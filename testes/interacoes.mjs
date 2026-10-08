@@ -16,7 +16,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import { RAIZ } from "../scripts/docs.mjs";
 import { proDisponivel, arquivoExemplo } from "../scripts/pro.mjs";
-import { supabaseFalso } from "./supabase-falso.mjs";
+import { supabaseFalso, semServicosReais, PROJETO } from "./supabase-falso.mjs";
 
 const DIST = path.join(RAIZ, "dist");
 const TIPOS = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png" };
@@ -50,9 +50,15 @@ async function novaAba(opcoes = {}) {
     reducedMotion: "reduce",
     ...opcoes,
   });
+  await semServicosReais(contexto);
   const aba = await contexto.newPage();
   aba.errosJs = [];
   aba.on("pageerror", (erro) => aba.errosJs.push(erro.message));
+  // Trava: nenhum teste pode tocar o banco de produção
+  aba.on("request", (pedido) => {
+    const host = new URL(pedido.url()).hostname;
+    if (host.endsWith(".supabase.co") && host !== new URL(PROJETO).hostname) aba.errosJs.push(`pedido ao Supabase real: ${host}`);
+  });
   return aba;
 }
 

@@ -7,6 +7,16 @@
  * aqui o foco é a tela: o que cada tipo de pessoa vê.
  */
 export const PROJETO = "https://teste-atalho.supabase.co";
+
+/**
+ * Testes nunca falam com o Supabase de produção: por padrão o site recebe uma
+ * configuração vazia (contas "em breve"). supabaseFalso() troca por uma simulada.
+ */
+export async function semServicosReais(contexto) {
+  await contexto.route("**/site/config.js", (rota) =>
+    rota.fulfill({ contentType: "text/javascript", body: 'window.ATALHO_CONFIG = { supabase: { url: "", chavePublica: "" }, assistente: { url: "" } };' })
+  );
+}
 const CHAVE = "sb_publishable_teste";
 
 export const PESSOAS = {

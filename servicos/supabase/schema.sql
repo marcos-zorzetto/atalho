@@ -20,7 +20,7 @@ create table if not exists public.favoritos (
   primary key (usuario_id, componente_id)
 );
 
--- Lista de espera do Atalho Pro (consentimento explícito, LGPD art. 7º, I)
+-- Lista de espera do Atalho Pro (consentimento explícito: RGPD art. 6.º, n.º 1, a; LGPD art. 7º, I)
 create table if not exists public.lista_espera_pro (
   usuario_id uuid primary key default auth.uid() references auth.users (id) on delete cascade,
   criado_em timestamptz not null default now()
@@ -68,7 +68,7 @@ $$;
 drop trigger if exists ao_criar_usuario on auth.users;
 create trigger ao_criar_usuario after insert on auth.users for each row execute function public.criar_perfil();
 
--- "Excluir minha conta": apaga o usuário logado e, em cascata, perfil, favoritos e lista (LGPD art. 18)
+-- "Excluir minha conta": apaga o usuário logado e, em cascata, perfil, favoritos e lista (RGPD art. 17; LGPD art. 18)
 create or replace function public.excluir_minha_conta()
 returns void
 language plpgsql

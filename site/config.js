@@ -9,8 +9,8 @@
  */
 window.ATALHO_CONFIG = {
   supabase: {
-    url: "",
-    chavePublica: "",
+    url: "https://onjmugnpjvflomrevknh.supabase.co",
+    chavePublica: "sb_publishable__6ZgOxk9Ir-zZjz_QuDmdQ_rdxDSIhF",
   },
   assistente: {
     url: "",

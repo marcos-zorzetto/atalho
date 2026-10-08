@@ -4,7 +4,11 @@ O site funciona sem nada disto: as contas aparecem como "em breve", as páginas 
 
 ## 1. Contas de usuário (Supabase, grátis)
 
-1. Crie uma conta em [supabase.com](https://supabase.com) e um projeto novo (região **South America (São Paulo)**, para ficar mais rápido no Brasil). Guarde a senha do banco num gerenciador de senhas.
+1. Crie uma conta em [supabase.com](https://supabase.com) e um projeto novo:
+   - **Region:** `Europe` (os dados ficam na União Europeia, como pede o RGPD para quem está em Portugal);
+   - **Automatically expose new tables:** desligado (o `schema.sql` libera só o necessário);
+   - **Enable automatic RLS:** ligado;
+   - **Database password:** use "Generate a password" e guarde num gerenciador de senhas.
 2. No projeto, abra **SQL Editor → New query**, cole o conteúdo de [`supabase/schema.sql`](supabase/schema.sql) e clique em **Run**. Isso cria as tabelas, as regras de segurança e as funções do painel. Pode rodar de novo sempre que o arquivo mudar.
 3. Em **Authentication → Sign In / Providers → Email**:
    - **Confirm email:** ligado (a pessoa confirma o e-mail antes de entrar);

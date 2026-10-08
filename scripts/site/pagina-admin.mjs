@@ -82,7 +82,7 @@ export function paginaAdmin() {
           </section>
         </div>
 
-        <p class="at-texto-suave at-texto-pequeno">Para excluir, bloquear ou reenviar a confirmação de um usuário, use a área <strong>Authentication</strong> do Supabase (botão “Abrir no Supabase”). Os dados desta página são pessoais: não compartilhe capturas de tela com e-mails visíveis (LGPD).</p>
+        <p class="at-texto-suave at-texto-pequeno">Para excluir, bloquear ou reenviar a confirmação de um usuário, use a área <strong>Authentication</strong> do Supabase (botão “Abrir no Supabase”). Os dados desta página são pessoais: não compartilhe capturas de tela com e-mails visíveis (RGPD e LGPD).</p>
       </div>
     </div>`;
 

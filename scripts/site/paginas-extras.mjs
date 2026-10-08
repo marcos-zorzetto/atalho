@@ -495,7 +495,7 @@ export function paginaPrivacidade() {
   const atualizado = "8 de outubro de 2026";
   const conteudo = `${cabecalhoPagina("Legal", "Política de privacidade", `Última atualização: ${atualizado}.`)}
     ${artigo(`
-      <p>Esta política explica quais dados o Atalho trata, por quê e quais são os seus direitos, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018, LGPD). O controlador dos dados é ${SITE.autor}.</p>
+      <p>Esta política explica quais dados o Atalho trata, por quê e quais são os seus direitos, conforme o Regulamento Geral sobre a Proteção de Dados da União Europeia (RGPD) e, para quem está no Brasil, a Lei Geral de Proteção de Dados (Lei 13.709/2018, LGPD). O responsável pelo tratamento é ${SITE.autor}, com sede em Portugal.</p>
       <h2 class="site-secao-titulo">1. Sem conta, quase nada</h2>
       <p>Para ler a documentação e copiar componentes, você não precisa de cadastro. As páginas completas são liberadas para quem cria uma conta grátis. O site não usa cookies de rastreamento nem de publicidade. Preferências como tema escuro ficam guardadas só no seu navegador (localStorage) e não são enviadas para nós.</p>
       <h2 class="site-secao-titulo">2. Se você criar uma conta</h2>
@@ -503,8 +503,8 @@ export function paginaPrivacidade() {
         <li><strong>Dados:</strong> nome, e-mail, senha (guardada de forma criptografada pelo provedor de autenticação, nunca em texto puro), componentes favoritos e se você quer receber o aviso do Atalho Pro.</li>
         <li><strong>Finalidade:</strong> permitir o acesso à conta e às páginas completas, guardar seus favoritos e, se você pedir, avisar sobre o lançamento do Atalho Pro.</li>
         <li><strong>Quem vê:</strong> só você e o administrador do Atalho, que enxerga nome, e-mail, datas de cadastro e de último acesso, quantidade de favoritos e se você está na lista do Pro, para manter o serviço funcionando. Ninguém vê a sua senha, nem o administrador. Os dados não são vendidos nem cedidos.</li>
-        <li><strong>Base legal:</strong> execução do serviço que você pediu (art. 7º, V) e consentimento para o aviso do Pro (art. 7º, I), que você pode retirar a qualquer momento na sua conta.</li>
-        <li><strong>Onde ficam:</strong> no Supabase, provedor de banco de dados e autenticação, que pode armazenar dados fora do Brasil com as garantias exigidas pela LGPD.</li>
+        <li><strong>Base legal:</strong> execução do serviço que você pediu (RGPD art. 6.º, n.º 1, b; LGPD art. 7º, V) e consentimento para o aviso do Pro (RGPD art. 6.º, n.º 1, a; LGPD art. 7º, I), que você pode retirar a qualquer momento na sua conta.</li>
+        <li><strong>Onde ficam:</strong> no Supabase, provedor de banco de dados e autenticação, em servidores na União Europeia, com as garantias exigidas pelo RGPD e pela LGPD.</li>
         <li><strong>E-mails:</strong> mensagens de confirmação de cadastro e de troca de senha são enviadas pelo Brevo, que recebe apenas o seu e-mail para fazer a entrega.</li>
         <li><strong>Por quanto tempo:</strong> enquanto a conta existir. Ao excluir a conta, os dados são apagados.</li>
       </ul>
@@ -513,13 +513,13 @@ export function paginaPrivacidade() {
       <h2 class="site-secao-titulo">4. Serviços de terceiros</h2>
       <p>O site carrega fontes do Google Fonts e a biblioteca do jsDelivr, e os exemplos consultam ViaCEP e DummyJSON quando você interage com eles. Esses serviços recebem dados técnicos da conexão (como o endereço IP), conforme as políticas deles.</p>
       <h2 class="site-secao-titulo">5. Seus direitos</h2>
-      <p>Você pode, a qualquer momento: confirmar e acessar seus dados, corrigir, pedir a portabilidade, retirar o consentimento e <strong>excluir a conta</strong> (botão em "Minha conta", que apaga tudo na hora).</p>
+      <p>Você pode, a qualquer momento: confirmar e acessar seus dados, corrigir, pedir a portabilidade, opor-se ao tratamento, retirar o consentimento e <strong>excluir a conta</strong> (botão em "Minha conta", que apaga tudo na hora). Se achar que seus direitos não foram respeitados, pode reclamar à autoridade de proteção de dados: a CNPD, em Portugal, ou a ANPD, no Brasil.</p>
       <h2 class="site-secao-titulo">6. Contato</h2>
       <p data-contato-privacidade>Para assuntos de privacidade, fale com o responsável pelo projeto pelo <a href="${SITE.repositorio}/issues/new?title=${encodeURIComponent("Privacidade: ")}">GitHub</a>.</p>
     `)}`;
   return pagina({
     titulo: "Política de privacidade · Atalho",
-    descricao: "Como o Atalho trata dados pessoais conforme a LGPD: o que é coletado, por quê, por quanto tempo e como excluir sua conta.",
+    descricao: "Como o Atalho trata dados pessoais conforme o RGPD e a LGPD: o que é coletado, por quê, por quanto tempo e como excluir sua conta.",
     caminho: "privacidade/",
     pagina: "legal",
     secao: "",

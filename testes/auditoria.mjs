@@ -18,7 +18,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { RAIZ } from "../scripts/docs.mjs";
 import { proDisponivel, arquivoExemplo } from "../scripts/pro.mjs";
-import { supabaseFalso } from "./supabase-falso.mjs";
+import { supabaseFalso, semServicosReais } from "./supabase-falso.mjs";
 
 const require = createRequire(import.meta.url);
 const DIST = path.join(RAIZ, "dist");
@@ -85,9 +85,11 @@ for (const visao of VISOES) {
     reducedMotion: "reduce",
   };
   const contexto = await navegador.newContext(opcoesContexto);
+  await semServicosReais(contexto);
   for (const pagina of paginas) {
     const [caminho, como] = pagina.split("#como=");
     const contextoPagina = como ? await navegador.newContext(opcoesContexto) : contexto;
+    if (como) await semServicosReais(contextoPagina);
     if (como) await supabaseFalso(contextoPagina, { pessoa: como === "visitante" ? null : como, conteudos: { loja: lojaMembro }, usuarios: 31 });
     const aba = await contextoPagina.newPage();
     aba.on("pageerror", (erro) => registrar(pagina, visao.nome, "erro de JavaScript", erro.message));

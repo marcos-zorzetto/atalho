@@ -14,6 +14,9 @@ const ADMIN = "00000000-0000-4000-8000-000000000001";
 const ANA = "00000000-0000-4000-8000-000000000002";
 const BRUNO = "00000000-0000-4000-8000-000000000003";
 
+// ATALHO_SCHEMA permite testar outra versão do arquivo (ex.: a que foi colada no Supabase)
+const SCHEMA = process.env.ATALHO_SCHEMA || path.join(RAIZ, "servicos", "supabase", "schema.sql");
+
 let db;
 
 /** Roda a consulta como um visitante (anon) ou como um usuário logado. */
@@ -50,9 +53,9 @@ before(async () => {
     -- Como o Supabase faz por padrão: tabelas novas ficam visíveis para a API (o RLS filtra)
     alter default privileges in schema public grant all on tables to anon, authenticated;
   `);
-  await db.exec(await readFile(path.join(RAIZ, "servicos", "supabase", "schema.sql"), "utf8"));
+  await db.exec(await readFile(SCHEMA, "utf8"));
   // Rodar duas vezes não pode quebrar (o guia diz que pode)
-  await db.exec(await readFile(path.join(RAIZ, "servicos", "supabase", "schema.sql"), "utf8"));
+  await db.exec(await readFile(SCHEMA, "utf8"));
 
   await db.exec(`
     insert into auth.users (id, email, raw_user_meta_data, created_at, last_sign_in_at, email_confirmed_at) values
