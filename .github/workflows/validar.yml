@@ -17,8 +17,9 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+      - run: npm ci
 
-      - name: Testes de consistência e site gerado
+      - name: Testes de consistência, banco de dados e site gerado
         run: npm test
 
       - name: Tipos do TypeScript (atalho.d.ts)

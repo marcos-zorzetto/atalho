@@ -1780,6 +1780,8 @@ a.at-cartao:hover, .at-cartao.at-clicavel:hover {
 .at-alerta-conteudo { flex: 1; min-width: 0; }
 .at-alerta-conteudo strong { display: block; color: var(--_cor); }
 .at-alerta-conteudo p { margin: 0.15rem 0 0; }
+/* Links no alerta usam a cor do texto: a cor primária some sobre o fundo colorido */
+.at-alerta-conteudo a:not(.at-botao) { color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 .at-alerta > button[data-at-fechar] { flex-shrink: 0; padding: 0 0.25rem; font-size: 1.15rem; line-height: 1.2; color: var(--at-texto-suave); background: none; border: 0; }
 
 /* Faixa no topo do site (avisos gerais, promoções) */

@@ -23,6 +23,8 @@ import {
 import { carregarGuiaPHP } from "./site/php-guia.mjs";
 import { EXEMPLOS } from "./site/exemplos.mjs";
 import { paginaEditor } from "./site/pagina-editor.mjs";
+import { paginaExemplo, redirecionamentoExemplo } from "./site/pagina-exemplo.mjs";
+import { paginaAdmin } from "./site/pagina-admin.mjs";
 
 const DIST = path.join(RAIZ, "dist");
 
@@ -56,8 +58,11 @@ export async function gerarSite() {
   // Arquivos estáticos
   await cp(path.join(RAIZ, "atalho"), path.join(DIST, "atalho"), { recursive: true });
   await cp(path.join(RAIZ, "php", "atalho.php"), path.join(DIST, "php", "atalho.php"));
-  await cp(path.join(RAIZ, "exemplos"), path.join(DIST, "exemplos"), { recursive: true });
-  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js"]) {
+  // Das páginas completas, só as imagens são públicas; o código fica no atalho-pro (Supabase)
+  for (const pasta of ["miniaturas", "capturas"]) {
+    await cp(path.join(RAIZ, "exemplos", pasta), path.join(DIST, "exemplos", pasta), { recursive: true });
+  }
+  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js"]) {
     await cp(path.join(RAIZ, "site", arquivo), path.join(DIST, "site", arquivo));
   }
   for (const arquivo of ["favicon.svg", "og.png"]) {
@@ -102,12 +107,19 @@ export async function gerarSite() {
     ["conta/index.html", paginaConta(contexto)],
     ["privacidade/index.html", paginaPrivacidade(contexto)],
     ["termos/index.html", paginaTermos(contexto)],
+    ["admin/index.html", paginaAdmin(contexto)],
     ["404.html", pagina404(contexto)],
   ]);
   for (const componente of ordem) {
     paginas.set(`componentes/${componente.id}/index.html`, paginaComponente({ ...contexto, componente }));
   }
+  for (const exemplo of EXEMPLOS) {
+    paginas.set(`exemplos/${exemplo.id}/index.html`, paginaExemplo({ ...contexto, exemplo }));
+  }
   for (const [caminho, html] of paginas) await escrever(caminho, html);
+
+  // Endereços antigos das páginas completas (exemplos/loja.html) levam à vitrine nova
+  for (const exemplo of EXEMPLOS) await escrever(`exemplos/${exemplo.id}.html`, redirecionamentoExemplo(exemplo));
 
   // Endereço antigo (componentes.html#modal) continua funcionando
   await escrever(
@@ -130,18 +142,17 @@ ${indexaveis
     return `  <url><loc>${endereco}</loc><lastmod>${hoje}</lastmod><priority>${prioridade}</priority></url>`;
   })
   .join("\n")}
-${EXEMPLOS.map((e) => `  <url><loc>${urlAbsoluta(`exemplos/${e.id}.html`)}</loc><lastmod>${hoje}</lastmod><priority>0.5</priority></url>`).join("\n")}
 </urlset>
 `;
   await escrever("sitemap.xml", sitemap);
-  await escrever("robots.txt", `User-agent: *\nAllow: /\nDisallow: ${url("conta/")}\n\nSitemap: ${urlAbsoluta("sitemap.xml")}\n`);
+  await escrever("robots.txt", `User-agent: *\nAllow: /\nDisallow: ${url("conta/")}\nDisallow: ${url("admin/")}\n\nSitemap: ${urlAbsoluta("sitemap.xml")}\n`);
 
   // llms.txt: resumo para buscadores de IA
   await escrever(
     "llms.txt",
     `# Atalho\n\n> ${SITE.descricao}\n\n## Componentes\n\n${ordem
       .map((c) => `- [${c.nome}](${urlAbsoluta(`componentes/${c.id}/`)}): ${c.resumo}`)
-      .join("\n")}\n\n## Guias\n\n- [TypeScript](${urlAbsoluta("typescript/")})\n- [PHP](${urlAbsoluta("php/")})\n- [Exemplos completos](${urlAbsoluta("exemplos/")})\n`
+      .join("\n")}\n\n## Guias\n\n- [TypeScript](${urlAbsoluta("typescript/")})\n- [PHP](${urlAbsoluta("php/")})\n- [Exemplos completos](${urlAbsoluta("exemplos/")})\n\n## Páginas completas (código para membros)\n\n${EXEMPLOS.map((e) => `- [${e.nome}](${urlAbsoluta(`exemplos/${e.id}/`)}): ${e.resumo}`).join("\n")}\n`
   );
 
   // .nojekyll: o GitHub Pages não processa nada, serve os arquivos como estão

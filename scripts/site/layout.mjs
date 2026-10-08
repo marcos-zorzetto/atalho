@@ -8,6 +8,15 @@ import { esc } from "./realce.mjs";
 const icone = (caminho, tamanho = 18) =>
   `<svg viewBox="0 0 24 24" width="${tamanho}" height="${tamanho}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${caminho}</svg>`;
 
+/** Páginas que usam contas: o supabase-js (versão fixa) e a conexão compartilhada. */
+const SUPABASE_JS = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js";
+export const SCRIPTS_SUPABASE = [SUPABASE_JS, "site/supabase.js"];
+
+/** Hash dos scripts de CDN (SRI): se o arquivo for alterado lá, o navegador não executa. */
+const INTEGRIDADE = {
+  [SUPABASE_JS]: "sha384-iLddHTLokph6Omwoyid4XKxHaWa6w41BnoEj0q5oOrzmYPpHIKt1wyjReA7s//pP",
+};
+
 export const ICONES_SITE = {
   busca: icone('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', 16),
   lua: icone('<path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/>'),
@@ -18,6 +27,11 @@ export const ICONES_SITE = {
   estrela: icone('<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>', 16),
   coracao: icone('<path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/>', 16),
   faisca: icone('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>', 16),
+  cadeado: icone('<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>', 16),
+  abrir: icone('<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>', 16),
+  baixar: icone('<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', 16),
+  codigo: icone('<path d="m8 8-4 4 4 4M16 8l4 4-4 4"/>', 16),
+  check: icone('<path d="m5 12 4 4 10-10"/>', 16),
 };
 
 const NAVEGACAO = [
@@ -53,7 +67,7 @@ function jsonLd(dados) {
  */
 export function pagina(p) {
   const canonical = urlAbsoluta(p.caminho);
-  const imagem = urlAbsoluta("og.png");
+  const imagem = p.imagemSocial || urlAbsoluta("og.png");
   const scripts = ["atalho/atalho.js", "site/config.js", "site/indice-busca.js", "site/assistente.js", ...(p.scripts || []), "site/site.js"];
 
   return `<!doctype html>
@@ -75,8 +89,8 @@ export function pagina(p) {
   <meta property="og:description" content="${esc(p.descricao)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${imagem}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="${p.imagemTamanho?.[0] || 1200}">
+  <meta property="og:image:height" content="${p.imagemTamanho?.[1] || 630}">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${url("favicon.svg")}" type="image/svg+xml">
   <link rel="sitemap" type="application/xml" href="${url("sitemap.xml")}">
@@ -86,7 +100,13 @@ export function pagina(p) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="${url("atalho/atalho.css")}">
   <link rel="stylesheet" href="${url("site/site.css")}">
-  ${scripts.map((s) => (s.startsWith("http") ? `<script src="${s}" defer></script>` : `<script src="${url(s)}" defer></script>`)).join("\n  ")}
+  ${scripts
+    .map((s) =>
+      s.startsWith("http")
+        ? `<script src="${s}"${INTEGRIDADE[s] ? ` integrity="${INTEGRIDADE[s]}" crossorigin="anonymous"` : ""} defer></script>`
+        : `<script src="${url(s)}" defer></script>`
+    )
+    .join("\n  ")}
   ${jsonLd(p.dadosEstruturados)}
   ${p.cabecaExtra || ""}
 </head>

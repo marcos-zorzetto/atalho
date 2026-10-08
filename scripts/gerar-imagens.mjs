@@ -1,57 +1,60 @@
 #!/usr/bin/env node
 /**
- * Gera as imagens do site com um navegador sem janela (Chrome, Chromium ou Edge):
- *  - exemplos/miniaturas/<id>.png  (galeria de exemplos)
- *  - og.png                         (imagem ao compartilhar o link)
+ * Gera as imagens do site num navegador sem janela (Edge no Windows, Chrome no CI):
+ *  - exemplos/miniaturas/<id>.png  640×400, galeria de exemplos
+ *  - exemplos/capturas/<id>.jpg    1280×800, vitrine e compartilhamento
+ *  - og.png                         1200×630, imagem ao compartilhar o site
  *
+ * As páginas completas vêm do repositório privado atalho-pro (veja scripts/pro.mjs).
  * Uso: npm run imagens    (rode de novo quando mudar um exemplo)
  */
-import { spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
-import { mkdir } from "node:fs/promises";
-import { pathToFileURL } from "node:url";
+import { chromium } from "playwright-core";
+import { mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { RAIZ } from "./docs.mjs";
 import { EXEMPLOS } from "./site/exemplos.mjs";
+import { proDisponivel, arquivoExemplo, PASTA_PRO } from "./pro.mjs";
 
-const candidatos = [
-  process.env.NAVEGADOR,
-  "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
-  "/usr/bin/google-chrome",
-  "/usr/bin/chromium",
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-].filter(Boolean);
-const navegador = candidatos.find((c) => existsSync(c));
-if (!navegador) {
-  console.error("Nenhum navegador encontrado. Defina a variável NAVEGADOR com o caminho do Chrome ou Edge.");
-  process.exit(1);
+const TIPOS = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".png": "image/png" };
+const ORIGEM = "http://atalho.local";
+
+const navegador = await chromium.launch({ channel: process.env.CI ? "chrome" : "msedge" });
+
+/** Serve a biblioteca do repositório público e as páginas do atalho-pro, sem servidor de verdade. */
+async function novaAba(largura, altura, escala) {
+  const contexto = await navegador.newContext({ viewport: { width: largura, height: altura }, deviceScaleFactor: escala, colorScheme: "light", reducedMotion: "reduce" });
+  await contexto.route(`${ORIGEM}/**`, async (rota) => {
+    const caminho = decodeURIComponent(new URL(rota.request().url()).pathname);
+    const exemplo = caminho.match(/^\/exemplos\/([a-z0-9-]+)\.html$/);
+    const arquivo = exemplo ? arquivoExemplo(exemplo[1]) : path.join(RAIZ, caminho);
+    try {
+      await rota.fulfill({ body: await readFile(arquivo), contentType: TIPOS[path.extname(arquivo)] || "application/octet-stream" });
+    } catch {
+      await rota.fulfill({ status: 404, body: "não encontrado" });
+    }
+  });
+  return contexto.newPage();
 }
 
-function capturar(endereco, destino, largura, altura, escala = 1) {
-  const resultado = spawnSync(
-    navegador,
-    [
-      "--headless=new",
-      "--disable-gpu",
-      "--hide-scrollbars",
-      "--no-first-run",
-      "--blink-settings=preferredColorScheme=1",
-      `--force-device-scale-factor=${escala}`,
-      "--virtual-time-budget=8000",
-      `--window-size=${largura},${altura}`,
-      `--screenshot=${destino}`,
-      endereco,
-    ],
-    { encoding: "utf8", timeout: 60000 }
-  );
-  if (!existsSync(destino)) throw new Error(`Falha ao capturar ${endereco}: ${resultado.stderr}`);
+async function capturar(endereco, destino, { largura, altura, escala = 1, tipo = "png" }) {
+  const aba = await novaAba(largura, altura, escala);
+  await aba.goto(endereco, { waitUntil: "networkidle", timeout: 30000 });
+  await aba.evaluate(() => document.fonts.ready);
+  await aba.screenshot({ path: destino, type: tipo, ...(tipo === "jpeg" ? { quality: 82 } : {}) });
+  await aba.context().close();
   console.log(`✓ ${path.relative(RAIZ, destino)}`);
 }
 
-await mkdir(path.join(RAIZ, "exemplos", "miniaturas"), { recursive: true });
-for (const exemplo of EXEMPLOS) {
-  const pagina = pathToFileURL(path.join(RAIZ, "exemplos", `${exemplo.id}.html`)).href;
-  capturar(pagina, path.join(RAIZ, "exemplos", "miniaturas", `${exemplo.id}.png`), 1280, 800, 0.5);
+if (proDisponivel) {
+  await mkdir(path.join(RAIZ, "exemplos", "miniaturas"), { recursive: true });
+  await mkdir(path.join(RAIZ, "exemplos", "capturas"), { recursive: true });
+  for (const { id } of EXEMPLOS) {
+    const endereco = `${ORIGEM}/exemplos/${id}.html`;
+    await capturar(endereco, path.join(RAIZ, "exemplos", "miniaturas", `${id}.png`), { largura: 1280, altura: 800, escala: 0.5 });
+    await capturar(endereco, path.join(RAIZ, "exemplos", "capturas", `${id}.jpg`), { largura: 1280, altura: 800, tipo: "jpeg" });
+  }
+} else {
+  console.warn(`Pasta do atalho-pro não encontrada (${PASTA_PRO}). As imagens das páginas completas foram mantidas.`);
 }
-capturar(pathToFileURL(path.join(RAIZ, "scripts", "og.html")).href, path.join(RAIZ, "og.png"), 1200, 630, 1);
+await capturar(`${ORIGEM}/scripts/og.html`, path.join(RAIZ, "og.png"), { largura: 1200, altura: 630 });
+await navegador.close();

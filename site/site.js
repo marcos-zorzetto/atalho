@@ -246,6 +246,11 @@
       link.querySelector("span").textContent = "Minha conta";
       link.classList.add("at-suave");
     }
+    // Quem já entrou não precisa do convite para criar conta; o selo "Membros" vira "Liberado"
+    if (sessao) {
+      $$("[data-exemplos-chamada]").forEach((el) => (el.hidden = true));
+      $$(".site-galeria-cadeado").forEach((el) => el.classList.add("site-liberado"));
+    }
   }
 
   async function prepararFavorito() {

@@ -197,12 +197,39 @@ test("sitemap lista todas as páginas indexáveis e robots.txt aponta para ele",
   assert.match(await ler("robots.txt"), /Sitemap: https:\/\/.+sitemap\.xml/);
 });
 
-test("exemplos completos têm página e miniatura", async () => {
+test("páginas completas: vitrine pública, imagens e componentes que existem", async () => {
+  const { EXEMPLOS } = await import("./site/exemplos.mjs");
+  const docs = await carregarDocs();
+  for (const e of EXEMPLOS) {
+    assert.ok(existsSync(path.join(RAIZ, "dist", "exemplos", e.id, "index.html")), `falta a vitrine /exemplos/${e.id}/`);
+    assert.ok(existsSync(path.join(RAIZ, "exemplos", "miniaturas", `${e.id}.png`)), `falta a miniatura de ${e.id} (rode npm run imagens)`);
+    assert.ok(existsSync(path.join(RAIZ, "exemplos", "capturas", `${e.id}.jpg`)), `falta a captura de ${e.id} (rode npm run imagens)`);
+    assert.ok(e.destaques?.length >= 3, `${e.id} precisa de pelo menos 3 destaques`);
+    for (const id of e.componentes) assert.ok(docs.componentes.some((c) => c.id === id), `${e.id} cita o componente "${id}", que não existe`);
+  }
+});
+
+test("o código das páginas completas não vai para o site público", async () => {
   const { EXEMPLOS } = await import("./site/exemplos.mjs");
   for (const e of EXEMPLOS) {
-    assert.ok(existsSync(path.join(RAIZ, "exemplos", `${e.id}.html`)), `falta exemplos/${e.id}.html`);
-    assert.ok(existsSync(path.join(RAIZ, "exemplos", "miniaturas", `${e.id}.png`)), `falta a miniatura de ${e.id} (rode npm run miniaturas)`);
+    assert.ok(!existsSync(path.join(RAIZ, "exemplos", `${e.id}.html`)), `exemplos/${e.id}.html deve ficar só no atalho-pro`);
+    // No site, o endereço antigo é só um redirecionamento para a vitrine
+    const antigo = await readFile(path.join(RAIZ, "dist", "exemplos", `${e.id}.html`), "utf8");
+    assert.ok(antigo.length < 800 && antigo.includes(`exemplos/${e.id}/`), `dist/exemplos/${e.id}.html deveria só redirecionar`);
+    const vitrine = await readFile(path.join(RAIZ, "dist", "exemplos", e.id, "index.html"), "utf8");
+    assert.ok(!vitrine.includes("data-at-acao="), `a vitrine de ${e.id} não pode trazer o código da página`);
   }
+});
+
+test("painel do administrador e conta não aparecem no Google", async () => {
+  const robots = await readFile(path.join(RAIZ, "dist", "robots.txt"), "utf8");
+  assert.match(robots, /Disallow: \/(atalho\/)?admin\//);
+  for (const pagina of ["admin", "conta"]) {
+    const html = await readFile(path.join(RAIZ, "dist", pagina, "index.html"), "utf8");
+    assert.match(html, /<meta name="robots" content="noindex/);
+  }
+  const sitemap = await readFile(path.join(RAIZ, "dist", "sitemap.xml"), "utf8");
+  assert.doesNotMatch(sitemap, /\/admin\/|\/conta\//);
 });
 
 test("os exemplos de PHP do guia existem", async () => {
