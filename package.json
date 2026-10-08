@@ -1,0 +1,25 @@
+{
+  "name": "atalho",
+  "version": "1.0.0",
+  "description": "Componentes de interface em português: HTML, CSS e JavaScript prontos, nos padrões das grandes empresas.",
+  "license": "MIT",
+  "author": "Marcos Zorzetto",
+  "homepage": "https://marcos-zorzetto.github.io/atalho/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcos-zorzetto/atalho.git"
+  },
+  "keywords": ["componentes", "ui", "css", "javascript", "portugues", "pt-br", "bootstrap", "design-system"],
+  "type": "module",
+  "files": ["atalho/"],
+  "main": "atalho/atalho.js",
+  "style": "atalho/atalho.css",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"scripts/*.test.mjs\"",
+    "atualizar": "node scripts/atualizar-documentacao.mjs --links",
+    "site": "npx --yes serve ."
+  }
+}

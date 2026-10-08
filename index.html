@@ -1,764 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantão 1406 · Loja-fã dos Mamonas Assassinas</title>
-    <meta name="description" content="Camisetas, discos, vinis e colecionáveis inspirados nos Mamonas Assassinas. Frete calculado pelo CEP, prévias das músicas e muito escracho.">
-    <meta name="theme-color" content="#FFD400">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Plantão 1406 · Loja-fã dos Mamonas Assassinas">
-    <meta property="og:description" content="A lojinha mais escrachada do Brasil. Ligue já! (ou só clique)">
-    <meta property="og:image" content="imagens/og-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;600;700;800;900&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atalho · Componentes de interface em português</title>
+  <meta name="description" content="Componentes completos de HTML, CSS e JavaScript, nos padrões das grandes empresas, explicados em português e prontos para colar. Por Marcos Zorzetto.">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Atalho · Componentes de interface em português">
+  <meta property="og:description" content="Pare de juntar tutoriais. Comece pelo componente pronto: máscaras de CPF, CEP automático, carrinho, tabelas, modais e mais, explicados em português.">
+  <meta property="og:url" content="https://marcos-zorzetto.github.io/atalho/">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <script>
+    try {
+      const tema = JSON.parse(localStorage.getItem("atalho:tema"));
+      if (tema) document.documentElement.dataset.tema = tema;
+    } catch {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="atalho/atalho.css">
+  <link rel="stylesheet" href="site/site.css">
+
+  <script src="atalho/atalho.js" defer></script>
+  <script src="site/dados/base.js" defer></script>
+  <script src="site/dados/fundamentos-formularios.js" defer></script>
+  <script src="site/dados/navegacao-janelas.js" defer></script>
+  <script src="site/dados/dados-feedback.js" defer></script>
+  <script src="site/dados/paginas-js-receitas.js" defer></script>
+  <script src="site/dados/baseline.js" defer></script>
+  <script src="site/site.js" defer></script>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#menu-links" data-bs-root-margin="0px 0px -55%" tabindex="0">
+<body data-pagina="inicio">
+  <a class="at-pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-    <a class="pular-conteudo" href="#produtos">Pular para os produtos</a>
+  <header class="at-barra site-barra">
+    <div class="at-barra-conteudo">
+      <a href="./" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
 
-    <div class="faixa-topo">
-        <div class="container d-flex justify-content-center align-items-center gap-2 flex-wrap">
-            <span><i class="bi bi-truck"></i> Frete grátis acima de <strong data-preco="199">R$ 199,00</strong></span>
-            <span class="d-none d-md-inline">·</span>
-            <span>Cupom <strong>LIGUEJA</strong> = 10% OFF</span>
-        </div>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="componentes.html#instalacao">Começar</a></li>
+        <li><a href="componentes.html">Componentes</a></li>
+        <li><a href="componentes.html#receita-loja">Receitas</a></li>
+        <li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Buscar componentes">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span>Buscar componente…</span>
+          <kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <nav class="navbar navbar-expand-xl sticky-top" id="menu" aria-label="Menu principal">
-        <div class="container">
-            <a class="navbar-brand logo" href="#inicio" aria-label="Plantão 1406, ir para o início">
-                <span class="logo-tv"><i class="bi bi-tv"></i></span>
-                <span class="logo-texto">Plantão <span>1406</span></span>
-            </a>
+  <main id="conteudo">
+    <section class="site-hero">
+      <div class="site-container site-hero-grade">
+        <div>
+          <span class="at-sobretitulo">Biblioteca de interface · 100% em português</span>
+          <h1 class="site-titulo site-h1">Pare de juntar tutoriais. <span class="site-marcador">Comece pelo componente pronto.</span></h1>
+          <p class="at-chamada">Componentes completos de HTML, CSS e JavaScript, nos mesmos padrões que Mercado Livre, GitHub, Stripe e Nubank usam, explicados em português e prontos para colar no seu projeto.</p>
 
-            <div class="d-flex align-items-center gap-2 order-xl-last acoes-menu">
-                <select id="moeda" class="form-select form-select-sm seletor-moeda" aria-label="Moeda dos preços">
-                    <option value="BRL">R$</option>
-                    <option value="USD">US$</option>
-                    <option value="EUR">€</option>
-                </select>
-                <button class="btn btn-icone d-none d-sm-inline-flex" type="button" id="btn-busca" aria-label="Buscar produtos">
-                    <i class="bi bi-search"></i>
-                </button>
-                <button class="btn btn-icone position-relative d-none d-sm-inline-flex" type="button" id="btn-favoritos" aria-label="Ver favoritos">
-                    <i class="bi bi-heart"></i>
-                    <span class="bolha" id="fav-count">0</span>
-                </button>
-                <button class="btn btn-carrinho position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinho" aria-controls="carrinho" aria-label="Abrir carrinho">
-                    <i class="bi bi-cart3"></i>
-                    <span class="d-none d-sm-inline" id="cart-total-nav">R$ 0,00</span>
-                    <span class="bolha" id="cart-count">0</span>
-                </button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-links" aria-controls="menu-links" aria-expanded="false" aria-label="Abrir menu">
-                    <i class="bi bi-list"></i>
-                </button>
-            </div>
+          <div class="site-busca" role="search">
+            <label class="site-busca-campo">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="at-sr">O que você quer construir?</span>
+              <input id="busca-inicio" type="search" placeholder="O que você quer construir?" autocomplete="off"
+                     role="combobox" aria-expanded="false" aria-controls="busca-inicio-resultados" aria-autocomplete="list">
+            </label>
+            <ul class="site-busca-resultados" id="busca-inicio-resultados" role="listbox" aria-label="Componentes encontrados" hidden></ul>
+          </div>
+          <div class="site-sugestoes">
+            Experimente:
+            <button class="site-sugestao" data-sugestao="máscara de cpf">máscara de CPF</button>
+            <button class="site-sugestao" data-sugestao="carrinho de compras">carrinho de compras</button>
+            <button class="site-sugestao" data-sugestao="janela de confirmação">janela de confirmação</button>
+            <button class="site-sugestao" data-sugestao="tabela com filtro">tabela com filtro</button>
+            <button class="site-sugestao" data-sugestao="login">login</button>
+          </div>
 
-            <div class="collapse navbar-collapse" id="menu-links">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="#oferta">Oferta</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#produtos">Produtos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#jukebox">Toca o Disco</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#calcular">Simulador</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#banda">A Banda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#fa-clube">Fã-clube</a></li>
-                </ul>
-            </div>
+          <div class="site-instalar">
+            <pre class="site-codigo" id="codigo-instalar"><code><span class="tk-pon">&lt;</span><span class="tk-tag">link</span> <span class="tk-atr">rel</span>=<span class="tk-str">"stylesheet"</span> <span class="tk-atr">href</span>=<span class="tk-str">"https://cdn.jsdelivr.net/gh/marcos-zorzetto/atalho@1/atalho/atalho.css"</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;</span><span class="tk-tag">script</span> <span class="tk-atr">src</span>=<span class="tk-str">"https://cdn.jsdelivr.net/gh/marcos-zorzetto/atalho@1/atalho/atalho.js"</span> <span class="tk-atr">defer</span><span class="tk-pon">&gt;&lt;/</span><span class="tk-tag">script</span><span class="tk-pon">&gt;</span></code></pre>
+            <button class="at-botao at-pequeno" data-at-copiar="#codigo-instalar" style="background:#292524;color:#e7e5e4;border-color:#57534e">Copiar</button>
+          </div>
         </div>
-    </nav>
 
-    <header id="inicio" class="hero">
-        <div class="sol-raios" aria-hidden="true"></div>
-        <div class="container position-relative">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6 text-center text-lg-start">
-                    <span class="chapeu"><span class="ponto-vivo"></span> Plantão 1406 · Ao vivo de Guarulhos</span>
-                    <h1 class="titulo-hero">A lojinha mais <span class="destaque-rosa">escrachada</span> do Brasil.</h1>
-                    <p class="lead texto-hero">Camisetas, discos e tralhas de colecionador inspiradas nos cinco de Guarulhos. Estoque limitado, risada ilimitada.</p>
-                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap">
-                        <a href="#produtos" class="btn btn-cartoon btn-rosa btn-lg">Quero tudo isso! <i class="bi bi-arrow-down-right"></i></a>
-                        <a href="#jukebox" class="btn btn-cartoon btn-branco btn-lg"><i class="bi bi-play-circle-fill"></i> Dar o play</a>
-                    </div>
-                    <ul class="selos-hero">
-                        <li><i class="bi bi-geo-alt-fill"></i> Frete pelo CEP</li>
-                        <li><i class="bi bi-credit-card-2-front-fill"></i> Até 6x sem juros</li>
-                        <li><i class="bi bi-qr-code"></i> 5% OFF no Pix</li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <div class="tv-hero">
-                        <img src="imagens/fotos/mascote-recorte.png" alt="Mascote da loja: a escultura da mamona sorridente da Praça Mamonas Assassinas" class="mascote-hero" width="700" height="700">
-                        <div class="balao-mascote">Ligue já!</div>
-                        <div class="tv-moldura">
-                            <span class="tv-canal">CANAL 14</span>
-                            <span class="tv-ao-vivo"><span class="ponto-vivo"></span> AO VIVO</span>
-                            <div id="hero-carousel" class="carousel slide carousel-fade tv-tela" data-bs-ride="carousel" data-bs-interval="3500">
-                                <div class="carousel-inner" id="hero-slides">
-                                    <div class="carousel-item active">
-                                        <div class="slide-carregando">Sintonizando o canal...</div>
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev" aria-label="Oferta anterior">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next" aria-label="Próxima oferta">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                            <div class="tv-botoes" aria-hidden="true"><span></span><span></span></div>
-                        </div>
-                    </div>
-                </div>
+        <div class="site-vitrine" aria-label="Demonstração ao vivo">
+          <span class="site-etiqueta-viva">AO VIVO</span>
+          <article class="at-cartao">
+            <div class="at-cartao-cabecalho">
+              <h2 class="at-texto-pequeno">Loja exemplo</h2>
+              <button class="at-botao at-icone at-contador-selo at-pequeno" aria-label="Carrinho">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6"/></svg>
+                <span data-contador data-at-texto="vitrineInicio.quantidade" data-at-mostrar="vitrineInicio.quantidade"></span>
+              </button>
             </div>
-        </div>
-    </header>
+            <div class="at-cartao-corpo at-linha at-topo" style="--at-gap: 16px">
+              <img src="https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" alt="Tênis cano alto vermelho e preto" width="104" height="104" style="background:#fff;border-radius:10px;object-fit:contain">
+              <div class="at-cresce at-pilha" style="--at-gap: 2px">
+                <span class="at-texto-pequeno">Tênis cano alto vermelho e preto</span>
+                <span class="at-preco-antigo">R$ 799,90</span>
+                <div><span class="at-preco">R$ 599,90</span><span class="at-preco-desconto">25% OFF</span></div>
+                <span class="at-parcelas">em 10x R$ 59,99 sem juros</span>
+                <button class="at-botao at-primario at-pequeno at-mt-2" data-at-acao="vitrineInicio.adicionar">Comprar</button>
+              </div>
+            </div>
+          </article>
 
-    <div class="ticker" aria-label="Avisos do plantão">
-        <span class="ticker-rotulo"><span class="ponto-vivo"></span> AO VIVO</span>
-        <div class="ticker-janela">
-            <div class="ticker-trilho">
-                <span>Atenção, telespectador: o estoque tá acabando</span>
-                <span>Cupom LIGUEJA = 10% OFF</span>
-                <span>Brasília amarela agora em escala 1:43</span>
-                <span>Frete grátis acima de R$ 199</span>
-                <span id="ticker-dolar">Dólar do dia: sintonizando...</span>
-                <span>1406 · Vira-Vira · Pelados em Santos · Chopis Centis · Robocop Gay</span>
-                <span>Até 6x sem juros</span>
-                <span aria-hidden="true">Atenção, telespectador: o estoque tá acabando</span>
-                <span aria-hidden="true">Cupom LIGUEJA = 10% OFF</span>
-                <span aria-hidden="true">Brasília amarela agora em escala 1:43</span>
-                <span aria-hidden="true">Frete grátis acima de R$ 199</span>
-                <span aria-hidden="true" class="ticker-dolar-copia">Dólar do dia: sintonizando...</span>
-                <span aria-hidden="true">1406 · Vira-Vira · Pelados em Santos · Chopis Centis · Robocop Gay</span>
-                <span aria-hidden="true">Até 6x sem juros</span>
-            </div>
+          <article class="at-cartao">
+            <form class="at-cartao-corpo at-formulario" data-at-validar id="form-inicio" style="gap: 12px">
+              <div class="at-campo at-meio">
+                <label class="at-rotulo" for="inicio-cpf">CPF</label>
+                <input class="at-entrada" id="inicio-cpf" name="cpf" required data-at-mascara="cpf" placeholder="000.000.000-00">
+              </div>
+              <div class="at-campo at-meio">
+                <label class="at-rotulo" for="inicio-cep">CEP</label>
+                <input class="at-entrada" id="inicio-cep" name="cep" required data-at-mascara="cep" data-at-cep placeholder="01310-100">
+              </div>
+              <div class="at-campo">
+                <label class="at-rotulo" for="inicio-rua">Endereço</label>
+                <input class="at-entrada" id="inicio-rua" name="rua" required data-at-cep-preencher="logradouro" placeholder="Preenche sozinho pelo CEP">
+              </div>
+              <button class="at-botao at-bloco">Validar</button>
+            </form>
+          </article>
+          <p class="at-texto-suave at-texto-pequeno at-mb-0">Os dois cartões acima são componentes do Atalho, conectados pelo estado. Nenhum framework.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="site-secao">
+      <div class="site-container site-historia">
+        <blockquote>
+          “Eu desisti de programar mais de uma vez. Não foi por falta de vontade.”
+        </blockquote>
+        <div class="site-historia-texto">
+          <p>Eu assistia a um tutorial e entendia uma coisa. Assistia a outro e entendia outra. Na hora de juntar tudo num projeto de verdade, nada se encaixava. E a documentação oficial ajudava pouco: boa parte só existe em inglês e mostra cada peça isolada, nunca a tela pronta.</p>
+          <p>O Atalho é o material que eu queria ter tido no começo. <strong>Cada componente vem completo</strong>, resolvido do jeito que as empresas grandes resolvem, com a explicação em português, os erros que se deve evitar, a acessibilidade e, principalmente, <strong>como ele se conecta com os outros</strong> para virar uma tela de verdade.</p>
+          <p class="at-mb-0">— Marcos Zorzetto</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-secao">
+      <div class="site-container">
+        <span class="at-sobretitulo">Como funciona</span>
+        <h2 class="site-titulo site-h2">Três passos. Nenhuma instalação.</h2>
+        <div class="site-passos at-mt-6">
+          <div class="site-passo">
+            <h3>Cole duas linhas</h3>
+            <p>No &lt;head&gt; de qualquer página. Sem npm, sem build, sem configurar nada.</p>
+            <pre class="site-codigo"><code><span class="tk-pon">&lt;</span><span class="tk-tag">link</span> <span class="tk-atr">rel</span>=<span class="tk-str">"stylesheet"</span> <span class="tk-atr">href</span>=<span class="tk-str">".../atalho.css"</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;</span><span class="tk-tag">script</span> <span class="tk-atr">src</span>=<span class="tk-str">".../atalho.js"</span> <span class="tk-atr">defer</span><span class="tk-pon">&gt;&lt;/</span><span class="tk-tag">script</span><span class="tk-pon">&gt;</span></code></pre>
+          </div>
+          <div class="site-passo">
+            <h3>Copie o componente</h3>
+            <p>O comportamento vem de atributos em português. O exemplo é o mesmo código que roda na página.</p>
+            <pre class="site-codigo"><code><span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span>=<span class="tk-str">"at-entrada"</span>
+       <span class="tk-atr">data-at-mascara</span>=<span class="tk-str">"cpf"</span><span class="tk-pon">&gt;</span>
+
+<span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">commandfor</span>=<span class="tk-str">"confirmar"</span>
+        <span class="tk-atr">command</span>=<span class="tk-str">"show-modal"</span><span class="tk-pon">&gt;</span>Excluir<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span></code></pre>
+          </div>
+          <div class="site-passo">
+            <h3>Conecte com o estado</h3>
+            <p>Mude os dados e a tela inteira acompanha. A ideia do React, sem precisar do React.</p>
+            <pre class="site-codigo"><code><span class="tk-pal">const</span> carrinho = Atalho.estado(<span class="tk-str">"carrinho"</span>, {
+  itens: [],
+  <span class="tk-pal">get</span> total() { <span class="tk-com">/* ... */</span> },
+});
+
+<span class="tk-com">&lt;!-- Atualiza sozinho: --&gt;</span>
+<span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">data-at-texto</span>=<span class="tk-str">"carrinho.total"</span><span class="tk-pon">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-secao">
+      <div class="site-container">
+        <div class="at-linha at-entre at-topo">
+          <div>
+            <span class="at-sobretitulo">O que tem dentro</span>
+            <h2 class="site-titulo site-h2"><span data-total-componentes>52</span> componentes e receitas</h2>
+          </div>
+          <a class="at-botao at-grande" href="componentes.html">Ver todos →</a>
+        </div>
+        <div class="site-categorias at-mt-6" id="lista-categorias"></div>
+      </div>
+    </section>
+
+    <section class="site-secao">
+      <div class="site-container">
+        <div class="site-robo">
+          <div>
+            <span class="at-sobretitulo" style="color: var(--at-cor-destaque)">Atualizado sozinho</span>
+            <h2 class="site-titulo site-h2">A documentação muda. O Atalho acompanha.</h2>
+            <p class="at-chamada">Toda semana, um robô no GitHub confere os dados oficiais de suporte dos navegadores (os mesmos dos selos Baseline do MDN) e todos os links da documentação. Quando um recurso chega a todos os navegadores, um link quebra ou uma página ganha tradução para português, ele abre uma proposta de atualização e o Claude sugere as mudanças nos componentes.</p>
+            <p class="at-texto-pequeno" style="color:#a8a29e">Dados atuais: web-features <span data-versao-baseline>—</span>, de <span data-data-baseline>—</span>.</p>
+            <a class="at-botao" href="https://github.com/marcos-zorzetto/atalho/blob/main/.github/workflows/atualizar-documentacao.yml" target="_blank" rel="noopener" style="background:#292524;color:#fafaf9;border-color:#57534e">Ver o robô no GitHub</a>
+          </div>
+          <div class="site-robo-numeros">
+            <div class="site-robo-numero"><strong data-total-recursos>—</strong><span>recursos do navegador monitorados</span></div>
+            <div class="site-robo-numero"><strong data-total-amplos>—</strong><span>já funcionam em todos os navegadores</span></div>
+            <div class="site-robo-numero"><strong><span data-total-links-pt>—</span>/<span data-total-links>—</span></strong><span>links do MDN já em português</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-secao">
+      <div class="site-container">
+        <span class="at-sobretitulo">Referências</span>
+        <h2 class="site-titulo site-h2">Os mesmos padrões de quem constrói em escala</h2>
+        <p class="at-chamada">Cada componente indica onde o padrão aparece no mundo real, para você reconhecer e entender por que ele é feito daquele jeito.</p>
+        <ul class="site-empresas">
+          <li>Mercado Livre</li><li>GitHub</li><li>Stripe</li><li>Nubank</li><li>Google</li><li>Amazon</li><li>Trello</li><li>WhatsApp</li><li>Linear</li><li>gov.br</li>
+        </ul>
+        <p class="at-texto-suave at-texto-pequeno at-mt-6">Empresas citadas apenas como referência de padrões de interface. O Atalho não tem relação com elas e todo o código foi escrito do zero.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div>
+        <a href="./" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+        <p class="at-mt-2 at-mb-0">Criado por <strong>Marcos Zorzetto</strong> · Código aberto (licença MIT) · <span data-ano>2026</span></p>
+      </div>
+      <nav aria-label="Rodapé">
+        <a href="componentes.html">Componentes</a>
+        <a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Meus projetos</a>
+        <a href="https://github.com/marcos-zorzetto/atalho/tree/loja-original" target="_blank" rel="noopener">Projeto anterior: Loja Mamonas Assassinas</a>
+      </nav>
     </div>
-
-    <main>
-        <section class="secao-categorias py-5" aria-labelledby="titulo-categorias">
-            <div class="container">
-                <h2 class="titulo-secao text-center" id="titulo-categorias">Escolha seu canal</h2>
-                <div class="categorias-lista" id="categorias-lista"></div>
-            </div>
-        </section>
-
-        <section id="oferta" class="secao-oferta py-5" aria-labelledby="titulo-oferta">
-            <div class="container">
-                <div class="row align-items-center g-4">
-                    <div class="col-lg-5 text-center text-lg-start">
-                        <span class="chapeu chapeu-escuro"><i class="bi bi-lightning-charge-fill"></i> Oferta relâmpago</span>
-                        <h2 class="titulo-secao" id="titulo-oferta">Ligue já! Essa oferta acaba à meia-noite</h2>
-                        <p>Quando o relógio zerar, o preço volta ao normal e o apresentador volta pro intervalo.</p>
-                        <div class="contador" aria-live="off">
-                            <div><span id="cont-h">00</span><small>horas</small></div>
-                            <div><span id="cont-m">00</span><small>min</small></div>
-                            <div><span id="cont-s">00</span><small>seg</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="tv-oferta" id="oferta-produto">
-                            <div class="slide-carregando">Sintonizando a oferta...</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="produtos" class="py-5 secao-produtos" aria-labelledby="titulo-produtos">
-            <div class="container">
-                <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
-                    <div>
-                        <span class="chapeu chapeu-escuro">Vitrine</span>
-                        <h2 class="titulo-secao mb-0" id="titulo-produtos">Tudo no ar agora</h2>
-                    </div>
-                    <p class="mb-0 text-secundario" id="resultado-info" aria-live="polite"></p>
-                </div>
-
-                <div id="filter-section" class="barra-filtros">
-                    <div class="row g-3 align-items-end">
-                        <div class="col-md-6 col-lg-3">
-                            <label for="category-filter" class="form-label">Categoria</label>
-                            <select id="category-filter" class="form-select">
-                                <option value="">Todas as Categorias</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <label for="search" class="form-label">Pesquisar</label>
-                            <div class="campo-icone">
-                                <i class="bi bi-search"></i>
-                                <input type="search" id="search" class="form-control" placeholder="Camiseta, vinil, Brasília...">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-2">
-                            <label for="sort" class="form-label">Ordenar</label>
-                            <select id="sort" class="form-select">
-                                <option value="">Destaques</option>
-                                <option value="menor">Menor preço</option>
-                                <option value="maior">Maior preço</option>
-                                <option value="desconto">Maior desconto</option>
-                                <option value="nome">Nome (A-Z)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 col-lg-3 d-flex flex-column gap-1">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="so-ofertas">
-                                <label class="form-check-label" for="so-ofertas">Só ofertas</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="so-favoritos">
-                                <label class="form-check-label" for="so-favoritos">Só favoritos</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="message"></div>
-
-                <div id="product-list" class="row g-4 mt-1"></div>
-            </div>
-        </section>
-
-        <section id="jukebox" class="secao-jukebox py-5" aria-labelledby="titulo-jukebox">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-5 text-center">
-                        <span class="chapeu">Toca o disco</span>
-                        <h2 class="titulo-secao text-white" id="titulo-jukebox">Ouça enquanto compra</h2>
-                        <div class="toca-discos">
-                            <div class="disco" id="disco">
-                                <img id="disco-capa" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="600" height="600">
-                            </div>
-                            <div class="braco-agulha" aria-hidden="true"></div>
-                        </div>
-                        <h3 class="album-titulo" id="album-titulo">Carregando o disco...</h3>
-                        <p class="album-info" id="album-info"></p>
-                        <a id="album-link" class="btn btn-cartoon btn-amarelo btn-sm d-none" href="#" target="_blank" rel="noopener">
-                            <i class="bi bi-apple"></i> Ouvir o álbum completo no Apple Music
-                        </a>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="painel-faixas">
-                            <div class="painel-topo">
-                                <span><i class="bi bi-music-note-list"></i> Faixas do álbum de 1995</span>
-                                <small>prévias de 30s via iTunes</small>
-                            </div>
-                            <ol class="lista-faixas" id="lista-faixas">
-                                <li class="faixa-esqueleto"></li>
-                                <li class="faixa-esqueleto"></li>
-                                <li class="faixa-esqueleto"></li>
-                                <li class="faixa-esqueleto"></li>
-                            </ol>
-                            <div class="jukebox-erro d-none" id="jukebox-erro">
-                                <p>Eita, a antena caiu e o disco não carregou.</p>
-                                <button type="button" class="btn btn-cartoon btn-amarelo btn-sm" id="btn-recarregar-jukebox">Tentar de novo</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <audio id="audio" preload="none"></audio>
-        </section>
-
-        <section id="calcular" class="py-5 secao-simulador" aria-labelledby="titulo-simulador">
-            <div class="container">
-                <div class="text-center mb-4">
-                    <span class="chapeu chapeu-escuro">Simulador do plantão</span>
-                    <h2 class="titulo-secao" id="titulo-simulador">Faça as contas antes de ligar</h2>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-7">
-                        <div id="order-form" class="cartao-cartoon h-100">
-                            <h3 class="subtitulo-cartao"><i class="bi bi-calculator"></i> Calcular Valor Total</h3>
-                            <form id="calc-form" novalidate>
-                                <div class="row g-3">
-                                    <div class="col-sm-8">
-                                        <label for="product" class="form-label">Escolha um produto</label>
-                                        <select id="product" name="product" class="form-select">
-                                            <option value="">Selecione um produto</option>
-                                        </select>
-                                        <div class="invalid-feedback">Escolhe um produto pra gente fazer a conta.</div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="quantity" class="form-label">Quantidade</label>
-                                        <input type="number" id="quantity" name="quantity" class="form-control" min="1" step="1" value="1" inputmode="numeric">
-                                        <div class="invalid-feedback">Use um número inteiro maior que zero.</div>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-wrap gap-2 mt-3">
-                                    <button type="button" id="calculate" class="btn btn-cartoon btn-rosa">
-                                        <i class="bi bi-calculator-fill"></i> Calcular valor
-                                    </button>
-                                    <button type="button" id="add-from-form" class="btn btn-cartoon btn-branco" disabled>
-                                        <i class="bi bi-cart-plus"></i> Joga no carrinho
-                                    </button>
-                                </div>
-                            </form>
-                            <div id="total-value" class="mt-4" aria-live="polite"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="cartao-cartoon cartao-frete h-100">
-                            <h3 class="subtitulo-cartao"><i class="bi bi-truck"></i> Vai de Brasília?</h3>
-                            <p class="small mb-2">Calcule o frete e a data de entrega pelo CEP. Saímos de Guarulhos/SP.</p>
-                            <label for="cep-simulador" class="form-label">Seu CEP</label>
-                            <div class="input-group">
-                                <input type="text" id="cep-simulador" class="form-control campo-cep" placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code">
-                                <button class="btn btn-cartoon btn-escuro" type="button" id="btn-cep-simulador">Calcular</button>
-                            </div>
-                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noopener" class="link-pequeno">Não sei meu CEP</a>
-                            <div id="frete-simulador" class="mt-3" aria-live="polite"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="banner-brasilia" aria-labelledby="titulo-brasilia">
-            <img src="imagens/fotos/brasilia-mamonas.jpg" alt="Brasília amarela com uma placa escrito MAMONAS no painel" loading="lazy">
-            <div class="container">
-                <div class="banner-conteudo">
-                    <span class="chapeu">Coleção Brasília Amarela</span>
-                    <h2 id="titulo-brasilia">A Brasília mais famosa do Brasil estacionou aqui.</h2>
-                    <p>Camiseta, chaveiro, miniatura 1:43 e pôster. Tudo amarelo, como manda o figurino.</p>
-                    <button type="button" class="btn btn-cartoon btn-amarelo" id="btn-colecao-brasilia">Ver a coleção <i class="bi bi-arrow-right"></i></button>
-                </div>
-            </div>
-        </section>
-
-        <section id="banda" class="py-5 secao-banda" aria-labelledby="titulo-banda">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6">
-                        <span class="chapeu chapeu-escuro">A história</span>
-                        <h2 class="titulo-secao" id="titulo-banda">Os cinco de Guarulhos</h2>
-                        <p class="texto-wiki" id="wiki-texto">Carregando a história da banda...</p>
-                        <a id="wiki-link" class="link-pequeno" href="https://pt.wikipedia.org/wiki/Mamonas_Assassinas" target="_blank" rel="noopener">Fonte: Wikipédia <i class="bi bi-box-arrow-up-right"></i></a>
-                        <div class="numeros-banda">
-                            <div><strong>1995</strong><span>único álbum de estúdio</span></div>
-                            <div><strong>+2 mi</strong><span>cópias vendidas</span></div>
-                            <div><strong>14</strong><span>faixas no disco</span></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <figure class="polaroid polaroid-esquerda">
-                            <img src="imagens/fotos/utopia-1990.jpg" alt="Show da banda Utopia num palco em Guarulhos, com o público em primeiro plano" loading="lazy">
-                            <figcaption>Ainda como Utopia, num palco de Guarulhos</figcaption>
-                        </figure>
-                    </div>
-                </div>
-
-                <div class="membros" aria-label="Integrantes">
-                    <div class="membro membro-amarelo"><i class="bi bi-mic-fill"></i><strong>Dinho</strong><span>Voz</span></div>
-                    <div class="membro membro-rosa"><i class="bi bi-lightning-fill"></i><strong>Bento Hinoto</strong><span>Guitarra</span></div>
-                    <div class="membro membro-azul"><i class="bi bi-music-note-beamed"></i><strong>Júlio Rasec</strong><span>Teclados</span></div>
-                    <div class="membro membro-laranja"><i class="bi bi-soundwave"></i><strong>Samuel Reoli</strong><span>Baixo</span></div>
-                    <div class="membro membro-verde"><i class="bi bi-vinyl-fill"></i><strong>Sérgio Reoli</strong><span>Bateria</span></div>
-                </div>
-
-                <ol class="linha-tempo">
-                    <li><span>1989</span><p>Sérgio, Samuel e Bento formam a banda Utopia em Guarulhos. Dinho e Júlio chegam logo depois.</p></li>
-                    <li><span>1994</span><p>A fita demo gravada com Rick Bonadio troca o rock sério pelo humor. Nascem os Mamonas Assassinas.</p></li>
-                    <li><span>1995</span><p>Sai pela EMI o álbum "Mamonas Assassinas", que passa de 2 milhões de cópias e leva o Diamante da ABPD.</p></li>
-                    <li class="em-memoria"><span>1996</span><p>Em 2 de março, os cinco integrantes morrem num acidente aéreo na Serra da Cantareira. A saudade continua até hoje.</p></li>
-                    <li><span>2016</span><p>Guarulhos ganha a Praça Mamonas Assassinas, com a mamona sorridente que virou o mascote desta loja.</p></li>
-                    <li><span>2023</span><p>"Mamonas Assassinas - O Filme" chega aos cinemas e apresenta a banda a uma nova geração.</p></li>
-                </ol>
-
-                <div class="row g-4 mt-2 align-items-center curiosidade">
-                    <div class="col-md-5">
-                        <figure class="polaroid polaroid-direita">
-                            <img src="imagens/fotos/mascote-mamona.jpg" alt="Escultura de uma mamona verde sorridente de gravata na Praça Mamonas Assassinas, em Guarulhos" loading="lazy">
-                            <figcaption>O mascote de verdade, na praça em Guarulhos</figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-7">
-                        <h3 class="subtitulo-cartao">Por que "Mamonas"?</h3>
-                        <p>A mamona é o fruto espinhento da planta <em>Ricinus communis</em>, bem comum em terrenos baldios pelo Brasil. O nome da banda brincava com esse fruto e com o duplo sentido da palavra, bem no espírito do grupo.</p>
-                        <p class="mb-0">Em Guarulhos, a praça que leva o nome da banda tem uma mamona gigante, verde e sorridente, de gravata. A gente se apaixonou e adotou como mascote do plantão.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="fa-clube" class="secao-fa-clube py-5" aria-labelledby="titulo-fa-clube">
-            <div class="container">
-                <div class="cartao-cartoon cartao-news">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-lg-6">
-                            <span class="chapeu chapeu-escuro">Fã-clube</span>
-                            <h2 class="titulo-secao" id="titulo-fa-clube">Entra pro fã-clube</h2>
-                            <p class="mb-0">É de graça, palavra de vendedor. Fique sabendo das ofertas antes do plantão.</p>
-                        </div>
-                        <div class="col-lg-6">
-                            <form id="news-form" novalidate>
-                                <div class="d-flex flex-column flex-sm-row gap-2">
-                                    <label for="news-email" class="visually-hidden">Seu e-mail</label>
-                                    <input type="email" id="news-email" class="form-control form-control-lg" placeholder="seu-melhor@email.com" autocomplete="email">
-                                    <button type="submit" class="btn btn-cartoon btn-rosa btn-lg text-nowrap">Me inscreve!</button>
-                                </div>
-                                <p id="news-msg" class="small mt-2 mb-0">Sem spam. Só barulho bom. Sai quando quiser.</p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-5 secao-faq" aria-labelledby="titulo-faq">
-            <div class="container">
-                <h2 class="titulo-secao text-center" id="titulo-faq">Perguntas do plantão</h2>
-                <div class="accordion faq" id="faq">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1">Como o frete é calculado?</button>
-                        </h3>
-                        <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faq">
-                            <div class="accordion-body">Pelo seu CEP. A gente encontra o endereço, mede a distância até Guarulhos e soma o peso dos produtos. A data de entrega já pula fins de semana e feriados nacionais. Acima de R$ 199, o PAC sai de graça.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2">Quais cupons estão valendo?</button>
-                        </h3>
-                        <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#faq">
-                            <div class="accordion-body"><strong>LIGUEJA</strong> dá 10% de desconto nos produtos. <strong>1406</strong> tira R$ 14,06 de compras acima de R$ 100. Um cupom por pedido.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3">Posso ver os preços em dólar ou euro?</button>
-                        </h3>
-                        <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#faq">
-                            <div class="accordion-body">Pode sim. Troque a moeda no topo da página: a cotação é atualizada na hora. A cobrança, claro, seria sempre em reais.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4" aria-expanded="false" aria-controls="faq-4">Esta é a loja oficial da banda?</button>
-                        </h3>
-                        <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#faq">
-                            <div class="accordion-body">Não. O Plantão 1406 é uma loja-fã independente, feita como projeto de portfólio. Não tem vínculo com a banda, os familiares ou as gravadoras, e nenhum pedido é cobrado ou enviado.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="rodape">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <a class="logo" href="#inicio">
-                        <span class="logo-tv"><i class="bi bi-tv"></i></span>
-                        <span class="logo-texto">Plantão <span>1406</span></span>
-                    </a>
-                    <p class="mt-3">A televenda mais escrachada da internet, em homenagem aos cinco de Guarulhos.</p>
-                    <div class="pagamentos" aria-label="Formas de pagamento">
-                        <span><i class="bi bi-qr-code"></i> Pix</span>
-                        <span><i class="bi bi-upc"></i> Boleto</span>
-                        <span><i class="bi bi-credit-card"></i> Cartão</span>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2">
-                    <h3 class="titulo-rodape">Loja</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#oferta">Oferta relâmpago</a></li>
-                        <li><a href="#produtos">Produtos</a></li>
-                        <li><a href="#calcular">Simulador</a></li>
-                        <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#carrinho">Carrinho</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <h3 class="titulo-rodape">Feito com dados de</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://performance-partners.apple.com/search-api" target="_blank" rel="noopener">iTunes Search API</a></li>
-                        <li><a href="https://pt.wikipedia.org" target="_blank" rel="noopener">Wikipédia</a></li>
-                        <li><a href="https://viacep.com.br" target="_blank" rel="noopener">ViaCEP</a> e <a href="https://brasilapi.com.br" target="_blank" rel="noopener">BrasilAPI</a></li>
-                        <li><a href="https://docs.awesomeapi.com.br" target="_blank" rel="noopener">AwesomeAPI</a> e <a href="https://servicodados.ibge.gov.br/api/docs" target="_blank" rel="noopener">IBGE</a></li>
-                        <li><button type="button" class="btn-link-rodape" data-bs-toggle="modal" data-bs-target="#creditos">Créditos das imagens</button></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <h3 class="titulo-rodape">Compartilhe o plantão</h3>
-                    <img id="qr-compartilhar" class="qr-rodape" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="QR code com o endereço desta loja" width="120" height="120" loading="lazy">
-                </div>
-            </div>
-            <hr>
-            <p class="aviso-legal">© <span id="ano">2026</span> Plantão 1406. Loja-fã não oficial, sem vínculo com a banda, seus familiares ou gravadoras. Nenhuma venda real é processada. Imagens com créditos aos respectivos autores.</p>
-        </div>
-    </footer>
-
-    <div class="modal fade" id="lightbox" tabindex="-1" aria-labelledby="lightbox-title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-md-down">
-            <div class="modal-content lightbox-content">
-                <button type="button" class="btn-close close-btn" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                <div class="row g-0">
-                    <div class="col-md-6 lightbox-galeria">
-                        <div class="lightbox-foto">
-                            <img id="lightbox-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="900" height="900">
-                            <div id="lightbox-badges" class="lightbox-badges"></div>
-                        </div>
-                        <div id="lightbox-thumbs" class="lightbox-thumbs"></div>
-                    </div>
-                    <div class="col-md-6 lightbox-info">
-                        <span id="lightbox-category" class="etiqueta-categoria"></span>
-                        <h2 id="lightbox-title" class="lightbox-titulo"></h2>
-                        <div id="lightbox-rating" class="avaliacao"></div>
-                        <div class="lightbox-precos">
-                            <span id="lightbox-old-price" class="preco-antigo"></span>
-                            <span id="lightbox-price" class="preco-grande"></span>
-                        </div>
-                        <p class="lightbox-condicoes"><span id="lightbox-parcelas"></span> · <span id="lightbox-pix"></span></p>
-                        <p id="lightbox-description"></p>
-
-                        <div id="lightbox-sizes" class="tamanhos"></div>
-                        <div id="lightbox-size-erro" class="texto-erro d-none">Escolhe um tamanho antes de jogar no carrinho.</div>
-
-                        <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
-                            <div class="seletor-qtd">
-                                <button type="button" id="lightbox-menos" aria-label="Diminuir quantidade"><i class="bi bi-dash-lg"></i></button>
-                                <input type="number" id="lightbox-qty" value="1" min="1" aria-label="Quantidade">
-                                <button type="button" id="lightbox-mais" aria-label="Aumentar quantidade"><i class="bi bi-plus-lg"></i></button>
-                            </div>
-                            <button type="button" id="lightbox-buy" class="btn btn-cartoon btn-rosa flex-grow-1">
-                                <i class="bi bi-cart-plus-fill"></i> Joga no carrinho
-                            </button>
-                            <button type="button" id="lightbox-fav" class="btn btn-cartoon btn-branco" aria-label="Favoritar">
-                                <i class="bi bi-heart"></i>
-                            </button>
-                        </div>
-                        <p id="lightbox-estoque" class="estoque mt-3"></p>
-                        <ul class="lista-vantagens">
-                            <li><i class="bi bi-truck"></i> Enviado de Guarulhos/SP. Frete grátis acima de <span data-preco="199">R$ 199,00</span></li>
-                            <li><i class="bi bi-arrow-repeat"></i> Troca grátis em até 7 dias</li>
-                        </ul>
-                        <div id="lightbox-musica" class="lightbox-musica d-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="offcanvas offcanvas-end carrinho" tabindex="-1" id="carrinho" aria-labelledby="carrinho-titulo">
-        <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="carrinho-titulo"><i class="bi bi-cart3"></i> Seu carrinho</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="estrada-frete" id="estrada-frete">
-                <p id="frete-gratis-texto" class="mb-2"></p>
-                <div class="estrada">
-                    <div class="estrada-barra" id="estrada-barra"></div>
-                    <span class="estrada-carro" id="estrada-carro" aria-hidden="true">
-                        <svg viewBox="0 0 64 32" width="44" height="22"><path d="M4 22 L6 13 Q7 11 10 11 L16 11 L22 3 Q23 2 25 2 L48 2 Q51 2 53 5 L58 12 Q62 13 62 17 L62 22 Q62 25 59 25 L6 25 Q4 25 4 22 Z" fill="#FFD400" stroke="#121212" stroke-width="2.5"/><path d="M24 5 L33 5 L33 11 L19 11 Z M36 5 L46 5 L46 11 L36 11 Z" fill="#9fd3ff" stroke="#121212" stroke-width="1.5"/><circle cx="17" cy="25" r="5" fill="#121212"/><circle cx="50" cy="25" r="5" fill="#121212"/></svg>
-                    </span>
-                    <span class="estrada-bandeira" aria-hidden="true"><i class="bi bi-flag-fill"></i> Santos</span>
-                </div>
-            </div>
-
-            <div id="cart-items" class="itens-carrinho"></div>
-
-            <div id="cart-resumo" class="resumo-carrinho">
-                <div class="bloco-carrinho">
-                    <label for="cupom" class="form-label"><i class="bi bi-ticket-perforated"></i> Cupom</label>
-                    <div class="input-group">
-                        <input type="text" id="cupom" class="form-control text-uppercase" placeholder="LIGUEJA">
-                        <button class="btn btn-cartoon btn-escuro" type="button" id="btn-cupom">Aplicar</button>
-                    </div>
-                    <div id="cupom-msg" class="small mt-1"></div>
-                </div>
-
-                <div class="bloco-carrinho">
-                    <label for="cep" class="form-label"><i class="bi bi-truck"></i> Vai de Brasília? Calcula o frete</label>
-                    <div class="input-group">
-                        <input type="text" id="cep" class="form-control campo-cep" placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code">
-                        <button class="btn btn-cartoon btn-escuro" type="button" id="btn-frete">Calcular</button>
-                    </div>
-                    <div id="frete-endereco" class="small mt-2" aria-live="polite"></div>
-                    <div id="frete-opcoes" class="mt-2"></div>
-                </div>
-
-                <dl class="totais">
-                    <div><dt>Subtotal</dt><dd id="cart-subtotal">R$ 0,00</dd></div>
-                    <div id="cart-desconto-linha" class="d-none"><dt>Desconto</dt><dd id="cart-desconto" class="texto-verde"></dd></div>
-                    <div><dt>Frete</dt><dd id="cart-frete">Calcule acima</dd></div>
-                    <div class="total-final"><dt>Total</dt><dd id="cart-total">R$ 0,00</dd></div>
-                </dl>
-                <p class="small text-center mb-3" id="cart-pix"></p>
-
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-cartoon btn-rosa btn-lg" id="btn-finalizar">Fechar o pedido <i class="bi bi-arrow-right"></i></button>
-                    <button type="button" class="btn btn-link link-esvaziar" id="btn-limpar">Esvaziar carrinho</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="checkout-titulo" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
-            <div class="modal-content checkout">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="checkout-titulo">Fechar o pedido</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <ol class="passos" id="passos">
-                        <li class="ativo">Dados</li>
-                        <li>Entrega</li>
-                        <li>Pagamento</li>
-                        <li>Pronto!</li>
-                    </ol>
-
-                    <form id="form-dados" class="passo" novalidate>
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label for="ck-nome" class="form-label">Nome completo</label>
-                                <input type="text" id="ck-nome" class="form-control" required minlength="3" autocomplete="name">
-                                <div class="invalid-feedback">Conta pra gente seu nome.</div>
-                            </div>
-                            <div class="col-md-7">
-                                <label for="ck-email" class="form-label">E-mail</label>
-                                <input type="email" id="ck-email" class="form-control" required autocomplete="email">
-                                <div class="invalid-feedback">Esse e-mail não parece certo.</div>
-                            </div>
-                            <div class="col-md-5">
-                                <label for="ck-telefone" class="form-label">Celular</label>
-                                <input type="tel" id="ck-telefone" class="form-control" required placeholder="(11) 91406-1406" maxlength="15" autocomplete="tel">
-                                <div class="invalid-feedback">Informe um celular com DDD.</div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <form id="form-entrega" class="passo d-none" novalidate>
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label for="ck-cep" class="form-label">CEP</label>
-                                <input type="text" id="ck-cep" class="form-control campo-cep" required placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code">
-                                <div class="invalid-feedback" id="ck-cep-erro">Informe um CEP válido.</div>
-                            </div>
-                            <div class="col-md-8">
-                                <label for="ck-rua" class="form-label">Rua</label>
-                                <input type="text" id="ck-rua" class="form-control" required autocomplete="address-line1">
-                                <div class="invalid-feedback">Informe a rua.</div>
-                            </div>
-                            <div class="col-4 col-md-3">
-                                <label for="ck-numero" class="form-label">Número</label>
-                                <input type="text" id="ck-numero" class="form-control" required>
-                                <div class="invalid-feedback">Número?</div>
-                            </div>
-                            <div class="col-8 col-md-4">
-                                <label for="ck-complemento" class="form-label">Complemento</label>
-                                <input type="text" id="ck-complemento" class="form-control" placeholder="Opcional">
-                            </div>
-                            <div class="col-md-5">
-                                <label for="ck-bairro" class="form-label">Bairro</label>
-                                <input type="text" id="ck-bairro" class="form-control" required>
-                                <div class="invalid-feedback">Informe o bairro.</div>
-                            </div>
-                            <div class="col-md-8">
-                                <label for="ck-cidade" class="form-label">Cidade</label>
-                                <input type="text" id="ck-cidade" class="form-control" required autocomplete="address-level2">
-                                <div class="invalid-feedback">Informe a cidade.</div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="ck-uf" class="form-label">Estado</label>
-                                <select id="ck-uf" class="form-select" required>
-                                    <option value="">Carregando...</option>
-                                </select>
-                                <div class="invalid-feedback">Escolha o estado.</div>
-                            </div>
-                            <div class="col-12">
-                                <span class="form-label d-block">Forma de entrega</span>
-                                <div id="ck-frete-opcoes"></div>
-                                <div class="texto-erro d-none" id="ck-frete-erro">Calcule o frete pelo CEP e escolha uma opção.</div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <form id="form-pagamento" class="passo d-none" novalidate>
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <span class="form-label d-block">Como você quer pagar?</span>
-                                <div class="opcoes-pagamento">
-                                    <input type="radio" class="btn-check" name="pagamento" id="pag-pix" value="pix" checked>
-                                    <label class="opcao-pagamento" for="pag-pix"><i class="bi bi-qr-code"></i> Pix <small>5% de desconto</small></label>
-                                    <input type="radio" class="btn-check" name="pagamento" id="pag-boleto" value="boleto">
-                                    <label class="opcao-pagamento" for="pag-boleto"><i class="bi bi-upc"></i> Boleto <small>vence em 3 dias</small></label>
-                                    <input type="radio" class="btn-check" name="pagamento" id="pag-cartao" value="cartao" disabled>
-                                    <label class="opcao-pagamento" for="pag-cartao"><i class="bi bi-credit-card"></i> Cartão <small>indisponível na demonstração</small></label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="resumo-pedido" id="ck-resumo"></div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div id="ck-confirmacao" class="passo d-none text-center">
-                        <div class="confete" aria-hidden="true"></div>
-                        <i class="bi bi-check-circle-fill icone-sucesso"></i>
-                        <h3 class="titulo-sucesso">Pedido <span id="ck-numero-pedido"></span> no ar!</h3>
-                        <p id="ck-entrega-data"></p>
-                        <div id="ck-pagamento-info"></div>
-                        <p class="small text-secundario mt-3 mb-0">Pedido de demonstração: esta é uma loja-fã de portfólio, nenhuma cobrança foi feita e nada vai ser enviado.</p>
-                    </div>
-                </div>
-                <div class="modal-footer" id="ck-rodape">
-                    <button type="button" class="btn btn-cartoon btn-branco" id="ck-voltar">Voltar</button>
-                    <button type="button" class="btn btn-cartoon btn-rosa" id="ck-avancar">Continuar <i class="bi bi-arrow-right"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="creditos" tabindex="-1" aria-labelledby="creditos-titulo" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="creditos-titulo">Créditos das imagens</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="small">As fotos vêm do Wikimedia Commons e são usadas conforme as licenças abaixo. As ilustrações dos produtos foram criadas para esta loja a partir delas.</p>
-                    <ul class="lista-creditos" id="lista-creditos"></ul>
-                    <p class="small mb-0">Capas e prévias musicais exibidas pela iTunes Search API, com link para a Apple Music.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mini-player" id="mini-player" aria-live="polite">
-        <img id="mini-capa" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="48" height="48">
-        <div class="mini-info">
-            <small>Tocando agora · prévia de 30s</small>
-            <strong id="mini-faixa"></strong>
-            <div class="mini-progresso"><span id="mini-progresso"></span></div>
-        </div>
-        <button type="button" id="mini-play" class="btn-mini" aria-label="Pausar"><i class="bi bi-pause-fill"></i></button>
-        <button type="button" id="mini-fechar" class="btn-mini" aria-label="Fechar player"><i class="bi bi-x-lg"></i></button>
-    </div>
-
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="aviso" class="toast balao-toast" role="status" aria-live="polite" aria-atomic="true">
-            <div class="d-flex align-items-center">
-                <div class="toast-body" id="aviso-texto"></div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
-            </div>
-        </div>
-    </div>
-
-    <a href="#inicio" id="voltar-topo" class="btn btn-cartoon btn-amarelo" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i><span class="d-none d-md-inline"> Subir de Brasília</span></a>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts.js"></script>
+  </footer>
 </body>
 </html>

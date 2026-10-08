@@ -1,0 +1,89 @@
+# Robô semanal de atualização da documentação.
+#
+# 1. Compara os recursos usados nos componentes com o web-features
+#    (base oficial dos selos Baseline do MDN) e confere os links do MDN.
+# 2. Se algo mudou e o segredo ANTHROPIC_API_KEY existir, o Claude lê o
+#    relatório e ajusta componentes, exemplos e textos.
+# 3. Os testes rodam de novo e um pull request é aberto para revisão humana.
+#    Nada vai para o ar sem alguém aprovar o PR.
+#
+# Para ligar a parte de IA: Settings → Secrets and variables → Actions →
+# New repository secret → ANTHROPIC_API_KEY (crie a chave em console.anthropic.com).
+
+name: Atualizar documentação
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # toda segunda-feira, 6h no horário de Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: atualizar-documentacao
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Verificar suporte dos navegadores e links do MDN
+        id: verificar
+        run: node scripts/atualizar-documentacao.mjs --links --relatorio "$RUNNER_TEMP/relatorio.md"
+
+      - name: Claude revisa os componentes afetados
+        if: steps.verificar.outputs.mudou == 'true' && env.ANTHROPIC_API_KEY != ''
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Você mantém o Atalho, uma biblioteca de componentes de interface em português
+            para iniciantes. Leia o relatório em ${{ runner.temp }}/relatorio.md e faça as
+            mudanças necessárias:
+
+            - Recurso que passou a "amplo" ou "recente": se o componente tinha um contorno
+              ou aviso por falta de suporte, simplifique. Se o recurso permite um jeito mais
+              simples de fazer algo (ex.: algo que antes exigia JavaScript), atualize o
+              exemplo e o texto "comoFunciona".
+            - Recurso que regrediu ou ficou "desconhecido": procure o id novo em
+              https://unpkg.com/web-features/data.json e corrija o campo "recursos".
+            - Link quebrado: encontre a página nova no MDN e troque o link.
+            - Página que ganhou tradução: troque en(...) por pt(...) no link.
+
+            Regras:
+            - Os dados ficam em site/dados/*.js; o código da biblioteca em atalho/.
+            - Escreva em português do Brasil, com o mesmo tom dos textos existentes.
+            - Não mude a API pública (nomes de classes e atributos) sem necessidade.
+            - Rode `npm test` no final; todos os testes precisam passar.
+            - Não faça commit nem push: o próximo passo abre o pull request.
+          claude_args: |
+            --max-turns 40
+            --allowedTools "Read,Edit,Write,Glob,Grep,WebFetch,Bash(npm test),Bash(node:*)"
+
+      - name: Rodar testes
+        if: steps.verificar.outputs.mudou == 'true'
+        run: npm test
+
+      - name: Abrir pull request
+        if: steps.verificar.outputs.mudou == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: robo/atualizacao-documentacao
+          delete-branch: true
+          commit-message: "docs: atualização semanal de suporte dos navegadores e links do MDN"
+          title: "Atualização semanal da documentação"
+          body-path: ${{ runner.temp }}/relatorio.md
+          labels: documentação, robô
