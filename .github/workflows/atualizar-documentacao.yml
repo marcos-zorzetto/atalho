@@ -2,13 +2,19 @@
 #
 # 1. Compara os recursos usados nos componentes com o web-features
 #    (base oficial dos selos Baseline do MDN) e confere os links do MDN.
-# 2. Se algo mudou e o segredo ANTHROPIC_API_KEY existir, o Claude lê o
-#    relatório e ajusta componentes, exemplos e textos.
-# 3. Os testes rodam de novo e um pull request é aberto para revisão humana.
+# 2. Se algo mudou e houver uma credencial do Claude, ele lê o relatório e
+#    ajusta componentes, exemplos e textos.
+# 3. Os testes rodam e um pull request é aberto para revisão humana.
 #    Nada vai para o ar sem alguém aprovar o PR.
 #
-# Para ligar a parte de IA: Settings → Secrets and variables → Actions →
-# New repository secret → ANTHROPIC_API_KEY (crie a chave em console.anthropic.com).
+# O robô nunca quebra por causa da IA: sem credencial, sem crédito, fora do ar
+# ou com testes falhando, as mudanças da IA são descartadas e o PR é aberto
+# só com os dados oficiais e o relatório.
+#
+# Credencial (use UMA das duas, em Settings → Secrets and variables → Actions):
+# - CLAUDE_CODE_OAUTH_TOKEN: usa sua assinatura Claude Pro/Max, sem custo extra.
+#   Gere com o comando "claude setup-token" no terminal.
+# - ANTHROPIC_API_KEY: chave da API (console.anthropic.com), crédito pré-pago.
 
 name: Atualizar documentação
 
@@ -31,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      TEM_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' || secrets.ANTHROPIC_API_KEY != '' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -44,9 +50,12 @@ jobs:
         run: node scripts/atualizar-documentacao.mjs --links --relatorio "$RUNNER_TEMP/relatorio.md"
 
       - name: Claude revisa os componentes afetados
-        if: steps.verificar.outputs.mudou == 'true' && env.ANTHROPIC_API_KEY != ''
+        id: claude
+        if: steps.verificar.outputs.mudou == 'true' && env.TEM_CLAUDE == 'true'
+        continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
@@ -67,6 +76,7 @@ jobs:
             - Os dados ficam em site/dados/*.js; o código da biblioteca em atalho/.
             - Escreva em português do Brasil, com o mesmo tom dos textos existentes.
             - Não mude a API pública (nomes de classes e atributos) sem necessidade.
+            - Não edite site/dados/baseline.js: ele é gerado pelo script.
             - Rode `npm test` no final; todos os testes precisam passar.
             - Não faça commit nem push: o próximo passo abre o pull request.
           claude_args: |
@@ -74,8 +84,39 @@ jobs:
             --allowedTools "Read,Edit,Write,Glob,Grep,WebFetch,Bash(npm test),Bash(node:*)"
 
       - name: Rodar testes
+        id: testes
         if: steps.verificar.outputs.mudou == 'true'
+        continue-on-error: true
         run: npm test
+
+      # Se a IA falhou (sem crédito, fora do ar...) ou deixou os testes quebrados,
+      # descarta as mudanças dela e mantém só os dados oficiais atualizados.
+      - name: Descartar mudanças da IA se algo deu errado
+        if: steps.verificar.outputs.mudou == 'true' && (steps.claude.outcome == 'failure' || steps.testes.outcome == 'failure')
+        run: |
+          git diff --name-only | grep -v '^site/dados/baseline.js$' | xargs -r git checkout --
+          git clean -fd
+          npm test
+          {
+            echo ""
+            echo "## Observação do robô"
+            echo ""
+            if [ "${{ steps.claude.outcome }}" = "failure" ]; then
+              echo "A revisão pelo Claude não rodou (credencial sem crédito, expirada ou serviço fora do ar). Este PR traz só os dados oficiais atualizados; ajuste os componentes manualmente se precisar."
+            else
+              echo "As mudanças sugeridas pelo Claude não passaram nos testes e foram descartadas. Este PR traz só os dados oficiais atualizados."
+            fi
+          } >> "$RUNNER_TEMP/relatorio.md"
+
+      - name: Avisar quando não há credencial do Claude
+        if: steps.verificar.outputs.mudou == 'true' && env.TEM_CLAUDE != 'true'
+        run: |
+          {
+            echo ""
+            echo "## Observação do robô"
+            echo ""
+            echo "Nenhuma credencial do Claude configurada: os componentes não foram revisados automaticamente."
+          } >> "$RUNNER_TEMP/relatorio.md"
 
       - name: Abrir pull request
         if: steps.verificar.outputs.mudou == 'true'
