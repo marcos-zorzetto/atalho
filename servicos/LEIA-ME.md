@@ -56,6 +56,8 @@ select id from auth.users where email = 'SEU-EMAIL@exemplo.com';
 
 3. Volte ao site, entre na sua conta e clique em **Painel do administrador** (ou abra `/admin/`).
 
+Para conferir todas as permissões (visitante, membro e administrador) direto no banco, cole [`supabase/validar-permissoes.sql`](supabase/validar-permissoes.sql) no SQL Editor, troque o e-mail na última linha e clique em Run: são 42 verificações, e o script desfaz tudo o que testou.
+
 Ninguém consegue se tornar administrador pelo site: a tabela `administradores` só aceita mudanças pelo SQL Editor. Para tirar alguém, use `delete from public.administradores where usuario_id = '...';`.
 
 ## 4. Páginas completas para membros (repositório privado atalho-pro)
