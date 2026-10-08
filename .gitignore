@@ -3,3 +3,5 @@ relatorio-atualizacao.md
 .claude/
 .DS_Store
 Thumbs.db
+dist/
+testes/resultado/

@@ -165,6 +165,12 @@ window.ATALHO_BASELINE = {
       "desde": "2021-12-07",
       "amplamenteDesde": "2024-06-07"
     },
+    "intersection-observer": {
+      "nome": "Intersection observer",
+      "status": "amplo",
+      "desde": "2019-03-25",
+      "amplamenteDesde": "2021-09-25"
+    },
     "intl": {
       "nome": "Intl",
       "status": "amplo",

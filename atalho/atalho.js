@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.0.0 — componentes de interface em português
+ * Atalho 1.1.0 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -845,7 +845,10 @@
     for (const formulario of raiz instanceof Element ? [raiz, ...$$("form[data-at-validar]", raiz)] : $$("form[data-at-validar]", raiz)) {
       if (formulario.matches?.("form[data-at-validar]")) formulario.noValidate = true;
     }
-    renderizarLigacoes(raiz instanceof Element ? raiz : document);
+    const escopo = raiz instanceof Element ? raiz : document;
+    for (const faixa of escopo.matches?.(".at-faixa-entrada") ? [escopo] : $$(".at-faixa-entrada", escopo)) atualizarFaixa(faixa);
+    for (const campo of escopo.matches?.("[data-at-contar]") ? [escopo] : $$("[data-at-contar]", escopo)) atualizarContagem(campo);
+    renderizarLigacoes(escopo);
   }
 
   /* ------------------------------------------------------------------------
@@ -930,10 +933,13 @@
     const caixas = $$("tbody [data-selecionar]", tabela);
     const marcadas = caixas.filter((c) => c.checked);
     caixas.forEach((c) => c.closest("tr")?.setAttribute("aria-selected", c.checked ? "true" : "false"));
+    // "Selecionar todos" reflete só as linhas visíveis (página atual e filtro aplicado)
     const todas = $("[data-selecionar-todos]", tabela);
     if (todas) {
-      todas.checked = marcadas.length > 0 && marcadas.length === caixas.length;
-      todas.indeterminate = marcadas.length > 0 && marcadas.length < caixas.length;
+      const visiveis = caixas.filter((c) => !c.closest("tr")?.hidden);
+      const marcadasVisiveis = visiveis.filter((c) => c.checked).length;
+      todas.checked = visiveis.length > 0 && marcadasVisiveis === visiveis.length;
+      todas.indeterminate = marcadasVisiveis > 0 && marcadasVisiveis < visiveis.length;
     }
     return marcadas;
   }
@@ -1619,6 +1625,415 @@
   }
 
   /* ------------------------------------------------------------------------
+     Componentes da versão 1.1
+     ------------------------------------------------------------------------ */
+
+  let contadorIds = 0;
+  const novoId = (prefixo) => `${prefixo}-${++contadorIds}-${Math.random().toString(36).slice(2, 6)}`;
+
+  // Autocompletar (combobox com lista de sugestões)
+  function itensVisiveis(caixa) {
+    return $$(".at-sugestoes > li[role=option]:not([hidden])", caixa);
+  }
+
+  function marcarSugestao(caixa, indice) {
+    const itens = itensVisiveis(caixa);
+    const campo = $("input", caixa);
+    itens.forEach((li, i) => li.setAttribute("aria-selected", String(i === indice)));
+    caixa.atIndice = indice;
+    if (itens[indice]) {
+      campo.setAttribute("aria-activedescendant", itens[indice].id);
+      itens[indice].scrollIntoView({ block: "nearest" });
+    } else {
+      campo.removeAttribute("aria-activedescendant");
+    }
+  }
+
+  function filtrarSugestoes(caixa) {
+    const campo = $("input", caixa);
+    const lista = $(".at-sugestoes", caixa);
+    const termo = normalizar(campo.value);
+    let visiveis = 0;
+    for (const li of $$(":scope > li[role=option]", lista)) {
+      const mostrar = !termo || normalizar(`${li.textContent} ${li.dataset.palavras || ""}`).includes(termo);
+      li.hidden = !mostrar;
+      if (mostrar) visiveis++;
+    }
+    let vazio = $(".at-sugestoes-vazio", lista);
+    if (!visiveis) {
+      if (!vazio) {
+        vazio = document.createElement("li");
+        vazio.className = "at-sugestoes-vazio";
+        vazio.textContent = caixa.dataset.msgVazia || "Nada encontrado.";
+        lista.append(vazio);
+      }
+      vazio.hidden = false;
+    } else if (vazio) {
+      vazio.hidden = true;
+    }
+    abrirSugestoes(caixa, true);
+    marcarSugestao(caixa, visiveis ? 0 : -1);
+  }
+
+  function abrirSugestoes(caixa, abrir) {
+    const lista = $(".at-sugestoes", caixa);
+    lista.hidden = !abrir;
+    $("input", caixa).setAttribute("aria-expanded", String(abrir));
+  }
+
+  function escolherSugestao(caixa, li) {
+    const campo = $("input", caixa);
+    campo.value = li.dataset.valor ?? li.textContent.trim();
+    abrirSugestoes(caixa, false);
+    campo.focus();
+    campo.dispatchEvent(new Event("change", { bubbles: true }));
+    emitir(caixa, "at:selecionar", { valor: campo.value, texto: li.textContent.trim(), item: li });
+  }
+
+  // Quantidade
+  function ajustarQuantidade(grupo, passo) {
+    const campo = $("input", grupo);
+    const minimo = campo.min === "" ? -Infinity : Number(campo.min);
+    const maximo = campo.max === "" ? Infinity : Number(campo.max);
+    const atual = Number(campo.value) || 0;
+    const novo = Math.min(maximo, Math.max(minimo, atual + passo * (Number(campo.step) || 1)));
+    if (novo !== atual) {
+      campo.value = String(novo);
+      campo.dispatchEvent(new Event("input", { bubbles: true }));
+      campo.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    atualizarQuantidade(grupo);
+  }
+
+  function atualizarQuantidade(grupo) {
+    const campo = $("input", grupo);
+    const valor = Number(campo.value) || 0;
+    $$("[data-passo]", grupo).forEach((botao) => {
+      const passo = Number(botao.dataset.passo);
+      botao.disabled = (passo < 0 && campo.min !== "" && valor <= Number(campo.min)) || (passo > 0 && campo.max !== "" && valor >= Number(campo.max));
+    });
+  }
+
+  // Contador de caracteres
+  function atualizarContagem(campo) {
+    const maximo = campo.maxLength > 0 ? campo.maxLength : Number(campo.dataset.atContar) || 0;
+    let contagem = campo.id ? $(`[data-contagem-de="${CSS.escape(campo.id)}"]`) : null;
+    if (!contagem) {
+      contagem = campo.atContagem;
+      if (!contagem) {
+        contagem = document.createElement("span");
+        contagem.className = "at-contagem";
+        contagem.setAttribute("aria-live", "polite");
+        campo.after(contagem);
+        campo.atContagem = contagem;
+      }
+    }
+    const usados = campo.value.length;
+    contagem.textContent = maximo ? `${usados}/${maximo}` : String(usados);
+    contagem.dataset.estado = maximo && usados >= maximo ? "cheio" : maximo && usados >= maximo * 0.9 ? "perto" : "";
+  }
+
+  // Faixa de valores
+  function atualizarFaixa(faixa) {
+    const minimo = Number(faixa.min) || 0;
+    const maximo = Number(faixa.max) || 100;
+    faixa.style.setProperty("--_progresso", `${((Number(faixa.value) - minimo) / (maximo - minimo)) * 100}%`);
+    if (faixa.id) {
+      for (const saida of $$(`output[for~="${CSS.escape(faixa.id)}"]`)) {
+        saida.textContent = aplicarFormato(Number(faixa.value), faixa.dataset.atFormato || saida.dataset.atFormato);
+      }
+    }
+  }
+
+  // Etiquetas
+  function sincronizarEtiquetas(caixa) {
+    const valores = $$(".at-etiqueta", caixa).map((e) => e.dataset.valor);
+    let escondido = $("input[type=hidden]", caixa);
+    if (!escondido && caixa.dataset.nome) {
+      escondido = document.createElement("input");
+      escondido.type = "hidden";
+      escondido.name = caixa.dataset.nome;
+      caixa.append(escondido);
+    }
+    if (escondido) escondido.value = valores.join(",");
+    emitir(caixa, "at:etiquetas", { lista: valores });
+  }
+
+  function adicionarEtiqueta(caixa, texto) {
+    const valor = texto.trim().replace(/,$/, "").trim();
+    if (!valor) return;
+    const existentes = $$(".at-etiqueta", caixa).map((e) => normalizar(e.dataset.valor));
+    const maximo = Number(caixa.dataset.maximo) || Infinity;
+    if (existentes.includes(normalizar(valor)) || existentes.length >= maximo) return;
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "at-etiqueta";
+    etiqueta.dataset.valor = valor;
+    etiqueta.append(valor + " ");
+    const remover = document.createElement("button");
+    remover.type = "button";
+    remover.dataset.atFechar = "";
+    remover.setAttribute("aria-label", `Remover ${valor}`);
+    remover.textContent = "×";
+    etiqueta.append(remover);
+    $("input:not([type=hidden])", caixa).before(etiqueta);
+    sincronizarEtiquetas(caixa);
+  }
+
+  // Galeria com tela cheia
+  let visualizador;
+  function abrirGaleria(galeria, indice) {
+    const fotos = $$(":scope > a", galeria);
+    if (!visualizador) {
+      visualizador = document.createElement("dialog");
+      visualizador.className = "at-visualizador";
+      visualizador.setAttribute("aria-label", "Visualizador de imagens");
+      visualizador.innerHTML = `<div class="at-visualizador-topo"><span data-posicao aria-live="polite"></span><button type="button" data-at-fechar aria-label="Fechar">×</button></div>
+        <figure><img alt=""></figure>
+        <div class="at-visualizador-rodape"><button type="button" data-ver="-1" aria-label="Imagem anterior">‹</button><span data-legenda></span><button type="button" data-ver="1" aria-label="Próxima imagem">›</button></div>`;
+      document.body.append(visualizador);
+      visualizador.addEventListener("click", (e) => {
+        const passo = e.target.closest("[data-ver]");
+        if (passo) mostrarFoto(Number(passo.dataset.ver));
+        else if (e.target.matches("figure")) visualizador.close();
+      });
+      visualizador.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") mostrarFoto(1);
+        if (e.key === "ArrowLeft") mostrarFoto(-1);
+      });
+    }
+    function mostrarFoto(passo = 0) {
+      visualizador.atIndice = (visualizador.atIndice + passo + fotos.length) % fotos.length;
+      const link = fotos[visualizador.atIndice];
+      const miniatura = $("img", link);
+      const imagem = $("img", visualizador);
+      imagem.src = link.href;
+      imagem.alt = miniatura?.alt || "";
+      $("[data-legenda]", visualizador).textContent = link.dataset.legenda || miniatura?.alt || "";
+      $("[data-posicao]", visualizador).textContent = `${visualizador.atIndice + 1} de ${fotos.length}`;
+    }
+    visualizador.atIndice = indice;
+    mostrarFoto(0);
+    visualizador.showModal();
+  }
+
+  // Vídeo leve do YouTube
+  function idDoYoutube(endereco) {
+    const casou = String(endereco).match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([\w-]{11})/);
+    return casou ? casou[1] : null;
+  }
+
+  // Contagem regressiva
+  const contagens = new Set();
+  function atualizarContagemRegressiva(caixa) {
+    const fim = new Date(caixa.dataset.ate).getTime();
+    const restante = Math.max(0, fim - Date.now());
+    const partes = {
+      dias: Math.floor(restante / 86400000),
+      horas: Math.floor((restante % 86400000) / 3600000),
+      minutos: Math.floor((restante % 3600000) / 60000),
+      segundos: Math.floor((restante % 60000) / 1000),
+    };
+    for (const [chave, valor] of Object.entries(partes)) {
+      const alvo = $(`[data-parte="${chave}"] strong`, caixa);
+      if (alvo) alvo.textContent = String(valor).padStart(2, "0");
+    }
+    caixa.setAttribute("aria-label", `Faltam ${partes.dias} dias, ${partes.horas} horas e ${partes.minutos} minutos`);
+    if (!restante) {
+      contagens.delete(caixa);
+      if (caixa.dataset.textoFim) caixa.textContent = caixa.dataset.textoFim;
+      emitir(caixa, "at:fim", {});
+    }
+  }
+
+  setInterval(() => {
+    for (const caixa of contagens) {
+      if (!caixa.isConnected) contagens.delete(caixa);
+      else atualizarContagemRegressiva(caixa);
+    }
+  }, 1000);
+
+  // Voltar ao topo
+  const botoesTopo = new Set();
+  addEventListener("scroll", () => {
+    for (const botao of botoesTopo) {
+      if (!botao.isConnected) botoesTopo.delete(botao);
+      else botao.toggleAttribute("data-visivel", scrollY > (Number(botao.dataset.depois) || 600));
+    }
+  }, { passive: true });
+
+  // Carregar mais
+  const observadorCarregar = "IntersectionObserver" in window
+    ? new IntersectionObserver((entradas) => {
+        for (const entrada of entradas) {
+          const alvo = entrada.target;
+          if (entrada.isIntersecting && !alvo.hidden && alvo.getAttribute("aria-busy") !== "true") emitir(alvo, "at:carregar", {});
+        }
+      }, { rootMargin: "300px" })
+    : null;
+
+  Object.assign(componentes, {
+    autocompletar(caixa) {
+      const campo = $("input", caixa);
+      const lista = $(".at-sugestoes", caixa);
+      if (!campo || !lista) return;
+      lista.id ||= novoId("at-sugestoes");
+      lista.setAttribute("role", "listbox");
+      lista.hidden = true;
+      $$(":scope > li", lista).forEach((li) => {
+        li.setAttribute("role", "option");
+        li.id ||= novoId("at-opcao");
+      });
+      campo.setAttribute("role", "combobox");
+      campo.setAttribute("aria-autocomplete", "list");
+      campo.setAttribute("aria-controls", lista.id);
+      campo.setAttribute("aria-expanded", "false");
+      campo.autocomplete = "off";
+    },
+    quantidade(grupo) {
+      const campo = $("input", grupo);
+      if (!campo) return;
+      campo.inputMode = "numeric";
+      $$("[data-passo]", grupo).forEach((botao) => {
+        botao.type = "button";
+        if (!botao.getAttribute("aria-label")) botao.setAttribute("aria-label", Number(botao.dataset.passo) > 0 ? "Aumentar" : "Diminuir");
+      });
+      atualizarQuantidade(grupo);
+    },
+    etiquetas(caixa) {
+      const campo = $("input:not([type=hidden])", caixa);
+      if (campo && !campo.getAttribute("aria-label")) campo.setAttribute("aria-label", "Adicionar etiqueta (Enter para confirmar)");
+      for (const valor of (caixa.dataset.valores || "").split(",").filter(Boolean)) adicionarEtiqueta(caixa, valor);
+      sincronizarEtiquetas(caixa);
+    },
+    galeria() {},
+    video(link) {
+      const id = idDoYoutube(link.href);
+      if (id && !link.style.backgroundImage) link.style.backgroundImage = `url("https://i.ytimg.com/vi/${id}/hqdefault.jpg")`;
+      if (!link.getAttribute("aria-label")) link.setAttribute("aria-label", `Assistir ao vídeo: ${link.textContent.trim() || "vídeo"}`);
+    },
+    contagem(caixa) {
+      if (!caixa.children.length) {
+        caixa.innerHTML = ["dias", "horas", "minutos", "segundos"]
+          .map((p) => `<span data-parte="${p}"><strong>00</strong><small>${p}</small></span>`)
+          .join("");
+      }
+      caixa.setAttribute("role", "timer");
+      contagens.add(caixa);
+      atualizarContagemRegressiva(caixa);
+    },
+    "voltar-topo"(botao) {
+      botoesTopo.add(botao);
+      botao.toggleAttribute("data-visivel", scrollY > (Number(botao.dataset.depois) || 600));
+    },
+    "carregar-mais"(alvo) {
+      observadorCarregar?.observe(alvo);
+    },
+  });
+
+  document.addEventListener("input", (evento) => {
+    const el = evento.target;
+    if (!(el instanceof HTMLElement)) return;
+    const caixa = el.closest("[data-at='autocompletar']");
+    if (caixa && el.matches("input")) filtrarSugestoes(caixa);
+    if (el.matches(".at-faixa-entrada")) atualizarFaixa(el);
+    if (el.hasAttribute("data-at-contar")) atualizarContagem(el);
+    const grupo = el.closest("[data-at='quantidade']");
+    if (grupo) atualizarQuantidade(grupo);
+  });
+
+  document.addEventListener("click", (evento) => {
+    const el = evento.target instanceof Element ? evento.target : null;
+    if (!el) return;
+
+    const opcao = el.closest("[data-at='autocompletar'] .at-sugestoes > li[role=option]");
+    if (opcao) escolherSugestao(opcao.closest("[data-at='autocompletar']"), opcao);
+    for (const caixa of $$("[data-at='autocompletar']")) {
+      if (!caixa.contains(el)) abrirSugestoes(caixa, false);
+    }
+
+    const passo = el.closest("[data-at='quantidade'] [data-passo]");
+    if (passo) ajustarQuantidade(passo.closest("[data-at='quantidade']"), Number(passo.dataset.passo));
+
+    const etiquetas = el.closest("[data-at='etiquetas']");
+    if (etiquetas) {
+      if (el.closest("[data-at-fechar]")) queueMicrotask(() => sincronizarEtiquetas(etiquetas));
+      else if (el === etiquetas) $("input:not([type=hidden])", etiquetas)?.focus();
+    }
+
+    const foto = el.closest("[data-at='galeria'] > a");
+    if (foto) {
+      evento.preventDefault();
+      abrirGaleria(foto.parentElement, $$(":scope > a", foto.parentElement).indexOf(foto));
+    }
+
+    const video = el.closest("a[data-at='video']");
+    if (video && !video.dataset.carregado) {
+      const id = idDoYoutube(video.href);
+      if (id) {
+        evento.preventDefault();
+        const iframe = document.createElement("iframe");
+        // youtube-nocookie: o YouTube só grava cookies depois que a pessoa decide assistir
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+        iframe.title = video.getAttribute("aria-label") || "Vídeo";
+        iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+        iframe.allowFullscreen = true;
+        video.dataset.carregado = "";
+        video.append(iframe);
+      }
+    }
+
+    const topo = el.closest("[data-at='voltar-topo']");
+    if (topo) {
+      evento.preventDefault();
+      scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      const alvo = $("h1, main") || document.body;
+      if (!alvo.hasAttribute("tabindex")) alvo.setAttribute("tabindex", "-1");
+      alvo.focus({ preventScroll: true });
+    }
+
+    const mais = el.closest("[data-at='carregar-mais'] button");
+    if (mais) emitir(mais.closest("[data-at='carregar-mais']"), "at:carregar", {});
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    const el = evento.target instanceof HTMLElement ? evento.target : null;
+    const caixa = el?.closest("[data-at='autocompletar']");
+    if (caixa && el.matches("input")) {
+      const itens = itensVisiveis(caixa);
+      const aberto = !$(".at-sugestoes", caixa).hidden;
+      if (evento.key === "ArrowDown") {
+        evento.preventDefault();
+        if (!aberto) filtrarSugestoes(caixa);
+        else marcarSugestao(caixa, Math.min((caixa.atIndice ?? -1) + 1, itens.length - 1));
+      } else if (evento.key === "ArrowUp" && aberto) {
+        evento.preventDefault();
+        marcarSugestao(caixa, Math.max((caixa.atIndice ?? 0) - 1, 0));
+      } else if (evento.key === "Enter" && aberto && itens[caixa.atIndice]) {
+        evento.preventDefault();
+        escolherSugestao(caixa, itens[caixa.atIndice]);
+      } else if (evento.key === "Escape" && aberto) {
+        evento.preventDefault();
+        abrirSugestoes(caixa, false);
+      }
+    }
+
+    const etiquetas = el?.closest("[data-at='etiquetas']");
+    if (etiquetas && el.matches("input:not([type=hidden])")) {
+      if (evento.key === "Enter" || evento.key === ",") {
+        evento.preventDefault();
+        adicionarEtiqueta(etiquetas, el.value);
+        el.value = "";
+      } else if (evento.key === "Backspace" && !el.value) {
+        const ultima = $$(".at-etiqueta", etiquetas).pop();
+        if (ultima) {
+          ultima.remove();
+          sincronizarEtiquetas(etiquetas);
+        }
+      }
+    }
+  });
+
+  /* ------------------------------------------------------------------------
      Partida
      ------------------------------------------------------------------------ */
 
@@ -1636,7 +2051,7 @@
   }
 
   const Atalho = {
-    versao: "1.0.0",
+    versao: "1.1.0",
     estado,
     observar,
     obterEstado: (nome) => estados.get(nome),

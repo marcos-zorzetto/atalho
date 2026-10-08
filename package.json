@@ -1,6 +1,6 @@
 {
   "name": "atalho",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Componentes de interface em português: HTML, CSS e JavaScript prontos, nos padrões das grandes empresas.",
   "license": "MIT",
   "author": "Marcos Zorzetto",
@@ -9,9 +9,20 @@
     "type": "git",
     "url": "git+https://github.com/marcos-zorzetto/atalho.git"
   },
-  "keywords": ["componentes", "ui", "css", "javascript", "portugues", "pt-br", "bootstrap", "design-system"],
+  "keywords": [
+    "componentes",
+    "ui",
+    "css",
+    "javascript",
+    "portugues",
+    "pt-br",
+    "bootstrap",
+    "design-system"
+  ],
   "type": "module",
-  "files": ["atalho/"],
+  "files": [
+    "atalho/"
+  ],
   "main": "atalho/atalho.js",
   "style": "atalho/atalho.css",
   "engines": {
@@ -20,6 +31,15 @@
   "scripts": {
     "test": "node --test \"scripts/*.test.mjs\"",
     "atualizar": "node scripts/atualizar-documentacao.mjs --links",
-    "site": "npx --yes serve ."
+    "build": "node scripts/gerar-site.mjs",
+    "imagens": "node scripts/gerar-imagens.mjs",
+    "tipos": "node scripts/verificar-typescript.mjs",
+    "site": "node scripts/gerar-site.mjs --local && npx --yes serve dist",
+    "e2e": "node scripts/gerar-site.mjs --local && node testes/interacoes.mjs",
+    "auditoria": "node scripts/gerar-site.mjs --local && node testes/auditoria.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.13.0",
+    "playwright-core": "1.63.0"
   }
 }

@@ -339,7 +339,7 @@ document.querySelector("#etapa-voltar").addEventListener("click", () => {
       nome: "Modal (janela de diálogo)",
       categoria: "sobreposicoes",
       resumo: "Janela por cima da página para confirmar algo importante ou preencher um formulário rápido. Abre sem escrever JavaScript.",
-      apelidos: ["modal", "popup", "pop-up", "janela", "dialog", "caixa de diálogo", "confirmação", "lightbox", "overlay", "alerta de confirmação"],
+      apelidos: ["modal", "popup", "pop-up", "janela", "dialog", "caixa de diálogo", "confirmação", "overlay", "alerta de confirmação"],
       inspiradoEm: ["GitHub (excluir repositório digitando o nome)", "Google Drive (compartilhar)", "Stripe (confirmações)"],
       quandoUsar: ["Confirmar ações irreversíveis.", "Formulários curtos que não merecem uma página (renomear, convidar)."],
       evitar: ["Conteúdo longo ou abrir um modal de dentro de outro. Use uma página ou uma gaveta."],

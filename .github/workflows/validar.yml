@@ -9,15 +9,76 @@ permissions:
   contents: read
 
 jobs:
-  testes:
-    name: Testes de consistência
+  site:
+    name: Biblioteca, documentação e site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
 
-      - name: Rodar testes
+      - name: Testes de consistência e site gerado
         run: npm test
+
+      - name: Tipos do TypeScript (atalho.d.ts)
+        run: npx --yes -p typescript@5.9.3 tsc -p atalho/testes-tipos
+
+      - name: Exemplos de TypeScript da documentação
+        run: |
+          npm install --global typescript@5.9.3
+          node scripts/verificar-typescript.mjs tsc
+
+  navegador:
+    name: Navegador (acessibilidade e interações)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Gerar o site
+        run: node scripts/gerar-site.mjs --local
+      - name: Interações (cliques, teclado, arrastar, celular)
+        run: node testes/interacoes.mjs
+      - name: Auditoria (WCAG 2.1 AA, tema escuro, celular)
+        run: node testes/auditoria.mjs
+      - name: Guardar o relatório se falhar
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: relatorio-navegador
+          path: testes/resultado/
+          if-no-files-found: ignore
+
+  php:
+    name: Biblioteca PHP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@2.40.0
+        with:
+          php-version: "8.1"
+          tools: none
+      - name: Sintaxe (php -l)
+        run: for arquivo in php/*.php php/exemplos/*.php php/testes/*.php; do php -l "$arquivo"; done
+      - name: Testes
+        run: php php/testes/testar.php
+
+  assistente:
+    name: Assistente (Cloudflare Worker)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: servicos/assistente
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Tipos
+        run: npx tsc --noEmit -p .
+      - name: Testes
+        run: node --test teste.test.ts

@@ -26,7 +26,8 @@
           html: `<section class="at-hero at-centro">
   <div class="at-container">
     <span class="at-selo at-primario">Novo · Emissão de nota fiscal</span>
-    <h1 class="at-titulo-1 at-mt-4">Sua loja vendendo no<br>piloto automático</h1>
+    <!-- Na sua página, este é o título principal: use h1 (aqui é h2 porque a documentação já tem o seu) -->
+    <h2 class="at-titulo-1 at-mt-4">Sua loja vendendo no<br>piloto automático</h2>
     <p class="at-chamada">Catálogo, Pix, frete e nota fiscal num lugar só. Configure em 10 minutos, sem programar.</p>
     <div class="at-linha at-mt-6">
       <a href="#" class="at-botao at-primario at-grande">Criar loja grátis</a>

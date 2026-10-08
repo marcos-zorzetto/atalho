@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.0.0 — componentes de interface em português
+ * Atalho 1.1.0 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -17,6 +17,7 @@
  *  10. Feedback (alerta, carregando, vazio, cookies)
  *  11. Blocos de página (hero, planos, rodapé)
  *  12. Utilitários
+ *  12b. Componentes da versão 1.1 (autocompletar, quantidade, galeria, vídeo, WhatsApp...)
  *  13. Animações e movimento reduzido
  *
  * Toda classe começa com "at-" para não brigar com o CSS do seu projeto.
@@ -36,11 +37,13 @@
 
   --at-cor-sucesso: #15803d;
   --at-cor-sucesso-suave: #dcfce7;
+  --at-cor-sobre-sucesso: #ffffff;
   --at-cor-aviso: #b45309;
   --at-cor-aviso-suave: #fef3c7;
   --at-cor-perigo: #b91c1c;
   --at-cor-perigo-forte: #991b1b;
   --at-cor-perigo-suave: #fee2e2;
+  --at-cor-sobre-perigo: #ffffff;
   --at-cor-info: #1d4ed8;
   --at-cor-info-suave: #dbeafe;
 
@@ -107,6 +110,8 @@
     --at-cor-perigo: #f87171;
     --at-cor-perigo-forte: #fca5a5;
     --at-cor-perigo-suave: rgb(248 113 113 / 0.14);
+    --at-cor-sobre-perigo: #1c1917;
+    --at-cor-sobre-sucesso: #1c1917;
     --at-cor-info: #60a5fa;
     --at-cor-info-suave: rgb(96 165 250 / 0.14);
     --at-fundo: #0c0a09;
@@ -134,6 +139,8 @@
   --at-cor-perigo: #f87171;
   --at-cor-perigo-forte: #fca5a5;
   --at-cor-perigo-suave: rgb(248 113 113 / 0.14);
+  --at-cor-sobre-perigo: #1c1917;
+  --at-cor-sobre-sucesso: #1c1917;
   --at-cor-info: #60a5fa;
   --at-cor-info-suave: rgb(96 165 250 / 0.14);
   --at-fundo: #0c0a09;
@@ -326,14 +333,14 @@ a { color: var(--at-cor-primaria); text-underline-offset: 0.18em; }
 .at-botao.at-perigo {
   --_fundo: var(--at-cor-perigo);
   --_fundo-hover: var(--at-cor-perigo-forte);
-  --_cor: #fff;
+  --_cor: var(--at-cor-sobre-perigo);
   --_borda: transparent;
 }
 
 .at-botao.at-sucesso {
   --_fundo: var(--at-cor-sucesso);
   --_fundo-hover: color-mix(in srgb, var(--at-cor-sucesso) 85%, #000);
-  --_cor: #fff;
+  --_cor: var(--at-cor-sobre-sucesso);
   --_borda: transparent;
 }
 
@@ -2007,6 +2014,325 @@ a.at-cartao:hover, .at-cartao.at-clicavel:hover {
 @media (min-width: 720px) {
   .at-so-celular { display: none !important; }
 }
+
+/* ==========================================================================
+   12b. COMPONENTES DA VERSÃO 1.1
+   ========================================================================== */
+
+/* Autocompletar */
+.at-autocompletar { position: relative; }
+
+.at-sugestoes {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  max-height: 260px;
+  margin: 0;
+  padding: var(--at-espaco-1);
+  overflow-y: auto;
+  list-style: none;
+  background: var(--at-superficie);
+  border: 1px solid var(--at-borda);
+  border-radius: var(--at-raio);
+  box-shadow: var(--at-sombra-3);
+}
+
+.at-sugestoes > li {
+  padding: 0.5rem 0.65rem;
+  font-size: var(--at-texto-sm);
+  border-radius: var(--at-raio-sm);
+  cursor: pointer;
+}
+
+.at-sugestoes > li[aria-selected="true"], .at-sugestoes > li:hover { background: var(--at-cor-primaria-suave); }
+.at-sugestoes > li small { display: block; color: var(--at-texto-suave); }
+.at-sugestoes-vazio { color: var(--at-texto-suave); cursor: default !important; background: none !important; }
+
+/* Quantidade (+ e −) */
+.at-quantidade {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--at-borda-forte);
+  border-radius: var(--at-raio);
+  background: var(--at-superficie);
+  overflow: hidden;
+}
+
+.at-quantidade > button {
+  width: 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--at-texto);
+  background: none;
+  border: 0;
+}
+
+.at-quantidade > button:hover { background: var(--at-superficie-2); }
+.at-quantidade > button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.at-quantidade > input {
+  width: 3.25rem;
+  min-height: 2.5rem;
+  padding: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  background: none;
+  border: 0;
+  border-inline: 1px solid var(--at-borda);
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.at-quantidade > input::-webkit-inner-spin-button,
+.at-quantidade > input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.at-quantidade:focus-within { box-shadow: var(--at-foco); border-color: var(--at-cor-primaria); }
+.at-quantidade > input:focus { outline: none; }
+
+/* Contador de caracteres */
+.at-contagem { margin-left: auto; font-size: var(--at-texto-xs); font-variant-numeric: tabular-nums; color: var(--at-texto-suave); }
+.at-contagem[data-estado="perto"] { color: var(--at-cor-aviso); font-weight: 600; }
+.at-contagem[data-estado="cheio"] { color: var(--at-cor-perigo); font-weight: 700; }
+
+/* Faixa de valores (input range) */
+.at-faixa-entrada {
+  --_progresso: 50%;
+  appearance: none;
+  width: 100%;
+  height: 1.5rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.at-faixa-entrada::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--at-raio-total);
+  background: linear-gradient(90deg, var(--at-cor-primaria) var(--_progresso), var(--at-superficie-3) var(--_progresso));
+}
+
+.at-faixa-entrada::-moz-range-track { height: 6px; border-radius: var(--at-raio-total); background: var(--at-superficie-3); }
+.at-faixa-entrada::-moz-range-progress { height: 6px; border-radius: var(--at-raio-total); background: var(--at-cor-primaria); }
+
+.at-faixa-entrada::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  background: #fff;
+  border: 2px solid var(--at-cor-primaria);
+  border-radius: 50%;
+  box-shadow: var(--at-sombra-1);
+}
+
+.at-faixa-entrada::-moz-range-thumb { width: 16px; height: 16px; background: #fff; border: 2px solid var(--at-cor-primaria); border-radius: 50%; }
+.at-faixa-entrada:focus-visible { outline: none; }
+.at-faixa-entrada:focus-visible::-webkit-slider-thumb { box-shadow: var(--at-foco); }
+.at-faixa-entrada:focus-visible::-moz-range-thumb { box-shadow: var(--at-foco); }
+
+/* Etiquetas (entrada de tags) */
+.at-etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--at-espaco-1);
+  min-height: 2.6rem;
+  padding: 0.3rem 0.4rem;
+  background: var(--at-superficie);
+  border: 1px solid var(--at-borda-forte);
+  border-radius: var(--at-raio);
+  cursor: text;
+}
+
+.at-etiquetas:focus-within { border-color: var(--at-cor-primaria); box-shadow: var(--at-foco); }
+.at-etiquetas > input { flex: 1; min-width: 8rem; padding: 0.25rem; font-size: var(--at-texto-sm); background: none; border: 0; outline: none; }
+
+/* Galeria com tela cheia */
+.at-galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(var(--min, 140px), 100%), 1fr)); gap: var(--at-espaco-2); }
+.at-galeria > a { display: block; overflow: hidden; border-radius: var(--at-raio); background: var(--at-superficie-2); }
+.at-galeria > a img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 300ms; }
+.at-galeria > a:hover img { transform: scale(1.04); }
+
+.at-visualizador {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background: rgb(12 10 9 / 0.94);
+  border: 0;
+}
+
+.at-visualizador[open] { display: grid; grid-template-rows: auto 1fr auto; }
+.at-visualizador::backdrop { background: transparent; }
+.at-visualizador-topo, .at-visualizador-rodape { display: flex; align-items: center; justify-content: space-between; gap: var(--at-espaco-3); padding: var(--at-espaco-3) var(--at-espaco-4); font-size: var(--at-texto-sm); }
+.at-visualizador figure { display: grid; place-items: center; min-height: 0; margin: 0; padding: 0 var(--at-espaco-4); }
+.at-visualizador img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: var(--at-raio); }
+.at-visualizador button { color: #fff; background: rgb(255 255 255 / 0.12); border: 0; border-radius: var(--at-raio); min-width: 2.5rem; min-height: 2.5rem; font-size: 1.2rem; }
+.at-visualizador button:hover { background: rgb(255 255 255 / 0.22); }
+
+/* Vídeo leve (carrega o player só no clique) */
+.at-video {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #000 center / cover no-repeat;
+  border-radius: var(--at-raio-lg);
+}
+
+.at-video::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 68px;
+  height: 48px;
+  background: rgb(0 0 0 / 0.72);
+  border-radius: 14px;
+  transform: translate(-50%, -50%);
+  transition: background var(--at-transicao);
+}
+
+.at-video::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  border-style: solid;
+  border-width: 11px 0 11px 19px;
+  border-color: transparent transparent transparent #fff;
+  transform: translate(-35%, -50%);
+}
+
+.at-video:hover::before { background: #dc2626; }
+.at-video > span { position: absolute; left: 0; right: 0; bottom: 0; padding: 2rem 1rem 0.75rem; font-size: var(--at-texto-sm); font-weight: 600; color: #fff; background: linear-gradient(transparent, rgb(0 0 0 / 0.75)); }
+.at-video > iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.at-video[data-carregado]::before, .at-video[data-carregado]::after { display: none; }
+
+/* Botão flutuante do WhatsApp */
+.at-whatsapp {
+  position: fixed;
+  right: var(--at-espaco-4);
+  bottom: var(--at-espaco-4);
+  z-index: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--at-espaco-2);
+  min-height: 3.25rem;
+  padding: 0 1.1rem 0 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: #0e7a3f;
+  border-radius: var(--at-raio-total);
+  box-shadow: 0 6px 20px rgb(14 122 63 / 0.4);
+  transition: transform var(--at-transicao);
+}
+
+.at-whatsapp:hover { transform: translateY(-2px); color: #fff; }
+.at-whatsapp svg { width: 1.5rem; height: 1.5rem; }
+.at-whatsapp.at-embutido { position: static; }
+
+@media (max-width: 719px) {
+  .at-whatsapp:not(.at-embutido) span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .at-whatsapp:not(.at-embutido) { padding: 0; width: 3.25rem; justify-content: center; }
+}
+
+/* Contagem regressiva */
+.at-contagem-regressiva { display: inline-flex; gap: var(--at-espaco-2); }
+
+.at-contagem-regressiva > span {
+  display: grid;
+  min-width: 3.5rem;
+  padding: var(--at-espaco-2);
+  text-align: center;
+  background: var(--at-superficie);
+  border: 1px solid var(--at-borda);
+  border-radius: var(--at-raio);
+}
+
+.at-contagem-regressiva strong { font-size: var(--at-texto-2xl); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.at-contagem-regressiva small { font-size: 0.68rem; color: var(--at-texto-suave); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* Lista de detalhes (chave e valor) */
+.at-detalhes {
+  display: grid;
+  grid-template-columns: minmax(120px, max-content) 1fr;
+  margin: 0;
+  font-size: var(--at-texto-sm);
+}
+
+.at-detalhes > dt, .at-detalhes > dd { margin: 0; padding: 0.65rem 0; border-bottom: 1px solid var(--at-borda); }
+.at-detalhes > dt { padding-right: var(--at-espaco-4); color: var(--at-texto-suave); }
+.at-detalhes > dd { font-weight: 500; }
+
+@media (max-width: 479px) {
+  .at-detalhes { grid-template-columns: 1fr; }
+  .at-detalhes > dt { padding-bottom: 0; border-bottom: 0; }
+}
+
+/* Depoimento */
+.at-depoimento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-espaco-4);
+  margin: 0;
+  padding: var(--at-espaco-5);
+  background: var(--at-superficie);
+  border: 1px solid var(--at-borda);
+  border-radius: var(--at-raio-lg);
+}
+
+.at-depoimento blockquote { margin: 0; font-size: var(--at-texto-md); line-height: 1.6; }
+.at-depoimento blockquote::before { content: "“"; display: block; height: 1.6rem; font: 800 3rem/1 Georgia, serif; color: var(--at-cor-primaria); }
+.at-depoimento figcaption { display: flex; align-items: center; gap: var(--at-espaco-3); font-size: var(--at-texto-sm); }
+.at-depoimento figcaption small { display: block; color: var(--at-texto-suave); }
+
+/* Recurso (grade de benefícios) */
+.at-recurso { display: flex; flex-direction: column; gap: var(--at-espaco-2); }
+.at-recurso-icone { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; color: var(--at-cor-primaria-forte); background: var(--at-cor-primaria-suave); border-radius: var(--at-raio); }
+.at-recurso h3 { margin: var(--at-espaco-2) 0 0; font-size: var(--at-texto-lg); }
+.at-recurso p { margin: 0; color: var(--at-texto-suave); font-size: var(--at-texto-sm); }
+
+/* Central de notificações (dentro de um menu popover) */
+.at-menu.at-menu-largo { min-width: min(360px, calc(100vw - 16px)); padding: 0; }
+.at-menu-cabecalho { display: flex; align-items: center; justify-content: space-between; padding: var(--at-espaco-3) var(--at-espaco-4); border-bottom: 1px solid var(--at-borda); font-weight: 700; font-size: var(--at-texto-sm); }
+.at-lista-notificacoes { max-height: 320px; margin: 0; padding: var(--at-espaco-1); overflow-y: auto; list-style: none; }
+.at-lista-notificacoes > li { display: flex; gap: var(--at-espaco-3); padding: var(--at-espaco-3); font-size: var(--at-texto-sm); border-radius: var(--at-raio-sm); }
+.at-lista-notificacoes > li:hover { background: var(--at-superficie-2); }
+.at-lista-notificacoes > li[data-nao-lida] { background: var(--at-cor-primaria-suave); }
+.at-lista-notificacoes time { display: block; font-size: var(--at-texto-xs); color: var(--at-texto-suave); }
+
+/* Voltar ao topo */
+.at-voltar-topo {
+  position: fixed;
+  right: var(--at-espaco-4);
+  bottom: calc(var(--at-espaco-4) + var(--at-deslocamento-topo, 0px));
+  z-index: 700;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.2rem;
+  color: var(--at-texto);
+  text-decoration: none;
+  background: var(--at-superficie);
+  border: 1px solid var(--at-borda-forte);
+  border-radius: 50%;
+  box-shadow: var(--at-sombra-2);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity var(--at-transicao), transform var(--at-transicao);
+}
+
+.at-voltar-topo[data-visivel] { opacity: 1; pointer-events: auto; transform: none; }
+
+/* Carregar mais */
+.at-carregar-mais { display: flex; justify-content: center; padding: var(--at-espaco-5); color: var(--at-texto-suave); font-size: var(--at-texto-sm); }
 
 /* ==========================================================================
    13. ANIMAÇÕES

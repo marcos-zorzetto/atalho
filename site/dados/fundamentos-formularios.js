@@ -136,11 +136,11 @@
           html: `<div class="at-linha">
   <button class="at-botao at-primario">Padrão</button>
 
-  <div class="at-linha" style="--at-cor-primaria: #7c3aed; --at-cor-primaria-forte: #6d28d9;">
+  <div class="at-linha" style="--at-cor-primaria: #7c3aed; --at-cor-primaria-forte: #6d28d9; --at-cor-sobre-primaria: #fff;">
     <button class="at-botao at-primario">Roxo</button>
   </div>
 
-  <div class="at-linha" style="--at-cor-primaria: #ea580c; --at-cor-primaria-forte: #c2410c; --at-raio: 999px;">
+  <div class="at-linha" style="--at-cor-primaria: #c2410c; --at-cor-primaria-forte: #9a3412; --at-cor-sobre-primaria: #fff; --at-raio: 999px;">
     <button class="at-botao at-primario">Laranja arredondado</button>
   </div>
 </div>`,

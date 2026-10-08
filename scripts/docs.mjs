@@ -17,6 +17,8 @@ export const ARQUIVOS_DE_DADOS = [
   "site/dados/navegacao-janelas.js",
   "site/dados/dados-feedback.js",
   "site/dados/paginas-js-receitas.js",
+  "site/dados/novos.js",
+  "site/dados/linguagens.js",
 ];
 
 export async function carregarDocs() {

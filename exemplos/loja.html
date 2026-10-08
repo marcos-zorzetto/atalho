@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja virtual · Exemplo do Atalho</title>
+  <meta name="description" content="Exemplo de loja virtual com vitrine, filtros e carrinho feita com o Atalho.">
+  <!-- No seu projeto, troque "../atalho/" pelo CDN do Atalho -->
+  <link rel="stylesheet" href="../atalho/atalho.css">
+  <script src="../atalho/atalho.js" defer></script>
+  <style>
+    .loja { display: grid; gap: 2rem; align-items: start; }
+    @media (min-width: 900px) { .loja { grid-template-columns: 220px 1fr; } }
+    .filtros { position: sticky; top: calc(var(--at-altura-barra) + 1rem); }
+    .busca-topo { flex: 1; max-width: 520px; }
+    .item-carrinho img { width: 64px; height: 64px; object-fit: contain; background: #fff; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="at-faixa">Frete grátis acima de R$ 199 · Pix com 5% de desconto</div>
+  <header class="at-barra">
+    <div class="at-container at-barra-conteudo">
+      <a href="#" class="at-barra-marca">◆ Minha Loja</a>
+      <div class="at-entrada-icone busca-topo at-so-desktop"><span class="at-icone-campo" aria-hidden="true">⌕</span><input class="at-entrada" type="search" placeholder="Buscar produtos" aria-label="Buscar produtos" data-at-acao="vitrine.buscar"></div>
+      <div class="at-barra-acoes">
+        <a href="#" class="at-botao at-fantasma at-so-desktop">Entrar</a>
+        <button class="at-botao at-icone at-contador-selo" commandfor="carrinho" command="show-modal" aria-label="Abrir carrinho">
+          🛒<span data-contador data-at-texto="carrinho.quantidade" data-at-mostrar="carrinho.quantidade"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="at-container" style="padding-block: 2rem">
+    <nav class="at-trilha at-mb-4" aria-label="Você está em"><ol><li><a href="#">Início</a></li><li><a href="#">Moda</a></li><li aria-current="page">Mais vendidos</li></ol></nav>
+    <div class="loja">
+      <aside class="filtros at-pilha" aria-label="Filtros">
+        <h2 class="at-titulo-4 at-mb-0">Filtros</h2>
+        <fieldset style="border:0;padding:0;margin:0" class="at-pilha">
+          <legend class="at-rotulo at-mb-2">Preço</legend>
+          <label class="at-check"><input type="radio" name="preco" value="0" checked data-at-acao="vitrine.filtrarPreco"> Todos</label>
+          <label class="at-check"><input type="radio" name="preco" value="300" data-at-acao="vitrine.filtrarPreco"> Até R$ 300</label>
+          <label class="at-check"><input type="radio" name="preco" value="1000" data-at-acao="vitrine.filtrarPreco"> Até R$ 1.000</label>
+        </fieldset>
+        <label class="at-check"><input type="checkbox" checked> Frete grátis</label>
+      </aside>
+      <section aria-label="Produtos">
+        <div class="at-linha at-entre at-mb-4"><p class="at-texto-suave at-mb-0" aria-live="polite" data-at-texto="vitrine.resumo"></p></div>
+        <div class="at-grade" style="--min: 190px" data-at-lista="vitrine.visiveis">
+          <template>
+            <article class="at-cartao at-produto">
+              <img class="at-cartao-midia" data-at-atributos="src: imagem, alt: nome" loading="lazy">
+              <div class="at-cartao-corpo">
+                <h3 class="at-produto-nome" data-at-campo="nome"></h3>
+                <span class="at-preco" data-at-campo="preco" data-at-formato="moeda"></span>
+                <span class="at-parcelas" data-at-campo="parcelas"></span>
+                <button class="at-botao at-primario at-bloco" data-at-acao="carrinho.adicionar">Comprar</button>
+              </div>
+            </article>
+          </template>
+        </div>
+        <div class="at-vazio" data-at-mostrar="vitrine.semResultado" hidden><h3>Nenhum produto encontrado</h3><p>Tente outra busca ou limpe os filtros.</p></div>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="at-gaveta" id="carrinho" aria-labelledby="carrinho-titulo">
+    <div class="at-modal-cabecalho"><h2 id="carrinho-titulo">Seu carrinho</h2><button class="at-botao at-icone at-fantasma at-pequeno" commandfor="carrinho" command="close" aria-label="Fechar">×</button></div>
+    <div class="at-modal-corpo">
+      <div class="at-vazio" data-at-mostrar="carrinho.vazio"><h3>Seu carrinho está vazio</h3><p>Adicione produtos para continuar.</p></div>
+      <ul class="at-pilha" style="list-style:none;padding:0;margin:0" data-at-lista="carrinho.itens">
+        <template>
+          <li class="at-linha at-topo item-carrinho">
+            <img data-at-atributos="src: imagem, alt: nome">
+            <div class="at-cresce">
+              <div class="at-texto-pequeno" data-at-campo="nome"></div>
+              <strong data-at-campo="subtotal" data-at-formato="moeda"></strong>
+              <div class="at-linha at-mt-2" style="--at-gap: 4px">
+                <button class="at-botao at-icone at-pequeno" data-at-acao="carrinho.diminuir" aria-label="Diminuir">−</button>
+                <span class="at-numero" data-at-campo="quantidade"></span>
+                <button class="at-botao at-icone at-pequeno" data-at-acao="carrinho.aumentar" aria-label="Aumentar">+</button>
+              </div>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+    <div class="at-modal-rodape" style="flex-direction: column; align-items: stretch">
+      <div class="at-linha at-entre"><span>Total</span><strong class="at-titulo-4 at-mb-0" data-at-texto="carrinho.total" data-at-formato="moeda" aria-live="polite"></strong></div>
+      <a class="at-botao at-primario at-grande at-bloco" href="checkout.html">Finalizar compra</a>
+    </div>
+  </dialog>
+
+  <script>
+    const produtos = [
+      { id: 1, nome: "Tênis cano alto vermelho e preto", preco: 599.9, imagem: "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" },
+      { id: 2, nome: "Óculos de sol clássico com proteção UV", preco: 189.9, imagem: "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp" },
+      { id: 3, nome: "Relógio com pulseira de couro marrom", preco: 349, imagem: "https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp" },
+      { id: 4, nome: "Óculos de sol preto", preco: 129.9, imagem: "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp" },
+      { id: 5, nome: "Relógio clássico prateado", preco: 899, imagem: "https://cdn.dummyjson.com/product-images/mens-watches/longines-master-collection/thumbnail.webp" },
+      { id: 6, nome: "Chuteira para campo", preco: 279.9, imagem: "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp" },
+    ].map((p) => ({ ...p, parcelas: "em 10x " + new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(p.preco / 10) + " sem juros" }));
+
+    document.addEventListener("at:pronto", () => {
+      const normalizar = Atalho.normalizar;
+      Atalho.estado("vitrine", {
+        termo: "",
+        precoMaximo: 0,
+        get visiveis() {
+          return produtos.filter((p) => normalizar(p.nome).includes(normalizar(this.termo)) && (!this.precoMaximo || p.preco <= this.precoMaximo));
+        },
+        get semResultado() { return this.visiveis.length === 0; },
+        get resumo() { return Atalho.formatar.plural(this.visiveis.length, "produto encontrado", "produtos encontrados"); },
+        buscar(termo) { this.termo = termo; },
+        filtrarPreco(valor) { this.precoMaximo = Number(valor); },
+      });
+
+      const recalcular = (itens) => itens.map((i) => ({ ...i, subtotal: i.preco * i.quantidade }));
+      Atalho.estado("carrinho", {
+        itens: [],
+        get quantidade() { return this.itens.reduce((s, i) => s + i.quantidade, 0); },
+        get total() { return this.itens.reduce((s, i) => s + i.subtotal, 0); },
+        get vazio() { return this.itens.length === 0; },
+        adicionar(produto) {
+          const existe = this.itens.some((i) => i.id === produto.id);
+          this.itens = recalcular(existe ? this.itens.map((i) => (i.id === produto.id ? { ...i, quantidade: i.quantidade + 1 } : i)) : [...this.itens, { ...produto, quantidade: 1 }]);
+          Atalho.notificar(produto.nome, { tipo: "sucesso", titulo: "Adicionado ao carrinho", acao: { texto: "Ver", aoClicar: () => document.querySelector("#carrinho").showModal() } });
+        },
+        aumentar(item) { this.itens = recalcular(this.itens.map((i) => (i.id === item.id ? { ...i, quantidade: i.quantidade + 1 } : i))); },
+        diminuir(item) { this.itens = recalcular(this.itens.map((i) => (i.id === item.id ? { ...i, quantidade: i.quantidade - 1 } : i)).filter((i) => i.quantidade > 0)); },
+      }, { salvar: true });
+    });
+  </script>
+</body>
+</html>

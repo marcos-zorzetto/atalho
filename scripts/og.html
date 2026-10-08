@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=JetBrains+Mono:wght@600&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body { width: 1200px; height: 630px; overflow: hidden; font-family: "Bricolage Grotesque", system-ui, sans-serif; color: #1c1917; background: #fafaf9; }
+    .grade { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, #e7e5e4 0 1px, transparent 1px 80px), repeating-linear-gradient(0deg, #e7e5e4 0 1px, transparent 1px 80px); opacity: .7; }
+    .conteudo { position: relative; padding: 72px 80px; height: 100%; display: flex; flex-direction: column; }
+    .marca { display: flex; align-items: center; gap: 18px; font-size: 44px; font-weight: 800; letter-spacing: -0.03em; }
+    .tecla { display: grid; place-items: center; width: 68px; height: 68px; font-size: 38px; background: #facc15; border: 3px solid #1c1917; border-radius: 14px; box-shadow: 0 6px 0 #1c1917; }
+    h1 { margin-top: 56px; font-size: 76px; line-height: 1.02; letter-spacing: -0.04em; max-width: 980px; }
+    mark { background: linear-gradient(transparent 60%, #fde047 60%); color: inherit; padding: 0 6px; }
+    .rodape { margin-top: auto; display: flex; gap: 14px; font: 600 22px "JetBrains Mono", monospace; color: #57534e; }
+    .rodape span { padding: 8px 16px; border: 2px solid #d6d3d1; border-radius: 999px; background: #fff; }
+  </style>
+</head>
+<body>
+  <div class="grade"></div>
+  <div class="conteudo">
+    <div class="marca"><span class="tecla">A</span>Atalho</div>
+    <h1>Componentes prontos, <mark>em português</mark>, para parar de juntar tutoriais.</h1>
+    <div class="rodape"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>PHP</span></div>
+  </div>
+</body>
+</html>
