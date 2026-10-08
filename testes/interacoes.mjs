@@ -461,6 +461,89 @@ teste("Celular: busca abre pelo botão de lupa", async (aba) => {
 }, { contexto: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } });
 
 /* ------------------------------------------------------------------------
+   Componentes da versão 1.2 (paridade com o Bootstrap)
+   ------------------------------------------------------------------------ */
+
+teste("Balão: abre ao lado do botão e fecha com Esc", async (aba) => {
+  await abrir(aba, "componentes/balao/");
+  const botao = aba.locator('[popovertarget="balao-taxa"]').first();
+  const balao = aba.locator("#balao-taxa");
+  await botao.click();
+  await aba.locator("#balao-taxa[data-posicionado]").waitFor();
+  const b = await botao.boundingBox(), c = await balao.boundingBox();
+  assert.ok(Math.abs(c.y - (b.y + b.height)) < 20 || Math.abs(c.y + c.height - b.y) < 20, `balão longe do botão (botão y=${b.y}, balão y=${c.y})`);
+  await aba.keyboard.press("Escape");
+  await balao.waitFor({ state: "hidden" });
+});
+
+teste("Rótulo flutuante: sobe ao digitar e volta ao apagar", async (aba) => {
+  await abrir(aba, "componentes/rotulo-flutuante/");
+  const rotulo = aba.locator('label[for="flut-email"]');
+  const antes = await rotulo.evaluate((l) => l.getBoundingClientRect().top);
+  await aba.locator("#flut-email").fill("ana@exemplo.com");
+  await aba.locator("#flut-senha").focus();
+  await aba.waitForTimeout(300);
+  const depois = await rotulo.evaluate((l) => l.getBoundingClientRect().top);
+  assert.ok(depois < antes - 4, `o rótulo não subiu (${antes} → ${depois})`);
+});
+
+teste("Recolher: abre, anuncia o estado e esconde do Tab quando fechado", async (aba) => {
+  await abrir(aba, "componentes/recolher/");
+  const botao = aba.getByRole("button", { name: "Ver detalhes" }).first();
+  const bloco = aba.locator("#detalhes-pedido");
+  assert.equal(await bloco.evaluate((b) => getComputedStyle(b).visibility), "hidden");
+  await botao.click();
+  assert.equal(await botao.getAttribute("aria-expanded"), "true");
+  // Espera a animação terminar (altura do conteúdo aparece)
+  await aba.waitForFunction(() => /Pagamento: Pix/.test(document.querySelector("#detalhes-pedido").innerText));
+  await botao.click();
+  assert.equal(await botao.getAttribute("aria-expanded"), "false");
+});
+
+teste("Índice: marca a seção que está sendo lida", async (aba) => {
+  await abrir(aba, "componentes/indice/");
+  const caixa = aba.locator(".site-exemplo-preview .at-grade-12, .at-grade-12").filter({ has: aba.locator("#termos-pagamento") }).first();
+  await caixa.evaluate((c) => {
+    c.scrollIntoView({ block: "start" });
+  });
+  await aba.locator("#termos-cancelamento").evaluate((s) => s.scrollIntoView({ block: "start" }));
+  await aba.waitForFunction(() => document.querySelector('.at-indice a[href="#termos-cancelamento"]')?.getAttribute("aria-current") === "location");
+  await aba.locator(".at-indice a[href='#termos-uso']").click();
+  assert.equal(await aba.locator(".at-indice a[href='#termos-uso']").getAttribute("aria-current"), "location");
+});
+
+teste("Grade de 12: 8 + 4 no computador, empilha no celular", async (aba) => {
+  await abrir(aba, "componentes/grade-12/");
+  const largura = (sel) => aba.locator(sel).first().evaluate((e) => e.getBoundingClientRect().width);
+  const principal = await largura("main.at-col-desktop-8"), lateral = await largura("aside.at-col-desktop-4");
+  assert.ok(principal / lateral > 1.8 && principal / lateral < 2.3, `proporção errada: ${principal} / ${lateral}`);
+  await aba.setViewportSize({ width: 390, height: 844 });
+  await aba.waitForFunction(() => innerWidth === 390);
+  await aba.waitForTimeout(150);
+  const p2 = await largura("main.at-col-desktop-8"), l2 = await largura("aside.at-col-desktop-4");
+  assert.ok(Math.abs(p2 - l2) < 2, `no celular as duas deviam ocupar a linha toda (${p2} × ${l2})`);
+});
+
+teste("Grupo de botões e botão fechar", async (aba) => {
+  await abrir(aba, "componentes/grupo-botoes/");
+  await aba.getByRole("button", { name: "Grade", exact: true }).click();
+  assert.equal(await aba.getByRole("button", { name: "Grade", exact: true }).getAttribute("aria-pressed"), "true");
+  assert.equal(await aba.getByRole("button", { name: "Lista", exact: true }).getAttribute("aria-pressed"), "false");
+  await aba.getByRole("button", { name: "Fechar aviso" }).click();
+  assert.equal(await aba.locator("#aviso-novidade").count(), 0);
+});
+
+teste("Utilitários: link esticado deixa o cartão inteiro clicável", async (aba) => {
+  await abrir(aba, "componentes/utilitarios/");
+  const cartao = aba.locator(".at-relativo:has(.at-link-esticado)").first();
+  await cartao.scrollIntoViewIfNeeded();
+  const caixa = await cartao.boundingBox();
+  // Clicar no canto esquerdo do cartão (longe do link) precisa acertar o link
+  const alvo = await aba.evaluate(([x, y]) => document.elementFromPoint(x, y)?.closest("a")?.className || "", [caixa.x + 10, caixa.y + 10]);
+  assert.match(alvo, /at-link-esticado/);
+});
+
+/* ------------------------------------------------------------------------
    Contas, área de membros e painel do administrador (Supabase simulado)
    ------------------------------------------------------------------------ */
 

@@ -123,6 +123,16 @@ test("a busca encontra o que iniciantes digitam", async () => {
   const buscar = (termo) => contexto.AtalhoSite.buscar(termo).map((c) => c.id);
 
   const casos = {
+    // Quem vem do Bootstrap procura pelo nome em inglês
+    "list group": "lista-grupo",
+    "popover": "balao",
+    "scrollspy": "indice",
+    "floating label": "rotulo-flutuante",
+    "collapse": "recolher",
+    "col-md-6": "grade-12",
+    "button group": "grupo-botoes",
+    "img fluid": "imagens",
+    "d-flex": "utilitarios",
     "popup": "modal",
     "janela de confirmação": "modal",
     "mascara de cpf": "mascaras",

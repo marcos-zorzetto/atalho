@@ -24,7 +24,7 @@
 
 ---
 
-O Atalho é uma biblioteca de HTML, CSS e JavaScript com **68 componentes e receitas** e **6 páginas completas**, nos padrões que empresas como Mercado Livre, GitHub, Stripe e Nubank usam, tudo explicado em português. Vem com tipos para **TypeScript** e uma biblioteca **PHP** para o lado do servidor.
+O Atalho é uma biblioteca de HTML, CSS e JavaScript com **77 componentes e receitas** e **6 páginas completas**, nos padrões que empresas como Mercado Livre, GitHub, Stripe e Nubank usam, tudo explicado em português. Vem com tipos para **TypeScript** e uma biblioteca **PHP** para o lado do servidor.
 
 Cada componente mostra:
 
@@ -125,7 +125,7 @@ Todo push passa por uma bateria automática ([`validar.yml`](.github/workflows/v
 - **TypeScript**: os tipos e todos os exemplos de TypeScript da documentação compilam;
 - **banco de dados**: as regras de segurança das contas rodam num PostgreSQL de verdade ([PGlite](https://pglite.dev)), conferindo que visitante não lê conteúdo exclusivo, que membro não vira administrador e que cada pessoa só vê os próprios dados;
 - **PHP**: sintaxe e testes da biblioteca;
-- **navegador de verdade**: 50 testes de interação (cliques, teclado, arrastar, celular) e auditoria de acessibilidade **WCAG 2.1 AA** com [axe-core](https://github.com/dequelabs/axe-core) em todas as páginas, no tema claro, no escuro e no celular.
+- **navegador de verdade**: 57 testes de interação (cliques, teclado, arrastar, celular) e auditoria de acessibilidade **WCAG 2.1 AA** com [axe-core](https://github.com/dequelabs/axe-core) em todas as páginas, no tema claro, no escuro e no celular.
 
 ## Atualizado sozinho
 

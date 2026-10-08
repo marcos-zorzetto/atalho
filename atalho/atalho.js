@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.1.0 — componentes de interface em português
+ * Atalho 1.2.0 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -558,7 +558,7 @@
 
   function posicionarPopover(popover) {
     const abridor = abridoresDePopover.get(popover);
-    if (!abridor || !popover.classList.contains("at-menu")) return;
+    if (!abridor || !popover.matches(".at-menu, .at-balao")) return;
     const ref = abridor.getBoundingClientRect();
     const caixa = popover.getBoundingClientRect();
     const margem = 8;
@@ -575,7 +575,7 @@
   }
 
   function popoversAbertos() {
-    return $$(".at-menu").filter((p) => {
+    return $$(".at-menu, .at-balao").filter((p) => {
       try { return p.matches(":popover-open"); } catch { return false; }
     });
   }
@@ -1545,13 +1545,20 @@
     if (valor.length === campos.length) emitir(codigo, "at:codigo", { valor });
   });
 
-  // Menus suspensos: posiciona ao abrir e acompanha rolagem
+  // Menus suspensos e balões: posiciona ao abrir e acompanha rolagem
   document.addEventListener("toggle", (evento) => {
     const popover = evento.target;
-    if (popover instanceof HTMLElement && popover.classList.contains("at-menu") && evento.newState === "open") {
-      posicionarPopover(popover);
-      $(".at-menu-item", popover)?.focus({ preventScroll: true });
+    if (!(popover instanceof HTMLElement)) return;
+    if (evento.newState !== "open") {
+      delete popover.dataset.posicionado;
+      return;
     }
+    if (popover.matches(".at-menu, .at-balao")) {
+      posicionarPopover(popover);
+      // O CSS esconde até aqui: evita o "pulo" do canto da tela até o botão
+      popover.dataset.posicionado = "";
+    }
+    if (popover.classList.contains("at-menu")) $(".at-menu-item", popover)?.focus({ preventScroll: true });
   }, true);
 
   const reposicionar = () => popoversAbertos().forEach(posicionarPopover);
@@ -1872,6 +1879,42 @@
     : null;
 
   Object.assign(componentes, {
+    /** Índice que acompanha a leitura (scrollspy): marca o link da seção visível. */
+    indice(nav) {
+      const links = $$('a[href^="#"]', nav).filter((a) => a.hash.length > 1);
+      const secoes = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter(Boolean);
+      if (!secoes.length || !("IntersectionObserver" in window)) return;
+      const marcar = (id) =>
+        links.forEach((a) => {
+          if (decodeURIComponent(a.hash.slice(1)) === id) a.setAttribute("aria-current", "location");
+          else a.removeAttribute("aria-current");
+        });
+      // Seções dentro de uma caixa com rolagem própria: observa a caixa, não a página
+      const rolavel = (el) => {
+        for (let pai = el.parentElement; pai && pai !== document.body; pai = pai.parentElement) {
+          const estilo = getComputedStyle(pai).overflowY;
+          if ((estilo === "auto" || estilo === "scroll") && pai.scrollHeight > pai.clientHeight) return pai;
+        }
+        return null;
+      };
+      const raiz = nav.dataset.raiz ? $(nav.dataset.raiz) : rolavel(secoes[0]);
+      const visiveis = new Map();
+      const observador = new IntersectionObserver(
+        (entradas) => {
+          entradas.forEach((e) => (e.isIntersecting ? visiveis.set(e.target.id, e.boundingClientRect.top) : visiveis.delete(e.target.id)));
+          // A seção mais alta entre as visíveis é a "atual"
+          const atual = [...visiveis.entries()].sort((a, b) => a[1] - b[1])[0];
+          if (atual) marcar(atual[0]);
+        },
+        { root: raiz, rootMargin: nav.dataset.margem || "-20% 0px -60% 0px" }
+      );
+      secoes.forEach((s) => observador.observe(s));
+      nav.addEventListener("click", (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (link) marcar(decodeURIComponent(link.hash.slice(1)));
+      });
+    },
+
     autocompletar(caixa) {
       const campo = $("input", caixa);
       const lista = $(".at-sugestoes", caixa);
@@ -2051,7 +2094,7 @@
   }
 
   const Atalho = {
-    versao: "1.1.0",
+    versao: "1.2.0",
     estado,
     observar,
     obterEstado: (nome) => estados.get(nome),

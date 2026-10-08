@@ -18,6 +18,7 @@ export const ARQUIVOS_DE_DADOS = [
   "site/dados/dados-feedback.js",
   "site/dados/paginas-js-receitas.js",
   "site/dados/novos.js",
+  "site/dados/paridade.js",
   "site/dados/linguagens.js",
 ];
 
