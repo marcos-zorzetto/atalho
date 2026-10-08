@@ -17,11 +17,14 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { RAIZ } from "../scripts/docs.mjs";
+import { proDisponivel, arquivoExemplo } from "../scripts/pro.mjs";
+import { supabaseFalso } from "./supabase-falso.mjs";
 
 const require = createRequire(import.meta.url);
 const DIST = path.join(RAIZ, "dist");
 const SAIDA = path.join(RAIZ, "testes", "resultado");
-const args = Object.fromEntries(process.argv.slice(2).map((a) => a.replace(/^--/, "").split("=")));
+// --nome=valor (o valor pode ter "=", como em "admin/#como=admin")
+const args = Object.fromEntries(process.argv.slice(2).map((a) => a.replace(/^--/, "").split(/=(.*)/s).slice(0, 2)));
 const comCapturas = !("sem-capturas" in args);
 
 /* Servidor estático simples para dist/ */
@@ -46,7 +49,12 @@ const BASE = `http://127.0.0.1:${servidor.address().port}`;
 const sitemap = await readFile(path.join(DIST, "sitemap.xml"), "utf8");
 let paginas = Array.from(sitemap.matchAll(/<loc>[^<]*?\/atalho\/([^<]*)<\/loc>/g), (m) => m[1]);
 if (!paginas.length) paginas = Array.from(sitemap.matchAll(/<loc>https?:\/\/[^/]+\/(?:atalho\/)?([^<]*)<\/loc>/g), (m) => m[1]);
-paginas.push("conta/", "pagina-que-nao-existe/");
+paginas.push("conta/", "admin/", "pagina-que-nao-existe/");
+// Telas de quem entrou na conta, com o Supabase simulado ("#como=" não vai para o servidor)
+paginas.push("exemplos/loja/#como=visitante", "exemplos/loja/#como=membro", "conta/#como=admin", "admin/#como=membro", "admin/#como=admin");
+const lojaMembro = proDisponivel
+  ? await readFile(arquivoExemplo("loja"), "utf8")
+  : '<!doctype html><html lang="pt-BR"><head><title>Loja</title></head><body><main><h1>Loja</h1></main></body></html>';
 if (args.paginas) paginas = args.paginas.split(",").map((p) => (p === "inicio" ? "" : p.replace(/^\//, "")));
 
 const navegador = await chromium.launch({
@@ -67,7 +75,7 @@ const registrar = (pagina, visao, tipo, detalhe) => problemas.push({ pagina: pag
 await mkdir(path.join(SAIDA, "capturas"), { recursive: true });
 
 for (const visao of VISOES) {
-  const contexto = await navegador.newContext({
+  const opcoesContexto = {
     viewport: visao.viewport,
     colorScheme: visao.colorScheme,
     isMobile: visao.isMobile,
@@ -75,9 +83,13 @@ for (const visao of VISOES) {
     deviceScaleFactor: 1,
     locale: "pt-BR",
     reducedMotion: "reduce",
-  });
+  };
+  const contexto = await navegador.newContext(opcoesContexto);
   for (const pagina of paginas) {
-    const aba = await contexto.newPage();
+    const [caminho, como] = pagina.split("#como=");
+    const contextoPagina = como ? await navegador.newContext(opcoesContexto) : contexto;
+    if (como) await supabaseFalso(contextoPagina, { pessoa: como === "visitante" ? null : como, conteudos: { loja: lojaMembro }, usuarios: 31 });
+    const aba = await contextoPagina.newPage();
     aba.on("pageerror", (erro) => registrar(pagina, visao.nome, "erro de JavaScript", erro.message));
     aba.on("console", (msg) => {
       if (msg.type() === "error" && !/Failed to load resource|net::ERR_|youtube|ytimg/i.test(msg.text())) registrar(pagina, visao.nome, "console", msg.text().slice(0, 300));
@@ -87,7 +99,8 @@ for (const visao of VISOES) {
       if (endereco.startsWith(BASE) && resposta.status() >= 400 && pagina !== "pagina-que-nao-existe/") registrar(pagina, visao.nome, "arquivo não encontrado", endereco.replace(BASE, ""));
     });
     try {
-      await aba.goto(`${BASE}/${pagina}`, { waitUntil: "load", timeout: 30000 });
+      await aba.goto(`${BASE}/${caminho}`, { waitUntil: "load", timeout: 30000 });
+      if (como) await aba.waitForTimeout(1200); // tempo para a sessão e as consultas simuladas
       await aba.waitForTimeout(900);
 
       const vazamentos = await aba.evaluate(() => {
@@ -131,13 +144,14 @@ for (const visao of VISOES) {
             })
           )
         );
-        const nome = `${(pagina || "inicio").replace(/\/$/, "").replace(/\//g, "_") || "inicio"}-${visao.nome}.png`;
+        const nome = `${(caminho || "inicio").replace(/\/$/, "").replace(/\//g, "_") || "inicio"}${como ? `-${como}` : ""}-${visao.nome}.png`;
         await aba.screenshot({ path: path.join(SAIDA, "capturas", nome), fullPage: true });
       }
     } catch (erro) {
       registrar(pagina, visao.nome, "não carregou", erro.message.slice(0, 200));
     }
     await aba.close();
+    if (como) await contextoPagina.close();
   }
   await contexto.close();
   console.log(`✓ ${visao.nome}: ${paginas.length} páginas`);

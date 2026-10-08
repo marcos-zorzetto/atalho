@@ -1,31 +1,17 @@
 /*
- * Contas do Atalho (Supabase). Carregado só nas páginas /conta/ e /pro/.
+ * Contas do Atalho (Supabase). Carregado nas páginas /conta/ e /pro/.
  * Sem configuração em site/config.js, mostra "Contas em breve" e não quebra nada.
  */
 (function () {
   "use strict";
 
   const $ = (s, r = document) => r.querySelector(s);
-  const config = (window.ATALHO_CONFIG || {}).supabase || {};
+  const { ativo, cliente, traduzir, notificar, usuario: usuarioAtual } = window.AtalhoSupabase;
   const base = document.body.dataset.base || "/";
   const pagina = document.body.dataset.pagina;
+  const parametros = new URLSearchParams(location.search);
 
-  const TRADUCOES = [
-    [/invalid login credentials/i, "E-mail ou senha incorretos."],
-    [/email not confirmed/i, "Confirme seu e-mail pelo link que enviamos antes de entrar."],
-    [/user already registered|already been registered/i, "Já existe uma conta com esse e-mail. Tente entrar."],
-    [/password should be at least/i, "A senha precisa ter pelo menos 8 caracteres."],
-    [/rate limit|too many requests|security purposes/i, "Muitas tentativas seguidas. Aguarde um minuto e tente de novo."],
-    [/network|fetch/i, "Sem conexão com o servidor. Confira sua internet."],
-    [/weak password|pwned|leaked/i, "Essa senha é fraca ou já apareceu em vazamentos. Escolha outra."],
-  ];
-  const traduzir = (erro) => {
-    const mensagem = String(erro?.message || erro || "");
-    return (TRADUCOES.find(([padrao]) => padrao.test(mensagem)) || [, "Algo deu errado. Tente de novo em instantes."])[1];
-  };
-  const notificar = (texto, tipo = "info", titulo) => window.Atalho.notificar(texto, { tipo, titulo });
-
-  if (!config.url || !config.chavePublica || !window.supabase) {
+  if (!ativo) {
     if (pagina === "conta") $("[data-conta-indisponivel]").hidden = false;
     if (pagina === "pro") {
       const estado = $("[data-lista-espera-estado]");
@@ -34,16 +20,24 @@
     return;
   }
 
-  const cliente = window.supabase.createClient(config.url, config.chavePublica, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
-  });
-
   const iniciais = (nome) =>
     String(nome || "?").trim().split(/\s+/).slice(0, 2).map((p) => p[0]).join("").toUpperCase();
 
-  async function usuarioAtual() {
-    const { data } = await cliente.auth.getUser();
-    return data.user || null;
+  /** Só volta para páginas do próprio site (evita redirecionamento aberto). */
+  function destinoSeguro() {
+    const voltar = parametros.get("voltar");
+    return voltar && voltar.startsWith(base) && !voltar.startsWith("//") && !voltar.includes("\\") ? voltar : null;
+  }
+
+  const enderecoRetorno = () => {
+    const voltar = destinoSeguro();
+    return `${location.origin}${base}conta/${voltar ? `?voltar=${encodeURIComponent(voltar)}` : ""}`;
+  };
+
+  function voltarOuRecarregar() {
+    const voltar = destinoSeguro();
+    if (voltar) location.href = voltar;
+    else location.replace(`${base}conta/`);
   }
 
   /* ------------------------------------------------------------------------
@@ -54,39 +48,43 @@
     $("[data-conta-visitante]").hidden = true;
     $("[data-conta-logado]").hidden = false;
 
-    const { data: perfil } = await cliente.from("perfis").select("nome").eq("id", usuario.id).maybeSingle();
+    const [{ data: perfil }, { data: favoritos, error: erroFavoritos }, { data: naLista }, { data: admin }] = await Promise.all([
+      cliente.from("perfis").select("nome").eq("id", usuario.id).maybeSingle(),
+      cliente.from("favoritos").select("componente_id").order("criado_em", { ascending: false }),
+      cliente.from("lista_espera_pro").select("usuario_id").maybeSingle(),
+      cliente.rpc("eh_admin"),
+    ]);
+
     const nome = perfil?.nome || usuario.user_metadata?.nome || usuario.email.split("@")[0];
     $("[data-conta-nome]").textContent = nome;
     $("[data-conta-email]").textContent = usuario.email;
     $("[data-conta-iniciais]").textContent = iniciais(nome);
+    $("[data-conta-admin]").hidden = admin !== true;
 
-    const { data: favoritos, error } = await cliente.from("favoritos").select("componente_id").order("criado_em", { ascending: false });
     const indice = new Map((window.ATALHO_INDICE || []).map((c) => [c.id, c]));
     const lista = $("[data-conta-favoritos]");
     lista.textContent = "";
-    for (const { componente_id } of error ? [] : favoritos) {
+    for (const { componente_id } of erroFavoritos ? [] : favoritos) {
       const c = indice.get(componente_id);
       if (!c) continue;
       const link = document.createElement("a");
       link.href = c.url;
-      link.innerHTML = "<strong></strong><span></span>";
-      link.querySelector("strong").textContent = c.nome;
-      link.querySelector("span").textContent = c.resumo;
+      link.append(Object.assign(document.createElement("strong"), { textContent: c.nome }));
+      link.append(Object.assign(document.createElement("span"), { textContent: c.resumo }));
       lista.append(link);
     }
     $("[data-conta-sem-favoritos]").hidden = lista.children.length > 0;
 
     const chave = $("[data-conta-lista-espera]");
-    const { data: naLista } = await cliente.from("lista_espera_pro").select("usuario_id").maybeSingle();
     chave.checked = Boolean(naLista);
     chave.onchange = async () => {
       const operacao = chave.checked
         ? cliente.from("lista_espera_pro").insert({})
         : cliente.from("lista_espera_pro").delete().eq("usuario_id", usuario.id);
-      const { error: erroLista } = await operacao;
-      if (erroLista) {
+      const { error } = await operacao;
+      if (error) {
         chave.checked = !chave.checked;
-        notificar(traduzir(erroLista), "perigo");
+        notificar(traduzir(error), "perigo");
       } else {
         notificar(chave.checked ? "Você está na lista do Atalho Pro." : "Você saiu da lista do Atalho Pro.", "sucesso");
       }
@@ -96,13 +94,22 @@
   function mostrarVisitante() {
     $("[data-conta-visitante]").hidden = false;
     $("[data-conta-logado]").hidden = true;
+    if (parametros.has("criar")) $('[aria-controls="painel-criar"]').click();
+    if (destinoSeguro()?.includes("/exemplos/")) $("[data-conta-motivo]").hidden = false;
   }
 
-  function voltarOuRecarregar() {
-    const voltar = new URLSearchParams(location.search).get("voltar");
-    // Só volta para páginas do próprio site (evita redirecionamento aberto)
-    if (voltar && voltar.startsWith(base) && !voltar.startsWith("//")) location.href = voltar;
-    else location.reload();
+  function oferecerReenvio(email) {
+    notificar("Confirme seu e-mail pelo link que enviamos antes de entrar.", "aviso", {
+      titulo: "E-mail ainda não confirmado",
+      duracao: 10000,
+      acao: {
+        texto: "Reenviar e-mail",
+        aoClicar: async () => {
+          const { error } = await cliente.auth.resend({ type: "signup", email, options: { emailRedirectTo: enderecoRetorno() } });
+          notificar(error ? traduzir(error) : `Enviamos um novo link para ${email}.`, error ? "perigo" : "sucesso");
+        },
+      },
+    });
   }
 
   async function iniciarPaginaConta() {
@@ -115,6 +122,7 @@
       botao.setAttribute("aria-busy", "true");
       const { error } = await cliente.auth.signInWithPassword({ email: dados.email, password: dados.senha });
       botao.removeAttribute("aria-busy");
+      if (error && /email not confirmed/i.test(error.message)) return oferecerReenvio(dados.email);
       if (error) return notificar(traduzir(error), "perigo");
       voltarOuRecarregar();
     });
@@ -125,19 +133,28 @@
       const { data, error } = await cliente.auth.signUp({
         email: dados.email,
         password: dados.senha,
-        options: { data: { nome: dados.nome.trim() }, emailRedirectTo: `${location.origin}${base}conta/` },
+        options: { data: { nome: dados.nome.trim() }, emailRedirectTo: enderecoRetorno() },
       });
       botao.removeAttribute("aria-busy");
       if (error) return notificar(traduzir(error), "perigo");
       if (data.session) return voltarOuRecarregar();
       formulario.reset();
-      notificar(`Enviamos um link de confirmação para ${dados.email}. Abra o e-mail para ativar sua conta.`, "sucesso", "Quase lá!");
+      $("[data-conta-confirmar-email]").textContent = dados.email;
+      $("[data-conta-aguardando]").hidden = false;
+      $("[data-conta-aguardando]").focus();
+    });
+
+    $("[data-conta-reenviar]").addEventListener("click", async () => {
+      const email = $("[data-conta-confirmar-email]").textContent;
+      const { error } = await cliente.auth.resend({ type: "signup", email, options: { emailRedirectTo: enderecoRetorno() } });
+      notificar(error ? traduzir(error) : `Enviamos um novo link para ${email}.`, error ? "perigo" : "sucesso");
     });
 
     $("[data-esqueci-senha]").addEventListener("click", async () => {
-      const email = $("#entrar-email").value.trim();
+      const campo = $("#entrar-email");
+      const email = campo.value.trim();
       if (!window.Atalho.validar.email(email)) {
-        $("#entrar-email").focus();
+        campo.focus();
         return notificar("Digite seu e-mail no campo acima e clique de novo.", "aviso");
       }
       const { error } = await cliente.auth.resetPasswordForEmail(email, { redirectTo: `${location.origin}${base}conta/` });
@@ -146,7 +163,7 @@
 
     $("[data-sair]").addEventListener("click", async () => {
       await cliente.auth.signOut();
-      location.reload();
+      location.replace(`${base}conta/`);
     });
 
     $("#modal-excluir-conta").addEventListener("close", async (evento) => {
@@ -159,13 +176,21 @@
       setTimeout(() => (location.href = base), 1500);
     });
 
-    // Voltou pelo link de "esqueci minha senha": pede a nova senha
-    cliente.auth.onAuthStateChange(async (evento) => {
-      if (evento !== "PASSWORD_RECOVERY") return;
-      const nova = window.prompt("Digite a nova senha (mínimo de 8 caracteres):");
-      if (!nova || nova.length < 8) return notificar("A senha precisa ter pelo menos 8 caracteres.", "aviso");
-      const { error } = await cliente.auth.updateUser({ password: nova });
-      notificar(error ? traduzir(error) : "Senha alterada.", error ? "perigo" : "sucesso");
+    // Voltou pelo link de "esqueci minha senha": pede a nova senha num formulário
+    const modalSenha = $("#modal-nova-senha");
+    cliente.auth.onAuthStateChange((evento) => {
+      if (evento === "PASSWORD_RECOVERY") modalSenha.showModal();
+    });
+    $("#form-nova-senha").addEventListener("at:enviar", async (evento) => {
+      const { dados, botao, formulario } = evento.detail;
+      if (dados.senha !== dados.confirmar) return notificar("As duas senhas precisam ser iguais.", "aviso");
+      botao.setAttribute("aria-busy", "true");
+      const { error } = await cliente.auth.updateUser({ password: dados.senha });
+      botao.removeAttribute("aria-busy");
+      if (error) return notificar(traduzir(error), "perigo");
+      formulario.reset();
+      modalSenha.close();
+      notificar("Senha alterada. Você já está conectado.", "sucesso");
     });
   }
 

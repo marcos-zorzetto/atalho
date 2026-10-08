@@ -30,6 +30,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+      - run: npm ci
 
       - name: Testes (não publica nada quebrado)
         run: npm test

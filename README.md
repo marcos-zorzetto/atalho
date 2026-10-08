@@ -115,7 +115,7 @@ Guia completo: [TypeScript no Atalho](https://marcos-zorzetto.github.io/atalho/t
 | Blocos de página | hero, recursos, depoimentos, planos e preços, rodapé |
 | JavaScript | estado reativo, formatação brasileira (Intl), requisições com erros em português, eventos |
 | Receitas | loja com carrinho, cadastro com CEP, painel administrativo, login em duas etapas |
-| Páginas completas | landing page de produto, painel administrativo, loja virtual, checkout com Pix, login, blog |
+| Páginas completas (grátis com conta) | landing page de produto, painel administrativo, loja virtual, checkout com Pix, login, blog |
 
 ## Qualidade verificada a cada mudança
 
@@ -123,8 +123,9 @@ Todo push passa por uma bateria automática ([`validar.yml`](.github/workflows/v
 
 - **consistência**: toda classe usada nos exemplos existe no CSS, todo `data-at` existe no JS, nenhum link interno quebrado, SEO de cada página (título, descrição, canonical, um único `h1`), sitemap;
 - **TypeScript**: os tipos e todos os exemplos de TypeScript da documentação compilam;
+- **banco de dados**: as regras de segurança das contas rodam num PostgreSQL de verdade ([PGlite](https://pglite.dev)), conferindo que visitante não lê conteúdo exclusivo, que membro não vira administrador e que cada pessoa só vê os próprios dados;
 - **PHP**: sintaxe e testes da biblioteca;
-- **navegador de verdade**: 40 testes de interação (cliques, teclado, arrastar, celular) e auditoria de acessibilidade **WCAG 2.1 AA** com [axe-core](https://github.com/dequelabs/axe-core) em todas as páginas, no tema claro, no escuro e no celular.
+- **navegador de verdade**: 50 testes de interação (cliques, teclado, arrastar, celular) e auditoria de acessibilidade **WCAG 2.1 AA** com [axe-core](https://github.com/dequelabs/axe-core) em todas as páginas, no tema claro, no escuro e no celular.
 
 ## Atualizado sozinho
 
@@ -137,11 +138,17 @@ Toda segunda-feira, um [workflow](.github/workflows/atualizar-documentacao.yml) 
 
 Para ligar a etapa de IA, crie o segredo `ANTHROPIC_API_KEY` em *Settings → Secrets and variables → Actions*. Sem a chave, o robô continua abrindo o PR com o relatório.
 
+## Área de membros
+
+Os componentes e a documentação são abertos para todos. As **páginas completas** ficam liberadas para quem cria uma conta grátis: a vitrine de cada uma (`/exemplos/<id>/`) é pública e aparece no Google, e o código só chega ao navegador de quem entrou na conta. Ele não fica neste repositório: vive no repositório privado `atalho-pro` e é entregue pelo Supabase, que confere a sessão de cada pedido.
+
+O administrador do site tem um painel em `/admin/` com usuários, cadastros por dia, lista de espera do Atalho Pro (exportável para planilha) e o conteúdo publicado. Os dados vêm de funções do banco que recusam quem não é administrador.
+
 ## Serviços opcionais
 
-O site funciona inteiro como páginas estáticas. Três recursos extras ficam desligados até você configurar, e todos cabem em planos gratuitos:
+O site funciona inteiro como páginas estáticas. Os recursos abaixo ficam desligados até você configurar, e todos cabem em planos gratuitos:
 
-- **Contas e favoritos** com [Supabase](https://supabase.com);
+- **Contas, área de membros e painel do administrador** com [Supabase](https://supabase.com) e e-mails pelo [Brevo](https://www.brevo.com);
 - **Assistente de IA** que monta o componente a partir de uma descrição, com [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) (sem cartão de crédito, sem cobrança surpresa);
 - **Espaços de patrocínio** com rótulo claro e `rel="sponsored"`.
 
@@ -165,10 +172,10 @@ atalho/          a biblioteca (atalho.css, atalho.js e atalho.d.ts)
 php/             a biblioteca PHP, exemplos e testes
 site/dados/      a documentação de cada componente (fonte única do site, da busca e dos testes)
 site/            código do site de documentação, do editor e das contas
-exemplos/        páginas completas prontas para copiar
 scripts/         gerador do site, robô de atualização e testes de consistência
 testes/          testes de ponta a ponta e auditoria de acessibilidade
 servicos/        assistente de IA (Cloudflare Worker) e banco de dados (Supabase)
+exemplos/        miniaturas e capturas das páginas completas (o código fica no atalho-pro)
 ```
 
 Encontrou um erro ou quer sugerir um componente? [Abra uma issue](https://github.com/marcos-zorzetto/atalho/issues). Quer apoiar o projeto? Veja [como patrocinar](https://marcos-zorzetto.github.io/atalho/patrocinar/).

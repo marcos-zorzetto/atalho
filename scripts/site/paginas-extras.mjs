@@ -1,5 +1,5 @@
 import { SITE, url } from "./config.mjs";
-import { pagina, ICONES_SITE } from "./layout.mjs";
+import { pagina, ICONES_SITE, SCRIPTS_SUPABASE } from "./layout.mjs";
 import { esc, realcarHTML, realcarTS, realcarPHP, realcarCSS, realcarTerminal } from "./realce.mjs";
 
 const cabecalhoPagina = (sobretitulo, titulo, chamada, extra = "") => `
@@ -28,14 +28,15 @@ export function paginaExemplos({ exemplos }) {
   const conteudo = `${cabecalhoPagina(
     "Exemplos",
     "Páginas completas, prontas para copiar",
-    "Telas inteiras feitas só com o Atalho. Abra, veja o código-fonte (Ctrl + U) e use como ponto de partida do seu projeto."
+    "Telas inteiras feitas só com o Atalho, prontas para usar como ponto de partida do seu projeto. Grátis para quem tem conta.",
+    `<div class="at-linha at-mt-4" data-exemplos-chamada><a class="at-botao at-primario" href="${url("conta/")}?criar">Criar conta grátis</a><a class="at-botao" href="${url("conta/")}">Já tenho conta</a></div>`
   )}
     <div class="site-container site-secao-curta">
       <div class="site-galeria">
         ${exemplos
           .map(
-            (e) => `<a class="site-galeria-item" href="${url(`exemplos/${e.id}.html`)}">
-          <span class="site-galeria-moldura"><img src="${url(`exemplos/miniaturas/${e.id}.png`)}" alt="Prévia do exemplo ${esc(e.nome)}" loading="lazy" width="600" height="375"></span>
+            (e) => `<a class="site-galeria-item" href="${url(`exemplos/${e.id}/`)}">
+          <span class="site-galeria-moldura"><img src="${url(`exemplos/miniaturas/${e.id}.png`)}" alt="Prévia do exemplo ${esc(e.nome)}" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado">${ICONES_SITE.cadeado} Membros</span></span>
           <strong>${esc(e.nome)}</strong><span>${esc(e.resumo)}</span>
           <span class="site-galeria-componentes">${e.componentes.map((c) => `<span class="at-selo">${esc(c)}</span>`).join("")}</span>
         </a>`
@@ -45,7 +46,7 @@ export function paginaExemplos({ exemplos }) {
     </div>`;
   return pagina({
     titulo: "Exemplos de páginas completas · Atalho",
-    descricao: "Landing page, painel administrativo, loja, login, checkout e blog prontos em HTML, CSS e JavaScript, feitos com o Atalho. Copie e adapte.",
+    descricao: "Landing page, painel administrativo, loja, login, checkout e blog prontos em HTML, CSS e JavaScript, feitos com o Atalho. Grátis com cadastro.",
     caminho: "exemplos/",
     pagina: "exemplos",
     secao: "exemplos",
@@ -376,17 +377,29 @@ export function paginaPro() {
     pagina: "pro",
     secao: "pro",
     conteudo,
-    scripts: ["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js", "site/conta.js"],
+    scripts: [...SCRIPTS_SUPABASE, "site/conta.js"],
   });
 }
 
 /* ------------------------------------------------------------------------ */
 
-export function paginaConta() {
-  const conteudo = `${cabecalhoPagina("Sua conta", "Minha conta", "Salve componentes favoritos e entre na lista do Atalho Pro.")}
+export function paginaConta({ exemplos }) {
+  const conteudo = `${cabecalhoPagina("Sua conta", "Minha conta", "Conta grátis: libera as páginas completas, guarda seus componentes favoritos e avisa quando o Atalho Pro sair.")}
     <div class="site-container site-conta" data-conta>
       <div class="at-alerta at-aviso" data-conta-indisponivel hidden>
-        <div class="at-alerta-conteudo"><strong>Contas em breve</strong><p>A área de contas ainda está sendo ativada. Enquanto isso, tudo no Atalho continua liberado sem cadastro.</p></div>
+        <div class="at-alerta-conteudo"><strong>Contas em breve</strong><p>A área de contas está sendo ativada. Os componentes continuam liberados sem cadastro; as páginas completas abrem assim que as contas estiverem no ar.</p></div>
+      </div>
+
+      <div class="at-alerta" data-conta-motivo hidden>
+        <div class="at-alerta-conteudo"><strong>Falta só entrar</strong><p>As páginas completas são liberadas para quem tem conta. É grátis e leva menos de um minuto.</p></div>
+      </div>
+
+      <div class="at-alerta at-sucesso site-conta-aguardando" data-conta-aguardando tabindex="-1" hidden>
+        <div class="at-alerta-conteudo">
+          <strong>Confirme seu e-mail para ativar a conta</strong>
+          <p>Enviamos um link para <strong data-conta-confirmar-email></strong>. Abra o e-mail e clique no link; você volta para cá já conectado.</p>
+          <p class="at-texto-pequeno">Não chegou em 2 minutos? Confira a caixa de spam ou <button type="button" class="at-botao at-link at-pequeno" data-conta-reenviar>reenvie o e-mail</button>.</p>
+        </div>
       </div>
 
       <div class="at-cartao site-conta-cartao" data-conta-visitante hidden>
@@ -424,8 +437,15 @@ export function paginaConta() {
         <div class="at-cartao">
           <div class="at-cartao-corpo at-linha at-entre">
             <div class="at-linha"><span class="at-avatar at-grande" data-conta-iniciais></span><div><strong data-conta-nome></strong><div class="at-texto-suave at-texto-pequeno" data-conta-email></div></div></div>
-            <button class="at-botao" data-sair>Sair</button>
+            <div class="at-linha">
+              <a class="at-botao at-primario" href="${url("admin/")}" data-conta-admin hidden>Painel do administrador</a>
+              <button class="at-botao" data-sair>Sair</button>
+            </div>
           </div>
+        </div>
+        <h2 class="site-secao-titulo at-mt-6">Páginas completas liberadas</h2>
+        <div class="site-relacionados">
+          ${exemplos.map((e) => `<a href="${url(`exemplos/${e.id}/`)}"><strong>${esc(e.nome)}</strong><span>${esc(e.resumo)}</span></a>`).join("")}
         </div>
         <h2 class="site-secao-titulo at-mt-6">Componentes favoritos</h2>
         <div class="site-relacionados" data-conta-favoritos></div>
@@ -442,16 +462,30 @@ export function paginaConta() {
           </form>
         </dialog>
       </div>
+
+      <dialog class="at-modal at-pequeno" id="modal-nova-senha" aria-labelledby="nova-senha-titulo">
+        <form data-at-validar id="form-nova-senha">
+          <div class="at-modal-corpo at-pilha">
+            <h3 class="at-titulo-4" id="nova-senha-titulo">Crie uma nova senha</h3>
+            <div class="at-campo"><label class="at-rotulo" for="nova-senha">Nova senha</label>
+              <div class="at-senha"><input class="at-entrada" id="nova-senha" name="senha" type="password" required minlength="8" autocomplete="new-password"><button type="button" data-at-ver-senha>Mostrar</button></div>
+              <div class="at-forca" aria-hidden="true"><span></span><span></span><span></span><span></span></div><span class="at-forca-texto" aria-live="polite"></span>
+            </div>
+            <div class="at-campo"><label class="at-rotulo" for="nova-senha-confirmar">Repita a nova senha</label><input class="at-entrada" id="nova-senha-confirmar" name="confirmar" type="password" required minlength="8" autocomplete="new-password"></div>
+          </div>
+          <div class="at-modal-rodape"><button type="button" class="at-botao at-fantasma" commandfor="modal-nova-senha" command="close">Agora não</button><button class="at-botao at-primario">Salvar nova senha</button></div>
+        </form>
+      </dialog>
     </div>`;
   return pagina({
     titulo: "Minha conta · Atalho",
-    descricao: "Entre ou crie sua conta grátis no Atalho para salvar componentes favoritos.",
+    descricao: "Entre ou crie sua conta grátis no Atalho para abrir as páginas completas e salvar componentes favoritos.",
     caminho: "conta/",
     pagina: "conta",
     secao: "",
     indexar: false,
     conteudo,
-    scripts: ["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js", "site/conta.js"],
+    scripts: [...SCRIPTS_SUPABASE, "site/conta.js"],
   });
 }
 
@@ -463,13 +497,15 @@ export function paginaPrivacidade() {
     ${artigo(`
       <p>Esta política explica quais dados o Atalho trata, por quê e quais são os seus direitos, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018, LGPD). O controlador dos dados é ${SITE.autor}.</p>
       <h2 class="site-secao-titulo">1. Sem conta, quase nada</h2>
-      <p>Para ler a documentação e copiar componentes, você não precisa de cadastro. O site não usa cookies de rastreamento nem de publicidade. Preferências como tema escuro ficam guardadas só no seu navegador (localStorage) e não são enviadas para nós.</p>
+      <p>Para ler a documentação e copiar componentes, você não precisa de cadastro. As páginas completas são liberadas para quem cria uma conta grátis. O site não usa cookies de rastreamento nem de publicidade. Preferências como tema escuro ficam guardadas só no seu navegador (localStorage) e não são enviadas para nós.</p>
       <h2 class="site-secao-titulo">2. Se você criar uma conta</h2>
       <ul class="site-lista">
         <li><strong>Dados:</strong> nome, e-mail, senha (guardada de forma criptografada pelo provedor de autenticação, nunca em texto puro), componentes favoritos e se você quer receber o aviso do Atalho Pro.</li>
-        <li><strong>Finalidade:</strong> permitir o acesso à conta, guardar seus favoritos e, se você pedir, avisar sobre o lançamento do Atalho Pro.</li>
+        <li><strong>Finalidade:</strong> permitir o acesso à conta e às páginas completas, guardar seus favoritos e, se você pedir, avisar sobre o lançamento do Atalho Pro.</li>
+        <li><strong>Quem vê:</strong> só você e o administrador do Atalho, que enxerga nome, e-mail, datas de cadastro e de último acesso, quantidade de favoritos e se você está na lista do Pro, para manter o serviço funcionando. Ninguém vê a sua senha, nem o administrador. Os dados não são vendidos nem cedidos.</li>
         <li><strong>Base legal:</strong> execução do serviço que você pediu (art. 7º, V) e consentimento para o aviso do Pro (art. 7º, I), que você pode retirar a qualquer momento na sua conta.</li>
         <li><strong>Onde ficam:</strong> no Supabase, provedor de banco de dados e autenticação, que pode armazenar dados fora do Brasil com as garantias exigidas pela LGPD.</li>
+        <li><strong>E-mails:</strong> mensagens de confirmação de cadastro e de troca de senha são enviadas pelo Brevo, que recebe apenas o seu e-mail para fazer a entrega.</li>
         <li><strong>Por quanto tempo:</strong> enquanto a conta existir. Ao excluir a conta, os dados são apagados.</li>
       </ul>
       <h2 class="site-secao-titulo">3. Assistente de IA</h2>

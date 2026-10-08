@@ -3,7 +3,11 @@
  * Testes de ponta a ponta: um navegador de verdade clica, digita, arrasta e usa
  * o teclado como uma pessoa faria, nos componentes e nas páginas de exemplo.
  *
- * Uso: node testes/interacoes.mjs   (gere antes: node scripts/gerar-site.mjs --local)
+ * Uso: node testes/interacoes.mjs              (gere antes: node scripts/gerar-site.mjs --local)
+ *      node testes/interacoes.mjs --somente=pro  (só as páginas completas do atalho-pro)
+ *
+ * As páginas completas ficam no repositório privado atalho-pro (scripts/pro.mjs).
+ * Sem ele, os testes delas são pulados, com aviso.
  */
 import { chromium } from "playwright-core";
 import { createServer } from "node:http";
@@ -11,15 +15,19 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { RAIZ } from "../scripts/docs.mjs";
+import { proDisponivel, arquivoExemplo } from "../scripts/pro.mjs";
+import { supabaseFalso } from "./supabase-falso.mjs";
 
 const DIST = path.join(RAIZ, "dist");
 const TIPOS = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png" };
 const servidor = createServer(async (req, res) => {
   let caminho = decodeURIComponent(new URL(req.url, "http://x").pathname);
   if (caminho.endsWith("/")) caminho += "index.html";
-  const arquivo = path.join(DIST, caminho);
+  // Páginas completas: vêm do atalho-pro (no site publicado, saem do Supabase para membros)
+  const exemplo = caminho.match(/^\/exemplos\/([a-z0-9-]+)\.html$/);
+  const arquivo = exemplo && proDisponivel ? arquivoExemplo(exemplo[1]) : path.join(DIST, caminho);
   try {
-    if (!arquivo.startsWith(DIST) || !(await stat(arquivo)).isFile()) throw new Error();
+    if ((!exemplo && !arquivo.startsWith(DIST)) || !(await stat(arquivo)).isFile()) throw new Error();
     res.writeHead(200, { "Content-Type": TIPOS[path.extname(arquivo)] || "application/octet-stream" });
     res.end(await readFile(arquivo));
   } catch {
@@ -352,7 +360,7 @@ teste("Exemplo Loja: buscar, filtrar e comprar", async (aba) => {
   assert.match(await aba.locator('[data-at-texto="vitrine.resumo"]').innerText(), /3 produtos/);
   await aba.getByRole("button", { name: "Comprar" }).first().click();
   assert.equal(await aba.locator('[data-at-texto="carrinho.quantidade"]').innerText(), "1");
-});
+}, { pro: true });
 
 teste("Exemplo Landing: anual muda o preço", async (aba) => {
   await abrir(aba, "exemplos/landing-saas.html");
@@ -360,7 +368,7 @@ teste("Exemplo Landing: anual muda o preço", async (aba) => {
   assert.equal(texto(await preco.innerText()), "R$ 79,00");
   await aba.getByRole("switch", { name: "Cobrança anual" }).check();
   assert.equal(texto(await preco.innerText()), "R$ 65,83");
-});
+}, { pro: true });
 
 teste("Exemplo Painel: Ctrl+K e ordenação", async (aba) => {
   await abrir(aba, "exemplos/painel.html");
@@ -369,7 +377,7 @@ teste("Exemplo Painel: Ctrl+K e ordenação", async (aba) => {
   await aba.keyboard.press("Escape");
   await aba.locator("#pedidos thead").getByRole("button", { name: "Cliente" }).click();
   assert.equal(await aba.locator("#pedidos tbody tr:not([hidden]) td:nth-child(2)").first().innerText(), "Ana Costa");
-});
+}, { pro: true });
 
 teste("Exemplo Checkout: Pix abre o modal", async (aba) => {
   await abrir(aba, "exemplos/checkout.html");
@@ -381,7 +389,7 @@ teste("Exemplo Checkout: Pix abre o modal", async (aba) => {
   await aba.locator("#numero").fill("1000");
   await aba.getByRole("button", { name: "Finalizar compra" }).click();
   await aba.locator("#modal-pix[open]").waitFor();
-}, { rede: true });
+}, { rede: true, pro: true });
 
 /* ------------------------------------------------------------------------
    Editor ao vivo
@@ -446,11 +454,123 @@ teste("Celular: busca abre pelo botão de lupa", async (aba) => {
   assert.match(await aba.locator("#site-paleta .at-comando-item").first().innerText(), /WhatsApp/);
 }, { contexto: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } });
 
+/* ------------------------------------------------------------------------
+   Contas, área de membros e painel do administrador (Supabase simulado)
+   ------------------------------------------------------------------------ */
+
+// Página completa mínima, independente do atalho-pro: usa a biblioteca pelo caminho relativo
+const PAGINA_TESTE = `<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Loja virtual · Exemplo</title>
+<link rel="stylesheet" href="../atalho/atalho.css"><script src="../atalho/atalho.js" defer></script></head>
+<body><main class="at-container"><button class="at-botao" id="testar" data-at-notificar="Funcionou na prévia">Testar</button></main></body></html>`;
+
+teste("Vitrine: sem contas ativadas, avisa que a área de membros vem em breve", async (aba) => {
+  await abrir(aba, "exemplos/loja/");
+  await aba.locator("[data-exclusivo-indisponivel]").waitFor();
+  assert.equal(await aba.locator("[data-exclusivo-membro]").isVisible(), false);
+});
+
+teste("Vitrine: visitante vê o convite e não recebe o conteúdo", async (aba) => {
+  await abrir(aba, "exemplos/loja/");
+  await aba.getByRole("heading", { name: "Exclusivo para membros" }).waitFor();
+  const criar = await aba.getByRole("link", { name: "Criar conta grátis" }).getAttribute("href");
+  assert.match(criar, /conta\/\?voltar=%2Fexemplos%2Floja%2F&criar$/);
+  assert.equal(aba.pedidosApi.some((p) => p.caminho.includes("/conteudos")), false, "visitante não deveria nem pedir o conteúdo");
+  assert.equal(await aba.locator("[data-exclusivo-fonte]").textContent(), "");
+}, { supabase: { pessoa: null } });
+
+teste("Vitrine: membro vê a página funcionando, o código e baixa o arquivo", async (aba) => {
+  await abrir(aba, "exemplos/loja/");
+  await aba.locator("[data-exclusivo-membro]").waitFor();
+  // A prévia carrega a biblioteca de verdade (o <base> aponta para o site)
+  const previa = aba.frameLocator("[data-exclusivo-previa]");
+  await previa.getByRole("button", { name: "Testar" }).click();
+  await previa.getByText("Funcionou na prévia").waitFor();
+  await aba.getByRole("tab", { name: "Código" }).click();
+  assert.match(await aba.locator("[data-exclusivo-fonte]").textContent(), /data-at-notificar="Funcionou na prévia"/);
+  // Download: o arquivo já aponta para a CDN e funciona fora do site
+  const [download] = await Promise.all([aba.waitForEvent("download"), aba.getByRole("button", { name: "Baixar HTML" }).click()]);
+  assert.equal(download.suggestedFilename(), "loja.html");
+  const arquivo = await readFile(await download.path(), "utf8");
+  assert.match(arquivo, /https:\/\/cdn\.jsdelivr\.net\/gh\/marcos-zorzetto\/atalho@1\/atalho\/atalho\.css/);
+  assert.doesNotMatch(arquivo, /\.\.\/atalho\//);
+  assert.match(await aba.getByRole("link", { name: "Editar e testar" }).getAttribute("href"), /editor\/#[A-Za-z0-9_-]{20,}/);
+}, { supabase: { pessoa: "membro", conteudos: { loja: PAGINA_TESTE } } });
+
+teste("Vitrine: conteúdo ainda não publicado mostra aviso e tentar de novo", async (aba) => {
+  await abrir(aba, "exemplos/blog/");
+  await aba.getByRole("heading", { name: "Não foi possível abrir agora" }).waitFor();
+  await aba.getByRole("button", { name: "Tentar de novo" }).waitFor();
+}, { supabase: { pessoa: "membro", conteudos: {} } });
+
+teste("Conta: vindo da vitrine, abre 'Criar conta' com o motivo explicado", async (aba) => {
+  await abrir(aba, "conta/?voltar=%2Fexemplos%2Floja%2F&criar");
+  await aba.locator("#painel-criar").waitFor({ state: "visible" });
+  await aba.getByText("Falta só entrar").waitFor();
+}, { supabase: { pessoa: null } });
+
+teste("Conta: administrador vê o atalho para o painel", async (aba) => {
+  await abrir(aba, "conta/");
+  await aba.getByRole("link", { name: "Painel do administrador" }).waitFor();
+  assert.equal(await aba.locator("[data-conta-email]").textContent(), "dono@exemplo.com");
+  assert.equal(await aba.locator(".site-relacionados a[href$='/exemplos/loja/']").count(), 1);
+}, { supabase: { pessoa: "admin" } });
+
+teste("Conta: membro comum não vê o atalho do painel", async (aba) => {
+  await abrir(aba, "conta/");
+  await aba.locator("[data-conta-nome]").filter({ hasText: "Ana Souza" }).waitFor();
+  assert.equal(await aba.locator("[data-conta-admin]").isVisible(), false);
+}, { supabase: { pessoa: "membro" } });
+
+teste("Admin: visitante é convidado a entrar", async (aba) => {
+  await abrir(aba, "admin/");
+  await aba.getByText("Entre com a sua conta de administrador").waitFor();
+  assert.equal(await aba.locator("[data-admin-painel]").isVisible(), false);
+}, { supabase: { pessoa: null } });
+
+teste("Admin: membro comum vê 'Acesso restrito' e nenhum dado", async (aba) => {
+  await abrir(aba, "admin/");
+  await aba.getByText("Acesso restrito").waitFor();
+  assert.equal(aba.pedidosApi.some((p) => p.caminho.includes("/rpc/admin_")), false);
+}, { supabase: { pessoa: "membro" } });
+
+teste("Admin: números, busca, paginação e planilha da lista de espera", async (aba) => {
+  await abrir(aba, "admin/");
+  await aba.locator('[data-admin-numero="usuarios"]').filter({ hasText: "31" }).waitFor();
+  const linhas = aba.locator("[data-admin-usuarios] tr");
+  assert.equal(await linhas.count(), 25);
+  assert.match(await aba.locator("[data-admin-paginacao-info]").textContent(), /31 usuário\(s\) · página 1 de 2/);
+  await aba.getByRole("button", { name: "Próxima" }).click();
+  await aba.locator("[data-admin-paginacao-info]").filter({ hasText: "página 2 de 2" }).waitFor();
+  assert.equal(await linhas.count(), 6);
+  assert.equal(await aba.getByRole("button", { name: "Próxima" }).isDisabled(), true);
+
+  await aba.getByRole("searchbox", { name: "Buscar usuários" }).fill("pessoa3");
+  await aba.locator("[data-admin-paginacao-info]").filter({ hasText: "2 usuário(s)" }).waitFor();
+  assert.deepEqual(await aba.locator("[data-admin-usuarios] tr td:nth-child(2)").allTextContents(), ["pessoa3@exemplo.com", "pessoa30@exemplo.com"]);
+
+  const [download] = await Promise.all([aba.waitForEvent("download"), aba.getByRole("button", { name: "Exportar planilha" }).click()]);
+  const csv = await readFile(await download.path(), "utf8");
+  assert.ok(csv.startsWith('\ufeff"Nome";"E-mail";"Entrou em"'), "planilha precisa abrir certo no Excel");
+  assert.equal(csv.trim().split("\r\n").length, 16);
+}, { supabase: { pessoa: "admin", usuarios: 31 } });
+
 /* ------------------------------------------------------------------------ */
 
+const somente = process.argv.find((a) => a.startsWith("--somente="))?.split("=")[1];
+const selecionados = testes.filter(({ opcoes }) => (somente === "pro" ? opcoes.pro : true));
+const pulados = selecionados.filter(({ opcoes }) => opcoes.pro && !proDisponivel);
+if (somente === "pro" && !proDisponivel) {
+  console.error("--somente=pro precisa da pasta do atalho-pro (defina ATALHO_PRO).");
+  process.exit(1);
+}
+if (pulados.length) console.log(`⚠ ${pulados.length} testes das páginas completas pulados: pasta do atalho-pro não encontrada (defina ATALHO_PRO).`);
+
 let falhas = 0;
-for (const { nome, fn, opcoes } of testes) {
+const executar = selecionados.filter((t) => !pulados.includes(t));
+for (const { nome, fn, opcoes } of executar) {
   const aba = await novaAba(opcoes.contexto);
+  aba.pedidosApi = opcoes.supabase ? await supabaseFalso(aba.context(), opcoes.supabase) : [];
   // No CI a ViaCEP responde com um dado fixo: o teste não falha por instabilidade de terceiros
   if (opcoes.rede && process.env.CI) {
     await aba.context().route("https://viacep.com.br/**", (rota) =>
@@ -470,5 +590,5 @@ for (const { nome, fn, opcoes } of testes) {
 }
 await navegador.close();
 servidor.close();
-console.log(`\n${testes.length - falhas} de ${testes.length} testes passaram.`);
+console.log(`\n${executar.length - falhas} de ${executar.length} testes passaram.`);
 process.exitCode = falhas ? 1 : 0;

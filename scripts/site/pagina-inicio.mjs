@@ -176,6 +176,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
           <div>
             <span class="at-sobretitulo">Páginas completas</span>
             <h2 class="site-titulo site-h2">Copie a tela inteira, não só o botão.</h2>
+            <p class="at-texto-suave at-mt-2">Seis páginas prontas, liberadas de graça para quem cria uma conta.</p>
           </div>
           <a class="at-botao at-grande" href="${url("exemplos/")}">Todos os exemplos ${ICONES_SITE.seta}</a>
         </div>
@@ -183,8 +184,8 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
           ${exemplos
             .slice(0, 6)
             .map(
-              (e) => `<a class="site-galeria-item" href="${url(`exemplos/${e.id}.html`)}">
-            <span class="site-galeria-moldura"><img src="${url(`exemplos/miniaturas/${e.id}.png`)}" alt="" loading="lazy" width="600" height="375"></span>
+              (e) => `<a class="site-galeria-item" href="${url(`exemplos/${e.id}/`)}">
+            <span class="site-galeria-moldura"><img src="${url(`exemplos/miniaturas/${e.id}.png`)}" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado">${ICONES_SITE.cadeado} Membros</span></span>
             <strong>${esc(e.nome)}</strong><span>${esc(e.resumo)}</span>
           </a>`
             )

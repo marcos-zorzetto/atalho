@@ -1,0 +1,39 @@
+name: Manter Supabase ativo
+
+# O plano grátis do Supabase pausa projetos sem acesso por 7 dias. Uma consulta
+# leve a cada 3 dias mantém as contas funcionando mesmo em semanas sem visitas.
+# Usa só o endereço e a chave PÚBLICA que já estão em site/config.js.
+
+on:
+  schedule:
+    - cron: "17 9 */3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  consultar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Consultar o banco
+        run: |
+          node --input-type=module -e '
+            import { readFile } from "node:fs/promises";
+            import vm from "node:vm";
+            const contexto = { window: {} };
+            vm.runInNewContext(await readFile("site/config.js", "utf8"), contexto);
+            const { url, chavePublica } = contexto.window.ATALHO_CONFIG?.supabase || {};
+            if (!url || !chavePublica) {
+              console.log("Supabase ainda não configurado em site/config.js. Nada a fazer.");
+              process.exit(0);
+            }
+            // Qualquer resposta do banco (mesmo "sem permissão") conta como atividade
+            const resposta = await fetch(`${url}/rest/v1/conteudos?select=id&limit=1`, { headers: { apikey: chavePublica } });
+            console.log(`Supabase respondeu ${resposta.status}.`);
+            if (resposta.status >= 500) process.exit(1);
+          '
