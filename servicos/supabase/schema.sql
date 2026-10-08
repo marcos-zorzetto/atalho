@@ -135,6 +135,9 @@ drop policy if exists "conteudos: membros leem" on public.conteudos;
 create policy "conteudos: membros leem" on public.conteudos for select to authenticated using (true);
 revoke all on public.conteudos from anon, authenticated;
 grant select on public.conteudos to authenticated;
+-- A chave secreta (papel service_role) publica o conteúdo. Ela ignora o RLS,
+-- mas ainda precisa da permissão da tabela quando o projeto não expõe tabelas sozinho.
+grant select, insert, update, delete on public.conteudos to service_role;
 
 -- ---------------------------------------------------------------------------
 -- Painel do administrador. Cada função confere eh_admin() no servidor: mesmo

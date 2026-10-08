@@ -36,6 +36,7 @@ before(async () => {
   await db.exec(`
     create role anon nologin;
     create role authenticated nologin;
+    create role service_role nologin bypassrls;
     create schema auth;
     create table auth.users (
       id uuid primary key,
@@ -51,7 +52,10 @@ before(async () => {
     grant execute on function auth.uid() to anon, authenticated;
     grant usage on schema public to anon, authenticated;
     -- Como o Supabase faz por padrão: tabelas novas ficam visíveis para a API (o RLS filtra)
-    alter default privileges in schema public grant all on tables to anon, authenticated;
+    grant usage on schema public to service_role;
+    -- Igual ao projeto de produção: "Automatically expose new tables" desligado, então
+    -- só vale o que o schema.sql concede. ATALHO_EXPOR=1 imita a opção ligada.
+    ${process.env.ATALHO_EXPOR ? "alter default privileges in schema public grant all on tables to anon, authenticated, service_role;" : ""}
   `);
   await db.exec(await readFile(SCHEMA, "utf8"));
   // Rodar duas vezes não pode quebrar (o guia diz que pode)
@@ -75,6 +79,19 @@ test("cadastro cria o perfil com o nome enviado (ou a parte antes do @)", async 
 test("visitante não lê conteúdo exclusivo; quem entrou lê", async () => {
   await assert.rejects(como(null, `select id from public.conteudos`), negado);
   assert.deepEqual(await como(ANA, `select id, titulo from public.conteudos`), [{ id: "loja", titulo: "Loja virtual" }]);
+});
+
+test("a chave secreta (service_role) publica e atualiza o conteúdo", async () => {
+  await db.transaction(async (tx) => {
+    await tx.exec("set local role service_role");
+    await tx.query(`insert into public.conteudos (id, titulo, html) values ('teste-publicacao', 'Teste', '<p>1</p>')
+      on conflict (id) do update set html = excluded.html`);
+    await tx.query(`insert into public.conteudos (id, titulo, html) values ('teste-publicacao', 'Teste', '<p>2</p>')
+      on conflict (id) do update set html = excluded.html`);
+  });
+  const { rows } = await db.query(`select html from public.conteudos where id = 'teste-publicacao'`);
+  assert.equal(rows[0].html, "<p>2</p>");
+  await db.query(`delete from public.conteudos where id = 'teste-publicacao'`);
 });
 
 test("membro não altera conteúdo exclusivo", async () => {
