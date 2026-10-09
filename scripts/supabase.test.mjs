@@ -152,6 +152,82 @@ test("cada membro só vê os próprios favoritos e a própria entrada na lista",
   assert.equal((await como(ANA, `select * from public.favoritos`)).length, 2);
 });
 
+test("loja: preços são públicos; assinaturas, compras e pagamentos não", async () => {
+  const precos = await como(null, `select id, preco_centavos from public.produtos where tipo = 'assinatura' order by id`);
+  assert.deepEqual(precos, [{ id: "pro-anual", preco_centavos: 3900 }, { id: "pro-mensal", preco_centavos: 490 }]);
+  for (const tabela of ["assinaturas", "compras", "pagamentos"]) {
+    await assert.rejects(como(null, `select * from public.${tabela}`), negado, `visitante leu ${tabela}`);
+  }
+  await assert.rejects(como(BRUNO, `select * from public.pagamentos`), negado);
+});
+
+test("loja: ninguém se dá o Pro nem compra sem pagar pela API", async () => {
+  await assert.rejects(como(BRUNO, `insert into public.assinaturas (id, usuario_id, status) values ('falsa', '${BRUNO}', 'active')`), negado);
+  await assert.rejects(como(BRUNO, `insert into public.compras (id, usuario_id, produto_id, pedido_lemon) values ('falsa', '${BRUNO}', 'pro-mensal', 'x')`), negado);
+  await assert.rejects(como(BRUNO, `update public.produtos set preco_centavos = 0`), negado);
+  await assert.rejects(como(BRUNO, `update public.conteudos set acesso = 'membro'`), negado);
+});
+
+test("loja: conteúdo Pro só para quem assina, comprou ou é administrador", async () => {
+  await db.exec(`
+    insert into public.produtos (id, tipo, nome, preco_centavos) values ('pagina-crm', 'pagina', 'CRM', 900), ('pagina-agenda', 'pagina', 'Agenda', 900);
+    insert into public.conteudos (id, titulo, html, acesso, produto_id) values
+      ('crm', 'CRM', '<p>crm</p>', 'pro', 'pagina-crm'),
+      ('agenda', 'Agenda', '<p>agenda</p>', 'pro', 'pagina-agenda');
+  `);
+  const ve = async (quem, id) => (await como(quem, `select count(*)::int as n from public.conteudos where id = '${id}'`))[0].n === 1;
+
+  // Membro sem nada: só o grátis
+  assert.equal(await ve(BRUNO, "loja"), true);
+  assert.equal(await ve(BRUNO, "crm"), false);
+
+  // Comprou só o CRM: lê o CRM, não a Agenda
+  await db.exec(`insert into public.compras (id, usuario_id, produto_id, pedido_lemon) values ('pedido-1-crm', '${BRUNO}', 'pagina-crm', 'pedido-1')`);
+  assert.equal(await ve(BRUNO, "crm"), true);
+  assert.equal(await ve(BRUNO, "agenda"), false);
+
+  // Reembolsou: perde o acesso
+  await db.exec(`update public.compras set reembolsada = true where id = 'pedido-1-crm'`);
+  assert.equal(await ve(BRUNO, "crm"), false);
+
+  // Assinou o Pro: lê tudo
+  await db.exec(`insert into public.assinaturas (id, usuario_id, produto_id, status) values ('sub-1', '${BRUNO}', 'pro-mensal', 'active')`);
+  assert.equal(await ve(BRUNO, "crm"), true);
+  assert.equal(await ve(BRUNO, "agenda"), true);
+  assert.equal((await como(BRUNO, `select public.tem_pro() as pro`))[0].pro, true);
+
+  // Cancelou: continua até o fim do período pago, depois perde
+  await db.exec(`update public.assinaturas set status = 'cancelled', termina_em = now() + interval '5 days' where id = 'sub-1'`);
+  assert.equal(await ve(BRUNO, "agenda"), true);
+  await db.exec(`update public.assinaturas set termina_em = now() - interval '1 minute' where id = 'sub-1'`);
+  assert.equal(await ve(BRUNO, "agenda"), false);
+  await db.exec(`update public.assinaturas set status = 'expired' where id = 'sub-1'`);
+  assert.equal(await ve(BRUNO, "agenda"), false);
+
+  // Cada um vê só as próprias assinaturas
+  assert.equal((await como(ADMIN, `select count(*)::int as n from public.assinaturas`))[0].n, 0);
+  assert.equal((await como(BRUNO, `select count(*)::int as n from public.assinaturas`))[0].n, 1);
+
+  // Administrador lê o Pro sem assinar
+  assert.equal(await ve(ADMIN, "agenda"), true);
+  // Visitante continua sem nada
+  await assert.rejects(como(null, `select count(*) from public.conteudos where id = 'crm'`), negado);
+});
+
+test("loja: o webhook (chave secreta) registra assinatura, compra e pagamento", async () => {
+  await db.transaction(async (tx) => {
+    await tx.exec("set local role service_role");
+    await tx.query(`insert into public.assinaturas (id, usuario_id, produto_id, status, renova_em) values ('sub-2', '${ADMIN}', 'pro-anual', 'active', now() + interval '1 year')
+      on conflict (id) do update set status = excluded.status`);
+    await tx.query(`insert into public.compras (id, usuario_id, produto_id, pedido_lemon) values ('pedido-2-agenda', '${ADMIN}', 'pagina-agenda', 'pedido-2') on conflict (id) do nothing`);
+    await tx.query(`insert into public.pagamentos (id, usuario_id, produto_id, valor_centavos) values ('pag-1', '${ADMIN}', 'pro-anual', 3900), ('pag-2', '${ADMIN}', 'pagina-agenda', 900)`);
+  });
+  const [{ admin_loja: loja }] = await como(ADMIN, `select public.admin_loja()`);
+  assert.equal(loja.assinantes_ativos, 1);
+  assert.equal(loja.receita_30_dias_centavos, 4800);
+  await assert.rejects(como(BRUNO, `select public.admin_loja()`), negado);
+});
+
 test("excluir a conta apaga o usuário e tudo dele", async () => {
   await como(ANA, `select public.excluir_minha_conta()`);
   const { rows } = await db.query(`select
