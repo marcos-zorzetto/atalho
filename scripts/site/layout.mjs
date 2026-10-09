@@ -123,7 +123,7 @@ ${p.conteudo}
 }
 
 function cabecalho(secaoAtual) {
-  return `<header class="at-barra site-barra">
+  return `<header class="at-barra at-barra-expandir-desktop site-barra">
     <div class="at-barra-conteudo">
       <a href="${url()}" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
       <span class="site-versao">v${SITE.versao}</span>

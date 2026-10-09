@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.2.0 — componentes de interface em português
+ * Atalho 1.2.1 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -2094,7 +2094,7 @@
   }
 
   const Atalho = {
-    versao: "1.2.0",
+    versao: "1.2.1",
     estado,
     observar,
     obterEstado: (nome) => estados.get(nome),

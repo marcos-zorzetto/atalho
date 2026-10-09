@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.2.0 — componentes de interface em português
+ * Atalho 1.2.1 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -227,6 +227,23 @@ a { color: var(--at-cor-primaria); text-underline-offset: 0.18em; }
   grid-template-columns: repeat(
     auto-fit,
     minmax(min(100%, max(var(--min, 180px), (100% - (var(--_n) - 1) * var(--_gap)) / var(--_n))), 1fr)
+  );
+}
+
+/* 4 colunas nunca viram 3 + 1 (item sobrando sozinho, comum no tablet):
+   4 lado a lado, senão 2, senão 1. O "* 999" escolhe entre os limites do clamp(). */
+.at-colunas-4 {
+  --_m: var(--min, 180px);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      clamp(
+        (100% - 3 * var(--_gap)) / 4,
+        (4 * var(--_m) + 3 * var(--_gap) - 100%) * 999,
+        clamp((100% - var(--_gap)) / 2, (2 * var(--_m) + var(--_gap) - 100%) * 999, 100%)
+      ),
+      1fr
+    )
   );
 }
 
@@ -825,6 +842,22 @@ select.at-entrada {
     padding-bottom: var(--at-espaco-3);
   }
   .at-barra-links[data-aberto] { display: flex; }
+}
+
+/* Muitos links: recolhe no menu até o desktop (tablet incluído), como o navbar-expand-lg do Bootstrap */
+@media (max-width: 1023px) {
+  .at-barra-expandir-desktop .at-barra-conteudo { flex-wrap: wrap; }
+  .at-barra-expandir-desktop .at-barra-menu { display: inline-flex; }
+  .at-barra-expandir-desktop .at-barra-links {
+    display: none;
+    order: 10;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-left: 0;
+    padding-bottom: var(--at-espaco-3);
+  }
+  .at-barra-expandir-desktop .at-barra-links[data-aberto] { display: flex; }
 }
 
 /* Layout de sistema com menu lateral */

@@ -61,8 +61,12 @@ html { scroll-padding-top: calc(var(--at-altura-barra) + 16px); scroll-behavior:
 
 .site-busca-botao { justify-content: flex-start; min-width: 13rem; color: var(--at-texto-suave); font-weight: 500; }
 .site-busca-botao kbd { margin-left: auto; }
+/* Tablet e celular não têm Ctrl: esconde o atalho de teclado */
+@media (hover: none) and (pointer: coarse) { .site-busca-botao kbd, .site-busca-campo kbd { display: none; } }
 
-@media (max-width: 1099px) {
+/* Tablet e notebook pequeno: só ícones à direita, para caber "Minha conta" */
+@media (max-width: 1279px) {
+  .site-versao { display: none; }
   .site-busca-botao { min-width: 0; }
   .site-busca-botao span, .site-busca-botao kbd { display: none; }
 }
@@ -100,7 +104,12 @@ html { scroll-padding-top: calc(var(--at-altura-barra) + 16px); scroll-behavior:
 }
 
 .site-hero-grade { display: grid; gap: var(--at-espaco-7); align-items: center; }
-@media (min-width: 1000px) { .site-hero-grade { grid-template-columns: 1.15fr 0.85fr; } }
+@media (min-width: 1000px) {
+  .site-hero-grade { grid-template-columns: 1.15fr 0.85fr; }
+  /* Em duas colunas, o título acompanha a largura da coluna (e não da tela): 4 linhas no tablet deitado e no desktop */
+  .site-hero-grade > :first-child { container-type: inline-size; }
+  .site-hero .site-h1 { font-size: min(5.25rem, 12.1cqi); }
+}
 .site-hero .at-chamada { font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem); max-width: 42ch; }
 .site-hero-acoes { display: flex; flex-wrap: wrap; gap: var(--at-espaco-3); margin-top: var(--at-espaco-6); }
 
@@ -172,6 +181,11 @@ mark { background: color-mix(in srgb, var(--at-cor-destaque) 55%, transparent); 
 
 .site-vitrine { position: relative; display: grid; gap: var(--at-espaco-4); }
 .site-vitrine > .at-cartao { box-shadow: var(--at-sombra-2); }
+/* Tablet em pé: os dois cartões lado a lado em vez de esticados na largura toda */
+@media (min-width: 720px) and (max-width: 999px) {
+  .site-vitrine { grid-template-columns: 1fr 1fr; align-items: start; }
+  .site-vitrine > p { grid-column: 1 / -1; }
+}
 
 .site-etiqueta-viva {
   position: absolute;

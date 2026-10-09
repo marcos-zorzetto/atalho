@@ -2,13 +2,13 @@
 /**
  * Auditoria completa do site com um navegador de verdade (Edge/Chrome via Playwright).
  *
- * Para cada página, em computador (claro e escuro) e celular:
+ * Para cada página, em computador (claro e escuro), tablet (em pé e deitado) e celular:
  *  - erros de JavaScript e no console, requisições do próprio site que falharam
  *  - elementos vazando para fora da tela (rolagem horizontal)
  *  - acessibilidade com axe-core (WCAG 2.1 A/AA), incluindo contraste de cores
  *  - captura de tela da página inteira (para revisão visual)
  *
- * Uso: node testes/auditoria.mjs [--paginas=inicio,componentes/modal] [--sem-capturas]
+ * Uso: node testes/auditoria.mjs [--paginas=inicio,componentes/modal] [--visoes=tablet,celular] [--sem-capturas]
  */
 import { chromium } from "playwright-core";
 import { createServer } from "node:http";
@@ -65,8 +65,10 @@ const navegador = await chromium.launch({
 const VISOES = [
   { nome: "computador", viewport: { width: 1440, height: 900 }, colorScheme: "light", axe: true },
   { nome: "escuro", viewport: { width: 1440, height: 900 }, colorScheme: "dark", axe: true },
+  { nome: "tablet", viewport: { width: 768, height: 1024 }, colorScheme: "light", isMobile: true, hasTouch: true, axe: false },
+  { nome: "tablet-deitado", viewport: { width: 1024, height: 768 }, colorScheme: "light", isMobile: true, hasTouch: true, axe: false },
   { nome: "celular", viewport: { width: 390, height: 844 }, colorScheme: "light", isMobile: true, hasTouch: true, axe: false },
-];
+].filter((v) => !args.visoes || args.visoes.split(",").includes(v.nome));
 
 const axeFonte = await readFile(require.resolve("axe-core/axe.min.js"), "utf8");
 const problemas = [];

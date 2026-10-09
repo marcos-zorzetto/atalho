@@ -191,7 +191,7 @@
         { nome: "at-container", tipo: "classe", descricao: "Centraliza com largura máxima. Some at-estreito para textos." },
         { nome: "at-secao", tipo: "classe", descricao: "Espaço vertical generoso para seções de página." },
         { nome: "at-grade", tipo: "classe", descricao: "Grade automática. Ajuste com --min (largura mínima do item)." },
-        { nome: "at-colunas-2 / -3 / -4", tipo: "classe", descricao: "No máximo 2, 3 ou 4 colunas. Usa menos quando o espaço do container não comporta (ajuste com --min)." },
+        { nome: "at-colunas-2 / -3 / -4", tipo: "classe", descricao: "No máximo 2, 3 ou 4 colunas. Usa menos quando o espaço do container não comporta (ajuste com --min). A de 4 vai direto para 2, sem deixar um item sozinho (3 + 1)." },
         { nome: "at-pilha", tipo: "classe", descricao: "Coluna com espaço igual. Ajuste com --at-gap." },
         { nome: "at-linha", tipo: "classe", descricao: "Lado a lado com quebra. Combine com at-entre, at-fim, at-centro, at-topo." },
         { nome: "at-cresce", tipo: "classe", descricao: "Item da linha que ocupa o espaço que sobrar." },

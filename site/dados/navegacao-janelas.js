@@ -14,7 +14,7 @@
       inspiradoEm: ["Stripe e Vercel (barra translúcida fixa)", "Mercado Livre (busca e carrinho no topo)", "Apple (menu compacto no celular)"],
       quandoUsar: ["No topo de todo site e landing page."],
       comoFunciona:
-        "No celular os links ficam escondidos; o botão com data-at-alternar=\"#id\" mostra/esconde a lista e atualiza aria-expanded. No desktop, a lista aparece sempre. Marque a página atual com aria-current=\"page\".",
+        "No celular os links ficam escondidos; o botão com data-at-alternar=\"#id\" mostra/esconde a lista e atualiza aria-expanded. No desktop, a lista aparece sempre. Com muitos links, adicione at-barra-expandir-desktop: o menu fica recolhido também no tablet (até 1023px), para nada vazar da tela. Marque a página atual com aria-current=\"page\".",
       recursos: ["sticky-positioning", "backdrop-filter", "color-mix"],
       mdn: [pt("<nav>", "Web/HTML/Reference/Elements/nav"), pt("position: sticky", "Web/CSS/Reference/Properties/position")],
       conectaCom: ["menu-suspenso", "comando", "gaveta", "lateral"],
@@ -26,6 +26,7 @@
         { nome: "at-barra / at-barra-conteudo", tipo: "classe", descricao: "Barra e container interno." },
         { nome: "at-barra-marca / at-barra-links / at-barra-acoes", tipo: "classe", descricao: "Partes da barra." },
         { nome: "at-barra-menu", tipo: "classe", descricao: "Botão que só aparece no celular." },
+        { nome: "at-barra-expandir-desktop", tipo: "classe", descricao: "Na .at-barra: recolhe os links no menu até 1023px (celular e tablet). Use quando há mais de 4 ou 5 links." },
         { nome: "data-at-alternar=\"#id\"", tipo: "atributo", descricao: "Mostra/esconde o alvo (adiciona data-aberto)." },
       ],
       exemplos: [
