@@ -59,6 +59,15 @@
     return INICIAL;
   }
 
+  /** Página inteira (cabeçalho, menu, seções) ou só um trecho, como um formulário? */
+  const ehPaginaInteira = (html) =>
+    /<(header|main|nav|aside|section)/i.test(html) || /class="[^"]*at-(app|barra|hero|secao|container)/.test(html);
+
+  // Trechos ganham margem e ficam centralizados, em vez de colados na borda da tela
+  const ESPACO_TRECHO = `
+    /* Espaço em volta do exemplo. Apague se o seu layout já tiver o próprio. */
+    body { max-width: 1120px; margin-inline: auto; padding: clamp(16px, 4vw, 48px); }`;
+
   const documento = (dados, cdn = false) => {
     const caminho = cdn ? CDN : `${base}atalho`;
     // Envia console.log e erros para o painel de console do editor
@@ -76,7 +85,7 @@ addEventListener("error",function(e){enviar("error",["Erro: "+e.message+(e.linen
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Meu projeto com o Atalho</title>
   <link rel="stylesheet" href="${caminho}/atalho.css">
-  <style>
+  <style>${ehPaginaInteira(dados.html) ? "" : ESPACO_TRECHO}
 ${dados.css}
   </style>
   ${ponte}

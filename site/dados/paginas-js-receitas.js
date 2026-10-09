@@ -591,84 +591,91 @@ Atalho.estado("carrinho", {
       exemplos: [
         {
           titulo: "Ficha de cadastro",
-          html: `<form id="form-cadastro" data-at-validar class="at-pilha" style="max-width: 680px; --at-gap: 24px">
-  <fieldset class="at-formulario" style="border: 0; padding: 0; margin: 0">
-    <legend class="at-titulo-4">Seus dados</legend>
-    <div class="at-campo">
-      <label class="at-rotulo" for="cad-nome">Nome completo</label>
-      <input class="at-entrada" id="cad-nome" name="nome" required minlength="5" autocomplete="name">
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-cpf">CPF</label>
-      <input class="at-entrada" id="cad-cpf" name="cpf" required data-at-mascara="cpf">
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-nasc">Data de nascimento</label>
-      <input class="at-entrada" id="cad-nasc" name="nascimento" type="date" required max="2010-12-31" autocomplete="bday">
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-email">E-mail</label>
-      <input class="at-entrada" id="cad-email" name="email" type="email" required autocomplete="email">
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-cel">Celular</label>
-      <input class="at-entrada" id="cad-cel" name="celular" type="tel" required data-at-mascara="telefone" autocomplete="tel-national">
-    </div>
-  </fieldset>
-
-  <fieldset class="at-formulario" style="border: 0; padding: 0; margin: 0">
-    <legend class="at-titulo-4">Endereço</legend>
-    <div class="at-campo at-terco">
-      <label class="at-rotulo" for="cad-cep">CEP</label>
-      <input class="at-entrada" id="cad-cep" name="cep" required data-at-mascara="cep" data-at-cep autocomplete="postal-code">
-    </div>
-    <div class="at-campo at-dois-tercos">
-      <label class="at-rotulo" for="cad-rua">Rua</label>
-      <input class="at-entrada" id="cad-rua" name="rua" required data-at-cep-preencher="logradouro">
-    </div>
-    <div class="at-campo at-terco">
-      <label class="at-rotulo" for="cad-num">Número</label>
-      <input class="at-entrada" id="cad-num" name="numero" required data-at-cep-foco>
-    </div>
-    <div class="at-campo at-dois-tercos">
-      <label class="at-rotulo" for="cad-comp">Complemento <span class="at-opcional">(opcional)</span></label>
-      <input class="at-entrada" id="cad-comp" name="complemento">
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-bairro">Bairro</label>
-      <input class="at-entrada" id="cad-bairro" name="bairro" required data-at-cep-preencher="bairro">
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-cidade">Cidade / UF</label>
-      <input class="at-entrada" id="cad-cidade" name="cidade" required data-at-cep-preencher="localidade">
-    </div>
-  </fieldset>
-
-  <fieldset class="at-formulario" style="border: 0; padding: 0; margin: 0">
-    <legend class="at-titulo-4">Acesso</legend>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-senha">Senha</label>
-      <div class="at-senha">
-        <input class="at-entrada" id="cad-senha" name="senha" type="password" required minlength="8" autocomplete="new-password">
-        <button type="button" data-at-ver-senha>Mostrar</button>
+          html: `<div class="at-cartao" style="max-width: 760px; margin-inline: auto">
+  <div class="at-cartao-corpo" style="border-bottom: 1px solid var(--at-borda)">
+    <h2 class="at-titulo-3 at-mb-0">Crie sua conta</h2>
+    <p class="at-texto-suave at-mb-0">Leva menos de 2 minutos: o endereço se preenche sozinho pelo CEP.</p>
+  </div>
+  <form id="form-cadastro" data-at-validar class="at-cartao-corpo at-pilha" style="--at-gap: 28px">
+    <fieldset class="at-formulario" style="border: 0; padding: 0; margin: 0">
+      <legend class="at-titulo-4">Seus dados</legend>
+      <div class="at-campo">
+        <label class="at-rotulo" for="cad-nome">Nome completo</label>
+        <input class="at-entrada" id="cad-nome" name="nome" required minlength="5" autocomplete="name">
       </div>
-      <div class="at-forca" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-      <span class="at-forca-texto" aria-live="polite"></span>
-    </div>
-    <div class="at-campo at-meio">
-      <label class="at-rotulo" for="cad-senha2">Confirme a senha</label>
-      <input class="at-entrada" id="cad-senha2" type="password" required data-at-igual="#cad-senha" data-msg-igual="As senhas não são iguais." autocomplete="new-password">
-    </div>
-    <div class="at-campo">
-      <label class="at-check">
-        <input type="checkbox" name="termos" required data-msg-obrigatorio="Aceite os termos para continuar.">
-        <span>Li e aceito os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a>.</span>
-      </label>
-    </div>
-  </fieldset>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-cpf">CPF</label>
+        <input class="at-entrada" id="cad-cpf" name="cpf" required data-at-mascara="cpf">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-nasc">Data de nascimento</label>
+        <input class="at-entrada" id="cad-nasc" name="nascimento" type="date" required max="2010-12-31" autocomplete="bday">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-email">E-mail</label>
+        <input class="at-entrada" id="cad-email" name="email" type="email" required autocomplete="email">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-cel">Celular</label>
+        <input class="at-entrada" id="cad-cel" name="celular" type="tel" required data-at-mascara="telefone" autocomplete="tel-national">
+      </div>
+    </fieldset>
 
-  <button class="at-botao at-primario at-grande">Criar minha conta</button>
-</form>
+    <fieldset class="at-formulario" style="border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0">
+      <legend class="at-titulo-4">Endereço</legend>
+      <div class="at-campo at-terco">
+        <label class="at-rotulo" for="cad-cep">CEP</label>
+        <input class="at-entrada" id="cad-cep" name="cep" required data-at-mascara="cep" data-at-cep autocomplete="postal-code">
+      </div>
+      <div class="at-campo at-dois-tercos">
+        <label class="at-rotulo" for="cad-rua">Rua</label>
+        <input class="at-entrada" id="cad-rua" name="rua" required data-at-cep-preencher="logradouro">
+      </div>
+      <div class="at-campo at-terco">
+        <label class="at-rotulo" for="cad-num">Número</label>
+        <input class="at-entrada" id="cad-num" name="numero" required data-at-cep-foco>
+      </div>
+      <div class="at-campo at-dois-tercos">
+        <label class="at-rotulo" for="cad-comp">Complemento <span class="at-opcional">(opcional)</span></label>
+        <input class="at-entrada" id="cad-comp" name="complemento">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-bairro">Bairro</label>
+        <input class="at-entrada" id="cad-bairro" name="bairro" required data-at-cep-preencher="bairro">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-cidade">Cidade / UF</label>
+        <input class="at-entrada" id="cad-cidade" name="cidade" required data-at-cep-preencher="localidade">
+      </div>
+    </fieldset>
+
+    <fieldset class="at-formulario" style="border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0">
+      <legend class="at-titulo-4">Acesso</legend>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-senha">Senha</label>
+        <div class="at-senha">
+          <input class="at-entrada" id="cad-senha" name="senha" type="password" required minlength="8" autocomplete="new-password">
+          <button type="button" data-at-ver-senha>Mostrar</button>
+        </div>
+        <div class="at-forca" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <span class="at-forca-texto" aria-live="polite"></span>
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-senha2">Confirme a senha</label>
+        <input class="at-entrada" id="cad-senha2" type="password" required data-at-igual="#cad-senha" data-msg-igual="As senhas não são iguais." autocomplete="new-password">
+      </div>
+      <div class="at-campo">
+        <label class="at-check">
+          <input type="checkbox" name="termos" required data-msg-obrigatorio="Aceite os termos para continuar.">
+          <span>Li e aceito os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a>.</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <button class="at-botao at-primario at-grande at-bloco">Criar minha conta</button>
+    <p class="at-texto-pequeno at-texto-suave at-texto-centro at-mb-0">Já tem conta? <a href="#">Entrar</a></p>
+  </form>
+</div>
 
 <dialog class="at-modal at-pequeno" id="modal-cadastro">
   <div class="at-modal-corpo at-texto-centro">
