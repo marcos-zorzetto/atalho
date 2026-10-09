@@ -187,11 +187,12 @@ test("cada componente tem a sua página", async () => {
 });
 
 test("nenhum link interno quebrado", async () => {
-  const base = "/atalho/";
+  const { SITE } = await import("./site/config.mjs");
+  const base = SITE.base;
   const quebrados = [];
   for (const pagina of paginas) {
     const html = await ler(pagina);
-    for (const [, destino] of html.matchAll(/(?:href|src)="(\/atalho\/[^"#?]*)/g)) {
+    for (const [, destino] of html.matchAll(new RegExp(`(?:href|src)="(${base.replace(/\//g, "\\/")}[^"#?]*)`, "g"))) {
       let caminho = destino.slice(base.length);
       if (caminho === "" || caminho.endsWith("/")) caminho += "index.html";
       if (!existsSync(path.join(DIST, caminho))) quebrados.push(`${pagina} → ${destino}`);

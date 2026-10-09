@@ -158,6 +158,38 @@ ${indexaveis
   // .nojekyll: o GitHub Pages não processa nada, serve os arquivos como estão
   await escrever(".nojekyll", "");
 
+  // Domínio próprio no GitHub Pages: o arquivo CNAME diz qual é
+  const host = new URL(SITE.url).hostname;
+  if (SITE.hospedagem === "github" && !host.endsWith(".github.io") && host !== "localhost") await escrever("CNAME", `${host}\n`);
+
+  // Cloudflare: cabeçalhos de segurança e cache (o GitHub Pages ignora este arquivo)
+  await escrever(
+    "_headers",
+    `/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: SAMEORIGIN
+
+${url("atalho/*")}
+  Cache-Control: public, max-age=3600, must-revalidate
+
+${url("exemplos/capturas/*")}
+  Cache-Control: public, max-age=604800
+
+${url("exemplos/miniaturas/*")}
+  Cache-Control: public, max-age=604800
+
+${url("admin/*")}
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+${url("conta/*")}
+  X-Robots-Tag: noindex, nofollow
+`
+  );
+
   const total = (await listar(DIST)).length;
   console.log(`Site gerado em dist/ (${paginas.size} páginas, ${total} arquivos) em ${Date.now() - inicio} ms. Base: ${SITE.base}`);
   return { paginas: [...paginas.keys()] };

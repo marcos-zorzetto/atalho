@@ -1,0 +1,15 @@
+// Hospedagem na Cloudflare (Workers com arquivos estáticos, plano grátis).
+// Publicado pelo .github/workflows/publicar.yml quando a variável
+// ATALHO_HOSPEDAGEM do repositório vale "cloudflare". Guia: servicos/MIGRAR-DOMINIO.md
+{
+  "name": "atalho",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    // /pagina-que-nao-existe/ mostra o 404.html do site, com status 404
+    "not_found_handling": "404-page",
+    // /componentes/modal e /componentes/modal/ abrem a mesma página
+    "html_handling": "auto-trailing-slash"
+  }
+  // O domínio (ex.: atalhoui.com) é ligado no painel: Workers → atalho → Settings → Domains & Routes
+}

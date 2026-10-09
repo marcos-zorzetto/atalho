@@ -1,5 +1,12 @@
-# Gera o site (dist/) e publica no GitHub Pages.
+# Gera o site (dist/) e publica.
 # Roda a cada push na main e toda segunda-feira (para tirar do ar patrocínios vencidos).
+#
+# Onde publicar é decidido por duas variáveis do repositório
+# (Settings → Secrets and variables → Actions → Variables):
+#   ATALHO_URL         endereço oficial, ex.: https://atalhoui.com/ (vazio: GitHub Pages padrão)
+#   ATALHO_HOSPEDAGEM  "github" (padrão) ou "cloudflare"
+# Na Cloudflare, o endereço antigo do GitHub Pages passa a redirecionar para o novo.
+# Guia completo: servicos/MIGRAR-DOMINIO.md
 
 name: Publicar site
 
@@ -19,6 +26,10 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+env:
+  ATALHO_URL: ${{ vars.ATALHO_URL }}
+  ATALHO_HOSPEDAGEM: ${{ vars.ATALHO_HOSPEDAGEM || 'github' }}
+
 jobs:
   publicar:
     runs-on: ubuntu-latest
@@ -37,6 +48,20 @@ jobs:
 
       - name: Gerar o site
         run: node scripts/gerar-site.mjs
+
+      - name: Publicar na Cloudflare
+        if: env.ATALHO_HOSPEDAGEM == 'cloudflare'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Endereço antigo do GitHub Pages leva ao domínio novo
+        if: env.ATALHO_HOSPEDAGEM == 'cloudflare'
+        run: |
+          node scripts/gerar-redirecionamento.mjs
+          rm -rf dist && mv dist-redirecionar dist
 
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
