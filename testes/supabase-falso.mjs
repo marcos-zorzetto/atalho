@@ -51,9 +51,11 @@ const json = (rota, corpo, status = 200) =>
  * Prepara a aba. `pessoa`: "admin", "membro" ou null (visitante).
  * `conteudos`: { id: html } servidos pela tabela "conteudos".
  * `loja`: { links: { produto: url }, assinaturas: [...], compras: [...] } da pessoa.
+ * `animacoes`: { id: { nivel: "membro" | "pro", html } } servidas como tipo "animacao":
+ *   como no banco, membro recebe só as de nível membro; quem assina (ou é admin) recebe todas.
  * Retorna a lista de requisições feitas à API, para conferir nos testes.
  */
-export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, usuarios = 3, loja = {} } = {}) {
+export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, usuarios = 3, loja = {}, animacoes = {} } = {}) {
   const quem = pessoa ? PESSOAS[pessoa] : null;
   const pedidos = [];
 
@@ -90,6 +92,10 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
       return json(rota, { code: "42501", message: "permission denied for table" }, 401);
     }
 
+    if (caminho === "/rest/v1/conteudos" && endereco.searchParams.get("tipo") === "eq.animacao") {
+      const temPro = quem.admin || (loja.assinaturas || []).some((a) => ["active", "on_trial", "past_due"].includes(a.status));
+      return json(rota, Object.entries(animacoes).filter(([, a]) => a.nivel === "membro" || temPro).map(([id, a]) => ({ id: `anim-${id}`, html: a.html })));
+    }
     if (caminho === "/rest/v1/conteudos") {
       const id = endereco.searchParams.get("id")?.replace(/^eq\./, "");
       return json(rota, conteudos[id] ? [{ html: conteudos[id], titulo: id }] : []);

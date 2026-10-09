@@ -15,7 +15,7 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { RAIZ } from "../scripts/docs.mjs";
-import { proDisponivel, arquivoExemplo } from "../scripts/pro.mjs";
+import { proDisponivel, arquivoExemplo, lerAnimacoesPro } from "../scripts/pro.mjs";
 import { supabaseFalso, semServicosReais, PROJETO } from "./supabase-falso.mjs";
 
 const DIST = path.join(RAIZ, "dist");
@@ -741,6 +741,103 @@ teste("Admin: números da loja", async (aba) => {
   assert.equal(texto(await aba.locator('[data-admin-numero="receita_30_dias"]').textContent()), "€ 23,70");
   assert.equal(await aba.locator('[data-admin-numero="assinantes_ativos"]').textContent(), "3");
 }, { supabase: { pessoa: "admin" } });
+
+/* ------------------------------------------------------------------------
+   Estúdio de animações: níveis de acesso, controles e as 48 animações
+   ------------------------------------------------------------------------ */
+
+const { ANIMACOES } = await import("../scripts/site/animacoes.mjs");
+// Com o atalho-pro, o código real; sem ele, um trecho mínimo que usa cada controle
+const ANIMACOES_CODIGO = proDisponivel
+  ? lerAnimacoesPro()
+  : Object.fromEntries(ANIMACOES.map((a) => [a.id, { nivel: a.nivel, html: `<div class="an-teste">${a.nome}</div><style>.an-teste{${a.parametros.map((p, i) => `--v${i}: var(${p.var}, 0);`).join("")}}</style>` }]));
+const ASSINANTE = { id: "77", produto_id: "pro-mensal", status: "active", renova_em: "2027-01-01T00:00:00Z", termina_em: null, portal_url: null };
+const contarLiberadas = (aba) => aba.locator('[data-animacao][data-liberada="true"]').count();
+
+teste("Animações: visitante não recebe nenhuma e é convidado a criar conta", async (aba) => {
+  await abrir(aba, "animacoes/");
+  await aba.getByText("Crie sua conta grátis para começar").waitFor();
+  assert.equal(await contarLiberadas(aba), 0);
+  assert.equal(await aba.locator("[data-animacao]").count(), ANIMACOES.length);
+  await aba.locator('[data-animacao="surgir"]').click();
+  const estudio = aba.getByRole("dialog");
+  await estudio.getByText("Grátis para quem tem conta").waitFor();
+  assert.equal(await estudio.locator("[data-estudio-area]").isVisible(), false, "sem prévia nem código");
+  assert.equal(aba.pedidosApi.filter((p) => p.caminho === "/rest/v1/conteudos").length, 0, "nem pede o código ao banco");
+}, { supabase: { pessoa: null, animacoes: ANIMACOES_CODIGO } });
+
+teste("Animações: membro usa as simples, ajusta e copia; as do Pro ficam bloqueadas", async (aba) => {
+  await abrir(aba, "animacoes/");
+  await aba.locator('[data-animacao="surgir"][data-liberada="true"]').waitFor();
+  assert.equal(await contarLiberadas(aba), ANIMACOES.filter((a) => a.nivel === "membro").length);
+  assert.equal(await aba.locator('[data-animacao="parallax"]').getAttribute("data-liberada"), "false");
+
+  await aba.locator('[data-animacao="surgir"]').click();
+  const estudio = aba.getByRole("dialog");
+  const duracao = estudio.getByLabel("Duração");
+  await duracao.fill("1200");
+  await aba.waitForFunction(() => document.querySelector("[data-estudio-fonte]").textContent.includes("--surgir-duracao: 1200ms;"));
+  const previa = aba.frameLocator("[data-estudio-previa]");
+  await aba.waitForFunction(() => document.querySelector("[data-estudio-previa]").srcdoc.includes("--surgir-duracao: 1200ms"));
+  await previa.locator(proDisponivel ? ".an-surgir" : ".an-teste").first().waitFor();
+  await estudio.getByRole("button", { name: "Copiar" }).click();
+  const copiado = await aba.evaluate(() => navigator.clipboard.readText());
+  assert.match(copiado, /Animação "Surgir"/);
+  assert.match(copiado, /--surgir-duracao: 1200ms;/);
+  assert.match(await estudio.getByRole("link", { name: "Abrir no editor" }).getAttribute("href"), /\/editor\/#[\w-]{20,}/);
+  await estudio.getByRole("button", { name: "Fechar estúdio" }).click();
+
+  await aba.locator('[data-animacao="parallax"]').click();
+  await estudio.getByRole("link", { name: "Conhecer o Pro" }).waitFor();
+  assert.equal(await estudio.locator("[data-estudio-area]").isVisible(), false);
+}, { supabase: { pessoa: "membro", animacoes: ANIMACOES_CODIGO }, contexto: { permissions: ["clipboard-read", "clipboard-write"] } });
+
+teste("Animações: assinante Pro usa todas; link direto abre o estúdio; filtro por categoria", async (aba) => {
+  await abrir(aba, "animacoes/#parallax");
+  const estudio = aba.getByRole("dialog");
+  await estudio.getByText("Role dentro da prévia para ver o efeito.").waitFor();
+  assert.equal(await contarLiberadas(aba), ANIMACOES.length);
+  await estudio.getByRole("button", { name: "Fechar estúdio" }).click();
+  await aba.getByRole("button", { name: "Texto", exact: true }).click();
+  const visiveis = await aba.locator(".site-anim-grade li:not([hidden])").count();
+  assert.equal(visiveis, ANIMACOES.filter((a) => a.categoria === "texto").length);
+}, { supabase: { pessoa: "membro", animacoes: ANIMACOES_CODIGO, loja: { assinaturas: [ASSINANTE] } } });
+
+teste("Animações (atalho-pro): as 48 rodam sem erro, se mexem e respeitam 'reduzir movimento'", async (aba) => {
+  const problemas = [];
+  aba.on("console", (msg) => msg.type() === "error" && problemas.push(msg.text()));
+  for (const a of ANIMACOES) {
+    const { html } = ANIMACOES_CODIGO[a.id];
+    const valores = a.parametros.map((p) => `${p.var}: ${p.tipo === "numero" ? `${p.padrao}${p.unidade || ""}` : p.padrao};`).join(" ");
+    const pagina = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>:root { ${valores} } body { min-height: 100vh; }</style></head><body>${html}</body></html>`;
+    await aba.setContent(pagina, { waitUntil: "load" });
+    await aba.waitForTimeout(150);
+    const antes = await aba.evaluate(() => document.body.innerHTML);
+    // Interage como uma pessoa: rola, passa o mouse e clica no primeiro botão (ou pergunta da sanfona)
+    await aba.mouse.move(400, 300);
+    await aba.mouse.wheel(0, 900);
+    await aba.waitForTimeout(250);
+    const botao = aba.locator("button").first();
+    if (await botao.count()) await botao.click({ trial: false, timeout: 1000 }).catch(() => {});
+    const pergunta = aba.locator("summary").first();
+    if (await pergunta.count()) await pergunta.click({ timeout: 1000 }).catch(() => {});
+    await aba.locator("body > :not(script, style)").first().hover({ timeout: 1000 }).catch(() => {});
+    await aba.mouse.move(420, 320);
+    await aba.waitForTimeout(250);
+    const estado = await aba.evaluate((antes) => ({ mudou: document.body.innerHTML !== antes, animacoes: document.getAnimations().length, canvas: document.querySelectorAll("canvas").length, transicoes: [...document.querySelectorAll("*")].some((el) => getComputedStyle(el).transitionDuration.split(",").some((d) => parseFloat(d) > 0)) }), antes);
+    if (!estado.animacoes && !estado.canvas && !estado.transicoes && !estado.mudou) problemas.push(`${a.id}: nada se mexeu`);
+    if (aba.errosJs.length) problemas.push(`${a.id}: ${aba.errosJs.splice(0).join(" | ")}`);
+  }
+  // Com "reduzir movimento", as animações em loop param
+  await aba.emulateMedia({ reducedMotion: "reduce" });
+  for (const id of ["pulsar", "flutuar", "gradiente-animado", "letreiro", "aurora"]) {
+    await aba.setContent(`<!doctype html><html><head><link rel="stylesheet" href="${BASE}/atalho/atalho.css"></head><body>${ANIMACOES_CODIGO[id].html}</body></html>`, { waitUntil: "load" });
+    await aba.waitForTimeout(100);
+    const infinitas = await aba.evaluate(() => document.getAnimations().filter((a) => a.effect?.getTiming().iterations === Infinity).length);
+    if (infinitas) problemas.push(`${id}: continua em loop com "reduzir movimento"`);
+  }
+  assert.equal(problemas.length, 0, problemas.join(" || "));
+}, { pro: true, contexto: { reducedMotion: "no-preference" } });
 
 /* ------------------------------------------------------------------------ */
 

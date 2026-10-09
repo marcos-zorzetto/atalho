@@ -237,3 +237,18 @@ test("excluir a conta apaga o usuário e tudo dele", async () => {
   assert.deepEqual(rows[0], { usuario: 0, favoritos: 0, lista: 0 });
   await assert.rejects(como(null, `select public.excluir_minha_conta()`), negado);
 });
+
+test("animações: membro recebe as simples; as do Pro só com assinatura; tipo inválido é recusado", async () => {
+  await db.exec(`
+    insert into public.conteudos (id, tipo, titulo, html, acesso) values
+      ('anim-surgir-teste', 'animacao', 'Surgir', '<style>.x{}</style>', 'membro'),
+      ('anim-aurora-teste', 'animacao', 'Aurora', '<style>.y{}</style>', 'pro');
+  `);
+  const ids = async (quem) => (await como(quem, `select id from public.conteudos where tipo = 'animacao' and id like '%-teste' order by id`)).map((l) => l.id);
+  const outro = "00000000-0000-4000-8000-0000000000aa";
+  await db.exec(`insert into auth.users (id, email) values ('${outro}', 'sem-pro@exemplo.com') on conflict do nothing`);
+  assert.deepEqual(await ids(outro), ["anim-surgir-teste"], "membro sem Pro só vê a simples");
+  await assert.rejects(como(null, `select id from public.conteudos where tipo = 'animacao'`), negado, "visitante não vê nenhuma");
+  assert.deepEqual(await ids(ADMIN), ["anim-aurora-teste", "anim-surgir-teste"], "administrador vê todas");
+  await assert.rejects(db.exec(`insert into public.conteudos (id, tipo, titulo, html) values ('x-teste', 'virus', 'x', 'x')`), /check constraint|conteudos_tipo_check/);
+});

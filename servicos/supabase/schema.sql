@@ -370,6 +370,11 @@ begin
 end;
 $$;
 
+-- Tipos de conteúdo (versão 1.4): animações do estúdio, componentes premium e negócios prontos
+alter table public.conteudos drop constraint if exists conteudos_tipo_check;
+alter table public.conteudos add constraint conteudos_tipo_check
+  check (tipo in ('exemplo', 'modelo', 'guia', 'animacao', 'componente', 'negocio'));
+
 -- Tem o Pro? Ativo, em teste, com pagamento atrasado (a Lemon Squeezy ainda
 -- tenta cobrar) ou cancelado mas dentro do período já pago.
 create or replace function public.tem_pro()

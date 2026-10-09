@@ -51,7 +51,7 @@ let paginas = Array.from(sitemap.matchAll(/<loc>[^<]*?\/atalho\/([^<]*)<\/loc>/g
 if (!paginas.length) paginas = Array.from(sitemap.matchAll(/<loc>https?:\/\/[^/]+\/(?:atalho\/)?([^<]*)<\/loc>/g), (m) => m[1]);
 paginas.push("conta/", "admin/", "pagina-que-nao-existe/");
 // Telas de quem entrou na conta, com o Supabase simulado ("#como=" não vai para o servidor)
-paginas.push("exemplos/loja/#como=visitante", "exemplos/loja/#como=membro", "conta/#como=admin", "admin/#como=membro", "admin/#como=admin");
+paginas.push("exemplos/loja/#como=visitante", "exemplos/loja/#como=membro", "conta/#como=admin", "admin/#como=membro", "admin/#como=admin", "animacoes/#como=membro");
 const lojaMembro = proDisponivel
   ? await readFile(arquivoExemplo("loja"), "utf8")
   : '<!doctype html><html lang="pt-BR"><head><title>Loja</title></head><body><main><h1>Loja</h1></main></body></html>';

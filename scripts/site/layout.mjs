@@ -40,7 +40,7 @@ const NAVEGACAO = [
   { rotulo: "Exemplos", caminho: "exemplos/", chave: "exemplos" },
   { rotulo: "Ícones", caminho: "icones/", chave: "icones" },
   { rotulo: "Editor", caminho: "editor/", chave: "editor" },
-  { rotulo: "Personalizar", caminho: "personalizar/", chave: "personalizar" },
+  { rotulo: "Animações", caminho: "animacoes/", chave: "animacoes" },
   { rotulo: "Pro", caminho: "pro/", chave: "pro", destaque: true },
 ];
 
@@ -159,7 +159,7 @@ function rodape() {
           <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
           <p class="at-texto-pequeno">Versão ${SITE.versao} · Licença MIT</p>
         </div>
-        ${coluna("Documentação", [["Instalação", "componentes/instalacao/"], ["Componentes", "componentes/"], ["Exemplos completos", "exemplos/"], ["Editor ao vivo", "editor/"], ["Ícones", "icones/"], ["Personalizar tema", "personalizar/"]])}
+        ${coluna("Documentação", [["Instalação", "componentes/instalacao/"], ["Componentes", "componentes/"], ["Exemplos completos", "exemplos/"], ["Editor ao vivo", "editor/"], ["Estúdio de animações", "animacoes/"], ["Ícones", "icones/"], ["Personalizar tema", "personalizar/"]])}
         ${coluna("Linguagens", [["TypeScript", "typescript/"], ["PHP no servidor", "php/"], ["Estado (reatividade)", "componentes/estado/"], ["Eventos", "componentes/eventos/"]])}
         ${coluna("Projeto", [["GitHub", SITE.repositorio, true], ["Relatar um problema", `${SITE.repositorio}/issues`, true], ["Atalho Pro", "pro/"], ["Anuncie no Atalho", "patrocinar/"]])}
         ${coluna("Legal", [["Privacidade", "privacidade/"], ["Termos de uso", "termos/"], ["Minha conta", "conta/"]])}
