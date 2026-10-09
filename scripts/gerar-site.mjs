@@ -25,6 +25,7 @@ import { EXEMPLOS } from "./site/exemplos.mjs";
 import { paginaEditor } from "./site/pagina-editor.mjs";
 import { paginaExemplo, redirecionamentoExemplo } from "./site/pagina-exemplo.mjs";
 import { paginaAnimacoes } from "./site/pagina-animacoes.mjs";
+import { gerarIconesPhosphor } from "./site/icones-phosphor.mjs";
 import { paginaAdmin } from "./site/pagina-admin.mjs";
 
 const DIST = path.join(RAIZ, "dist");
@@ -63,7 +64,7 @@ export async function gerarSite() {
   for (const pasta of ["miniaturas", "capturas"]) {
     await cp(path.join(RAIZ, "exemplos", pasta), path.join(DIST, "exemplos", pasta), { recursive: true });
   }
-  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "animacoes.js"]) {
+  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "animacoes.js", "icones.js"]) {
     await cp(path.join(RAIZ, "site", arquivo), path.join(DIST, "site", arquivo));
   }
   for (const arquivo of ["favicon.svg", "og.png"]) {
@@ -156,6 +157,9 @@ ${indexaveis
       .map((c) => `- [${c.nome}](${urlAbsoluta(`componentes/${c.id}/`)}): ${c.resumo}`)
       .join("\n")}\n\n## Guias\n\n- [TypeScript](${urlAbsoluta("typescript/")})\n- [PHP](${urlAbsoluta("php/")})\n- [Exemplos completos](${urlAbsoluta("exemplos/")})\n\n## Páginas completas (código para membros)\n\n${EXEMPLOS.map((e) => `- [${e.nome}](${urlAbsoluta(`exemplos/${e.id}/`)}): ${e.resumo}`).join("\n")}\n`
   );
+
+  // Ícones Phosphor: um arquivo por estilo e o índice da busca em português
+  await gerarIconesPhosphor(DIST, SITE.base);
 
   // .nojekyll: o GitHub Pages não processa nada, serve os arquivos como estão
   await escrever(".nojekyll", "");

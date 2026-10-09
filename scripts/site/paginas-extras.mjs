@@ -1,5 +1,6 @@
 import { SITE, url } from "./config.mjs";
 import { pagina, ICONES_SITE, SCRIPTS_SUPABASE } from "./layout.mjs";
+import { PESOS, CATEGORIAS_PT, VERSAO_PHOSPHOR } from "./icones-phosphor.mjs";
 import { esc, realcarHTML, realcarTS, realcarPHP, realcarCSS, realcarTerminal } from "./realce.mjs";
 
 const cabecalhoPagina = (sobretitulo, titulo, chamada, extra = "") => `
@@ -60,11 +61,28 @@ export function paginaIcones({ icones }) {
   const nomes = Object.keys(icones.icones);
   const conteudo = `${cabecalhoPagina(
     "Ícones",
-    `${nomes.length} ícones desenhados para o Atalho`,
-    "Traço de 2px, grade 24×24, herdam a cor do texto. Clique em um ícone para copiar o SVG e cole direto no seu HTML.",
-    `<div class="at-entrada-icone site-filtro">${ICONES_SITE.busca}<input class="at-entrada" type="search" id="filtro-icones" placeholder="Filtrar ícones: carrinho, seta, usuário…" aria-label="Filtrar ícones" autocomplete="off"></div>`
+    "1.512 ícones em 6 estilos, grátis",
+    "Do traço fino ao duas cores. Escolha o estilo, o tamanho e a cor, e clique para copiar o SVG pronto. Busque em português: carrinho, dinheiro, agenda, barbearia…",
+    `<div class="at-entrada-icone site-filtro">${ICONES_SITE.busca}<input class="at-entrada" type="search" id="filtro-icones" placeholder="Buscar: carrinho, pix, usuário, seta…" aria-label="Buscar ícones" autocomplete="off"></div>`
   )}
-    <div class="site-container site-secao-curta">
+    <div class="site-container site-secao-curta site-icones-explorador" data-icones-explorador>
+      <div class="site-icones-barra">
+        <div class="at-abas at-segmentado" role="radiogroup" aria-label="Estilo dos ícones" data-icones-pesos>
+          ${PESOS.map(([id, nome], i) => `<button type="button" class="at-aba" role="radio" aria-checked="${i === 0}" data-peso="${id}">${nome}</button>`).join("")}
+        </div>
+        <label class="site-icones-controle">Tamanho <input type="range" min="16" max="64" step="4" value="32" data-icones-tamanho aria-label="Tamanho dos ícones"><output data-icones-tamanho-valor>32px</output></label>
+        <label class="site-icones-controle">Cor <input type="color" value="#0f766e" data-icones-cor aria-label="Cor dos ícones"></label>
+        <select class="at-entrada site-icones-categoria" data-icones-categoria aria-label="Categoria">
+          <option value="">Todas as categorias</option>
+          ${Object.values(CATEGORIAS_PT).sort((a, b) => a.localeCompare(b, "pt-BR")).map((c) => `<option>${c}</option>`).join("")}
+        </select>
+      </div>
+      <p class="at-texto-suave at-texto-pequeno" data-icones-contagem aria-live="polite">Carregando ícones…</p>
+      <ul class="site-icones site-icones-phosphor" data-icones-lista></ul>
+      <p class="at-texto-pequeno at-texto-suave">Ícones <a href="https://phosphoricons.com" target="_blank" rel="noopener">Phosphor</a> ${VERSAO_PHOSPHOR}, licença MIT: use à vontade, inclusive em projetos comerciais.</p>
+
+      <h2 class="site-secao-titulo at-mt-8">Feitos para o Brasil</h2>
+      <p class="at-texto-suave">${nomes.length} ícones desenhados para o Atalho, com traço de 2px: Pix, boleto, CPF, WhatsApp e outros do dia a dia brasileiro.</p>
       <ul class="site-icones" id="lista-icones">
         ${nomes
           .map(
@@ -77,20 +95,33 @@ export function paginaIcones({ icones }) {
       <p>Cole o SVG copiado. O tamanho vem de <code>width</code>/<code>height</code> e a cor, do texto ao redor (<code>currentColor</code>). Em botões só com ícone, sempre coloque <code>aria-label</code>.</p>
       ${codigo(
         "html",
-        `<button class="at-botao at-icone" aria-label="Buscar">
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    ${icones.icones.busca}
-  </svg>
+        `<button class="at-botao at-icone" aria-label="Carrinho">
+  <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">…</svg>
 </button>`
       )}
-    </div>`;
+    </div>
+
+    <dialog class="at-modal at-pequeno site-icone-detalhe" id="icone-detalhe" aria-labelledby="icone-detalhe-nome">
+      <div class="at-modal-corpo at-pilha">
+        <div class="site-icone-detalhe-previa" data-icone-previa></div>
+        <h2 class="at-titulo-4 at-mb-0" id="icone-detalhe-nome" data-icone-nome></h2>
+        <p class="at-texto-pequeno at-texto-suave at-mb-0" data-icone-info></p>
+        <pre class="site-codigo site-icone-codigo" tabindex="0"><code data-icone-codigo></code></pre>
+        <div class="at-linha">
+          <button type="button" class="at-botao at-primario" data-icone-acao="copiar">Copiar SVG</button>
+          <button type="button" class="at-botao" data-icone-acao="baixar">Baixar .svg</button>
+          <button type="button" class="at-botao at-fantasma" commandfor="icone-detalhe" command="close">Fechar</button>
+        </div>
+      </div>
+    </dialog>`;
   return pagina({
-    titulo: "Ícones SVG grátis · Atalho",
-    descricao: `${nomes.length} ícones SVG gratuitos (licença MIT) para sites e sistemas: carrinho, usuário, setas, WhatsApp, Pix e mais. Clique para copiar.`,
+    titulo: "1.512 ícones SVG grátis em 6 estilos · Atalho",
+    descricao: `1.512 ícones SVG gratuitos (MIT) em 6 estilos, com busca em português, mais ${nomes.length} ícones brasileiros: Pix, boleto, CPF, WhatsApp. Escolha cor e tamanho e clique para copiar.`,
     caminho: "icones/",
     pagina: "icones",
     secao: "icones",
     conteudo,
+    scripts: ["site/icones.js"],
   });
 }
 

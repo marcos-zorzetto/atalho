@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.2.1 — componentes de interface em português
+ * Atalho 1.2.2 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -2771,4 +2771,6 @@ a.at-lista-item:hover, button.at-lista-item:hover { background: var(--at-superfi
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  /* Menu e balão: a posição muda na hora, sem nem um quadro no lugar antigo */
+  .at-menu, .at-balao { transition-property: opacity !important; }
 }

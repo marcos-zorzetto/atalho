@@ -776,3 +776,20 @@ mark { background: color-mix(in srgb, var(--at-cor-destaque) 55%, transparent); 
 @media (max-width: 640px) {
   .site-anim-area, .site-anim-estudio-topo { padding-inline: var(--at-espaco-3); }
 }
+
+/* ---------- Explorador de ícones (/icones/) ---------- */
+
+.site-icones-barra { display: flex; flex-wrap: wrap; align-items: center; gap: var(--at-espaco-3) var(--at-espaco-4); margin-bottom: var(--at-espaco-3); }
+.site-icones-controle { display: inline-flex; align-items: center; gap: var(--at-espaco-2); font-size: var(--at-texto-sm); font-weight: 600; }
+.site-icones-controle input[type="range"] { width: 120px; accent-color: var(--at-cor-primaria); }
+.site-icones-controle output { min-width: 3rem; font: 600 var(--at-texto-xs) var(--site-fonte-codigo); }
+.site-icones-controle input[type="color"] { width: 2.5rem; height: 2rem; padding: 2px; background: var(--at-superficie); border: 1px solid var(--at-borda-forte); border-radius: var(--at-raio-sm); cursor: pointer; }
+.site-icones-categoria { width: auto; min-width: 12rem; }
+.site-icones-phosphor { --icone-tamanho: 32px; --icone-cor: var(--at-cor-primaria); min-height: 50vh; }
+.site-icones-phosphor svg { width: var(--icone-tamanho); height: var(--icone-tamanho); color: var(--icone-cor); fill: currentColor; }
+.site-icones li[hidden] { display: none; }
+.site-icone-detalhe-previa { display: grid; place-items: center; padding: var(--at-espaco-5); background: var(--at-superficie-2); border-radius: var(--at-raio-lg); }
+.site-icone-codigo { max-height: 140px; margin: 0; font-size: var(--at-texto-xs); white-space: pre-wrap; word-break: break-all; }
+.site-icones-barra .at-aba[aria-checked="true"] { color: var(--at-texto); background: var(--at-superficie); box-shadow: var(--at-sombra-1); }
+.site-icones-phosphor li, .site-icones-phosphor .site-icone { height: 100%; }
+.site-recurso-icone { display: inline-grid; place-items: center; width: 44px; height: 44px; margin-bottom: var(--at-espaco-3); color: var(--at-cor-primaria); background: var(--at-cor-primaria-suave); border-radius: 12px; }

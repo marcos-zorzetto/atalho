@@ -1,7 +1,13 @@
 import { SITE, url } from "./config.mjs";
+import { svgPhosphor } from "./icones-phosphor.mjs";
 import { pagina, espacoPatrocinio, ICONES_SITE } from "./layout.mjs";
 import { esc, realcarHTML, realcarTS, realcarPHP } from "./realce.mjs";
 import { urlComponente } from "./pagina-componente.mjs";
+
+const ICONE_CATEGORIA = {
+  fundamentos: "rocket-launch", formularios: "textbox", acoes: "cursor-click", navegacao: "compass", sobreposicoes: "app-window",
+  dados: "table", feedback: "bell-ringing", paginas: "layout", javascript: "brackets-curly", receitas: "cooking-pot",
+};
 
 export function paginaInicio({ docs, baseline, patrocinadores, exemplos }) {
   const total = docs.componentes.length;
@@ -130,14 +136,14 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
         <h2 class="site-titulo site-h2">Tudo que o Bootstrap tem. Mais o que faltava para o Brasil.</h2>
         <div class="site-recursos at-mt-6">
           ${[
-            ["Componentes completos", "Não só a peça isolada: quando usar, o que evitar, acessibilidade e como cada componente conversa com os outros."],
-            ["Feito para o Brasil", "Máscaras de CPF e CNPJ alfanumérico, CEP automático, Pix copia e cola, parcelas sem juros, aviso de cookies da LGPD."],
-            ["Estado reativo", "A ideia central do React em atributos HTML: muda o dado e a tela inteira acompanha. Sem build."],
-            ["TypeScript e PHP", "Tipos completos da biblioteca e uma biblioteca PHP para o servidor: validação, CEP, respostas JSON e segurança."],
-            ["Acessível de verdade", "Teclado, leitores de tela e ARIA corretos em cada componente, seguindo o guia WAI-ARIA."],
-            ["Sempre atualizado", "Um robô confere toda semana os dados oficiais dos navegadores e os links do MDN, e propõe as atualizações."],
+            ["puzzle-piece", "Componentes completos", "Não só a peça isolada: quando usar, o que evitar, acessibilidade e como cada componente conversa com os outros."],
+            ["map-pin-area", "Feito para o Brasil", "Máscaras de CPF e CNPJ alfanumérico, CEP automático, Pix copia e cola, parcelas sem juros, aviso de cookies da LGPD."],
+            ["lightning", "Estado reativo", "A ideia central do React em atributos HTML: muda o dado e a tela inteira acompanha. Sem build."],
+            ["code", "TypeScript e PHP", "Tipos completos da biblioteca e uma biblioteca PHP para o servidor: validação, CEP, respostas JSON e segurança."],
+            ["person-arms-spread", "Acessível de verdade", "Teclado, leitores de tela e ARIA corretos em cada componente, seguindo o guia WAI-ARIA."],
+            ["robot", "Sempre atualizado", "Um robô confere toda semana os dados oficiais dos navegadores e os links do MDN, e propõe as atualizações."],
           ]
-            .map(([t, d]) => `<div class="site-recurso"><h3>${t}</h3><p>${d}</p></div>`)
+            .map(([icone, t, d]) => `<div class="site-recurso"><span class="site-recurso-icone">${svgPhosphor(icone, "duotone", 26)}</span><h3>${t}</h3><p>${d}</p></div>`)
             .join("")}
         </div>
       </div>
@@ -203,6 +209,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
             .map((cat) => {
               const itens = docs.componentes.filter((c) => c.categoria === cat.id);
               return `<a class="site-categoria" href="${url(`componentes/#${cat.id}`)}">
+              <span class="site-recurso-icone">${svgPhosphor(ICONE_CATEGORIA[cat.id] || "squares-four", "duotone", 24)}</span>
               <span class="site-contagem">${String(itens.length).padStart(2, "0")} ${itens.length === 1 ? "item" : "itens"}</span>
               <h3>${esc(cat.nome)}</h3>
               <p>${esc(cat.descricao)}</p>

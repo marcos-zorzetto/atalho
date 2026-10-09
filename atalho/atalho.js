@@ -1,5 +1,5 @@
 /*!
- * Atalho 1.2.1 — componentes de interface em português
+ * Atalho 1.2.2 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
@@ -557,7 +557,10 @@
   const abridoresDePopover = new WeakMap();
 
   function posicionarPopover(popover) {
-    const abridor = abridoresDePopover.get(popover);
+    // Sem registro (clique antes de o Atalho carregar, ou abertura por código): usa o botão que aponta para ele
+    const abridor =
+      abridoresDePopover.get(popover) ||
+      (popover.id && $$(`[popovertarget="${CSS.escape(popover.id)}"], button[commandfor="${CSS.escape(popover.id)}"]`).find((b) => b.offsetParent !== null));
     if (!abridor || !popover.matches(".at-menu, .at-balao")) return;
     const ref = abridor.getBoundingClientRect();
     const caixa = popover.getBoundingClientRect();
@@ -2094,7 +2097,7 @@
   }
 
   const Atalho = {
-    versao: "1.2.1",
+    versao: "1.2.2",
     estado,
     observar,
     obterEstado: (nome) => estados.get(nome),
