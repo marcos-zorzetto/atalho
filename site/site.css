@@ -67,6 +67,9 @@ html { scroll-padding-top: calc(var(--at-altura-barra) + 16px); scroll-behavior:
 /* Tablet e notebook pequeno: só ícones à direita, para caber "Minha conta" */
 @media (max-width: 1279px) {
   .site-versao { display: none; }
+  /* Folga para fontes um pouco mais largas (Linux, Android) */
+  .site-barra .at-barra-links { margin-left: var(--at-espaco-1); }
+  .site-barra .at-barra-links a { padding-inline: 0.5rem; }
   .site-busca-botao { min-width: 0; }
   .site-busca-botao span, .site-busca-botao kbd { display: none; }
 }
