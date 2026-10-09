@@ -51,11 +51,11 @@ const json = (rota, corpo, status = 200) =>
  * Prepara a aba. `pessoa`: "admin", "membro" ou null (visitante).
  * `conteudos`: { id: html } servidos pela tabela "conteudos".
  * `loja`: { links: { produto: url }, assinaturas: [...], compras: [...] } da pessoa.
- * `animacoes`: { id: { nivel: "membro" | "pro", html } } servidas como tipo "animacao":
- *   como no banco, membro recebe só as de nível membro; quem assina (ou é admin) recebe todas.
+ * `animacoes` e `componentes`: { id: { nivel: "publico" | "membro" | "pro", html } } (tipos "animacao" e "componente"):
+ *   como no banco, visitante recebe o publico; membro publico + membro; quem assina (ou é admin) recebe todos.
  * Retorna a lista de requisições feitas à API, para conferir nos testes.
  */
-export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, usuarios = 3, loja = {}, animacoes = {} } = {}) {
+export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, usuarios = 3, loja = {}, animacoes = {}, componentes = {} } = {}) {
   const quem = pessoa ? PESSOAS[pessoa] : null;
   const pedidos = [];
 
@@ -86,15 +86,21 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
     if (caminho.startsWith("/auth/v1/logout")) return rota.fulfill({ status: 204, headers: { "access-control-allow-origin": "*" } });
     if (caminho.startsWith("/auth/v1/")) return json(rota, {});
 
-    // Mesmo comportamento das regras do banco: sem login, nada
-    if (!logado) {
-      if (caminho.startsWith("/rest/v1/rpc/")) return json(rota, { code: "42501", message: "permission denied for function" }, 401);
-      return json(rota, { code: "42501", message: "permission denied for table" }, 401);
+    // Trechos da vitrine (animações e componentes), com as mesmas regras do banco:
+    // visitante só o "publico"; membro publico + membro; Pro (ou admin) tudo
+    const tipoTrecho = { "eq.animacao": ["anim-", animacoes], "eq.componente": ["comp-", componentes] }[endereco.searchParams.get("tipo")];
+    if (caminho === "/rest/v1/conteudos" && tipoTrecho) {
+      const temPro = logado && (quem.admin || (loja.assinaturas || []).some((a) => ["active", "on_trial", "past_due"].includes(a.status)));
+      const permitido = (nivel) => nivel === "publico" || (logado && nivel === "membro") || temPro;
+      const [prefixo, trechos] = tipoTrecho;
+      return json(rota, Object.entries(trechos).filter(([, a]) => permitido(a.nivel)).map(([id, a]) => ({ id: prefixo + id, html: a.html })));
     }
 
-    if (caminho === "/rest/v1/conteudos" && endereco.searchParams.get("tipo") === "eq.animacao") {
-      const temPro = quem.admin || (loja.assinaturas || []).some((a) => ["active", "on_trial", "past_due"].includes(a.status));
-      return json(rota, Object.entries(animacoes).filter(([, a]) => a.nivel === "membro" || temPro).map(([id, a]) => ({ id: `anim-${id}`, html: a.html })));
+    // Mesmo comportamento das regras do banco: sem login, nada (além do público acima)
+    if (!logado) {
+      if (caminho.startsWith("/rest/v1/rpc/")) return json(rota, { code: "42501", message: "permission denied for function" }, 401);
+      if (caminho === "/rest/v1/conteudos") return json(rota, []);
+      return json(rota, { code: "42501", message: "permission denied for table" }, 401);
     }
     if (caminho === "/rest/v1/conteudos") {
       const id = endereco.searchParams.get("id")?.replace(/^eq\./, "");

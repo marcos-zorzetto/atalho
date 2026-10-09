@@ -24,7 +24,7 @@ import { carregarGuiaPHP } from "./site/php-guia.mjs";
 import { EXEMPLOS } from "./site/exemplos.mjs";
 import { paginaEditor } from "./site/pagina-editor.mjs";
 import { paginaExemplo, redirecionamentoExemplo } from "./site/pagina-exemplo.mjs";
-import { paginaAnimacoes } from "./site/pagina-animacoes.mjs";
+import { paginaAnimacoes, paginaComponentesAvancados } from "./site/pagina-vitrine.mjs";
 import { gerarIconesPhosphor } from "./site/icones-phosphor.mjs";
 import { paginaAdmin } from "./site/pagina-admin.mjs";
 
@@ -64,7 +64,7 @@ export async function gerarSite() {
   for (const pasta of ["miniaturas", "capturas"]) {
     await cp(path.join(RAIZ, "exemplos", pasta), path.join(DIST, "exemplos", pasta), { recursive: true });
   }
-  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "animacoes.js", "icones.js"]) {
+  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "vitrine.js", "icones.js"]) {
     await cp(path.join(RAIZ, "site", arquivo), path.join(DIST, "site", arquivo));
   }
   for (const arquivo of ["favicon.svg", "og.png"]) {
@@ -107,6 +107,7 @@ export async function gerarSite() {
     ["patrocinar/index.html", paginaPatrocinar(contexto)],
     ["pro/index.html", paginaPro(contexto)],
     ["animacoes/index.html", paginaAnimacoes(contexto)],
+    ["avancados/index.html", paginaComponentesAvancados(contexto)],
     ["conta/index.html", paginaConta(contexto)],
     ["privacidade/index.html", paginaPrivacidade(contexto)],
     ["termos/index.html", paginaTermos(contexto)],

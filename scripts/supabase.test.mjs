@@ -77,7 +77,8 @@ test("cadastro cria o perfil com o nome enviado (ou a parte antes do @)", async 
 });
 
 test("visitante não lê conteúdo exclusivo; quem entrou lê", async () => {
-  await assert.rejects(como(null, `select id from public.conteudos`), negado);
+  // Visitante só enxerga o nível "publico" (nenhum aqui): a lista volta vazia
+  assert.deepEqual(await como(null, `select id from public.conteudos where acesso <> 'publico'`), []);
   assert.deepEqual(await como(ANA, `select id, titulo from public.conteudos`), [{ id: "loja", titulo: "Loja virtual" }]);
 });
 
@@ -211,7 +212,7 @@ test("loja: conteúdo Pro só para quem assina, comprou ou é administrador", as
   // Administrador lê o Pro sem assinar
   assert.equal(await ve(ADMIN, "agenda"), true);
   // Visitante continua sem nada
-  await assert.rejects(como(null, `select count(*) from public.conteudos where id = 'crm'`), negado);
+  assert.equal((await como(null, `select count(*)::int as n from public.conteudos where id = 'crm'`))[0].n, 0);
 });
 
 test("loja: o webhook (chave secreta) registra assinatura, compra e pagamento", async () => {
@@ -248,7 +249,24 @@ test("animações: membro recebe as simples; as do Pro só com assinatura; tipo 
   const outro = "00000000-0000-4000-8000-0000000000aa";
   await db.exec(`insert into auth.users (id, email) values ('${outro}', 'sem-pro@exemplo.com') on conflict do nothing`);
   assert.deepEqual(await ids(outro), ["anim-surgir-teste"], "membro sem Pro só vê a simples");
-  await assert.rejects(como(null, `select id from public.conteudos where tipo = 'animacao'`), negado, "visitante não vê nenhuma");
+  assert.deepEqual(await como(null, `select id from public.conteudos where tipo = 'animacao' and id like '%-teste'`), [], "visitante não vê as de membro nem as do Pro");
   assert.deepEqual(await ids(ADMIN), ["anim-aurora-teste", "anim-surgir-teste"], "administrador vê todas");
   await assert.rejects(db.exec(`insert into public.conteudos (id, tipo, titulo, html) values ('x-teste', 'virus', 'x', 'x')`), /check constraint|conteudos_tipo_check/);
+});
+
+test("nível público: visitante lê só o público; membro lê público e membro; Pro lê tudo", async () => {
+  await db.exec(`
+    insert into public.conteudos (id, tipo, titulo, html, acesso) values
+      ('pub-teste', 'componente', 'Público', '<p>a</p>', 'publico'),
+      ('mem-teste', 'componente', 'Membro', '<p>b</p>', 'membro'),
+      ('pro-teste', 'componente', 'Pro', '<p>c</p>', 'pro');
+  `);
+  const ids = async (quem) => (await como(quem, `select id from public.conteudos where id in ('pub-teste', 'mem-teste', 'pro-teste') order by id`)).map((l) => l.id);
+  assert.deepEqual(await ids(null), ["pub-teste"], "visitante");
+  const membro = "00000000-0000-4000-8000-0000000000ab";
+  await db.exec(`insert into auth.users (id, email) values ('${membro}', 'membro-publico@exemplo.com') on conflict do nothing`);
+  assert.deepEqual(await ids(membro), ["mem-teste", "pub-teste"], "membro sem Pro");
+  assert.deepEqual(await ids(ADMIN), ["mem-teste", "pro-teste", "pub-teste"], "administrador");
+  await assert.rejects(como(null, `update public.conteudos set html = 'x' where id = 'pub-teste'`), negado, "visitante não altera");
+  await assert.rejects(como(null, `insert into public.conteudos (id, titulo, html, acesso) values ('inv', 'x', 'x', 'publico')`), negado);
 });

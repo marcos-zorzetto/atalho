@@ -11,12 +11,11 @@ export const PASTA_EXEMPLOS_PRO = path.join(PASTA_PRO, "conteudos", "exemplos");
 export const proDisponivel = existsSync(PASTA_EXEMPLOS_PRO);
 export const arquivoExemplo = (id) => path.join(PASTA_EXEMPLOS_PRO, `${id}.html`);
 
-/** Animações do estúdio: { id: { nivel, html } }, lidas do atalho-pro (vazio se não houver). */
-export const PASTA_ANIMACOES_PRO = path.join(PASTA_PRO, "conteudos", "animacoes");
-export function lerAnimacoesPro() {
+/** Trechos do atalho-pro ("animacoes" ou "componentes"): { id: { nivel, html } } (vazio se não houver). */
+export function lerTrechosPro(tipo) {
   const animacoes = {};
-  for (const nivel of ["membro", "pro"]) {
-    const pasta = path.join(PASTA_ANIMACOES_PRO, nivel);
+  for (const nivel of ["publico", "membro", "pro"]) {
+    const pasta = path.join(PASTA_PRO, "conteudos", tipo, nivel);
     if (!existsSync(pasta)) continue;
     for (const arquivo of readdirSync(pasta).filter((a) => a.endsWith(".html"))) {
       animacoes[arquivo.replace(/\.html$/, "")] = { nivel, html: readFileSync(path.join(pasta, arquivo), "utf8") };
@@ -24,3 +23,5 @@ export function lerAnimacoesPro() {
   }
   return animacoes;
 }
+export const lerAnimacoesPro = () => lerTrechosPro("animacoes");
+export const lerComponentesPro = () => lerTrechosPro("componentes");

@@ -433,3 +433,19 @@ end;
 $$;
 revoke all on function public.admin_loja() from public, anon;
 grant execute on function public.admin_loja() to authenticated;
+
+-- ===========================================================================
+-- NÍVEL PÚBLICO (versão 1.5): uma amostra para quem ainda não tem conta
+-- (3 animações e 10 componentes avançados). Membro lê público + membro;
+-- o Pro lê tudo. O resto continua invisível para visitantes.
+-- ===========================================================================
+alter table public.conteudos drop constraint if exists conteudos_acesso_valido;
+alter table public.conteudos add constraint conteudos_acesso_valido check (acesso in ('publico', 'membro', 'pro'));
+
+drop policy if exists "conteudos: visitante lê o público" on public.conteudos;
+create policy "conteudos: visitante lê o público" on public.conteudos for select to anon using (acesso = 'publico');
+grant select on public.conteudos to anon;
+
+drop policy if exists "conteudos: quem tem acesso lê" on public.conteudos;
+create policy "conteudos: quem tem acesso lê" on public.conteudos for select to authenticated
+  using (acesso in ('publico', 'membro') or public.tem_pro() or public.comprou(produto_id) or public.eh_admin());

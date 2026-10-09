@@ -43,11 +43,11 @@ export const CATEGORIAS = [
 /** rolagem: true → a prévia precisa ser rolada (não centraliza o conteúdo). */
 export const ANIMACOES = [
   /* --------------------------- Membro (conta grátis) --------------------------- */
-  { id: "surgir", nome: "Surgir", nivel: "membro", categoria: "entrada", descricao: "O elemento aparece suavemente. A entrada mais elegante para cartões, imagens e textos.", parametros: [duracao("surgir", 700), atraso("surgir"), curva("surgir")] },
-  { id: "subir", nome: "Subir aparecendo", nivel: "membro", categoria: "entrada", descricao: "Sobe alguns pixels enquanto aparece. O padrão de sites como Apple e Stripe.", parametros: [duracao("subir", 700), distancia("subir", 24), atraso("subir"), curva("subir")] },
+  { id: "surgir", nome: "Surgir", nivel: "publico", categoria: "entrada", descricao: "O elemento aparece suavemente. A entrada mais elegante para cartões, imagens e textos.", parametros: [duracao("surgir", 700), atraso("surgir"), curva("surgir")] },
+  { id: "subir", nome: "Subir aparecendo", nivel: "publico", categoria: "entrada", descricao: "Sobe alguns pixels enquanto aparece. O padrão de sites como Apple e Stripe.", parametros: [duracao("subir", 700), distancia("subir", 24), atraso("subir"), curva("subir")] },
   { id: "deslizar", nome: "Entrar pelo lado", nivel: "membro", categoria: "entrada", descricao: "Entra pela esquerda ou pela direita. Bom para listas e notificações.", parametros: [duracao("deslizar", 600), distancia("deslizar", 48), opcao("deslizar", "sentido", "Vem da", [["-1", "Esquerda"], ["1", "Direita"]], "-1"), curva("deslizar")] },
   { id: "zoom", nome: "Zoom de entrada", nivel: "membro", categoria: "entrada", descricao: "Cresce até o tamanho real. Destaca modais, selos e ofertas.", parametros: [duracao("zoom", 500), numero("zoom", "escala", "Tamanho inicial", 0.2, 1, 0.05, 0.85), curva("zoom", CURVAS[4][0])] },
-  { id: "pulsar", nome: "Pulsar", nivel: "membro", categoria: "atencao", descricao: "Aumenta e diminui sem parar. Ideal para o botão principal ou um aviso ao vivo.", parametros: [duracao("pulsar", 1600), numero("pulsar", "intensidade", "Intensidade", 1, 1.3, 0.01, 1.06), repeticoes("pulsar")] },
+  { id: "pulsar", nome: "Pulsar", nivel: "publico", categoria: "atencao", descricao: "Aumenta e diminui sem parar. Ideal para o botão principal ou um aviso ao vivo.", parametros: [duracao("pulsar", 1600), numero("pulsar", "intensidade", "Intensidade", 1, 1.3, 0.01, 1.06), repeticoes("pulsar")] },
   { id: "balancar", nome: "Balançar", nivel: "membro", categoria: "atencao", descricao: "Balança de um lado para o outro, como quem diz \"aqui!\". Use em erros de formulário.", parametros: [duracao("balancar", 600), distancia("balancar", 6, 30, "Intensidade"), repeticoes("balancar", "1")] },
   { id: "quicar", nome: "Quicar", nivel: "membro", categoria: "atencao", descricao: "Pula e cai como uma bola. Divertido para setas de \"role para baixo\" e ícones.", parametros: [duracao("quicar", 1000), distancia("quicar", 16, 80, "Altura"), repeticoes("quicar")] },
   { id: "girar", nome: "Girar", nivel: "membro", categoria: "feedback", descricao: "Gira sem parar. O indicador de carregamento clássico.", parametros: [duracao("girar", 900, 4000, 200), opcao("girar", "sentido", "Sentido", [["normal", "Horário"], ["reverse", "Anti-horário"]], "normal")] },
@@ -110,4 +110,4 @@ export const ANIMACOES = [
   { id: "notificacoes", nome: "Notificações empilhadas", nivel: "pro", categoria: "transicao", descricao: "Avisos que chegam, se empilham e saem deslizando, como no iPhone.", parametros: [duracao("notificacoes", 400, 1200, 150), numero("notificacoes", "tempo", "Tempo na tela", 1500, 8000, 250, 3500, "ms")] },
 ];
 
-export const NIVEIS = { membro: "Membro", pro: "Pro" };
+export const NIVEIS = { publico: "Grátis", membro: "Membro", pro: "Pro" };
