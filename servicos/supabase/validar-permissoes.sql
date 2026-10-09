@@ -3,9 +3,10 @@
 -- administrador e clique em Run. Cada linha do resultado é uma verificação: a
 -- coluna "ok" precisa ser ✓ em todas.
 --
--- Como funciona: cria dois membros de teste, executa cada ação como visitante
--- (anon), como membro (authenticated) e como administrador, e no fim desfaz
--- tudo (os membros de teste, favoritos, alterações). Só o resultado sobra.
+-- Como funciona: cria membros de teste (um comum, um assinante do Pro e um que
+-- comprou uma página avulsa) e uma página Pro de teste, executa cada ação como
+-- visitante (anon), como membro (authenticated), como administrador e com a
+-- chave secreta, e no fim desfaz tudo. Só o resultado sobra.
 
 create or replace function pg_temp.validar_permissoes(email_admin text)
 returns table (ordem int, quem text, teste text, esperado text, obtido text, ok text)
@@ -15,6 +16,9 @@ declare
   admin_id uuid := (select id from auth.users where email = email_admin);
   membro uuid := '00000000-0000-4000-8000-00000000a001';
   outro uuid := '00000000-0000-4000-8000-00000000a002';
+  comprador uuid := '00000000-0000-4000-8000-00000000a003';
+  total_conteudos int;
+  conteudos_gratis int;
   resultados jsonb := '[]';
   c record;
   valor text;
@@ -26,11 +30,19 @@ begin
   end if;
 
   begin
-    -- Dois membros de teste (somem no fim)
+    -- Membros de teste (somem no fim)
     insert into auth.users (id, aud, role, email, raw_user_meta_data, email_confirmed_at, created_at, updated_at)
     values (membro, 'authenticated', 'authenticated', 'membro.teste@exemplo.com', '{"nome":"Membro Teste"}', now(), now(), now()),
-           (outro, 'authenticated', 'authenticated', 'outro.teste@exemplo.com', '{"nome":"Outro Teste"}', now(), now(), now());
+           (outro, 'authenticated', 'authenticated', 'outro.teste@exemplo.com', '{"nome":"Outro Teste"}', now(), now(), now()),
+           (comprador, 'authenticated', 'authenticated', 'comprador.teste@exemplo.com', '{"nome":"Comprador Teste"}', now(), now(), now());
     insert into public.favoritos (usuario_id, componente_id) values (outro, 'modal');
+    -- Loja: uma página Pro de teste; "outro" assina o Pro e "comprador" comprou só essa página
+    insert into public.produtos (id, tipo, nome, preco_centavos) values ('pagina-teste-validacao', 'pagina', 'Página de teste', 900);
+    insert into public.conteudos (id, titulo, html, acesso, produto_id) values ('teste-pro-validacao', 'Teste Pro', '<p>pro</p>', 'pro', 'pagina-teste-validacao');
+    insert into public.assinaturas (id, usuario_id, produto_id, status) values ('teste-validacao', outro, 'pro-mensal', 'active');
+    insert into public.compras (id, usuario_id, produto_id, pedido_lemon) values ('teste-validacao', comprador, 'pagina-teste-validacao', 'teste');
+    total_conteudos := (select count(*) from public.conteudos);
+    conteudos_gratis := (select count(*) from public.conteudos where acesso = 'membro');
     total_usuarios := (select count(*) from auth.users);
 
     for c in
@@ -48,8 +60,13 @@ begin
         ('Visitante', null, 'Painel: resumo', 'negado', 'select public.admin_resumo()::text'),
         ('Visitante', null, 'Painel: lista de usuários', 'negado', 'select count(*)::text from public.admin_usuarios()'),
         ('Visitante', null, 'Excluir uma conta', 'negado', 'select public.excluir_minha_conta()::text'),
+        ('Visitante', null, 'Loja: ver os preços', 'permitido: %', 'select count(*)::text from public.produtos'),
+        ('Visitante', null, 'Loja: ler assinaturas', 'negado', 'select count(*)::text from public.assinaturas'),
+        ('Visitante', null, 'Loja: ler compras', 'negado', 'select count(*)::text from public.compras'),
+        ('Visitante', null, 'Loja: ler pagamentos', 'negado', 'select count(*)::text from public.pagamentos'),
+        ('Visitante', null, 'Painel: números da loja', 'negado', 'select public.admin_loja()::text'),
         -- Membro cadastrado (comum)
-        ('Membro', membro, 'Ler as páginas completas', 'permitido: 6', 'select count(*)::text from public.conteudos'),
+        ('Membro', membro, 'Ler as páginas completas grátis (sem as Pro)', 'permitido: ' || conteudos_gratis, 'select count(*)::text from public.conteudos'),
         ('Membro', membro, 'Ler o próprio perfil', 'permitido: 1', 'select count(*)::text from public.perfis where id = auth.uid()'),
         ('Membro', membro, 'Ler o perfil dos outros', 'permitido: 0', 'select count(*)::text from public.perfis where id <> auth.uid()'),
         ('Membro', membro, 'Mudar o próprio nome', 'permitido: 1', 'with x as (update public.perfis set nome = ''Novo Nome'' where id = auth.uid() returning 1) select count(*)::text from x'),
@@ -69,18 +86,37 @@ begin
         ('Membro', membro, 'Painel: lista de usuários', 'negado', 'select count(*)::text from public.admin_usuarios()'),
         ('Membro', membro, 'Painel: lista de espera', 'negado', 'select count(*)::text from public.admin_lista_espera()'),
         ('Membro', membro, 'Painel: conteúdos', 'negado', 'select count(*)::text from public.admin_conteudos()'),
+        ('Membro', membro, 'Loja: ler página Pro sem pagar', 'permitido: 0', 'select count(*)::text from public.conteudos where id = ''teste-pro-validacao'''),
+        ('Membro', membro, 'Loja: tem o Pro?', 'permitido: false', 'select public.tem_pro()::text'),
+        ('Membro', membro, 'Loja: dar-se o Pro', 'negado', 'with x as (insert into public.assinaturas (id, usuario_id, status) values (''falsa'', auth.uid(), ''active'') returning 1) select count(*)::text from x'),
+        ('Membro', membro, 'Loja: registrar compra sem pagar', 'negado', 'with x as (insert into public.compras (id, usuario_id, produto_id, pedido_lemon) values (''falsa'', auth.uid(), ''pagina-teste-validacao'', ''x'') returning 1) select count(*)::text from x'),
+        ('Membro', membro, 'Loja: mudar preço', 'negado', 'with x as (update public.produtos set preco_centavos = 0 returning 1) select count(*)::text from x'),
+        ('Membro', membro, 'Loja: tornar página Pro grátis', 'negado', 'with x as (update public.conteudos set acesso = ''membro'' returning 1) select count(*)::text from x'),
+        ('Membro', membro, 'Loja: ver assinaturas dos outros', 'permitido: 0', 'select count(*)::text from public.assinaturas'),
+        ('Membro', membro, 'Loja: ver compras dos outros', 'permitido: 0', 'select count(*)::text from public.compras'),
+        ('Membro', membro, 'Loja: ler pagamentos', 'negado', 'select count(*)::text from public.pagamentos'),
+        ('Membro', membro, 'Painel: números da loja', 'negado', 'select public.admin_loja()::text'),
+        -- Assinante do Pro e quem comprou só uma página
+        ('Assinante Pro', outro, 'Tem o Pro', 'permitido: true', 'select public.tem_pro()::text'),
+        ('Assinante Pro', outro, 'Lê a página Pro', 'permitido: 1', 'select count(*)::text from public.conteudos where id = ''teste-pro-validacao'''),
+        ('Assinante Pro', outro, 'Vê só a própria assinatura', 'permitido: 1', 'select count(*)::text from public.assinaturas'),
+        ('Compra avulsa', comprador, 'Não tem o Pro', 'permitido: false', 'select public.tem_pro()::text'),
+        ('Compra avulsa', comprador, 'Lê a página que comprou', 'permitido: 1', 'select count(*)::text from public.conteudos where id = ''teste-pro-validacao'''),
         -- Administrador (a sua conta)
         ('Administrador', admin_id, 'É reconhecido como administrador', 'permitido: true', 'select public.eh_admin()::text'),
-        ('Administrador', admin_id, 'Ler as páginas completas', 'permitido: 6', 'select count(*)::text from public.conteudos'),
+        ('Administrador', admin_id, 'Ler todas as páginas, inclusive Pro', 'permitido: ' || total_conteudos, 'select count(*)::text from public.conteudos'),
+        ('Administrador', admin_id, 'Painel: números da loja', 'permitido: {%', 'select public.admin_loja()::text'),
         ('Administrador', admin_id, 'Painel: resumo', 'permitido: {%', 'select public.admin_resumo()::text'),
         ('Administrador', admin_id, 'Painel: vê todos os usuários', 'permitido: ' || total_usuarios, 'select count(*)::text from public.admin_usuarios()'),
         ('Administrador', admin_id, 'Painel: busca usuários', 'permitido: 1', 'select count(*)::text from public.admin_usuarios(''membro.teste'')'),
         ('Administrador', admin_id, 'Painel: lista de espera', 'permitido: %', 'select count(*)::text from public.admin_lista_espera()'),
-        ('Administrador', admin_id, 'Painel: conteúdos publicados', 'permitido: 6', 'select count(*)::text from public.admin_conteudos()'),
+        ('Administrador', admin_id, 'Painel: conteúdos publicados', 'permitido: ' || total_conteudos, 'select count(*)::text from public.admin_conteudos()'),
         ('Administrador', admin_id, 'Painel: cadastros por dia', 'permitido: 30', 'select count(*)::text from public.admin_cadastros_por_dia(30)'),
         ('Administrador', admin_id, 'Não vê senhas (nem o admin)', 'negado', 'select count(*)::text from auth.users'),
         -- Chave secreta (usada só pelo repositório atalho-pro)
-        ('Chave secreta', null, 'Publicar e atualizar páginas', 'permitido: 6', 'with x as (update public.conteudos set atualizado_em = atualizado_em returning 1) select count(*)::text from x')
+        ('Chave secreta', null, 'Publicar e atualizar páginas', 'permitido: ' || total_conteudos, 'with x as (update public.conteudos set atualizado_em = atualizado_em returning 1) select count(*)::text from x'),
+        ('Chave secreta', null, 'Webhook: gravar assinatura', 'permitido: 1', 'with x as (insert into public.assinaturas (id, usuario_id, status) values (''teste-webhook'', ''' || membro || ''', ''active'') returning 1) select count(*)::text from x'),
+        ('Chave secreta', null, 'Webhook: gravar pagamento', 'permitido: 1', 'with x as (insert into public.pagamentos (id, valor_centavos) values (''teste-webhook'', 490) returning 1) select count(*)::text from x')
       ) as t (quem, sub, teste, esperado, consulta)
     loop
       n := n + 1;

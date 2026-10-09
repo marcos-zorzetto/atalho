@@ -1,4 +1,4 @@
-# Ativando contas, área de membros e o assistente de IA
+# Ativando contas, área de membros, vendas e o assistente de IA
 
 O site funciona sem nada disto: as contas aparecem como "em breve", as páginas completas mostram "área de membros em breve" e o assistente usa a busca local. Cada serviço abaixo é **gratuito** e independente. Ative quando quiser, nesta ordem.
 
@@ -96,7 +96,53 @@ assistente: {
 
 **Cota grátis:** 10 mil "neurônios" por dia, cerca de 200 perguntas com o modelo Gemma 4. Cada pessoa pode fazer até 6 perguntas por minuto.
 
-## 6. Publicar
+## 6. Vendas: Atalho Pro e compras avulsas (Lemon Squeezy)
+
+A Lemon Squeezy é a **revendedora oficial** (merchant of record): ela cobra, recolhe o IVA de cada país e emite a fatura. Você recebe o valor menos a taxa dela (cerca de 5% + €0,50 por venda). O banco e a função que recebe os avisos já estão prontos; falta só a sua loja.
+
+1. Crie a conta em [lemonsqueezy.com](https://www.lemonsqueezy.com) e uma loja chamada **Atalho**, com moeda **EUR**. Complete a verificação de identidade e os dados para receber (*Settings → Payouts*). Até ativar, tudo funciona em **modo de teste**.
+2. **Products → New product → "Atalho Pro"**, do tipo assinatura, com duas variantes:
+   - **Mensal**: €4,90 por mês
+   - **Anual**: €39 por ano
+
+   Em *Confirmation modal → Button link*, coloque `https://marcos-zorzetto.github.io/atalho/conta/?pagamento=ok`, para a pessoa voltar para a conta, onde o acesso aparece liberado.
+3. Em cada variante, use **Share → Checkout URL** e cole o link em `site/config.js`:
+
+   ```js
+   pagamentos: {
+     links: {
+       "pro-mensal": "https://atalho.lemonsqueezy.com/buy/...",
+       "pro-anual": "https://atalho.lemonsqueezy.com/buy/...",
+     },
+   },
+   ```
+
+   Links que não sejam `https://...lemonsqueezy.com` são ignorados de propósito.
+4. Ligue cada variante ao produto do banco. O número da variante aparece no endereço quando você a edita. No *SQL Editor* do Supabase:
+
+   ```sql
+   update public.produtos set variante_lemon = 'NÚMERO-DA-MENSAL' where id = 'pro-mensal';
+   update public.produtos set variante_lemon = 'NÚMERO-DA-ANUAL' where id = 'pro-anual';
+   ```
+5. **Settings → Webhooks → +**:
+   - URL: `https://onjmugnpjvflomrevknh.supabase.co/functions/v1/lemon-webhook`
+   - Signing secret: invente uma senha longa e guarde-a; você vai usá-la no passo 6
+   - Eventos: `order_created`, `order_refunded`, `subscription_created`, `subscription_updated`, `subscription_cancelled`, `subscription_resumed`, `subscription_expired`, `subscription_paused`, `subscription_unpaused`, `subscription_payment_success` e `subscription_payment_refunded`
+6. No Supabase, em **Edge Functions → Secrets**, crie `LEMON_WEBHOOK_SECRET` com o mesmo signing secret. Sem ele, a função recusa todos os avisos (resposta 401), e ninguém consegue liberar acesso falsificando um aviso.
+7. **Teste** em modo de teste: assine com o cartão `4242 4242 4242 4242` (qualquer validade futura e CVC). Em *Minha conta* deve aparecer "Atalho Pro mensal"; no painel do administrador, a receita. Depois cancele no portal e confira que o acesso continua até o fim do período.
+
+**Página ou componente avulso:** crie um produto de pagamento único (€9 a página, €3 o componente), cadastre-o no banco e marque o conteúdo como Pro:
+
+```sql
+insert into public.produtos (id, tipo, nome, preco_centavos, variante_lemon)
+values ('pagina-crm', 'pagina', 'Página: CRM', 900, 'NÚMERO-DA-VARIANTE');
+```
+
+Em `scripts/site/exemplos.mjs`, a página recebe `acesso: "pro"` e `produto: "pagina-crm"` (a vitrine passa a mostrar o selo Pro e o botão de compra), e o `atalho-pro` publica o conteúdo com o mesmo `acesso` e `produto_id`. No `site/config.js`, acrescente `"pagina-crm": "https://atalho.lemonsqueezy.com/buy/..."` em `links`.
+
+**Conferir as permissões da loja:** o `servicos/supabase/validar-permissoes.sql` também testa a loja: visitante e membro não leem assinaturas, compras nem pagamentos; ninguém se dá o Pro nem muda preço; assinante e comprador leem só o que pagaram.
+
+## 7. Publicar
 
 Faça commit e push do `site/config.js`. O GitHub gera e publica o site sozinho em alguns minutos.
 

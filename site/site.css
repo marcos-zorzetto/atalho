@@ -684,3 +684,14 @@ mark { background: color-mix(in srgb, var(--at-cor-destaque) 55%, transparent); 
 .site-admin-grafico span:last-child { opacity: 1; background: var(--at-cor-destaque, var(--at-cor-primaria)); }
 .site-admin .at-tabela td { vertical-align: middle; }
 .site-admin .at-tabela td:nth-child(2) { word-break: break-all; }
+
+/* ---------- Planos e preços (/pro/) ---------- */
+
+.site-precos { padding-block: var(--at-espaco-7) var(--at-espaco-8); }
+.site-precos-alternar { margin-bottom: var(--at-espaco-6); font-weight: 600; }
+.site-precos .at-plano > div:first-of-type { display: grid; gap: var(--at-espaco-1); }
+.site-precos-nota { min-height: 1.5em; }
+.site-precos-aviso { margin-top: var(--at-espaco-4); text-align: center; }
+.site-precos-faq { max-width: 760px; }
+.site-exclusivo-pro { color: #1c1917; background: var(--at-cor-destaque); }
+.site-conta-compras { margin: var(--at-espaco-2) 0 0; padding-left: var(--at-espaco-5); font-size: var(--at-texto-sm); color: var(--at-texto-suave); }

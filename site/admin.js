@@ -128,8 +128,19 @@
     }
   }
 
+  /** Loja: a receita é o total pago; a Lemon Squeezy repassa descontando o IVA e as taxas dela. */
+  async function carregarLoja() {
+    const loja = await chamar("admin_loja");
+    const euro = (centavos) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "EUR" }).format(centavos / 100);
+    $('[data-admin-numero="assinantes_ativos"]', raiz).textContent = numero(loja.assinantes_ativos);
+    $('[data-admin-numero="compras_avulsas"]', raiz).textContent = numero(loja.compras_avulsas);
+    $('[data-admin-numero="receita_30_dias"]', raiz).textContent = euro(loja.receita_30_dias_centavos);
+    $('[data-admin-numero="receita_total"]', raiz).textContent = euro(loja.receita_total_centavos);
+    $('[data-admin-detalhe="receita_total"]', raiz).textContent = "valor pago, antes de IVA e taxas";
+  }
+
   async function carregarTudo() {
-    await Promise.all([carregarResumo(), carregarUsuarios(), carregarListaEConteudos()]);
+    await Promise.all([carregarResumo(), carregarUsuarios(), carregarListaEConteudos(), carregarLoja()]);
   }
 
   /** Planilha em CSV com ";" e BOM: abre certinho no Excel em português. */

@@ -40,6 +40,13 @@ export function paginaAdmin() {
           ${indicador("lista_espera", "Lista do Atalho Pro")}
         </div>
 
+        <div class="at-colunas-4" style="--min: 200px" aria-label="Loja">
+          ${indicador("assinantes_ativos", "Assinantes Pro")}
+          ${indicador("compras_avulsas", "Compras avulsas")}
+          ${indicador("receita_30_dias", "Receita em 30 dias")}
+          ${indicador("receita_total", "Receita total")}
+        </div>
+
         <section class="at-cartao">
           <div class="at-cartao-cabecalho"><h2>Cadastros nos últimos 30 dias</h2><span class="at-selo" data-admin-total-periodo></span></div>
           <div class="at-cartao-corpo">

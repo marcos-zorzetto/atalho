@@ -19,6 +19,11 @@ export async function semServicosReais(contexto) {
 }
 const CHAVE = "sb_publishable_teste";
 
+export const PRODUTOS = [
+  { id: "pro-mensal", tipo: "assinatura", nome: "Atalho Pro (mensal)", preco_centavos: 490, intervalo: "mes" },
+  { id: "pro-anual", tipo: "assinatura", nome: "Atalho Pro (anual)", preco_centavos: 3900, intervalo: "ano" },
+];
+
 export const PESSOAS = {
   admin: { id: "00000000-0000-4000-8000-000000000001", email: "dono@exemplo.com", nome: "Dono do Site", admin: true },
   membro: { id: "00000000-0000-4000-8000-000000000002", email: "ana@exemplo.com", nome: "Ana Souza", admin: false },
@@ -45,16 +50,17 @@ const json = (rota, corpo, status = 200) =>
 /**
  * Prepara a aba. `pessoa`: "admin", "membro" ou null (visitante).
  * `conteudos`: { id: html } servidos pela tabela "conteudos".
+ * `loja`: { links: { produto: url }, assinaturas: [...], compras: [...] } da pessoa.
  * Retorna a lista de requisições feitas à API, para conferir nos testes.
  */
-export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, usuarios = 3 } = {}) {
+export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, usuarios = 3, loja = {} } = {}) {
   const quem = pessoa ? PESSOAS[pessoa] : null;
   const pedidos = [];
 
   await contexto.route("**/site/config.js", (rota) =>
     rota.fulfill({
       contentType: "text/javascript",
-      body: `window.ATALHO_CONFIG = { supabase: { url: "${PROJETO}", chavePublica: "${CHAVE}" }, assistente: { url: "" } };`,
+      body: `window.ATALHO_CONFIG = { supabase: { url: "${PROJETO}", chavePublica: "${CHAVE}" }, assistente: { url: "" }, pagamentos: { links: ${JSON.stringify(loja.links || {})} } };`,
     })
   );
 
@@ -92,6 +98,9 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
     if (caminho === "/rest/v1/favoritos") return json(rota, [{ componente_id: "modal" }]);
     if (caminho === "/rest/v1/lista_espera_pro") return json(rota, []);
     if (caminho === "/rest/v1/rpc/eh_admin") return json(rota, quem.admin);
+    if (caminho === "/rest/v1/produtos") return json(rota, PRODUTOS);
+    if (caminho === "/rest/v1/assinaturas") return json(rota, loja.assinaturas || []);
+    if (caminho === "/rest/v1/compras") return json(rota, loja.compras || []);
 
     if (caminho.startsWith("/rest/v1/rpc/admin_")) {
       if (!quem.admin) return json(rota, { code: "42501", message: "acesso restrito ao administrador" }, 403);
@@ -119,6 +128,7 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
           .slice(corpo.deslocamento || 0, (corpo.deslocamento || 0) + (corpo.limite || 25)),
         admin_lista_espera: lista.filter((u) => u.lista_espera).map((u) => ({ email: u.email, nome: u.nome, entrou_em: u.criado_em })),
         admin_conteudos: [{ id: "loja", tipo: "exemplo", titulo: "Loja virtual", tamanho: 8816, atualizado_em: hoje.toISOString() }],
+        admin_loja: { assinantes_ativos: 3, compras_avulsas: 2, receita_30_dias_centavos: 2370, receita_total_centavos: 6270 },
       };
       return json(rota, respostas[funcao] ?? []);
     }

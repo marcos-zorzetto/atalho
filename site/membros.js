@@ -1,7 +1,8 @@
 /*
  * Área de membros: nas vitrines /exemplos/<id>/, mostra a página completa a quem
  * entrou na conta. O conteúdo vem do Supabase, e quem decide se a pessoa pode ler
- * é o banco (regra "conteudos: membros leem"), não este arquivo.
+ * é o banco (regra "conteudos: quem tem acesso lê"), não este arquivo. Páginas Pro
+ * só voltam do banco para quem assina, comprou ou é administrador.
  */
 (function () {
   "use strict";
@@ -19,7 +20,7 @@
 
   function mostrar(estado) {
     cartao.dataset.exclusivoEstado = estado;
-    for (const nome of ["carregando", "visitante", "indisponivel", "erro"]) {
+    for (const nome of ["carregando", "visitante", "pro", "indisponivel", "erro"]) {
       $(`[data-exclusivo-${nome}]`, cartao).hidden = nome !== estado;
     }
   }
@@ -60,6 +61,8 @@
     const pessoa = await usuario();
     if (!pessoa) return mostrar("visitante");
     const { data, error } = await cliente.from("conteudos").select("html, titulo").eq("id", id).maybeSingle();
+    // Página Pro sem assinatura nem compra: o banco não devolve nada; oferece as opções
+    if (!error && !data && raiz.dataset.exclusivoAcesso === "pro") return mostrar("pro");
     if (error || !data) {
       $("[data-exclusivo-erro-texto]", raiz).textContent = error
         ? traduzir(error)

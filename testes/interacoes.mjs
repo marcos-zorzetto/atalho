@@ -177,7 +177,8 @@ teste("Menu suspenso: abre ao lado do botão, setas navegam, Esc fecha", async (
   const botao = aba.getByRole("button", { name: "Mais ações" });
   await botao.click();
   const menu = aba.locator("#menu-projeto");
-  await aba.waitForFunction(() => document.querySelector("#menu-projeto").matches(":popover-open"));
+  // O menu é posicionado no evento "toggle", logo depois de abrir (até lá fica invisível)
+  await aba.waitForFunction(() => document.querySelector("#menu-projeto").matches(":popover-open[data-posicionado]"));
   const [b, m] = await Promise.all([botao.boundingBox(), menu.boundingBox()]);
   assert.ok(Math.abs(m.y - (b.y + b.height)) < 20 && Math.abs(m.x - b.x) < 30, `menu longe do botão: ${JSON.stringify({ b, m })}`);
   await aba.keyboard.press("ArrowDown");
@@ -643,6 +644,103 @@ teste("Admin: números, busca, paginação e planilha da lista de espera", async
   assert.ok(csv.startsWith('\ufeff"Nome";"E-mail";"Entrou em"'), "planilha precisa abrir certo no Excel");
   assert.equal(csv.trim().split("\r\n").length, 16);
 }, { supabase: { pessoa: "admin", usuarios: 31 } });
+
+/* ------------------------------------------------------------------------
+   Loja: planos, checkout da Lemon Squeezy e plano na conta
+   ------------------------------------------------------------------------ */
+
+const LINKS = { "pro-mensal": "https://atalho.lemonsqueezy.com/buy/mensal-teste", "pro-anual": "https://atalho.lemonsqueezy.com/buy/anual-teste" };
+const ASSINATURA_ATIVA = { id: "77", produto_id: "pro-anual", status: "active", renova_em: "2027-10-09T00:00:00Z", termina_em: null, portal_url: "https://atalho.lemonsqueezy.com/billing/77" };
+
+teste("Preços: alterna mensal e anual, e sem pagamentos leva à lista de espera", async (aba) => {
+  await abrir(aba, "pro/");
+  const pro = aba.locator(".at-plano[data-destaque]");
+  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /€ 4,90/);
+  await aba.getByRole("switch", { name: "Cobrança anual" }).check();
+  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /€ 39\s*\/ano/);
+  assert.match(texto(await pro.innerText()), /equivale a € 3,25\/mês/);
+  const botao = pro.getByRole("button", { name: "Entrar na lista de espera" });
+  await botao.click();
+  await aba.locator("#lista-espera").waitFor();
+  assert.equal(await aba.locator("[data-loja-aviso]").isVisible(), true);
+  assert.equal(await aba.locator("#modal-compra").count(), 0, "sem pagamentos não abre o checkout");
+});
+
+teste("Preços: link que não é da Lemon Squeezy é ignorado", async (aba) => {
+  await abrir(aba, "pro/");
+  await aba.locator(".at-plano[data-destaque]").getByRole("button", { name: "Entrar na lista de espera" }).waitFor();
+}, { supabase: { pessoa: "membro", loja: { links: { "pro-mensal": "https://golpe.exemplo.com/buy", "pro-anual": "http://atalho.lemonsqueezy.com/buy/x" } } } });
+
+teste("Preços: visitante que assina é levado a criar a conta antes", async (aba) => {
+  await abrir(aba, "pro/");
+  await aba.getByRole("button", { name: "Assinar o Pro mensal" }).click();
+  await aba.waitForURL(/\/conta\/\?voltar=%2Fpro%2F&criar$/);
+}, { supabase: { pessoa: null, loja: { links: LINKS } } });
+
+teste("Preços: membro confirma a desistência e vai ao checkout só com o id da conta", async (aba) => {
+  let checkout = null;
+  await aba.context().route("https://atalho.lemonsqueezy.com/**", (rota) => {
+    checkout = rota.request().url();
+    return rota.fulfill({ contentType: "text/html", body: "<title>Checkout</title>" });
+  });
+  await abrir(aba, "pro/");
+  await aba.getByRole("switch", { name: "Cobrança anual" }).check();
+  await aba.getByRole("button", { name: "Assinar o Pro anual" }).click();
+  const dialogo = aba.getByRole("dialog", { name: "Antes de ir para o pagamento" });
+  await dialogo.waitFor();
+  assert.match(texto(await dialogo.innerText()), /Atalho Pro \(anual\) · € 39 por ano/);
+  const pagar = dialogo.getByRole("button", { name: "Ir para o pagamento" });
+  assert.equal(await pagar.isDisabled(), true, "sem o consentimento não paga");
+  await dialogo.getByRole("checkbox").check();
+  await pagar.click();
+  await aba.waitForURL(/lemonsqueezy\.com/);
+  const endereco = new URL(checkout);
+  assert.equal(endereco.pathname, "/buy/anual-teste");
+  assert.equal(endereco.searchParams.get("checkout[custom][usuario_id]"), "00000000-0000-4000-8000-000000000002");
+  assert.doesNotMatch(checkout, /ana|exemplo\.com|Souza/i, "nenhum dado pessoal no endereço");
+}, { supabase: { pessoa: "membro", loja: { links: LINKS } } });
+
+teste("Preços: quem já assina vê 'Seu plano atual'", async (aba) => {
+  await abrir(aba, "pro/");
+  await aba.locator("[data-loja-plano-atual]").waitFor();
+  assert.equal(await aba.getByRole("button", { name: "Seu plano atual" }).first().isDisabled(), true);
+  assert.equal(await aba.getByRole("link", { name: "Você já é membro" }).count(), 1);
+}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA] } } });
+
+teste("Conta: assinante vê o plano, a renovação, as compras e o portal", async (aba) => {
+  await abrir(aba, "conta/");
+  const plano = aba.locator("[data-conta-plano]");
+  await plano.getByText("Atalho Pro anual").waitFor();
+  assert.match(texto(await plano.innerText()), /Renova em 9 de outubro de 2027/);
+  assert.match(texto(await plano.innerText()), /CRM · comprado em/);
+  assert.equal(await plano.getByRole("link", { name: "Gerenciar assinatura" }).getAttribute("href"), ASSINATURA_ATIVA.portal_url);
+  assert.equal(await aba.locator("[data-conta-lista-bloco]").isVisible(), false, "com pagamentos no ar, some a lista de espera");
+}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA], compras: [{ produto_id: "pagina-crm", criado_em: "2026-10-01T10:00:00Z", produtos: { nome: "CRM" } }] } } });
+
+teste("Conta: cobrança atrasada pede para atualizar o cartão; membro sem plano vê o convite", async (aba) => {
+  await abrir(aba, "conta/");
+  const plano = aba.locator("[data-conta-plano]");
+  await plano.getByRole("link", { name: "Atualizar pagamento" }).waitFor();
+}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [{ ...ASSINATURA_ATIVA, status: "past_due" }] } } });
+
+teste("Conta: membro sem plano vê o convite para o Pro", async (aba) => {
+  await abrir(aba, "conta/");
+  await aba.locator("[data-conta-plano]").getByRole("link", { name: "Conhecer o Pro" }).waitFor();
+  assert.equal(await aba.locator("[data-conta-lista-bloco]").isVisible(), true, "sem pagamentos, a lista de espera continua");
+}, { supabase: { pessoa: "membro" } });
+
+teste("Conta: na volta do pagamento, confirma o acesso liberado", async (aba) => {
+  await abrir(aba, "conta/?pagamento=ok");
+  await aba.getByText("Acesso liberado. Bom proveito!").waitFor();
+  assert.equal(new URL(aba.url()).search, "", "o aviso não se repete ao recarregar");
+}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA] } } });
+
+teste("Admin: números da loja", async (aba) => {
+  await abrir(aba, "admin/");
+  await aba.locator('[data-admin-numero="receita_30_dias"]').filter({ hasText: "€" }).waitFor();
+  assert.equal(texto(await aba.locator('[data-admin-numero="receita_30_dias"]').textContent()), "€ 23,70");
+  assert.equal(await aba.locator('[data-admin-numero="assinantes_ativos"]').textContent(), "3");
+}, { supabase: { pessoa: "admin" } });
 
 /* ------------------------------------------------------------------------ */
 

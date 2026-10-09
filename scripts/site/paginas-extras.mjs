@@ -36,7 +36,7 @@ export function paginaExemplos({ exemplos }) {
         ${exemplos
           .map(
             (e) => `<a class="site-galeria-item" href="${url(`exemplos/${e.id}/`)}">
-          <span class="site-galeria-moldura"><img src="${url(`exemplos/miniaturas/${e.id}.png`)}" alt="Prévia do exemplo ${esc(e.nome)}" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado">${ICONES_SITE.cadeado} Membros</span></span>
+          <span class="site-galeria-moldura"><img src="${url(`exemplos/miniaturas/${e.id}.png`)}" alt="Prévia do exemplo ${esc(e.nome)}" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado">${ICONES_SITE.cadeado} ${e.acesso === "pro" ? "Pro" : "Membros"}</span></span>
           <strong>${esc(e.nome)}</strong><span>${esc(e.resumo)}</span>
           <span class="site-galeria-componentes">${e.componentes.map((c) => `<span class="at-selo">${esc(c)}</span>`).join("")}</span>
         </a>`
@@ -346,38 +346,123 @@ export function paginaPatrocinar({ docs }) {
 
 /* ------------------------------------------------------------------------ */
 
-export function paginaPro() {
-  const itens = [
-    ["Painel administrativo completo", "Login, menu lateral, gráficos, tabelas com filtros, formulários de cadastro e permissões."],
-    ["Loja virtual", "Vitrine, página de produto, carrinho, checkout com Pix e cartão, área do cliente com pedidos."],
-    ["Landing pages de venda", "Modelos para curso, SaaS, evento e serviço, com seções testadas em conversão."],
-    ["Back-end em PHP", "API com login seguro, banco de dados e validações prontas para os modelos acima."],
+/** Preços exibidos (o cobrado é o da Lemon Squeezy; os valores ficam iguais aos da tabela produtos). */
+export const PRECOS = { proMensal: 4.9, proAnual: 39, pagina: 9, componente: 3 };
+// "€ 39" em vez de "€ 39,00"; centavos só quando existem
+const euro = (valor) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "EUR" }).format(valor).replace(/,00$/, "");
+
+export function paginaPro({ exemplos = [] } = {}) {
+  const economia = PRECOS.proMensal * 12 - PRECOS.proAnual;
+  const planos = [
+    {
+      nome: "Grátis",
+      preco: euro(0),
+      nota: "sem cadastro",
+      itens: ["Todos os componentes e receitas, inclusive os equivalentes ao Bootstrap", "Documentação em português, com TypeScript e PHP", "Editor ao vivo e CDN", "Licença MIT: pode usar em projetos comerciais"],
+      botao: `<a class="at-botao at-bloco" href="${url("componentes/instalacao/")}">Começar agora</a>`,
+    },
+    {
+      nome: "Membro",
+      preco: euro(0),
+      nota: "com conta grátis",
+      itens: ["Tudo do Grátis", `${exemplos.length} páginas completas: loja, painel, checkout, login e mais`, "Baixar o código ou abrir no editor", "Componentes favoritos guardados na conta"],
+      botao: `<a class="at-botao at-bloco" href="${url("conta/?criar")}" data-plano-membro>Criar conta grátis</a>`,
+    },
+    {
+      nome: "Pro",
+      destaque: "Mais completo",
+      preco: `<span data-at-mostrar="!precos.anual">${euro(PRECOS.proMensal)} <small>/mês</small></span><span data-at-mostrar="precos.anual" hidden>${euro(PRECOS.proAnual)} <small>/ano</small></span>`,
+      nota: `<span data-at-mostrar="!precos.anual">cancele quando quiser</span><span data-at-mostrar="precos.anual" hidden>equivale a ${euro(PRECOS.proAnual / 12)}/mês</span>`,
+      itens: ["Tudo do Membro", "Todas as páginas e modelos Pro, com novidades todo mês", "Blocos premium para landing pages, painéis e lojas", "Licença para usar em projetos de clientes", "Se cancelar, o acesso continua até o fim do período pago"],
+      botao: `<button class="at-botao at-primario at-bloco" data-comprar="pro-mensal" data-at-mostrar="!precos.anual">Assinar o Pro mensal</button>
+          <button class="at-botao at-primario at-bloco" data-comprar="pro-anual" data-at-mostrar="precos.anual" hidden>Assinar o Pro anual</button>`,
+    },
+  ];
+  const perguntas = [
+    ["Preciso pagar para usar o Atalho?", "Não. A biblioteca, a documentação e todos os componentes equivalentes aos do Bootstrap são grátis para sempre, inclusive em projetos comerciais (licença MIT). Com uma conta grátis você ainda libera as páginas completas."],
+    ["O que muda no Pro?", "O Pro libera todas as páginas e modelos marcados como Pro, os blocos premium e tudo o que for lançado enquanto a assinatura estiver ativa. É para quem quer entregar projetos mais rápido."],
+    ["Posso comprar só uma página, sem assinar?", `Sim. Cada página Pro pode ser comprada sozinha por ${euro(PRECOS.pagina)} e cada componente premium por ${euro(PRECOS.componente)}. É seu para sempre, sem mensalidade.`],
+    ["Como cancelo a assinatura?", "Em Minha conta, no botão Gerenciar assinatura. O cancelamento é imediato e você continua com acesso até o fim do período que já pagou. Não há multa nem fidelidade."],
+    ["Quem cobra? Tem fatura?", "O pagamento é processado pela Lemon Squeezy, que atua como revendedora oficial (merchant of record): ela cobra, recolhe o IVA do seu país e envia a fatura por e-mail. O Atalho nunca vê os dados do seu cartão."],
+    ["Quais formas de pagamento?", "Cartão de crédito ou débito, PayPal, Apple Pay e Google Pay. O valor é cobrado em euros; se o seu cartão for de outro país, o banco faz a conversão."],
+    ["E o direito de desistência?", "Na União Europeia, quem compra conteúdo digital tem 14 dias para desistir, a menos que peça o acesso imediato e reconheça que perde esse direito ao recebê-lo. Antes de pagar, perguntamos isso de forma clara. Se algo não funcionar como descrito, escreva para nós e resolvemos."],
+    ["Posso usar em projetos de clientes?", "Sim. O que você baixa pode ser usado em quantos projetos quiser, seus ou de clientes. Só não pode revender ou redistribuir os modelos Pro como modelos (por exemplo, num marketplace de templates)."],
   ];
   const conteudo = `${cabecalhoPagina(
-    "Atalho Pro",
-    "Sistemas inteiros, prontos para usar",
-    "O Atalho continua grátis. O Pro é para quem quer economizar semanas: modelos completos de front e back-end, feitos com o mesmo cuidado da documentação."
+    "Planos",
+    "Grátis para aprender. Pro para entregar mais rápido.",
+    "O Atalho é e continua grátis. O Pro é para quem quer pular semanas de trabalho com páginas e sistemas completos, feitos com o mesmo cuidado da documentação."
   )}
-    ${artigo(`
-      <div class="site-recursos">${itens.map(([t, d]) => `<div class="site-recurso"><h3>${t}</h3><p>${d}</p></div>`).join("")}</div>
+    <div class="site-container site-precos">
+      <label class="at-linha at-centro site-precos-alternar">
+        Mensal
+        <input type="checkbox" role="switch" class="at-chave" data-at-valor="precos.anual" aria-label="Cobrança anual">
+        Anual <span class="at-selo at-sucesso">economize ${euro(economia)}</span>
+      </label>
 
-      <div class="site-pro-cartao at-mt-6" id="lista-espera">
-        <h2 class="site-titulo site-h2">Entre na lista de espera</h2>
-        <p>Quem entrar na lista recebe o aviso do lançamento e o preço de pré-venda. Sem spam: um e-mail no lançamento.</p>
-        <div data-lista-espera>
-          <p class="at-texto-suave" data-lista-espera-estado>Para entrar na lista, <a href="${url("conta/")}">crie sua conta grátis</a>.</p>
-          <button class="at-botao at-primario" data-entrar-lista hidden>Quero ser avisado do lançamento</button>
-        </div>
+      <div class="at-planos">
+        ${planos
+          .map(
+            (p) => `<div class="at-plano"${p.destaque ? ` data-destaque="${p.destaque}"` : ""}>
+          <h2 class="at-titulo-4">${p.nome}</h2>
+          <div>
+            <div class="at-plano-preco">${p.preco}</div>
+            <p class="at-texto-suave at-texto-pequeno at-mb-0 site-precos-nota">${p.nota}</p>
+          </div>
+          <ul>${p.itens.map((i) => `<li>${i}</li>`).join("")}</ul>
+          ${p.botao}
+        </div>`
+          )
+          .join("\n        ")}
       </div>
-    `)}`;
+      <p class="at-texto-suave at-texto-pequeno site-precos-aviso" data-loja-aviso hidden></p>
+      <div class="at-alerta at-sucesso at-mt-4" data-loja-plano-atual hidden><div class="at-alerta-conteudo"><strong>Você é Pro.</strong><p>Obrigado por apoiar o Atalho! Veja sua assinatura em <a href="${url("conta/")}">Minha conta</a>.</p></div></div>
+
+      <h2 class="site-secao-titulo at-mt-8">Compra avulsa, sem assinatura</h2>
+      <div class="at-colunas-2">
+        <div class="site-recurso"><h3>Página completa · ${euro(PRECOS.pagina)}</h3><p>Uma página Pro inteira (por exemplo, um painel ou um checkout), com o código para baixar e abrir no editor. Paga uma vez, é sua para sempre.</p></div>
+        <div class="site-recurso"><h3>Componente premium · ${euro(PRECOS.componente)}</h3><p>Um bloco pronto para encaixar no seu projeto, como uma seção de preços animada ou um gráfico de painel. Também sem mensalidade.</p></div>
+      </div>
+      <p class="at-texto-suave at-texto-pequeno at-mt-3">O botão de compra fica na página de cada item Pro, em <a href="${url("exemplos/")}">Exemplos completos</a>.</p>
+
+      <h2 class="site-secao-titulo at-mt-8">Perguntas frequentes</h2>
+      <div class="at-sanfona site-precos-faq">
+        ${perguntas.map(([p, r], i) => `<details name="faq-precos"${i === 0 ? " open" : ""}><summary>${p}</summary><div class="at-sanfona-conteudo"><p>${r}</p></div></details>`).join("\n        ")}
+      </div>
+
+      <div class="site-pro-cartao at-mt-8" id="lista-espera" data-lista-espera hidden>
+        <h2 class="site-titulo site-h2">Pagamentos abrem em breve</h2>
+        <p>Entre na lista e receba o aviso do lançamento com o preço de pré-venda. Sem spam: um e-mail no lançamento.</p>
+        <p class="at-texto-suave" data-lista-espera-estado>Para entrar na lista, <a href="${url("conta/")}">crie sua conta grátis</a>.</p>
+        <button class="at-botao at-primario" data-entrar-lista hidden>Quero ser avisado do lançamento</button>
+      </div>
+    </div>`;
   return pagina({
-    titulo: "Atalho Pro · Modelos de sistemas e lojas prontos",
-    descricao: "Atalho Pro: painel administrativo, loja virtual e landing pages completas em HTML, CSS, JavaScript e PHP. Entre na lista de espera.",
+    titulo: "Planos e preços · Atalho Pro",
+    descricao: `O Atalho é grátis. O Pro custa ${euro(PRECOS.proMensal)}/mês ou ${euro(PRECOS.proAnual)}/ano e libera todas as páginas e modelos completos; páginas avulsas por ${euro(PRECOS.pagina)}.`,
     caminho: "pro/",
     pagina: "pro",
     secao: "pro",
     conteudo,
-    scripts: [...SCRIPTS_SUPABASE, "site/conta.js"],
+    scripts: [...SCRIPTS_SUPABASE, "site/loja.js", "site/conta.js"],
+    dadosEstruturados: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: "Atalho Pro",
+        description: "Páginas e modelos completos de interface em português, com HTML, CSS, JavaScript e PHP.",
+        brand: { "@type": "Brand", name: SITE.nome },
+        offers: [
+          { "@type": "Offer", name: "Pro mensal", price: PRECOS.proMensal.toFixed(2), priceCurrency: "EUR", url: `${SITE.url}pro/` },
+          { "@type": "Offer", name: "Pro anual", price: PRECOS.proAnual.toFixed(2), priceCurrency: "EUR", url: `${SITE.url}pro/` },
+        ],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: perguntas.map(([p, r]) => ({ "@type": "Question", name: p, acceptedAnswer: { "@type": "Answer", text: r } })),
+      },
+    ],
   });
 }
 
@@ -443,6 +528,8 @@ export function paginaConta({ exemplos }) {
             </div>
           </div>
         </div>
+        <h2 class="site-secao-titulo at-mt-6">Seu plano</h2>
+        <div data-conta-plano><p class="at-texto-suave">Carregando…</p></div>
         <h2 class="site-secao-titulo at-mt-6">Páginas completas liberadas</h2>
         <div class="site-relacionados">
           ${exemplos.map((e) => `<a href="${url(`exemplos/${e.id}/`)}"><strong>${esc(e.nome)}</strong><span>${esc(e.resumo)}</span></a>`).join("")}
@@ -450,14 +537,16 @@ export function paginaConta({ exemplos }) {
         <h2 class="site-secao-titulo at-mt-6">Componentes favoritos</h2>
         <div class="site-relacionados" data-conta-favoritos></div>
         <p class="at-texto-suave" data-conta-sem-favoritos hidden>Você ainda não favoritou nenhum componente. Use o botão ♡ Favoritar nas páginas dos componentes.</p>
-        <h2 class="site-secao-titulo at-mt-6">Atalho Pro</h2>
-        <label class="at-linha"><input type="checkbox" role="switch" class="at-chave" data-conta-lista-espera> Quero ser avisado do lançamento do Atalho Pro</label>
+        <div data-conta-lista-bloco>
+          <h2 class="site-secao-titulo at-mt-6">Atalho Pro</h2>
+          <label class="at-linha"><input type="checkbox" role="switch" class="at-chave" data-conta-lista-espera> Quero ser avisado do lançamento do Atalho Pro</label>
+        </div>
         <h2 class="site-secao-titulo at-mt-6">Seus dados</h2>
-        <p class="at-texto-suave">Guardamos só nome, e-mail, favoritos e a sua escolha sobre a lista do Pro. Veja a <a href="${url("privacidade/")}">política de privacidade</a>.</p>
+        <p class="at-texto-suave">Guardamos só nome, e-mail, favoritos, a sua escolha sobre a lista do Pro e, se você comprar, o plano e as compras (os dados de pagamento ficam só na Lemon Squeezy). Veja a <a href="${url("privacidade/")}">política de privacidade</a>.</p>
         <button class="at-botao at-perigo" commandfor="modal-excluir-conta" command="show-modal">Excluir minha conta</button>
         <dialog class="at-modal at-pequeno" id="modal-excluir-conta" aria-labelledby="excluir-conta-titulo">
           <form method="dialog">
-            <div class="at-modal-corpo"><h3 class="at-titulo-4" id="excluir-conta-titulo">Excluir sua conta?</h3><p class="at-texto-suave">Seus dados e favoritos serão apagados de forma definitiva.</p></div>
+            <div class="at-modal-corpo"><h3 class="at-titulo-4" id="excluir-conta-titulo">Excluir sua conta?</h3><p class="at-texto-suave">Seus dados e favoritos serão apagados de forma definitiva.</p><p class="at-texto-pequeno at-mb-0"><strong>Assina o Pro?</strong> Cancele antes em Gerenciar assinatura: excluir a conta não interrompe a cobrança na Lemon Squeezy.</p></div>
             <div class="at-modal-rodape"><button class="at-botao at-fantasma" value="cancelar">Cancelar</button><button class="at-botao at-perigo" value="excluir" data-excluir-conta>Excluir definitivamente</button></div>
           </form>
         </dialog>
@@ -485,14 +574,14 @@ export function paginaConta({ exemplos }) {
     secao: "",
     indexar: false,
     conteudo,
-    scripts: [...SCRIPTS_SUPABASE, "site/conta.js"],
+    scripts: [...SCRIPTS_SUPABASE, "site/loja.js", "site/conta.js"],
   });
 }
 
 /* ------------------------------------------------------------------------ */
 
 export function paginaPrivacidade() {
-  const atualizado = "8 de outubro de 2026";
+  const atualizado = "9 de outubro de 2026";
   const conteudo = `${cabecalhoPagina("Legal", "Política de privacidade", `Última atualização: ${atualizado}.`)}
     ${artigo(`
       <p>Esta política explica quais dados o Atalho trata, por quê e quais são os seus direitos, conforme o Regulamento Geral sobre a Proteção de Dados da União Europeia (RGPD) e, para quem está no Brasil, a Lei Geral de Proteção de Dados (Lei 13.709/2018, LGPD). O responsável pelo tratamento é ${SITE.autor}, com sede em Portugal.</p>
@@ -507,6 +596,13 @@ export function paginaPrivacidade() {
         <li><strong>Onde ficam:</strong> no Supabase, provedor de banco de dados e autenticação, em servidores na União Europeia, com as garantias exigidas pelo RGPD e pela LGPD.</li>
         <li><strong>E-mails:</strong> mensagens de confirmação de cadastro e de troca de senha são enviadas pelo Brevo, que recebe apenas o seu e-mail para fazer a entrega.</li>
         <li><strong>Por quanto tempo:</strong> enquanto a conta existir. Ao excluir a conta, os dados são apagados.</li>
+      </ul>
+      <h2 class="site-secao-titulo">2.1. Se você comprar ou assinar o Pro</h2>
+      <ul>
+        <li><strong>Quem processa o pagamento:</strong> a Lemon Squeezy (Lemon Squeezy LLC), que atua como revendedora oficial (merchant of record). Ela coleta e trata os dados de pagamento e de faturação (nome, e-mail, país, cartão ou PayPal) como responsável pelo tratamento, conforme a política de privacidade dela. O Atalho nunca recebe os dados do seu cartão.</li>
+        <li><strong>O que o Atalho guarda:</strong> o identificador da sua conta ligado ao plano ou à compra, a situação da assinatura (ativa, cancelada, datas de renovação e de término), o valor pago e o endereço do portal de assinatura, recebidos da Lemon Squeezy por um aviso assinado digitalmente.</li>
+        <li><strong>Finalidade e base legal:</strong> liberar o conteúdo que você comprou (execução do contrato: RGPD art. 6.º, n.º 1, b; LGPD art. 7º, V) e cumprir obrigações contábeis (RGPD art. 6.º, n.º 1, c; LGPD art. 7º, II).</li>
+        <li><strong>Por quanto tempo:</strong> enquanto a conta existir; registros de pagamento podem ser mantidos pelo prazo exigido pela lei fiscal, mesmo após a exclusão da conta, sem os demais dados.</li>
       </ul>
       <h2 class="site-secao-titulo">3. Assistente de IA</h2>
       <p>O texto que você digita no assistente é enviado ao serviço de IA da Cloudflare para gerar a resposta. Não peça ajuda com dados pessoais (CPF, senhas, endereços reais). As perguntas não são associadas à sua conta.</p>
@@ -528,26 +624,34 @@ export function paginaPrivacidade() {
 }
 
 export function paginaTermos() {
-  const conteudo = `${cabecalhoPagina("Legal", "Termos de uso", "Última atualização: 8 de outubro de 2026.")}
+  const conteudo = `${cabecalhoPagina("Legal", "Termos de uso", "Última atualização: 9 de outubro de 2026.")}
     ${artigo(`
       <h2 class="site-secao-titulo">1. O que é o Atalho</h2>
       <p>O Atalho é uma biblioteca gratuita de componentes de interface e a documentação que a acompanha, mantida por ${SITE.autor}.</p>
       <h2 class="site-secao-titulo">2. Licença do código</h2>
-      <p>O código da biblioteca é distribuído sob a <a href="${SITE.repositorio}/blob/main/LICENSE">licença MIT</a>: você pode usar em projetos pessoais e comerciais, modificar e redistribuir, mantendo o aviso de licença. O conteúdo do Atalho Pro, quando lançado, terá licença própria.</p>
+      <p>O código da biblioteca é distribuído sob a <a href="${SITE.repositorio}/blob/main/LICENSE">licença MIT</a>: você pode usar em projetos pessoais e comerciais, modificar e redistribuir, mantendo o aviso de licença. O conteúdo do Atalho Pro tem licença própria, descrita abaixo.</p>
       <h2 class="site-secao-titulo">3. Sem garantias</h2>
       <p>O Atalho é oferecido "como está". Revise e teste o código antes de usar em produção, especialmente tudo que envolve segurança, pagamentos e dados pessoais.</p>
       <h2 class="site-secao-titulo">4. Conta</h2>
       <p>Você é responsável pela sua senha. Contas usadas para abuso (como tentar sobrecarregar o assistente de IA) podem ser removidas.</p>
-      <h2 class="site-secao-titulo">5. Assistente de IA</h2>
+      <h2 class="site-secao-titulo" id="venda">5. Atalho Pro e compras</h2>
+      <ul>
+        <li><strong>Vendedor:</strong> as vendas são feitas pela Lemon Squeezy, revendedora oficial (merchant of record) do Atalho. Ela cobra, emite a fatura e recolhe os impostos (como o IVA). Os termos de compra dela também se aplicam.</li>
+        <li><strong>Assinatura Pro:</strong> cobrada por mês ou por ano, renova automaticamente até ser cancelada. Você cancela quando quiser em "Minha conta", sem multa; o acesso continua até o fim do período já pago. Mudanças de preço valem só para a próxima renovação e são avisadas antes.</li>
+        <li><strong>Compra avulsa:</strong> pagamento único por uma página ou um componente, com acesso enquanto o Atalho existir. Se o serviço for encerrado, você recebe o arquivo para guardar.</li>
+        <li><strong>Direito de desistência (UE):</strong> por ser conteúdo digital entregue na hora, antes de pagar você pede o acesso imediato e reconhece que, com isso, perde o direito de desistência de 14 dias. Se o conteúdo não funcionar como descrito, escreva para nós: corrigimos ou devolvemos o valor.</li>
+        <li><strong>Licença do conteúdo Pro:</strong> você pode usar e modificar o que baixar em quantos projetos quiser, seus ou de clientes, inclusive comerciais. Não pode revender, redistribuir ou publicar os modelos Pro como modelos ou kits (por exemplo, em marketplaces de templates), nem compartilhar o acesso da sua conta.</li>
+      </ul>
+      <h2 class="site-secao-titulo">6. Assistente de IA</h2>
       <p>As respostas são geradas automaticamente e podem conter erros. Confira o código sugerido antes de usar.</p>
-      <h2 class="site-secao-titulo">6. Patrocínios</h2>
+      <h2 class="site-secao-titulo">7. Patrocínios</h2>
       <p>Conteúdos patrocinados são sempre identificados. O Atalho não se responsabiliza por produtos de patrocinadores.</p>
-      <h2 class="site-secao-titulo">7. Mudanças</h2>
+      <h2 class="site-secao-titulo">8. Mudanças</h2>
       <p>Estes termos podem ser atualizados; a data no topo indica a última versão.</p>
     `)}`;
   return pagina({
     titulo: "Termos de uso · Atalho",
-    descricao: "Termos de uso do Atalho: licença MIT do código, conta, assistente de IA e patrocínios.",
+    descricao: "Termos de uso do Atalho: licença MIT do código, conta, Atalho Pro e compras, assistente de IA e patrocínios.",
     caminho: "termos/",
     pagina: "legal",
     secao: "",

@@ -1,6 +1,10 @@
 import { SITE, url, urlAbsoluta } from "./config.mjs";
 import { pagina, ICONES_SITE, SCRIPTS_SUPABASE } from "./layout.mjs";
 import { esc } from "./realce.mjs";
+import { PRECOS } from "./paginas-extras.mjs";
+
+// "€ 39" em vez de "€ 39,00"; centavos só quando existem
+const euro = (valor) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "EUR" }).format(valor).replace(/,00$/, "");
 
 /**
  * Vitrine de uma página completa: pública (o Google lê nome, descrição, destaques
@@ -11,6 +15,8 @@ export function paginaExemplo({ exemplo: e, exemplos, docs }) {
   const outros = exemplos.filter((x) => x.id !== e.id).slice(0, 3);
   // Captura grande (1280×800) para a vitrine e para o compartilhamento em redes sociais
   const captura = `exemplos/capturas/${e.id}.jpg`;
+  // Pro: só para quem assina ou comprou esta página (as regras do banco decidem)
+  const pro = e.acesso === "pro";
 
   const conteudo = `
     <div class="site-container site-exemplo-pagina">
@@ -22,7 +28,7 @@ export function paginaExemplo({ exemplo: e, exemplos, docs }) {
 
       <header class="site-exemplo-topo">
         <div class="at-pilha">
-          <span class="site-exclusivo-selo">${ICONES_SITE.cadeado} Grátis para membros</span>
+          <span class="site-exclusivo-selo${pro ? " site-exclusivo-pro" : ""}">${ICONES_SITE.cadeado} ${pro ? "Atalho Pro" : "Grátis para membros"}</span>
           <h1 class="site-titulo site-h2">${esc(e.nome)}</h1>
           <p class="at-chamada">${esc(e.resumo)}</p>
           <ul class="site-exemplo-destaques">
@@ -31,7 +37,7 @@ export function paginaExemplo({ exemplo: e, exemplos, docs }) {
         </div>
       </header>
 
-      <section class="site-exclusivo" data-exclusivo="${e.id}" aria-label="Página completa">
+      <section class="site-exclusivo" data-exclusivo="${e.id}"${pro ? ` data-exclusivo-acesso="pro"` : ""} aria-label="Página completa">
         <div class="site-exclusivo-vitrine" data-exclusivo-vitrine>
           <img src="${url(captura)}" alt="Prévia da página ${esc(e.nome)}" width="1280" height="800" fetchpriority="high">
           <div class="site-exclusivo-cartao" data-exclusivo-estado="carregando" aria-live="polite">
@@ -41,11 +47,24 @@ export function paginaExemplo({ exemplo: e, exemplos, docs }) {
             </div>
             <div data-exclusivo-visitante hidden>
               <span class="site-exclusivo-icone">${ICONES_SITE.cadeado}</span>
-              <h2 class="at-titulo-4">Exclusivo para membros</h2>
-              <p class="at-texto-suave">Crie sua conta grátis para ver esta página funcionando, copiar o código completo e baixar o arquivo pronto.</p>
+              <h2 class="at-titulo-4">${pro ? "Exclusivo do Atalho Pro" : "Exclusivo para membros"}</h2>
+              <p class="at-texto-suave">${
+                pro
+                  ? "Entre na sua conta (é grátis) e depois assine o Pro ou compre só esta página."
+                  : "Crie sua conta grátis para ver esta página funcionando, copiar o código completo e baixar o arquivo pronto."
+              }</p>
               <div class="at-linha at-centro">
                 <a class="at-botao at-primario" href="${url("conta/")}?criar" data-exclusivo-criar>Criar conta grátis</a>
                 <a class="at-botao" href="${url("conta/")}" data-exclusivo-entrar>Já tenho conta</a>
+              </div>
+            </div>
+            <div data-exclusivo-pro hidden>
+              <span class="site-exclusivo-icone">${ICONES_SITE.cadeado}</span>
+              <h2 class="at-titulo-4">Esta página é do Atalho Pro</h2>
+              <p class="at-texto-suave">Assine o Pro para liberar esta e todas as outras páginas Pro, ou compre só esta e fique com ela para sempre.</p>
+              <div class="at-linha at-centro">
+                <a class="at-botao at-primario" href="${url("pro/")}">Ver o Pro · ${euro(PRECOS.proMensal)}/mês</a>
+                ${e.produto ? `<button type="button" class="at-botao" data-comprar="${esc(e.produto)}">Comprar só esta · ${euro(PRECOS.pagina)}</button>` : ""}
               </div>
             </div>
             <div data-exclusivo-indisponivel hidden>
@@ -117,7 +136,7 @@ export function paginaExemplo({ exemplo: e, exemplos, docs }) {
     imagemSocial: urlAbsoluta(captura),
     imagemTamanho: [1280, 800],
     conteudo,
-    scripts: [...SCRIPTS_SUPABASE, "site/membros.js"],
+    scripts: [...SCRIPTS_SUPABASE, "site/loja.js", "site/membros.js"],
     dadosEstruturados: [
       {
         "@context": "https://schema.org",

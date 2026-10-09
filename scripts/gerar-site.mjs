@@ -62,7 +62,7 @@ export async function gerarSite() {
   for (const pasta of ["miniaturas", "capturas"]) {
     await cp(path.join(RAIZ, "exemplos", pasta), path.join(DIST, "exemplos", pasta), { recursive: true });
   }
-  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js"]) {
+  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js"]) {
     await cp(path.join(RAIZ, "site", arquivo), path.join(DIST, "site", arquivo));
   }
   for (const arquivo of ["favicon.svg", "og.png"]) {
