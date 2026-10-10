@@ -53,6 +53,21 @@ jobs:
           path: testes/resultado/
           if-no-files-found: ignore
 
+  vscode:
+    name: Extensão do VS Code (no VS Code de verdade)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Empacotar (confere o manifesto)
+        working-directory: vscode-atalho
+        run: npx --yes @vscode/vsce@3 package --no-dependencies
+      - name: Testes dentro do VS Code (visitante, membro, Pro, todos os trechos)
+        run: xvfb-run -a npm run teste-vscode
+
   php:
     name: Biblioteca PHP
     runs-on: ubuntu-latest

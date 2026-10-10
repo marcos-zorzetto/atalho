@@ -37,11 +37,13 @@
     "tipos": "node scripts/verificar-typescript.mjs",
     "site": "node scripts/gerar-site.mjs --local && npx --yes serve dist",
     "e2e": "node scripts/gerar-site.mjs --local && node testes/interacoes.mjs",
-    "auditoria": "node scripts/gerar-site.mjs --local && node testes/auditoria.mjs"
+    "auditoria": "node scripts/gerar-site.mjs --local && node testes/auditoria.mjs",
+    "teste-vscode": "node vscode-atalho/test-vscode/executar.js"
   },
   "devDependencies": {
     "@electric-sql/pglite": "0.5.8",
     "@phosphor-icons/core": "^2.1.1",
+    "@vscode/test-electron": "2.5.2",
     "axe-core": "4.13.0",
     "playwright-core": "1.63.0"
   }

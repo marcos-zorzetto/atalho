@@ -3,3 +3,4 @@ test/**
 .gitignore
 *.vsix
 PUBLICAR.md
+test-vscode/**

@@ -26,6 +26,7 @@ class TreeItem { constructor(label, estado) { this.label = label; this.collapsib
 
 const vscodeFalso = {
   EventEmitter, SnippetString, MarkdownString, CompletionItem, TreeItem,
+  ExtensionMode: { Production: 1, Development: 2, Test: 3 },
   ThemeIcon: class { constructor(id) { this.id = id; } },
   Hover: class { constructor(conteudo, intervalo) { this.contents = conteudo; this.range = intervalo; } },
   CompletionItemKind: { Snippet: 1, Value: 2, Event: 3 },
@@ -46,9 +47,9 @@ const vscodeFalso = {
   window: {
     createStatusBarItem: () => ({ show() {}, dispose() {} }),
     registerTreeDataProvider: (_id, p) => ((registrados.painel = p), { dispose() {} }),
-    showInformationMessage: async (m) => { registrados.mensagens.push(m); },
-    showWarningMessage: async (m) => { registrados.mensagens.push(m); },
-    showErrorMessage: async (m) => { registrados.mensagens.push(m); },
+    showInformationMessage: (m) => (registrados.mensagens.push(m), Promise.resolve()),
+    showWarningMessage: (m) => (registrados.mensagens.push(m), Promise.resolve()),
+    showErrorMessage: (m) => (registrados.mensagens.push(m), Promise.resolve()),
     withProgress: async (_o, f) => f(),
     activeTextEditor: undefined,
   },

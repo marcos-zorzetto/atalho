@@ -50,29 +50,36 @@ async function atualizarEstado(sessao) {
    Comandos
    -------------------------------------------------------------------------- */
 
-async function entrar() {
-  const escolha = await vscode.window.showQuickPick(
-    [
-      { label: "$(account) Já tenho conta", description: "entrar com e-mail e senha", acao: "entrar" },
-      { label: "$(add) Criar conta grátis", description: "abre o site do Atalho", acao: "criar" },
-    ],
-    { title: "Atalho", placeHolder: "A extensão é grátis com uma conta do Atalho" },
-  );
-  if (!escolha) return;
-  if (escolha.acao === "criar") return criarConta();
+/**
+ * Pede o e-mail e a senha e entra. Os testes passam os dois direto (sem as
+ * caixas de digitação). Devolve true se entrou.
+ */
+async function entrar(emailDado, senhaDada) {
+  let email = emailDado, senha = senhaDada;
+  if (typeof email !== "string" || typeof senha !== "string") {
+    const escolha = await vscode.window.showQuickPick(
+      [
+        { label: "$(account) Já tenho conta", description: "entrar com e-mail e senha", acao: "entrar" },
+        { label: "$(add) Criar conta grátis", description: "abre o site do Atalho", acao: "criar" },
+      ],
+      { title: "Atalho", placeHolder: "A extensão é grátis com uma conta do Atalho" },
+    );
+    if (!escolha) return false;
+    if (escolha.acao === "criar") return criarConta(), false;
 
-  const email = await vscode.window.showInputBox({
-    title: "Entrar no Atalho (1 de 2)",
-    prompt: "Seu e-mail da conta do Atalho",
-    placeHolder: "voce@email.com",
-    ignoreFocusOut: true,
-    validateInput: (v) => (/^\S+@\S+\.\S+$/.test(v.trim()) ? null : "Digite um e-mail válido."),
-  });
-  if (!email) return;
-  const senha = await vscode.window.showInputBox({ title: "Entrar no Atalho (2 de 2)", prompt: "Sua senha", password: true, ignoreFocusOut: true });
-  if (!senha) return;
+    email = await vscode.window.showInputBox({
+      title: "Entrar no Atalho (1 de 2)",
+      prompt: "Seu e-mail da conta do Atalho",
+      placeHolder: "voce@email.com",
+      ignoreFocusOut: true,
+      validateInput: (v) => (/^\S+@\S+\.\S+$/.test(v.trim()) ? null : "Digite um e-mail válido."),
+    });
+    if (!email) return false;
+    senha = await vscode.window.showInputBox({ title: "Entrar no Atalho (2 de 2)", prompt: "Sua senha", password: true, ignoreFocusOut: true });
+    if (!senha) return false;
+  }
 
-  await vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: "Atalho: entrando…" }, async () => {
+  return vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: "Atalho: entrando…" }, async () => {
     try {
       const sessao = await conta.entrar(email.trim(), senha);
       await atualizarEstado(sessao);
@@ -81,18 +88,27 @@ async function entrar() {
       vscode.window
         .showInformationMessage(`Bem-vindo(a)! Plano ${nomePlano(estado)}: ${TRECHOS_BASE.length} trechos grátis e ${liberados} avançados liberados. Digite "at-" num arquivo HTML.`, ...acoes)
         .then((r) => r && assinarPro());
+      return true;
     } catch (erro) {
-      const r = await vscode.window.showErrorMessage(`Atalho: ${erro.message}`, "Tentar de novo", "Esqueci a senha");
-      if (r === "Tentar de novo") entrar();
-      if (r === "Esqueci a senha") vscode.env.openExternal(link("conta/"));
+      // Sem "await": a mensagem fica aberta sem travar o comando
+      vscode.window.showErrorMessage(`Atalho: ${erro.message}`, "Tentar de novo", "Esqueci a senha").then((r) => {
+        if (r === "Tentar de novo") entrar();
+        if (r === "Esqueci a senha") vscode.env.openExternal(link("conta/"));
+      });
+      ultimoErro = erro.message;
+      return false;
     }
   });
 }
+
+/** Última mensagem de erro do login (os testes conferem). */
+let ultimoErro = null;
 
 const criarConta = () => vscode.env.openExternal(link("conta/?criar"));
 const assinarPro = () => vscode.env.openExternal(link("pro/"));
 
 async function sair() {
+  ultimoErro = null;
   await conta.sair();
   await atualizarEstado(null);
   vscode.window.showInformationMessage("Atalho: você saiu da sua conta.");
@@ -106,25 +122,29 @@ async function inserirCodigo(corpo) {
   await vscode.window.showTextDocument(documento);
 }
 
-async function exigirConta() {
+function exigirConta() {
   if (estado.pessoa) return true;
-  const r = await vscode.window.showInformationMessage("Os trechos do Atalho são liberados com uma conta grátis.", "Entrar", "Criar conta grátis");
-  if (r === "Entrar") entrar();
-  if (r === "Criar conta grátis") criarConta();
+  vscode.window.showInformationMessage("Os trechos do Atalho são liberados com uma conta grátis.", "Entrar", "Criar conta grátis").then((r) => {
+    if (r === "Entrar") entrar();
+    if (r === "Criar conta grátis") criarConta();
+  });
   return false;
 }
 
+/** Insere um item do painel ou da busca. Devolve "inserido", "sem-conta" ou "bloqueado". */
 async function inserirItem(item) {
-  if (!(await exigirConta())) return;
-  if (item.corpo) return inserirCodigo(item.corpo);
-  const r = await vscode.window.showInformationMessage(`"${item.nome}" faz parte do Atalho Pro (todos os componentes e animações, com atualizações).`, "Conhecer o Pro", "Já assinei: atualizar");
-  if (r === "Conhecer o Pro") assinarPro();
-  if (r === "Já assinei: atualizar") atualizar();
+  if (!exigirConta()) return "sem-conta";
+  if (item.corpo) return await inserirCodigo(item.corpo), "inserido";
+  vscode.window.showInformationMessage(`"${item.nome}" faz parte do Atalho Pro (todos os componentes e animações, com atualizações).`, "Conhecer o Pro", "Já assinei: atualizar").then((r) => {
+    if (r === "Conhecer o Pro") assinarPro();
+    if (r === "Já assinei: atualizar") atualizar();
+  });
+  return "bloqueado";
 }
 
 /** Busca rápida em tudo (Ctrl+Shift+P → "Atalho: Inserir componente"). */
 async function inserir() {
-  if (!(await exigirConta())) return;
+  if (!exigirConta()) return;
   const base = TRECHOS_BASE.map((t) => ({ label: t.nome, description: t.prefixo, detail: `${t.categoria} · ${t.resumo}`, item: t }));
   const avancados = [...estado.avancados, ...estado.animacoes].map((i) => ({
     label: `${i.liberado ? "" : "$(lock) "}${i.nome}`,
@@ -140,9 +160,10 @@ async function inserir() {
 }
 
 async function novaPagina() {
-  if (!(await exigirConta())) return;
+  if (!exigirConta()) return;
   const documento = await vscode.workspace.openTextDocument({ language: "html", content: paginaInicial(CONFIG.cdn, "<h1>Olá!</h1>") });
   await vscode.window.showTextDocument(documento);
+  return documento;
 }
 
 async function atualizar() {
@@ -281,8 +302,10 @@ function folha(item) {
 
 async function activate(contexto) {
   const CHAVE = "atalho.renovacao";
+  // Nos testes automáticos, um servidor de contas de mentira substitui o real
+  const emTeste = contexto.extensionMode === vscode.ExtensionMode.Test && process.env.ATALHO_TESTE_SUPABASE;
   conta = new Conta({
-    url: CONFIG.supabase.url,
+    url: emTeste || CONFIG.supabase.url,
     chavePublica: CONFIG.supabase.chavePublica,
     cofre: {
       ler: () => contexto.secrets.get(CHAVE),
@@ -291,6 +314,7 @@ async function activate(contexto) {
     },
   });
 
+  const painelLateral = new Painel();
   const barra = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   const desenharBarra = () => {
     barra.text = `$(zap) Atalho: ${nomePlano(estado)}`;
@@ -315,10 +339,13 @@ async function activate(contexto) {
     vscode.commands.registerCommand("atalho.documentacao", () => vscode.env.openExternal(link(""))),
     vscode.languages.registerCompletionItemProvider(LINGUAGENS, autocompletar, "-", '"', "'", " "),
     vscode.languages.registerHoverProvider(LINGUAGENS, dicas),
-    vscode.window.registerTreeDataProvider("atalho.painel", new Painel()),
+    vscode.window.registerTreeDataProvider("atalho.painel", painelLateral),
   );
 
   await atualizarEstado(await conta.restaurar());
+
+  // Usado só pelos testes (outras extensões não têm motivo para chamar)
+  return { estado, painel: painelLateral, barra, ultimoErro: () => ultimoErro, catalogo: { TRECHOS_BASE, CLASSES } };
 }
 
 function deactivate() {}
