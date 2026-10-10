@@ -1,6 +1,6 @@
 /*
  * Ícones do Atalho: traço de 2px em grade 24x24, desenhados para o projeto.
- * Licença MIT. Use copiando o SVG da página /icones/.
+ * Licença MIT. Use a copiar o SVG da página /icones/.
  */
 (function () {
   const icones = {

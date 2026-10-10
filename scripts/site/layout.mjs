@@ -8,11 +8,11 @@ import { esc } from "./realce.mjs";
 const icone = (caminho, tamanho = 18) =>
   `<svg viewBox="0 0 24 24" width="${tamanho}" height="${tamanho}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${caminho}</svg>`;
 
-/** Páginas que usam contas: o supabase-js (versão fixa) e a conexão compartilhada. */
+/** Páginas que usam contas: o supabase-js (versão fixa) e a ligação compartilhada. */
 const SUPABASE_JS = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js";
 export const SCRIPTS_SUPABASE = [SUPABASE_JS, "site/supabase.js"];
 
-/** Hash dos scripts de CDN (SRI): se o arquivo for alterado lá, o navegador não executa. */
+/** Hash dos scripts de CDN (SRI): se o ficheiro for alterado lá, o navegador não executa. */
 const INTEGRIDADE = {
   [SUPABASE_JS]: "sha384-iLddHTLokph6Omwoyid4XKxHaWa6w41BnoEj0q5oOrzmYPpHIKt1wyjReA7s//pP",
 };
@@ -71,7 +71,7 @@ export function pagina(p) {
   const scripts = ["atalho/atalho.js", "site/config.js", "site/indice-busca.js", "site/assistente.js", ...(p.scripts || []), "site/site.js"];
 
   return `<!doctype html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,7 +83,7 @@ export function pagina(p) {
   <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${p.tipoOg || "website"}">
-  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale" content="pt_PT">
   <meta property="og:site_name" content="${SITE.nome}">
   <meta property="og:title" content="${esc(p.tituloSocial || p.titulo)}">
   <meta property="og:description" content="${esc(p.descricao)}">
@@ -111,7 +111,7 @@ export function pagina(p) {
   ${p.cabecaExtra || ""}
 </head>
 <body data-pagina="${p.pagina}" data-base="${SITE.base}"${p.classeCorpo ? ` class="${p.classeCorpo}"` : ""}>
-  <a class="at-pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
   ${cabecalho(p.secao)}
   <main id="conteudo">
 ${p.conteudo}
@@ -135,8 +135,8 @@ function cabecalho(secaoAtual) {
         ).join("\n        ")}
       </ul>
       <div class="at-barra-acoes">
-        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Buscar componentes (Ctrl + K)">
-          ${ICONES_SITE.busca}<span>Buscar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          ${ICONES_SITE.busca}<span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
         </button>
         <a class="at-botao at-icone at-fantasma at-so-desktop" href="${SITE.repositorio}" target="_blank" rel="noopener" aria-label="Código no GitHub">${ICONES_SITE.github}</a>
         <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro">${ICONES_SITE.lua}</button>
@@ -161,8 +161,8 @@ function rodape() {
         </div>
         ${coluna("Documentação", [["Instalação", "componentes/instalacao/"], ["Componentes", "componentes/"], ["Exemplos completos", "exemplos/"], ["Editor ao vivo", "editor/"], ["Estúdio de animações", "animacoes/"], ["Ícones", "icones/"], ["Personalizar tema", "personalizar/"]])}
         ${coluna("Linguagens", [["TypeScript", "typescript/"], ["PHP no servidor", "php/"], ["Estado (reatividade)", "componentes/estado/"], ["Eventos", "componentes/eventos/"]])}
-        ${coluna("Projeto", [["GitHub", SITE.repositorio, true], ["Relatar um problema", `${SITE.repositorio}/issues`, true], ["Atalho Pro", "pro/"], ["Anuncie no Atalho", "patrocinar/"]])}
-        ${coluna("Legal", [["Privacidade", "privacidade/"], ["Termos de uso", "termos/"], ["Minha conta", "conta/"]])}
+        ${coluna("Projeto", [["GitHub", SITE.repositorio, true], ["Reportar um problema", `${SITE.repositorio}/issues`, true], ["Atalho Pro", "pro/"], ["Anuncie no Atalho", "patrocinar/"]])}
+        ${coluna("Legal", [["Privacidade", "privacidade/"], ["Termos de uso", "termos/"], ["A minha conta", "conta/"]])}
       </div>
       <div class="site-rodape-base">
         <span>Criado por <a href="${SITE.autorUrl}" target="_blank" rel="noopener">${SITE.autor}</a>. Empresas citadas são só referência de padrões de interface.</span>
@@ -192,7 +192,7 @@ export function espacoPatrocinio(patrocinadores, posicao = "lateral") {
   return `<aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
     <a href="${url("patrocinar/")}" class="site-patrocinio-link">
       <span class="site-patrocinio-icone" aria-hidden="true">${ICONES_SITE.faisca}</span>
-      <span><strong>Sua marca aqui</strong><span>Alcance desenvolvedores que estão começando no Brasil.</span></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
     </a>
     <small>Espaço publicitário</small>
   </aside>`;

@@ -29,11 +29,11 @@
       <div class="at-modal-corpo at-pilha">
         <form class="at-grupo-entrada" data-assistente-form>
           <input class="at-entrada" name="pergunta" maxlength="400" required autocomplete="off"
-                 placeholder="Ex.: formulário de contato com CPF e telefone" aria-label="Descreva o que você quer construir">
+                 placeholder="Ex.: formulário de contacto com NIF e telemóvel" aria-label="Descreva o que quer construir">
           <button class="at-botao at-primario">Perguntar</button>
         </form>
         <div data-assistente-saida aria-live="polite"></div>
-        <p class="at-texto-suave at-texto-pequeno at-mb-0">Respostas geradas por IA podem ter erros: confira antes de usar. Não digite dados pessoais.</p>
+        <p class="at-texto-suave at-texto-pequeno at-mb-0">Respostas geradas por IA podem ter erros: verifique-as antes de as usar. Não escreva dados pessoais.</p>
       </div>`;
     document.body.append(dialogo);
     $("[data-assistente-form]", dialogo).addEventListener("submit", (e) => {
@@ -45,15 +45,15 @@
 
   function sugestoesLocais(pergunta) {
     const achados = window.AtalhoSite?.buscar(pergunta, 5) || [];
-    if (!achados.length) return '<p class="at-texto-suave">Não encontrei nada parecido. Tente descrever de outro jeito.</p>';
-    return `<p>Componentes que combinam com a sua busca:</p><div class="site-relacionados">${achados
+    if (!achados.length) return '<p class="at-texto-suave">Não encontrei nada parecido. Tente descrever de outra forma.</p>';
+    return `<p>Componentes que combinam com a sua pesquisa:</p><div class="site-relacionados">${achados
       .map((c) => `<a href="${c.url}"><strong>${esc(c.nome)}</strong><span>${esc(c.resumo)}</span></a>`)
       .join("")}</div>`;
   }
 
   function previa(html) {
     const raiz = base();
-    return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    return `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${raiz}atalho/atalho.css"><script src="${raiz}atalho/atalho.js" defer><\/script>
 <style>body{padding:16px;background:transparent}</style></head><body>${html}</body></html>`;
   }
@@ -85,7 +85,7 @@
         ${
           resposta.html
             ? `<div class="site-exemplo-caixa at-mt-4">
-                <iframe class="site-assistente-previa" title="Prévia do código gerado" sandbox="allow-scripts" loading="lazy"></iframe>
+                <iframe class="site-assistente-previa" title="Pré-visualização do código gerado" sandbox="allow-scripts" loading="lazy"></iframe>
                 <div class="site-codigo-abas"><span class="site-codigo-rotulo">HTML gerado</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
                 <pre class="site-codigo" tabindex="0"><code>${esc(resposta.html)}</code></pre>
               </div>`
@@ -96,7 +96,7 @@
     } catch (erro) {
       const limite = erro.status === 429;
       saida.innerHTML = `<div class="at-alerta at-aviso"><div class="at-alerta-conteudo"><strong>${limite ? "O assistente atingiu o limite de uso por agora" : "O assistente não respondeu"}</strong><p>${
-        limite ? "Tente de novo em alguns minutos." : "Enquanto isso, veja o que a busca encontrou."
+        limite ? "Tente de novo daqui a alguns minutos." : "Entretanto, veja o que a pesquisa encontrou."
       }</p></div></div>${sugestoesLocais(pergunta)}`;
     } finally {
       botao.removeAttribute("aria-busy");

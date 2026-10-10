@@ -1,21 +1,22 @@
 /*!
- * Atalho 1.2.2 — componentes de interface em português
+ * Atalho 1.3.0 — componentes de interface em português
  * https://github.com/marcos-zorzetto/atalho
  * Licença MIT · Marcos Zorzetto
  *
  * Como funciona
  * -------------
  * Você escreve HTML com atributos "data-at-..." e o Atalho cuida do resto.
- * Não precisa chamar nenhuma função de inicialização: os eventos são
+ * Não precisa de chamar nenhuma função de inicialização: os eventos são
  * delegados ao documento e um MutationObserver liga automaticamente os
  * componentes que forem adicionados depois (via fetch, template etc.).
  *
  * API pública: window.Atalho
- *   Atalho.estado(nome, dados, opcoes)   estado reativo que atualiza a tela
+ *   Atalho.estado(nome, dados, opcoes)   estado reativo que atualiza o ecrã
  *   Atalho.notificar(mensagem, opcoes)   notificação flutuante (toast)
- *   Atalho.formatar.moeda(valor)         formatação brasileira (Intl)
- *   Atalho.requisitar(url, opcoes)       fetch com tempo limite e erros em português
- *   Atalho.validar.cpf(texto)            validação de CPF e CNPJ
+ *   Atalho.formatar.moeda(valor)         moeda e números no idioma da página (Intl)
+ *   Atalho.requisitar(url, opcoes)       fetch com tempo limite e erros no idioma da página
+ *   Atalho.validar.nif(texto)            NIF, IBAN, código postal, telemóvel (e CPF/CNPJ do Brasil)
+ *   Atalho.configurar({ idioma, moeda }) troca o idioma e a moeda (padrão: <html lang> e euro)
  *   Atalho.iniciar(elemento)             liga componentes manualmente (raramente necessário)
  */
 (function () {
@@ -64,32 +65,219 @@
       try {
         localStorage.setItem(chave, JSON.stringify(valor));
       } catch {
-        /* modo privado ou armazenamento cheio: segue sem salvar */
+        /* modo privado ou armazenamento cheio: continua sem guardar */
       }
     },
   };
 
   /* ------------------------------------------------------------------------
-     Formatação brasileira (Intl)
+     Idioma e moeda
+     O idioma vem do <html lang="..."> (pt-PT, pt-BR ou en; padrão pt-PT) e a
+     moeda de <html data-at-moeda="..."> (padrão: euro; real para pt-BR).
+     Atalho.configurar({ idioma: "en", moeda: "GBP" }) troca os dois.
      ------------------------------------------------------------------------ */
 
-  const intlMoeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-  const intlNumero = new Intl.NumberFormat("pt-BR");
-  const intlRelativo = new Intl.RelativeTimeFormat("pt-BR", { numeric: "auto" });
+  const configuracao = { idioma: null, moeda: null };
+
+  function idioma() {
+    const lang = configuracao.idioma || document.documentElement.lang || "pt-PT";
+    if (/^en\b/i.test(lang)) return "en";
+    if (/^pt-br$/i.test(lang)) return "pt-BR";
+    return "pt-PT";
+  }
+  // Para o Intl: pt-PT, pt-BR ou a variante de inglês escolhida (en-GB, en-US…)
+  function localidade() {
+    if (idioma() !== "en") return idioma();
+    const lang = configuracao.idioma || document.documentElement.lang || "en";
+    return /^en\b/i.test(lang) ? lang : "en";
+  }
+  const moeda = () => configuracao.moeda || document.documentElement.dataset.atMoeda || (idioma() === "pt-BR" ? "BRL" : "EUR");
+
+  const TEXTOS = {
+    "pt-PT": {
+      erro400: "Algum dado enviado está incorreto.",
+      erro401: "Precisa de iniciar sessão na sua conta.",
+      erro403: "Não tem permissão para fazer isto.",
+      erro404: "Não encontrámos o que procurou.",
+      erro422: "Verifique os dados do formulário.",
+      erro429: "Demasiadas tentativas. Aguarde um pouco e tente novamente.",
+      erroServidor: (status) => `O servidor respondeu com o erro ${status}.`,
+      demorou: "O servidor demorou demasiado a responder. Tente novamente.",
+      semInternet: "Sem ligação à internet.",
+      semServidor: "Não foi possível ligar ao servidor.",
+      notificacoes: "Notificações",
+      fecharNotificacao: "Fechar notificação",
+      marqueOpcao: "Marque esta opção para continuar.",
+      escolhaOpcao: "Escolha uma opção.",
+      preencha: "Preencha este campo.",
+      emailInvalido: "Introduza um e-mail válido, como nome@exemplo.pt.",
+      urlInvalida: "Introduza um endereço completo, a começar por https://.",
+      formatoInvalido: "Formato inválido.",
+      curto: (min, atual) => `Use pelo menos ${min} caracteres (agora são ${atual}).`,
+      longo: (max) => `Use no máximo ${max} caracteres.`,
+      minimo: (min) => `O valor mínimo é ${min}.`,
+      maximo: (max) => `O valor máximo é ${max}.`,
+      passo: "Valor fora do intervalo permitido.",
+      padrao: "O formato não está correto.",
+      valorInvalido: "Valor inválido.",
+      cpfInvalido: "CPF inválido. Verifique os números.",
+      cnpjInvalido: "CNPJ inválido. Verifique os caracteres.",
+      nifInvalido: "NIF inválido. Verifique os 9 algarismos.",
+      ibanInvalido: "IBAN inválido. Verifique o país e os números.",
+      codigoPostalInvalido: "Código postal incompleto (formato 0000-000).",
+      telefoneInvalido: "Número de telefone incompleto.",
+      telemovelInvalido: "Número de telemóvel inválido (9 algarismos, a começar por 9).",
+      cepInvalido: "CEP incompleto.",
+      cepNaoEncontrado: "CEP não encontrado. Verifique os números.",
+      codigoPostalNaoEncontrado: "Código postal não encontrado. Verifique os números.",
+      diferentes: "Os valores não são iguais.",
+      paginacaoTabela: "Paginação da tabela",
+      arrasteCartao: "Arraste ou use Alt + setas para mover",
+      digito: (i, total) => `Algarismo ${i} de ${total}`,
+      tabelaVazia: "Nenhum resultado para esta pesquisa.",
+      paginaAnterior: "Página anterior",
+      pagina: (p) => `Página ${p}`,
+      proximaPagina: "Página seguinte",
+      mostrando: (de, ate, total) => `A mostrar ${de}–${ate} de ${total}`,
+      nenhumResultado: "Nenhum resultado",
+      grandeDemais: " · demasiado grande",
+      remover: "Remover",
+      copiado: "Copiado!",
+      naoCopiou: "Não foi possível copiar. Selecione o texto e use Ctrl+C.",
+      ocultar: "Ocultar",
+      mostrar: "Mostrar",
+      forca: ["", "Fraca", "Razoável", "Boa", "Forte"],
+      nadaEncontrado: "Nada encontrado.",
+      removerItem: (v) => `Remover ${v}`,
+      visualizador: "Visualizador de imagens",
+      fechar: "Fechar",
+      imagemAnterior: "Imagem anterior",
+      proximaImagem: "Imagem seguinte",
+      faltam: (d, h, m) => `Faltam ${d} dias, ${h} horas e ${m} minutos`,
+      aumentar: "Aumentar",
+      diminuir: "Diminuir",
+      adicionarEtiqueta: "Adicionar etiqueta (Enter para confirmar)",
+      verVideo: (t) => `Ver o vídeo: ${t}`,
+      video: "vídeo",
+      videoTitulo: "Vídeo",
+      agora: "agora mesmo",
+    },
+    // Só o que muda no português do Brasil
+    "pt-BR": {
+      erro401: "Você precisa entrar na sua conta.",
+      erro403: "Você não tem permissão para fazer isso.",
+      erro404: "Não encontramos o que você procurou.",
+      erro429: "Muitas tentativas. Aguarde um pouco e tente de novo.",
+      demorou: "O servidor demorou demais para responder. Tente de novo.",
+      semInternet: "Sem conexão com a internet.",
+      semServidor: "Não foi possível conectar ao servidor.",
+      emailInvalido: "Digite um e-mail válido, como nome@exemplo.com.",
+      urlInvalida: "Digite um endereço completo, começando com https://.",
+      telefoneInvalido: "Telefone incompleto. Inclua o DDD.",
+      digito: (i, total) => `Dígito ${i} de ${total}`,
+      tabelaVazia: "Nenhum resultado para essa busca.",
+      proximaPagina: "Próxima página",
+      mostrando: (de, ate, total) => `Mostrando ${de}–${ate} de ${total}`,
+      grandeDemais: " · grande demais",
+      proximaImagem: "Próxima imagem",
+      verVideo: (t) => `Assistir ao vídeo: ${t}`,
+    },
+    en: {
+      erro400: "Some of the data sent is incorrect.",
+      erro401: "You need to sign in to your account.",
+      erro403: "You don't have permission to do this.",
+      erro404: "We couldn't find what you were looking for.",
+      erro422: "Please check the form data.",
+      erro429: "Too many attempts. Please wait a moment and try again.",
+      erroServidor: (status) => `The server responded with error ${status}.`,
+      demorou: "The server took too long to respond. Please try again.",
+      semInternet: "No internet connection.",
+      semServidor: "Could not connect to the server.",
+      notificacoes: "Notifications",
+      fecharNotificacao: "Close notification",
+      marqueOpcao: "Tick this option to continue.",
+      escolhaOpcao: "Choose an option.",
+      preencha: "Please fill in this field.",
+      emailInvalido: "Enter a valid email, like name@example.com.",
+      urlInvalida: "Enter a full address, starting with https://.",
+      formatoInvalido: "Invalid format.",
+      curto: (min, atual) => `Use at least ${min} characters (currently ${atual}).`,
+      longo: (max) => `Use at most ${max} characters.`,
+      minimo: (min) => `The minimum value is ${min}.`,
+      maximo: (max) => `The maximum value is ${max}.`,
+      passo: "Value outside the allowed range.",
+      padrao: "The format is not correct.",
+      valorInvalido: "Invalid value.",
+      cpfInvalido: "Invalid CPF. Check the numbers.",
+      cnpjInvalido: "Invalid CNPJ. Check the characters.",
+      nifInvalido: "Invalid tax number (NIF). Check the 9 digits.",
+      ibanInvalido: "Invalid IBAN. Check the country code and numbers.",
+      codigoPostalInvalido: "Incomplete postcode (format 0000-000).",
+      telefoneInvalido: "Incomplete phone number.",
+      telemovelInvalido: "Invalid mobile number (9 digits, starting with 9).",
+      cepInvalido: "Incomplete CEP.",
+      cepNaoEncontrado: "CEP not found. Check the numbers.",
+      codigoPostalNaoEncontrado: "Postcode not found. Check the numbers.",
+      diferentes: "The values don't match.",
+      paginacaoTabela: "Table pagination",
+      arrasteCartao: "Drag or use Alt + arrow keys to move",
+      digito: (i, total) => `Digit ${i} of ${total}`,
+      tabelaVazia: "No results for this search.",
+      paginaAnterior: "Previous page",
+      pagina: (p) => `Page ${p}`,
+      proximaPagina: "Next page",
+      mostrando: (de, ate, total) => `Showing ${de}–${ate} of ${total}`,
+      nenhumResultado: "No results",
+      grandeDemais: " · too large",
+      remover: "Remove",
+      copiado: "Copied!",
+      naoCopiou: "Couldn't copy. Select the text and press Ctrl+C.",
+      ocultar: "Hide",
+      mostrar: "Show",
+      forca: ["", "Weak", "Fair", "Good", "Strong"],
+      nadaEncontrado: "Nothing found.",
+      removerItem: (v) => `Remove ${v}`,
+      visualizador: "Image viewer",
+      fechar: "Close",
+      imagemAnterior: "Previous image",
+      proximaImagem: "Next image",
+      faltam: (d, h, m) => `${d} days, ${h} hours and ${m} minutes left`,
+      aumentar: "Increase",
+      diminuir: "Decrease",
+      adicionarEtiqueta: "Add tag (press Enter to confirm)",
+      verVideo: (t) => `Watch the video: ${t}`,
+      video: "video",
+      videoTitulo: "Video",
+      agora: "just now",
+    },
+  };
+
+  /** Texto no idioma da página: t("preencha") ou t("curto", 8, 3). */
+  function t(chave, ...args) {
+    const valor = TEXTOS[idioma()][chave] ?? TEXTOS["pt-PT"][chave];
+    return typeof valor === "function" ? valor(...args) : valor;
+  }
+
+  /* ------------------------------------------------------------------------
+     Formatação no idioma e na moeda da página (Intl)
+     ------------------------------------------------------------------------ */
+
+  const intlCache = new Map();
+  function intl(Tipo, opcoes = {}) {
+    const chave = `${Tipo.name}|${localidade()}|${JSON.stringify(opcoes)}`;
+    if (!intlCache.has(chave)) intlCache.set(chave, new Tipo(localidade(), opcoes));
+    return intlCache.get(chave);
+  }
 
   const formatar = {
-    moeda: (valor) => intlMoeda.format(Number(valor) || 0),
+    moeda: (valor, codigo) => intl(Intl.NumberFormat, { style: "currency", currency: codigo || moeda() }).format(Number(valor) || 0),
     numero: (valor, casas) =>
-      casas == null
-        ? intlNumero.format(Number(valor) || 0)
-        : new Intl.NumberFormat("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas }).format(Number(valor) || 0),
-    porcentagem: (valor, casas = 0) =>
-      new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: casas }).format(Number(valor) || 0),
-    compacto: (valor) => new Intl.NumberFormat("pt-BR", { notation: "compact" }).format(Number(valor) || 0),
-    data: (valor, estilo = "medium") => new Intl.DateTimeFormat("pt-BR", { dateStyle: estilo }).format(new Date(valor)),
-    dataHora: (valor) =>
-      new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(valor)),
-    hora: (valor) => new Intl.DateTimeFormat("pt-BR", { timeStyle: "short" }).format(new Date(valor)),
+      intl(Intl.NumberFormat, casas == null ? {} : { minimumFractionDigits: casas, maximumFractionDigits: casas }).format(Number(valor) || 0),
+    porcentagem: (valor, casas = 0) => intl(Intl.NumberFormat, { style: "percent", maximumFractionDigits: casas }).format(Number(valor) || 0),
+    compacto: (valor) => intl(Intl.NumberFormat, { notation: "compact" }).format(Number(valor) || 0),
+    data: (valor, estilo = "medium") => intl(Intl.DateTimeFormat, { dateStyle: estilo }).format(new Date(valor)),
+    dataHora: (valor) => intl(Intl.DateTimeFormat, { dateStyle: "short", timeStyle: "short" }).format(new Date(valor)),
+    hora: (valor) => intl(Intl.DateTimeFormat, { timeStyle: "short" }).format(new Date(valor)),
     relativo(valor) {
       const segundos = Math.round((new Date(valor).getTime() - Date.now()) / 1000);
       const unidades = [
@@ -97,9 +285,9 @@
         ["day", 86400], ["hour", 3600], ["minute", 60],
       ];
       for (const [unidade, tamanho] of unidades) {
-        if (Math.abs(segundos) >= tamanho) return intlRelativo.format(Math.round(segundos / tamanho), unidade);
+        if (Math.abs(segundos) >= tamanho) return intl(Intl.RelativeTimeFormat, { numeric: "auto" }).format(Math.round(segundos / tamanho), unidade);
       }
-      return "agora mesmo";
+      return t("agora");
     },
     bytes(bytes) {
       if (!bytes) return "0 B";
@@ -109,14 +297,36 @@
     },
     plural: (quantidade, singular, plural) =>
       `${formatar.numero(quantidade)} ${quantidade === 1 ? singular : plural || singular + "s"}`,
-    maiusculas: (texto) => String(texto ?? "").toLocaleUpperCase("pt-BR"),
+    maiusculas: (texto) => String(texto ?? "").toLocaleUpperCase(localidade()),
   };
 
   /* ------------------------------------------------------------------------
-     Validação de documentos brasileiros
+     Validação de documentos (Portugal, Europa e Brasil)
      ------------------------------------------------------------------------ */
 
   const validar = {
+    // NIF/NIPC de Portugal: 9 algarismos, o último confere os outros (módulo 11)
+    nif(texto) {
+      const nif = somenteDigitos(texto);
+      if (!/^[1235689]\d{8}$/.test(nif) && !/^(45|70|71|72|74|75|77|79|90|91|98|99)\d{7}$/.test(nif)) return false;
+      const soma = nif.slice(0, 8).split("").reduce((total, d, i) => total + Number(d) * (9 - i), 0);
+      const resto = soma % 11;
+      return Number(nif[8]) === (resto < 2 ? 0 : 11 - resto);
+    },
+    // IBAN de qualquer país (ISO 13616): tamanho por país e módulo 97
+    iban(texto) {
+      const iban = String(texto ?? "").toUpperCase().replace(/[^0-9A-Z]/g, "");
+      const tamanhos = { PT: 25, ES: 24, FR: 27, DE: 22, IT: 27, NL: 18, BE: 16, IE: 22, LU: 20, AT: 20, CH: 21, GB: 22, PL: 28, SE: 24, DK: 18, FI: 18, NO: 15, GR: 27, CZ: 24, RO: 24, HU: 28, BR: 29 };
+      if (!/^[A-Z]{2}\d{2}[0-9A-Z]{10,30}$/.test(iban)) return false;
+      if (tamanhos[iban.slice(0, 2)] && tamanhos[iban.slice(0, 2)] !== iban.length) return false;
+      const numeros = (iban.slice(4) + iban.slice(0, 4)).replace(/[A-Z]/g, (letra) => String(letra.charCodeAt(0) - 55));
+      let resto = 0;
+      for (const d of numeros) resto = (resto * 10 + Number(d)) % 97;
+      return resto === 1;
+    },
+    codigoPostal: (texto) => /^\d{4}-?\d{3}$/.test(String(texto ?? "").trim()),
+    // Telemóvel de Portugal (9 algarismos a começar por 9), com ou sem +351
+    telemovel: (texto) => /^9[1236]\d{7}$/.test(somenteDigitos(texto).replace(/^(00)?351/, "")),
     cpf(texto) {
       const cpf = somenteDigitos(texto);
       if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -144,12 +354,15 @@
       return cnpj.endsWith(`${primeiro}${segundo}`);
     },
     email: (texto) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(texto ?? "").trim()),
-    telefone: (texto) => /^\d{10,11}$/.test(somenteDigitos(texto)),
+    // Brasil: DDD + número. Outros: número nacional de Portugal (9) ou internacional com indicativo (8 a 15)
+    telefone: (texto) =>
+      idioma() === "pt-BR" ? /^\d{10,11}$/.test(somenteDigitos(texto)) : /^(\+|00)?\d{9,15}$/.test(String(texto ?? "").replace(/[\s().-]/g, "")),
     cep: (texto) => /^\d{8}$/.test(somenteDigitos(texto)),
   };
 
   /* ------------------------------------------------------------------------
-     Máscaras: data-at-mascara="cpf | cnpj | telefone | cep | moeda | data | cartao | placa"
+     Máscaras: data-at-mascara="nif | iban | codigo-postal | telemovel | telefone | moeda | data | cartao
+               | validade | matricula | cpf | cnpj | cep | placa"
      ------------------------------------------------------------------------ */
 
   function aplicarPadrao(caracteres, padrao) {
@@ -170,9 +383,27 @@
       padrao: () => "**.***.***/****-00",
       modo: "text",
     },
+    nif: { limpar: somenteDigitos, padrao: () => "000 000 000", modo: "numeric" },
+    "codigo-postal": { limpar: somenteDigitos, padrao: () => "0000-000", modo: "numeric" },
+    telemovel: { limpar: somenteDigitos, padrao: () => "000 000 000", modo: "tel" },
+    iban: {
+      limpar: (v) => String(v).toUpperCase().replace(/[^0-9A-Z]/g, "").slice(0, 34),
+      padrao: () => "**** **** **** **** **** **** **** **",
+      modo: "text",
+    },
+    // Matrícula de Portugal (AA-00-AA, desde 2020; também serve para os modelos antigos)
+    matricula: {
+      limpar: (v) => String(v).toUpperCase().replace(/[^0-9A-Z]/g, "").slice(0, 6),
+      padrao: () => "**-**-**",
+      modo: "text",
+    },
+    // No Brasil: (00) 00000-0000. Nos outros idiomas: blocos de 3 (912 345 678), com + se tiver indicativo
     telefone: {
-      limpar: somenteDigitos,
-      padrao: (d) => (d.length > 10 ? "(00) 00000-0000" : "(00) 0000-00000"),
+      limpar: (v) => (idioma() === "pt-BR" ? somenteDigitos(v) : String(v).replace(/(?!^\+)\D/g, "").slice(0, 16)),
+      padrao: (d) =>
+        idioma() === "pt-BR"
+          ? d.length > 10 ? "(00) 00000-0000" : "(00) 0000-00000"
+          : d.startsWith("+") ? "**** 000 000 000 000" : "000 000 000 000",
       modo: "tel",
     },
     cep: { limpar: somenteDigitos, padrao: () => "00000-000", modo: "numeric" },
@@ -207,7 +438,7 @@
 
     campo.value = formatado;
 
-    // Devolve o cursor para o lugar certo (ninguém gosta de cursor pulando para o fim)
+    // Devolve o cursor para o lugar certo (ninguém gosta de ver o cursor a saltar para o fim)
     let posicao = 0;
     let contados = 0;
     while (posicao < formatado.length && contados < significativosAntes) {
@@ -221,14 +452,14 @@
     const mascara = mascaras[campo.dataset.atMascara];
     if (!campo.inputMode) campo.inputMode = campo.dataset.atMascara === "moeda" ? "numeric" : mascara?.modo || "text";
     if (!campo.maxLength || campo.maxLength < 0) {
-      const tamanhos = { cpf: 14, cnpj: 18, telefone: 15, cep: 9, data: 10, cartao: 19, validade: 5, placa: 8 };
+      const tamanhos = { nif: 11, "codigo-postal": 8, telemovel: 11, iban: 42, matricula: 8, cpf: 14, cnpj: 18, telefone: idioma() === "pt-BR" ? 15 : 20, cep: 9, data: 10, cartao: 19, validade: 5, placa: 8 };
       if (tamanhos[campo.dataset.atMascara]) campo.maxLength = tamanhos[campo.dataset.atMascara];
     }
     if (campo.value) aplicarMascara(campo);
   }
 
   /* ------------------------------------------------------------------------
-     Requisições: fetch com tempo limite e mensagens em português
+     Pedidos: fetch com tempo limite e mensagens em português
      ------------------------------------------------------------------------ */
 
   async function requisitar(url, opcoes = {}) {
@@ -249,15 +480,8 @@
       const tipo = resposta.headers.get("content-type") || "";
       const dados = tipo.includes("json") ? await resposta.json() : await resposta.text();
       if (!resposta.ok) {
-        const mensagens = {
-          400: "Algum dado enviado está incorreto.",
-          401: "Você precisa entrar na sua conta.",
-          403: "Você não tem permissão para fazer isso.",
-          404: "Não encontramos o que você procurou.",
-          422: "Confira os dados do formulário.",
-          429: "Muitas tentativas. Aguarde um pouco e tente de novo.",
-        };
-        const erro = new Error(mensagens[resposta.status] || `O servidor respondeu com erro ${resposta.status}.`);
+        const conhecidos = [400, 401, 403, 404, 422, 429];
+        const erro = new Error(conhecidos.includes(resposta.status) ? t(`erro${resposta.status}`) : t("erroServidor", resposta.status));
         erro.status = resposta.status;
         erro.dados = dados;
         throw erro;
@@ -265,11 +489,11 @@
       return dados;
     } catch (erro) {
       if (erro.name === "TimeoutError" || controle.signal.reason?.name === "TimeoutError") {
-        throw new Error("O servidor demorou demais para responder. Tente de novo.");
+        throw new Error(t("demorou"));
       }
       if (erro.name === "AbortError") throw erro;
       if (erro instanceof TypeError) {
-        throw new Error(navigator.onLine === false ? "Sem conexão com a internet." : "Não foi possível conectar ao servidor.");
+        throw new Error(navigator.onLine === false ? t("semInternet") : t("semServidor"));
       }
       throw erro;
     } finally {
@@ -288,7 +512,7 @@
     caixaNotificacoes = document.createElement("section");
     caixaNotificacoes.className = "at-notificacoes";
     caixaNotificacoes.setAttribute("aria-live", "polite");
-    caixaNotificacoes.setAttribute("aria-label", "Notificações");
+    caixaNotificacoes.setAttribute("aria-label", t("notificacoes"));
     if ("popover" in HTMLElement.prototype) caixaNotificacoes.popover = "manual";
     document.body.append(caixaNotificacoes);
     return caixaNotificacoes;
@@ -341,7 +565,7 @@
     const botaoFechar = document.createElement("button");
     botaoFechar.type = "button";
     botaoFechar.className = "at-notificacao-fechar";
-    botaoFechar.setAttribute("aria-label", "Fechar notificação");
+    botaoFechar.setAttribute("aria-label", t("fecharNotificacao"));
     botaoFechar.textContent = "×";
     botaoFechar.addEventListener("click", () => fechar());
     item.append(botaoFechar);
@@ -354,7 +578,7 @@
     let inicio = Date.now();
     let temporizador = duracao > 0 ? setTimeout(fechar, restante) : null;
 
-    // Pausa enquanto o mouse está em cima: dá tempo de ler e clicar em "Desfazer"
+    // Pausa enquanto o rato está em cima: dá tempo de ler e clicar em "Desfazer"
     item.addEventListener("mouseenter", () => {
       clearTimeout(temporizador);
       restante -= Date.now() - inicio;
@@ -381,7 +605,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     Estado reativo: a tela acompanha os dados
+     Estado reativo: o ecrã acompanha os dados
      ------------------------------------------------------------------------ */
 
   const estados = new Map();
@@ -557,7 +781,7 @@
   const abridoresDePopover = new WeakMap();
 
   function posicionarPopover(popover) {
-    // Sem registro (clique antes de o Atalho carregar, ou abertura por código): usa o botão que aponta para ele
+    // Sem registo (clique antes de o Atalho carregar, ou abertura por código): usa o botão que aponta para ele
     const abridor =
       abridoresDePopover.get(popover) ||
       (popover.id && $$(`[popovertarget="${CSS.escape(popover.id)}"], button[commandfor="${CSS.escape(popover.id)}"]`).find((b) => b.offsetParent !== null));
@@ -591,22 +815,22 @@
     const v = campo.validity;
     const d = campo.dataset;
     if (v.valueMissing) {
-      if (campo.type === "checkbox") return d.msgObrigatorio || "Marque esta opção para continuar.";
-      if (campo.tagName === "SELECT" || campo.type === "radio") return d.msgObrigatorio || "Escolha uma opção.";
-      return d.msgObrigatorio || "Preencha este campo.";
+      if (campo.type === "checkbox") return d.msgObrigatorio || t("marqueOpcao");
+      if (campo.tagName === "SELECT" || campo.type === "radio") return d.msgObrigatorio || t("escolhaOpcao");
+      return d.msgObrigatorio || t("preencha");
     }
     if (v.typeMismatch) {
-      if (campo.type === "email") return d.msgFormato || "Digite um e-mail válido, como nome@exemplo.com.";
-      if (campo.type === "url") return d.msgFormato || "Digite um endereço completo, começando com https://.";
-      return d.msgFormato || "Formato inválido.";
+      if (campo.type === "email") return d.msgFormato || t("emailInvalido");
+      if (campo.type === "url") return d.msgFormato || t("urlInvalida");
+      return d.msgFormato || t("formatoInvalido");
     }
-    if (v.tooShort) return `Use pelo menos ${campo.minLength} caracteres (agora são ${campo.value.length}).`;
-    if (v.tooLong) return `Use no máximo ${campo.maxLength} caracteres.`;
-    if (v.rangeUnderflow) return `O valor mínimo é ${campo.min}.`;
-    if (v.rangeOverflow) return `O valor máximo é ${campo.max}.`;
-    if (v.stepMismatch) return "Valor fora do intervalo permitido.";
-    if (v.patternMismatch) return d.msgFormato || "O formato não está correto.";
-    if (v.badInput) return "Valor inválido.";
+    if (v.tooShort) return t("curto", campo.minLength, campo.value.length);
+    if (v.tooLong) return t("longo", campo.maxLength);
+    if (v.rangeUnderflow) return t("minimo", campo.min);
+    if (v.rangeOverflow) return t("maximo", campo.max);
+    if (v.stepMismatch) return t("passo");
+    if (v.patternMismatch) return d.msgFormato || t("padrao");
+    if (v.badInput) return t("valorInvalido");
     if (v.customError) return campo.validationMessage;
     return "";
   }
@@ -616,17 +840,24 @@
     let erro = "";
     const valor = campo.value.trim();
     const tipo = campo.dataset.atMascara;
-    if (valor && tipo === "cpf" && !validar.cpf(valor)) erro = "CPF inválido. Confira os números.";
-    if (valor && tipo === "cnpj" && !validar.cnpj(valor)) erro = "CNPJ inválido. Confira os caracteres.";
-    if (valor && tipo === "telefone" && !validar.telefone(valor)) erro = "Telefone incompleto. Inclua o DDD.";
-    if (valor && tipo === "cep" && !validar.cep(valor)) erro = "CEP incompleto.";
-    // O navegador aceita "nome@empresa" (sem .com). Para cadastro real, exigimos o domínio completo.
+    const regras = {
+      nif: ["nif", "nifInvalido"],
+      iban: ["iban", "ibanInvalido"],
+      "codigo-postal": ["codigoPostal", "codigoPostalInvalido"],
+      telemovel: ["telemovel", "telemovelInvalido"],
+      telefone: ["telefone", "telefoneInvalido"],
+      cpf: ["cpf", "cpfInvalido"],
+      cnpj: ["cnpj", "cnpjInvalido"],
+      cep: ["cep", "cepInvalido"],
+    };
+    if (valor && regras[tipo] && !validar[regras[tipo][0]](valor)) erro = t(regras[tipo][1]);
+    // O navegador aceita "nome@empresa" (sem .com). Para um registo real, exigimos o domínio completo.
     if (valor && campo.type === "email" && !campo.validity.typeMismatch && !validar.email(valor)) {
-      erro = campo.dataset.msgFormato || "Digite um e-mail válido, como nome@exemplo.com.";
+      erro = campo.dataset.msgFormato || t("emailInvalido");
     }
     if (campo.dataset.atIgual) {
       const outro = alvoDe(campo.dataset.atIgual, campo);
-      if (outro && valor !== outro.value) erro = campo.dataset.msgIgual || "Os valores não são iguais.";
+      if (outro && valor !== outro.value) erro = campo.dataset.msgIgual || t("diferentes");
     }
     if (!erro && campo.dataset.atCepErro) erro = campo.dataset.atCepErro;
     campo.setCustomValidity(erro);
@@ -689,7 +920,7 @@
     try {
       if (!cacheCep.has(cep)) cacheCep.set(cep, await requisitar(`https://viacep.com.br/ws/${cep}/json/`, { tempoLimite: 8000 }));
       const endereco = cacheCep.get(cep);
-      if (endereco.erro) throw new Error("CEP não encontrado. Confira os números.");
+      if (endereco.erro) throw new Error(t("cepNaoEncontrado"));
 
       for (const destino of $$("[data-at-cep-preencher]", escopo)) {
         const chave = destino.dataset.atCepPreencher;
@@ -712,7 +943,63 @@
   }
 
   /* ------------------------------------------------------------------------
-     Componentes que precisam preparar o HTML ao aparecer na página
+     Morada pelo código postal de Portugal (GEO API PT, gratuita e sem chave)
+     <input data-at-mascara="codigo-postal" data-at-codigo-postal>
+     <input data-at-cp-preencher="rua | localidade | concelho | distrito">
+     ------------------------------------------------------------------------ */
+
+  const cacheCodigoPostal = new Map();
+
+  async function buscarCodigoPostal(campo) {
+    const digitos = somenteDigitos(campo.value);
+    if (digitos.length !== 7 || campo.dataset.atCpAtual === digitos) return;
+    const codigo = `${digitos.slice(0, 4)}-${digitos.slice(4)}`;
+    campo.dataset.atCpAtual = digitos;
+    const escopo = campo.form || campo.closest("[data-at-cp-escopo]") || document;
+    const container = campo.closest(".at-campo");
+    container?.setAttribute("aria-busy", "true");
+    delete campo.dataset.atCepErro;
+
+    try {
+      if (!cacheCodigoPostal.has(codigo)) {
+        const dados = await requisitar(`https://json.geoapi.pt/cp/${codigo}`, { tempoLimite: 8000 }).catch((erro) => {
+          throw erro.status === 404 ? new Error(t("codigoPostalNaoEncontrado")) : erro;
+        });
+        cacheCodigoPostal.set(codigo, {
+          codigoPostal: codigo,
+          rua: dados.partes?.[0]?.["Artéria"] || "",
+          localidade: dados.Localidade || dados["Designação Postal"] || "",
+          concelho: dados.Concelho || "",
+          distrito: dados.Distrito || "",
+        });
+      }
+      const morada = cacheCodigoPostal.get(codigo);
+      if (!morada.localidade) throw new Error(t("codigoPostalNaoEncontrado"));
+
+      for (const destino of $$("[data-at-cp-preencher]", escopo)) {
+        const valor = morada[destino.dataset.atCpPreencher];
+        if (valor !== undefined) {
+          destino.value = valor;
+          destino.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      }
+      $("[data-at-cp-foco]", escopo)?.focus();
+      emitir(campo, "at:codigo-postal", morada);
+    } catch (erro) {
+      cacheCodigoPostal.delete(codigo);
+      // Só o código inexistente é erro do campo. Serviço ocupado (429) ou sem ligação
+      // não podem impedir o envio: a pessoa preenche a morada à mão.
+      if (erro.message === t("codigoPostalNaoEncontrado")) campo.dataset.atCepErro = erro.message;
+      delete campo.dataset.atCpAtual;
+      emitir(campo, "at:codigo-postal-erro", { mensagem: erro.message });
+    } finally {
+      container?.removeAttribute("aria-busy");
+      if (campo.form?.hasAttribute("data-at-validar") || campo.dataset.atCepErro) mostrarValidacao(campo);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Componentes que precisam de preparar o HTML ao aparecer na página
      ------------------------------------------------------------------------ */
 
   const preparados = new WeakSet();
@@ -769,7 +1056,7 @@
       if (config.porPagina && !tabela.atPaginacao) {
         const nav = document.createElement("nav");
         nav.className = "at-paginacao at-mt-4";
-        nav.setAttribute("aria-label", "Paginação da tabela");
+        nav.setAttribute("aria-label", t("paginacaoTabela"));
         (tabela.closest(".at-tabela-caixa") || tabela).after(nav);
         tabela.atPaginacao = nav;
       }
@@ -798,7 +1085,7 @@
       $$(".at-kanban-cartao", quadro).forEach((cartao) => {
         cartao.draggable = true;
         if (!cartao.hasAttribute("tabindex")) cartao.tabIndex = 0;
-        if (!cartao.title) cartao.title = "Arraste ou use Alt + setas para mover";
+        if (!cartao.title) cartao.title = t("arrasteCartao");
       });
       atualizarContagensKanban(quadro);
     },
@@ -809,7 +1096,7 @@
         campo.inputMode = "numeric";
         campo.maxLength = 1;
         campo.autocomplete = i === 0 ? "one-time-code" : "off";
-        if (!campo.getAttribute("aria-label")) campo.setAttribute("aria-label", `Dígito ${i + 1} de ${campos.length}`);
+        if (!campo.getAttribute("aria-label")) campo.setAttribute("aria-label", t("digito", i + 1, campos.length));
       });
     },
 
@@ -878,7 +1165,7 @@
       const th = tabela.tHead.rows[0].cells[config.coluna];
       const tipo = th.dataset.ordenar || "texto";
       const fator = config.direcao === "ascending" ? 1 : -1;
-      const colator = new Intl.Collator("pt-BR", { numeric: true });
+      const colator = intl(Intl.Collator, { numeric: true });
       linhas.sort((a, b) => {
         const va = valorDaCelula(a.cells[config.coluna], tipo);
         const vb = valorDaCelula(b.cells[config.coluna], tipo);
@@ -905,7 +1192,7 @@
         const celula = vazia.insertCell();
         celula.colSpan = tabela.tHead?.rows[0].cells.length || 1;
       }
-      vazia.cells[0].textContent = tabela.dataset.msgVazia || "Nenhum resultado para essa busca.";
+      vazia.cells[0].textContent = tabela.dataset.msgVazia || t("tabelaVazia");
       vazia.hidden = false;
     } else if (vazia) {
       vazia.hidden = true;
@@ -917,14 +1204,14 @@
       const botoes = [];
       const botao = (rotulo, pagina, extra = "") =>
         `<button type="button" class="at-pagina" data-pagina="${pagina}" ${extra}>${rotulo}</button>`;
-      botoes.push(botao("‹", config.pagina - 1, `aria-label="Página anterior" ${config.pagina === 1 ? "disabled" : ""}`));
+      botoes.push(botao("‹", config.pagina - 1, `aria-label="${t("paginaAnterior")}" ${config.pagina === 1 ? "disabled" : ""}`));
       for (let p = 1; p <= paginas; p++) {
         const perto = p === 1 || p === paginas || Math.abs(p - config.pagina) <= 1;
-        if (perto) botoes.push(botao(p, p, p === config.pagina ? 'aria-current="page"' : `aria-label="Página ${p}"`));
+        if (perto) botoes.push(botao(p, p, p === config.pagina ? 'aria-current="page"' : `aria-label="${t("pagina", p)}"`));
         else if (botoes[botoes.length - 1] !== "…") botoes.push("…");
       }
-      botoes.push(botao("›", config.pagina + 1, `aria-label="Próxima página" ${config.pagina === paginas ? "disabled" : ""}`));
-      nav.innerHTML = `<span class="at-paginacao-info">${total ? `Mostrando ${inicio + 1}–${ate} de ${total}` : "Nenhum resultado"}</span>
+      botoes.push(botao("›", config.pagina + 1, `aria-label="${t("proximaPagina")}" ${config.pagina === paginas ? "disabled" : ""}`));
+      nav.innerHTML = `<span class="at-paginacao-info">${total ? t("mostrando", inicio + 1, ate, total) : t("nenhumResultado")}</span>
         <div class="at-paginacao-botoes">${botoes.map((b) => (b === "…" ? '<span class="at-pagina" aria-hidden="true">…</span>' : b)).join("")}</div>`;
       nav.atTabela = tabela;
     }
@@ -962,7 +1249,7 @@
       if (filtro && !normalizar(linha.textContent).includes(filtro)) continue;
       linhas.push(Array.from(linha.cells).filter((c) => !ignorar(c)).map((c) => escapar(c.textContent)).join(";"));
     }
-    // ";" e BOM UTF-8: é assim que o Excel em português abre o arquivo com acentos corretos
+    // ";" e BOM UTF-8: é assim que o Excel em português abre o ficheiro com acentos corretos
     const arquivo = new Blob(["﻿" + linhas.join("\r\n")], { type: "text/csv;charset=utf-8" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(arquivo);
@@ -1081,11 +1368,11 @@
         info.className = "at-cresce";
         info.innerHTML = `<div class="at-truncar"></div><small class="at-texto-suave"></small>`;
         info.firstElementChild.textContent = arquivo.name;
-        info.lastElementChild.textContent = formatar.bytes(arquivo.size) + (limite && arquivo.size > limite ? " · grande demais" : "");
+        info.lastElementChild.textContent = formatar.bytes(arquivo.size) + (limite && arquivo.size > limite ? t("grandeDemais") : "");
         const remover = document.createElement("button");
         remover.type = "button";
         remover.className = "at-botao at-fantasma at-pequeno";
-        remover.textContent = "Remover";
+        remover.textContent = t("remover");
         remover.dataset.removerArquivo = String(i);
         li.append(previa, info, remover);
         lista.append(li);
@@ -1095,7 +1382,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     Senha
+     Palavra-passe
      ------------------------------------------------------------------------ */
 
   function forcaDaSenha(senha) {
@@ -1217,12 +1504,12 @@
         if (copiar.dataset.atCopiado != null) return;
         const original = copiar.innerHTML;
         copiar.dataset.atCopiado = "";
-        copiar.textContent = copiar.dataset.textoCopiado || "Copiado!";
+        copiar.textContent = copiar.dataset.textoCopiado || t("copiado");
         setTimeout(() => {
           copiar.innerHTML = original;
           delete copiar.dataset.atCopiado;
         }, 1800);
-      }, () => notificar("Não foi possível copiar. Selecione o texto e use Ctrl+C.", { tipo: "perigo" }));
+      }, () => notificar(t("naoCopiou"), { tipo: "perigo" }));
     }
 
     const tema = el.closest("[data-at-tema]");
@@ -1237,7 +1524,7 @@
       if (campo) {
         const mostrar = campo.type === "password";
         campo.type = mostrar ? "text" : "password";
-        verSenha.textContent = mostrar ? "Ocultar" : "Mostrar";
+        verSenha.textContent = mostrar ? t("ocultar") : t("mostrar");
         verSenha.setAttribute("aria-pressed", String(mostrar));
         campo.focus();
       }
@@ -1304,7 +1591,7 @@
       emitir(document, "at:cookies", preferencias);
     }
 
-    // Upload: remover arquivo
+    // Upload: remover ficheiro
     const remover = el.closest("[data-remover-arquivo]");
     if (remover) {
       const lista = remover.closest(".at-upload-lista");
@@ -1350,6 +1637,7 @@
     }
 
     if (el.hasAttribute("data-at-cep")) buscarCep(el);
+    if (el.hasAttribute("data-at-codigo-postal")) buscarCodigoPostal(el);
 
     if (el.dataset.atValor && estados.has(el.dataset.atValor.split(".")[0])) {
       const [nome, ...caminho] = el.dataset.atValor.split(".");
@@ -1365,7 +1653,7 @@
       const texto = senha.parentElement.querySelector(".at-forca-texto");
       const nivel = forcaDaSenha(el.value);
       if (medidor) medidor.dataset.nivel = String(nivel);
-      if (texto) texto.textContent = el.value ? ["", "Fraca", "Razoável", "Boa", "Forte"][nivel] : "";
+      if (texto) texto.textContent = el.value ? t("forca")[nivel] : "";
     }
 
     const codigo = el.closest("[data-at='codigo']");
@@ -1373,7 +1661,7 @@
       const campos = $$("input", codigo);
       const digitos = somenteDigitos(el.value);
       if (digitos.length > 1) {
-        // Colou ou o celular preencheu o código pelo SMS
+        // Colou ou o telemóvel preencheu o código pelo SMS
         campos.forEach((c, i) => (c.value = digitos[i] || ""));
         campos[Math.min(digitos.length, campos.length) - 1].focus();
       } else {
@@ -1420,7 +1708,7 @@
     const el = evento.target;
     if (!(el instanceof HTMLElement) || !el.form?.hasAttribute("data-at-validar")) return;
     if (!el.willValidate || el.type === "submit") return;
-    // Só reclama depois que a pessoa preencheu algo ou já tentou enviar
+    // Só reclama depois de a pessoa preencher algo ou de já ter tentado enviar
     if (el.value || el.form.dataset.atTentou != null) mostrarValidacao(el);
   });
 
@@ -1548,7 +1836,7 @@
     if (valor.length === campos.length) emitir(codigo, "at:codigo", { valor });
   });
 
-  // Menus suspensos e balões: posiciona ao abrir e acompanha rolagem
+  // Menus suspensos e balões: posiciona ao abrir e acompanha o scroll
   document.addEventListener("toggle", (evento) => {
     const popover = evento.target;
     if (!(popover instanceof HTMLElement)) return;
@@ -1558,7 +1846,7 @@
     }
     if (popover.matches(".at-menu, .at-balao")) {
       posicionarPopover(popover);
-      // O CSS esconde até aqui: evita o "pulo" do canto da tela até o botão
+      // O CSS esconde até aqui: evita o "salto" do canto do ecrã até ao botão
       popover.dataset.posicionado = "";
     }
     if (popover.classList.contains("at-menu")) $(".at-menu-item", popover)?.focus({ preventScroll: true });
@@ -1674,7 +1962,7 @@
       if (!vazio) {
         vazio = document.createElement("li");
         vazio.className = "at-sugestoes-vazio";
-        vazio.textContent = caixa.dataset.msgVazia || "Nada encontrado.";
+        vazio.textContent = caixa.dataset.msgVazia || t("nadaEncontrado");
         lista.append(vazio);
       }
       vazio.hidden = false;
@@ -1782,24 +2070,24 @@
     const remover = document.createElement("button");
     remover.type = "button";
     remover.dataset.atFechar = "";
-    remover.setAttribute("aria-label", `Remover ${valor}`);
+    remover.setAttribute("aria-label", t("removerItem", valor));
     remover.textContent = "×";
     etiqueta.append(remover);
     $("input:not([type=hidden])", caixa).before(etiqueta);
     sincronizarEtiquetas(caixa);
   }
 
-  // Galeria com tela cheia
+  // Galeria em ecrã inteiro
   let visualizador;
   function abrirGaleria(galeria, indice) {
     const fotos = $$(":scope > a", galeria);
     if (!visualizador) {
       visualizador = document.createElement("dialog");
       visualizador.className = "at-visualizador";
-      visualizador.setAttribute("aria-label", "Visualizador de imagens");
-      visualizador.innerHTML = `<div class="at-visualizador-topo"><span data-posicao aria-live="polite"></span><button type="button" data-at-fechar aria-label="Fechar">×</button></div>
+      visualizador.setAttribute("aria-label", t("visualizador"));
+      visualizador.innerHTML = `<div class="at-visualizador-topo"><span data-posicao aria-live="polite"></span><button type="button" data-at-fechar aria-label="${t("fechar")}">×</button></div>
         <figure><img alt=""></figure>
-        <div class="at-visualizador-rodape"><button type="button" data-ver="-1" aria-label="Imagem anterior">‹</button><span data-legenda></span><button type="button" data-ver="1" aria-label="Próxima imagem">›</button></div>`;
+        <div class="at-visualizador-rodape"><button type="button" data-ver="-1" aria-label="${t("imagemAnterior")}">‹</button><span data-legenda></span><button type="button" data-ver="1" aria-label="${t("proximaImagem")}">›</button></div>`;
       document.body.append(visualizador);
       visualizador.addEventListener("click", (e) => {
         const passo = e.target.closest("[data-ver]");
@@ -1847,7 +2135,7 @@
       const alvo = $(`[data-parte="${chave}"] strong`, caixa);
       if (alvo) alvo.textContent = String(valor).padStart(2, "0");
     }
-    caixa.setAttribute("aria-label", `Faltam ${partes.dias} dias, ${partes.horas} horas e ${partes.minutos} minutos`);
+    caixa.setAttribute("aria-label", t("faltam", partes.dias, partes.horas, partes.minutos));
     if (!restante) {
       contagens.delete(caixa);
       if (caixa.dataset.textoFim) caixa.textContent = caixa.dataset.textoFim;
@@ -1882,7 +2170,7 @@
     : null;
 
   Object.assign(componentes, {
-    /** Índice que acompanha a leitura (scrollspy): marca o link da seção visível. */
+    /** Índice que acompanha a leitura (scrollspy): marca o link da secção visível. */
     indice(nav) {
       const links = $$('a[href^="#"]', nav).filter((a) => a.hash.length > 1);
       const secoes = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter(Boolean);
@@ -1892,7 +2180,7 @@
           if (decodeURIComponent(a.hash.slice(1)) === id) a.setAttribute("aria-current", "location");
           else a.removeAttribute("aria-current");
         });
-      // Seções dentro de uma caixa com rolagem própria: observa a caixa, não a página
+      // Secções dentro de uma caixa com scroll próprio: observa a caixa, não a página
       const rolavel = (el) => {
         for (let pai = el.parentElement; pai && pai !== document.body; pai = pai.parentElement) {
           const estilo = getComputedStyle(pai).overflowY;
@@ -1905,7 +2193,7 @@
       const observador = new IntersectionObserver(
         (entradas) => {
           entradas.forEach((e) => (e.isIntersecting ? visiveis.set(e.target.id, e.boundingClientRect.top) : visiveis.delete(e.target.id)));
-          // A seção mais alta entre as visíveis é a "atual"
+          // A secção mais alta entre as visíveis é a "atual"
           const atual = [...visiveis.entries()].sort((a, b) => a[1] - b[1])[0];
           if (atual) marcar(atual[0]);
         },
@@ -1941,13 +2229,13 @@
       campo.inputMode = "numeric";
       $$("[data-passo]", grupo).forEach((botao) => {
         botao.type = "button";
-        if (!botao.getAttribute("aria-label")) botao.setAttribute("aria-label", Number(botao.dataset.passo) > 0 ? "Aumentar" : "Diminuir");
+        if (!botao.getAttribute("aria-label")) botao.setAttribute("aria-label", Number(botao.dataset.passo) > 0 ? t("aumentar") : t("diminuir"));
       });
       atualizarQuantidade(grupo);
     },
     etiquetas(caixa) {
       const campo = $("input:not([type=hidden])", caixa);
-      if (campo && !campo.getAttribute("aria-label")) campo.setAttribute("aria-label", "Adicionar etiqueta (Enter para confirmar)");
+      if (campo && !campo.getAttribute("aria-label")) campo.setAttribute("aria-label", t("adicionarEtiqueta"));
       for (const valor of (caixa.dataset.valores || "").split(",").filter(Boolean)) adicionarEtiqueta(caixa, valor);
       sincronizarEtiquetas(caixa);
     },
@@ -1955,7 +2243,7 @@
     video(link) {
       const id = idDoYoutube(link.href);
       if (id && !link.style.backgroundImage) link.style.backgroundImage = `url("https://i.ytimg.com/vi/${id}/hqdefault.jpg")`;
-      if (!link.getAttribute("aria-label")) link.setAttribute("aria-label", `Assistir ao vídeo: ${link.textContent.trim() || "vídeo"}`);
+      if (!link.getAttribute("aria-label")) link.setAttribute("aria-label", t("verVideo", link.textContent.trim() || t("video")));
     },
     contagem(caixa) {
       if (!caixa.children.length) {
@@ -2018,9 +2306,9 @@
       if (id) {
         evento.preventDefault();
         const iframe = document.createElement("iframe");
-        // youtube-nocookie: o YouTube só grava cookies depois que a pessoa decide assistir
+        // youtube-nocookie: o YouTube só grava cookies depois de a pessoa decidir ver o vídeo
         iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
-        iframe.title = video.getAttribute("aria-label") || "Vídeo";
+        iframe.title = video.getAttribute("aria-label") || t("videoTitulo");
         iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen";
         iframe.allowFullscreen = true;
         video.dataset.carregado = "";
@@ -2097,7 +2385,14 @@
   }
 
   const Atalho = {
-    versao: "1.2.2",
+    versao: "1.3.0",
+    /** Troca o idioma ("pt-PT", "pt-BR", "en") e/ou a moeda ("EUR", "GBP", "BRL"…) de tudo o que o Atalho escreve. */
+    configurar({ idioma: novoIdioma, moeda: novaMoeda } = {}) {
+      if (novoIdioma !== undefined) configuracao.idioma = novoIdioma;
+      if (novaMoeda !== undefined) configuracao.moeda = novaMoeda;
+      intlCache.clear();
+      return { idioma: idioma(), moeda: moeda() };
+    },
     estado,
     observar,
     obterEstado: (nome) => estados.get(nome),

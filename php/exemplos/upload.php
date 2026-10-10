@@ -1,5 +1,5 @@
 <?php
-// api/upload.php — recebe as fotos do componente "Enviar arquivos"
+// api/upload.php — recebe as fotos do componente "Enviar ficheiros"
 declare(strict_types=1);
 
 require __DIR__ . '/../atalho.php';
@@ -23,7 +23,7 @@ foreach (array_keys($fotos['name']) as $i) {
         'error' => $fotos['error'][$i],
     ];
     try {
-        // Confere o tipo REAL do arquivo, não a extensão do nome
+        // Confere o tipo REAL do ficheiro, não a extensão do nome
         $salvas[] = salvarUpload($arquivo, __DIR__ . '/uploads', ['image/jpeg', 'image/png', 'image/webp'], 5);
     } catch (RuntimeException $erro) {
         responderErro("{$arquivo['name']}: {$erro->getMessage()}", 422);

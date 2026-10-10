@@ -1,7 +1,7 @@
 /*
  * Área de membros: nas vitrines /exemplos/<id>/, mostra a página completa a quem
  * entrou na conta. O conteúdo vem do Supabase, e quem decide se a pessoa pode ler
- * é o banco (regra "conteudos: quem tem acesso lê"), não este arquivo. Páginas Pro
+ * é o banco (regra "conteudos: quem tem acesso lê"), não este ficheiro. Páginas Pro
  * só voltam do banco para quem assina, comprou ou é administrador.
  */
 (function () {
@@ -30,7 +30,7 @@
   const paraDownload = (codigo) => codigo.replace(/(["'])\.\.\/atalho\//g, `$1${CDN}`);
 
   function codificarEditor(texto) {
-    // O editor recebe HTML, CSS e JS separados; aqui vai o arquivo inteiro como HTML
+    // O editor recebe HTML, CSS e JS separados; aqui vai o ficheiro inteiro como HTML
     const bytes = new TextEncoder().encode(JSON.stringify({ html: texto, css: "", js: "" }));
     let binario = "";
     bytes.forEach((b) => (binario += String.fromCharCode(b)));
@@ -66,7 +66,7 @@
     if (error || !data) {
       $("[data-exclusivo-erro-texto]", raiz).textContent = error
         ? traduzir(error)
-        : "Esta página ainda está sendo publicada. Volte em alguns minutos.";
+        : "Esta página ainda está a ser publicada. Volte daqui a alguns minutos.";
       return mostrar("erro");
     }
     liberar(data);

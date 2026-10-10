@@ -1,6 +1,6 @@
 /*
  * Abas de TypeScript e PHP nos exemplos já existentes.
- * Fica num arquivo separado para os exemplos principais continuarem simples.
+ * Fica num ficheiro separado para os exemplos principais continuarem simples.
  */
 (function () {
   const { componentes } = window.ATALHO_DOCS;
@@ -40,47 +40,47 @@ $erros = validar($dados, [
     'senha' => ['obrigatorio', 'min:8'],
 ]);
 if ($erros) {
-    responderErro('Confira os dados do formulário.', 422, $erros);
+    responderErro('Verifique os dados do formulário.', 422, $erros);
 }
 
-$hash = password_hash($dados['senha'], PASSWORD_DEFAULT); // nunca salve a senha pura
+$hash = password_hash($dados['senha'], PASSWORD_DEFAULT); // nunca guarde a palavra-passe pura
 responderJson(['id' => 123], 201);`,
   });
 
   em("mascaras", 1, {
-    ts: `const campo = document.querySelector<HTMLInputElement>("#cpf-teste")!;
+    ts: `const campo = document.querySelector<HTMLInputElement>("#nif-teste")!;
 
-function cpfValido(): boolean {
-  return Atalho.validar.cpf(campo.value); // (texto: string) => boolean
+function nifValido(): boolean {
+  return Atalho.validar.nif(campo.value); // (texto: string) => boolean
 }`,
     php: `<?php
 require __DIR__ . '/atalho.php';
 
-var_dump(Atalho\\validarCpf('529.982.247-25'));      // true
-var_dump(Atalho\\validarCnpj('12.ABC.345/01DE-35'));  // true (CNPJ alfanumérico)
-echo Atalho\\formatarCpf('52998224725');              // 529.982.247-25`,
+var_dump(Atalho\\validarNif('123 456 789'));                      // true
+var_dump(Atalho\\validarIban('PT50 0002 0123 1234 5678 9015 4'));  // true
+echo Atalho\\formatarMoeda(1234.5);                               // 1234,50 €`,
   });
 
   em("cep", 0, {
-    ts: `const cep = document.querySelector<HTMLInputElement>("#end-cep")!;
+    ts: `const codigoPostal = document.querySelector<HTMLInputElement>("#end-cp")!;
 
-cep.addEventListener("at:cep", (evento) => {
-  const { localidade, uf, ddd } = evento.detail; // tipos do ViaCEP
-  console.log(\`\${localidade}/\${uf}, DDD \${ddd}\`);
+codigoPostal.addEventListener("at:codigo-postal", (evento) => {
+  const { localidade, concelho, distrito } = evento.detail; // tipos da morada
+  console.log(\`\${localidade} (\${concelho}, \${distrito})\`);
 });`,
     php: `<?php
-// api/cep.php?cep=01310100 — CEP pelo seu servidor, com cache
+// api/codigo-postal.php?cp=1250-096 — morada pelo seu servidor, com cache
 require __DIR__ . '/atalho.php';
-use function Atalho\\{buscarCep, responderErro, responderJson};
+use function Atalho\\{buscarCodigoPostal, responderErro, responderJson};
 
-$endereco = buscarCep($_GET['cep'] ?? '', __DIR__ . '/cache-cep');
-$endereco ?? responderErro('CEP não encontrado.', 404);
-responderJson($endereco);`,
+$morada = buscarCodigoPostal($_GET['cp'] ?? '', __DIR__ . '/cache-cp');
+$morada ?? responderErro('Código postal não encontrado.', 404);
+responderJson($morada);`,
   });
 
   em("upload", 0, {
     php: `<?php
-// api/upload.php — confere o tipo REAL do arquivo, não a extensão
+// api/upload.php — confere o tipo REAL do ficheiro, não a extensão
 require __DIR__ . '/atalho.php';
 use function Atalho\\{exigirMetodo, salvarUpload, responderErro, responderJson};
 
@@ -99,7 +99,7 @@ try {
 require __DIR__ . '/atalho.php';
 use function Atalho\\{paginar, limparTexto, responderJson};
 
-$pdo = new PDO('mysql:host=localhost;dbname=loja;charset=utf8mb4', 'usuario', 'senha', [
+$pdo = new PDO('mysql:host=localhost;dbname=loja;charset=utf8mb4', 'utilizador', 'palavra-passe', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 ]);
 $filtro = '%' . limparTexto($_GET['busca'] ?? '', 100) . '%';
@@ -169,27 +169,27 @@ async function salvarCliente(dados: Omit<Cliente, "id">, token: string): Promise
       corpo: dados,
       cabecalhos: { Authorization: \`Bearer \${token}\` },
     });
-    Atalho.notificar(\`Cliente \${cliente.nome} cadastrado.\`, { tipo: "sucesso" });
+    Atalho.notificar(\`Cliente \${cliente.nome} registado.\`, { tipo: "sucesso" });
   } catch (erro) {
     if (erro instanceof Error) Atalho.notificar(erro.message, { tipo: "perigo" });
   }
 }`,
     php: `<?php
-// api/clientes.php — o outro lado da requisição
+// api/clientes.php — o outro lado do pedido
 require __DIR__ . '/atalho.php';
 use function Atalho\\{exigirMetodo, lerJson, validar, responderErro, responderJson, limparTexto};
 
 exigirMetodo('POST');
 $dados = lerJson();
 if ($erros = validar($dados, ['nome' => ['obrigatorio', 'min:2']])) {
-    responderErro('Confira os dados do formulário.', 422, $erros);
+    responderErro('Verifique os dados do formulário.', 422, $erros);
 }
 responderJson(['id' => 42, 'nome' => limparTexto($dados['nome'], 120)], 201);`,
   });
 
   em("receita-cadastro", 0, {
     php: `<?php
-// api/clientes.php — recebe a ficha de cadastro completa
+// api/clientes.php — recebe a ficha de registo completa
 require __DIR__ . '/atalho.php';
 use function Atalho\\{exigirMetodo, lerJson, validar, responderErro, responderJson, somenteDigitos};
 
@@ -206,7 +206,7 @@ $erros = validar($dados, [
     'termos' => ['obrigatorio'],
 ]);
 if ($erros) {
-    responderErro('Confira os dados do formulário.', 422, $erros);
+    responderErro('Verifique os dados do formulário.', 422, $erros);
 }
 
 $cliente = [
@@ -219,22 +219,22 @@ responderJson(['ok' => true], 201);`,
 
   em("receita-login", 0, {
     php: `<?php
-// api/login.php — senha com hash, nova sessão e limite de tentativas
+// api/login.php — palavra-passe com hash, nova sessão e limite de tentativas
 require __DIR__ . '/atalho.php';
 use function Atalho\\{exigirMetodo, lerJson, iniciarSessao, responderErro, responderJson};
 
 exigirMetodo('POST');
 iniciarSessao();
 $dados = lerJson();
-$usuario = buscarUsuario($dados['email'] ?? ''); // sua consulta ao banco
+$usuario = buscarUsuario($dados['email'] ?? ''); // a sua consulta à base de dados
 
 if (!$usuario || !password_verify($dados['senha'] ?? '', $usuario['senha_hash'])) {
-    responderErro('E-mail ou senha incorretos.', 401); // não diga qual dos dois errou
+    responderErro('E-mail ou palavra-passe incorretos.', 401); // não diga qual dos dois errou
 }
 
 session_regenerate_id(true);
 $_SESSION['aguardando_codigo'] = $usuario['id'];
-// Envie o código por SMS ou e-mail e confira em outra rota (api/codigo.php)
+// Envie o código por SMS ou e-mail e verifique-o noutra rota (api/codigo.php)
 responderJson(['proximo' => 'codigo']);`,
   });
 })();

@@ -6,7 +6,7 @@
  * consentimento sobre o direito de desistência → checkout da Lemon Squeezy com o
  * id da conta em checkout[custom][usuario_id] → webhook grava no banco → acesso liberado.
  *
- * Segurança: este arquivo só LÊ o que é da própria pessoa (as regras do banco
+ * Segurança: este ficheiro só LÊ o que é da própria pessoa (as regras do banco
  * garantem). Liberar acesso só acontece pelo webhook, com a assinatura conferida.
  */
 (function () {
@@ -19,8 +19,8 @@
   const base = document.body.dataset.base || "/";
   const pagina = document.body.dataset.pagina;
 
-  const euro = (centavos) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "EUR" }).format(centavos / 100).replace(/,00$/, "");
-  const data = (texto) => new Intl.DateTimeFormat("pt-BR", { dateStyle: "long" }).format(new Date(texto));
+  const euro = (centavos) => new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(centavos / 100).replace(/,00(?=\s*€)/, "");
+  const data = (texto) => new Intl.DateTimeFormat("pt-PT", { dateStyle: "long" }).format(new Date(texto));
 
   /** Só aceita checkout e portal da própria Lemon Squeezy, em https. */
   function enderecoLemon(texto) {
@@ -36,7 +36,7 @@
   const ATIVOS = ["on_trial", "active", "past_due"];
   const daAcesso = (a) => ATIVOS.includes(a.status) || (a.status === "cancelled" && a.termina_em && new Date(a.termina_em) > new Date());
 
-  /** O que a pessoa conectada tem: assinatura que dá acesso e compras não reembolsadas. */
+  /** O que a pessoa ligada tem: assinatura que dá acesso e compras não reembolsadas. */
   async function situacao() {
     const pessoa = ativo ? await usuarioAtual() : null;
     if (!pessoa) return { pessoa: null, pro: null, assinaturas: [], compras: [] };
@@ -73,7 +73,7 @@
         <p class="at-mb-0"><strong data-compra-nome></strong> · <span data-compra-preco></span></p>
         <label class="at-check"><input type="checkbox" name="imediato" required data-compra-consentimento>
           <span>Quero acesso imediato ao conteúdo digital e reconheço que, ao recebê-lo, perco o direito de desistência de 14 dias.</span></label>
-        <p class="at-texto-suave at-texto-pequeno at-mb-0">O pagamento é feito na Lemon Squeezy, revendedora oficial do Atalho: ela cobra, recolhe o IVA e envia a fatura. Ao continuar, você aceita os <a href="${base}termos/#venda">termos de venda</a>.</p>
+        <p class="at-texto-suave at-texto-pequeno at-mb-0">O pagamento é feito na Lemon Squeezy, revendedora oficial do Atalho: ela cobra, recolhe o IVA e envia a fatura. Ao continuar, aceita os <a href="${base}termos/#venda">termos de venda</a>.</p>
         <div class="at-linha at-fim">
           <button class="at-botao at-fantasma" value="cancelar" formnovalidate>Cancelar</button>
           <button class="at-botao at-primario" value="pagar" data-compra-pagar disabled>Ir para o pagamento</button>
@@ -98,7 +98,7 @@
     }
     const pessoa = await usuarioAtual();
     if (!pessoa) {
-      notificar("Entre ou crie sua conta grátis para que a compra fique ligada a ela.", "info");
+      notificar("Entre ou crie a sua conta grátis para que a compra fique ligada a ela.", "info");
       return setTimeout(() => (location.href = linkConta({ criar: true })), 900);
     }
     botao?.setAttribute("aria-busy", "true");
@@ -149,28 +149,28 @@
     const { pessoa, pro } = await situacao();
     if (!pessoa) return;
     for (const link of $$("[data-plano-membro]")) {
-      link.textContent = "Você já é membro";
+      link.textContent = "Já é membro";
       link.href = `${base}exemplos/`;
     }
     if (pro) {
       $("[data-loja-plano-atual]").hidden = false;
       for (const botao of $$("[data-comprar^='pro-']")) {
-        botao.textContent = "Seu plano atual";
+        botao.textContent = "O seu plano atual";
         botao.disabled = true;
       }
     }
   }
 
   /* ------------------------------------------------------------------------
-     /conta/: seu plano, compras e volta do pagamento
+     /conta/: o seu plano, compras e volta do pagamento
      ------------------------------------------------------------------------ */
 
   function textoAssinatura(a) {
     const intervalo = a.produto_id === "pro-anual" ? "anual" : "mensal";
     if (a.status === "past_due") return { titulo: `Atalho Pro ${intervalo}`, detalhe: "Não conseguimos cobrar a última renovação. Atualize o cartão para não perder o acesso.", tipo: "aviso" };
-    if (a.status === "cancelled") return { titulo: `Atalho Pro ${intervalo} (cancelado)`, detalhe: `Seu acesso continua até ${data(a.termina_em)}.`, tipo: "info" };
+    if (a.status === "cancelled") return { titulo: `Atalho Pro ${intervalo} (cancelado)`, detalhe: `O seu acesso continua até ${data(a.termina_em)}.`, tipo: "info" };
     if (a.status === "on_trial") return { titulo: `Atalho Pro ${intervalo} (teste grátis)`, detalhe: a.renova_em ? `A primeira cobrança é em ${data(a.renova_em)}.` : "", tipo: "sucesso" };
-    return { titulo: `Atalho Pro ${intervalo}`, detalhe: a.renova_em ? `Renova em ${data(a.renova_em)}.` : "Assinatura ativa.", tipo: "sucesso" };
+    return { titulo: `Atalho Pro ${intervalo}`, detalhe: a.renova_em ? `Renova em ${data(a.renova_em)}.` : "Subscrição ativa.", tipo: "sucesso" };
   }
 
   function desenharPlano({ pro, compras }) {
@@ -193,12 +193,12 @@
       detalhe.textContent = t.detalhe;
       const portal = enderecoLemon(pro.portal_url || "");
       if (portal) {
-        const link = Object.assign(document.createElement("a"), { className: `at-botao${t.tipo === "aviso" ? " at-primario" : ""}`, href: portal.href, rel: "noopener", textContent: t.tipo === "aviso" ? "Atualizar pagamento" : "Gerenciar assinatura" });
+        const link = Object.assign(document.createElement("a"), { className: `at-botao${t.tipo === "aviso" ? " at-primario" : ""}`, href: portal.href, rel: "noopener", textContent: t.tipo === "aviso" ? "Atualizar pagamento" : "Gerir subscrição" });
         corpo.append(link);
       }
     } else {
       titulo.textContent = "Membro (grátis)";
-      detalhe.textContent = "Você tem as páginas completas grátis. O Pro libera todas as páginas e modelos Pro.";
+      detalhe.textContent = "Tem as páginas completas grátis. O Pro desbloqueia todas as páginas e modelos Pro.";
       corpo.append(Object.assign(document.createElement("a"), { className: "at-botao at-primario", href: `${base}pro/`, textContent: "Conhecer o Pro" }));
     }
     cartao.append(corpo);
@@ -211,7 +211,7 @@
         li.textContent = `${c.produtos?.nome || c.produto_id} · comprado em ${data(c.criado_em)}`;
         lista.append(li);
       }
-      const rotulo = Object.assign(document.createElement("p"), { className: "at-texto-pequeno at-mt-4 at-mb-0", textContent: "Compras avulsas (suas para sempre):" });
+      const rotulo = Object.assign(document.createElement("p"), { className: "at-texto-pequeno at-mt-4 at-mb-0", textContent: "Compras avulsas (as suas para sempre):" });
       caixa.append(rotulo, lista);
     }
   }
@@ -225,7 +225,7 @@
     desenharPlano(atual);
     // Voltou do pagamento: o aviso da Lemon Squeezy leva alguns segundos para chegar
     if (new URLSearchParams(location.search).get("pagamento") === "ok") {
-      notificar("Pagamento recebido! Liberando seu acesso…", "sucesso", { duracao: 8000 });
+      notificar("Pagamento recebido! A desbloquear o seu acesso…", "sucesso", { duracao: 8000 });
       const antes = atual.compras.length;
       for (let tentativa = 0; tentativa < 15 && !atual.pro && atual.compras.length === antes; tentativa++) {
         await new Promise((ok) => setTimeout(ok, 2000));
@@ -233,8 +233,8 @@
       }
       desenharPlano(atual);
       history.replaceState(null, "", location.pathname);
-      if (atual.pro || atual.compras.length > antes) notificar("Acesso liberado. Bom proveito!", "sucesso");
-      else notificar("O pagamento ainda está sendo confirmado. Atualize a página em alguns minutos.", "info", { duracao: 10000 });
+      if (atual.pro || atual.compras.length > antes) notificar("Acesso desbloqueado. Bom proveito!", "sucesso");
+      else notificar("O pagamento ainda está a ser confirmado. Atualize a página daqui a alguns minutos.", "info", { duracao: 10000 });
     }
   }
 

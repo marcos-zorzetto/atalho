@@ -1,7 +1,7 @@
 /*
  * Painel do administrador. Todas as consultas usam funções do banco (admin_*)
  * que recusam quem não está na tabela "administradores". Esconder ou mostrar
- * partes da tela aqui é só conforto visual; a proteção está no servidor.
+ * partes do ecrã aqui é só conforto visual; a proteção está no servidor.
  */
 (function () {
   "use strict";
@@ -64,7 +64,7 @@
       if (campo) campo.textContent = numero(valor);
     }
     $('[data-admin-detalhe="usuarios"]', raiz).textContent = `${numero(resumo.confirmados)} com e-mail confirmado`;
-    $('[data-admin-detalhe="lista_espera"]', raiz).textContent = `${numero(resumo.favoritos)} favoritos salvos`;
+    $('[data-admin-detalhe="lista_espera"]', raiz).textContent = `${numero(resumo.favoritos)} favoritos guardados`;
     $("[data-admin-total-conteudos]", raiz).textContent = `${numero(resumo.conteudos)} páginas`;
 
     const maximo = Math.max(1, ...dias.map((d) => Number(d.cadastros)));
@@ -74,11 +74,11 @@
       ...dias.map((d) => {
         const barra = document.createElement("span");
         barra.style.setProperty("--h", `${(Number(d.cadastros) / maximo) * 100}%`);
-        barra.title = `${formatar.data(`${d.dia}T12:00:00`, "short")}: ${d.cadastros} cadastro(s)`;
+        barra.title = `${formatar.data(`${d.dia}T12:00:00`, "short")}: ${d.cadastros} registo(s)`;
         return barra;
       })
     );
-    grafico.setAttribute("aria-label", `${total} cadastros nos últimos 30 dias; o maior dia teve ${maximo === 1 && total === 0 ? 0 : maximo}.`);
+    grafico.setAttribute("aria-label", `${total} registos nos últimos 30 dias; o maior dia teve ${maximo === 1 && total === 0 ? 0 : maximo}.`);
     $("[data-admin-total-periodo]", raiz).textContent = `${numero(total)} no período`;
   }
 
@@ -88,7 +88,7 @@
     const usuarios = await chamar("admin_usuarios", { busca: estado.busca, limite: POR_PAGINA, deslocamento: estado.pagina * POR_PAGINA });
     corpo.removeAttribute("aria-busy");
     estado.total = Number(usuarios[0]?.total || 0);
-    if (!usuarios.length) vazio(corpo, 6, estado.busca ? "Ninguém encontrado com essa busca." : "Nenhum usuário ainda.");
+    if (!usuarios.length) vazio(corpo, 6, estado.busca ? "Ninguém encontrado com essa pesquisa." : "Nenhum utilizador ainda.");
     else {
       corpo.replaceChildren(
         ...usuarios.map((u) => {
@@ -102,7 +102,7 @@
       );
     }
     const paginas = Math.max(1, Math.ceil(estado.total / POR_PAGINA));
-    $("[data-admin-paginacao-info]", raiz).textContent = `${numero(estado.total)} usuário(s) · página ${estado.pagina + 1} de ${paginas}`;
+    $("[data-admin-paginacao-info]", raiz).textContent = `${numero(estado.total)} utilizador(es) · página ${estado.pagina + 1} de ${paginas}`;
     $('[data-admin-pagina="-1"]', raiz).disabled = estado.pagina === 0;
     $('[data-admin-pagina="1"]', raiz).disabled = estado.pagina + 1 >= paginas;
   }
@@ -117,7 +117,7 @@
 
     const base = document.body.dataset.base || "/";
     const corpoConteudos = $("[data-admin-conteudos]", raiz);
-    if (!conteudos.length) vazio(corpoConteudos, 3, "Nada publicado ainda. Rode o workflow do repositório atalho-pro.");
+    if (!conteudos.length) vazio(corpoConteudos, 3, "Nada publicado ainda. Execute o workflow do repositório atalho-pro.");
     else {
       corpoConteudos.replaceChildren(
         ...conteudos.map((c) => {
@@ -131,7 +131,7 @@
   /** Loja: a receita é o total pago; a Lemon Squeezy repassa descontando o IVA e as taxas dela. */
   async function carregarLoja() {
     const loja = await chamar("admin_loja");
-    const euro = (centavos) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "EUR" }).format(centavos / 100);
+    const euro = (centavos) => new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(centavos / 100);
     $('[data-admin-numero="assinantes_ativos"]', raiz).textContent = numero(loja.assinantes_ativos);
     $('[data-admin-numero="compras_avulsas"]', raiz).textContent = numero(loja.compras_avulsas);
     $('[data-admin-numero="receita_30_dias"]', raiz).textContent = euro(loja.receita_30_dias_centavos);
@@ -143,11 +143,11 @@
     await Promise.all([carregarResumo(), carregarUsuarios(), carregarListaEConteudos(), carregarLoja()]);
   }
 
-  /** Planilha em CSV com ";" e BOM: abre certinho no Excel em português. */
+  /** Folha de cálculo em CSV com ";" e BOM: abre certinho no Excel em português. */
   function exportarLista() {
     const celula = (valor) => {
       let texto = String(valor ?? "");
-      if (/^[=+\-@]/.test(texto)) texto = `'${texto}`; // evita fórmula maliciosa na planilha
+      if (/^[=+\-@]/.test(texto)) texto = `'${texto}`; // evita fórmula maliciosa na folha de cálculo
       return `"${texto.replace(/"/g, '""')}"`;
     };
     const linhas = [["Nome", "E-mail", "Entrou em"], ...estado.lista.map((p) => [p.nome, p.email, data(p.entrou_em)])];
@@ -168,7 +168,7 @@
     if (error) throw error;
     if (admin !== true) return mostrar("negado");
 
-    $("[data-admin-quem]", raiz).textContent = `Conectado como ${pessoa.email}`;
+    $("[data-admin-quem]", raiz).textContent = `Ligado como ${pessoa.email}`;
     $("[data-admin-supabase]", raiz).href = `https://supabase.com/dashboard/project/${projeto}/auth/users`;
     mostrar("painel");
     await carregarTudo();

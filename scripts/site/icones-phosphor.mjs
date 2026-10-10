@@ -1,6 +1,6 @@
 /**
  * Ícones Phosphor (licença MIT, phosphoricons.com): 1.512 ícones em 6 estilos.
- * Na publicação viram um arquivo por estilo (sprite SVG, carregado só quando
+ * Na publicação viram um ficheiro por estilo (sprite SVG, carregado só quando
  * a pessoa escolhe o estilo) e um índice para a busca em português.
  */
 import { readFile, readdir, mkdir, writeFile } from "node:fs/promises";

@@ -10,7 +10,7 @@
   },
   {
    "id": "rolagem",
-   "nome": "Ao rolar a página"
+   "nome": "Ao fazer scroll na página"
   },
   {
    "id": "texto",
@@ -18,7 +18,7 @@
   },
   {
    "id": "interacao",
-   "nome": "Mouse e toque"
+   "nome": "Rato e toque"
   },
   {
    "id": "fundo",
@@ -26,7 +26,7 @@
   },
   {
    "id": "feedback",
-   "nome": "Carregando e sucesso"
+   "nome": "A carregar e sucesso"
   },
   {
    "id": "transicao",
@@ -43,7 +43,7 @@
   },
   {
    "id": "subir",
-   "nome": "Subir aparecendo",
+   "nome": "Subir e aparecer",
    "nivel": "publico",
    "categoria": "entrada",
    "descricao": "Sobe alguns pixels enquanto aparece. O padrão de sites como Apple e Stripe."
@@ -60,7 +60,7 @@
    "nome": "Zoom de entrada",
    "nivel": "membro",
    "categoria": "entrada",
-   "descricao": "Cresce até o tamanho real. Destaca modais, selos e ofertas."
+   "descricao": "Cresce até ao tamanho real. Destaca modais, selos e ofertas."
   },
   {
    "id": "pulsar",
@@ -78,10 +78,10 @@
   },
   {
    "id": "quicar",
-   "nome": "Quicar",
+   "nome": "Saltitar",
    "nivel": "membro",
    "categoria": "atencao",
-   "descricao": "Pula e cai como uma bola. Divertido para setas de \"role para baixo\" e ícones."
+   "descricao": "Salta e cai como uma bola. Divertido para setas de \"deslize para baixo\" e ícones."
   },
   {
    "id": "girar",
@@ -106,10 +106,10 @@
   },
   {
    "id": "revelar-rolagem",
-   "nome": "Revelar ao rolar",
+   "nome": "Revelar ao fazer scroll",
    "nivel": "pro",
    "categoria": "rolagem",
-   "descricao": "Cada bloco aparece quando entra na tela, ligado à rolagem (scroll-driven). Com plano B automático para navegadores antigos."
+   "descricao": "Cada bloco aparece quando entra no ecrã, ligado ao scroll (scroll-driven). Com plano B automático para navegadores antigos."
   },
   {
    "id": "progresso-leitura",
@@ -123,35 +123,35 @@
    "nome": "Parallax em camadas",
    "nivel": "pro",
    "categoria": "rolagem",
-   "descricao": "As camadas andam em velocidades diferentes ao rolar e criam profundidade."
+   "descricao": "As camadas andam em velocidades diferentes ao fazer scroll e criam profundidade."
   },
   {
    "id": "zoom-rolagem",
-   "nome": "Zoom na rolagem",
+   "nome": "Zoom no scroll",
    "nivel": "pro",
    "categoria": "rolagem",
-   "descricao": "A imagem cresce devagar enquanto passa pela tela. Efeito cinematográfico."
+   "descricao": "A imagem cresce devagar enquanto passa pelo ecrã. Efeito cinematográfico."
   },
   {
    "id": "cabecalho-encolhe",
    "nome": "Cabeçalho que encolhe",
    "nivel": "pro",
    "categoria": "rolagem",
-   "descricao": "O topo do site diminui e ganha sombra ao rolar, liberando espaço para o conteúdo."
+   "descricao": "O topo do site diminui e ganha sombra ao fazer scroll, libertando espaço para o conteúdo."
   },
   {
    "id": "cascata",
    "nome": "Lista em cascata",
    "nivel": "pro",
    "categoria": "rolagem",
-   "descricao": "Os itens aparecem um depois do outro quando a lista entra na tela."
+   "descricao": "Os itens aparecem um depois do outro quando a lista entra no ecrã."
   },
   {
    "id": "maquina-escrever",
    "nome": "Máquina de escrever",
    "nivel": "pro",
    "categoria": "texto",
-   "descricao": "Digita, apaga e troca as frases sozinho, com cursor piscando. Perfeito para o título do hero."
+   "descricao": "Escreve, apaga e troca as frases sozinho, com cursor a piscar. Perfeito para o título do hero."
   },
   {
    "id": "palavra-a-palavra",
@@ -172,28 +172,28 @@
    "nome": "Texto que se decifra",
    "nivel": "pro",
    "categoria": "texto",
-   "descricao": "Letras aleatórias se organizam até formar a palavra, estilo filme de hacker. Repete ao passar o mouse."
+   "descricao": "Letras aleatórias organizam-se até formar a palavra, estilo filme de hacker. Repete ao passar o rato."
   },
   {
    "id": "contador",
    "nome": "Contador animado",
    "nivel": "pro",
    "categoria": "texto",
-   "descricao": "Os números sobem até o valor quando aparecem na tela, já formatados em reais, porcentagem ou milhar."
+   "descricao": "Os números sobem até ao valor quando aparecem no ecrã, já formatados em euros, percentagem ou milhares."
   },
   {
    "id": "sublinhado",
    "nome": "Sublinhado que se desenha",
    "nivel": "pro",
    "categoria": "texto",
-   "descricao": "A linha cresce da esquerda para a direita ao passar o mouse. Links com acabamento de revista."
+   "descricao": "A linha cresce da esquerda para a direita ao passar o rato. Links com acabamento de revista."
   },
   {
    "id": "marca-texto",
-   "nome": "Marca-texto",
+   "nome": "Marcador",
    "nivel": "pro",
    "categoria": "texto",
-   "descricao": "Uma faixa de marca-texto passa por trás da frase quando ela aparece."
+   "descricao": "Uma faixa de marcador fluorescente passa por trás da frase quando ela aparece."
   },
   {
    "id": "botao-magnetico",
@@ -207,11 +207,11 @@
    "nome": "Cartão com inclinação 3D",
    "nivel": "pro",
    "categoria": "interacao",
-   "descricao": "O cartão inclina seguindo o mouse, com reflexo de luz. Ótimo para produtos e planos."
+   "descricao": "O cartão inclina seguindo o rato, com reflexo de luz. Ótimo para produtos e planos."
   },
   {
    "id": "holofote",
-   "nome": "Holofote que segue o mouse",
+   "nome": "Holofote que segue o rato",
    "nivel": "pro",
    "categoria": "interacao",
    "descricao": "Uma luz suave acompanha o cursor dentro dos cartões, como no site da Vercel e da Linear."
@@ -221,18 +221,18 @@
    "nome": "Ondulação no clique",
    "nivel": "pro",
    "categoria": "interacao",
-   "descricao": "Uma onda sai do ponto tocado, como nos apps do Android. Confirma o toque no celular."
+   "descricao": "Uma onda sai do ponto tocado, como nas apps do Android. Confirma o toque no telemóvel."
   },
   {
    "id": "brilho-passando",
-   "nome": "Reflexo passando",
+   "nome": "Reflexo a passar",
    "nivel": "pro",
    "categoria": "interacao",
    "descricao": "Um reflexo de luz atravessa o botão de tempos em tempos. Faz o botão de compra brilhar."
   },
   {
    "id": "borda-giratoria",
-   "nome": "Borda em gradiente girando",
+   "nome": "Borda em gradiente a girar",
    "nivel": "pro",
    "categoria": "interacao",
    "descricao": "Uma borda colorida gira em volta do cartão. Destaca o plano recomendado."
@@ -242,21 +242,21 @@
    "nome": "Imagem revelada por cortina",
    "nivel": "pro",
    "categoria": "interacao",
-   "descricao": "A imagem se revela com um corte que abre quando ela entra na tela."
+   "descricao": "A imagem revela-se com um corte que abre quando ela entra no ecrã."
   },
   {
    "id": "virar-cartao",
    "nome": "Cartão que vira",
    "nivel": "pro",
    "categoria": "interacao",
-   "descricao": "Gira em 3D e mostra o verso. Use para perguntas e respostas, preços e equipe."
+   "descricao": "Gira em 3D e mostra o verso. Use para perguntas e respostas, preços e equipa."
   },
   {
    "id": "gradiente-animado",
    "nome": "Gradiente animado",
    "nivel": "pro",
    "categoria": "fundo",
-   "descricao": "As cores do fundo se movem devagar. Dá vida ao hero sem pesar a página."
+   "descricao": "As cores do fundo movem-se devagar. Dá vida ao hero sem pesar a página."
   },
   {
    "id": "aurora",
@@ -270,14 +270,14 @@
    "nome": "Letreiro infinito",
    "nivel": "pro",
    "categoria": "fundo",
-   "descricao": "Logos ou frases passando sem parar e sem emendas. Pausa quando o mouse passa por cima."
+   "descricao": "Logos ou frases a passar sem parar e sem emendas. Pausa quando o rato passa por cima."
   },
   {
    "id": "particulas",
    "nome": "Partículas conectadas",
    "nivel": "pro",
    "categoria": "fundo",
-   "descricao": "Pontos flutuando e se ligando por linhas. Clássico de sites de tecnologia."
+   "descricao": "Pontos a flutuar e a ligar-se por linhas. Clássico de sites de tecnologia."
   },
   {
    "id": "ondas",
@@ -288,87 +288,87 @@
   },
   {
    "id": "grade-pontos",
-   "nome": "Grade de pontos com luz",
+   "nome": "Grelha de pontos com luz",
    "nivel": "pro",
    "categoria": "fundo",
-   "descricao": "Uma grade de pontos discreta com uma luz que percorre o fundo."
+   "descricao": "Uma grelha de pontos discreta com uma luz que percorre o fundo."
   },
   {
    "id": "esqueleto",
    "nome": "Esqueleto com brilho",
    "nivel": "pro",
    "categoria": "feedback",
-   "descricao": "Formas cinzas com um brilho passando enquanto o conteúdo carrega. Padrão do YouTube e do LinkedIn."
+   "descricao": "Formas cinzentas com um brilho a passar enquanto o conteúdo carrega. Padrão do YouTube e do LinkedIn."
   },
   {
    "id": "pontos",
    "nome": "Três pontinhos",
    "nivel": "pro",
    "categoria": "feedback",
-   "descricao": "Pontos pulando em sequência: \"digitando…\" ou \"carregando…\"."
+   "descricao": "Pontos a saltar em sequência: \"a escrever…\" ou \"a carregar…\"."
   },
   {
    "id": "check-sucesso",
    "nome": "Check de sucesso",
    "nivel": "pro",
    "categoria": "feedback",
-   "descricao": "O círculo se desenha e o check aparece. Confirmação de pagamento ou cadastro."
+   "descricao": "O círculo desenha-se e o check aparece. Confirmação de pagamento ou registo."
   },
   {
    "id": "desenhar-svg",
    "nome": "Desenho de linha (SVG)",
    "nivel": "pro",
    "categoria": "feedback",
-   "descricao": "Logos, assinaturas e ilustrações se desenham sozinhos quando entram na tela."
+   "descricao": "Logos, assinaturas e ilustrações desenham-se sozinhos quando entram no ecrã."
   },
   {
    "id": "confete",
    "nome": "Confete",
    "nivel": "pro",
    "categoria": "feedback",
-   "descricao": "Uma explosão de confete ao clicar. Comemore compras, cadastros e metas batidas."
+   "descricao": "Uma explosão de confete ao clicar. Comemore compras, registos e metas batidas."
   },
   {
    "id": "menu-icone",
    "nome": "Ícone de menu que vira X",
    "nivel": "pro",
    "categoria": "feedback",
-   "descricao": "As três linhas do menu se transformam em um X ao abrir."
+   "descricao": "As três linhas do menu transformam-se num X ao abrir."
   },
   {
    "id": "transicao-tela",
-   "nome": "Transição entre telas",
+   "nome": "Transição entre ecrãs",
    "nivel": "pro",
    "categoria": "transicao",
-   "descricao": "Troca de conteúdo com a API View Transitions: o navegador anima de uma tela para a outra."
+   "descricao": "Troca de conteúdo com a API View Transitions: o navegador anima de um ecrã para o outro."
   },
   {
    "id": "lista-flip",
    "nome": "Lista que se reorganiza",
    "nivel": "pro",
    "categoria": "transicao",
-   "descricao": "Ao ordenar ou filtrar, cada item desliza para o novo lugar em vez de pular (técnica FLIP)."
+   "descricao": "Ao ordenar ou filtrar, cada item desliza para o novo lugar em vez de saltar (técnica FLIP)."
   },
   {
    "id": "modal-mola",
    "nome": "Modal com efeito mola",
    "nivel": "pro",
    "categoria": "transicao",
-   "descricao": "A janela abre com um leve quique natural, usando a curva linear() de mola."
+   "descricao": "A janela abre com um leve ressalto natural, usando a curva linear() de mola."
   },
   {
    "id": "acordeao",
-   "nome": "Sanfona suave",
+   "nome": "Acordeão suave",
    "nivel": "pro",
    "categoria": "transicao",
-   "descricao": "Perguntas que abrem e fecham deslizando, sem pulo, com o elemento nativo <details>."
+   "descricao": "Perguntas que abrem e fecham a deslizar, sem saltos, com o elemento nativo <details>."
   },
   {
    "id": "notificacoes",
    "nome": "Notificações empilhadas",
    "nivel": "pro",
    "categoria": "transicao",
-   "descricao": "Avisos que chegam, se empilham e saem deslizando, como no iPhone."
+   "descricao": "Avisos que chegam, empilham-se e saem a deslizar, como no iPhone."
   }
  ]
 }

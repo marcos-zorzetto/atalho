@@ -52,30 +52,30 @@
 
   async function carregar() {
     if (!ativo) {
-      aviso("Em breve", "As contas estão sendo ativadas. Volte em alguns dias.");
+      aviso("Em breve", "As contas estão a ser ativadas. Volte daqui a alguns dias.");
       return marcarCartoes();
     }
     pessoa = await usuario();
     // Sem conta, o banco entrega só o nível "publico" (a amostra grátis)
     const { data, error } = await cliente.from("conteudos").select("id, html").eq("tipo", tipo);
     if (error) {
-      aviso(`Não foi possível carregar os ${textos.itens}`, traduzir(error));
+      aviso(`Não foi possível carregar a lista de ${textos.itens}`, traduzir(error));
       return marcarCartoes();
     }
     for (const linha of data) codigos.set(linha.id.slice(prefixo.length), linha.html);
     const temPro = itens.some((a) => a.nivel === "pro" && codigos.has(a.id));
     if (!pessoa) {
       aviso(
-        `${codigos.size} ${textos.itens} grátis para você testar agora`,
-        `Crie sua conta grátis para liberar ${conta("publico") + conta("membro")}. O Pro libera todos os ${itens.length}, além dos sistemas completos.`,
+        `${codigos.size} ${textos.itens} grátis para testar agora`,
+        `Crie a sua conta grátis para desbloquear ${conta("publico") + conta("membro")}. O Pro desbloqueia o catálogo inteiro (${itens.length}), além dos sistemas completos.`,
         [link("Criar conta grátis", linkConta({ criar: true }), true), link("Já tenho conta", linkConta())]
       );
     } else if (temPro) {
-      aviso(`Todos os ${itens.length} ${textos.itens} liberados`, "Você tem o Atalho Pro. Abra qualquer um, ajuste e copie.");
+      aviso(`Acesso total: ${itens.length} ${textos.itens}`, "Tem o Atalho Pro. Abra qualquer um, ajuste e copie.");
     } else {
       aviso(
-        `Você tem ${codigos.size} ${textos.itens} liberados`,
-        `Assine o Pro (${precos.proMensal}/mês ou ${precos.proAnual}/ano) para liberar mais ${itens.length - codigos.size}, os sistemas completos e tudo o que for lançado.`,
+        `Tem acesso a ${codigos.size} ${textos.itens}`,
+        `Subscreva o Pro (${precos.proMensal}/mês ou ${precos.proAnual}/ano) para desbloquear mais ${itens.length - codigos.size}, os sistemas completos e tudo o que for lançado.`,
         [link("Conhecer o Pro", `${base}pro/`, true)]
       );
     }
@@ -110,7 +110,7 @@
   function blocoAjustes() {
     if (!parametros().length) return "";
     const linhas = parametros().map((p) => `    ${p.var}: ${valorCss(p, valores[p.var])};`).join("\n");
-    return `<style>\n  /* Seus ajustes: mude aqui quando quiser */\n  :root {\n${linhas}\n  }\n</style>\n\n`;
+    return `<style>\n  /* Os seus ajustes: mude aqui quando quiser */\n  :root {\n${linhas}\n  }\n</style>\n\n`;
   }
 
   const codigoFinal = () => `<!-- ${textos.item[0].toUpperCase() + textos.item.slice(1)} "${atual.nome}" · Atalho -->\n${blocoAjustes()}${codigos.get(atual.id)}`;
@@ -120,13 +120,13 @@
     if (previa && $("[data-estudio-forcar-caixa]").checked) codigo = codigo.replace(/prefers-reduced-motion: reduce/g, "prefers-reduced-motion: desligado-na-previa");
     const caminho = previa ? `${base}atalho` : CDN;
     const tema = previa ? document.documentElement.dataset.tema : "";
-    // Trechos ficam centralizados, sem passar da largura (celular)
+    // Trechos ficam centralizados, sem passar da largura (telemóvel)
     const centralizar =
       atual.rolagem || atual.paginaInteira
         ? ""
         : "body { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 24px; box-sizing: border-box; } body > :not(script, style) { max-width: 100%; }";
     return `<!doctype html>
-<html lang="pt-BR"${tema ? ` data-tema="${tema}"` : ""}>
+<html lang="pt-PT"${tema ? ` data-tema="${tema}"` : ""}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -214,20 +214,20 @@ ${codigo}
     const temAjustes = parametros().length > 0;
     titulo("Usar no seu site em 4 passos");
     lista([
-      temAjustes ? `Ajuste nos controles ao lado (${parametros().map((p) => p.rotulo.toLowerCase()).join(", ")}) e veja o resultado na hora.` : "Veja a prévia e teste no computador, no tablet e no celular pelos botões acima dela.",
-      "Clique em \"Copiar\" (ou em \"Baixar página\" para receber um arquivo .html pronto, que abre direto no navegador).",
-      "No seu site, abra o arquivo .html num editor de texto (o Bloco de Notas serve; o VS Code é melhor e grátis) e cole o código dentro do <body>, onde o bloco deve aparecer.",
+      temAjustes ? `Ajuste nos controlos ao lado (${parametros().map((p) => p.rotulo.toLowerCase()).join(", ")}) e veja o resultado na hora.` : "Veja a pré-visualização e teste no computador, no tablet e no telemóvel pelos botões acima dela.",
+      "Clique em \"Copiar\" (ou em \"Descarregar página\" para receber um ficheiro .html pronto, que abre diretamente no navegador).",
+      "No seu site, abra o ficheiro .html num editor de texto (o Bloco de Notas serve; o VS Code é melhor e grátis) e cole o código dentro do <body>, onde o bloco deve aparecer.",
       [
-        "Se a sua página ainda não usa o Atalho, cole também estas duas linhas dentro do <head>: o estilo (atalho.css) e o script (atalho.js). Elas estão no arquivo baixado e na ",
+        "Se a sua página ainda não usa o Atalho, cole também estas duas linhas dentro do <head>: o estilo (atalho.css) e o script (atalho.js). Elas estão no ficheiro descarregado e na ",
         { texto: "página de instalação", href: `${base}componentes/instalacao/` },
         ".",
       ],
     ]);
     titulo("Trocar textos, fotos e cores");
     lista([
-      "Textos: troque direto no código copiado, entre as tags (por exemplo, o que está entre <h2> e </h2>).",
-      "Fotos: troque o endereço que está em src=\"...\" pelo da sua imagem. Se ela estiver na mesma pasta, basta o nome do arquivo, como src=\"minha-foto.jpg\".",
-      temAjustes ? "Cores e medidas: mude os valores no bloco \"Seus ajustes\", no começo do código." : "Cores: mude os valores em \"color\" e \"background\" dentro do <style> do código.",
+      "Textos: troque diretamente no código copiado, entre as tags (por exemplo, o que está entre <h2> e </h2>).",
+      "Fotos: troque o endereço que está em src=\"...\" pelo da sua imagem. Se ela estiver na mesma pasta, basta o nome do ficheiro, como src=\"minha-foto.jpg\".",
+      temAjustes ? "Cores e medidas: mude os valores no bloco \"Os seus ajustes\", no começo do código." : "Cores: mude os valores em \"color\" e \"background\" dentro do <style> do código.",
     ]);
     if (atual.dicas?.length) {
       titulo("Dicas para este item");
@@ -236,7 +236,7 @@ ${codigo}
     titulo("Colocar o site no ar");
     lista([
       [{ texto: "Publicar o site de graça (passo a passo)", href: `${base}aprender/publicar-gratis/` }],
-      [{ texto: "Comprar um domínio próprio (.com ou .com.br)", href: `${base}aprender/dominio/` }],
+      [{ texto: "Comprar um domínio próprio (.com ou .pt)", href: `${base}aprender/dominio/` }],
       [{ texto: "Ter e-mail profissional com o seu domínio", href: `${base}aprender/email-profissional/` }],
     ]);
   }
@@ -248,11 +248,11 @@ ${codigo}
     const acoes = $("[data-estudio-bloqueio-acoes]");
     if (nivel === "membro" && !pessoa) {
       $("[data-estudio-bloqueio-titulo]").textContent = "Grátis para quem tem conta";
-      $("[data-estudio-bloqueio-texto]").textContent = `Crie sua conta grátis (leva 1 minuto) e use este e mais ${conta("publico") + conta("membro") - 1} ${textos.itens} agora, com prévia, ajustes e tutorial.`;
+      $("[data-estudio-bloqueio-texto]").textContent = `Crie a sua conta grátis (leva 1 minuto) e use este e mais ${conta("publico") + conta("membro") - 1} ${textos.itens} agora, com pré-visualização, ajustes e tutorial.`;
       acoes.replaceChildren(link("Criar conta grátis", linkConta({ criar: true }), true), link("Já tenho conta", linkConta()));
     } else {
       $("[data-estudio-bloqueio-titulo]").textContent = "Exclusivo do Atalho Pro";
-      $("[data-estudio-bloqueio-texto]").textContent = `O Pro libera este e todos os ${itens.length} ${textos.itens}, os sistemas completos prontos para vender e tudo o que for lançado, por ${precos.proMensal}/mês.`;
+      $("[data-estudio-bloqueio-texto]").textContent = `O Pro desbloqueia o catálogo completo (${itens.length} ${textos.itens}), os sistemas completos prontos para vender e tudo o que for lançado, por ${precos.proMensal}/mês.`;
       acoes.replaceChildren(
         ...(pessoa ? [link("Conhecer o Pro", `${base}pro/`, true)] : [link("Conhecer o Pro", `${base}pro/`, true), link("Criar conta grátis", linkConta({ criar: true }))])
       );
@@ -276,7 +276,7 @@ ${codigo}
     $("[data-estudio-controles]").hidden = !parametros().length;
     raiz.ownerDocument.querySelector(".site-anim-area").classList.toggle("site-vitrine-sem-ajustes", !parametros().length);
     valores = Object.fromEntries(parametros().map((p) => [p.var, p.padrao]));
-    $("[data-estudio-dica]").textContent = atual.rolagem ? "Role dentro da prévia para ver o efeito." : "";
+    $("[data-estudio-dica]").textContent = atual.rolagem ? "Faça scroll dentro da pré-visualização para ver o efeito." : "";
     $("[data-estudio-forcar]").hidden = !(reduzir() && tipo === "animacao");
     $("[data-estudio-controles]").replaceChildren(...parametros().map(criarControle));
     montarTutorial();

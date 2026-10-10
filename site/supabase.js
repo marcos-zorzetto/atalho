@@ -1,9 +1,9 @@
 /*
- * Conexão com o Supabase usada pela conta, pela área de membros e pelo painel
+ * Ligação com o Supabase usada pela conta, pela área de membros e pelo painel
  * do administrador. Carregado depois do supabase-js e do site/config.js.
  *
  * Segurança: aqui só existe a chave PÚBLICA. Quem decide o que cada pessoa pode
- * ler são as regras do banco (servicos/supabase/schema.sql), não este arquivo.
+ * ler são as regras do banco (servicos/supabase/schema.sql), não este ficheiro.
  */
 (function () {
   "use strict";
@@ -12,21 +12,21 @@
   const ativo = Boolean(config.url && config.chavePublica && window.supabase);
 
   const TRADUCOES = [
-    [/invalid login credentials/i, "E-mail ou senha incorretos."],
-    [/email not confirmed/i, "Confirme seu e-mail pelo link que enviamos antes de entrar."],
+    [/invalid login credentials/i, "E-mail ou palavra-passe incorretos."],
+    [/email not confirmed/i, "Confirme o seu e-mail pelo link que enviámos antes de entrar."],
     [/user already registered|already been registered/i, "Já existe uma conta com esse e-mail. Tente entrar."],
-    [/password should be at least/i, "A senha precisa ter pelo menos 8 caracteres."],
-    [/same.*password|different from the old/i, "A nova senha precisa ser diferente da atual."],
+    [/password should be at least/i, "A palavra-passe tem de ter pelo menos 8 caracteres."],
+    [/same.*password|different from the old/i, "A nova palavra-passe tem de ser diferente da atual."],
     [/email address not authorized/i, "O envio de e-mails ainda não foi configurado no site. Tente mais tarde."],
     [/rate limit|too many requests|security purposes/i, "Muitas tentativas seguidas. Aguarde um minuto e tente de novo."],
     [/acesso restrito|permission denied|42501/i, "Acesso restrito ao administrador."],
-    [/jwt|token.*(expired|invalid)|session.*missing/i, "Sua sessão expirou. Entre de novo."],
-    [/network|fetch/i, "Sem conexão com o servidor. Confira sua internet."],
-    [/weak password|pwned|leaked/i, "Essa senha é fraca ou já apareceu em vazamentos. Escolha outra."],
+    [/jwt|token.*(expired|invalid)|session.*missing/i, "A sua sessão expirou. Entre de novo."],
+    [/network|fetch/i, "Sem ligação ao servidor. Verifique a sua internet."],
+    [/weak password|pwned|leaked/i, "Essa palavra-passe é fraca ou já apareceu em fugas de dados. Escolha outra."],
   ];
   const traduzir = (erro) => {
     const mensagem = `${erro?.message || erro || ""} ${erro?.code || ""}`;
-    return (TRADUCOES.find(([padrao]) => padrao.test(mensagem)) || [, "Algo deu errado. Tente de novo em instantes."])[1];
+    return (TRADUCOES.find(([padrao]) => padrao.test(mensagem)) || [, "Algo correu mal. Tente de novo dentro de instantes."])[1];
   };
 
   const notificar = (texto, tipo = "info", extras = {}) => window.Atalho.notificar(texto, { tipo, ...extras });
@@ -37,7 +37,7 @@
       })
     : null;
 
-  /** Usuário da sessão guardada no navegador (renova o acesso sozinho se precisar). */
+  /** Utilizador da sessão guardada no navegador (renova o acesso sozinho se precisar). */
   async function usuario() {
     if (!cliente) return null;
     const { data } = await cliente.auth.getSession();

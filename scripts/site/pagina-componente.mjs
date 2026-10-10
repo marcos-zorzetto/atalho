@@ -6,13 +6,13 @@ import { linkEditor } from "./pagina-editor.mjs";
 const SELOS = {
   amplo: { classe: "at-sucesso", texto: "Em todos os navegadores", dica: (r) => `Disponível em todos os navegadores principais desde ${mesAno(r.desde)}.` },
   recente: { classe: "at-info", texto: "Novo em todos os navegadores", dica: (r) => `Chegou a todos os navegadores atuais em ${mesAno(r.desde)}. Navegadores muito desatualizados podem não ter.` },
-  limitado: { classe: "at-aviso", texto: "Ainda não em todos", dica: () => "Melhoria progressiva: sem suporte, o componente continua funcionando com visual mais simples." },
+  limitado: { classe: "at-aviso", texto: "Ainda não em todos", dica: () => "Melhoria progressiva: sem suporte, o componente continua a funcionar com visual mais simples." },
   desconhecido: { classe: "", texto: "Sem dados", dica: () => "Recurso não encontrado na base web-features." },
 };
 
 function mesAno(data) {
   if (!data) return "há muito tempo";
-  return new Intl.DateTimeFormat("pt-BR", { month: "long", year: "numeric" }).format(new Date(`${data}T12:00:00`));
+  return new Intl.DateTimeFormat("pt-PT", { month: "long", year: "numeric" }).format(new Date(`${data}T12:00:00`));
 }
 
 export const slug = (texto) =>
@@ -146,7 +146,7 @@ export function paginaComponente({ docs, componente: c, ordem, baseline, patroci
       <div class="site-docs-barra-celular">
         <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs">${ICONES_SITE.menu} Todos os componentes</button>
       </div>
-      <nav class="at-trilha" aria-label="Você está em"><ol>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
         <li><a href="${url()}">Início</a></li>
         <li><a href="${url("componentes/")}">Componentes</a></li>
         <li><a href="${urlComponente(primeiroDaCategoria)}">${esc(categoria.nome)}</a></li>
@@ -154,7 +154,7 @@ export function paginaComponente({ docs, componente: c, ordem, baseline, patroci
       </ol></nav>
       <div class="site-titulo-linha">
         <h1 class="site-titulo site-h2" tabindex="-1">${esc(c.nome)}</h1>
-        <button class="at-botao at-pequeno site-favoritar" data-favoritar="${c.id}" aria-pressed="false" hidden>${ICONES_SITE.coracao}<span>Favoritar</span></button>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="${c.id}" aria-pressed="false" hidden>${ICONES_SITE.coracao}<span>Adicionar aos favoritos</span></button>
       </div>
       <p class="at-chamada">${esc(c.resumo)}</p>
       <div class="site-meta">
@@ -197,7 +197,7 @@ export function paginaComponente({ docs, componente: c, ordem, baseline, patroci
         "@type": "TechArticle",
         headline: `${c.nome} em HTML, CSS e JavaScript`,
         description: c.resumo,
-        inLanguage: "pt-BR",
+        inLanguage: "pt-PT",
         url: urlAbsoluta(`componentes/${c.id}/`),
         author: { "@type": "Person", name: SITE.autor, url: SITE.autorUrl },
         publisher: { "@type": "Organization", name: SITE.nome, url: SITE.url },

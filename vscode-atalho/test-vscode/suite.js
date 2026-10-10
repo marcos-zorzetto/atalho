@@ -68,7 +68,7 @@ teste("ativa sem conta: tudo bloqueado, convite para entrar", async () => {
 
 teste("senha errada: não entra e explica em português", async () => {
   assert.equal(await vscode.commands.executeCommand("atalho.entrar", "membro@teste.pt", "errada"), false);
-  assert.match(api.ultimoErro(), /E-mail ou senha incorretos/);
+  assert.match(api.ultimoErro(), /E-mail ou palavra-passe incorretos/);
   assert.equal(api.estado.pessoa, null);
   assert.equal(await vscode.commands.executeCommand("atalho.entrar", "ninguem@teste.pt", "x"), false);
 });
@@ -81,7 +81,7 @@ teste("membro: entra, plano Membro, 20 componentes e 10 animações liberados", 
   assert.equal(api.estado.avancados.filter((i) => i.liberado).length, 20);
   assert.equal(api.estado.animacoes.filter((i) => i.liberado).length, 10);
   const raiz = await api.painel.getChildren();
-  assert.ok(raiz.some((n) => n.label === "Liberar tudo com o Pro"));
+  assert.ok(raiz.some((n) => n.label === "Desbloquear tudo com o Pro"));
   const avancados = raiz.find((n) => n.label === "Componentes avançados");
   assert.equal(avancados.description, "20 de 119");
 });
@@ -173,7 +173,7 @@ teste("Pro: tudo liberado (119 componentes e 48 animações)", async () => {
   assert.equal(api.estado.avancados.filter((i) => i.liberado).length, api.estado.avancados.length);
   assert.equal(api.estado.animacoes.filter((i) => i.liberado).length, api.estado.animacoes.length);
   const raiz = await api.painel.getChildren();
-  assert.ok(!raiz.some((n) => n.label === "Liberar tudo com o Pro"));
+  assert.ok(!raiz.some((n) => n.label === "Desbloquear tudo com o Pro"));
 });
 
 teste("Pro: TODOS os componentes avançados e animações entram no editor exatamente como são", async () => {

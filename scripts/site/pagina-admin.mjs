@@ -25,30 +25,30 @@ export function paginaAdmin() {
       </header>
 
       <div data-admin-estado="carregando" aria-live="polite">
-        <div data-admin-carregando><span class="at-carregando" aria-hidden="true"></span> <span class="at-texto-suave">Conferindo sua permissão…</span></div>
+        <div data-admin-carregando><span class="at-carregando" aria-hidden="true"></span> <span class="at-texto-suave">A verificar a sua permissão…</span></div>
         <div class="at-alerta at-aviso" data-admin-indisponivel hidden><div class="at-alerta-conteudo"><strong>Contas ainda não ativadas</strong><p>Configure o Supabase em <code>site/config.js</code> seguindo o guia <code>servicos/LEIA-ME.md</code>.</p></div></div>
         <div class="at-alerta" data-admin-entrar hidden><div class="at-alerta-conteudo"><strong>Entre com a sua conta de administrador</strong><p><a class="at-botao at-primario at-pequeno at-mt-2" href="${url("conta/")}?voltar=${encodeURIComponent(url("admin/"))}">Entrar</a></p></div></div>
-        <div class="at-alerta at-perigo" data-admin-negado hidden><div class="at-alerta-conteudo"><strong>Acesso restrito</strong><p>Esta conta não é de administrador. <a href="${url("conta/")}">Voltar para minha conta</a>.</p></div></div>
+        <div class="at-alerta at-perigo" data-admin-negado hidden><div class="at-alerta-conteudo"><strong>Acesso restrito</strong><p>Esta conta não é de administrador. <a href="${url("conta/")}">Voltar à minha conta</a>.</p></div></div>
         <div class="at-alerta at-perigo" data-admin-erro hidden><div class="at-alerta-conteudo"><strong>Não foi possível carregar o painel</strong><p data-admin-erro-texto></p></div></div>
       </div>
 
       <div class="at-pilha site-admin-painel" data-admin-painel hidden>
         <div class="at-colunas-4" style="--min: 200px">
-          ${indicador("usuarios", "Usuários")}
+          ${indicador("usuarios", "Utilizadores")}
           ${indicador("novos_7_dias", "Novos em 7 dias")}
           ${indicador("ativos_30_dias", "Ativos em 30 dias")}
           ${indicador("lista_espera", "Lista do Atalho Pro")}
         </div>
 
         <div class="at-colunas-4" style="--min: 200px" aria-label="Loja">
-          ${indicador("assinantes_ativos", "Assinantes Pro")}
+          ${indicador("assinantes_ativos", "Subscritores Pro")}
           ${indicador("compras_avulsas", "Compras avulsas")}
           ${indicador("receita_30_dias", "Receita em 30 dias")}
           ${indicador("receita_total", "Receita total")}
         </div>
 
         <section class="at-cartao">
-          <div class="at-cartao-cabecalho"><h2>Cadastros nos últimos 30 dias</h2><span class="at-selo" data-admin-total-periodo></span></div>
+          <div class="at-cartao-cabecalho"><h2>Registos nos últimos 30 dias</h2><span class="at-selo" data-admin-total-periodo></span></div>
           <div class="at-cartao-corpo">
             <div class="site-admin-grafico" role="img" data-admin-grafico></div>
           </div>
@@ -56,16 +56,16 @@ export function paginaAdmin() {
 
         <section class="at-cartao">
           <div class="at-cartao-cabecalho site-admin-cabecalho">
-            <h2>Usuários</h2>
-            <div class="at-entrada-icone site-admin-busca"><span class="at-icone-campo" aria-hidden="true">⌕</span><input class="at-entrada" type="search" placeholder="Buscar por nome ou e-mail" aria-label="Buscar usuários" data-admin-busca></div>
+            <h2>Utilizadores</h2>
+            <div class="at-entrada-icone site-admin-busca"><span class="at-icone-campo" aria-hidden="true">⌕</span><input class="at-entrada" type="search" placeholder="Pesquisar por nome ou e-mail" aria-label="Pesquisar utilizadores" data-admin-busca></div>
           </div>
-          <div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Lista de usuários">
+          <div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Lista de utilizadores">
             <table class="at-tabela">
-              <thead><tr><th>Nome</th><th>E-mail</th><th>Cadastro</th><th>Último acesso</th><th>Situação</th><th class="at-direita">Favoritos</th></tr></thead>
+              <thead><tr><th>Nome</th><th>E-mail</th><th>Registo</th><th>Último acesso</th><th>Situação</th><th class="at-direita">Favoritos</th></tr></thead>
               <tbody data-admin-usuarios></tbody>
             </table>
           </div>
-          <nav class="at-paginacao site-admin-paginacao" aria-label="Páginas de usuários">
+          <nav class="at-paginacao site-admin-paginacao" aria-label="Páginas de utilizadores">
             <span class="at-paginacao-info" data-admin-paginacao-info></span>
             <div class="at-paginacao-botoes">
               <button type="button" class="at-botao at-pequeno" data-admin-pagina="-1">Anterior</button>
@@ -76,7 +76,7 @@ export function paginaAdmin() {
 
         <div class="at-colunas-2" style="--min: 320px">
           <section class="at-cartao">
-            <div class="at-cartao-cabecalho"><h2>Lista de espera do Pro</h2><button type="button" class="at-botao at-pequeno" data-admin-exportar>Exportar planilha</button></div>
+            <div class="at-cartao-cabecalho"><h2>Lista de espera do Pro</h2><button type="button" class="at-botao at-pequeno" data-admin-exportar>Exportar folha de cálculo</button></div>
             <div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Lista de espera do Atalho Pro">
               <table class="at-tabela"><thead><tr><th>Nome</th><th>E-mail</th><th>Entrou em</th></tr></thead><tbody data-admin-lista></tbody></table>
             </div>
@@ -89,13 +89,13 @@ export function paginaAdmin() {
           </section>
         </div>
 
-        <p class="at-texto-suave at-texto-pequeno">Para excluir, bloquear ou reenviar a confirmação de um usuário, use a área <strong>Authentication</strong> do Supabase (botão “Abrir no Supabase”). Os dados desta página são pessoais: não compartilhe capturas de tela com e-mails visíveis (RGPD e LGPD).</p>
+        <p class="at-texto-suave at-texto-pequeno">Para eliminar, bloquear ou reenviar a confirmação de um utilizador, use a área <strong>Authentication</strong> do Supabase (botão “Abrir no Supabase”). Os dados desta página são pessoais: não partilhe capturas de ecrã com e-mails visíveis (RGPD).</p>
       </div>
     </div>`;
 
   return pagina({
     titulo: "Painel do administrador · Atalho",
-    descricao: "Área restrita do administrador do Atalho: usuários, cadastros, lista de espera do Pro e conteúdo exclusivo.",
+    descricao: "Área restrita do administrador do Atalho: utilizadores, registos, lista de espera do Pro e conteúdo exclusivo.",
     caminho: "admin/",
     pagina: "admin",
     secao: "",

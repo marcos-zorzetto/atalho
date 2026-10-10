@@ -128,7 +128,7 @@ export async function gerarSite() {
   // Endereço antigo (componentes.html#modal) continua funcionando
   await escrever(
     "componentes.html",
-    `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Componentes · Atalho</title>
+    `<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><title>Componentes · Atalho</title>
 <link rel="canonical" href="${urlAbsoluta("componentes/")}"><meta name="robots" content="noindex">
 <script>location.replace("${url("componentes/")}" + (location.hash ? location.hash.slice(1) + "/" : ""));</script>
 </head><body><a href="${url("componentes/")}">Ver componentes</a></body></html>`

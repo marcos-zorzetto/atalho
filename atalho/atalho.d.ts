@@ -46,8 +46,8 @@ declare global {
   }
 
   interface AtalhoFormatar {
-    /** 1234.5 → "R$ 1.234,50" */
-    moeda(valor: number): string;
+    /** 1234.5 → "1234,50 €" (idioma e moeda da página; passe "GBP", "BRL"… para outra moeda) */
+    moeda(valor: number, codigo?: string): string;
     /** 1234.5 → "1.234,5" */
     numero(valor: number, casas?: number): string;
     /** 0.125 → "13%" (ou "12,5%" com casas = 1) */
@@ -67,16 +67,34 @@ declare global {
   }
 
   interface AtalhoValidar {
+    /** NIF/NIPC de Portugal (9 algarismos com dígito de controlo). */
+    nif(texto: string): boolean;
+    /** IBAN de qualquer país (tamanho por país e módulo 97). */
+    iban(texto: string): boolean;
+    /** Código postal de Portugal: 0000-000. */
+    codigoPostal(texto: string): boolean;
+    /** Telemóvel de Portugal (91, 92, 93 ou 96), com ou sem +351. */
+    telemovel(texto: string): boolean;
     cpf(texto: string): boolean;
     /** Aceita o CNPJ numérico e o alfanumérico (a partir de julho de 2026). */
     cnpj(texto: string): boolean;
     email(texto: string): boolean;
+    /** pt-BR: DDD + número. Outros idiomas: número nacional ou internacional (+351…). */
     telefone(texto: string): boolean;
     cep(texto: string): boolean;
   }
 
+  interface AtalhoConfiguracao {
+    /** "pt-PT" (padrão), "pt-BR" ou "en". Sem isto, vale o <html lang>. */
+    idioma?: string | null;
+    /** Código ISO 4217: "EUR" (padrão), "GBP", "BRL"… Sem isto, vale <html data-at-moeda>. */
+    moeda?: string | null;
+  }
+
   interface AtalhoApi {
     readonly versao: string;
+    /** Troca o idioma e a moeda de tudo o que o Atalho escreve. Devolve o que ficou valendo. */
+    configurar(opcoes: AtalhoConfiguracao): { idioma: "pt-PT" | "pt-BR" | "en"; moeda: string };
     /**
      * Cria um estado reativo: ao trocar um valor, tudo que usa data-at-texto,
      * data-at-mostrar, data-at-lista etc. se atualiza sozinho.
@@ -98,6 +116,15 @@ declare global {
     temaAtual(): "claro" | "escuro";
     /** Remove acentos e deixa minúsculo: "Ação" → "acao" */
     normalizar(texto: string): string;
+  }
+
+  /** Morada devolvida pela GEO API PT (evento at:codigo-postal). */
+  interface AtalhoMoradaPortugal {
+    codigoPostal: string;
+    rua: string;
+    localidade: string;
+    concelho: string;
+    distrito: string;
   }
 
   /** Endereço devolvido pelo ViaCEP (evento at:cep). */
@@ -129,6 +156,8 @@ declare global {
     "at:pronto": CustomEvent<{ versao: string }>;
     "at:enviar": CustomEvent<{ dados: Record<string, FormDataEntryValue>; formulario: HTMLFormElement; botao: HTMLElement | null }>;
     "at:invalido": CustomEvent<{ campos: HTMLElement[] }>;
+    "at:codigo-postal": CustomEvent<AtalhoMoradaPortugal>;
+    "at:codigo-postal-erro": CustomEvent<{ mensagem: string }>;
     "at:cep": CustomEvent<AtalhoEnderecoCep>;
     "at:cep-erro": CustomEvent<{ mensagem: string }>;
     "at:codigo": CustomEvent<{ valor: string }>;

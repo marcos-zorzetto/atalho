@@ -86,7 +86,7 @@
         chave.checked = !chave.checked;
         notificar(traduzir(error), "perigo");
       } else {
-        notificar(chave.checked ? "Você está na lista do Atalho Pro." : "Você saiu da lista do Atalho Pro.", "sucesso");
+        notificar(chave.checked ? "Está na lista do Atalho Pro." : "Saiu da lista do Atalho Pro.", "sucesso");
       }
     };
   }
@@ -99,14 +99,14 @@
   }
 
   function oferecerReenvio(email) {
-    notificar("Confirme seu e-mail pelo link que enviamos antes de entrar.", "aviso", {
+    notificar("Confirme o seu e-mail pelo link que enviámos antes de entrar.", "aviso", {
       titulo: "E-mail ainda não confirmado",
       duracao: 10000,
       acao: {
         texto: "Reenviar e-mail",
         aoClicar: async () => {
           const { error } = await cliente.auth.resend({ type: "signup", email, options: { emailRedirectTo: enderecoRetorno() } });
-          notificar(error ? traduzir(error) : `Enviamos um novo link para ${email}.`, error ? "perigo" : "sucesso");
+          notificar(error ? traduzir(error) : `Enviámos um novo link para ${email}.`, error ? "perigo" : "sucesso");
         },
       },
     });
@@ -147,7 +147,7 @@
     $("[data-conta-reenviar]").addEventListener("click", async () => {
       const email = $("[data-conta-confirmar-email]").textContent;
       const { error } = await cliente.auth.resend({ type: "signup", email, options: { emailRedirectTo: enderecoRetorno() } });
-      notificar(error ? traduzir(error) : `Enviamos um novo link para ${email}.`, error ? "perigo" : "sucesso");
+      notificar(error ? traduzir(error) : `Enviámos um novo link para ${email}.`, error ? "perigo" : "sucesso");
     });
 
     $("[data-esqueci-senha]").addEventListener("click", async () => {
@@ -155,10 +155,10 @@
       const email = campo.value.trim();
       if (!window.Atalho.validar.email(email)) {
         campo.focus();
-        return notificar("Digite seu e-mail no campo acima e clique de novo.", "aviso");
+        return notificar("Escreva o seu e-mail no campo acima e clique de novo.", "aviso");
       }
       const { error } = await cliente.auth.resetPasswordForEmail(email, { redirectTo: `${location.origin}${base}conta/` });
-      notificar(error ? traduzir(error) : `Se existir uma conta com ${email}, você vai receber um link para criar uma nova senha.`, error ? "perigo" : "sucesso");
+      notificar(error ? traduzir(error) : `Se existir uma conta com ${email}, vai receber um link para criar uma nova palavra-passe.`, error ? "perigo" : "sucesso");
     });
 
     $("[data-sair]").addEventListener("click", async () => {
@@ -172,25 +172,25 @@
       const { error } = await cliente.rpc("excluir_minha_conta");
       if (error) return notificar(traduzir(error), "perigo");
       await cliente.auth.signOut();
-      notificar("Sua conta e todos os seus dados foram apagados.", "sucesso");
+      notificar("A sua conta e todos os seus dados foram apagados.", "sucesso");
       setTimeout(() => (location.href = base), 1500);
     });
 
-    // Voltou pelo link de "esqueci minha senha": pede a nova senha num formulário
+    // Voltou pelo link de "esqueci-me da palavra-passe": pede a nova palavra-passe num formulário
     const modalSenha = $("#modal-nova-senha");
     cliente.auth.onAuthStateChange((evento) => {
       if (evento === "PASSWORD_RECOVERY") modalSenha.showModal();
     });
     $("#form-nova-senha").addEventListener("at:enviar", async (evento) => {
       const { dados, botao, formulario } = evento.detail;
-      if (dados.senha !== dados.confirmar) return notificar("As duas senhas precisam ser iguais.", "aviso");
+      if (dados.senha !== dados.confirmar) return notificar("As duas palavras-passe têm de ser iguais.", "aviso");
       botao.setAttribute("aria-busy", "true");
       const { error } = await cliente.auth.updateUser({ password: dados.senha });
       botao.removeAttribute("aria-busy");
       if (error) return notificar(traduzir(error), "perigo");
       formulario.reset();
       modalSenha.close();
-      notificar("Senha alterada. Você já está conectado.", "sucesso");
+      notificar("Palavra-passe alterada. Já tem a sessão iniciada.", "sucesso");
     });
   }
 
@@ -205,10 +205,10 @@
     if (!usuario) return;
     const { data: naLista } = await cliente.from("lista_espera_pro").select("usuario_id").maybeSingle();
     if (naLista) {
-      estado.textContent = "Você já está na lista. Avisaremos no lançamento!";
+      estado.textContent = "Já está na lista. Avisaremos no lançamento!";
       return;
     }
-    estado.textContent = "Você está conectado. Um clique e pronto:";
+    estado.textContent = "Tem a sessão iniciada. Um clique e pronto:";
     botao.hidden = false;
     botao.addEventListener("click", async () => {
       botao.setAttribute("aria-busy", "true");
@@ -216,8 +216,8 @@
       botao.removeAttribute("aria-busy");
       if (error) return notificar(traduzir(error), "perigo");
       botao.hidden = true;
-      estado.textContent = "Pronto! Você está na lista do Atalho Pro.";
-      notificar("Você está na lista do Atalho Pro.", "sucesso");
+      estado.textContent = "Pronto! Está na lista do Atalho Pro.";
+      notificar("Está na lista do Atalho Pro.", "sucesso");
     });
   }
 

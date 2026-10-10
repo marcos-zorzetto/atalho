@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Testes de ponta a ponta: um navegador de verdade clica, digita, arrasta e usa
+ * Testes de ponta a ponta: um navegador de verdade clica, escreve, arrasta e usa
  * o teclado como uma pessoa faria, nos componentes e nas páginas de exemplo.
  *
  * Uso: node testes/interacoes.mjs              (gere antes: node scripts/gerar-site.mjs --local)
@@ -45,7 +45,7 @@ const teste = (nome, fn, opcoes = {}) => testes.push({ nome, fn, opcoes });
 async function novaAba(opcoes = {}) {
   const contexto = await navegador.newContext({
     viewport: { width: 1440, height: 900 },
-    locale: "pt-BR",
+    locale: "pt-PT",
     permissions: ["clipboard-read", "clipboard-write"],
     reducedMotion: "reduce",
     ...opcoes,
@@ -83,9 +83,9 @@ teste("Ctrl+K abre a busca, entende 'popup' e leva ao modal pelo teclado", async
   await aba.waitForURL(/componentes\/modal\//);
 });
 
-teste("Busca da página inicial: digitar 'cpf' e Enter abre Máscaras", async (aba) => {
+teste("Busca da página inicial: escrever 'nif' e Enter abre Máscaras", async (aba) => {
   await abrir(aba, "");
-  await aba.locator("#busca-inicio").fill("cpf");
+  await aba.locator("#busca-inicio").fill("nif");
   await aba.locator("#busca-inicio-resultados .site-resultado").first().waitFor();
   await aba.locator("#busca-inicio").press("Enter");
   await aba.waitForURL(/componentes\/mascaras\//);
@@ -99,12 +99,12 @@ teste("Vitrine ao vivo: Comprar soma no carrinho e mostra notificação", async 
   await aba.locator(".at-notificacao").first().waitFor();
 });
 
-teste("Formulário da vitrine: CPF inválido mostra erro em português", async (aba) => {
+teste("Formulário da vitrine: NIF inválido mostra erro em português de Portugal", async (aba) => {
   await abrir(aba, "");
-  await aba.locator("#inicio-cpf").pressSequentially("11111111111");
-  assert.equal(await aba.locator("#inicio-cpf").inputValue(), "111.111.111-11");
+  await aba.locator("#inicio-cpf").pressSequentially("123456780");
+  assert.equal(await aba.locator("#inicio-cpf").inputValue(), "123 456 780");
   await aba.getByRole("button", { name: "Validar" }).click();
-  await aba.getByText("CPF inválido. Confira os números.").waitFor();
+  await aba.getByText("NIF inválido. Verifique os 9 algarismos.").waitFor();
 });
 
 teste("Tema escuro: alterna e continua escuro depois de recarregar", async (aba) => {
@@ -126,12 +126,12 @@ teste("Abas de código: trocar para JavaScript e copiar", async (aba) => {
   assert.match(await aba.evaluate(() => navigator.clipboard.readText()), /aria-busy/);
 });
 
-teste("Índice 'Nesta página' leva até a seção", async (aba) => {
+teste("Índice 'Nesta página' leva até a secção", async (aba) => {
   await abrir(aba, "componentes/tabela/");
   await aba.locator(".site-indice").getByRole("link", { name: "Referência" }).click();
   await aba.waitForTimeout(300);
   const topo = await aba.locator("#referencia").evaluate((el) => el.getBoundingClientRect().top);
-  assert.ok(topo > 0 && topo < 300, `seção ficou em ${topo}px`);
+  assert.ok(topo > 0 && topo < 300, `secção ficou em ${topo}px`);
 });
 
 teste("Catálogo: filtro encontra por sinônimo", async (aba) => {
@@ -153,7 +153,7 @@ teste("Ícones: clicar copia o SVG", async (aba) => {
 
 teste("Modal: abre sem JavaScript próprio, Esc fecha e devolve o foco", async (aba) => {
   await abrir(aba, "componentes/modal/");
-  const abridor = aba.getByRole("button", { name: "Cancelar assinatura" }).first();
+  const abridor = aba.getByRole("button", { name: "Cancelar subscrição" }).first();
   await abridor.click();
   assert.equal(await aba.locator("#modal-sair").evaluate((d) => d.open), true);
   await aba.keyboard.press("Escape");
@@ -163,13 +163,13 @@ teste("Modal: abre sem JavaScript próprio, Esc fecha e devolve o foco", async (
 
 teste("Modal de exclusão: botão só libera com o nome certo", async (aba) => {
   await abrir(aba, "componentes/modal/");
-  await aba.getByRole("button", { name: "Excluir projeto" }).click();
-  const botao = aba.getByRole("button", { name: "Entendi, excluir este projeto" });
+  await aba.getByRole("button", { name: "Eliminar projeto" }).click();
+  const botao = aba.getByRole("button", { name: "Entendi, eliminar este projeto" });
   assert.equal(await botao.isDisabled(), true);
   await aba.keyboard.type("loja-virtual");
   assert.equal(await botao.isDisabled(), false);
   await botao.click();
-  await aba.locator(".at-notificacao", { hasText: "Projeto excluído." }).waitFor();
+  await aba.locator(".at-notificacao", { hasText: "Projeto eliminado." }).waitFor();
 });
 
 teste("Menu suspenso: abre ao lado do botão, setas navegam, Esc fecha", async (aba) => {
@@ -203,7 +203,7 @@ teste("Tabela: ordenar, filtrar, paginar e selecionar com cliques", async (aba) 
   assert.equal(await aba.locator("#tabela-pedidos tbody tr:not([hidden]) td:nth-child(2)").first().innerText(), "#1044");
   await aba.getByRole("button", { name: "Página 2" }).click();
   assert.match(await aba.locator(".at-paginacao-info").innerText(), /6–8 de 8/);
-  await aba.locator("#busca-pedidos").fill("pix");
+  await aba.locator("#busca-pedidos").fill("mb way");
   assert.equal(await aba.locator("#tabela-pedidos tbody tr:not([hidden])").count(), 3);
   await aba.getByRole("checkbox", { name: "Selecionar todos" }).check();
   assert.equal(await aba.locator("#selecionados").innerText(), "3 selecionados");
@@ -211,17 +211,25 @@ teste("Tabela: ordenar, filtrar, paginar e selecionar com cliques", async (aba) 
 
 teste("Máscaras: digitação real formata e o cursor não pula", async (aba) => {
   await abrir(aba, "componentes/mascaras/");
-  await aba.locator("#m-tel").pressSequentially("11987654321");
-  assert.equal(await aba.locator("#m-tel").inputValue(), "(11) 98765-4321");
+  await aba.locator("#m-tel").pressSequentially("912345678");
+  assert.equal(await aba.locator("#m-tel").inputValue(), "912 345 678");
   await aba.locator("#m-valor").pressSequentially("123456");
-  assert.equal(texto(await aba.locator("#m-valor").inputValue()), "R$ 1.234,56");
+  assert.equal(texto(await aba.locator("#m-valor").inputValue()), "1234,56 €");
+  await aba.locator("#m-iban").pressSequentially("pt50000201231234567890154");
+  assert.equal(await aba.locator("#m-iban").inputValue(), "PT50 0002 0123 1234 5678 9015 4");
+  await aba.locator("#m-cp").pressSequentially("1250096");
+  assert.equal(await aba.locator("#m-cp").inputValue(), "1250-096");
+  // O cursor não salta para o fim ao corrigir um algarismo no meio
+  await aba.locator("#m-nif").pressSequentially("123456789");
+  await aba.locator("#m-nif").press("Home");
+  await aba.locator("#m-nif").press("ArrowRight");
+  await aba.locator("#m-nif").press("ArrowRight");
+  await aba.locator("#m-nif").press("Delete");
+  await aba.locator("#m-nif").press("9");
+  assert.equal(await aba.locator("#m-nif").inputValue(), "129 456 789");
+  // Brasil continua a funcionar
   await aba.locator("#m-cpf").pressSequentially("52998224725");
-  await aba.locator("#m-cpf").press("Home");
-  await aba.locator("#m-cpf").press("ArrowRight");
-  await aba.locator("#m-cpf").press("ArrowRight");
-  await aba.locator("#m-cpf").press("Delete");
-  await aba.locator("#m-cpf").press("1");
-  assert.equal(await aba.locator("#m-cpf").inputValue(), "521.982.247-25");
+  assert.equal(await aba.locator("#m-cpf").inputValue(), "529.982.247-25");
 });
 
 teste("Validação: enviar vazio mostra erros e foca o primeiro campo", async (aba) => {
@@ -239,14 +247,14 @@ teste("Senha: mostrar e medidor de força", async (aba) => {
   assert.equal(await aba.locator("#nova-senha").getAttribute("type"), "text");
 });
 
-teste("Código de verificação: digitar avança sozinho e confirma", async (aba) => {
+teste("Código de verificação: escrever avança sozinho e confirma", async (aba) => {
   await abrir(aba, "componentes/codigo/");
   await aba.locator("#codigo-sms input").first().click();
   await aba.keyboard.type("123456");
   await aba.locator(".at-notificacao", { hasText: "Número confirmado!" }).waitFor();
 });
 
-teste("Upload: escolher arquivo mostra o nome e o tamanho", async (aba) => {
+teste("Upload: escolher ficheiro mostra o nome e o tamanho", async (aba) => {
   await abrir(aba, "componentes/upload/");
   const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==", "base64");
   await aba.locator('[data-at="upload"] input[type=file]').setInputFiles({ name: "foto-produto.png", mimeType: "image/png", buffer: png });
@@ -255,13 +263,15 @@ teste("Upload: escolher arquivo mostra o nome e o tamanho", async (aba) => {
   assert.equal(await aba.locator(".at-upload-lista li").count(), 0);
 });
 
-teste("Copiar Pix: copia o código e confirma", async (aba) => {
+teste("Copiar referência Multibanco e IBAN", async (aba) => {
   await abrir(aba, "componentes/copiar/");
   await aba.getByRole("button", { name: /Copiar/ }).first().click();
-  assert.match(await aba.evaluate(() => navigator.clipboard.readText()), /^00020126/);
+  assert.equal(await aba.evaluate(() => navigator.clipboard.readText()), "21312");
+  await aba.locator('[data-at-copiar="#iban-loja"]').click();
+  assert.equal(await aba.evaluate(() => navigator.clipboard.readText()), "PT50 0002 0123 1234 5678 9015 4");
 });
 
-teste("Kanban: arrastar com o mouse e mover com Alt+seta", async (aba) => {
+teste("Kanban: arrastar com o rato e mover com Alt+seta", async (aba) => {
   await abrir(aba, "componentes/kanban/");
   await aba.locator("#quadro").scrollIntoViewIfNeeded();
   const origem = await aba.locator('[data-id="1"]').boundingBox();
@@ -284,7 +294,7 @@ teste("Carrossel: botão Próximo rola a fileira", async (aba) => {
   assert.ok((await aba.locator(".at-carrossel-trilho").evaluate((t) => t.scrollLeft)) > 50);
 });
 
-teste("Galeria: abre em tela cheia e navega com as setas", async (aba) => {
+teste("Galeria: abre em ecrã inteiro e navega com as setas", async (aba) => {
   await abrir(aba, "componentes/galeria/");
   await aba.locator('[data-at="galeria"] a').first().click();
   await aba.getByText("1 de 4").waitFor();
@@ -293,12 +303,12 @@ teste("Galeria: abre em tela cheia e navega com as setas", async (aba) => {
   await aba.keyboard.press("Escape");
 });
 
-teste("Autocompletar: digitar, setas e Enter", async (aba) => {
+teste("Autocompletar: escrever, setas e Enter", async (aba) => {
   await abrir(aba, "componentes/autocompletar/");
-  await aba.locator("#banco").pressSequentially("ita");
+  await aba.locator("#banco").pressSequentially("mil");
   await aba.keyboard.press("ArrowDown");
   await aba.keyboard.press("Enter");
-  assert.equal(await aba.locator("#banco").inputValue(), "341");
+  assert.equal(await aba.locator("#banco").inputValue(), "0033");
 });
 
 teste("Etiquetas: Enter cria, Backspace apaga", async (aba) => {
@@ -317,7 +327,7 @@ teste("Notificação com Desfazer (padrão Gmail)", async (aba) => {
   assert.equal(await aba.locator("#lista-emails li").first().isVisible(), true);
 });
 
-teste("Cookies (LGPD): aceitar dispara a escolha", async (aba) => {
+teste("Cookies (RGPD): aceitar dispara a escolha", async (aba) => {
   await abrir(aba, "componentes/cookies/");
   await aba.getByRole("button", { name: "Aceitar", exact: true }).click();
   await aba.locator(".at-notificacao", { hasText: "Análise de uso permitida." }).waitFor();
@@ -334,10 +344,10 @@ teste("Loja com carrinho: comprar, ajustar quantidade e ver o total", async (aba
   await aba.getByRole("button", { name: "Abrir carrinho" }).click();
   const gaveta = aba.locator("#gaveta-carrinho");
   await gaveta.getByRole("button", { name: "Aumentar" }).first().click();
-  assert.equal(texto(await gaveta.locator('[data-at-texto="carrinho.total"]').innerText()), "R$ 1.389,70");
+  assert.equal(texto(await gaveta.locator('[data-at-texto="carrinho.total"]').innerText()), "1389,70 €");
 });
 
-teste("Login em duas etapas: senha, código e pronto", async (aba) => {
+teste("Login em duas etapas: palavra-passe, código e pronto", async (aba) => {
   await abrir(aba, "componentes/receita-login/");
   await aba.locator("#login-email").fill("ana@exemplo.com");
   await aba.locator("#login-senha").fill("senha-forte-1");
@@ -347,11 +357,37 @@ teste("Login em duas etapas: senha, código e pronto", async (aba) => {
   await aba.getByRole("heading", { name: "Tudo certo!" }).waitFor();
 });
 
-teste("CEP preenche o endereço (ViaCEP)", async (aba) => {
+teste("Código postal preenche a morada (GEO API PT)", async (aba) => {
   await abrir(aba, "componentes/cep/");
-  await aba.locator("#end-cep").pressSequentially("01310100");
-  await aba.waitForFunction(() => document.querySelector("#end-rua").value === "Avenida Paulista", null, { timeout: 15000 });
+  await aba.locator("#end-cp").pressSequentially("1250096");
+  await aba.waitForFunction(() => document.querySelector("#end-localidade").value === "Lisboa", null, { timeout: 15000 });
+  assert.equal(await aba.locator("#end-distrito").inputValue(), "Lisboa");
+  assert.ok((await aba.locator("#end-rua").inputValue()).length > 3, "a rua também é preenchida");
   assert.equal(await aba.evaluate(() => document.activeElement.id), "end-numero");
+}, { rede: true });
+
+teste("Código postal inexistente mostra o erro no campo", async (aba) => {
+  await abrir(aba, "componentes/cep/");
+  await aba.locator("#end-cp").pressSequentially("9999999");
+  await aba.getByText("Código postal não encontrado. Verifique os números.").waitFor({ timeout: 15000 });
+  assert.equal(await aba.locator("#end-cp").getAttribute("aria-invalid"), "true");
+}, { rede: true });
+
+teste("Serviço de códigos postais ocupado não bloqueia o formulário", async (aba) => {
+  await aba.context().route("https://json.geoapi.pt/cp/**", (rota) => rota.fulfill({ status: 429, headers: { "access-control-allow-origin": "*" }, json: { msg: "limite" } }));
+  await abrir(aba, "componentes/cep/");
+  const pedido = aba.waitForResponse((r) => r.url().includes("geoapi.pt"));
+  await aba.locator("#end-cp").pressSequentially("1250096");
+  await pedido;
+  await aba.waitForTimeout(300);
+  assert.notEqual(await aba.locator("#end-cp").getAttribute("aria-invalid"), "true", "o campo não fica com erro");
+});
+
+teste("CEP do Brasil preenche o endereço (ViaCEP)", async (aba) => {
+  await abrir(aba, "componentes/cep/");
+  await aba.locator("#br-cep").pressSequentially("01310100");
+  await aba.waitForFunction(() => document.querySelector("#br-rua").value === "Avenida Paulista", null, { timeout: 15000 });
+  assert.equal(await aba.locator("#br-uf").inputValue(), "SP");
 }, { rede: true });
 
 /* ------------------------------------------------------------------------
@@ -363,7 +399,7 @@ teste("Exemplo Loja: buscar, filtrar e comprar", async (aba) => {
   await aba.evaluate(() => localStorage.clear());
   await aba.reload();
   await aba.waitForFunction(() => window.Atalho);
-  await aba.getByRole("radio", { name: "Até R$ 300" }).check();
+  await aba.getByRole("radio", { name: "Até 300 €" }).check();
   assert.match(await aba.locator('[data-at-texto="vitrine.resumo"]').innerText(), /3 produtos/);
   await aba.getByRole("button", { name: "Comprar" }).first().click();
   assert.equal(await aba.locator('[data-at-texto="carrinho.quantidade"]').innerText(), "1");
@@ -372,9 +408,9 @@ teste("Exemplo Loja: buscar, filtrar e comprar", async (aba) => {
 teste("Exemplo Landing: anual muda o preço", async (aba) => {
   await abrir(aba, "exemplos/landing-saas.html");
   const preco = aba.locator('[data-at-texto="precos.pro"]');
-  assert.equal(texto(await preco.innerText()), "R$ 79,00");
+  assert.equal(texto(await preco.innerText()), "79,00 €");
   await aba.getByRole("switch", { name: "Cobrança anual" }).check();
-  assert.equal(texto(await preco.innerText()), "R$ 65,83");
+  assert.equal(texto(await preco.innerText()), "65,83 €");
 }, { pro: true });
 
 teste("Exemplo Painel: Ctrl+K e ordenação", async (aba) => {
@@ -386,16 +422,16 @@ teste("Exemplo Painel: Ctrl+K e ordenação", async (aba) => {
   assert.equal(await aba.locator("#pedidos tbody tr:not([hidden]) td:nth-child(2)").first().innerText(), "Ana Costa");
 }, { pro: true });
 
-teste("Exemplo Checkout: Pix abre o modal", async (aba) => {
+teste("Exemplo Checkout: NIF, morada pelo código postal e MB WAY", async (aba) => {
   await abrir(aba, "exemplos/checkout.html");
   await aba.locator("#nome").fill("Ana Oliveira");
-  await aba.locator("#cpf").pressSequentially("52998224725");
-  await aba.locator("#celular").pressSequentially("11987654321");
-  await aba.locator("#cep").pressSequentially("01310100");
-  await aba.waitForFunction(() => document.querySelector("#rua").value !== "", null, { timeout: 15000 });
-  await aba.locator("#numero").fill("1000");
+  await aba.locator("#cpf").pressSequentially("123456789");
+  await aba.locator("#celular").pressSequentially("912345678");
+  await aba.locator("#cep").pressSequentially("1250096");
+  await aba.waitForFunction(() => document.querySelector("#cidade").value === "Lisboa", null, { timeout: 15000 });
+  await aba.locator("#numero").fill("100, 2.º Esq.");
   await aba.getByRole("button", { name: "Finalizar compra" }).click();
-  await aba.locator("#modal-pix[open]").waitFor();
+  await aba.locator("#modal-pix[open]").getByText("912 345 678").waitFor();
 }, { rede: true, pro: true });
 
 /* ------------------------------------------------------------------------
@@ -407,7 +443,7 @@ teste("Editor: 'Editar e testar' abre o exemplo e a prévia funciona", async (ab
   await aba.locator(".site-editar").first().click();
   await aba.waitForURL(/editor\/#/);
   const previa = aba.frameLocator("[data-editor-previa]");
-  await previa.getByRole("button", { name: "Cancelar assinatura" }).click();
+  await previa.getByRole("button", { name: "Cancelar subscrição" }).click();
   await previa.locator("#modal-sair[open]").waitFor();
 });
 
@@ -435,7 +471,7 @@ teste("Editor: o link compartilhado reabre o mesmo código", async (aba) => {
 });
 
 /* ------------------------------------------------------------------------
-   Celular
+   Telemóvel
    ------------------------------------------------------------------------ */
 
 teste("Celular: menu do topo abre e fecha", async (aba) => {
@@ -477,7 +513,7 @@ teste("Balão: abre ao lado do botão e fecha com Esc", async (aba) => {
   await balao.waitFor({ state: "hidden" });
 });
 
-teste("Rótulo flutuante: sobe ao digitar e volta ao apagar", async (aba) => {
+teste("Rótulo flutuante: sobe ao escrever e volta ao apagar", async (aba) => {
   await abrir(aba, "componentes/rotulo-flutuante/");
   const rotulo = aba.locator('label[for="flut-email"]');
   const antes = await rotulo.evaluate((l) => l.getBoundingClientRect().top);
@@ -496,12 +532,12 @@ teste("Recolher: abre, anuncia o estado e esconde do Tab quando fechado", async 
   await botao.click();
   assert.equal(await botao.getAttribute("aria-expanded"), "true");
   // Espera a animação terminar (altura do conteúdo aparece)
-  await aba.waitForFunction(() => /Pagamento: Pix/.test(document.querySelector("#detalhes-pedido").innerText));
+  await aba.waitForFunction(() => /Pagamento: MB WAY/.test(document.querySelector("#detalhes-pedido").innerText));
   await botao.click();
   assert.equal(await botao.getAttribute("aria-expanded"), "false");
 });
 
-teste("Índice: marca a seção que está sendo lida", async (aba) => {
+teste("Índice: marca a secção que está sendo lida", async (aba) => {
   await abrir(aba, "componentes/indice/");
   const caixa = aba.locator(".site-exemplo-preview .at-grade-12, .at-grade-12").filter({ has: aba.locator("#termos-pagamento") }).first();
   await caixa.evaluate((c) => {
@@ -513,7 +549,7 @@ teste("Índice: marca a seção que está sendo lida", async (aba) => {
   assert.equal(await aba.locator(".at-indice a[href='#termos-uso']").getAttribute("aria-current"), "location");
 });
 
-teste("Grade de 12: 8 + 4 no computador, empilha no celular", async (aba) => {
+teste("Grade de 12: 8 + 4 no computador, empilha no telemóvel", async (aba) => {
   await abrir(aba, "componentes/grade-12/");
   const largura = (sel) => aba.locator(sel).first().evaluate((e) => e.getBoundingClientRect().width);
   const principal = await largura("main.at-col-desktop-8"), lateral = await largura("aside.at-col-desktop-4");
@@ -522,13 +558,13 @@ teste("Grade de 12: 8 + 4 no computador, empilha no celular", async (aba) => {
   await aba.waitForFunction(() => innerWidth === 390);
   await aba.waitForTimeout(150);
   const p2 = await largura("main.at-col-desktop-8"), l2 = await largura("aside.at-col-desktop-4");
-  assert.ok(Math.abs(p2 - l2) < 2, `no celular as duas deviam ocupar a linha toda (${p2} × ${l2})`);
+  assert.ok(Math.abs(p2 - l2) < 2, `no telemóvel as duas deviam ocupar a linha toda (${p2} × ${l2})`);
 });
 
 teste("Grupo de botões e botão fechar", async (aba) => {
   await abrir(aba, "componentes/grupo-botoes/");
-  await aba.getByRole("button", { name: "Grade", exact: true }).click();
-  assert.equal(await aba.getByRole("button", { name: "Grade", exact: true }).getAttribute("aria-pressed"), "true");
+  await aba.getByRole("button", { name: "Grelha", exact: true }).click();
+  assert.equal(await aba.getByRole("button", { name: "Grelha", exact: true }).getAttribute("aria-pressed"), "true");
   assert.equal(await aba.getByRole("button", { name: "Lista", exact: true }).getAttribute("aria-pressed"), "false");
   await aba.getByRole("button", { name: "Fechar aviso" }).click();
   assert.equal(await aba.locator("#aviso-novidade").count(), 0);
@@ -550,7 +586,7 @@ teste("Utilitários: link esticado deixa o cartão inteiro clicável", async (ab
 
 // Página completa mínima, independente do atalho-pro: usa a biblioteca pelo caminho relativo
 const PAGINA_TESTE = `<!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><title>Loja virtual · Exemplo</title>
+<html lang="pt-PT"><head><meta charset="utf-8"><title>Loja online · Exemplo</title>
 <link rel="stylesheet" href="../atalho/atalho.css"><script src="../atalho/atalho.js" defer></script></head>
 <body><main class="at-container"><button class="at-botao" id="testar" data-at-notificar="Funcionou na prévia">Testar</button></main></body></html>`;
 
@@ -569,7 +605,7 @@ teste("Vitrine: visitante vê o convite e não recebe o conteúdo", async (aba) 
   assert.equal(await aba.locator("[data-exclusivo-fonte]").textContent(), "");
 }, { supabase: { pessoa: null } });
 
-teste("Vitrine: membro vê a página funcionando, o código e baixa o arquivo", async (aba) => {
+teste("Vitrine: membro vê a página a funcionar, o código e baixa o ficheiro", async (aba) => {
   await abrir(aba, "exemplos/loja/");
   await aba.locator("[data-exclusivo-membro]").waitFor();
   // A prévia carrega a biblioteca de verdade (o <base> aponta para o site)
@@ -578,8 +614,8 @@ teste("Vitrine: membro vê a página funcionando, o código e baixa o arquivo", 
   await previa.getByText("Funcionou na prévia").waitFor();
   await aba.getByRole("tab", { name: "Código" }).click();
   assert.match(await aba.locator("[data-exclusivo-fonte]").textContent(), /data-at-notificar="Funcionou na prévia"/);
-  // Download: o arquivo já aponta para a CDN e funciona fora do site
-  const [download] = await Promise.all([aba.waitForEvent("download"), aba.getByRole("button", { name: "Baixar HTML" }).click()]);
+  // Download: o ficheiro já aponta para a CDN e funciona fora do site
+  const [download] = await Promise.all([aba.waitForEvent("download"), aba.getByRole("button", { name: "Descarregar HTML" }).click()]);
   assert.equal(download.suggestedFilename(), "loja.html");
   const arquivo = await readFile(await download.path(), "utf8");
   assert.match(arquivo, /https:\/\/cdn\.jsdelivr\.net\/gh\/marcos-zorzetto\/atalho@1\/atalho\/atalho\.css/);
@@ -624,24 +660,24 @@ teste("Admin: membro comum vê 'Acesso restrito' e nenhum dado", async (aba) => 
   assert.equal(aba.pedidosApi.some((p) => p.caminho.includes("/rpc/admin_")), false);
 }, { supabase: { pessoa: "membro" } });
 
-teste("Admin: números, busca, paginação e planilha da lista de espera", async (aba) => {
+teste("Admin: números, busca, paginação e folha de cálculo da lista de espera", async (aba) => {
   await abrir(aba, "admin/");
   await aba.locator('[data-admin-numero="usuarios"]').filter({ hasText: "31" }).waitFor();
   const linhas = aba.locator("[data-admin-usuarios] tr");
   assert.equal(await linhas.count(), 25);
-  assert.match(await aba.locator("[data-admin-paginacao-info]").textContent(), /31 usuário\(s\) · página 1 de 2/);
+  assert.match(await aba.locator("[data-admin-paginacao-info]").textContent(), /31 utilizador\(es\) · página 1 de 2/);
   await aba.getByRole("button", { name: "Próxima" }).click();
   await aba.locator("[data-admin-paginacao-info]").filter({ hasText: "página 2 de 2" }).waitFor();
   assert.equal(await linhas.count(), 6);
   assert.equal(await aba.getByRole("button", { name: "Próxima" }).isDisabled(), true);
 
-  await aba.getByRole("searchbox", { name: "Buscar usuários" }).fill("pessoa3");
-  await aba.locator("[data-admin-paginacao-info]").filter({ hasText: "2 usuário(s)" }).waitFor();
+  await aba.getByRole("searchbox", { name: "Pesquisar utilizadores" }).fill("pessoa3");
+  await aba.locator("[data-admin-paginacao-info]").filter({ hasText: "2 utilizador(es)" }).waitFor();
   assert.deepEqual(await aba.locator("[data-admin-usuarios] tr td:nth-child(2)").allTextContents(), ["pessoa3@exemplo.com", "pessoa30@exemplo.com"]);
 
-  const [download] = await Promise.all([aba.waitForEvent("download"), aba.getByRole("button", { name: "Exportar planilha" }).click()]);
+  const [download] = await Promise.all([aba.waitForEvent("download"), aba.getByRole("button", { name: "Exportar folha de cálculo" }).click()]);
   const csv = await readFile(await download.path(), "utf8");
-  assert.ok(csv.startsWith('\ufeff"Nome";"E-mail";"Entrou em"'), "planilha precisa abrir certo no Excel");
+  assert.ok(csv.startsWith('\ufeff"Nome";"E-mail";"Entrou em"'), "folha de cálculo precisa abrir certo no Excel");
   assert.equal(csv.trim().split("\r\n").length, 16);
 }, { supabase: { pessoa: "admin", usuarios: 31 } });
 
@@ -655,10 +691,10 @@ const ASSINATURA_ATIVA = { id: "77", produto_id: "pro-anual", status: "active", 
 teste("Preços: alterna mensal e anual, e sem pagamentos leva à lista de espera", async (aba) => {
   await abrir(aba, "pro/");
   const pro = aba.locator(".at-plano[data-destaque]");
-  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /€ 4,90/);
+  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /4,90 €/);
   await aba.getByRole("switch", { name: "Cobrança anual" }).check();
-  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /€ 39\s*\/ano/);
-  assert.match(texto(await pro.innerText()), /equivale a € 3,25\/mês/);
+  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /39 €\s*\/ano/);
+  assert.match(texto(await pro.innerText()), /equivale a 3,25 €\/mês/);
   const botao = pro.getByRole("button", { name: "Entrar na lista de espera" });
   await botao.click();
   await aba.locator("#lista-espera").waitFor();
@@ -673,7 +709,7 @@ teste("Preços: link que não é da Lemon Squeezy é ignorado", async (aba) => {
 
 teste("Preços: visitante que assina é levado a criar a conta antes", async (aba) => {
   await abrir(aba, "pro/");
-  await aba.getByRole("button", { name: "Assinar o Pro mensal" }).click();
+  await aba.getByRole("button", { name: "Subscrever o Pro mensal" }).click();
   await aba.waitForURL(/\/conta\/\?voltar=%2Fpro%2F&criar$/);
 }, { supabase: { pessoa: null, loja: { links: LINKS } } });
 
@@ -685,10 +721,10 @@ teste("Preços: membro confirma a desistência e vai ao checkout só com o id da
   });
   await abrir(aba, "pro/");
   await aba.getByRole("switch", { name: "Cobrança anual" }).check();
-  await aba.getByRole("button", { name: "Assinar o Pro anual" }).click();
+  await aba.getByRole("button", { name: "Subscrever o Pro anual" }).click();
   const dialogo = aba.getByRole("dialog", { name: "Antes de ir para o pagamento" });
   await dialogo.waitFor();
-  assert.match(texto(await dialogo.innerText()), /Atalho Pro \(anual\) · € 39 por ano/);
+  assert.match(texto(await dialogo.innerText()), /Atalho Pro \(anual\) · 39 € por ano/);
   const pagar = dialogo.getByRole("button", { name: "Ir para o pagamento" });
   assert.equal(await pagar.isDisabled(), true, "sem o consentimento não paga");
   await dialogo.getByRole("checkbox").check();
@@ -700,11 +736,11 @@ teste("Preços: membro confirma a desistência e vai ao checkout só com o id da
   assert.doesNotMatch(checkout, /ana|exemplo\.com|Souza/i, "nenhum dado pessoal no endereço");
 }, { supabase: { pessoa: "membro", loja: { links: LINKS } } });
 
-teste("Preços: quem já assina vê 'Seu plano atual'", async (aba) => {
+teste("Preços: quem já assina vê 'O seu plano atual'", async (aba) => {
   await abrir(aba, "pro/");
   await aba.locator("[data-loja-plano-atual]").waitFor();
-  assert.equal(await aba.getByRole("button", { name: "Seu plano atual" }).first().isDisabled(), true);
-  assert.equal(await aba.getByRole("link", { name: "Você já é membro" }).count(), 1);
+  assert.equal(await aba.getByRole("button", { name: "O seu plano atual" }).first().isDisabled(), true);
+  assert.equal(await aba.getByRole("link", { name: "Já é membro" }).count(), 1);
 }, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA] } } });
 
 teste("Conta: assinante vê o plano, a renovação, as compras e o portal", async (aba) => {
@@ -713,7 +749,7 @@ teste("Conta: assinante vê o plano, a renovação, as compras e o portal", asyn
   await plano.getByText("Atalho Pro anual").waitFor();
   assert.match(texto(await plano.innerText()), /Renova em 9 de outubro de 2027/);
   assert.match(texto(await plano.innerText()), /CRM · comprado em/);
-  assert.equal(await plano.getByRole("link", { name: "Gerenciar assinatura" }).getAttribute("href"), ASSINATURA_ATIVA.portal_url);
+  assert.equal(await plano.getByRole("link", { name: "Gerir subscrição" }).getAttribute("href"), ASSINATURA_ATIVA.portal_url);
   assert.equal(await aba.locator("[data-conta-lista-bloco]").isVisible(), false, "com pagamentos no ar, some a lista de espera");
 }, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA], compras: [{ produto_id: "pagina-crm", criado_em: "2026-10-01T10:00:00Z", produtos: { nome: "CRM" } }] } } });
 
@@ -731,20 +767,20 @@ teste("Conta: membro sem plano vê o convite para o Pro", async (aba) => {
 
 teste("Conta: na volta do pagamento, confirma o acesso liberado", async (aba) => {
   await abrir(aba, "conta/?pagamento=ok");
-  await aba.getByText("Acesso liberado. Bom proveito!").waitFor();
+  await aba.getByText("Acesso desbloqueado. Bom proveito!").waitFor();
   assert.equal(new URL(aba.url()).search, "", "o aviso não se repete ao recarregar");
 }, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA] } } });
 
 teste("Admin: números da loja", async (aba) => {
   await abrir(aba, "admin/");
   await aba.locator('[data-admin-numero="receita_30_dias"]').filter({ hasText: "€" }).waitFor();
-  assert.equal(texto(await aba.locator('[data-admin-numero="receita_30_dias"]').textContent()), "€ 23,70");
+  assert.equal(texto(await aba.locator('[data-admin-numero="receita_30_dias"]').textContent()), "23,70 €");
   assert.equal(await aba.locator('[data-admin-numero="assinantes_ativos"]').textContent(), "3");
 }, { supabase: { pessoa: "admin" } });
 
 /* ------------------------------------------------------------------------
    Vitrines (animações e componentes avançados): níveis de acesso, ajustes,
-   tutorial e cada item rodando de verdade (com o atalho-pro)
+   tutorial e cada item a correr de verdade (com o atalho-pro)
    ------------------------------------------------------------------------ */
 
 const { ANIMACOES } = await import("../scripts/site/animacoes.mjs");
@@ -762,7 +798,7 @@ teste("Animações: visitante testa as grátis; as de membro e Pro pedem conta",
   await abrir(aba, "animacoes/");
   await aba.locator('[data-item="surgir"][data-liberada="true"]').waitFor();
   assert.equal(await liberados(aba), quantos(ANIMACOES, "publico"));
-  await aba.getByText("Crie sua conta grátis para liberar").waitFor();
+  await aba.getByText("Crie a sua conta grátis para desbloquear").waitFor();
   await aba.locator('[data-item="balancar"]').click();
   const estudio = aba.getByRole("dialog");
   await estudio.getByText("Grátis para quem tem conta").waitFor();
@@ -801,22 +837,22 @@ teste("Animações: membro ajusta, copia e lê o passo a passo; as do Pro ficam 
 teste("Animações: assinante Pro usa todas; link direto abre o estúdio; filtro por categoria", async (aba) => {
   await abrir(aba, "animacoes/#parallax");
   const estudio = aba.getByRole("dialog");
-  await estudio.getByText("Role dentro da prévia para ver o efeito.").waitFor();
+  await estudio.getByText("Faça scroll dentro da pré-visualização para ver o efeito.").waitFor();
   assert.equal(await liberados(aba), ANIMACOES.length);
   await estudio.getByRole("button", { name: "Fechar" }).click();
   await aba.getByRole("button", { name: "Texto", exact: true }).click();
   assert.equal(await aba.locator(".site-anim-grade li:not([hidden])").count(), ANIMACOES.filter((a) => a.categoria === "texto").length);
 }, { supabase: { pessoa: "membro", animacoes: ANIMACOES_CODIGO, loja: { assinaturas: [ASSINANTE] } } });
 
-teste("Componentes avançados: 10 sem cadastro, 20 com conta, todos no Pro; prévia no celular e baixar", async (aba) => {
+teste("Componentes avançados: 10 sem registo, 20 com conta, todos no Pro; prévia no telemóvel e descarregar", async (aba) => {
   await abrir(aba, "avancados/");
   await aba.locator('[data-item="precos-tres-planos"][data-liberada="true"]').waitFor();
   assert.equal(await liberados(aba), 10);
   await aba.locator('[data-item="precos-tres-planos"]').click();
   const estudio = aba.getByRole("dialog");
-  await estudio.getByRole("radio", { name: "Celular" }).click();
+  await estudio.getByRole("radio", { name: "Telemóvel" }).click();
   assert.equal(await estudio.locator("[data-estudio-previa]").evaluate((f) => f.style.width), "390px");
-  const [arquivo] = await Promise.all([aba.waitForEvent("download"), estudio.getByRole("button", { name: "Baixar página" }).click()]);
+  const [arquivo] = await Promise.all([aba.waitForEvent("download"), estudio.getByRole("button", { name: "Descarregar página" }).click()]);
   assert.equal(arquivo.suggestedFilename(), "precos-tres-planos.html");
 }, { supabase: { pessoa: null, componentes: COMPONENTES_CODIGO } });
 
@@ -837,7 +873,7 @@ teste("Animações (atalho-pro): todas rodam sem erro, se mexem e respeitam 'red
   for (const a of ANIMACOES) {
     const { html } = ANIMACOES_CODIGO[a.id];
     const valores = a.parametros.map((p) => `${p.var}: ${p.tipo === "numero" ? `${p.padrao}${p.unidade || ""}` : p.padrao};`).join(" ");
-    await aba.setContent(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>:root { ${valores} } body { min-height: 100vh; }</style></head><body>${html}</body></html>`, { waitUntil: "load" });
+    await aba.setContent(`<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>:root { ${valores} } body { min-height: 100vh; }</style></head><body>${html}</body></html>`, { waitUntil: "load" });
     await aba.waitForTimeout(150);
     const antes = await aba.evaluate(() => document.body.innerHTML);
     await aba.mouse.move(400, 300);
@@ -864,7 +900,7 @@ teste("Animações (atalho-pro): todas rodam sem erro, se mexem e respeitam 'red
   assert.equal(problemas.length, 0, problemas.join(" || "));
 }, { pro: true, contexto: { reducedMotion: "no-preference" } });
 
-teste("Componentes avançados (atalho-pro): todos abrem sem erro e cabem no celular e no tablet", async (aba) => {
+teste("Componentes avançados (atalho-pro): todos abrem sem erro e cabem no telemóvel e no tablet", async (aba) => {
   const problemas = [];
   const componentes = lerComponentesPro();
   for (const [id, { html }] of Object.entries(componentes)) {
@@ -872,7 +908,7 @@ teste("Componentes avançados (atalho-pro): todos abrem sem erro e cabem no celu
       // Página nova a cada vez: nada sobra de um componente para o outro
       await aba.goto("about:blank");
       await aba.setViewportSize({ width: largura, height: 800 });
-      await aba.setContent(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>body { margin: 0; min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 16px; box-sizing: border-box; } body > :not(script, style) { max-width: 100%; }</style><script src="${BASE}/atalho/atalho.js" defer></script></head><body>${html}</body></html>`, { waitUntil: "load" });
+      await aba.setContent(`<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>body { margin: 0; min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 16px; box-sizing: border-box; } body > :not(script, style) { max-width: 100%; }</style><script src="${BASE}/atalho/atalho.js" defer></script></head><body>${html}</body></html>`, { waitUntil: "load" });
       await aba.waitForTimeout(200);
       const r = await aba.evaluate(() => {
         const largura = document.documentElement.clientWidth;
@@ -905,10 +941,17 @@ const executar = selecionados.filter((t) => !pulados.includes(t));
 for (const { nome, fn, opcoes } of executar) {
   const aba = await novaAba(opcoes.contexto);
   aba.pedidosApi = opcoes.supabase ? await supabaseFalso(aba.context(), opcoes.supabase) : [];
-  // No CI a ViaCEP responde com um dado fixo: o teste não falha por instabilidade de terceiros
-  if (opcoes.rede && process.env.CI) {
+  // ViaCEP e GEO API PT respondem com dados fixos: o teste não falha por instabilidade
+  // nem pelo limite de pedidos grátis dos serviços de terceiros
+  if (opcoes.rede) {
+    const cors = { "access-control-allow-origin": "*" };
     await aba.context().route("https://viacep.com.br/**", (rota) =>
-      rota.fulfill({ headers: { "access-control-allow-origin": "*" }, json: { cep: "01310-100", logradouro: "Avenida Paulista", bairro: "Bela Vista", localidade: "São Paulo", uf: "SP" } })
+      rota.fulfill({ headers: cors, json: { cep: "01310-100", logradouro: "Avenida Paulista", bairro: "Bela Vista", localidade: "São Paulo", uf: "SP" } })
+    );
+    await aba.context().route("https://json.geoapi.pt/cp/**", (rota) =>
+      rota.request().url().endsWith("/1250-096")
+        ? rota.fulfill({ headers: cors, json: { CP: "1250-096", Distrito: "Lisboa", Concelho: "Lisboa", Localidade: "Lisboa", partes: [{ "Artéria": "Largo Doutor António Viana" }] } })
+        : rota.fulfill({ status: 404, headers: cors, json: { erro: "não encontrado" } })
     );
   }
   const inicio = Date.now();

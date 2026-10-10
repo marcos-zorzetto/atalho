@@ -1,6 +1,6 @@
 /*
  * Fonte única da documentação do Atalho.
- * Cada arquivo em site/dados/ acrescenta componentes em ATALHO_DOCS.componentes.
+ * Cada ficheiro em site/dados/ acrescenta componentes em ATALHO_DOCS.componentes.
  * O site, a busca, a validação (npm test) e o robô de atualização leem daqui.
  *
  * Formato de um componente:
@@ -29,7 +29,7 @@
     produtos: [
       {
         id: 101,
-        nome: "Tênis cano alto vermelho e preto",
+        nome: "Ténis cano alto vermelho e preto",
         preco: 599.9,
         precoAntigo: 799.9,
         imagem: "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp",
@@ -43,14 +43,14 @@
       },
       {
         id: 103,
-        nome: "Relógio com pulseira de couro marrom",
+        nome: "Relógio com pulseira de pele castanha",
         preco: 349,
         precoAntigo: null,
         imagem: "https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp",
       },
       {
         id: 104,
-        nome: "Notebook 14 polegadas 16 GB RAM 512 GB SSD",
+        nome: "Portátil de 14 polegadas 16 GB RAM 512 GB SSD",
         preco: 8999,
         precoAntigo: 10499,
         imagem: "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp",
@@ -93,15 +93,15 @@
     util,
     categorias: [
       { id: "fundamentos", nome: "Comece aqui", descricao: "Instalação, cores, layout e texto." },
-      { id: "formularios", nome: "Formulários", descricao: "Campos, máscaras, CEP, validação e envio." },
+      { id: "formularios", nome: "Formulários", descricao: "Campos, máscaras, código postal, validação e envio." },
       { id: "acoes", nome: "Ações", descricao: "Botões, menus e copiar." },
-      { id: "navegacao", nome: "Navegação", descricao: "Menus do site, abas, etapas e busca rápida." },
+      { id: "navegacao", nome: "Navegação", descricao: "Menus do site, abas, etapas e pesquisa rápida." },
       { id: "sobreposicoes", nome: "Janelas e avisos", descricao: "Modal, gaveta, dica e notificações." },
       { id: "dados", nome: "Exibir dados", descricao: "Cartões, produtos, tabelas, listas e quadros." },
-      { id: "feedback", nome: "Feedback", descricao: "Alertas, carregamento, estados vazios e LGPD." },
-      { id: "paginas", nome: "Blocos de página", descricao: "Seções prontas para landing pages." },
-      { id: "javascript", nome: "JavaScript", descricao: "Estado, formatação, requisições e eventos." },
-      { id: "receitas", nome: "Receitas completas", descricao: "Componentes conectados em telas reais." },
+      { id: "feedback", nome: "Feedback", descricao: "Alertas, carregamento, estados vazios e cookies (RGPD)." },
+      { id: "paginas", nome: "Blocos de página", descricao: "Secções prontas para landing pages." },
+      { id: "javascript", nome: "JavaScript", descricao: "Estado, formatação, pedidos e eventos." },
+      { id: "receitas", nome: "Receitas completas", descricao: "Componentes conectados em ecrãs reais." },
     ],
     componentes: [],
   };

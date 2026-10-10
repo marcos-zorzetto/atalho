@@ -26,7 +26,7 @@
   <p class="at-chamada">Edite este código e veja o resultado ao lado.</p>
   <div class="at-linha">
     <button class="at-botao at-primario" id="botao">Clique aqui</button>
-    <input class="at-entrada" data-at-mascara="cpf" placeholder="Digite um CPF" style="max-width: 220px">
+    <input class="at-entrada" data-at-mascara="nif" placeholder="Escreva um NIF" style="max-width: 220px">
   </div>
 </main>`,
     css: `/* Personalize aqui. Ex.: troque a cor principal */
@@ -59,11 +59,11 @@
     return INICIAL;
   }
 
-  /** Página inteira (cabeçalho, menu, seções) ou só um trecho, como um formulário? */
+  /** Página inteira (cabeçalho, menu, secções) ou só um trecho, como um formulário? */
   const ehPaginaInteira = (html) =>
     /<(header|main|nav|aside|section)/i.test(html) || /class="[^"]*at-(app|barra|hero|secao|container)/.test(html);
 
-  // Trechos ganham margem e ficam centralizados, em vez de colados na borda da tela
+  // Trechos ganham margem e ficam centralizados, em vez de colados na borda do ecrã
   const ESPACO_TRECHO = `
     /* Espaço em volta do exemplo. Apague se o seu layout já tiver o próprio. */
     body { max-width: 1120px; margin-inline: auto; padding: clamp(16px, 4vw, 48px); }`;
@@ -79,11 +79,11 @@
 addEventListener("error",function(e){enviar("error",["Erro: "+e.message+(e.lineno?" (linha "+e.lineno+")":"")])});})();
 <\/script>`;
     return `<!doctype html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Meu projeto com o Atalho</title>
+  <title>O meu projeto com o Atalho</title>
   <link rel="stylesheet" href="${caminho}/atalho.css">
   <style>${ehPaginaInteira(dados.html) ? "" : ESPACO_TRECHO}
 ${dados.css}

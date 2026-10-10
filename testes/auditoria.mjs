@@ -4,9 +4,9 @@
  *
  * Para cada página, em computador (claro e escuro), tablet (em pé e deitado) e celular:
  *  - erros de JavaScript e no console, requisições do próprio site que falharam
- *  - elementos vazando para fora da tela (rolagem horizontal)
+ *  - elementos vazando para fora do ecrã (rolagem horizontal)
  *  - acessibilidade com axe-core (WCAG 2.1 A/AA), incluindo contraste de cores
- *  - captura de tela da página inteira (para revisão visual)
+ *  - captura de ecrã da página inteira (para revisão visual)
  *
  * Uso: node testes/auditoria.mjs [--paginas=inicio,componentes/modal] [--visoes=tablet,celular] [--sem-capturas]
  */
@@ -50,11 +50,11 @@ const sitemap = await readFile(path.join(DIST, "sitemap.xml"), "utf8");
 let paginas = Array.from(sitemap.matchAll(/<loc>[^<]*?\/atalho\/([^<]*)<\/loc>/g), (m) => m[1]);
 if (!paginas.length) paginas = Array.from(sitemap.matchAll(/<loc>https?:\/\/[^/]+\/(?:atalho\/)?([^<]*)<\/loc>/g), (m) => m[1]);
 paginas.push("conta/", "admin/", "pagina-que-nao-existe/");
-// Telas de quem entrou na conta, com o Supabase simulado ("#como=" não vai para o servidor)
+// Ecrãs de quem entrou na conta, com o Supabase simulado ("#como=" não vai para o servidor)
 paginas.push("exemplos/loja/#como=visitante", "exemplos/loja/#como=membro", "conta/#como=admin", "admin/#como=membro", "admin/#como=admin", "animacoes/#como=membro");
 const lojaMembro = proDisponivel
   ? await readFile(arquivoExemplo("loja"), "utf8")
-  : '<!doctype html><html lang="pt-BR"><head><title>Loja</title></head><body><main><h1>Loja</h1></main></body></html>';
+  : '<!doctype html><html lang="pt-PT"><head><title>Loja</title></head><body><main><h1>Loja</h1></main></body></html>';
 if (args.paginas) paginas = args.paginas.split(",").map((p) => (p === "inicio" ? "" : p.replace(/^\//, "")));
 
 const navegador = await chromium.launch({
@@ -83,7 +83,7 @@ for (const visao of VISOES) {
     isMobile: visao.isMobile,
     hasTouch: visao.hasTouch,
     deviceScaleFactor: 1,
-    locale: "pt-BR",
+    locale: "pt-PT",
     reducedMotion: "reduce",
   };
   const contexto = await navegador.newContext(opcoesContexto);
@@ -100,7 +100,7 @@ for (const visao of VISOES) {
     });
     aba.on("response", (resposta) => {
       const endereco = resposta.url();
-      if (endereco.startsWith(BASE) && resposta.status() >= 400 && pagina !== "pagina-que-nao-existe/") registrar(pagina, visao.nome, "arquivo não encontrado", endereco.replace(BASE, ""));
+      if (endereco.startsWith(BASE) && resposta.status() >= 400 && pagina !== "pagina-que-nao-existe/") registrar(pagina, visao.nome, "ficheiro não encontrado", endereco.replace(BASE, ""));
     });
     try {
       await aba.goto(`${BASE}/${caminho}`, { waitUntil: "load", timeout: 30000 });
@@ -126,7 +126,7 @@ for (const visao of VISOES) {
         }
         return { rolagemHorizontal: document.documentElement.scrollWidth > largura + 1, elementos: saida };
       });
-      if (vazamentos.rolagemHorizontal || vazamentos.elementos.length) registrar(pagina, visao.nome, "vaza da tela", vazamentos.elementos.join(" | ") || "rolagem horizontal");
+      if (vazamentos.rolagemHorizontal || vazamentos.elementos.length) registrar(pagina, visao.nome, "vaza do ecrã", vazamentos.elementos.join(" | ") || "rolagem horizontal");
 
       if (visao.axe) {
         await aba.evaluate(axeFonte);
@@ -139,7 +139,7 @@ for (const visao of VISOES) {
       }
 
       if (comCapturas) {
-        // Imagens com loading="lazy" fora da tela não carregam numa captura de página inteira
+        // Imagens com loading="lazy" fora do ecrã não carregam numa captura de página inteira
         await aba.evaluate(() =>
           Promise.all(
             [...document.images].map((img) => {

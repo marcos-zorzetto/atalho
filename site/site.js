@@ -104,11 +104,11 @@
     paleta.className = "at-comando site-paleta";
     paleta.id = "site-paleta";
     paleta.dataset.atTecla = "";
-    paleta.setAttribute("aria-label", "Buscar componentes");
+    paleta.setAttribute("aria-label", "Pesquisar componentes");
     paleta.innerHTML = `
       <div class="at-comando-busca">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input placeholder="Buscar: modal, máscara de CPF, carrinho…" aria-label="Buscar componentes" role="combobox" aria-expanded="true" aria-controls="site-paleta-lista" autocomplete="off">
+        <input placeholder="Procurar: modal, máscara de NIF, carrinho…" aria-label="Pesquisar componentes" role="combobox" aria-expanded="true" aria-controls="site-paleta-lista" autocomplete="off">
       </div>
       <ul class="at-comando-lista" id="site-paleta-lista" role="listbox"></ul>
       <div class="at-comando-rodape"><span>↑↓ navegar</span><span>Enter abrir</span><span>Esc fechar</span></div>`;
@@ -128,8 +128,8 @@
         )
         .join("");
       if (termo && window.AtalhoAssistente?.disponivel()) {
-        html += `<li class="at-comando-grupo">Não achou?</li><li><button type="button" class="at-comando-item" role="option" id="paleta-ia" data-perguntar-ia aria-selected="${resultados.length === 0}">
-          <strong>✨ Perguntar ao assistente: “${esc(termo)}”</strong><small>A IA monta o componente que você descreveu</small></button></li>`;
+        html += `<li class="at-comando-grupo">Não encontrou?</li><li><button type="button" class="at-comando-item" role="option" id="paleta-ia" data-perguntar-ia aria-selected="${resultados.length === 0}">
+          <strong>✨ Perguntar ao assistente: “${esc(termo)}”</strong><small>A IA monta o componente que descreveu</small></button></li>`;
       } else if (termo && !resultados.length) {
         html += `<li class="at-comando-vazio">Nada encontrado para "${esc(termo)}". Tente outra palavra, como "janela" ou "formulário".</li>`;
       }
@@ -243,7 +243,7 @@
     const link = $("[data-conta-cabecalho]");
     const sessao = sessaoGuardada();
     if (link && sessao) {
-      link.querySelector("span").textContent = "Minha conta";
+      link.querySelector("span").textContent = "A minha conta";
       link.classList.add("at-suave");
     }
     // Quem já entrou não precisa do convite para criar conta; o selo "Membros" vira "Liberado"
@@ -261,14 +261,14 @@
     const sessao = sessaoGuardada();
     const marcar = (favorito) => {
       botao.setAttribute("aria-pressed", String(favorito));
-      botao.querySelector("span").textContent = favorito ? "Favorito" : "Favoritar";
+      botao.querySelector("span").textContent = favorito ? "Favorito" : "Marcar como favorito";
     };
     if (sessao) {
       try {
         const lista = await apiSupabase(`favoritos?select=componente_id&componente_id=eq.${encodeURIComponent(id)}`, { headers: { Prefer: "" } });
         marcar(Array.isArray(lista) && lista.length > 0);
       } catch {
-        /* sem conexão: botão continua funcionando ao clicar */
+        /* sem conexão: botão continua a funcionar ao clicar */
       }
     }
     botao.addEventListener("click", async () => {
@@ -282,9 +282,9 @@
         if (favorito) await apiSupabase(`favoritos?componente_id=eq.${encodeURIComponent(id)}`, { method: "DELETE" });
         else await apiSupabase("favoritos", { method: "POST", body: JSON.stringify({ componente_id: id }) });
         marcar(!favorito);
-        window.Atalho.notificar(favorito ? "Removido dos favoritos." : "Salvo nos favoritos.", { tipo: "sucesso" });
+        window.Atalho.notificar(favorito ? "Removido dos favoritos." : "Guardado nos favoritos.", { tipo: "sucesso" });
       } catch {
-        window.Atalho.notificar("Não foi possível salvar agora. Entre de novo na sua conta.", { tipo: "perigo" });
+        window.Atalho.notificar("Não foi possível guardar agora. Entre de novo na sua conta.", { tipo: "perigo" });
       } finally {
         botao.removeAttribute("aria-busy");
       }
@@ -315,7 +315,7 @@
                 <strong>${destacar(c.nome, campo.value)}</strong><small>${esc(c.categoria)} · ${esc(c.resumo)}</small></a></li>`
             )
             .join("")
-        : `<li class="site-resultado"><strong>Nada encontrado para "${esc(campo.value)}"</strong><small>Tente outra palavra${window.AtalhoAssistente?.disponivel() ? " ou aperte Enter para perguntar ao assistente" : ""}.</small></li>`;
+        : `<li class="site-resultado"><strong>Nada encontrado para "${esc(campo.value)}"</strong><small>Tente outra palavra${window.AtalhoAssistente?.disponivel() ? " ou prima Enter para perguntar ao assistente" : ""}.</small></li>`;
       campo.setAttribute("aria-activedescendant", resultados[0] ? `res-${resultados[0].id}` : "");
     }
 
@@ -347,11 +347,11 @@
       quantidade: 0,
       adicionar() {
         this.quantidade++;
-        window.Atalho.notificar("Tênis cano alto vermelho e preto", { tipo: "sucesso", titulo: "Adicionado ao carrinho" });
+        window.Atalho.notificar("Ténis de cano alto vermelho e preto", { tipo: "sucesso", titulo: "Adicionado ao carrinho" });
       },
     });
     $("#form-inicio")?.addEventListener("at:enviar", (e) =>
-      window.Atalho.notificar(`CPF ${e.detail.dados.cpf} válido e endereço encontrado.`, { tipo: "sucesso", titulo: "Tudo certo!" })
+      window.Atalho.notificar(`NIF ${e.detail.dados.nif} válido e morada encontrada.`, { tipo: "sucesso", titulo: "Tudo certo!" })
     );
   }
 
@@ -390,7 +390,7 @@
     }
     prepararFavorito();
 
-    // Marca no índice a seção visível
+    // Marca no índice a secção visível
     const links = $$(".site-indice a[href^='#']");
     if ("IntersectionObserver" in window && links.length) {
       const observador = new IntersectionObserver(
@@ -479,7 +479,7 @@
       aviso.className = `at-alerta ${melhor >= 4.5 ? "at-sucesso" : "at-aviso"}`;
       aviso.innerHTML = `<div class="at-alerta-conteudo"><strong>Contraste ${melhor.toFixed(1)}:1 ${melhor >= 4.5 ? "· aprovado (WCAG AA)" : "· baixo"}</strong><p>${
         melhor >= 4.5
-          ? `Texto ${sobre === "#ffffff" ? "branco" : "escuro"} sobre a sua cor fica legível para todo mundo.`
+          ? `Texto ${sobre === "#ffffff" ? "branco" : "escuro"} sobre a sua cor fica legível para toda a gente.`
           : "Texto sobre essa cor pode ficar difícil de ler. Escolha um tom mais escuro ou mais claro."
       }</p></div>`;
     }

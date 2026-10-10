@@ -139,7 +139,7 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
           .map((u, _, filtrados) => ({ ...u, total: filtrados.length }))
           .slice(corpo.deslocamento || 0, (corpo.deslocamento || 0) + (corpo.limite || 25)),
         admin_lista_espera: lista.filter((u) => u.lista_espera).map((u) => ({ email: u.email, nome: u.nome, entrou_em: u.criado_em })),
-        admin_conteudos: [{ id: "loja", tipo: "exemplo", titulo: "Loja virtual", tamanho: 8816, atualizado_em: hoje.toISOString() }],
+        admin_conteudos: [{ id: "loja", tipo: "exemplo", titulo: "Loja online", tamanho: 8816, atualizado_em: hoje.toISOString() }],
         admin_loja: { assinantes_ativos: 3, compras_avulsas: 2, receita_30_dias_centavos: 2370, receita_total_centavos: 6270 },
       };
       return json(rota, respostas[funcao] ?? []);

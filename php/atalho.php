@@ -5,7 +5,7 @@
  *
  * Requer PHP 8.1 ou mais novo. Sem dependências: basta "require 'atalho.php';".
  *
- * Regra de ouro: tudo que o navegador valida deve ser validado de novo aqui.
+ * Regra de ouro: tudo o que o navegador valida deve ser validado de novo aqui.
  * Qualquer pessoa pode desligar o JavaScript ou chamar a sua API diretamente.
  */
 
@@ -13,35 +13,46 @@ declare(strict_types=1);
 
 namespace Atalho;
 
-const VERSAO = '1.1.0';
+const VERSAO = '1.2.0';
 
 /* -------------------------------------------------------------------------
    Texto e números
    ------------------------------------------------------------------------- */
 
-/** Mantém só os dígitos: "529.982.247-25" → "52998224725" */
+/** Mantém só os algarismos: "123 456 789" → "123456789" */
 function somenteDigitos(?string $texto): string
 {
     return preg_replace('/\D+/', '', (string) $texto) ?? '';
 }
 
-/** Remove espaços nas pontas e caracteres de controle invisíveis. */
+/** Remove espaços nas pontas e caracteres de controlo invisíveis. */
 function limparTexto(?string $texto, int $tamanhoMaximo = 1000): string
 {
     $limpo = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', trim((string) $texto)) ?? '';
     return mb_substr($limpo, 0, $tamanhoMaximo);
 }
 
-/** Escapa texto para colocar dentro do HTML (evita XSS). Use sempre ao imprimir dados do usuário. */
+/** Escapa texto para colocar dentro do HTML (evita XSS). Use sempre ao imprimir dados do utilizador. */
 function e(?string $texto): string
 {
     return htmlspecialchars((string) $texto, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-/** 1234.5 → "R$ 1.234,50" */
-function formatarMoeda(float|int $valor): string
+/**
+ * 1234.5 → "1234,50 €" e 12345.5 → "12 345,50 €" (como o Intl em pt-PT).
+ * formatarMoeda(1234.5, 'BRL') → "R$ 1.234,50"; outras moedas: "1234,50 GBP".
+ */
+function formatarMoeda(float|int $valor, string $moeda = 'EUR'): string
 {
-    return 'R$ ' . number_format((float) $valor, 2, ',', '.');
+    if ($moeda === 'BRL') {
+        return 'R$ ' . number_format((float) $valor, 2, ',', '.');
+    }
+    $numero = number_format((float) $valor, 2, ',', ' ');
+    // Em Portugal, só agrupa a partir de 5 algarismos (1234,50 mas 12 345,50)
+    if (preg_match('/^-?\d \d{3},/', $numero)) {
+        $numero = str_replace(' ', '', $numero);
+    }
+    return $numero . ' ' . ($moeda === 'EUR' ? '€' : $moeda);
 }
 
 /** "52998224725" → "529.982.247-25" */
@@ -61,7 +72,63 @@ function formatarCnpj(string $cnpj): string
 }
 
 /* -------------------------------------------------------------------------
-   Validação de documentos brasileiros
+   Validação de documentos de Portugal e da Europa
+   ------------------------------------------------------------------------- */
+
+/** NIF/NIPC de Portugal: 9 algarismos, o último confere os outros (módulo 11). */
+function validarNif(?string $texto): bool
+{
+    $nif = somenteDigitos($texto);
+    if (!preg_match('/^[1235689]\d{8}$/', $nif) && !preg_match('/^(45|70|71|72|74|75|77|79|90|91|98|99)\d{7}$/', $nif)) {
+        return false;
+    }
+    $soma = 0;
+    for ($i = 0; $i < 8; $i++) {
+        $soma += (int) $nif[$i] * (9 - $i);
+    }
+    $resto = $soma % 11;
+    return (int) $nif[8] === ($resto < 2 ? 0 : 11 - $resto);
+}
+
+/** IBAN de qualquer país (ISO 13616): tamanho por país e módulo 97. */
+function validarIban(?string $texto): bool
+{
+    $iban = strtoupper(preg_replace('/[^0-9A-Za-z]/', '', (string) $texto) ?? '');
+    $tamanhos = ['PT' => 25, 'ES' => 24, 'FR' => 27, 'DE' => 22, 'IT' => 27, 'NL' => 18, 'BE' => 16, 'IE' => 22, 'LU' => 20, 'AT' => 20,
+        'CH' => 21, 'GB' => 22, 'PL' => 28, 'SE' => 24, 'DK' => 18, 'FI' => 18, 'NO' => 15, 'GR' => 27, 'CZ' => 24, 'RO' => 24, 'HU' => 28, 'BR' => 29];
+    if (!preg_match('/^[A-Z]{2}\d{2}[0-9A-Z]{10,30}$/', $iban)) {
+        return false;
+    }
+    $pais = substr($iban, 0, 2);
+    if (isset($tamanhos[$pais]) && $tamanhos[$pais] !== strlen($iban)) {
+        return false;
+    }
+    $numeros = '';
+    foreach (str_split(substr($iban, 4) . substr($iban, 0, 4)) as $c) {
+        $numeros .= ctype_alpha($c) ? (string) (ord($c) - 55) : $c;
+    }
+    $resto = 0;
+    foreach (str_split($numeros) as $d) {
+        $resto = ($resto * 10 + (int) $d) % 97;
+    }
+    return $resto === 1;
+}
+
+/** Código postal de Portugal: 0000-000. */
+function validarCodigoPostal(?string $texto): bool
+{
+    return preg_match('/^\d{4}-?\d{3}$/', trim((string) $texto)) === 1;
+}
+
+/** Telemóvel de Portugal (91, 92, 93 ou 96), com ou sem +351. */
+function validarTelemovel(?string $texto): bool
+{
+    $numero = preg_replace('/^(00)?351/', '', somenteDigitos($texto)) ?? '';
+    return preg_match('/^9[1236]\d{7}$/', $numero) === 1;
+}
+
+/* -------------------------------------------------------------------------
+   Validação de documentos do Brasil (para clientes brasileiros)
    ------------------------------------------------------------------------- */
 
 function validarCpf(?string $texto): bool
@@ -110,13 +177,21 @@ function validarCnpj(?string $texto): bool
 function validarEmail(?string $email): bool
 {
     $email = trim((string) $email);
-    // filter_var aceita "nome@empresa" sem domínio completo; para cadastro, exigimos o ponto
+    // filter_var aceita "nome@empresa" sem domínio completo; para registo, exigimos o ponto
     return filter_var($email, FILTER_VALIDATE_EMAIL) !== false && preg_match('/@[^@\s]+\.[^@\s]{2,}$/', $email) === 1;
 }
 
-function validarTelefone(?string $telefone): bool
+/**
+ * Telefone nacional ou internacional (9 a 15 algarismos, com + ou 00 opcionais).
+ * Com $pais = 'BR', exige DDD + número (10 ou 11 algarismos).
+ */
+function validarTelefone(?string $telefone, string $pais = 'PT'): bool
 {
-    return preg_match('/^\d{10,11}$/', somenteDigitos($telefone)) === 1;
+    if ($pais === 'BR') {
+        return preg_match('/^\d{10,11}$/', somenteDigitos($telefone)) === 1;
+    }
+    $limpo = preg_replace('/[\s().-]/', '', (string) $telefone) ?? '';
+    return preg_match('/^(\+|00)?\d{9,15}$/', $limpo) === 1;
 }
 
 function validarCep(?string $cep): bool
@@ -130,7 +205,7 @@ function validarCep(?string $cep): bool
  * $erros = Atalho\validar($dados, [
  *     'nome'  => ['obrigatorio', 'min:3'],
  *     'email' => ['obrigatorio', 'email'],
- *     'cpf'   => ['obrigatorio', 'cpf'],
+ *     'nif'   => ['obrigatorio', 'nif'],
  * ]);
  */
 function validar(array $dados, array $regras): array
@@ -149,14 +224,18 @@ function validar(array $dados, array $regras): array
                 continue;
             }
             $mensagem = match ($nome) {
-                'email' => validarEmail((string) $valor) ? null : 'Digite um e-mail válido, como nome@exemplo.com.',
+                'email' => validarEmail((string) $valor) ? null : 'Introduza um e-mail válido, como nome@exemplo.pt.',
+                'nif' => validarNif((string) $valor) ? null : 'NIF inválido. Verifique os 9 algarismos.',
+                'iban' => validarIban((string) $valor) ? null : 'IBAN inválido. Verifique o país e os números.',
+                'codigo_postal' => validarCodigoPostal((string) $valor) ? null : 'Código postal incompleto (formato 0000-000).',
+                'telemovel' => validarTelemovel((string) $valor) ? null : 'Número de telemóvel inválido.',
                 'cpf' => validarCpf((string) $valor) ? null : 'CPF inválido.',
                 'cnpj' => validarCnpj((string) $valor) ? null : 'CNPJ inválido.',
-                'telefone' => validarTelefone((string) $valor) ? null : 'Telefone incompleto. Inclua o DDD.',
+                'telefone' => validarTelefone((string) $valor) ? null : 'Número de telefone incompleto.',
                 'cep' => validarCep((string) $valor) ? null : 'CEP inválido.',
                 'min' => mb_strlen((string) $valor) >= (int) $parametro ? null : "Use pelo menos {$parametro} caracteres.",
                 'max' => mb_strlen((string) $valor) <= (int) $parametro ? null : "Use no máximo {$parametro} caracteres.",
-                'numero' => is_numeric($valor) ? null : 'Digite um número.',
+                'numero' => is_numeric($valor) ? null : 'Introduza um número.',
                 default => null,
             };
             if ($mensagem !== null) {
@@ -169,7 +248,7 @@ function validar(array $dados, array $regras): array
 }
 
 /* -------------------------------------------------------------------------
-   Requisições e respostas JSON (para usar com Atalho.requisitar e at:enviar)
+   Pedidos e respostas JSON (para usar com Atalho.requisitar e at:enviar)
    ------------------------------------------------------------------------- */
 
 /** Responde em JSON e encerra. */
@@ -200,12 +279,12 @@ function exigirMetodo(string ...$metodos): void
     }
 }
 
-/** Lê o corpo JSON enviado pelo navegador. Limite padrão: 1 MB. */
+/** Lê o corpo JSON enviado pelo navegador. Limite predefinido: 1 MB. */
 function lerJson(int $tamanhoMaximo = 1_048_576): array
 {
     $corpo = file_get_contents('php://input', false, null, 0, $tamanhoMaximo + 1);
     if ($corpo === false || strlen($corpo) > $tamanhoMaximo) {
-        responderErro('Envio grande demais.', 413);
+        responderErro('Envio demasiado grande.', 413);
     }
     if ($corpo === '') {
         return [];
@@ -219,7 +298,7 @@ function lerJson(int $tamanhoMaximo = 1_048_576): array
 }
 
 /**
- * Libera chamadas de outros domínios (CORS) só para os endereços informados.
+ * Permite pedidos de outros domínios (CORS) só para os endereços indicados.
  * Responde sozinho ao "preflight" (OPTIONS).
  */
 function cors(array $origensPermitidas, array $metodos = ['GET', 'POST']): void
@@ -275,7 +354,7 @@ function validarCsrf(?string $token = null): void
 }
 
 /* -------------------------------------------------------------------------
-   CEP (ViaCEP) com cache em arquivo
+   CEP (ViaCEP) com cache em ficheiro
    ------------------------------------------------------------------------- */
 
 /**
@@ -310,27 +389,67 @@ function buscarCep(string $cep, ?string $pastaCache = null, int $tempoLimite = 5
     return $endereco;
 }
 
+/**
+ * Morada de um código postal de Portugal (GEO API PT). Devolve null se não existir.
+ * Formato: ['codigoPostal', 'rua', 'localidade', 'concelho', 'distrito'], igual ao evento at:codigo-postal.
+ */
+function buscarCodigoPostal(string $codigo, ?string $pastaCache = null, int $tempoLimite = 5): ?array
+{
+    $digitos = somenteDigitos($codigo);
+    if (strlen($digitos) !== 7) {
+        return null;
+    }
+    $codigo = substr($digitos, 0, 4) . '-' . substr($digitos, 4);
+    $pastaCache ??= sys_get_temp_dir() . '/atalho-codigo-postal';
+    $arquivo = "{$pastaCache}/{$digitos}.json";
+    if (is_file($arquivo) && filemtime($arquivo) > time() - 30 * 86400) {
+        $guardado = json_decode((string) file_get_contents($arquivo), true);
+        return is_array($guardado) ? $guardado : null;
+    }
+    $contexto = stream_context_create(['http' => ['timeout' => $tempoLimite, 'ignore_errors' => true, 'header' => "Accept: application/json\r\n"]]);
+    $resposta = @file_get_contents("https://json.geoapi.pt/cp/{$codigo}", false, $contexto);
+    if ($resposta === false) {
+        throw new \RuntimeException('Não foi possível consultar o código postal agora.');
+    }
+    $dados = json_decode($resposta, true);
+    if (!is_array($dados) || empty($dados['Localidade'] ?? $dados['Designação Postal'] ?? null)) {
+        return null;
+    }
+    $morada = [
+        'codigoPostal' => $codigo,
+        'rua' => $dados['partes'][0]['Artéria'] ?? '',
+        'localidade' => $dados['Localidade'] ?? $dados['Designação Postal'],
+        'concelho' => $dados['Concelho'] ?? '',
+        'distrito' => $dados['Distrito'] ?? '',
+    ];
+    if (!is_dir($pastaCache)) {
+        @mkdir($pastaCache, 0775, true);
+    }
+    @file_put_contents($arquivo, json_encode($morada, JSON_UNESCAPED_UNICODE), LOCK_EX);
+    return $morada;
+}
+
 /* -------------------------------------------------------------------------
    Upload seguro
    ------------------------------------------------------------------------- */
 
 /**
- * Salva um arquivo enviado com segurança: confere o tipo REAL (não o nome),
- * o tamanho e gera um nome aleatório. Devolve o nome salvo.
+ * Guarda um ficheiro enviado com segurança: confere o tipo REAL (não o nome),
+ * o tamanho e gera um nome aleatório. Devolve o nome guardado.
  *
  * $nome = Atalho\salvarUpload($_FILES['foto'], __DIR__ . '/uploads', ['image/jpeg', 'image/png', 'image/webp'], 5);
  */
 function salvarUpload(array $arquivo, string $pasta, array $tiposPermitidos, float $tamanhoMaximoMb = 5): string
 {
     if (($arquivo['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK || !is_uploaded_file($arquivo['tmp_name'] ?? '')) {
-        throw new \RuntimeException('Envio do arquivo falhou.');
+        throw new \RuntimeException('O envio do ficheiro falhou.');
     }
     if ($arquivo['size'] > $tamanhoMaximoMb * 1024 * 1024) {
-        throw new \RuntimeException("Arquivo maior que {$tamanhoMaximoMb} MB.");
+        throw new \RuntimeException("Ficheiro maior que {$tamanhoMaximoMb} MB.");
     }
     $tipo = (new \finfo(FILEINFO_MIME_TYPE))->file($arquivo['tmp_name']) ?: '';
     if (!in_array($tipo, $tiposPermitidos, true)) {
-        throw new \RuntimeException('Tipo de arquivo não permitido.');
+        throw new \RuntimeException('Tipo de ficheiro não permitido.');
     }
     $extensoes = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif', 'application/pdf' => 'pdf'];
     $nome = bin2hex(random_bytes(16)) . '.' . ($extensoes[$tipo] ?? 'bin');
@@ -338,7 +457,7 @@ function salvarUpload(array $arquivo, string $pasta, array $tiposPermitidos, flo
         throw new \RuntimeException('Não foi possível criar a pasta de envio.');
     }
     if (!move_uploaded_file($arquivo['tmp_name'], rtrim($pasta, '/\\') . DIRECTORY_SEPARATOR . $nome)) {
-        throw new \RuntimeException('Não foi possível salvar o arquivo.');
+        throw new \RuntimeException('Não foi possível guardar o ficheiro.');
     }
     return $nome;
 }

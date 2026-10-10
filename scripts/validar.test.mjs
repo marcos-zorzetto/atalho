@@ -178,7 +178,7 @@ test("toda página tem título, descrição, canonical e um único h1", async ()
     assert.ok(descricao.length >= 30 && descricao.length <= 170, `${pagina}: descrição com ${descricao.length} caracteres`);
     assert.match(html, /<link rel="canonical" href="https:\/\/[^"]+">/, `${pagina}: sem canonical`);
     assert.equal((html.match(/<h1[\s>]/g) || []).length, 1, `${pagina}: precisa de exatamente um <h1>`);
-    assert.match(html, /<html lang="pt-BR">/, `${pagina}: sem lang`);
+    assert.match(html, /<html lang="pt-PT">/, `${pagina}: sem lang`);
   }
 });
 

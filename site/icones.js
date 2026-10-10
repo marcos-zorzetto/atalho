@@ -1,6 +1,6 @@
 /*
  * Explorador de ícones Phosphor: busca em português, 6 estilos, tamanho e cor.
- * Os ícones vêm de um arquivo por estilo (icones/phosphor/<estilo>.svg), baixado
+ * Os ícones vêm de um ficheiro por estilo (icones/phosphor/<estilo>.svg), descarregado
  * uma vez; cada ícone da lista aponta para ele com <use>.
  */
 (function () {
@@ -121,5 +121,5 @@
       icones = dados.icones;
       desenhar();
     })
-    .catch(() => ($("[data-icones-contagem]", raiz).textContent = "Não foi possível carregar os ícones. Confira sua conexão e recarregue a página."));
+    .catch(() => ($("[data-icones-contagem]", raiz).textContent = "Não foi possível carregar os ícones. Verifique a sua ligação e recarregue a página."));
 })();

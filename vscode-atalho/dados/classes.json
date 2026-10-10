@@ -177,7 +177,7 @@
  {
   "nome": "at-carregar-mais",
   "componente": "carregar-mais",
-  "titulo": "Carregar mais (rolagem infinita)"
+  "titulo": "Carregar mais (scroll infinito)"
  },
  {
   "nome": "at-carrossel",
@@ -262,7 +262,7 @@
  {
   "nome": "at-circulo",
   "componente": "carregando",
-  "titulo": "Carregando e progresso"
+  "titulo": "A carregar e progresso"
  },
  {
   "nome": "at-clicavel"
@@ -293,7 +293,7 @@
  {
   "nome": "at-col-4",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-col-5"
@@ -307,7 +307,7 @@
  {
   "nome": "at-col-8",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-col-9"
@@ -333,7 +333,7 @@
  {
   "nome": "at-col-desktop-4",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-col-desktop-5"
@@ -347,7 +347,7 @@
  {
   "nome": "at-col-desktop-8",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-col-desktop-9"
@@ -406,7 +406,7 @@
  {
   "nome": "at-col-tablet-3",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-col-tablet-4",
@@ -430,7 +430,7 @@
  {
   "nome": "at-col-tablet-9",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-colunas-2"
@@ -448,37 +448,37 @@
  {
   "nome": "at-comando",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-comando-busca",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-comando-grupo",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-comando-item",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-comando-lista",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-comando-rodape",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-comando-vazio",
   "componente": "comando",
-  "titulo": "Busca rápida (Ctrl+K)"
+  "titulo": "Pesquisa rápida (Ctrl+K)"
  },
  {
   "nome": "at-contador-selo",
@@ -503,7 +503,7 @@
  {
   "nome": "at-cookies",
   "componente": "cookies",
-  "titulo": "Aviso de cookies (LGPD)"
+  "titulo": "Aviso de cookies (RGPD)"
  },
  {
   "nome": "at-cor-aviso"
@@ -559,12 +559,12 @@
  {
   "nome": "at-dois-tercos",
   "componente": "mascaras",
-  "titulo": "Máscaras (CPF, CNPJ, telefone...)"
+  "titulo": "Máscaras (NIF, IBAN, telemóvel...)"
  },
  {
   "nome": "at-embutido",
   "componente": "cookies",
-  "titulo": "Aviso de cookies (LGPD)"
+  "titulo": "Aviso de cookies (RGPD)"
  },
  {
   "nome": "at-encolher",
@@ -592,7 +592,7 @@
  {
   "nome": "at-esqueleto",
   "componente": "carregando",
-  "titulo": "Carregando e progresso"
+  "titulo": "A carregar e progresso"
  },
  {
   "nome": "at-esquerda"
@@ -682,12 +682,12 @@
  {
   "nome": "at-forca",
   "componente": "senha",
-  "titulo": "Senha (mostrar e força)"
+  "titulo": "Palavra-passe (mostrar e força)"
  },
  {
   "nome": "at-forca-texto",
   "componente": "senha",
-  "titulo": "Senha (mostrar e força)"
+  "titulo": "Palavra-passe (mostrar e força)"
  },
  {
   "nome": "at-formulario",
@@ -770,7 +770,7 @@
  {
   "nome": "at-girando",
   "componente": "carregando",
-  "titulo": "Carregando e progresso"
+  "titulo": "A carregar e progresso"
  },
  {
   "nome": "at-grade",
@@ -780,7 +780,7 @@
  {
   "nome": "at-grade-12",
   "componente": "grade-12",
-  "titulo": "Grade de 12 colunas"
+  "titulo": "Grelha de 12 colunas"
  },
  {
   "nome": "at-grande",
@@ -816,7 +816,7 @@
  {
   "nome": "at-imagem",
   "componente": "requisitar",
-  "titulo": "Buscar dados de uma API"
+  "titulo": "Obter dados de uma API"
  },
  {
   "nome": "at-indicador",
@@ -942,12 +942,12 @@
  {
   "nome": "at-linha-tempo",
   "componente": "linha-do-tempo",
-  "titulo": "Linha do tempo (rastreio)"
+  "titulo": "Linha do tempo (seguimento)"
  },
  {
   "nome": "at-linha-tempo-marca",
   "componente": "linha-do-tempo",
-  "titulo": "Linha do tempo (rastreio)"
+  "titulo": "Linha do tempo (seguimento)"
  },
  {
   "nome": "at-link",
@@ -1512,7 +1512,7 @@
  {
   "nome": "at-progresso",
   "componente": "carregando",
-  "titulo": "Carregando e progresso"
+  "titulo": "A carregar e progresso"
  },
  {
   "nome": "at-proporcao",
@@ -1702,12 +1702,12 @@
  {
   "nome": "at-sanfona",
   "componente": "sanfona",
-  "titulo": "Sanfona (perguntas frequentes)"
+  "titulo": "Acordeão (perguntas frequentes)"
  },
  {
   "nome": "at-sanfona-conteudo",
   "componente": "sanfona",
-  "titulo": "Sanfona (perguntas frequentes)"
+  "titulo": "Acordeão (perguntas frequentes)"
  },
  {
   "nome": "at-secao",
@@ -1739,7 +1739,7 @@
  {
   "nome": "at-senha",
   "componente": "senha",
-  "titulo": "Senha (mostrar e força)"
+  "titulo": "Palavra-passe (mostrar e força)"
  },
  {
   "nome": "at-so-celular"
@@ -1768,7 +1768,7 @@
  {
   "nome": "at-sr",
   "componente": "upload",
-  "titulo": "Enviar arquivos"
+  "titulo": "Enviar ficheiros"
  },
  {
   "nome": "at-suave",
@@ -1819,12 +1819,12 @@
  {
   "nome": "at-terco",
   "componente": "mascaras",
-  "titulo": "Máscaras (CPF, CNPJ, telefone...)"
+  "titulo": "Máscaras (NIF, IBAN, telemóvel...)"
  },
  {
   "nome": "at-texto-centro",
   "componente": "receita-cadastro",
-  "titulo": "Cadastro com CEP"
+  "titulo": "Registo com morada automática"
  },
  {
   "nome": "at-texto-direita",
@@ -1881,7 +1881,7 @@
  {
   "nome": "at-topo",
   "componente": "carregando",
-  "titulo": "Carregando e progresso"
+  "titulo": "A carregar e progresso"
  },
  {
   "nome": "at-trilha",
@@ -1904,12 +1904,12 @@
  {
   "nome": "at-upload",
   "componente": "upload",
-  "titulo": "Enviar arquivos"
+  "titulo": "Enviar ficheiros"
  },
  {
   "nome": "at-upload-lista",
   "componente": "upload",
-  "titulo": "Enviar arquivos"
+  "titulo": "Enviar ficheiros"
  },
  {
   "nome": "at-upload-tipo"

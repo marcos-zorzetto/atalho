@@ -108,7 +108,7 @@ test("Conta: traduz erros e esquece token recusado", async () => {
   });
   const c = cofre("velho");
   const conta = new Conta({ url: "https://x.supabase.co", chavePublica: "k", cofre: c, fetch: f });
-  await assert.rejects(conta.entrar("a@b.com", "errada"), /E-mail ou senha incorretos/);
+  await assert.rejects(conta.entrar("a@b.com", "errada"), /E-mail ou palavra-passe incorretos/);
   assert.equal(await conta.restaurar(), null);
   assert.equal(c.valor, undefined);
 });

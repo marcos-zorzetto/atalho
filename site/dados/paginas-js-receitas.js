@@ -12,23 +12,23 @@
       categoria: "paginas",
       resumo: "A primeira dobra de uma landing page: chamada, título forte, subtítulo, botões e prova social.",
       apelidos: ["hero", "banner", "landing page", "capa", "topo da página", "primeira dobra", "chamada", "header da home"],
-      inspiradoEm: ["Stripe", "Linear", "Nubank (página inicial)"],
+      inspiradoEm: ["Stripe", "Linear", "Revolut (página inicial)"],
       quandoUsar: ["No topo de páginas de produto, serviço ou portfólio."],
-      comoFunciona: "Combine tipografia, linha de botões e avatares. Use at-centro para centralizar tudo.",
+      comoFunciona: "Combine tipografia, linha de botões e avatares. Use at-centro para centrar tudo.",
       recursos: ["min-max-clamp", "text-wrap-balance"],
       mdn: [],
       conectaCom: ["barra", "tipografia", "planos", "avatar"],
       acessibilidade: ["O título do hero normalmente é o <h1> da página."],
-      api: [{ nome: "at-hero", tipo: "classe", descricao: "Espaço vertical do topo. Some at-centro para centralizar." }],
+      api: [{ nome: "at-hero", tipo: "classe", descricao: "Espaço vertical do topo. Junte at-centro para centrar." }],
       exemplos: [
         {
           titulo: "Produto SaaS",
           html: `<section class="at-hero at-centro">
   <div class="at-container">
-    <span class="at-selo at-primario">Novo · Emissão de nota fiscal</span>
+    <span class="at-selo at-primario">Novo · Emissão de fatura</span>
     <!-- Na sua página, este é o título principal: use h1 (aqui é h2 porque a documentação já tem o seu) -->
-    <h2 class="at-titulo-1 at-mt-4">Sua loja vendendo no<br>piloto automático</h2>
-    <p class="at-chamada">Catálogo, Pix, frete e nota fiscal num lugar só. Configure em 10 minutos, sem programar.</p>
+    <h2 class="at-titulo-1 at-mt-4">A sua loja a vender no<br>piloto automático</h2>
+    <p class="at-chamada">Catálogo, MB WAY, portes e faturas num só lugar. Configure em 10 minutos, sem programar.</p>
     <div class="at-linha at-mt-6">
       <a href="#" class="at-botao at-primario at-grande">Criar loja grátis</a>
       <a href="#" class="at-botao at-grande">Ver demonstração</a>
@@ -37,7 +37,7 @@
       <div class="at-avatares">
         <span class="at-avatar at-pequeno">AO</span><span class="at-avatar at-pequeno">LP</span><span class="at-avatar at-pequeno">JS</span>
       </div>
-      Mais de 12 mil lojistas no Brasil
+      Mais de 12 mil lojistas em Portugal
     </div>
   </div>
 </section>`,
@@ -57,7 +57,7 @@
       recursos: ["grid"],
       mdn: [],
       conectaCom: ["estado", "sanfona", "botao"],
-      acessibilidade: ["O plano em destaque precisa ter o motivo em texto (data-destaque=\"Mais escolhido\"), não só a borda."],
+      acessibilidade: ["O plano em destaque precisa de ter o motivo em texto (data-destaque=\"Mais escolhido\"), não só a borda."],
       api: [
         { nome: "at-planos / at-plano", tipo: "classe", descricao: "Grade e cada plano." },
         { nome: "data-destaque=\"texto\"", tipo: "atributo", descricao: "Plano em destaque com a etiqueta." },
@@ -75,20 +75,20 @@
 <div class="at-planos">
   <div class="at-plano">
     <h3>Grátis</h3>
-    <div class="at-plano-preco">R$ 0 <small>/mês</small></div>
-    <ul><li>Até 20 produtos</li><li>Pix e boleto</li><li>Domínio .loja</li></ul>
+    <div class="at-plano-preco">0 € <small>/mês</small></div>
+    <ul><li>Até 20 produtos</li><li>MB WAY e Multibanco</li><li>Domínio .loja</li></ul>
     <button class="at-botao at-bloco">Começar</button>
   </div>
   <div class="at-plano" data-destaque="Mais escolhido">
     <h3>Profissional</h3>
     <div class="at-plano-preco"><span data-at-texto="planos.pro" data-at-formato="moeda"></span> <small>/mês</small></div>
-    <ul><li>Produtos ilimitados</li><li>Nota fiscal automática</li><li>Domínio próprio</li><li>Suporte por WhatsApp</li></ul>
-    <button class="at-botao at-primario at-bloco">Assinar Profissional</button>
+    <ul><li>Produtos ilimitados</li><li>Fatura automática</li><li>Domínio próprio</li><li>Suporte por WhatsApp</li></ul>
+    <button class="at-botao at-primario at-bloco">Subscrever Profissional</button>
   </div>
   <div class="at-plano">
     <h3>Empresa</h3>
     <div class="at-plano-preco"><span data-at-texto="planos.empresa" data-at-formato="moeda"></span> <small>/mês</small></div>
-    <ul><li>Tudo do Profissional</li><li>Várias lojas</li><li>API e integrações</li><li>Gerente de conta</li></ul>
+    <ul><li>Tudo do Profissional</li><li>Várias lojas</li><li>API e integrações</li><li>Gestor de conta</li></ul>
     <button class="at-botao at-bloco">Falar com vendas</button>
   </div>
 </div>`,
@@ -106,12 +106,12 @@
       id: "rodape",
       nome: "Rodapé",
       categoria: "paginas",
-      resumo: "Rodapé com colunas de links, redes e as informações que lojas brasileiras são obrigadas a mostrar.",
-      apelidos: ["footer", "rodapé", "rodape", "final da página", "links do rodapé", "cnpj"],
-      inspiradoEm: ["Magalu e Amazon Brasil (dados da empresa)", "Stripe (colunas)"],
+      resumo: "Rodapé com colunas de links, redes e as informações que as lojas online em Portugal são obrigadas a mostrar (Livro de Reclamações, NIF, morada).",
+      apelidos: ["footer", "rodapé", "rodape", "final da página", "links do rodapé", "livro de reclamações", "nif", "ral"],
+      inspiradoEm: ["Worten e El Corte Inglés (dados da empresa)", "Stripe (colunas)"],
       quandoUsar: ["No fim de todo site."],
       comoFunciona:
-        "As colunas se ajustam sozinhas. Lojas virtuais no Brasil precisam exibir razão social, CNPJ e endereço em local de fácil acesso (Decreto 7.962/2013), e o rodapé é o lugar esperado.",
+        "As colunas ajustam-se sozinhas. Em Portugal, as lojas online têm de mostrar a firma, o NIF e a morada (Decreto-Lei 7/2004), o link do Livro de Reclamações Eletrónico e a informação sobre Resolução Alternativa de Litígios (Lei 144/2015). O rodapé é o lugar onde as pessoas (e as autoridades) procuram.",
       recursos: ["grid"],
       mdn: [],
       conectaCom: ["cookies", "barra"],
@@ -121,20 +121,20 @@
       ],
       exemplos: [
         {
-          titulo: "Loja virtual",
+          titulo: "Loja online",
           html: `<footer class="at-rodape">
   <div class="at-container">
     <div class="at-rodape-grade">
       <div>
         <a href="#" class="at-barra-marca">◆ Minha Loja</a>
-        <p class="at-texto-suave at-mt-2">Moda e acessórios com entrega para todo o Brasil.</p>
+        <p class="at-texto-suave at-mt-2">Moda e acessórios com entrega em todo o país.</p>
       </div>
-      <nav aria-label="Ajuda"><h4>Ajuda</h4><ul><li><a href="#">Trocas e devoluções</a></li><li><a href="#">Prazos de entrega</a></li><li><a href="#">Fale conosco</a></li></ul></nav>
-      <nav aria-label="Institucional"><h4>Institucional</h4><ul><li><a href="#">Quem somos</a></li><li><a href="#">Trabalhe conosco</a></li><li><a href="#">Política de privacidade</a></li></ul></nav>
-      <div><h4>Pagamento</h4><p class="at-texto-suave">Pix · Cartão em até 10x · Boleto</p></div>
+      <nav aria-label="Ajuda"><h4>Ajuda</h4><ul><li><a href="#">Trocas e devoluções</a></li><li><a href="#">Prazos de entrega</a></li><li><a href="#">Fale connosco</a></li></ul></nav>
+      <nav aria-label="Institucional"><h4>Institucional</h4><ul><li><a href="#">Quem somos</a></li><li><a href="#">Trabalhe connosco</a></li><li><a href="#">Política de privacidade</a></li></ul></nav>
+      <div><h4>Pagamento</h4><p class="at-texto-suave">MB WAY · Multibanco · Cartão · PayPal</p><p class="at-mt-2"><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener">Livro de Reclamações</a></p></div>
     </div>
     <div class="at-rodape-base">
-      <span>Minha Loja Comércio Ltda. · CNPJ 12.345.678/0001-95 · Av. Paulista, 1000, São Paulo, SP</span>
+      <span>Minha Loja, Lda. · NIF 509 999 999 · Av. da Liberdade, 100, 1250-096 Lisboa · <a href="https://www.consumidor.gov.pt/resolucao-de-litigios.aspx" target="_blank" rel="noopener">Resolução de litígios</a></span>
       <span>© 2026</span>
     </div>
   </div>
@@ -150,15 +150,15 @@
       id: "estado",
       nome: "Estado (reatividade)",
       categoria: "javascript",
-      resumo: "A ideia central do React, sem React: você muda os dados e a tela se atualiza sozinha. É assim que os componentes se conectam.",
-      apelidos: ["estado", "state", "reatividade", "react", "vue", "usestate", "store", "variável global", "conectar componentes", "data binding", "atualizar tela", "localstorage"],
+      resumo: "A ideia central do React, sem React: muda os dados e o ecrã atualiza-se sozinho. É assim que os componentes se conectam.",
+      apelidos: ["estado", "state", "reatividade", "react", "vue", "usestate", "store", "variável global", "ligar componentes", "data binding", "atualizar ecrã", "localstorage"],
       inspiradoEm: ["React (useState e dados imutáveis)", "Vue e Pinia (estado com ações e getters)", "Alpine.js (atributos no HTML)"],
       quandoUsar: [
-        "Quando várias partes da tela mostram o mesmo dado (o número do carrinho na barra e o total na gaveta).",
-        "Quando você se pega escrevendo document.querySelector(...).textContent = ... em vários lugares.",
+        "Quando várias partes do ecrã mostram o mesmo dado (o número do carrinho na barra e o total na gaveta).",
+        "Quando dá por si a escrever document.querySelector(...).textContent = ... em vários lugares.",
       ],
       comoFunciona:
-        "Atalho.estado(\"nome\", { dados, getters, ações }) cria o estado. No HTML, data-at-texto=\"nome.campo\" mostra o valor, data-at-mostrar esconde/mostra, data-at-lista repete um <template>, data-at-valor liga um campo nos dois sentidos e data-at-acao chama uma função. Como no React, para atualizar uma lista crie um array novo (this.itens = [...this.itens, novo]) em vez de usar push: é a troca de valor que avisa a tela. Com { salvar: true } os dados sobrevivem ao recarregar a página.",
+        "Atalho.estado(\"nome\", { dados, getters, ações }) cria o estado. No HTML, data-at-texto=\"nome.campo\" mostra o valor, data-at-mostrar esconde/mostra, data-at-lista repete um <template>, data-at-valor liga um campo nos dois sentidos e data-at-acao chama uma função. Como no React, para atualizar uma lista crie um array novo (this.itens = [...this.itens, novo]) em vez de usar push: é a troca de valor que avisa o ecrã. Com { salvar: true } os dados sobrevivem ao recarregar a página.",
       recursos: ["template", "localstorage"],
       mdn: [
         pt("Proxy (a técnica por trás)", "Web/JavaScript/Reference/Global_Objects/Proxy"),
@@ -170,7 +170,7 @@
       api: [
         { nome: "Atalho.estado(nome, objeto, { salvar })", tipo: "função", descricao: "Cria o estado e devolve o objeto reativo." },
         { nome: "data-at-texto=\"nome.campo\" + data-at-formato", tipo: "atributo", descricao: "Mostra o valor (formatos: moeda, numero, data, relativo, porcentagem…)." },
-        { nome: "data-at-mostrar / data-at-desabilitar", tipo: "atributo", descricao: "Mostra ou desabilita conforme o valor. Use ! para negar: \"!nome.campo\"." },
+        { nome: "data-at-mostrar / data-at-desabilitar", tipo: "atributo", descricao: "Mostra ou desativa conforme o valor. Use ! para negar: \"!nome.campo\"." },
         { nome: "data-at-valor=\"nome.campo\"", tipo: "atributo", descricao: "Liga input/checkbox ao estado nos dois sentidos." },
         { nome: "data-at-lista=\"nome.lista\" + <template>", tipo: "atributo", descricao: "Repete o template para cada item." },
         { nome: "data-at-campo / data-at-atributos", tipo: "atributo", descricao: "Dentro do template: texto e atributos vindos do item." },
@@ -194,7 +194,7 @@
 });`,
         },
         {
-          titulo: "Lista de tarefas que fica salva",
+          titulo: "Lista de tarefas que fica guardada",
           descricao: "Adicione tarefas e recarregue a página: elas continuam lá.",
           html: `<form class="at-grupo-entrada" style="max-width: 420px" data-at-acao="tarefas.adicionar">
   <input class="at-entrada" name="texto" placeholder="Nova tarefa" aria-label="Nova tarefa" required autocomplete="off">
@@ -234,12 +234,12 @@
       id: "formatar",
       nome: "Formatar (moeda, datas, números)",
       categoria: "javascript",
-      resumo: "Funções prontas para o padrão brasileiro: R$ 1.234,56, 08/10/2026, \"há 5 minutos\", 1,2 mil, 3,4 MB.",
-      apelidos: ["formatar", "moeda", "real", "dinheiro", "data", "hora", "intl", "toLocaleString", "número", "porcentagem", "tempo relativo", "há 5 minutos", "bytes"],
+      resumo: "Funções prontas no idioma da página: 1234,56 €, 08/10/2026, \"há 5 minutos\", 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.",
+      apelidos: ["formatar", "moeda", "euro", "dinheiro", "data", "hora", "intl", "toLocaleString", "número", "porcentagem", "tempo relativo", "há 5 minutos", "bytes"],
       inspiradoEm: ["Intl, a API de internacionalização dos navegadores"],
-      quandoUsar: ["Sempre que mostrar dinheiro, data ou número para uma pessoa. Nunca monte \"R$ \" + valor na mão."],
+      quandoUsar: ["Sempre que mostrar dinheiro, data ou número para uma pessoa. Nunca monte valor + \" €\" à mão."],
       comoFunciona:
-        "São atalhos para a API Intl do navegador já configurada em pt-BR. No HTML, use os mesmos nomes em data-at-formato.",
+        "São atalhos para a API Intl do navegador, no idioma do <html lang> (pt-PT por omissão) e na moeda de <html data-at-moeda> (euro por omissão). Atalho.configurar({ idioma, moeda }) troca os dois. No HTML, use os mesmos nomes em data-at-formato.",
       recursos: ["intl", "intl-relative-time-format"],
       mdn: [
         pt("Intl.NumberFormat", "Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat"),
@@ -249,11 +249,11 @@
       conectaCom: ["estado", "tabela", "indicador"],
       acessibilidade: [],
       api: [
-        { nome: "moeda(1234.5)", tipo: "função", descricao: "R$ 1.234,50" },
-        { nome: "numero(1234.5, casas?)", tipo: "função", descricao: "1.234,5" },
+        { nome: "moeda(1234.5, codigo?)", tipo: "função", descricao: "1234,50 € (ou moeda(10, \"GBP\") → 10,00 £)" },
+        { nome: "numero(12345.5, casas?)", tipo: "função", descricao: "12 345,5" },
         { nome: "porcentagem(0.125, 1)", tipo: "função", descricao: "12,5%" },
         { nome: "compacto(1200)", tipo: "função", descricao: "1,2 mil" },
-        { nome: "data(valor, \"short|medium|long|full\")", tipo: "função", descricao: "08/10/2026 ou 8 de out. de 2026" },
+        { nome: "data(valor, \"short|medium|long|full\")", tipo: "função", descricao: "08/10/2026 ou 8 de outubro de 2026" },
         { nome: "dataHora(valor) / hora(valor)", tipo: "função", descricao: "08/10/2026, 14:30 / 14:30" },
         { nome: "relativo(valor)", tipo: "função", descricao: "há 5 minutos, amanhã, há 2 semanas" },
         { nome: "bytes(3500000)", tipo: "função", descricao: "3,3 MB" },
@@ -292,34 +292,34 @@ document.querySelector("#tabela-formatos").innerHTML = exemplos
 
     {
       id: "requisitar",
-      nome: "Buscar dados de uma API",
+      nome: "Obter dados de uma API",
       categoria: "javascript",
-      resumo: "fetch com tempo limite, JSON automático e erros em português. Com Estado, você ganha carregando, erro e resultado na tela sem esforço.",
+      resumo: "fetch com tempo limite, JSON automático e erros em português. Com o Estado, ganha os estados de carregamento, erro e resultado no ecrã sem esforço.",
       apelidos: ["fetch", "api", "ajax", "requisição", "http", "get", "post", "axios", "buscar dados", "json", "backend", "servidor", "carregar dados"],
-      inspiradoEm: ["Axios (erros e tempo limite)", "TanStack Query (estados carregando/erro/sucesso)"],
-      quandoUsar: ["Sempre que a página precisa falar com um servidor."],
+      inspiradoEm: ["Axios (erros e tempo limite)", "TanStack Query (estados de carregamento/erro/sucesso)"],
+      quandoUsar: ["Sempre que a página precisa de falar com um servidor."],
       comoFunciona:
-        "Atalho.requisitar(url, opções) devolve os dados já convertidos de JSON. Se der erro, lança uma mensagem pronta para mostrar à pessoa (\"Sem conexão com a internet\", \"O servidor demorou demais\"). Passe corpo como objeto e ele vira JSON; passe um FormData para enviar arquivos.",
+        "Atalho.requisitar(url, opções) devolve os dados já convertidos de JSON. Se der erro, lança uma mensagem pronta para mostrar à pessoa (\"Sem ligação à internet\", \"O servidor demorou demasiado\"). Passe corpo como objeto e é convertido em JSON; passe um FormData para enviar ficheiros.",
       recursos: ["fetch", "abortable-fetch", "aborting"],
-      mdn: [pt("Fetch API", "Web/API/Fetch_API"), pt("Usando Fetch", "Web/API/Fetch_API/Using_Fetch"), en("AbortController", "Web/API/AbortController")],
+      mdn: [pt("Fetch API", "Web/API/Fetch_API"), pt("Utilizar o Fetch", "Web/API/Fetch_API/Using_Fetch"), en("AbortController", "Web/API/AbortController")],
       conectaCom: ["estado", "carregando", "validacao", "notificacao"],
-      acessibilidade: ["Anuncie o resultado da busca com aria-live (\"6 produtos encontrados\")."],
+      acessibilidade: ["Anuncie o resultado da pesquisa com aria-live (\"6 produtos encontrados\")."],
       api: [
         { nome: "Atalho.requisitar(url, opções)", tipo: "função", descricao: "Promise com os dados. Opções abaixo." },
-        { nome: "metodo", tipo: "opção", descricao: "\"GET\" (padrão), \"POST\", \"PUT\", \"PATCH\", \"DELETE\"." },
-        { nome: "corpo", tipo: "opção", descricao: "Objeto (vira JSON) ou FormData." },
+        { nome: "metodo", tipo: "opção", descricao: "\"GET\" (predefinido), \"POST\", \"PUT\", \"PATCH\", \"DELETE\"." },
+        { nome: "corpo", tipo: "opção", descricao: "Objeto (convertido em JSON) ou FormData." },
         { nome: "cabecalhos", tipo: "opção", descricao: "Ex.: { Authorization: \"Bearer ...\" }." },
-        { nome: "tempoLimite", tipo: "opção", descricao: "Milissegundos (padrão 15000)." },
-        { nome: "sinal", tipo: "opção", descricao: "AbortSignal para cancelar (busca enquanto digita)." },
+        { nome: "tempoLimite", tipo: "opção", descricao: "Milissegundos (predefinido: 15000)." },
+        { nome: "sinal", tipo: "opção", descricao: "AbortSignal para cancelar (pesquisa enquanto escreve)." },
         { nome: "erro.status / erro.dados", tipo: "propriedade", descricao: "No catch: código HTTP e resposta do servidor." },
       ],
       exemplos: [
         {
-          titulo: "Busca enquanto digita",
+          titulo: "Pesquisa enquanto escreve",
           descricao: "Dados reais da API pública DummyJSON (preços fictícios). Tente \"phone\", \"watch\" ou \"shoes\".",
           html: `<div class="at-entrada-icone" style="max-width: 420px">
   ${i.busca}
-  <input class="at-entrada" type="search" placeholder="Buscar produtos (em inglês)" aria-label="Buscar produtos" data-at-acao="catalogo.buscar" value="watch">
+  <input class="at-entrada" type="search" placeholder="Pesquisar produtos (em inglês)" aria-label="Pesquisar produtos" data-at-acao="catalogo.buscar" value="watch">
 </div>
 
 <p class="at-texto-suave at-texto-pequeno at-mt-4" aria-live="polite" data-at-texto="catalogo.status"></p>
@@ -349,7 +349,7 @@ const catalogo = Atalho.estado("catalogo", {
   status: "",
 
   async buscar(termo) {
-    controle?.abort(); // cancela a busca anterior se a pessoa continuar digitando
+    controle?.abort(); // cancela a pesquisa anterior se a pessoa continuar a escrever
     controle = new AbortController();
     this.carregando = true;
     this.erro = "";
@@ -381,9 +381,9 @@ catalogo.buscar("watch");`,
         corpo: dados,
         cabecalhos: { Authorization: "Bearer " + token },
       });
-      Atalho.notificar("Cliente " + cliente.nome + " cadastrado.", { tipo: "sucesso" });
+      Atalho.notificar("Cliente " + cliente.nome + " registado.", { tipo: "sucesso" });
     } catch (erro) {
-      // erro.message já vem em português: "Confira os dados do formulário."
+      // erro.message já vem em português: "Verifique os dados do formulário."
       Atalho.notificar(erro.message, { tipo: "perigo" });
       console.log(erro.status, erro.dados); // 422, { campo: "email", ... }
     }
@@ -397,12 +397,12 @@ catalogo.buscar("watch");`,
       id: "eventos",
       nome: "Eventos do Atalho",
       categoria: "javascript",
-      resumo: "Todos os componentes avisam o que aconteceu com eventos do navegador. É o jeito de ligar o Atalho ao seu código e ao seu servidor.",
+      resumo: "Todos os componentes avisam o que aconteceu com eventos do navegador. É a forma de ligar o Atalho ao seu código e ao seu servidor.",
       apelidos: ["eventos", "events", "addEventListener", "callback", "ouvir", "integração", "customevent", "hook"],
       inspiradoEm: ["Web Components (CustomEvent)", "Bootstrap (eventos show.bs.modal)"],
-      quandoUsar: ["Salvar no servidor quando algo muda, ou reagir a um componente em outro lugar da tela."],
+      quandoUsar: ["Guardar no servidor quando algo muda, ou reagir a um componente noutro lugar do ecrã."],
       comoFunciona:
-        "São CustomEvents que borbulham até o document. Escute no próprio elemento ou no document; os dados ficam em evento.detail.",
+        "São CustomEvents que borbulham até ao document. Escute no próprio elemento ou no document; os dados ficam em evento.detail.",
       recursos: ["js-modules"],
       mdn: [en("CustomEvent", "Web/API/CustomEvent"), en("Evento toggle", "Web/API/HTMLElement/toggle_event")],
       conectaCom: ["estado", "validacao", "tabela", "kanban"],
@@ -410,9 +410,10 @@ catalogo.buscar("watch");`,
       api: [
         { nome: "at:pronto", tipo: "evento", descricao: "Atalho carregado (no document)." },
         { nome: "at:enviar / at:invalido", tipo: "evento", descricao: "Formulário com data-at-validar." },
-        { nome: "at:cep / at:cep-erro", tipo: "evento", descricao: "Busca de CEP." },
+        { nome: "at:codigo-postal / at:codigo-postal-erro", tipo: "evento", descricao: "Morada pelo código postal (Portugal)." },
+        { nome: "at:cep / at:cep-erro", tipo: "evento", descricao: "Endereço pelo CEP (Brasil)." },
         { nome: "at:codigo", tipo: "evento", descricao: "Código de verificação completo." },
-        { nome: "at:arquivos", tipo: "evento", descricao: "Arquivos escolhidos no upload." },
+        { nome: "at:arquivos", tipo: "evento", descricao: "Ficheiros escolhidos no upload." },
         { nome: "at:aba", tipo: "evento", descricao: "Aba trocada." },
         { nome: "at:selecao", tipo: "evento", descricao: "Linhas selecionadas na tabela." },
         { nome: "at:mover", tipo: "evento", descricao: "Cartão movido no kanban." },
@@ -424,7 +425,7 @@ catalogo.buscar("watch");`,
       ],
       exemplos: [
         {
-          titulo: "Registro de eventos",
+          titulo: "Registo de eventos",
           descricao: "Interaja com as abas e veja o que é disparado.",
           html: `<div class="at-abas" data-at="abas">
   <button class="at-aba" aria-controls="ev-um">Primeira</button>
@@ -449,12 +450,12 @@ document.addEventListener("at:aba", (evento) => {
       id: "receita-loja",
       nome: "Loja com carrinho",
       categoria: "receitas",
-      resumo: "Vitrine, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo conectado pelo Estado e salvo no navegador.",
-      apelidos: ["loja", "e-commerce", "carrinho", "carrinho de compras", "shopping cart", "comprar", "checkout", "loja virtual", "vitrine"],
-      inspiradoEm: ["Amazon", "Mercado Livre", "iFood (sacola lateral)"],
-      quandoUsar: ["Ponto de partida para qualquer loja ou cardápio digital."],
+      resumo: "Montra, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo ligado pelo Estado e guardado no navegador.",
+      apelidos: ["loja", "e-commerce", "carrinho", "carrinho de compras", "shopping cart", "comprar", "checkout", "loja online", "vitrine"],
+      inspiradoEm: ["Amazon", "Zalando", "Uber Eats (cesto lateral)"],
+      quandoUsar: ["Ponto de partida para qualquer loja ou menu digital."],
       comoFunciona:
-        "Dois estados: vitrine (os produtos) e carrinho (os itens, salvo no navegador). O botão Comprar está dentro da lista da vitrine, então a ação carrinho.adicionar recebe o produto automaticamente. Contador, gaveta, total e botão de finalizar só leem do carrinho: nenhum código atualiza a tela diretamente.",
+        "Dois estados: vitrine (os produtos) e carrinho (os itens, guardado no navegador). O botão Comprar está dentro da lista da vitrine, por isso a ação carrinho.adicionar recebe o produto automaticamente. Contador, gaveta, total e botão de finalizar só leem do carrinho: nenhum código atualiza o ecrã diretamente.",
       recursos: ["dialog", "invoker-commands", "template", "localstorage"],
       mdn: [],
       conectaCom: ["produto", "gaveta", "barra", "estado", "notificacao", "formatar"],
@@ -491,15 +492,15 @@ document.addEventListener("at:aba", (evento) => {
 
 <dialog class="at-gaveta" id="gaveta-carrinho" aria-labelledby="carrinho-titulo">
   <div class="at-modal-cabecalho">
-    <h3 id="carrinho-titulo">Seu carrinho</h3>
+    <h3 id="carrinho-titulo">O seu carrinho</h3>
     <button class="at-botao at-icone at-fantasma at-pequeno" commandfor="gaveta-carrinho" command="close" aria-label="Fechar">${i.fechar}</button>
   </div>
 
   <div class="at-modal-corpo">
     <div class="at-vazio" data-at-mostrar="carrinho.vazio">
       ${i.vazio}
-      <h3>Seu carrinho está vazio</h3>
-      <p>Que tal dar uma olhada nas ofertas?</p>
+      <h3>O seu carrinho está vazio</h3>
+      <p>Que tal espreitar as ofertas?</p>
     </div>
 
     <ul class="at-pilha" style="--at-gap: 12px; list-style: none; padding: 0; margin: 0" data-at-lista="carrinho.itens">
@@ -564,7 +565,7 @@ Atalho.estado("carrinho", {
   },
   remover(item) { this.itens = this.itens.filter((i) => i.id !== item.id); },
   finalizar() {
-    Atalho.notificar("Total de " + Atalho.formatar.moeda(this.total) + ". Agora é só ligar ao seu pagamento!", { titulo: "Pedido criado" });
+    Atalho.notificar("Total de " + Atalho.formatar.moeda(this.total) + ". Agora é só ligar ao seu pagamento!", { titulo: "Encomenda criada" });
     this.itens = [];
     document.querySelector("#gaveta-carrinho").close();
   },
@@ -575,37 +576,37 @@ Atalho.estado("carrinho", {
 
     {
       id: "receita-cadastro",
-      nome: "Cadastro com CEP",
+      nome: "Registo com morada automática",
       categoria: "receitas",
-      resumo: "Cadastro brasileiro completo: dados pessoais com máscaras, endereço automático pelo CEP, senha com força, termos e confirmação.",
-      apelidos: ["cadastro", "formulário de cadastro", "registro", "sign up", "criar conta", "cadastro de cliente", "endereço"],
-      inspiradoEm: ["Magalu e Mercado Livre (cadastro)", "Bancos digitais (abertura de conta)"],
-      quandoUsar: ["Cadastro de clientes, checkout como visitante, ficha de matrícula."],
+      resumo: "Registo completo: dados pessoais com NIF e telemóvel, morada automática pelo código postal, palavra-passe com força, termos e confirmação.",
+      apelidos: ["cadastro", "formulário de registo", "registro", "sign up", "criar conta", "registo de cliente", "endereço"],
+      inspiradoEm: ["Worten e Fnac (registo)", "Bancos digitais (abertura de conta)"],
+      quandoUsar: ["Registo de clientes, checkout como visitante, ficha de matrícula."],
       comoFunciona:
-        "Um único formulário com data-at-validar junta Campos, Máscaras, CEP, Senha e Validação. Ao enviar, o botão mostra carregando e um modal confirma, usando o evento at:enviar.",
+        "Um único formulário com data-at-validar junta Campos, Máscaras, Morada pelo código postal, Palavra-passe e Validação. Ao enviar, o botão mostra o estado de carregamento e um modal confirma, usando o evento at:enviar.",
       recursos: ["constraint-validation", "fetch", "dialog"],
       mdn: [],
       conectaCom: ["campo", "mascaras", "cep", "senha", "validacao", "modal"],
-      acessibilidade: ["Os grupos de campos usam <fieldset> e <legend> para o leitor de tela anunciar a seção."],
+      acessibilidade: ["Os grupos de campos usam <fieldset> e <legend> para o leitor de ecrã anunciar a secção."],
       api: [],
       exemplos: [
         {
-          titulo: "Ficha de cadastro",
+          titulo: "Ficha de registo",
           html: `<div class="at-cartao" style="max-width: 760px; margin-inline: auto">
   <div class="at-cartao-corpo" style="border-bottom: 1px solid var(--at-borda)">
-    <h2 class="at-titulo-3 at-mb-0">Crie sua conta</h2>
-    <p class="at-texto-suave at-mb-0">Leva menos de 2 minutos: o endereço se preenche sozinho pelo CEP.</p>
+    <h2 class="at-titulo-3 at-mb-0">Crie a sua conta</h2>
+    <p class="at-texto-suave at-mb-0">Leva menos de 2 minutos: a morada preenche-se sozinha pelo código postal.</p>
   </div>
   <form id="form-cadastro" data-at-validar class="at-cartao-corpo at-pilha" style="--at-gap: 28px">
     <fieldset class="at-formulario" style="border: 0; padding: 0; margin: 0">
-      <legend class="at-titulo-4">Seus dados</legend>
+      <legend class="at-titulo-4">Os seus dados</legend>
       <div class="at-campo">
         <label class="at-rotulo" for="cad-nome">Nome completo</label>
         <input class="at-entrada" id="cad-nome" name="nome" required minlength="5" autocomplete="name">
       </div>
       <div class="at-campo at-meio">
-        <label class="at-rotulo" for="cad-cpf">CPF</label>
-        <input class="at-entrada" id="cad-cpf" name="cpf" required data-at-mascara="cpf">
+        <label class="at-rotulo" for="cad-nif">NIF</label>
+        <input class="at-entrada" id="cad-nif" name="nif" required data-at-mascara="nif" inputmode="numeric">
       </div>
       <div class="at-campo at-meio">
         <label class="at-rotulo" for="cad-nasc">Data de nascimento</label>
@@ -616,43 +617,43 @@ Atalho.estado("carrinho", {
         <input class="at-entrada" id="cad-email" name="email" type="email" required autocomplete="email">
       </div>
       <div class="at-campo at-meio">
-        <label class="at-rotulo" for="cad-cel">Celular</label>
-        <input class="at-entrada" id="cad-cel" name="celular" type="tel" required data-at-mascara="telefone" autocomplete="tel-national">
+        <label class="at-rotulo" for="cad-cel">Telemóvel</label>
+        <input class="at-entrada" id="cad-cel" name="telemovel" type="tel" required data-at-mascara="telemovel" autocomplete="tel-national">
       </div>
     </fieldset>
 
     <fieldset class="at-formulario" style="border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0">
-      <legend class="at-titulo-4">Endereço</legend>
+      <legend class="at-titulo-4">Morada</legend>
       <div class="at-campo at-terco">
-        <label class="at-rotulo" for="cad-cep">CEP</label>
-        <input class="at-entrada" id="cad-cep" name="cep" required data-at-mascara="cep" data-at-cep autocomplete="postal-code">
+        <label class="at-rotulo" for="cad-cp">Código postal</label>
+        <input class="at-entrada" id="cad-cp" name="codigo_postal" required data-at-mascara="codigo-postal" data-at-codigo-postal autocomplete="postal-code" placeholder="0000-000">
       </div>
       <div class="at-campo at-dois-tercos">
         <label class="at-rotulo" for="cad-rua">Rua</label>
-        <input class="at-entrada" id="cad-rua" name="rua" required data-at-cep-preencher="logradouro">
+        <input class="at-entrada" id="cad-rua" name="rua" required data-at-cp-preencher="rua" autocomplete="address-line1">
       </div>
       <div class="at-campo at-terco">
-        <label class="at-rotulo" for="cad-num">Número</label>
-        <input class="at-entrada" id="cad-num" name="numero" required data-at-cep-foco>
+        <label class="at-rotulo" for="cad-num">N.º</label>
+        <input class="at-entrada" id="cad-num" name="numero" required data-at-cp-foco>
       </div>
       <div class="at-campo at-dois-tercos">
-        <label class="at-rotulo" for="cad-comp">Complemento <span class="at-opcional">(opcional)</span></label>
-        <input class="at-entrada" id="cad-comp" name="complemento">
+        <label class="at-rotulo" for="cad-comp">Andar / porta <span class="at-opcional">(opcional)</span></label>
+        <input class="at-entrada" id="cad-comp" name="andar" autocomplete="address-line2">
       </div>
       <div class="at-campo at-meio">
-        <label class="at-rotulo" for="cad-bairro">Bairro</label>
-        <input class="at-entrada" id="cad-bairro" name="bairro" required data-at-cep-preencher="bairro">
+        <label class="at-rotulo" for="cad-localidade">Localidade</label>
+        <input class="at-entrada" id="cad-localidade" name="localidade" required data-at-cp-preencher="localidade" autocomplete="address-level2">
       </div>
       <div class="at-campo at-meio">
-        <label class="at-rotulo" for="cad-cidade">Cidade / UF</label>
-        <input class="at-entrada" id="cad-cidade" name="cidade" required data-at-cep-preencher="localidade">
+        <label class="at-rotulo" for="cad-distrito">Distrito</label>
+        <input class="at-entrada" id="cad-distrito" name="distrito" required data-at-cp-preencher="distrito" autocomplete="address-level1">
       </div>
     </fieldset>
 
     <fieldset class="at-formulario" style="border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0">
       <legend class="at-titulo-4">Acesso</legend>
       <div class="at-campo at-meio">
-        <label class="at-rotulo" for="cad-senha">Senha</label>
+        <label class="at-rotulo" for="cad-senha">Palavra-passe</label>
         <div class="at-senha">
           <input class="at-entrada" id="cad-senha" name="senha" type="password" required minlength="8" autocomplete="new-password">
           <button type="button" data-at-ver-senha>Mostrar</button>
@@ -661,8 +662,8 @@ Atalho.estado("carrinho", {
         <span class="at-forca-texto" aria-live="polite"></span>
       </div>
       <div class="at-campo at-meio">
-        <label class="at-rotulo" for="cad-senha2">Confirme a senha</label>
-        <input class="at-entrada" id="cad-senha2" type="password" required data-at-igual="#cad-senha" data-msg-igual="As senhas não são iguais." autocomplete="new-password">
+        <label class="at-rotulo" for="cad-senha2">Confirme a palavra-passe</label>
+        <input class="at-entrada" id="cad-senha2" type="password" required data-at-igual="#cad-senha" data-msg-igual="As palavras-passe não são iguais." autocomplete="new-password">
       </div>
       <div class="at-campo">
         <label class="at-check">
@@ -672,7 +673,7 @@ Atalho.estado("carrinho", {
       </div>
     </fieldset>
 
-    <button class="at-botao at-primario at-grande at-bloco">Criar minha conta</button>
+    <button class="at-botao at-primario at-grande at-bloco">Criar a minha conta</button>
     <p class="at-texto-pequeno at-texto-suave at-texto-centro at-mb-0">Já tem conta? <a href="#">Entrar</a></p>
   </form>
 </div>
@@ -695,7 +696,7 @@ Atalho.estado("carrinho", {
     botao.removeAttribute("aria-busy");
     const primeiroNome = dados.nome.split(" ")[0];
     document.querySelector("#cadastro-mensagem").textContent =
-      "Bem-vindo(a), " + primeiroNome + ". Enviamos a confirmação para " + dados.email + ".";
+      "Bem-vindo(a), " + primeiroNome + ". Enviámos a confirmação para " + dados.email + ".";
     document.querySelector("#modal-cadastro").showModal();
     formulario.reset();
   }, 1200);
@@ -708,7 +709,7 @@ Atalho.estado("carrinho", {
       id: "receita-painel",
       nome: "Painel administrativo",
       categoria: "receitas",
-      resumo: "Menu lateral, indicadores, busca, tabela com ordenação, ações por linha e exportação. A tela que todo sistema de empresa tem.",
+      resumo: "Menu lateral, indicadores, pesquisa, tabela com ordenação, ações por linha e exportação. O ecrã que todo sistema de empresa tem.",
       apelidos: ["dashboard", "painel", "admin", "sistema", "erp", "crm", "backoffice", "painel de controle"],
       inspiradoEm: ["Shopify Admin", "Stripe Dashboard", "Linear"],
       quandoUsar: ["Base para sistemas internos, ERPs, CRMs e painéis de loja."],
@@ -716,11 +717,11 @@ Atalho.estado("carrinho", {
       recursos: ["grid", "popover", "has"],
       mdn: [],
       conectaCom: ["lateral", "indicador", "tabela", "menu-suspenso", "trilha", "comando"],
-      acessibilidade: ["Cada menu de linha tem aria-label com o nome do item (\"Ações do pedido 1048\")."],
+      acessibilidade: ["Cada menu de linha tem aria-label com o nome do item (\"Ações da encomenda 1048\")."],
       api: [],
       exemplos: [
         {
-          titulo: "Pedidos",
+          titulo: "Encomendas",
           html: `<div class="at-app" style="min-height: 560px">
   <aside class="at-lateral" style="height: auto">
     <div class="at-lateral-topo"><span class="at-barra-marca">◆ Gestão</span></div>
@@ -736,46 +737,46 @@ Atalho.estado("carrinho", {
     <div>
       <nav class="at-trilha" aria-label="Você está em"><ol><li><a href="#">Início</a></li><li aria-current="page">Pedidos</li></ol></nav>
       <div class="at-linha at-entre at-mt-2">
-        <h2 class="at-titulo-3 at-mb-0">Pedidos</h2>
+        <h2 class="at-titulo-3 at-mb-0">Encomendas</h2>
         <button class="at-botao at-primario" data-at-notificar="Abra aqui o formulário de novo pedido" data-at-tipo="info">Novo pedido</button>
       </div>
     </div>
 
     <div class="at-colunas-3" style="--at-gap: 16px">
-      <div class="at-indicador"><span class="at-indicador-rotulo">Hoje</span><strong class="at-indicador-valor">R$ 3.840</strong><span class="at-indicador-variacao" data-direcao="sobe">↑ 18% vs. ontem</span></div>
-      <div class="at-indicador"><span class="at-indicador-rotulo">A enviar</span><strong class="at-indicador-valor">3</strong><span class="at-indicador-variacao">1 atrasado</span></div>
-      <div class="at-indicador"><span class="at-indicador-rotulo">Ticket médio</span><strong class="at-indicador-valor">R$ 412</strong><span class="at-indicador-variacao" data-direcao="desce">↓ 2% vs. setembro</span></div>
+      <div class="at-indicador"><span class="at-indicador-rotulo">Hoje</span><strong class="at-indicador-valor">3840 €</strong><span class="at-indicador-variacao" data-direcao="sobe">↑ 18% vs. ontem</span></div>
+      <div class="at-indicador"><span class="at-indicador-rotulo">A enviar</span><strong class="at-indicador-valor">3</strong><span class="at-indicador-variacao">1 atrasada</span></div>
+      <div class="at-indicador"><span class="at-indicador-rotulo">Ticket médio</span><strong class="at-indicador-valor">412 €</strong><span class="at-indicador-variacao" data-direcao="desce">↓ 2% vs. setembro</span></div>
     </div>
 
     <div>
       <div class="at-tabela-ferramentas">
         <div class="at-entrada-icone at-cresce" style="max-width: 300px">
           ${i.busca}
-          <input class="at-entrada" id="painel-busca" type="search" placeholder="Buscar pedidos" aria-label="Buscar pedidos">
+          <input class="at-entrada" id="painel-busca" type="search" placeholder="Pesquisar encomendas" aria-label="Pesquisar encomendas">
         </div>
         <button class="at-botao" data-at-exportar="#painel-tabela" data-arquivo="pedidos.csv">${i.baixar} Exportar</button>
       </div>
       <div class="at-tabela-caixa">
         <table class="at-tabela" id="painel-tabela" data-at="tabela" data-filtro="#painel-busca">
-          <thead><tr><th data-ordenar="numero">Pedido</th><th data-ordenar>Cliente</th><th>Status</th><th data-ordenar="numero" class="at-direita">Total</th><th data-nao-exportar><span class="at-sr">Ações</span></th></tr></thead>
+          <thead><tr><th data-ordenar="numero">Encomenda</th><th data-ordenar>Cliente</th><th>Estado</th><th data-ordenar="numero" class="at-direita">Total</th><th data-nao-exportar><span class="at-sr">Ações</span></th></tr></thead>
           <tbody>
             ${[
-              ["1048", "Maria Oliveira", "sucesso", "Pago", 1250],
+              ["1048", "Maria Oliveira", "sucesso", "Paga", 1250],
               ["1047", "João Santos", "aviso", "A enviar", 389.9],
-              ["1046", "Ana Costa", "perigo", "Atrasado", 89.9],
-              ["1045", "Lucas Pereira", "info", "Enviado", 2100],
+              ["1046", "Ana Costa", "perigo", "Atrasada", 89.9],
+              ["1045", "Lucas Pereira", "info", "Enviada", 2100],
             ]
               .map(
                 ([numero, cliente, cor, status, total]) => `<tr>
               <td>#${numero}</td><td>${cliente}</td><td><span class="at-selo at-${cor}">${status}</span></td>
-              <td class="at-direita" data-valor="${total}">${new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(total)}</td>
+              <td class="at-direita" data-valor="${total}">${new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(total)}</td>
               <td class="at-encolher" data-nao-exportar>
                 <button class="at-botao at-icone at-fantasma at-pequeno" popovertarget="acoes-${numero}" aria-label="Ações do pedido ${numero}">${i.mais}</button>
                 <div id="acoes-${numero}" popover class="at-menu" data-alinhar="fim">
                   <button class="at-menu-item">Ver detalhes</button>
                   <button class="at-menu-item" data-at-notificar="Etiqueta do pedido ${numero} gerada">Gerar etiqueta</button>
                   <hr class="at-menu-separador">
-                  <button class="at-menu-item at-perigo">Cancelar pedido</button>
+                  <button class="at-menu-item at-perigo">Cancelar encomenda</button>
                 </div>
               </td>
             </tr>`
@@ -795,25 +796,25 @@ Atalho.estado("carrinho", {
       id: "receita-login",
       nome: "Login em duas etapas",
       categoria: "receitas",
-      resumo: "E-mail e senha, depois o código de verificação, depois a confirmação. As telas trocam pelo Estado, sem recarregar a página.",
+      resumo: "E-mail e palavra-passe, depois o código de verificação, depois a confirmação. Os ecrãs trocam pelo Estado, sem recarregar a página.",
       apelidos: ["login", "entrar", "autenticação", "2fa", "dois fatores", "verificação em duas etapas", "sign in", "acesso"],
-      inspiradoEm: ["Google (verificação em duas etapas)", "Nubank e bancos digitais"],
-      quandoUsar: ["Telas de login com segurança extra."],
+      inspiradoEm: ["Google (verificação em duas etapas)", "Revolut e bancos digitais"],
+      quandoUsar: ["Ecrãs de login com segurança extra."],
       comoFunciona:
-        "Um estado guarda a etapa atual; cada tela tem data-at-mostrar com um getter (login.naSenha, login.noCodigo, login.pronto). O formulário chama login.entrar e o código dispara at:codigo, que chama login.verificar.",
+        "Um estado guarda a etapa atual; cada ecrã tem data-at-mostrar com um getter (login.naSenha, login.noCodigo, login.pronto). O formulário chama login.entrar e o código dispara at:codigo, que chama login.verificar.",
       recursos: ["constraint-validation"],
       mdn: [],
       conectaCom: ["validacao", "senha", "codigo", "etapas", "estado"],
-      acessibilidade: ["Ao trocar de etapa, o foco vai para o primeiro campo da nova tela."],
+      acessibilidade: ["Ao trocar de etapa, o foco vai para o primeiro campo do novo ecrã."],
       api: [],
       exemplos: [
         {
           titulo: "Entrar",
-          descricao: "Use qualquer e-mail, senha com 8+ caracteres e o código 123456.",
+          descricao: "Use qualquer e-mail, palavra-passe com 8+ caracteres e o código 123456.",
           html: `<div class="at-cartao" style="max-width: 400px; margin-inline: auto">
   <div class="at-cartao-corpo at-pilha">
     <ol class="at-etapas">
-      <li id="passo-1" aria-current="step">Senha</li>
+      <li id="passo-1" aria-current="step">Palavra-passe</li>
       <li id="passo-2">Código</li>
       <li id="passo-3">Pronto</li>
     </ol>
@@ -825,7 +826,7 @@ Atalho.estado("carrinho", {
         <input class="at-entrada" id="login-email" name="email" type="email" required autocomplete="username">
       </div>
       <div class="at-campo">
-        <label class="at-rotulo" for="login-senha">Senha</label>
+        <label class="at-rotulo" for="login-senha">Palavra-passe</label>
         <div class="at-senha">
           <input class="at-entrada" id="login-senha" name="senha" type="password" required minlength="8" autocomplete="current-password">
           <button type="button" data-at-ver-senha>Mostrar</button>
@@ -835,8 +836,8 @@ Atalho.estado("carrinho", {
     </form>
 
     <div class="at-pilha" data-at-mostrar="login.noCodigo" hidden>
-      <h3 class="at-titulo-4 at-mb-0">Digite o código</h3>
-      <p class="at-texto-suave at-mb-0">Enviamos para <strong data-at-texto="login.email"></strong>.</p>
+      <h3 class="at-titulo-4 at-mb-0">Escreva o código</h3>
+      <p class="at-texto-suave at-mb-0">Enviámos para <strong data-at-texto="login.email"></strong>.</p>
       <div class="at-codigo" data-at="codigo" id="login-codigo"><input><input><input><input><input><input></div>
       <button class="at-botao at-link" data-at-acao="login.voltar">Usar outro e-mail</button>
     </div>
@@ -844,7 +845,7 @@ Atalho.estado("carrinho", {
     <div class="at-texto-centro" data-at-mostrar="login.pronto" hidden>
       <div class="at-titulo-1" aria-hidden="true">✓</div>
       <h3 class="at-titulo-4">Tudo certo!</h3>
-      <p class="at-texto-suave">Você entrou como <span data-at-texto="login.email"></span>.</p>
+      <p class="at-texto-suave">Entrou como <span data-at-texto="login.email"></span>.</p>
       <button class="at-botao at-bloco" data-at-acao="login.voltar">Sair</button>
     </div>
   </div>

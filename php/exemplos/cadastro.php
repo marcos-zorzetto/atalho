@@ -13,20 +13,20 @@ $dados = lerJson();
 $erros = validar($dados, [
     'nome' => ['obrigatorio', 'min:3', 'max:120'],
     'email' => ['obrigatorio', 'email'],
-    'cpf' => ['obrigatorio', 'cpf'],
-    'celular' => ['obrigatorio', 'telefone'],
+    'nif' => ['obrigatorio', 'nif'],
+    'telemovel' => ['obrigatorio', 'telemovel'],
 ]);
 
 if ($erros) {
-    responderErro('Confira os dados do formulário.', 422, $erros);
+    responderErro('Verifique os dados do formulário.', 422, $erros);
 }
 
 $cliente = [
     'nome' => limparTexto($dados['nome'], 120),
     'email' => mb_strtolower(trim($dados['email'])),
-    'cpf' => somenteDigitos($dados['cpf']),        // guarde só os dígitos
-    'celular' => somenteDigitos($dados['celular']),
+    'nif' => somenteDigitos($dados['nif']),            // guarde só os algarismos
+    'telemovel' => somenteDigitos($dados['telemovel']),
 ];
 
-// Aqui você salvaria no banco (veja o exemplo de pedidos com PDO)
+// Aqui guardaria na base de dados (veja o exemplo de pedidos com PDO)
 responderJson(['id' => 123, 'nome' => $cliente['nome']], 201);

@@ -8,7 +8,7 @@ use function Atalho\{exigirMetodo, paginar, limparTexto, responderJson};
 
 exigirMetodo('GET');
 
-$pdo = new PDO('mysql:host=localhost;dbname=loja;charset=utf8mb4', 'usuario', 'senha', [
+$pdo = new PDO('mysql:host=localhost;dbname=loja;charset=utf8mb4', 'utilizador', 'palavra-passe', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ]);
@@ -16,7 +16,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=loja;charset=utf8mb4', 'usuario', 's
 $busca = limparTexto($_GET['busca'] ?? '', 100);
 $filtro = '%' . $busca . '%';
 
-// Sempre use parâmetros (?), nunca junte texto do usuário no SQL: evita SQL injection
+// Use sempre parâmetros (?), nunca junte texto do utilizador no SQL: evita SQL injection
 $contar = $pdo->prepare('SELECT COUNT(*) FROM pedidos WHERE cliente LIKE ?');
 $contar->execute([$filtro]);
 $pagina = paginar((int) $contar->fetchColumn(), (int) ($_GET['pagina'] ?? 1), 20);

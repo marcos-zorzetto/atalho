@@ -51,7 +51,7 @@ async function atualizarEstado(sessao) {
    -------------------------------------------------------------------------- */
 
 /**
- * Pede o e-mail e a senha e entra. Os testes passam os dois direto (sem as
+ * Pede o e-mail e a palavra-passe e entra. Os testes passam os dois direto (sem as
  * caixas de digitação). Devolve true se entrou.
  */
 async function entrar(emailDado, senhaDada) {
@@ -59,7 +59,7 @@ async function entrar(emailDado, senhaDada) {
   if (typeof email !== "string" || typeof senha !== "string") {
     const escolha = await vscode.window.showQuickPick(
       [
-        { label: "$(account) Já tenho conta", description: "entrar com e-mail e senha", acao: "entrar" },
+        { label: "$(account) Já tenho conta", description: "entrar com e-mail e palavra-passe", acao: "entrar" },
         { label: "$(add) Criar conta grátis", description: "abre o site do Atalho", acao: "criar" },
       ],
       { title: "Atalho", placeHolder: "A extensão é grátis com uma conta do Atalho" },
@@ -69,31 +69,31 @@ async function entrar(emailDado, senhaDada) {
 
     email = await vscode.window.showInputBox({
       title: "Entrar no Atalho (1 de 2)",
-      prompt: "Seu e-mail da conta do Atalho",
-      placeHolder: "voce@email.com",
+      prompt: "O seu e-mail da conta do Atalho",
+      placeHolder: "nome@email.pt",
       ignoreFocusOut: true,
-      validateInput: (v) => (/^\S+@\S+\.\S+$/.test(v.trim()) ? null : "Digite um e-mail válido."),
+      validateInput: (v) => (/^\S+@\S+\.\S+$/.test(v.trim()) ? null : "Escreva um e-mail válido."),
     });
     if (!email) return false;
-    senha = await vscode.window.showInputBox({ title: "Entrar no Atalho (2 de 2)", prompt: "Sua senha", password: true, ignoreFocusOut: true });
+    senha = await vscode.window.showInputBox({ title: "Entrar no Atalho (2 de 2)", prompt: "A sua palavra-passe", password: true, ignoreFocusOut: true });
     if (!senha) return false;
   }
 
-  return vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: "Atalho: entrando…" }, async () => {
+  return vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: "Atalho: a entrar…" }, async () => {
     try {
       const sessao = await conta.entrar(email.trim(), senha);
       await atualizarEstado(sessao);
       const liberados = estado.avancados.filter((i) => i.liberado).length + estado.animacoes.filter((i) => i.liberado).length;
       const acoes = estado.pro || estado.admin ? [] : ["Conhecer o Pro"];
       vscode.window
-        .showInformationMessage(`Bem-vindo(a)! Plano ${nomePlano(estado)}: ${TRECHOS_BASE.length} trechos grátis e ${liberados} avançados liberados. Digite "at-" num arquivo HTML.`, ...acoes)
+        .showInformationMessage(`Bem-vindo(a)! Plano ${nomePlano(estado)}: ${TRECHOS_BASE.length} trechos grátis e ${liberados} avançados desbloqueados. Escreva "at-" num ficheiro HTML.`, ...acoes)
         .then((r) => r && assinarPro());
       return true;
     } catch (erro) {
       // Sem "await": a mensagem fica aberta sem travar o comando
-      vscode.window.showErrorMessage(`Atalho: ${erro.message}`, "Tentar de novo", "Esqueci a senha").then((r) => {
-        if (r === "Tentar de novo") entrar();
-        if (r === "Esqueci a senha") vscode.env.openExternal(link("conta/"));
+      vscode.window.showErrorMessage(`Atalho: ${erro.message}`, "Tentar novamente", "Esqueci-me da palavra-passe").then((r) => {
+        if (r === "Tentar novamente") entrar();
+        if (r === "Esqueci-me da palavra-passe") vscode.env.openExternal(link("conta/"));
       });
       ultimoErro = erro.message;
       return false;
@@ -111,7 +111,7 @@ async function sair() {
   ultimoErro = null;
   await conta.sair();
   await atualizarEstado(null);
-  vscode.window.showInformationMessage("Atalho: você saiu da sua conta.");
+  vscode.window.showInformationMessage("Atalho: saiu da sua conta.");
 }
 
 /** Insere o código no editor aberto; sem editor, cria uma página nova já com o Atalho. */
@@ -124,7 +124,7 @@ async function inserirCodigo(corpo) {
 
 function exigirConta() {
   if (estado.pessoa) return true;
-  vscode.window.showInformationMessage("Os trechos do Atalho são liberados com uma conta grátis.", "Entrar", "Criar conta grátis").then((r) => {
+  vscode.window.showInformationMessage("Os trechos do Atalho são desbloqueados com uma conta grátis.", "Entrar", "Criar conta grátis").then((r) => {
     if (r === "Entrar") entrar();
     if (r === "Criar conta grátis") criarConta();
   });
@@ -135,9 +135,9 @@ function exigirConta() {
 async function inserirItem(item) {
   if (!exigirConta()) return "sem-conta";
   if (item.corpo) return await inserirCodigo(item.corpo), "inserido";
-  vscode.window.showInformationMessage(`"${item.nome}" faz parte do Atalho Pro (todos os componentes e animações, com atualizações).`, "Conhecer o Pro", "Já assinei: atualizar").then((r) => {
+  vscode.window.showInformationMessage(`"${item.nome}" faz parte do Atalho Pro (todos os componentes e animações, com atualizações).`, "Conhecer o Pro", "Já subscrevi: atualizar").then((r) => {
     if (r === "Conhecer o Pro") assinarPro();
-    if (r === "Já assinei: atualizar") atualizar();
+    if (r === "Já subscrevi: atualizar") atualizar();
   });
   return "bloqueado";
 }
@@ -154,7 +154,7 @@ async function inserir() {
   }));
   const escolha = await vscode.window.showQuickPick(
     [{ label: "Avançados e animações", kind: vscode.QuickPickItemKind.Separator }, ...avancados, { label: "Biblioteca grátis", kind: vscode.QuickPickItemKind.Separator }, ...base],
-    { title: "Atalho: inserir componente", placeHolder: "Busque em português: modal, carrinho, agenda, entrada suave…", matchOnDescription: true, matchOnDetail: true },
+    { title: "Atalho: inserir componente", placeHolder: "Procure em português: modal, carrinho, agenda, entrada suave…", matchOnDescription: true, matchOnDetail: true },
   );
   if (escolha) inserirItem(escolha.item);
 }
@@ -167,7 +167,7 @@ async function novaPagina() {
 }
 
 async function atualizar() {
-  await vscode.window.withProgress({ location: vscode.ProgressLocation.Window, title: "Atalho: atualizando" }, async () => {
+  await vscode.window.withProgress({ location: vscode.ProgressLocation.Window, title: "Atalho: a atualizar" }, async () => {
     await atualizarEstado(conta.sessao ? await conta.restaurar() : null);
   });
 }
@@ -193,11 +193,11 @@ const autocompletar = {
     if (!estado.pessoa) {
       const palavra = classe ?? palavraNoCursor(linhaAntes);
       if (!/^at/.test(palavra)) return [];
-      const convite = new vscode.CompletionItem({ label: palavra || "at-", description: "Entre (grátis) para liberar o Atalho" }, vscode.CompletionItemKind.Event);
+      const convite = new vscode.CompletionItem({ label: palavra || "at-", description: "Entre (grátis) para desbloquear o Atalho" }, vscode.CompletionItemKind.Event);
       convite.insertText = "";
       convite.filterText = palavra;
       convite.command = { command: "atalho.entrar", title: "Entrar" };
-      convite.documentation = new vscode.MarkdownString("Crie sua conta grátis no Atalho para liberar os trechos, as classes e os componentes avançados.");
+      convite.documentation = new vscode.MarkdownString("Crie a sua conta grátis no Atalho para desbloquear os trechos, as classes e os componentes avançados.");
       return [convite];
     }
 
@@ -252,10 +252,10 @@ class Painel {
       const conta = new vscode.TreeItem(`${estado.pessoa.email}`, vscode.TreeItemCollapsibleState.None);
       conta.description = estado.admin ? "Administrador" : `Plano ${nomePlano(estado)}`;
       conta.iconPath = new vscode.ThemeIcon(tudo ? "star-full" : "account");
-      conta.tooltip = tudo ? "Tudo liberado." : "Conta grátis: biblioteca inteira, 20 componentes avançados e 10 animações.";
+      conta.tooltip = tudo ? "Tudo desbloqueado." : "Conta grátis: biblioteca inteira, 20 componentes avançados e 10 animações.";
       const nos = [conta];
       if (!tudo) {
-        const pro = new vscode.TreeItem("Liberar tudo com o Pro", vscode.TreeItemCollapsibleState.None);
+        const pro = new vscode.TreeItem("Desbloquear tudo com o Pro", vscode.TreeItemCollapsibleState.None);
         pro.iconPath = new vscode.ThemeIcon("star-empty");
         pro.command = { command: "atalho.assinarPro", title: "Conhecer o Pro" };
         pro.tooltip = "Abre os planos no site do Atalho.";
@@ -290,7 +290,7 @@ function grupo(titulo, itens) {
 function folha(item) {
   const no = new vscode.TreeItem(item.nome, vscode.TreeItemCollapsibleState.None);
   no.description = item.liberado ? item.prefixo : `${item.rotuloNivel || "Pro"}`;
-  no.tooltip = new vscode.MarkdownString(`**${item.nome}**\n\n${item.descricao || ""}\n\n${item.liberado ? `Clique para inserir · ou digite \`${item.prefixo}\`` : "🔒 Disponível no Atalho Pro"}`);
+  no.tooltip = new vscode.MarkdownString(`**${item.nome}**\n\n${item.descricao || ""}\n\n${item.liberado ? `Clique para inserir · ou escreva \`${item.prefixo}\`` : "🔒 Disponível no Atalho Pro"}`);
   no.iconPath = new vscode.ThemeIcon(item.liberado ? (item.tipo === "animacao" ? "sparkle" : "symbol-snippet") : "lock");
   no.command = { command: "atalho.inserirItem", title: "Inserir", arguments: [item] };
   return no;
@@ -318,7 +318,7 @@ async function activate(contexto) {
   const barra = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   const desenharBarra = () => {
     barra.text = `$(zap) Atalho: ${nomePlano(estado)}`;
-    barra.tooltip = estado.pessoa ? `${estado.pessoa.email} · clique para buscar um componente` : "Entre (grátis) para liberar os trechos do Atalho";
+    barra.tooltip = estado.pessoa ? `${estado.pessoa.email} · clique para pesquisar um componente` : "Entre (grátis) para desbloquear os trechos do Atalho";
     barra.command = estado.pessoa ? "atalho.inserir" : "atalho.entrar";
     barra.show();
   };

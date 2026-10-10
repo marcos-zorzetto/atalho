@@ -4,7 +4,7 @@
  * Formato de cada item:
  * {
  *   nome: "Hospedagem Exemplo",
- *   texto: "Hospede seu primeiro site com 50% de desconto.",   // até ~70 caracteres
+ *   texto: "Hospede o seu primeiro site com 50% de desconto.",   // até ~70 caracteres
  *   url: "https://exemplo.com/?utm_source=atalho",
  *   imagem: "https://exemplo.com/logo-64.png",                // opcional, quadrada
  *   posicoes: ["lateral", "inicio"],                           // onde aparece

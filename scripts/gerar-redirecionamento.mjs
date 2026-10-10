@@ -23,7 +23,7 @@ if (new URL(NOVO).hostname.endsWith(".github.io")) {
 
 const esc = (texto) => texto.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 const pagina = (destino) => `<!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8">
+<html lang="pt-PT"><head><meta charset="utf-8">
 <title>O Atalho mudou de endereço</title>
 <link rel="canonical" href="${esc(destino)}">
 <meta name="robots" content="noindex">
@@ -53,7 +53,7 @@ for await (const arquivo of paginasHtml(DIST)) {
 await writeFile(
   path.join(SAIDA, "404.html"),
   `<!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><title>O Atalho mudou de endereço</title><meta name="robots" content="noindex">
+<html lang="pt-PT"><head><meta charset="utf-8"><title>O Atalho mudou de endereço</title><meta name="robots" content="noindex">
 <script>location.replace(${JSON.stringify(NOVO)} + location.pathname.replace(/^\\/atalho\\/?/, "") + location.search + location.hash);</script>
 </head><body><p>O Atalho mudou para <a href="${esc(NOVO)}">${esc(NOVO)}</a>.</p></body></html>
 `

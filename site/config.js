@@ -5,7 +5,7 @@
  *
  * A chave do Supabase abaixo é a chave PÚBLICA (anon/publishable). Ela foi feita
  * para ficar no navegador: quem protege os dados são as regras de segurança
- * (RLS) criadas pelo arquivo servicos/supabase/schema.sql.
+ * (RLS) criadas pelo ficheiro servicos/supabase/schema.sql.
  */
 window.ATALHO_CONFIG = {
   supabase: {

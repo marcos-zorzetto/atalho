@@ -1,7 +1,7 @@
 {
   "name": "atalho",
   "displayName": "Atalho: componentes em português",
-  "description": "Trechos prontos da biblioteca Atalho (HTML, CSS e JS em português): digite at- e escolha. Com a conta grátis, a biblioteca inteira; no Pro, mais de 100 componentes avançados e 48 animações.",
+  "description": "Trechos prontos da biblioteca Atalho (HTML, CSS e JS em português): escreva at- e escolha. Com a conta grátis, a biblioteca inteira; no Pro, mais de 100 componentes avançados e 48 animações.",
   "version": "1.0.0",
   "publisher": "marcos-zorzetto",
   "author": { "name": "Marcos Zorzetto" },
@@ -12,7 +12,7 @@
   "bugs": { "url": "https://github.com/marcos-zorzetto/atalho/issues" },
   "engines": { "vscode": "^1.90.0" },
   "categories": ["Snippets", "Programming Languages", "Other"],
-  "keywords": ["atalho", "português", "componentes", "html", "css", "bootstrap", "snippets", "animações", "ui", "pt-br"],
+  "keywords": ["atalho", "português", "componentes", "html", "css", "bootstrap", "snippets", "animações", "ui", "pt-pt", "pt-br"],
   "galleryBanner": { "color": "#facc15", "theme": "light" },
   "main": "./extension.js",
   "activationEvents": ["onStartupFinished"],
@@ -51,7 +51,7 @@
     "viewsWelcome": [
       {
         "view": "atalho.painel",
-        "contents": "Componentes prontos em português, para colar e usar.\nCom a conta grátis você libera a biblioteca inteira, as classes e 30 componentes e animações avançados. No Pro, tudo.\n[Entrar](command:atalho.entrar)\n[Criar conta grátis](command:atalho.criarConta)\nÉ a mesma conta do site do Atalho.",
+        "contents": "Componentes prontos em português, para colar e usar.\nCom a conta grátis, desbloqueia a biblioteca inteira, as classes e 30 componentes e animações avançados. No Pro, tudo.\n[Entrar](command:atalho.entrar)\n[Criar conta grátis](command:atalho.criarConta)\nÉ a mesma conta do site do Atalho.",
         "when": "!atalho.conectado"
       }
     ]

@@ -5,7 +5,7 @@ import { ANIMACOES, CATEGORIAS as CATEGORIAS_ANIMACOES } from "./animacoes.mjs";
 import { COMPONENTES_AVANCADOS, CATEGORIAS_COMPONENTES } from "./componentes-avancados.mjs";
 import { PRECOS } from "./paginas-extras.mjs";
 
-const euro = (valor) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "EUR" }).format(valor).replace(/,00$/, "");
+const euro = (valor) => new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(valor).replace(/,00$/, "");
 export const NIVEIS = { publico: "Grátis", membro: "Membro", pro: "Pro" };
 
 /**
@@ -43,7 +43,7 @@ function paginaVitrine({ tipo, prefixo, caminho, secao, itens, categorias, texto
         <h1 class="site-titulo site-h2">${textos.titulo}</h1>
         <p class="at-chamada">${esc(textos.chamada)}</p>
         <div class="site-anim-niveis">
-          <div><strong>${conta("publico")}</strong><span>grátis, sem cadastro</span></div>
+          <div><strong>${conta("publico")}</strong><span>grátis, sem registo</span></div>
           <div><strong>${conta("publico") + conta("membro")}</strong><span>com conta grátis</span></div>
           <div><strong>${itens.length}</strong><span>no Atalho Pro</span></div>
         </div>
@@ -53,7 +53,7 @@ function paginaVitrine({ tipo, prefixo, caminho, secao, itens, categorias, texto
     <div class="site-container site-anim" data-vitrine>
       <div class="at-alerta site-anim-aviso" data-vitrine-aviso aria-live="polite">
         <div class="at-alerta-conteudo">
-          <strong data-vitrine-aviso-titulo>Conferindo seu acesso…</strong>
+          <strong data-vitrine-aviso-titulo>A verificar o seu acesso…</strong>
           <p data-vitrine-aviso-texto></p>
           <div class="at-linha at-mt-2" data-vitrine-aviso-acoes hidden></div>
         </div>
@@ -90,15 +90,15 @@ function paginaVitrine({ tipo, prefixo, caminho, secao, itens, categorias, texto
         <div class="site-anim-previa">
           <div class="site-anim-previa-barra">
             <button type="button" class="at-botao at-pequeno" data-estudio-repetir>↻ Recarregar</button>
-            <div class="at-abas at-segmentado site-vitrine-telas" role="radiogroup" aria-label="Tamanho da tela">
+            <div class="at-abas at-segmentado site-vitrine-telas" role="radiogroup" aria-label="Tamanho do ecrã">
               <button type="button" class="at-aba" role="radio" aria-checked="true" data-tela="100%">Computador</button>
               <button type="button" class="at-aba" role="radio" aria-checked="false" data-tela="768px">Tablet</button>
-              <button type="button" class="at-aba" role="radio" aria-checked="false" data-tela="390px">Celular</button>
+              <button type="button" class="at-aba" role="radio" aria-checked="false" data-tela="390px">Telemóvel</button>
             </div>
             <span class="at-texto-pequeno at-texto-suave" data-estudio-dica></span>
             <label class="at-texto-pequeno site-anim-forcar" data-estudio-forcar hidden><input type="checkbox" data-estudio-forcar-caixa> Mostrar mesmo com "reduzir movimento"</label>
           </div>
-          <div class="site-vitrine-moldura"><iframe title="Prévia" sandbox="allow-scripts allow-forms allow-modals" data-estudio-previa></iframe></div>
+          <div class="site-vitrine-moldura"><iframe title="Pré-visualização" sandbox="allow-scripts allow-forms allow-modals" data-estudio-previa></iframe></div>
         </div>
         <form class="site-anim-controles" data-estudio-controles aria-label="Ajustes"></form>
         <div class="site-anim-codigo">
@@ -110,8 +110,8 @@ function paginaVitrine({ tipo, prefixo, caminho, secao, itens, categorias, texto
             <div class="site-codigo-abas">
               <span class="site-codigo-rotulo">Código com os seus ajustes</span>
               <div class="at-linha">
-                <button type="button" class="at-botao at-pequeno" data-estudio-acao="restaurar">Restaurar padrão</button>
-                <button type="button" class="at-botao at-pequeno" data-estudio-acao="baixar">${ICONES_SITE.baixar} Baixar página</button>
+                <button type="button" class="at-botao at-pequeno" data-estudio-acao="restaurar">Repor predefinições</button>
+                <button type="button" class="at-botao at-pequeno" data-estudio-acao="baixar">${ICONES_SITE.baixar} Descarregar página</button>
                 <a class="at-botao at-pequeno" href="${url("editor/")}" data-estudio-editor>Abrir no editor</a>
                 <button type="button" class="at-botao at-pequeno at-primario" data-estudio-acao="copiar">${ICONES_SITE.codigo} Copiar</button>
               </div>
@@ -158,11 +158,11 @@ export function paginaAnimacoes() {
     itens: ANIMACOES,
     categorias: CATEGORIAS_ANIMACOES,
     titulo: "Estúdio de animações CSS e JavaScript em português · Atalho",
-    descricao: `${ANIMACOES.length} animações prontas e editáveis: revelar ao rolar, parallax, máquina de escrever, contador, cartão 3D, confete e mais. Teste grátis, sem cadastro.`,
+    descricao: `${ANIMACOES.length} animações prontas e editáveis: revelar ao fazer scroll, parallax, máquina de escrever, contador, cartão 3D, confete e mais. Teste grátis, sem registo.`,
     textos: {
       sobretitulo: "Estúdio de animações",
-      titulo: `Animações profissionais, <span class="site-anim-destaque">ajustadas no clique</span>.`,
-      chamada: `${ANIMACOES.length} efeitos prontos, do "surgir" à rolagem cinematográfica. Mexa nos controles, veja na hora e copie o código já com os seus valores. Cada um vem com o passo a passo para usar no seu site.`,
+      titulo: `Animações profissionais, <span class="site-anim-destaque">ajustadas num clique</span>.`,
+      chamada: `${ANIMACOES.length} efeitos prontos, do "surgir" ao scroll cinematográfico. Mexa nos controlos, veja na hora e copie o código já com os seus valores. Cada um vem com o passo a passo para usar no seu site.`,
       item: "animação",
       itens: "animações",
     },
@@ -178,11 +178,11 @@ export function paginaComponentesAvancados() {
     itens: COMPONENTES_AVANCADOS,
     categorias: CATEGORIAS_COMPONENTES,
     titulo: `${COMPONENTES_AVANCADOS.length} componentes avançados prontos para sites e sistemas · Atalho`,
-    descricao: `${COMPONENTES_AVANCADOS.length} componentes prontos para usar: hero, preços, depoimentos, carrinho, agenda, gráficos, checkout e mais. Prévia ao vivo, código e passo a passo em português.`,
+    descricao: `${COMPONENTES_AVANCADOS.length} componentes prontos para usar: hero, preços, testemunhos, carrinho, agenda, gráficos, checkout e mais. Pré-visualização ao vivo, código e passo a passo em português.`,
     textos: {
       sobretitulo: "Componentes avançados",
       titulo: `Blocos prontos para <span class="site-anim-destaque">vender, agendar e encantar</span>.`,
-      chamada: `${COMPONENTES_AVANCADOS.length} componentes completos, com visual profissional e funcionando de verdade: preços, agenda, carrinho, gráficos, formulários. Veja no computador, no tablet e no celular, ajuste as cores e copie. Cada um explica como usar, mesmo para quem nunca programou.`,
+      chamada: `${COMPONENTES_AVANCADOS.length} componentes completos, com visual profissional e a funcionar de verdade: preços, agenda, carrinho, gráficos, formulários. Veja no computador, no tablet e no telemóvel, ajuste as cores e copie. Cada um explica como usar, mesmo para quem nunca programou.`,
       item: "componente",
       itens: "componentes",
     },

@@ -15,17 +15,17 @@ export function paginaInicio({ docs, baseline, patrocinadores, exemplos }) {
   const amplos = recursos.filter((r) => r.status === "amplo").length;
   const linksPt = docs.componentes.flatMap((c) => c.mdn || []);
   const dataDados = baseline.verificadoEm
-    ? new Intl.DateTimeFormat("pt-BR", { dateStyle: "long" }).format(new Date(`${baseline.verificadoEm}T12:00:00`))
+    ? new Intl.DateTimeFormat("pt-PT", { dateStyle: "long" }).format(new Date(`${baseline.verificadoEm}T12:00:00`))
     : "—";
 
   const instalacao = `<link rel="stylesheet" href="${SITE.cdn}/atalho.css">
 <script src="${SITE.cdn}/atalho.js" defer></script>`;
 
   const vitrine = {
-    html: `<input class="at-entrada" data-at-mascara="cpf">
+    html: `<input class="at-entrada" data-at-mascara="nif">
 
 <button commandfor="confirmar" command="show-modal">
-  Excluir
+  Eliminar
 </button>`,
     ts: `interface Carrinho {
   itens: { nome: string; preco: number }[];
@@ -42,8 +42,8 @@ const carrinho = Atalho.estado<Carrinho>("carrinho", {
 require 'atalho.php';
 
 $dados = Atalho\\lerJson();
-if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
-    Atalho\\responderErro('CPF inválido', 422);
+if (!Atalho\\validarNif($dados['nif'] ?? '')) {
+    Atalho\\responderErro('NIF inválido', 422);
 }`,
   };
 
@@ -55,13 +55,13 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
             <span class="at-selo at-destaque">Novo</span> Descreva o que precisa e o assistente monta ${ICONES_SITE.seta}
           </button>
           <h1 class="site-titulo site-h1">Pare de juntar tutoriais. <span class="site-marcador">Comece pelo componente pronto.</span></h1>
-          <p class="at-chamada">${total} componentes e receitas de HTML, CSS e JavaScript, nos padrões que Mercado Livre, GitHub, Stripe e Nubank usam. Explicados em português, com exemplos em TypeScript e PHP.</p>
+          <p class="at-chamada">${total} componentes e receitas de HTML, CSS e JavaScript, nos padrões que Stripe, GitHub, Revolut e Booking usam. Explicados em português, com exemplos em TypeScript e PHP.</p>
 
           <div class="site-busca" role="search">
             <label class="site-busca-campo">
               ${ICONES_SITE.busca}
-              <span class="at-sr">O que você quer construir?</span>
-              <input id="busca-inicio" type="search" placeholder="O que você quer construir?" autocomplete="off"
+              <span class="at-sr">O que quer construir?</span>
+              <input id="busca-inicio" type="search" placeholder="O que quer construir?" autocomplete="off"
                      role="combobox" aria-expanded="false" aria-controls="busca-inicio-resultados" aria-autocomplete="list">
               <kbd class="at-tecla at-so-desktop">Ctrl K</kbd>
             </label>
@@ -69,7 +69,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
           </div>
           <div class="site-sugestoes">
             Experimente:
-            ${["máscara de CPF", "carrinho de compras", "janela de confirmação", "tabela com filtro", "login com código"].map((s) => `<button type="button" class="site-sugestao" data-sugestao="${s}">${s}</button>`).join("")}
+            ${["máscara de NIF", "carrinho de compras", "janela de confirmação", "tabela com filtro", "login com código"].map((s) => `<button type="button" class="site-sugestao" data-sugestao="${s}">${s}</button>`).join("")}
           </div>
 
           <div class="site-hero-acoes">
@@ -89,12 +89,12 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
               </button>
             </div>
             <div class="at-cartao-corpo at-linha at-topo" style="--at-gap: 16px">
-              <img src="https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" alt="Tênis cano alto vermelho e preto" width="104" height="104" style="background:#fff;border-radius:10px;object-fit:contain">
+              <img src="https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" alt="Ténis cano alto vermelho e preto" width="104" height="104" style="background:#fff;border-radius:10px;object-fit:contain">
               <div class="at-cresce at-pilha" style="--at-gap: 2px">
-                <span class="at-texto-pequeno">Tênis cano alto vermelho e preto</span>
-                <span class="at-preco-antigo">R$ 799,90</span>
-                <div><span class="at-preco">R$ 599,90</span><span class="at-preco-desconto">25% OFF</span></div>
-                <span class="at-parcelas">em 10x R$ 59,99 sem juros</span>
+                <span class="at-texto-pequeno">Ténis cano alto vermelho e preto</span>
+                <span class="at-preco-antigo">799,90 €</span>
+                <div><span class="at-preco">599,90 €</span><span class="at-preco-desconto">25% OFF</span></div>
+                <span class="at-parcelas">ou 3x 199,97 € sem juros</span>
                 <button class="at-botao at-primario at-pequeno at-mt-2" data-at-acao="vitrineInicio.adicionar">Comprar</button>
               </div>
             </div>
@@ -102,21 +102,21 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
           <article class="at-cartao">
             <form class="at-cartao-corpo at-formulario" data-at-validar id="form-inicio" style="gap: 12px">
               <div class="at-campo at-meio">
-                <label class="at-rotulo" for="inicio-cpf">CPF</label>
-                <input class="at-entrada" id="inicio-cpf" name="cpf" required data-at-mascara="cpf" placeholder="000.000.000-00">
+                <label class="at-rotulo" for="inicio-cpf">NIF</label>
+                <input class="at-entrada" id="inicio-cpf" name="nif" required data-at-mascara="nif" placeholder="123 456 789">
               </div>
               <div class="at-campo at-meio">
-                <label class="at-rotulo" for="inicio-cep">CEP</label>
-                <input class="at-entrada" id="inicio-cep" name="cep" required data-at-mascara="cep" data-at-cep placeholder="01310-100">
+                <label class="at-rotulo" for="inicio-cep">Código postal</label>
+                <input class="at-entrada" id="inicio-cep" name="codigo_postal" required data-at-mascara="codigo-postal" data-at-codigo-postal placeholder="1250-096">
               </div>
               <div class="at-campo">
-                <label class="at-rotulo" for="inicio-rua">Endereço</label>
-                <input class="at-entrada" id="inicio-rua" name="rua" required data-at-cep-preencher="logradouro" placeholder="Preenche sozinho pelo CEP">
+                <label class="at-rotulo" for="inicio-rua">Morada</label>
+                <input class="at-entrada" id="inicio-rua" name="rua" required data-at-cp-preencher="rua" placeholder="Preenche-se sozinha pelo código postal">
               </div>
               <button class="at-botao at-bloco">Validar</button>
             </form>
           </article>
-          <p class="at-texto-suave at-texto-pequeno at-mb-0">Componentes do Atalho conectados pelo estado. Sem framework.</p>
+          <p class="at-texto-suave at-texto-pequeno at-mb-0">Componentes do Atalho ligados pelo estado. Sem framework.</p>
         </div>
       </div>
     </section>
@@ -132,16 +132,16 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
 
     <section class="site-secao">
       <div class="site-container">
-        <span class="at-sobretitulo">Por que o Atalho</span>
-        <h2 class="site-titulo site-h2">Tudo que o Bootstrap tem. Mais o que faltava para o Brasil.</h2>
+        <span class="at-sobretitulo">Porquê o Atalho</span>
+        <h2 class="site-titulo site-h2">Tudo o que o Bootstrap tem. Mais o que faltava a quem fala português.</h2>
         <div class="site-recursos at-mt-6">
           ${[
             ["puzzle-piece", "Componentes completos", "Não só a peça isolada: quando usar, o que evitar, acessibilidade e como cada componente conversa com os outros."],
-            ["map-pin-area", "Feito para o Brasil", "Máscaras de CPF e CNPJ alfanumérico, CEP automático, Pix copia e cola, parcelas sem juros, aviso de cookies da LGPD."],
-            ["lightning", "Estado reativo", "A ideia central do React em atributos HTML: muda o dado e a tela inteira acompanha. Sem build."],
-            ["code", "TypeScript e PHP", "Tipos completos da biblioteca e uma biblioteca PHP para o servidor: validação, CEP, respostas JSON e segurança."],
-            ["person-arms-spread", "Acessível de verdade", "Teclado, leitores de tela e ARIA corretos em cada componente, seguindo o guia WAI-ARIA."],
-            ["robot", "Sempre atualizado", "Um robô confere toda semana os dados oficiais dos navegadores e os links do MDN, e propõe as atualizações."],
+            ["map-pin-area", "Feito para Portugal e a Europa", "NIF e IBAN validados, morada pelo código postal, telemóvel, euro em todo o lado, MB WAY e Multibanco nos exemplos, aviso de cookies conforme o RGPD. E também CPF, CEP e real para clientes do Brasil."],
+            ["lightning", "Estado reativo", "A ideia central do React em atributos HTML: muda o dado e o ecrã inteiro acompanha. Sem build."],
+            ["code", "TypeScript e PHP", "Tipos completos da biblioteca e uma biblioteca PHP para o servidor: validação de NIF e IBAN, respostas JSON e segurança."],
+            ["person-arms-spread", "Acessível de verdade", "Teclado, leitores de ecrã e ARIA corretos em cada componente, seguindo o guia WAI-ARIA."],
+            ["robot", "Sempre atualizado", "Um robô verifica todas as semanas os dados oficiais dos navegadores e os links do MDN, e propõe as atualizações."],
           ]
             .map(([icone, t, d]) => `<div class="site-recurso"><span class="site-recurso-icone">${svgPhosphor(icone, "duotone", 26)}</span><h3>${t}</h3><p>${d}</p></div>`)
             .join("")}
@@ -153,7 +153,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
       <div class="site-container site-duas-colunas">
         <div>
           <span class="at-sobretitulo">Do HTML ao servidor</span>
-          <h2 class="site-titulo site-h2">Um só jeito de pensar, nas três camadas.</h2>
+          <h2 class="site-titulo site-h2">Uma só forma de pensar, nas três camadas.</h2>
           <p class="at-chamada">No navegador, atributos em português. No TypeScript, tipos que completam sozinhos no editor. No PHP, as mesmas regras validadas no servidor, que é onde a segurança de verdade acontece.</p>
           <div class="at-linha at-mt-6">
             <a class="at-botao" href="${url("typescript/")}">Guia de TypeScript</a>
@@ -181,8 +181,8 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
         <div class="at-linha at-entre at-topo">
           <div>
             <span class="at-sobretitulo">Páginas completas</span>
-            <h2 class="site-titulo site-h2">Copie a tela inteira, não só o botão.</h2>
-            <p class="at-texto-suave at-mt-2">Seis páginas prontas, liberadas de graça para quem cria uma conta.</p>
+            <h2 class="site-titulo site-h2">Copie o ecrã inteiro, não só o botão.</h2>
+            <p class="at-texto-suave at-mt-2">Seis páginas prontas, disponíveis de graça para quem cria uma conta.</p>
           </div>
           <a class="at-botao at-grande" href="${url("exemplos/")}">Todos os exemplos ${ICONES_SITE.seta}</a>
         </div>
@@ -225,8 +225,8 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
       <div class="site-container site-historia">
         <blockquote>“Eu desisti de programar mais de uma vez. Não foi por falta de vontade.”</blockquote>
         <div class="site-historia-texto">
-          <p>Eu assistia a um tutorial e entendia uma coisa. Assistia a outro e entendia outra. Na hora de juntar tudo num projeto de verdade, nada se encaixava. E a documentação oficial ajudava pouco: boa parte só existe em inglês e mostra cada peça isolada, nunca a tela pronta.</p>
-          <p>O Atalho é o material que eu queria ter tido no começo. <strong>Cada componente vem completo</strong>, resolvido do jeito que as empresas grandes resolvem, com a explicação em português e, principalmente, <strong>como ele se conecta com os outros</strong> para virar uma tela de verdade.</p>
+          <p>Eu via um tutorial e percebia uma coisa. Via outro e percebia outra. Na hora de juntar tudo num projeto a sério, nada se encaixava. E a documentação oficial ajudava pouco: boa parte só existe em inglês e mostra cada peça isolada, nunca o ecrã pronto.</p>
+          <p>O Atalho é o material que eu queria ter tido no começo. <strong>Cada componente vem completo</strong>, resolvido da forma como as grandes empresas resolvem, com a explicação em português e, principalmente, <strong>como se liga aos outros</strong> para formar um ecrã a sério.</p>
           <p class="at-mb-0">— ${SITE.autor}, criador do Atalho</p>
         </div>
       </div>
@@ -238,7 +238,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
           <div>
             <span class="at-sobretitulo" style="color: var(--at-cor-destaque)">Atualizado sozinho</span>
             <h2 class="site-titulo site-h2">A documentação muda. O Atalho acompanha.</h2>
-            <p class="at-chamada">Toda semana, um robô confere os dados oficiais de suporte dos navegadores (os mesmos dos selos Baseline do MDN) e todos os links da documentação, e propõe as atualizações. Nada vai para o ar sem revisão.</p>
+            <p class="at-chamada">Todas as semanas, um robô verifica os dados oficiais de suporte dos navegadores (os mesmos dos selos Baseline do MDN) e todos os links da documentação, e propõe as atualizações. Nada vai para o ar sem revisão.</p>
             <p class="at-texto-pequeno" style="color:#a8a29e">Dados atuais: web-features ${esc(baseline.versao || "—")}, de ${dataDados}.</p>
           </div>
           <div class="site-robo-numeros">
@@ -255,14 +255,14 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
         <div class="site-pro-cartao">
           <span class="at-selo at-destaque">Atalho Pro</span>
           <h2 class="site-titulo site-h2">Sistemas inteiros, prontos para usar.</h2>
-          <p>Painéis administrativos, lojas e landing pages completas, feitas com o Atalho, para economizar semanas de trabalho.</p>
+          <p>Painéis administrativos, lojas e landing pages completas, feitas com o Atalho, para poupar semanas de trabalho.</p>
           <a class="at-botao at-primario" href="${url("pro/")}">Entrar na lista de espera</a>
         </div>
         <div class="site-pilha-chamadas">
           ${espacoPatrocinio(patrocinadores, "inicio")}
           <div class="site-chamada-pequena">
             <h3>Quer apoiar o projeto?</h3>
-            <p>O Atalho é gratuito. Patrocínios mantêm a documentação crescendo.</p>
+            <p>O Atalho é gratuito. Patrocínios mantêm a documentação a crescer.</p>
             <a class="at-botao at-pequeno" href="${url("patrocinar/")}">Ver formatos de patrocínio</a>
           </div>
         </div>
@@ -271,7 +271,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
 
   return pagina({
     titulo: "Atalho · Componentes HTML, CSS e JavaScript em português",
-    descricao: `${total} componentes de interface em português, prontos para copiar: máscaras de CPF, CEP automático, carrinho, tabelas, modais e mais. Com TypeScript e PHP. Grátis.`,
+    descricao: `${total} componentes de interface em português, prontos a copiar: NIF, código postal, carrinho, tabelas, modais e mais. Com TypeScript e PHP. Grátis.`,
     caminho: "",
     pagina: "inicio",
     secao: "",
@@ -282,7 +282,7 @@ if (!Atalho\\validarCpf($dados['cpf'] ?? '')) {
         "@type": "WebSite",
         name: SITE.nome,
         url: SITE.url,
-        inLanguage: "pt-BR",
+        inLanguage: "pt-PT",
         description: SITE.descricao,
         potentialAction: {
           "@type": "SearchAction",
@@ -314,7 +314,7 @@ export function paginaCatalogo({ docs }) {
         <p class="at-chamada">${docs.componentes.length} componentes e receitas, cada um com explicação em português, exemplos que funcionam na página, acessibilidade e TypeScript/PHP quando faz sentido.</p>
         <div class="at-entrada-icone site-filtro">
           ${ICONES_SITE.busca}
-          <input class="at-entrada" type="search" id="filtro-catalogo" placeholder="Filtrar: modal, cpf, tabela, carrinho…" aria-label="Filtrar componentes" autocomplete="off">
+          <input class="at-entrada" type="search" id="filtro-catalogo" placeholder="Filtrar: modal, nif, tabela, carrinho…" aria-label="Filtrar componentes" autocomplete="off">
         </div>
         <nav class="site-ancoras" aria-label="Categorias">
           ${docs.categorias.map((cat) => `<a href="#${cat.id}">${esc(cat.nome)}</a>`).join("")}
@@ -340,12 +340,12 @@ export function paginaCatalogo({ docs }) {
       </section>`
         )
         .join("\n")}
-      <p class="site-catalogo-vazio at-texto-suave" hidden>Nenhum componente com esse nome. Tente a busca (Ctrl K), que entende sinônimos.</p>
+      <p class="site-catalogo-vazio at-texto-suave" hidden>Nenhum componente com esse nome. Experimente a pesquisa (Ctrl K), que reconhece sinónimos.</p>
     </div>`;
 
   return pagina({
     titulo: "Componentes · Atalho",
-    descricao: `Todos os ${docs.componentes.length} componentes do Atalho: formulários, máscaras, CEP, modais, tabelas, carrinho, login e mais, explicados em português.`,
+    descricao: `Todos os ${docs.componentes.length} componentes do Atalho: formulários, máscaras, código postal, modais, tabelas, carrinho, login e mais, explicados em português.`,
     caminho: "componentes/",
     pagina: "catalogo",
     secao: "componentes",
@@ -354,7 +354,7 @@ export function paginaCatalogo({ docs }) {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       name: "Componentes do Atalho",
-      inLanguage: "pt-BR",
+      inLanguage: "pt-PT",
       hasPart: docs.componentes.map((c) => ({ "@type": "TechArticle", name: c.nome, url: `${SITE.url}componentes/${c.id}/` })),
     },
   });

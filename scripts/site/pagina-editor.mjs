@@ -13,11 +13,11 @@ export function paginaEditor() {
       <div class="site-editor-barra">
         <div>
           <h1 class="site-editor-titulo">Editor ao vivo</h1>
-          <span class="at-texto-suave at-texto-pequeno">O resultado atualiza enquanto você digita. Nada sai do seu navegador.</span>
+          <span class="at-texto-suave at-texto-pequeno">O resultado atualiza-se à medida que escreve. Nada sai do seu navegador.</span>
         </div>
         <div class="at-linha">
           <button type="button" class="at-botao at-pequeno" data-editor-acao="compartilhar">Copiar link</button>
-          <button type="button" class="at-botao at-pequeno" data-editor-acao="baixar">Baixar HTML</button>
+          <button type="button" class="at-botao at-pequeno" data-editor-acao="baixar">Descarregar HTML</button>
           <button type="button" class="at-botao at-pequeno at-fantasma" data-editor-acao="limpar">Começar do zero</button>
         </div>
       </div>
@@ -35,7 +35,7 @@ export function paginaEditor() {
         <section class="site-editor-resultado" aria-label="Resultado">
           <iframe title="Resultado do código" sandbox="allow-scripts allow-forms allow-modals allow-popups" data-editor-previa></iframe>
           <div class="site-editor-console" aria-live="polite">
-            <div class="site-editor-console-topo"><strong>Console</strong><button type="button" class="at-botao at-link at-pequeno" data-editor-acao="limpar-console">Limpar</button></div>
+            <div class="site-editor-console-topo"><strong>Consola</strong><button type="button" class="at-botao at-link at-pequeno" data-editor-acao="limpar-console">Limpar</button></div>
             <ol data-editor-console></ol>
           </div>
         </section>

@@ -7,10 +7,10 @@
 "use strict";
 
 const ERROS = {
-  invalid_credentials: "E-mail ou senha incorretos.",
-  email_not_confirmed: "Confirme seu e-mail antes de entrar (veja a caixa de entrada e o spam).",
-  over_request_rate_limit: "Muitas tentativas. Espere alguns minutos e tente de novo.",
-  user_banned: "Esta conta está bloqueada. Fale com o suporte.",
+  invalid_credentials: "E-mail ou palavra-passe incorretos.",
+  email_not_confirmed: "Confirme o seu e-mail antes de entrar (veja a caixa de entrada e o spam).",
+  over_request_rate_limit: "Demasiadas tentativas. Espere alguns minutos e tente novamente.",
+  user_banned: "Esta conta está bloqueada. Contacte o suporte.",
 };
 
 class ErroConta extends Error {}
@@ -35,7 +35,7 @@ class Conta {
     try {
       resposta = await this.fetch(this.url + caminho, { method: metodo, headers: cabecalhos, body: corpo ? JSON.stringify(corpo) : undefined });
     } catch {
-      throw new ErroConta("Sem conexão com o Atalho. Confira sua internet.");
+      throw new ErroConta("Sem ligação ao Atalho. Verifique a sua internet.");
     }
     const texto = await resposta.text();
     const dados = texto ? JSON.parse(texto) : null;
@@ -63,8 +63,8 @@ class Conta {
     try {
       return await this.guardar(await this.pedir("/auth/v1/token?grant_type=refresh_token", { metodo: "POST", corpo: { refresh_token: renovacao } }));
     } catch (erro) {
-      // Token recusado (conta excluída, senha trocada…): esquece. Sem internet: mantém para a próxima vez.
-      if (!/conexão/.test(erro.message)) await this.cofre.apagar();
+      // Token recusado (conta eliminada, palavra-passe trocada…): esquece. Sem internet: mantém para a próxima vez.
+      if (!/ligação/.test(erro.message)) await this.cofre.apagar();
       return null;
     }
   }
@@ -75,7 +75,7 @@ class Conta {
       const renovada = await this.restaurar();
       if (!renovada) {
         this.sessao = null;
-        throw new ErroConta("Sua sessão expirou. Entre de novo.");
+        throw new ErroConta("A sua sessão expirou. Entre novamente.");
       }
     }
     return this.sessao.acesso;
