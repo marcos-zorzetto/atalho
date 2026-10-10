@@ -137,7 +137,8 @@ teste("sem editor aberto: cria uma página nova com o Atalho e o trecho", async 
   const texto = vscode.window.activeTextEditor.document.getText();
   assert.match(texto, /<!doctype html>/);
   assert.match(texto, /cdn\.jsdelivr\.net\/gh\/marcos-zorzetto\/atalho@1\/atalho\/atalho\.css/);
-  assert.ok(texto.includes(item.corpo.split("\n")[1].trim()), "o trecho entrou na página");
+  const linhas = item.corpo.split("\n").map((l) => l.trim()).filter(Boolean);
+  assert.ok(linhas.every((l) => texto.includes(l)), "o trecho entrou inteiro na página");
   assert.equal(vscode.window.activeTextEditor.document.languageId, "html");
 });
 

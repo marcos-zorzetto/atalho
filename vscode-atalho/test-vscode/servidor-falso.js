@@ -19,7 +19,7 @@ const PASTA = { componente: "componentes", animacao: "animacoes" };
 
 function codigo(tipo, item) {
   const arquivo = path.join(PRO, PASTA[tipo], item.nivel, item.id + ".html");
-  return fs.existsSync(arquivo) ? fs.readFileSync(arquivo, "utf8").replace(/\r\n/g, "\n") : `<div class="cx-teste">${item.nome} $1 \${x}</div>`;
+  return !process.env.ATALHO_TESTE_SEM_PRO && fs.existsSync(arquivo) ? fs.readFileSync(arquivo, "utf8").replace(/\r\n/g, "\n") : `<div class="cx-teste">${item.nome} $1 \${x}</div>`;
 }
 
 const LINHAS = Object.entries(CATALOGOS).flatMap(([tipo, cat]) =>
