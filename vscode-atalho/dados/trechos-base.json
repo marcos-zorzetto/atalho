@@ -1,0 +1,802 @@
+[
+ {
+  "prefixo": "at-instalacao",
+  "componente": "instalacao",
+  "nome": "Instalação",
+  "categoria": "Comece aqui",
+  "resumo": "Duas linhas no seu HTML e todos os componentes funcionam. Sem npm, sem build, sem configuração.",
+  "corpo": "<button class=\"at-botao at-primario\" data-at-notificar=\"Funcionou! O Atalho está instalado.\">\n  Clique aqui\n</button>"
+ },
+ {
+  "prefixo": "at-cores-e-temas",
+  "componente": "cores-e-temas",
+  "nome": "Cores e tema escuro",
+  "categoria": "Comece aqui",
+  "resumo": "Todas as cores, espaços e cantos vêm de variáveis CSS. Troque uma linha e o site inteiro muda de identidade.",
+  "corpo": "<div class=\"at-linha\">\n  <button class=\"at-botao at-primario\">Padrão</button>\n\n  <div class=\"at-linha\" style=\"--at-cor-primaria: #7c3aed; --at-cor-primaria-forte: #6d28d9; --at-cor-sobre-primaria: #fff;\">\n    <button class=\"at-botao at-primario\">Roxo</button>\n  </div>\n\n  <div class=\"at-linha\" style=\"--at-cor-primaria: #c2410c; --at-cor-primaria-forte: #9a3412; --at-cor-sobre-primaria: #fff; --at-raio: 999px;\">\n    <button class=\"at-botao at-primario\">Laranja arredondado</button>\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-cores-e-temas-2",
+  "componente": "cores-e-temas",
+  "nome": "Cores e tema escuro: Botão de tema claro/escuro",
+  "categoria": "Comece aqui",
+  "resumo": "Todas as cores, espaços e cantos vêm de variáveis CSS. Troque uma linha e o site inteiro muda de identidade.",
+  "corpo": "<button class=\"at-botao at-icone\" data-at-tema=\"alternar\" aria-label=\"Alternar tema escuro\">\n  <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z\"/></svg>\n</button>"
+ },
+ {
+  "prefixo": "at-layout",
+  "componente": "layout",
+  "nome": "Layout e grade",
+  "categoria": "Comece aqui",
+  "resumo": "Container, grade que se ajusta sozinha, colunas, pilha e linha. Resolve 95% dos layouts sem escrever media query.",
+  "corpo": "<div class=\"at-grade\" style=\"--min: 160px; --at-gap: 12px;\">\n  <div class=\"at-superficie\">1</div>\n  <div class=\"at-superficie\">2</div>\n  <div class=\"at-superficie\">3</div>\n  <div class=\"at-superficie\">4</div>\n  <div class=\"at-superficie\">5</div>\n</div>"
+ },
+ {
+  "prefixo": "at-layout-2",
+  "componente": "layout",
+  "nome": "Layout e grade: Linha com itens nas pontas",
+  "categoria": "Comece aqui",
+  "resumo": "Container, grade que se ajusta sozinha, colunas, pilha e linha. Resolve 95% dos layouts sem escrever media query.",
+  "corpo": "<div class=\"at-linha at-entre\">\n  <h3 class=\"at-titulo-4 at-mb-0\">Pedidos recentes</h3>\n  <button class=\"at-botao at-primario at-pequeno\">Novo pedido</button>\n</div>"
+ },
+ {
+  "prefixo": "at-layout-3",
+  "componente": "layout",
+  "nome": "Layout e grade: Pilha",
+  "categoria": "Comece aqui",
+  "resumo": "Container, grade que se ajusta sozinha, colunas, pilha e linha. Resolve 95% dos layouts sem escrever media query.",
+  "corpo": "<div class=\"at-pilha\" style=\"--at-gap: 8px; max-width: 320px;\">\n  <div class=\"at-superficie\">Primeiro</div>\n  <div class=\"at-superficie\">Segundo</div>\n  <div class=\"at-superficie\">Terceiro</div>\n</div>"
+ },
+ {
+  "prefixo": "at-tipografia",
+  "componente": "tipografia",
+  "nome": "Texto e tipografia",
+  "categoria": "Comece aqui",
+  "resumo": "Títulos, chamadas, texto secundário e teclas de atalho com hierarquia clara.",
+  "corpo": "<span class=\"at-sobretitulo\">Novidade</span>\n<h2 class=\"at-titulo-2\">Relatórios em tempo real</h2>\n<p class=\"at-chamada\">Acompanhe vendas, estoque e clientes num só lugar, atualizado a cada minuto.</p>\n<p class=\"at-texto-suave at-texto-pequeno\">\n  Pressione <kbd class=\"at-tecla\">Ctrl</kbd> + <kbd class=\"at-tecla\">K</kbd> para buscar.\n</p>"
+ },
+ {
+  "prefixo": "at-campo",
+  "componente": "campo",
+  "nome": "Campos de formulário",
+  "categoria": "Formulários",
+  "resumo": "Texto, seleção, área de texto, caixas de marcação, opções e chave liga/desliga com rótulo, ajuda e erro.",
+  "corpo": "<form class=\"at-formulario\" style=\"max-width: 560px\">\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"nome-completo\">Nome completo</label>\n    <input class=\"at-entrada\" id=\"nome-completo\" name=\"nome\" autocomplete=\"name\">\n  </div>\n\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"email-campo\">E-mail</label>\n    <input class=\"at-entrada\" id=\"email-campo\" type=\"email\" autocomplete=\"email\" placeholder=\"nome@exemplo.com\">\n    <span class=\"at-ajuda\">Enviaremos a confirmação para este endereço.</span>\n  </div>\n\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"estado-campo\">Estado</label>\n    <select class=\"at-entrada\" id=\"estado-campo\" autocomplete=\"address-level1\">\n      <option value=\"\">Selecione</option>\n      <option>São Paulo</option>\n      <option>Rio de Janeiro</option>\n      <option>Minas Gerais</option>\n    </select>\n  </div>\n\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"obs\">Observações <span class=\"at-opcional\">(opcional)</span></label>\n    <textarea class=\"at-entrada\" id=\"obs\" rows=\"3\"></textarea>\n  </div>\n</form>"
+ },
+ {
+  "prefixo": "at-campo-2",
+  "componente": "campo",
+  "nome": "Campos de formulário: Marcação, opções e chave",
+  "categoria": "Formulários",
+  "resumo": "Texto, seleção, área de texto, caixas de marcação, opções e chave liga/desliga com rótulo, ajuda e erro.",
+  "corpo": "<div class=\"at-pilha\" style=\"--at-gap: 12px\">\n  <label class=\"at-check\">\n    <input type=\"checkbox\" checked> Quero receber ofertas por e-mail\n  </label>\n\n  <fieldset style=\"border: 0; padding: 0; margin: 0\">\n    <legend class=\"at-rotulo at-mb-2\">Forma de pagamento</legend>\n    <div class=\"at-linha\">\n      <label class=\"at-check\"><input type=\"radio\" name=\"pagamento\" checked> Pix</label>\n      <label class=\"at-check\"><input type=\"radio\" name=\"pagamento\"> Cartão</label>\n      <label class=\"at-check\"><input type=\"radio\" name=\"pagamento\"> Boleto</label>\n    </div>\n  </fieldset>\n\n  <label class=\"at-linha\">\n    <input type=\"checkbox\" role=\"switch\" class=\"at-chave\" checked>\n    Notificações no celular\n  </label>\n</div>"
+ },
+ {
+  "prefixo": "at-campo-3",
+  "componente": "campo",
+  "nome": "Campos de formulário: Prefixo, sufixo e busca",
+  "categoria": "Formulários",
+  "resumo": "Texto, seleção, área de texto, caixas de marcação, opções e chave liga/desliga com rótulo, ajuda e erro.",
+  "corpo": "<div class=\"at-pilha\" style=\"max-width: 420px\">\n  <div class=\"at-grupo-entrada\">\n    <span class=\"at-adicional\">https://</span>\n    <input class=\"at-entrada\" aria-label=\"Endereço do site\" placeholder=\"minhaloja\">\n    <span class=\"at-adicional\">.com.br</span>\n  </div>\n\n  <div class=\"at-grupo-entrada\">\n    <input class=\"at-entrada\" type=\"email\" aria-label=\"Seu e-mail\" placeholder=\"Seu melhor e-mail\">\n    <button class=\"at-botao at-primario\">Assinar</button>\n  </div>\n\n  <div class=\"at-entrada-icone\">\n    <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>\n    <input class=\"at-entrada\" type=\"search\" aria-label=\"Buscar\" placeholder=\"Buscar produtos, marcas e muito mais\">\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-mascaras",
+  "componente": "mascaras",
+  "nome": "Máscaras (CPF, CNPJ, telefone...)",
+  "categoria": "Formulários",
+  "resumo": "Formata enquanto a pessoa digita: CPF, CNPJ (inclusive o novo alfanumérico), telefone, CEP, moeda, cartão, validade, data e placa.",
+  "corpo": "<div class=\"at-formulario\" style=\"max-width: 640px\">\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"m-cpf\">CPF</label>\n    <input class=\"at-entrada\" id=\"m-cpf\" data-at-mascara=\"cpf\" placeholder=\"000.000.000-00\">\n  </div>\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"m-cnpj\">CNPJ</label>\n    <input class=\"at-entrada\" id=\"m-cnpj\" data-at-mascara=\"cnpj\" placeholder=\"12.ABC.345/01DE-35\">\n  </div>\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"m-tel\">Celular</label>\n    <input class=\"at-entrada\" id=\"m-tel\" type=\"tel\" data-at-mascara=\"telefone\" autocomplete=\"tel-national\" placeholder=\"(11) 98765-4321\">\n  </div>\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"m-cep\">CEP</label>\n    <input class=\"at-entrada\" id=\"m-cep\" data-at-mascara=\"cep\" autocomplete=\"postal-code\" placeholder=\"00000-000\">\n  </div>\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"m-valor\">Valor</label>\n    <input class=\"at-entrada\" id=\"m-valor\" data-at-mascara=\"moeda\" placeholder=\"R$ 0,00\">\n  </div>\n  <div class=\"at-campo at-meio\">\n    <label class=\"at-rotulo\" for=\"m-placa\">Placa</label>\n    <input class=\"at-entrada\" id=\"m-placa\" data-at-mascara=\"placa\" placeholder=\"ABC-1D23\">\n  </div>\n  <div class=\"at-campo at-dois-tercos\">\n    <label class=\"at-rotulo\" for=\"m-cartao\">Número do cartão</label>\n    <input class=\"at-entrada\" id=\"m-cartao\" data-at-mascara=\"cartao\" autocomplete=\"cc-number\" placeholder=\"0000 0000 0000 0000\">\n  </div>\n  <div class=\"at-campo at-terco\">\n    <label class=\"at-rotulo\" for=\"m-validade\">Validade</label>\n    <input class=\"at-entrada\" id=\"m-validade\" data-at-mascara=\"validade\" autocomplete=\"cc-exp\" placeholder=\"MM/AA\">\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-mascaras-2",
+  "componente": "mascaras",
+  "nome": "Máscaras (CPF, CNPJ, telefone...): Validando por JavaScript",
+  "categoria": "Formulários",
+  "resumo": "Formata enquanto a pessoa digita: CPF, CNPJ (inclusive o novo alfanumérico), telefone, CEP, moeda, cartão, validade, data e placa.",
+  "corpo": "<div class=\"at-linha\">\n  <input class=\"at-entrada\" id=\"cpf-teste\" data-at-mascara=\"cpf\" aria-label=\"CPF\" style=\"max-width: 200px\" value=\"529.982.247-25\">\n  <button class=\"at-botao\" id=\"cpf-conferir\">Conferir</button>\n</div>\n\n<script type=\"module\">\ndocument.querySelector(\"#cpf-conferir\").addEventListener(\"click\", () => {\n  const cpf = document.querySelector(\"#cpf-teste\").value;\n  if (Atalho.validar.cpf(cpf)) {\n    Atalho.notificar(\"CPF válido.\", { tipo: \"sucesso\" });\n  } else {\n    Atalho.notificar(\"CPF inválido.\", { tipo: \"perigo\" });\n  }\n});\n</script>"
+ },
+ {
+  "prefixo": "at-cep",
+  "componente": "cep",
+  "nome": "Endereço pelo CEP",
+  "categoria": "Formulários",
+  "resumo": "A pessoa digita o CEP e rua, bairro, cidade e estado se preenchem sozinhos. Usa a API gratuita do ViaCEP, sem cadastro.",
+  "corpo": "<form class=\"at-formulario\" style=\"max-width: 640px\" data-at-validar>\n  <div class=\"at-campo at-terco\">\n    <label class=\"at-rotulo\" for=\"end-cep\">CEP</label>\n    <input class=\"at-entrada\" id=\"end-cep\" name=\"cep\" required data-at-mascara=\"cep\" data-at-cep autocomplete=\"postal-code\">\n    <a class=\"at-ajuda\" href=\"https://buscacepinter.correios.com.br/\" target=\"_blank\" rel=\"noopener\">Não sei meu CEP</a>\n  </div>\n  <div class=\"at-campo at-dois-tercos\">\n    <label class=\"at-rotulo\" for=\"end-rua\">Rua</label>\n    <input class=\"at-entrada\" id=\"end-rua\" name=\"rua\" required data-at-cep-preencher=\"logradouro\" autocomplete=\"address-line1\">\n  </div>\n  <div class=\"at-campo at-terco\">\n    <label class=\"at-rotulo\" for=\"end-numero\">Número</label>\n    <input class=\"at-entrada\" id=\"end-numero\" name=\"numero\" required data-at-cep-foco inputmode=\"numeric\">\n  </div>\n  <div class=\"at-campo at-dois-tercos\">\n    <label class=\"at-rotulo\" for=\"end-bairro\">Bairro</label>\n    <input class=\"at-entrada\" id=\"end-bairro\" name=\"bairro\" required data-at-cep-preencher=\"bairro\">\n  </div>\n  <div class=\"at-campo at-dois-tercos\">\n    <label class=\"at-rotulo\" for=\"end-cidade\">Cidade</label>\n    <input class=\"at-entrada\" id=\"end-cidade\" name=\"cidade\" required data-at-cep-preencher=\"localidade\" autocomplete=\"address-level2\">\n  </div>\n  <div class=\"at-campo at-terco\">\n    <label class=\"at-rotulo\" for=\"end-uf\">UF</label>\n    <input class=\"at-entrada\" id=\"end-uf\" name=\"uf\" required maxlength=\"2\" data-at-cep-preencher=\"uf\" autocomplete=\"address-level1\">\n  </div>\n</form>\n\n<script type=\"module\">\ndocument.querySelector(\"#end-cep\").addEventListener(\"at:cep\", (evento) => {\n  const { localidade, uf, ddd } = evento.detail;\n  console.log(\"Endereço encontrado:\", localidade, uf, \"DDD\", ddd);\n});\n</script>"
+ },
+ {
+  "prefixo": "at-validacao",
+  "componente": "validacao",
+  "nome": "Validação de formulário",
+  "categoria": "Formulários",
+  "resumo": "Mensagens de erro claras, em português, no lugar certo e na hora certa. Sem biblioteca extra, usando a validação nativa do navegador.",
+  "corpo": "<form id=\"form-conta\" class=\"at-pilha\" style=\"max-width: 420px\" data-at-validar>\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"cc-nome\">Nome</label>\n    <input class=\"at-entrada\" id=\"cc-nome\" name=\"nome\" required minlength=\"3\" autocomplete=\"name\">\n  </div>\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"cc-email\">E-mail</label>\n    <input class=\"at-entrada\" id=\"cc-email\" name=\"email\" type=\"email\" required autocomplete=\"email\">\n  </div>\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"cc-cpf\">CPF</label>\n    <input class=\"at-entrada\" id=\"cc-cpf\" name=\"cpf\" required data-at-mascara=\"cpf\">\n  </div>\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"cc-senha\">Senha</label>\n    <input class=\"at-entrada\" id=\"cc-senha\" name=\"senha\" type=\"password\" required minlength=\"8\" autocomplete=\"new-password\">\n    <span class=\"at-ajuda\">Mínimo de 8 caracteres.</span>\n  </div>\n  <div class=\"at-campo\">\n    <label class=\"at-rotulo\" for=\"cc-senha2\">Confirme a senha</label>\n    <input class=\"at-entrada\" id=\"cc-senha2\" type=\"password\" required data-at-igual=\"#cc-senha\" data-msg-igual=\"As senhas não são iguais.\" autocomplete=\"new-password\">\n  </div>\n  <div class=\"at-campo\">\n    <label class=\"at-check\">\n      <input type=\"checkbox\" name=\"termos\" required data-msg-obrigatorio=\"Você precisa aceitar os termos.\">\n      Li e aceito os termos de uso\n    </label>\n  </div>\n  <button class=\"at-botao at-primario at-bloco\">Criar conta</button>\n</form>\n\n<script type=\"module\">\ndocument.querySelector(\"#form-conta\").addEventListener(\"at:enviar\", (evento) => {\n  const { dados, botao } = evento.detail;\n  botao.setAttribute(\"aria-busy\", \"true\");\n\n  // Aqui você mandaria para a sua API:\n  // await Atalho.requisitar(\"/api/contas\", { metodo: \"POST\", corpo: dados });\n  setTimeout(() => {\n    botao.removeAttribute(\"aria-busy\");\n    Atalho.notificar(\"Conta criada para \" + dados.email, { tipo: \"sucesso\", titulo: \"Tudo certo!\" });\n  }, 1200);\n});\n</script>"
+ },
+ {
+  "prefixo": "at-senha",
+  "componente": "senha",
+  "nome": "Senha (mostrar e força)",
+  "categoria": "Formulários",
+  "resumo": "Campo de senha com botão Mostrar/Ocultar e medidor de força que avisa enquanto a pessoa digita.",
+  "corpo": "<div class=\"at-campo\" style=\"max-width: 360px\">\n  <label class=\"at-rotulo\" for=\"nova-senha\">Crie uma senha</label>\n  <div class=\"at-senha\">\n    <input class=\"at-entrada\" id=\"nova-senha\" type=\"password\" autocomplete=\"new-password\">\n    <button type=\"button\" data-at-ver-senha>Mostrar</button>\n  </div>\n  <div class=\"at-forca\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span></div>\n  <span class=\"at-forca-texto\" aria-live=\"polite\"></span>\n</div>"
+ },
+ {
+  "prefixo": "at-codigo",
+  "componente": "codigo",
+  "nome": "Código de verificação",
+  "categoria": "Formulários",
+  "resumo": "Seis caixinhas para o código recebido por SMS ou e-mail. Avança sozinho, aceita colar e preenche automático pelo SMS no celular.",
+  "corpo": "<div class=\"at-pilha\" style=\"--at-gap: 12px\">\n  <p class=\"at-mb-0\">Enviamos um código por SMS para <strong>(11) 9••••-4321</strong>.</p>\n  <div class=\"at-codigo\" data-at=\"codigo\" id=\"codigo-sms\">\n    <input><input><input><input><input><input>\n  </div>\n  <button class=\"at-botao at-link\" type=\"button\">Reenviar código em 30 s</button>\n</div>\n\n<script type=\"module\">\nconst codigo = document.querySelector(\"#codigo-sms\");\n\ncodigo.addEventListener(\"at:codigo\", (evento) => {\n  if (evento.detail.valor === \"123456\") {\n    Atalho.notificar(\"Número confirmado!\", { tipo: \"sucesso\" });\n  } else {\n    codigo.setAttribute(\"aria-invalid\", \"true\");\n    Atalho.notificar(\"Código incorreto. Confira o SMS.\", { tipo: \"perigo\" });\n  }\n});\n</script>"
+ },
+ {
+  "prefixo": "at-upload",
+  "componente": "upload",
+  "nome": "Enviar arquivos",
+  "categoria": "Formulários",
+  "resumo": "Área para arrastar e soltar arquivos, com prévia das imagens, tamanho formatado, botão de remover e limite de tamanho.",
+  "corpo": "<label class=\"at-upload\" data-at=\"upload\" data-tamanho-maximo=\"5\">\n  <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 16V4M6 10l6-6 6 6M4 20h16\"/></svg>\n  <span><strong>Clique para escolher</strong> ou arraste as fotos aqui</span>\n  <small>PNG, JPG ou WEBP, até 5 MB cada</small>\n  <input type=\"file\" accept=\"image/*\" multiple class=\"at-sr\">\n</label>\n<ul class=\"at-upload-lista\"></ul>\n\n<script type=\"module\">\ndocument.addEventListener(\"at:arquivos\", (evento) => {\n  console.log(evento.detail.arquivos.length + \" arquivo(s) pronto(s) para enviar\");\n\n  // Para enviar ao servidor:\n  // const dados = new FormData();\n  // evento.detail.arquivos.forEach((arquivo) => dados.append(\"fotos\", arquivo));\n  // await Atalho.requisitar(\"/api/fotos\", { metodo: \"POST\", corpo: dados });\n});\n</script>"
+ },
+ {
+  "prefixo": "at-botao",
+  "componente": "botao",
+  "nome": "Botão",
+  "categoria": "Ações",
+  "resumo": "Botões para cada nível de importância, tamanhos, ícones, estado de carregando, grupo e contador.",
+  "corpo": "<div class=\"at-linha\">\n  <button class=\"at-botao at-primario\">Salvar alterações</button>\n  <button class=\"at-botao\">Exportar</button>\n  <button class=\"at-botao at-suave\">Convidar</button>\n  <button class=\"at-botao at-fantasma\">Cancelar</button>\n  <button class=\"at-botao at-perigo\">Excluir</button>\n  <button class=\"at-botao at-link\">Ver detalhes</button>\n</div>"
+ },
+ {
+  "prefixo": "at-botao-2",
+  "componente": "botao",
+  "nome": "Botão: Tamanhos e ícones",
+  "categoria": "Ações",
+  "resumo": "Botões para cada nível de importância, tamanhos, ícones, estado de carregando, grupo e contador.",
+  "corpo": "<div class=\"at-linha\">\n  <button class=\"at-botao at-primario at-pequeno\">Pequeno</button>\n  <button class=\"at-botao at-primario\">Normal</button>\n  <button class=\"at-botao at-primario at-grande\">Grande</button>\n  <button class=\"at-botao\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 4v12M6 10l6 6 6-6M4 20h16\"/></svg> Baixar PDF</button>\n  <button class=\"at-botao at-icone\" aria-label=\"Editar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/></svg></button>\n  <button class=\"at-botao at-icone at-fantasma\" aria-label=\"Excluir\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14\"/></svg></button>\n</div>"
+ },
+ {
+  "prefixo": "at-botao-3",
+  "componente": "botao",
+  "nome": "Botão: Carregando ao salvar",
+  "categoria": "Ações",
+  "resumo": "Botões para cada nível de importância, tamanhos, ícones, estado de carregando, grupo e contador.",
+  "corpo": "<button class=\"at-botao at-primario\" id=\"botao-salvar\">Salvar</button>\n\n<script type=\"module\">\nconst botao = document.querySelector(\"#botao-salvar\");\n\nbotao.addEventListener(\"click\", () => {\n  botao.setAttribute(\"aria-busy\", \"true\");\n\n  setTimeout(() => {\n    botao.removeAttribute(\"aria-busy\");\n    Atalho.notificar(\"Alterações salvas.\", { tipo: \"sucesso\" });\n  }, 1500);\n});\n</script>"
+ },
+ {
+  "prefixo": "at-botao-4",
+  "componente": "botao",
+  "nome": "Botão: Grupo e contador",
+  "categoria": "Ações",
+  "resumo": "Botões para cada nível de importância, tamanhos, ícones, estado de carregando, grupo e contador.",
+  "corpo": "<div class=\"at-linha\">\n  <div class=\"at-grupo-botoes\" role=\"group\" aria-label=\"Período\">\n    <button class=\"at-botao\" aria-pressed=\"false\">Dia</button>\n    <button class=\"at-botao\" aria-pressed=\"true\">Semana</button>\n    <button class=\"at-botao\" aria-pressed=\"false\">Mês</button>\n  </div>\n\n  <button class=\"at-botao at-icone at-contador-selo\" aria-label=\"Notificações: 3 novas\">\n    <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z\"/><path d=\"M10 21h4\"/></svg>\n    <span data-contador aria-hidden=\"true\">3</span>\n  </button>\n</div>\n\n<script type=\"module\">\ndocument.querySelectorAll(\"[aria-label='Período'] .at-botao\").forEach((botao, _, todos) => {\n  botao.addEventListener(\"click\", () => {\n    todos.forEach((b) => b.setAttribute(\"aria-pressed\", String(b === botao)));\n  });\n});\n</script>"
+ },
+ {
+  "prefixo": "at-menu-suspenso",
+  "componente": "menu-suspenso",
+  "nome": "Menu suspenso",
+  "categoria": "Ações",
+  "resumo": "Lista de ações que abre ao clicar num botão: o famoso menu dos três pontinhos e o menu do usuário.",
+  "corpo": "<button class=\"at-botao at-icone\" popovertarget=\"menu-projeto\" aria-label=\"Mais ações\">\n  <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"5\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/></svg>\n</button>\n\n<div id=\"menu-projeto\" popover class=\"at-menu\">\n  <button class=\"at-menu-item\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/></svg> Renomear <kbd>F2</kbd></button>\n  <button class=\"at-menu-item\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"8\" y=\"8\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M4 16V5a1 1 0 0 1 1-1h11\"/></svg> Duplicar</button>\n  <hr class=\"at-menu-separador\">\n  <button class=\"at-menu-item at-perigo\" data-at-notificar=\"Projeto excluído\" data-at-tipo=\"perigo\">\n    <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14\"/></svg> Excluir\n  </button>\n</div>"
+ },
+ {
+  "prefixo": "at-menu-suspenso-2",
+  "componente": "menu-suspenso",
+  "nome": "Menu suspenso: Menu do usuário",
+  "categoria": "Ações",
+  "resumo": "Lista de ações que abre ao clicar num botão: o famoso menu dos três pontinhos e o menu do usuário.",
+  "corpo": "<div class=\"at-linha at-fim\">\n  <button class=\"at-botao at-fantasma\" popovertarget=\"menu-usuario\" style=\"padding-inline: 6px\">\n    <span class=\"at-avatar at-pequeno\">MZ</span> Marcos ▾\n  </button>\n</div>\n\n<div id=\"menu-usuario\" popover class=\"at-menu\" data-alinhar=\"fim\">\n  <div class=\"at-menu-titulo\">marcos@exemplo.com</div>\n  <a class=\"at-menu-item\" href=\"#\">Meu perfil</a>\n  <a class=\"at-menu-item\" href=\"#\">Configurações</a>\n  <button class=\"at-menu-item\" data-at-tema=\"alternar\" data-manter-aberto><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z\"/></svg> Tema escuro</button>\n  <hr class=\"at-menu-separador\">\n  <a class=\"at-menu-item\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 4h4v16h-4M10 8l-4 4 4 4M6 12h11\"/></svg> Sair</a>\n</div>"
+ },
+ {
+  "prefixo": "at-copiar",
+  "componente": "copiar",
+  "nome": "Copiar (Pix, cupom, link)",
+  "categoria": "Ações",
+  "resumo": "Botão que copia um texto para a área de transferência e confirma com \"Copiado!\". Perfeito para Pix copia e cola, cupom e link de convite.",
+  "corpo": "<div class=\"at-campo\" style=\"max-width: 460px\">\n  <label class=\"at-rotulo\" for=\"pix-codigo\">Pix copia e cola</label>\n  <div class=\"at-grupo-entrada\">\n    <input class=\"at-entrada\" id=\"pix-codigo\" readonly value=\"00020126580014BR.GOV.BCB.PIX0136a1b2c3d4-e5f6-7890-abcd-ef1234567890520400005303986540529.905802BR5913LOJA EXEMPLO6009SAO PAULO62070503***6304ABCD\">\n    <button class=\"at-botao at-primario\" data-at-copiar=\"#pix-codigo\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"8\" y=\"8\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M4 16V5a1 1 0 0 1 1-1h11\"/></svg> Copiar</button>\n  </div>\n  <span class=\"at-ajuda\">Abra o app do seu banco, escolha Pix copia e cola e cole o código.</span>\n</div>"
+ },
+ {
+  "prefixo": "at-copiar-2",
+  "componente": "copiar",
+  "nome": "Copiar (Pix, cupom, link): Cupom",
+  "categoria": "Ações",
+  "resumo": "Botão que copia um texto para a área de transferência e confirma com \"Copiado!\". Perfeito para Pix copia e cola, cupom e link de convite.",
+  "corpo": "<button class=\"at-botao at-suave\" data-at-copiar=\"BEMVINDO10\" data-texto-copiado=\"Cupom copiado!\">\n  Cupom BEMVINDO10 · 10% off\n</button>"
+ },
+ {
+  "prefixo": "at-barra",
+  "componente": "barra",
+  "nome": "Barra de navegação",
+  "categoria": "Navegação",
+  "resumo": "Topo do site com marca, links, busca e ações. Fica fixa ao rolar, tem fundo translúcido e vira menu no celular.",
+  "corpo": "<header class=\"at-barra\">\n  <div class=\"at-container at-barra-conteudo\">\n    <a href=\"#\" class=\"at-barra-marca\">◆ Minha Loja</a>\n\n    <button class=\"at-botao at-icone at-fantasma at-barra-menu\"\n            data-at-alternar=\"#links-loja\" aria-expanded=\"false\" aria-controls=\"links-loja\"\n            aria-label=\"Abrir menu\">\n      <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\"/></svg>\n    </button>\n\n    <ul class=\"at-barra-links\" id=\"links-loja\">\n      <li><a href=\"#\" aria-current=\"page\">Início</a></li>\n      <li><a href=\"#\">Ofertas do dia</a></li>\n      <li><a href=\"#\">Mais vendidos</a></li>\n      <li><a href=\"#\">Atendimento</a></li>\n    </ul>\n\n    <div class=\"at-barra-acoes\">\n      <a href=\"#\" class=\"at-botao at-fantasma at-so-desktop\">Entrar</a>\n      <button class=\"at-botao at-icone at-contador-selo\" aria-label=\"Carrinho: 2 itens\">\n        <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"20\" r=\"1.5\"/><circle cx=\"18\" cy=\"20\" r=\"1.5\"/><path d=\"M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6\"/></svg>\n        <span data-contador aria-hidden=\"true\">2</span>\n      </button>\n    </div>\n  </div>\n</header>"
+ },
+ {
+  "prefixo": "at-lateral",
+  "componente": "lateral",
+  "nome": "Menu lateral de sistema",
+  "categoria": "Navegação",
+  "resumo": "O esqueleto de todo painel administrativo: menu à esquerda com seções e contadores, conteúdo à direita.",
+  "corpo": "<div class=\"at-app\">\n  <aside class=\"at-lateral\">\n    <div class=\"at-lateral-topo\"><a href=\"#\" class=\"at-barra-marca\">◆ Painel</a></div>\n    <nav aria-label=\"Menu principal\">\n      <a href=\"#\" class=\"at-lateral-link\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 11 12 3l9 8v10h-6v-6H9v6H3z\"/></svg> Início</a>\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7l9-4 9 4v10l-9 4-9-4z\"/><path d=\"M3 7l9 4 9-4M12 11v10\"/></svg> Pedidos <span class=\"at-selo at-primario\">12</span></a>\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"4\"/><path d=\"M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-5-6.7\"/></svg> Clientes</a>\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20V10M10 20V4M16 20v-7M22 20H2\"/></svg> Relatórios</a>\n      <span class=\"at-lateral-titulo\">Conta</span>\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12\"/><circle cx=\"16\" cy=\"6\" r=\"2\"/><circle cx=\"10\" cy=\"12\" r=\"2\"/><circle cx=\"18\" cy=\"18\" r=\"2\"/></svg> Configurações</a>\n    </nav>\n    <div class=\"at-lateral-rodape at-linha\">\n      <span class=\"at-avatar at-pequeno\">MZ</span>\n      <span class=\"at-texto-pequeno\">Marcos Zorzetto</span>\n    </div>\n  </aside>\n  <main class=\"at-app-conteudo\">\n    <h2 class=\"at-titulo-3\">Bom dia, Marcos</h2>\n    <p class=\"at-texto-suave\">Você tem 12 pedidos aguardando envio.</p>\n  </main>\n</div>"
+ },
+ {
+  "prefixo": "at-abas",
+  "componente": "abas",
+  "nome": "Abas",
+  "categoria": "Navegação",
+  "resumo": "Divide conteúdo relacionado em painéis, mostrando um por vez. Funciona com mouse, teclado e leitor de tela.",
+  "corpo": "<div class=\"at-abas\" data-at=\"abas\" aria-label=\"Configurações\">\n  <button class=\"at-aba\" aria-controls=\"painel-perfil\">Perfil</button>\n  <button class=\"at-aba\" aria-controls=\"painel-seguranca\">Segurança</button>\n  <button class=\"at-aba\" aria-controls=\"painel-faturas\">Faturas</button>\n</div>\n<div class=\"at-painel\" id=\"painel-perfil\">Nome, foto e informações públicas.</div>\n<div class=\"at-painel\" id=\"painel-seguranca\">Senha, verificação em duas etapas e dispositivos conectados.</div>\n<div class=\"at-painel\" id=\"painel-faturas\">Histórico de pagamentos e notas fiscais.</div>"
+ },
+ {
+  "prefixo": "at-abas-2",
+  "componente": "abas",
+  "nome": "Abas: Segmentado",
+  "categoria": "Navegação",
+  "resumo": "Divide conteúdo relacionado em painéis, mostrando um por vez. Funciona com mouse, teclado e leitor de tela.",
+  "corpo": "<div class=\"at-abas at-segmentado\" data-at=\"abas\" aria-label=\"Visualização\">\n  <button class=\"at-aba\" aria-controls=\"vis-lista\">Lista</button>\n  <button class=\"at-aba\" aria-controls=\"vis-quadro\">Quadro</button>\n  <button class=\"at-aba\" aria-controls=\"vis-calendario\">Calendário</button>\n</div>\n<div class=\"at-painel\" id=\"vis-lista\">Visualização em lista.</div>\n<div class=\"at-painel\" id=\"vis-quadro\">Visualização em quadro.</div>\n<div class=\"at-painel\" id=\"vis-calendario\">Visualização em calendário.</div>"
+ },
+ {
+  "prefixo": "at-trilha",
+  "componente": "trilha",
+  "nome": "Trilha (breadcrumb)",
+  "categoria": "Navegação",
+  "resumo": "Mostra onde a pessoa está e o caminho de volta: Início / Eletrônicos / Celulares.",
+  "corpo": "<nav class=\"at-trilha\" aria-label=\"Você está em\">\n  <ol>\n    <li><a href=\"#\">Início</a></li>\n    <li><a href=\"#\">Eletrônicos</a></li>\n    <li><a href=\"#\">Celulares</a></li>\n    <li aria-current=\"page\">Smartphone 128 GB</li>\n  </ol>\n</nav>"
+ },
+ {
+  "prefixo": "at-paginacao",
+  "componente": "paginacao",
+  "nome": "Paginação",
+  "categoria": "Navegação",
+  "resumo": "Navegação entre páginas de resultados com a contagem \"Mostrando 1–10 de 248\".",
+  "corpo": "<nav class=\"at-paginacao\" aria-label=\"Paginação\">\n  <span class=\"at-paginacao-info\">Mostrando 11–20 de 248</span>\n  <div class=\"at-paginacao-botoes\">\n    <a class=\"at-pagina\" href=\"?pagina=1\" aria-label=\"Página anterior\">‹</a>\n    <a class=\"at-pagina\" href=\"?pagina=1\">1</a>\n    <a class=\"at-pagina\" href=\"?pagina=2\" aria-current=\"page\">2</a>\n    <a class=\"at-pagina\" href=\"?pagina=3\">3</a>\n    <span class=\"at-pagina\" aria-hidden=\"true\">…</span>\n    <a class=\"at-pagina\" href=\"?pagina=25\">25</a>\n    <a class=\"at-pagina\" href=\"?pagina=3\" aria-label=\"Próxima página\">›</a>\n  </div>\n</nav>"
+ },
+ {
+  "prefixo": "at-etapas",
+  "componente": "etapas",
+  "nome": "Etapas",
+  "categoria": "Navegação",
+  "resumo": "Mostra o progresso num processo em partes, como carrinho → entrega → pagamento → confirmação.",
+  "corpo": "<ol class=\"at-etapas\" id=\"etapas-checkout\">\n  <li data-estado=\"feito\">Carrinho</li>\n  <li aria-current=\"step\">Entrega</li>\n  <li>Pagamento</li>\n  <li>Confirmação</li>\n</ol>\n<div class=\"at-linha at-centro at-mt-6\">\n  <button class=\"at-botao\" id=\"etapa-voltar\">Voltar</button>\n  <button class=\"at-botao at-primario\" id=\"etapa-avancar\">Continuar</button>\n</div>\n\n<script type=\"module\">\nconst etapas = [...document.querySelectorAll(\"#etapas-checkout li\")];\nlet atual = 1;\n\nfunction mostrar() {\n  etapas.forEach((etapa, indice) => {\n    if (indice === atual) etapa.setAttribute(\"aria-current\", \"step\");\n    else etapa.removeAttribute(\"aria-current\");\n    if (indice < atual) etapa.dataset.estado = \"feito\";\n    else delete etapa.dataset.estado;\n  });\n}\n\ndocument.querySelector(\"#etapa-avancar\").addEventListener(\"click\", () => {\n  atual = Math.min(atual + 1, etapas.length - 1);\n  mostrar();\n});\ndocument.querySelector(\"#etapa-voltar\").addEventListener(\"click\", () => {\n  atual = Math.max(atual - 1, 0);\n  mostrar();\n});\n</script>"
+ },
+ {
+  "prefixo": "at-comando",
+  "componente": "comando",
+  "nome": "Busca rápida (Ctrl+K)",
+  "categoria": "Navegação",
+  "resumo": "Uma caixa de busca que abre com Ctrl+K e leva a qualquer página ou ação em segundos. É a busca deste site.",
+  "corpo": "<button class=\"at-botao\" commandfor=\"paleta-demo\" command=\"show-modal\">\n  <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg> Buscar… <kbd class=\"at-tecla\">Ctrl K</kbd>\n</button>\n\n<dialog class=\"at-comando\" id=\"paleta-demo\" data-at=\"comando\" aria-label=\"Busca rápida\">\n  <div class=\"at-comando-busca\">\n    <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>\n    <input placeholder=\"O que você procura?\" aria-label=\"Buscar\" autofocus>\n  </div>\n  <ul class=\"at-comando-lista\">\n    <li class=\"at-comando-grupo\">Páginas</li>\n    <li><a class=\"at-comando-item\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 11 12 3l9 8v10h-6v-6H9v6H3z\"/></svg> Início</a></li>\n    <li><a class=\"at-comando-item\" href=\"#\" data-palavras=\"vendas compras\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7l9-4 9 4v10l-9 4-9-4z\"/><path d=\"M3 7l9 4 9-4M12 11v10\"/></svg> Pedidos</a></li>\n    <li><a class=\"at-comando-item\" href=\"#\" data-palavras=\"usuários pessoas\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"4\"/><path d=\"M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-5-6.7\"/></svg> Clientes</a></li>\n    <li class=\"at-comando-grupo\">Ações</li>\n    <li><button class=\"at-comando-item\" data-at-notificar=\"Pedido criado\">Novo pedido <small>N</small></button></li>\n    <li><button class=\"at-comando-item\" data-at-tema=\"alternar\" data-palavras=\"dark escuro claro\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z\"/></svg> Alternar tema</button></li>\n  </ul>\n  <p class=\"at-comando-vazio\" hidden>Nada encontrado.</p>\n  <div class=\"at-comando-rodape\"><span>↑↓ navegar</span><span>Enter abrir</span><span>Esc fechar</span></div>\n</dialog>"
+ },
+ {
+  "prefixo": "at-modal",
+  "componente": "modal",
+  "nome": "Modal (janela de diálogo)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Janela por cima da página para confirmar algo importante ou preencher um formulário rápido. Abre sem escrever JavaScript.",
+  "corpo": "<button class=\"at-botao at-perigo\" commandfor=\"modal-sair\" command=\"show-modal\">Cancelar assinatura</button>\n\n<dialog class=\"at-modal at-pequeno\" id=\"modal-sair\" aria-labelledby=\"modal-sair-titulo\">\n  <form method=\"dialog\">\n    <div class=\"at-modal-corpo\">\n      <h3 id=\"modal-sair-titulo\" class=\"at-titulo-4\">Cancelar assinatura?</h3>\n      <p class=\"at-texto-suave\">Você continua com acesso até 30/11. Depois disso, seus projetos ficam somente leitura.</p>\n    </div>\n    <div class=\"at-modal-rodape\">\n      <button class=\"at-botao at-fantasma\" value=\"manter\">Manter assinatura</button>\n      <button class=\"at-botao at-perigo\" value=\"cancelar\">Cancelar assinatura</button>\n    </div>\n  </form>\n</dialog>\n\n<script type=\"module\">\ndocument.querySelector(\"#modal-sair\").addEventListener(\"close\", (evento) => {\n  if (evento.target.returnValue === \"cancelar\") {\n    Atalho.notificar(\"Assinatura cancelada.\", { tipo: \"aviso\" });\n  }\n});\n</script>"
+ },
+ {
+  "prefixo": "at-modal-2",
+  "componente": "modal",
+  "nome": "Modal (janela de diálogo): Excluir digitando o nome (padrão GitHub)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Janela por cima da página para confirmar algo importante ou preencher um formulário rápido. Abre sem escrever JavaScript.",
+  "corpo": "<button class=\"at-botao at-perigo\" commandfor=\"modal-excluir\" command=\"show-modal\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14\"/></svg> Excluir projeto</button>\n\n<dialog class=\"at-modal\" id=\"modal-excluir\" aria-labelledby=\"modal-excluir-titulo\">\n  <form method=\"dialog\">\n    <div class=\"at-modal-cabecalho\">\n      <h3 id=\"modal-excluir-titulo\">Excluir loja-virtual</h3>\n      <button type=\"button\" class=\"at-botao at-icone at-fantasma at-pequeno\" commandfor=\"modal-excluir\" command=\"close\" aria-label=\"Fechar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>\n    </div>\n    <div class=\"at-modal-corpo at-pilha\">\n      <div class=\"at-alerta at-perigo\">\n        <div class=\"at-alerta-conteudo\">Isso apaga o projeto, os pedidos e as configurações. Não dá para desfazer.</div>\n      </div>\n      <div class=\"at-campo\">\n        <label class=\"at-rotulo\" for=\"confirma-nome\">Digite <strong>loja-virtual</strong> para confirmar</label>\n        <input class=\"at-entrada\" id=\"confirma-nome\" autocomplete=\"off\" autofocus>\n      </div>\n    </div>\n    <div class=\"at-modal-rodape\">\n      <button class=\"at-botao at-perigo at-bloco\" id=\"botao-excluir\" value=\"excluir\" disabled>Entendi, excluir este projeto</button>\n    </div>\n  </form>\n</dialog>\n\n<script type=\"module\">\nconst campo = document.querySelector(\"#confirma-nome\");\nconst botao = document.querySelector(\"#botao-excluir\");\nconst modal = document.querySelector(\"#modal-excluir\");\n\ncampo.addEventListener(\"input\", () => {\n  botao.disabled = campo.value !== \"loja-virtual\";\n});\n\nmodal.addEventListener(\"close\", () => {\n  if (modal.returnValue === \"excluir\") {\n    Atalho.notificar(\"Projeto excluído.\", { tipo: \"perigo\" });\n  }\n  campo.value = \"\";\n  botao.disabled = true;\n  modal.returnValue = \"\";\n});\n</script>"
+ },
+ {
+  "prefixo": "at-gaveta",
+  "componente": "gaveta",
+  "nome": "Gaveta (painel lateral)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Painel que desliza da lateral: carrinho de compras, filtros, detalhes de um item ou menu no celular.",
+  "corpo": "<button class=\"at-botao\" commandfor=\"gaveta-filtros\" command=\"show-modal\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 5h18l-7 8v6l-4 2v-8z\"/></svg> Filtros</button>\n\n<dialog class=\"at-gaveta\" id=\"gaveta-filtros\" aria-labelledby=\"filtros-titulo\">\n  <div class=\"at-modal-cabecalho\">\n    <h3 id=\"filtros-titulo\">Filtros</h3>\n    <button class=\"at-botao at-icone at-fantasma at-pequeno\" commandfor=\"gaveta-filtros\" command=\"close\" aria-label=\"Fechar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>\n  </div>\n  <div class=\"at-modal-corpo at-pilha\">\n    <fieldset style=\"border:0;padding:0;margin:0\" class=\"at-pilha\">\n      <legend class=\"at-rotulo at-mb-2\">Entrega</legend>\n      <label class=\"at-check\"><input type=\"checkbox\" checked> Frete grátis</label>\n      <label class=\"at-check\"><input type=\"checkbox\"> Chega amanhã</label>\n    </fieldset>\n    <div class=\"at-campo\">\n      <label class=\"at-rotulo\" for=\"filtro-ordem\">Ordenar por</label>\n      <select class=\"at-entrada\" id=\"filtro-ordem\">\n        <option>Mais relevantes</option>\n        <option>Menor preço</option>\n        <option>Maior preço</option>\n      </select>\n    </div>\n  </div>\n  <div class=\"at-modal-rodape\">\n    <button class=\"at-botao at-fantasma\" commandfor=\"gaveta-filtros\" command=\"close\">Limpar</button>\n    <button class=\"at-botao at-primario\" commandfor=\"gaveta-filtros\" command=\"close\">Ver 128 resultados</button>\n  </div>\n</dialog>"
+ },
+ {
+  "prefixo": "at-dica",
+  "componente": "dica",
+  "nome": "Dica (tooltip)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Texto curto que aparece ao passar o mouse ou focar com o teclado, explicando um ícone.",
+  "corpo": "<div class=\"at-linha\" style=\"padding-top: 2rem\">\n  <button class=\"at-botao at-icone\" data-at-dica=\"Editar\" aria-label=\"Editar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/></svg></button>\n  <button class=\"at-botao at-icone\" data-at-dica=\"Copiar link\" aria-label=\"Copiar link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"8\" y=\"8\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M4 16V5a1 1 0 0 1 1-1h11\"/></svg></button>\n  <button class=\"at-botao at-icone\" data-at-dica=\"Baixar PDF\" aria-label=\"Baixar PDF\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 4v12M6 10l6 6 6-6M4 20h16\"/></svg></button>\n  <button class=\"at-botao at-icone\" data-at-dica=\"Mover para a lixeira\" data-at-dica-lado=\"baixo\" aria-label=\"Mover para a lixeira\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14\"/></svg></button>\n</div>"
+ },
+ {
+  "prefixo": "at-notificacao",
+  "componente": "notificacao",
+  "nome": "Notificação (toast)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Mensagem rápida no canto da tela confirmando o que aconteceu, com botão de Desfazer opcional.",
+  "corpo": "<div class=\"at-linha\">\n  <button class=\"at-botao\" data-at-notificar=\"Alterações salvas.\" data-at-tipo=\"sucesso\">Sucesso</button>\n  <button class=\"at-botao\" data-at-notificar=\"Não foi possível conectar.\" data-at-tipo=\"perigo\">Erro</button>\n  <button class=\"at-botao\" data-at-notificar=\"Seu plano vence em 3 dias.\" data-at-tipo=\"aviso\">Aviso</button>\n  <button class=\"at-botao\" data-at-notificar=\"Nova versão disponível.\" data-at-tipo=\"info\">Info</button>\n</div>"
+ },
+ {
+  "prefixo": "at-notificacao-2",
+  "componente": "notificacao",
+  "nome": "Notificação (toast): Arquivar com Desfazer (padrão Gmail)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Mensagem rápida no canto da tela confirmando o que aconteceu, com botão de Desfazer opcional.",
+  "corpo": "<ul class=\"at-pilha\" id=\"lista-emails\" style=\"--at-gap: 8px; list-style: none; padding: 0; max-width: 420px\">\n  <li class=\"at-superficie at-linha at-entre\" style=\"padding: 12px 16px\">\n    Fatura de outubro\n    <button class=\"at-botao at-pequeno\" data-arquivar>Arquivar</button>\n  </li>\n  <li class=\"at-superficie at-linha at-entre\" style=\"padding: 12px 16px\">\n    Seu pedido foi enviado\n    <button class=\"at-botao at-pequeno\" data-arquivar>Arquivar</button>\n  </li>\n</ul>\n\n<script type=\"module\">\ndocument.querySelector(\"#lista-emails\").addEventListener(\"click\", (evento) => {\n  const botao = evento.target.closest(\"[data-arquivar]\");\n  if (!botao) return;\n  const item = botao.closest(\"li\");\n  item.hidden = true;\n\n  Atalho.notificar(\"Conversa arquivada.\", {\n    acao: { texto: \"Desfazer\", aoClicar: () => (item.hidden = false) },\n  });\n});\n</script>"
+ },
+ {
+  "prefixo": "at-cartao",
+  "componente": "cartao",
+  "nome": "Cartão",
+  "categoria": "Exibir dados",
+  "resumo": "Caixa que agrupa informações de um mesmo assunto: artigo, resumo, configuração, item clicável.",
+  "corpo": "<div class=\"at-grade\" style=\"--min: 240px\">\n  <a class=\"at-cartao\" href=\"#\">\n    <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp\" alt=\"\" loading=\"lazy\">\n    <div class=\"at-cartao-corpo\">\n      <span class=\"at-sobretitulo\">Guia</span>\n      <h3 class=\"at-cartao-titulo\">Como escolher um notebook para programar</h3>\n      <p class=\"at-texto-suave at-texto-pequeno\">Memória, processador e tela: o que realmente importa.</p>\n    </div>\n  </a>\n\n  <section class=\"at-cartao\">\n    <div class=\"at-cartao-cabecalho\">\n      <h3>Notificações</h3>\n      <span class=\"at-selo at-sucesso\">Ativas</span>\n    </div>\n    <div class=\"at-cartao-corpo at-pilha\" style=\"--at-gap: 12px\">\n      <label class=\"at-linha at-entre\">Novos pedidos <input type=\"checkbox\" role=\"switch\" class=\"at-chave\" checked></label>\n      <label class=\"at-linha at-entre\">Mensagens <input type=\"checkbox\" role=\"switch\" class=\"at-chave\" checked></label>\n      <label class=\"at-linha at-entre\">Novidades do produto <input type=\"checkbox\" role=\"switch\" class=\"at-chave\"></label>\n    </div>\n    <div class=\"at-cartao-rodape\">\n      <span class=\"at-texto-suave at-texto-pequeno\">Salvo automaticamente</span>\n      <button class=\"at-botao at-pequeno\">Testar</button>\n    </div>\n  </section>\n</div>"
+ },
+ {
+  "prefixo": "at-produto",
+  "componente": "produto",
+  "nome": "Cartão de produto",
+  "categoria": "Exibir dados",
+  "resumo": "O cartão de e-commerce brasileiro completo: foto, nome em até duas linhas, preço antigo, desconto, parcelas sem juros, frete grátis e botão de comprar.",
+  "corpo": "<div class=\"at-grade\" style=\"--min: 200px\">\n  <article class=\"at-cartao at-produto\">\n    <span class=\"at-selo at-destaque\">MAIS VENDIDO</span>\n    <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp\" alt=\"Tênis cano alto vermelho e preto\" loading=\"lazy\">\n    <div class=\"at-cartao-corpo\">\n      <h3 class=\"at-produto-nome\"><a href=\"#\">Tênis cano alto vermelho e preto</a></h3>\n      <span class=\"at-preco-antigo\"><span class=\"at-sr\">De </span>R$ 799,90</span>\n      <div><span class=\"at-preco\"><span class=\"at-sr\">por </span>R$ 599,90</span><span class=\"at-preco-desconto\">25% OFF</span></div>\n      <span class=\"at-parcelas\">em 10x R$ 59,99 sem juros</span>\n      <span class=\"at-frete\">Frete grátis</span>\n      <span><span class=\"at-estrelas\" style=\"--nota: 4.7\" role=\"img\" aria-label=\"Nota 4,7 de 5\"></span> <small class=\"at-texto-suave\">(2.381)</small></span>\n      <button class=\"at-botao at-primario at-bloco\" data-at-notificar=\"Adicionado ao carrinho\">Comprar</button>\n    </div>\n  </article>\n\n  <article class=\"at-cartao at-produto\">\n    <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp\" alt=\"Óculos de sol clássico com proteção UV\" loading=\"lazy\">\n    <div class=\"at-cartao-corpo\">\n      <h3 class=\"at-produto-nome\"><a href=\"#\">Óculos de sol clássico com proteção UV</a></h3>\n      <span class=\"at-preco-antigo\"><span class=\"at-sr\">De </span>R$ 229,90</span>\n      <div><span class=\"at-preco\"><span class=\"at-sr\">por </span>R$ 189,90</span><span class=\"at-preco-desconto\">17% OFF</span></div>\n      <span class=\"at-parcelas\">em 3x R$ 63,30 sem juros</span>\n      <button class=\"at-botao at-primario at-bloco\" data-at-notificar=\"Adicionado ao carrinho\">Comprar</button>\n    </div>\n  </article>\n\n  <article class=\"at-cartao at-produto\">\n    <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp\" alt=\"Relógio com pulseira de couro marrom\" loading=\"lazy\">\n    <div class=\"at-cartao-corpo\">\n      <h3 class=\"at-produto-nome\"><a href=\"#\">Relógio com pulseira de couro marrom</a></h3>\n      <div><span class=\"at-preco\">R$ 349,00</span></div>\n      <span class=\"at-parcelas\">em 5x R$ 69,80 sem juros</span>\n      <span class=\"at-frete\">Chega amanhã</span>\n      <button class=\"at-botao at-primario at-bloco\" data-at-notificar=\"Adicionado ao carrinho\">Comprar</button>\n    </div>\n  </article>\n</div>"
+ },
+ {
+  "prefixo": "at-tabela",
+  "componente": "tabela",
+  "nome": "Tabela de dados",
+  "categoria": "Exibir dados",
+  "resumo": "Tabela de sistema completa: ordenar por coluna, buscar, paginar, selecionar linhas e exportar para Excel. Tudo com atributos no HTML.",
+  "corpo": "<div class=\"at-tabela-ferramentas\">\n  <div class=\"at-entrada-icone at-cresce\" style=\"max-width: 320px\">\n    <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>\n    <input class=\"at-entrada\" id=\"busca-pedidos\" type=\"search\" placeholder=\"Buscar pedido, cliente, pagamento…\" aria-label=\"Buscar pedidos\">\n  </div>\n  <span class=\"at-texto-suave at-texto-pequeno\" id=\"selecionados\" aria-live=\"polite\"></span>\n  <button class=\"at-botao\" data-at-exportar=\"#tabela-pedidos\" data-arquivo=\"pedidos.csv\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 4v12M6 10l6 6 6-6M4 20h16\"/></svg> Exportar</button>\n</div>\n\n<div class=\"at-tabela-caixa\">\n  <table class=\"at-tabela\" id=\"tabela-pedidos\" data-at=\"tabela\" data-filtro=\"#busca-pedidos\" data-por-pagina=\"5\">\n    <thead>\n      <tr>\n        <th class=\"at-encolher\"><input type=\"checkbox\" data-selecionar-todos aria-label=\"Selecionar todos\"></th>\n        <th data-ordenar=\"numero\">Pedido</th>\n        <th data-ordenar>Cliente</th>\n        <th data-ordenar=\"data\">Data</th>\n        <th>Pagamento</th>\n        <th>Status</th>\n        <th data-ordenar=\"numero\" class=\"at-direita\">Total</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1048\" aria-label=\"Selecionar pedido 1048\"></td><td>#1048</td><td>Maria Oliveira</td><td data-valor=\"2026-10-07\">07/10/2026</td><td>Pix</td><td><span class=\"at-selo at-sucesso\">Pago</span></td><td class=\"at-direita\" data-valor=\"1250\">R$ 1.250,00</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1047\" aria-label=\"Selecionar pedido 1047\"></td><td>#1047</td><td>João Santos</td><td data-valor=\"2026-10-07\">07/10/2026</td><td>Cartão 3x</td><td><span class=\"at-selo at-aviso\">Aguardando</span></td><td class=\"at-direita\" data-valor=\"389.9\">R$ 389,90</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1046\" aria-label=\"Selecionar pedido 1046\"></td><td>#1046</td><td>Ana Costa</td><td data-valor=\"2026-10-06\">06/10/2026</td><td>Boleto</td><td><span class=\"at-selo at-perigo\">Cancelado</span></td><td class=\"at-direita\" data-valor=\"89.9\">R$ 89,90</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1045\" aria-label=\"Selecionar pedido 1045\"></td><td>#1045</td><td>Lucas Pereira</td><td data-valor=\"2026-10-05\">05/10/2026</td><td>Pix</td><td><span class=\"at-selo at-info\">Enviado</span></td><td class=\"at-direita\" data-valor=\"2100\">R$ 2.100,00</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1044\" aria-label=\"Selecionar pedido 1044\"></td><td>#1044</td><td>Juliana Lima</td><td data-valor=\"2026-10-05\">05/10/2026</td><td>Cartão 10x</td><td><span class=\"at-selo at-sucesso\">Pago</span></td><td class=\"at-direita\" data-valor=\"4599\">R$ 4.599,00</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1043\" aria-label=\"Selecionar pedido 1043\"></td><td>#1043</td><td>Rafael Souza</td><td data-valor=\"2026-10-04\">04/10/2026</td><td>Pix</td><td><span class=\"at-selo at-sucesso\">Pago</span></td><td class=\"at-direita\" data-valor=\"159.8\">R$ 159,80</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1042\" aria-label=\"Selecionar pedido 1042\"></td><td>#1042</td><td>Beatriz Rocha</td><td data-valor=\"2026-10-03\">03/10/2026</td><td>Boleto</td><td><span class=\"at-selo at-aviso\">Aguardando</span></td><td class=\"at-direita\" data-valor=\"740\">R$ 740,00</td></tr>\n      <tr><td><input type=\"checkbox\" data-selecionar value=\"1041\" aria-label=\"Selecionar pedido 1041\"></td><td>#1041</td><td>Mário Almeida</td><td data-valor=\"2026-10-02\">02/10/2026</td><td>Cartão 1x</td><td><span class=\"at-selo at-info\">Enviado</span></td><td class=\"at-direita\" data-valor=\"56\">R$ 56,00</td></tr>\n    </tbody>\n  </table>\n</div>\n\n<script type=\"module\">\ndocument.querySelector(\"#tabela-pedidos\").addEventListener(\"at:selecao\", (evento) => {\n  const { quantidade } = evento.detail;\n  document.querySelector(\"#selecionados\").textContent =\n    quantidade ? Atalho.formatar.plural(quantidade, \"selecionado\") : \"\";\n});\n</script>"
+ },
+ {
+  "prefixo": "at-indicador",
+  "componente": "indicador",
+  "nome": "Indicadores (KPIs)",
+  "categoria": "Exibir dados",
+  "resumo": "Os números grandes do topo de todo painel: faturamento, pedidos, clientes, com a variação em relação ao período anterior.",
+  "corpo": "<div class=\"at-colunas-4\" style=\"--at-gap: 16px\">\n  <div class=\"at-indicador\">\n    <span class=\"at-indicador-rotulo\">Faturamento</span>\n    <strong class=\"at-indicador-valor\">R$ 48.920</strong>\n    <span class=\"at-indicador-variacao\" data-direcao=\"sobe\">↑ 12,5% vs. setembro</span>\n  </div>\n  <div class=\"at-indicador\">\n    <span class=\"at-indicador-rotulo\">Pedidos</span>\n    <strong class=\"at-indicador-valor\">1.284</strong>\n    <span class=\"at-indicador-variacao\" data-direcao=\"sobe\">↑ 8,2% vs. setembro</span>\n  </div>\n  <div class=\"at-indicador\">\n    <span class=\"at-indicador-rotulo\">Ticket médio</span>\n    <strong class=\"at-indicador-valor\">R$ 38,10</strong>\n    <span class=\"at-indicador-variacao\">Estável</span>\n  </div>\n  <div class=\"at-indicador\">\n    <span class=\"at-indicador-rotulo\">Cancelamentos</span>\n    <strong class=\"at-indicador-valor\">23</strong>\n    <span class=\"at-indicador-variacao\" data-direcao=\"desce\">↓ 3,1% vs. setembro</span>\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-selo",
+  "componente": "selo",
+  "nome": "Selos e etiquetas",
+  "categoria": "Exibir dados",
+  "resumo": "Selos mostram status (Pago, Pendente, Novo). Etiquetas são filtros ou tags que a pessoa pode remover.",
+  "corpo": "<div class=\"at-linha\">\n  <span class=\"at-selo\">Rascunho</span>\n  <span class=\"at-selo at-primario\">Novo</span>\n  <span class=\"at-selo at-sucesso at-ponto\">Pago</span>\n  <span class=\"at-selo at-aviso at-ponto\">Aguardando</span>\n  <span class=\"at-selo at-perigo at-ponto\">Cancelado</span>\n  <span class=\"at-selo at-info\">Enviado</span>\n  <span class=\"at-selo at-destaque\">-25%</span>\n</div>"
+ },
+ {
+  "prefixo": "at-selo-2",
+  "componente": "selo",
+  "nome": "Selos e etiquetas: Filtros aplicados",
+  "categoria": "Exibir dados",
+  "resumo": "Selos mostram status (Pago, Pendente, Novo). Etiquetas são filtros ou tags que a pessoa pode remover.",
+  "corpo": "<div class=\"at-linha\">\n  <span class=\"at-etiqueta\">Frete grátis <button data-at-fechar aria-label=\"Remover filtro Frete grátis\">×</button></span>\n  <span class=\"at-etiqueta\">Até R$ 500 <button data-at-fechar aria-label=\"Remover filtro Até R$ 500\">×</button></span>\n  <span class=\"at-etiqueta\">Novo <button data-at-fechar aria-label=\"Remover filtro Novo\">×</button></span>\n</div>"
+ },
+ {
+  "prefixo": "at-avatar",
+  "componente": "avatar",
+  "nome": "Avatar",
+  "categoria": "Exibir dados",
+  "resumo": "Foto ou iniciais da pessoa, com status (online, ocupado) e grupos sobrepostos.",
+  "corpo": "<div class=\"at-linha\" style=\"--at-gap: 20px\">\n  <span class=\"at-avatar at-pequeno\">AO</span>\n  <span class=\"at-avatar\" data-status=\"online\">MZ</span>\n  <span class=\"at-avatar at-grande\" data-status=\"ocupado\">JS</span>\n\n  <div class=\"at-avatares\" aria-label=\"5 pessoas editando\">\n    <span class=\"at-avatar\">AO</span>\n    <span class=\"at-avatar\" style=\"background:#fef3c7;color:#92400e\">LP</span>\n    <span class=\"at-avatar\" style=\"background:#dbeafe;color:#1e40af\">BR</span>\n    <span class=\"at-avatar\" style=\"background:var(--at-superficie-3);color:var(--at-texto)\">+2</span>\n  </div>\n\n  <div class=\"at-linha\">\n    <span class=\"at-avatar\" data-status=\"online\">AO</span>\n    <div><strong class=\"at-texto-pequeno\" style=\"display:block\">Ana Oliveira</strong><small class=\"at-texto-suave\">Online agora</small></div>\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-linha-do-tempo",
+  "componente": "linha-do-tempo",
+  "nome": "Linha do tempo (rastreio)",
+  "categoria": "Exibir dados",
+  "resumo": "Histórico de eventos em ordem: rastreio de pedido, atividades de um projeto, etapas de um chamado.",
+  "corpo": "<ol class=\"at-linha-tempo\" style=\"max-width: 420px\">\n  <li>\n    <span class=\"at-linha-tempo-marca\" style=\"background:var(--at-cor-sucesso-suave);color:var(--at-cor-sucesso)\">✓</span>\n    <div><strong>Pedido entregue</strong><time datetime=\"2026-10-08T14:32\">Hoje, 14:32</time></div>\n  </li>\n  <li>\n    <span class=\"at-linha-tempo-marca\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h11v10H3zM14 9h4l3 3v4h-7z\"/><circle cx=\"7\" cy=\"18\" r=\"2\"/><circle cx=\"17\" cy=\"18\" r=\"2\"/></svg></span>\n    <div><strong>Saiu para entrega</strong><time datetime=\"2026-10-08T08:10\">Hoje, 08:10 · São Paulo, SP</time></div>\n  </li>\n  <li>\n    <span class=\"at-linha-tempo-marca\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7l9-4 9 4v10l-9 4-9-4z\"/><path d=\"M3 7l9 4 9-4M12 11v10\"/></svg></span>\n    <div><strong>Pedido enviado</strong><time datetime=\"2026-10-06T17:45\">06/10, 17:45</time></div>\n  </li>\n  <li>\n    <span class=\"at-linha-tempo-marca\">✓</span>\n    <div><strong>Pagamento aprovado</strong><time datetime=\"2026-10-06T10:02\">06/10, 10:02 · Pix</time></div>\n  </li>\n</ol>"
+ },
+ {
+  "prefixo": "at-avaliacao",
+  "componente": "avaliacao",
+  "nome": "Avaliação (estrelas)",
+  "categoria": "Exibir dados",
+  "resumo": "Mostra notas com estrelas (inclusive meia estrela) e permite que a pessoa avalie com mouse ou teclado.",
+  "corpo": "<div class=\"at-pilha\">\n  <div class=\"at-linha\">\n    <span class=\"at-estrelas\" style=\"--nota: 4.6; font-size: 1.25rem\" role=\"img\" aria-label=\"Nota 4,6 de 5\"></span>\n    <strong>4,6</strong> <span class=\"at-texto-suave\">(1.284 avaliações)</span>\n  </div>\n\n  <fieldset class=\"at-avaliar\">\n    <legend class=\"at-sr\">Sua nota</legend>\n    <input type=\"radio\" id=\"nota5\" name=\"nota\" value=\"5\"><label for=\"nota5\" title=\"Excelente\">★</label>\n    <input type=\"radio\" id=\"nota4\" name=\"nota\" value=\"4\"><label for=\"nota4\" title=\"Bom\">★</label>\n    <input type=\"radio\" id=\"nota3\" name=\"nota\" value=\"3\"><label for=\"nota3\" title=\"Regular\">★</label>\n    <input type=\"radio\" id=\"nota2\" name=\"nota\" value=\"2\"><label for=\"nota2\" title=\"Ruim\">★</label>\n    <input type=\"radio\" id=\"nota1\" name=\"nota\" value=\"1\"><label for=\"nota1\" title=\"Péssimo\">★</label>\n  </fieldset>\n</div>\n\n<script type=\"module\">\ndocument.querySelectorAll(\"[name='nota']\").forEach((opcao) => {\n  opcao.addEventListener(\"change\", () => {\n    Atalho.notificar(\"Obrigado! Você deu nota \" + opcao.value + \".\", { tipo: \"sucesso\" });\n  });\n});\n</script>"
+ },
+ {
+  "prefixo": "at-carrossel",
+  "componente": "carrossel",
+  "nome": "Carrossel",
+  "categoria": "Exibir dados",
+  "resumo": "Fileira de itens que rola para o lado, com botões e encaixe suave. No celular, é só arrastar com o dedo.",
+  "corpo": "<section class=\"at-carrossel\" data-at=\"carrossel\" aria-label=\"Recomendados para você\">\n  <div class=\"at-linha at-entre at-mb-4\">\n    <h3 class=\"at-titulo-4 at-mb-0\">Recomendados para você</h3>\n    <div class=\"at-carrossel-controles\">\n      <button class=\"at-botao at-icone at-pequeno\" data-carrossel=\"anterior\" aria-label=\"Anterior\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5M11 18l-6-6 6-6\"/></svg></button>\n      <button class=\"at-botao at-icone at-pequeno\" data-carrossel=\"proximo\" aria-label=\"Próximo\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>\n    </div>\n  </div>\n  <div class=\"at-carrossel-trilho\" tabindex=\"0\" style=\"--largura-item: 200px\">\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp\" alt=\"Tênis cano alto vermelho e preto\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\"><a href=\"#\">Tênis cano alto vermelho e preto</a></h4>\n        <span class=\"at-preco\">R$ 599,90</span>\n      </div>\n    </article>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp\" alt=\"Óculos de sol clássico com proteção UV\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\"><a href=\"#\">Óculos de sol clássico com proteção UV</a></h4>\n        <span class=\"at-preco\">R$ 189,90</span>\n      </div>\n    </article>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp\" alt=\"Relógio com pulseira de couro marrom\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\"><a href=\"#\">Relógio com pulseira de couro marrom</a></h4>\n        <span class=\"at-preco\">R$ 349,00</span>\n      </div>\n    </article>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp\" alt=\"Notebook 14 polegadas 16 GB RAM 512 GB SSD\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\"><a href=\"#\">Notebook 14 polegadas 16 GB RAM 512 GB SSD</a></h4>\n        <span class=\"at-preco\">R$ 8.999,00</span>\n      </div>\n    </article>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp\" alt=\"Tênis cano alto vermelho e preto\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\"><a href=\"#\">Tênis cano alto vermelho e preto</a></h4>\n        <span class=\"at-preco\">R$ 599,90</span>\n      </div>\n    </article>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" src=\"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp\" alt=\"Óculos de sol clássico com proteção UV\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\"><a href=\"#\">Óculos de sol clássico com proteção UV</a></h4>\n        <span class=\"at-preco\">R$ 189,90</span>\n      </div>\n    </article>\n  </div>\n</section>"
+ },
+ {
+  "prefixo": "at-sanfona",
+  "componente": "sanfona",
+  "nome": "Sanfona (perguntas frequentes)",
+  "categoria": "Exibir dados",
+  "resumo": "Perguntas que abrem e fecham ao clicar. Ideal para FAQ e detalhes opcionais.",
+  "corpo": "<div class=\"at-sanfona\" style=\"max-width: 640px\">\n  <details name=\"faq\" open>\n    <summary>Qual o prazo de entrega?</summary>\n    <div class=\"at-sanfona-conteudo\"><p>Capitais: até 3 dias úteis. Demais cidades: até 8 dias úteis. O prazo exato aparece no checkout depois de informar o CEP.</p></div>\n  </details>\n  <details name=\"faq\">\n    <summary>Posso trocar ou devolver?</summary>\n    <div class=\"at-sanfona-conteudo\"><p>Sim. Você tem 7 dias após o recebimento para desistir da compra, sem precisar justificar (Código de Defesa do Consumidor, art. 49).</p></div>\n  </details>\n  <details name=\"faq\">\n    <summary>Quais formas de pagamento vocês aceitam?</summary>\n    <div class=\"at-sanfona-conteudo\"><p>Pix (com 5% de desconto), cartão de crédito em até 10x sem juros e boleto.</p></div>\n  </details>\n</div>"
+ },
+ {
+  "prefixo": "at-chat",
+  "componente": "chat",
+  "nome": "Chat",
+  "categoria": "Exibir dados",
+  "resumo": "Conversa no estilo WhatsApp: balões dos dois lados, horário e campo de envio. Ligado ao Estado, a lista se atualiza sozinha.",
+  "corpo": "<div class=\"at-chat\" style=\"max-width: 420px; --altura: 380px\">\n  <div class=\"at-linha\" style=\"padding: 12px 16px; border-bottom: 1px solid var(--at-borda)\">\n    <span class=\"at-avatar at-pequeno\" data-status=\"online\">LJ</span>\n    <div><strong class=\"at-texto-pequeno\" style=\"display:block\">Loja Exemplo</strong><small class=\"at-texto-suave\">Responde em minutos</small></div>\n  </div>\n  <div class=\"at-chat-mensagens\" role=\"log\" aria-live=\"polite\" data-at-lista=\"conversa.mensagens\">\n    <template>\n      <div class=\"at-mensagem\" data-at-atributos=\"class: classe\">\n        <span data-at-campo=\"texto\"></span>\n        <time data-at-campo=\"hora\"></time>\n      </div>\n    </template>\n  </div>\n  <form class=\"at-chat-envio\" data-at-acao=\"conversa.enviar\">\n    <input class=\"at-entrada\" name=\"texto\" placeholder=\"Escreva uma mensagem\" aria-label=\"Mensagem\" autocomplete=\"off\" required>\n    <button class=\"at-botao at-primario at-icone\" aria-label=\"Enviar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 2 11 13M22 2l-7 20-4-9-9-4z\"/></svg></button>\n  </form>\n</div>\n\n<script type=\"module\">\nconst agora = () => Atalho.formatar.hora(new Date());\n\nconst conversa = Atalho.estado(\"conversa\", {\n  mensagens: [\n    { texto: \"Olá! Como posso ajudar?\", hora: \"10:02\", classe: \"at-mensagem\" },\n  ],\n  enviar(dados, evento) {\n    if (!dados.texto.trim()) return;\n    this.mensagens = [...this.mensagens, { texto: dados.texto, hora: agora(), classe: \"at-mensagem at-minha\" }];\n    evento.target.reset();\n\n    setTimeout(() => {\n      this.mensagens = [...this.mensagens, {\n        texto: \"Recebi sua mensagem! Um atendente já vai responder.\",\n        hora: agora(),\n        classe: \"at-mensagem\",\n      }];\n    }, 900);\n  },\n});\n\n// Rola para a última mensagem sempre que a conversa muda\nAtalho.observar(\"conversa\", () => {\n  const area = document.querySelector(\".at-chat-mensagens\");\n  area.scrollTop = area.scrollHeight;\n});\n</script>"
+ },
+ {
+  "prefixo": "at-kanban",
+  "componente": "kanban",
+  "nome": "Quadro Kanban",
+  "categoria": "Exibir dados",
+  "resumo": "Colunas com cartões que você arrasta entre etapas: A fazer, Fazendo, Feito. Também move pelo teclado.",
+  "corpo": "<div class=\"at-kanban\" data-at=\"kanban\" id=\"quadro\">\n  <section class=\"at-kanban-coluna\" data-coluna=\"fazer\">\n    <header>A fazer <span class=\"at-selo\" data-contagem></span></header>\n    <ul class=\"at-kanban-lista\">\n      <li class=\"at-kanban-cartao\" data-id=\"1\">Criar página de login</li>\n      <li class=\"at-kanban-cartao\" data-id=\"2\">Integrar pagamento Pix <span class=\"at-selo at-perigo\">Urgente</span></li>\n    </ul>\n  </section>\n  <section class=\"at-kanban-coluna\" data-coluna=\"fazendo\">\n    <header>Fazendo <span class=\"at-selo\" data-contagem></span></header>\n    <ul class=\"at-kanban-lista\">\n      <li class=\"at-kanban-cartao\" data-id=\"3\">Tabela de pedidos</li>\n    </ul>\n  </section>\n  <section class=\"at-kanban-coluna\" data-coluna=\"feito\">\n    <header>Feito <span class=\"at-selo\" data-contagem></span></header>\n    <ul class=\"at-kanban-lista\">\n      <li class=\"at-kanban-cartao\" data-id=\"4\">Layout da home</li>\n    </ul>\n  </section>\n</div>\n\n<script type=\"module\">\ndocument.querySelector(\"#quadro\").addEventListener(\"at:mover\", (evento) => {\n  const { id, de, para } = evento.detail;\n  if (de !== para) Atalho.notificar(\"Tarefa \" + id + \" movida para \" + para + \".\");\n  // await Atalho.requisitar(\"/api/tarefas/\" + id, { metodo: \"PATCH\", corpo: { coluna: para } });\n});\n</script>"
+ },
+ {
+  "prefixo": "at-alerta",
+  "componente": "alerta",
+  "nome": "Alertas e faixa",
+  "categoria": "Feedback",
+  "resumo": "Mensagens fixas na página: informação, sucesso, atenção e erro. A faixa é o aviso no topo do site.",
+  "corpo": "<div class=\"at-pilha\" style=\"--at-gap: 12px\">\n  <div class=\"at-alerta\">\n    <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg>\n    <div class=\"at-alerta-conteudo\"><strong>Manutenção programada</strong><p>O sistema ficará fora do ar domingo, das 2h às 4h.</p></div>\n    <button data-at-fechar aria-label=\"Fechar aviso\">×</button>\n  </div>\n  <div class=\"at-alerta at-sucesso\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m8 12 3 3 5-6\"/></svg><div class=\"at-alerta-conteudo\"><strong>Pagamento confirmado</strong><p>Enviamos o recibo para seu e-mail.</p></div></div>\n  <div class=\"at-alerta at-aviso\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 2 20h20z\"/><path d=\"M12 10v4M12 17h.01\"/></svg><div class=\"at-alerta-conteudo\"><strong>Seu certificado digital vence em 5 dias</strong><p>Renove para continuar emitindo notas fiscais.</p></div></div>\n  <div class=\"at-alerta at-perigo\" role=\"alert\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 2 20h20z\"/><path d=\"M12 10v4M12 17h.01\"/></svg><div class=\"at-alerta-conteudo\"><strong>Cartão recusado</strong><p>Confira os dados ou tente outro cartão.</p></div></div>\n</div>"
+ },
+ {
+  "prefixo": "at-alerta-2",
+  "componente": "alerta",
+  "nome": "Alertas e faixa: Faixa do topo",
+  "categoria": "Feedback",
+  "resumo": "Mensagens fixas na página: informação, sucesso, atenção e erro. A faixa é o aviso no topo do site.",
+  "corpo": "<div class=\"at-faixa\">Frete grátis acima de R$ 199 · <a href=\"#\">Ver regras</a></div>"
+ },
+ {
+  "prefixo": "at-carregando",
+  "componente": "carregando",
+  "nome": "Carregando e progresso",
+  "categoria": "Feedback",
+  "resumo": "Indicador girando, esqueleto do conteúdo (skeleton) e barra de progresso nativa.",
+  "corpo": "<div class=\"at-cartao\" style=\"max-width: 360px\" id=\"perfil-cartao\" aria-busy=\"true\">\n  <div class=\"at-cartao-corpo at-linha at-topo\">\n    <span class=\"at-esqueleto at-circulo\"></span>\n    <div class=\"at-cresce at-pilha\" style=\"--at-gap: 8px\">\n      <span class=\"at-esqueleto at-titulo\"></span>\n      <span class=\"at-esqueleto\"></span>\n      <span class=\"at-esqueleto\" style=\"width: 70%\"></span>\n    </div>\n  </div>\n</div>\n\n<script type=\"module\">\nsetTimeout(() => {\n  const cartao = document.querySelector(\"#perfil-cartao\");\n  cartao.removeAttribute(\"aria-busy\");\n  cartao.innerHTML = `\n    <div class=\"at-cartao-corpo at-linha at-topo\">\n      <span class=\"at-avatar at-grande\">AO</span>\n      <div class=\"at-cresce\">\n        <strong>Ana Oliveira</strong>\n        <p class=\"at-texto-suave at-texto-pequeno at-mb-0\">Desenvolvedora front-end em São Paulo. Gosta de café e de interfaces simples.</p>\n      </div>\n    </div>`;\n}, 1800);\n</script>"
+ },
+ {
+  "prefixo": "at-carregando-2",
+  "componente": "carregando",
+  "nome": "Carregando e progresso: Girando e progresso",
+  "categoria": "Feedback",
+  "resumo": "Indicador girando, esqueleto do conteúdo (skeleton) e barra de progresso nativa.",
+  "corpo": "<div class=\"at-pilha\" style=\"max-width: 360px\">\n  <div class=\"at-linha\"><span class=\"at-girando\" role=\"status\" aria-label=\"Carregando\"></span> Buscando pedidos…</div>\n  <label class=\"at-texto-pequeno\">Enviando fotos (65%) <progress class=\"at-progresso\" max=\"100\" value=\"65\"></progress></label>\n  <label class=\"at-texto-pequeno\">Armazenamento quase cheio <progress class=\"at-progresso at-aviso\" max=\"100\" value=\"92\"></progress></label>\n</div>"
+ },
+ {
+  "prefixo": "at-vazio",
+  "componente": "vazio",
+  "nome": "Estado vazio",
+  "categoria": "Feedback",
+  "resumo": "O que mostrar quando não há nada: explica o porquê e oferece o próximo passo.",
+  "corpo": "<div class=\"at-vazio\">\n  <svg viewBox=\"0 0 24 24\" width=\"48\" height=\"48\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 13h5l2 3h4l2-3h5\"/><path d=\"M5 5h14l2 8v6H3v-6z\"/></svg>\n  <h3>Nenhum pedido ainda</h3>\n  <p>Quando alguém comprar na sua loja, o pedido aparece aqui com tudo que você precisa para enviar.</p>\n  <button class=\"at-botao at-primario\">Compartilhar minha loja</button>\n</div>"
+ },
+ {
+  "prefixo": "at-cookies",
+  "componente": "cookies",
+  "nome": "Aviso de cookies (LGPD)",
+  "categoria": "Feedback",
+  "resumo": "Consentimento de cookies conforme a LGPD: aceitar, recusar com o mesmo destaque e escolher por categoria. A escolha fica salva.",
+  "corpo": "<div class=\"at-cookies at-embutido\" data-at=\"cookies\" role=\"region\" aria-label=\"Aviso de cookies\">\n  <p>Usamos cookies essenciais para o site funcionar e, com sua permissão, cookies de análise para melhorar a experiência. <a href=\"#\">Política de privacidade</a></p>\n  <div class=\"at-linha\">\n    <button class=\"at-botao\" popovertarget=\"cookies-opcoes\">Personalizar</button>\n    <button class=\"at-botao\" data-at-cookies=\"recusar\">Recusar</button>\n    <button class=\"at-botao at-primario\" data-at-cookies=\"aceitar\">Aceitar</button>\n  </div>\n  <div id=\"cookies-opcoes\" popover class=\"at-menu\" style=\"padding: 16px; min-width: 280px\">\n    <div class=\"at-pilha\" style=\"--at-gap: 12px\">\n      <label class=\"at-check\"><input type=\"checkbox\" checked disabled> Essenciais (sempre ativos)</label>\n      <label class=\"at-check\"><input type=\"checkbox\" name=\"analiticos\"> Análise de uso</label>\n      <label class=\"at-check\"><input type=\"checkbox\" name=\"marketing\"> Marketing</label>\n      <button class=\"at-botao at-primario at-pequeno\" data-at-cookies=\"salvar\" popovertarget=\"cookies-opcoes\" popovertargetaction=\"hide\">Salvar escolhas</button>\n    </div>\n  </div>\n</div>\n\n<script type=\"module\">\ndocument.addEventListener(\"at:cookies\", (evento) => {\n  const { analiticos } = evento.detail;\n  Atalho.notificar(analiticos ? \"Análise de uso permitida.\" : \"Só cookies essenciais.\");\n  // if (analiticos) carregarGoogleAnalytics();\n});\n</script>"
+ },
+ {
+  "prefixo": "at-hero",
+  "componente": "hero",
+  "nome": "Hero (topo da landing page)",
+  "categoria": "Blocos de página",
+  "resumo": "A primeira dobra de uma landing page: chamada, título forte, subtítulo, botões e prova social.",
+  "corpo": "<section class=\"at-hero at-centro\">\n  <div class=\"at-container\">\n    <span class=\"at-selo at-primario\">Novo · Emissão de nota fiscal</span>\n    <!-- Na sua página, este é o título principal: use h1 (aqui é h2 porque a documentação já tem o seu) -->\n    <h2 class=\"at-titulo-1 at-mt-4\">Sua loja vendendo no<br>piloto automático</h2>\n    <p class=\"at-chamada\">Catálogo, Pix, frete e nota fiscal num lugar só. Configure em 10 minutos, sem programar.</p>\n    <div class=\"at-linha at-mt-6\">\n      <a href=\"#\" class=\"at-botao at-primario at-grande\">Criar loja grátis</a>\n      <a href=\"#\" class=\"at-botao at-grande\">Ver demonstração</a>\n    </div>\n    <div class=\"at-linha at-mt-6 at-texto-suave at-texto-pequeno\">\n      <div class=\"at-avatares\">\n        <span class=\"at-avatar at-pequeno\">AO</span><span class=\"at-avatar at-pequeno\">LP</span><span class=\"at-avatar at-pequeno\">JS</span>\n      </div>\n      Mais de 12 mil lojistas no Brasil\n    </div>\n  </div>\n</section>"
+ },
+ {
+  "prefixo": "at-planos",
+  "componente": "planos",
+  "nome": "Planos e preços",
+  "categoria": "Blocos de página",
+  "resumo": "Tabela de planos com destaque no recomendado e alternância mensal/anual que recalcula os preços.",
+  "corpo": "<label class=\"at-linha at-centro at-mb-6\">\n  Mensal\n  <input type=\"checkbox\" role=\"switch\" class=\"at-chave\" data-at-valor=\"planos.anual\" aria-label=\"Cobrança anual\">\n  Anual <span class=\"at-selo at-sucesso\">2 meses grátis</span>\n</label>\n\n<div class=\"at-planos\">\n  <div class=\"at-plano\">\n    <h3>Grátis</h3>\n    <div class=\"at-plano-preco\">R$ 0 <small>/mês</small></div>\n    <ul><li>Até 20 produtos</li><li>Pix e boleto</li><li>Domínio .loja</li></ul>\n    <button class=\"at-botao at-bloco\">Começar</button>\n  </div>\n  <div class=\"at-plano\" data-destaque=\"Mais escolhido\">\n    <h3>Profissional</h3>\n    <div class=\"at-plano-preco\"><span data-at-texto=\"planos.pro\" data-at-formato=\"moeda\"></span> <small>/mês</small></div>\n    <ul><li>Produtos ilimitados</li><li>Nota fiscal automática</li><li>Domínio próprio</li><li>Suporte por WhatsApp</li></ul>\n    <button class=\"at-botao at-primario at-bloco\">Assinar Profissional</button>\n  </div>\n  <div class=\"at-plano\">\n    <h3>Empresa</h3>\n    <div class=\"at-plano-preco\"><span data-at-texto=\"planos.empresa\" data-at-formato=\"moeda\"></span> <small>/mês</small></div>\n    <ul><li>Tudo do Profissional</li><li>Várias lojas</li><li>API e integrações</li><li>Gerente de conta</li></ul>\n    <button class=\"at-botao at-bloco\">Falar com vendas</button>\n  </div>\n</div>\n\n<script type=\"module\">\nAtalho.estado(\"planos\", {\n  anual: false,\n  // Anual: paga 10 meses e leva 12\n  get pro() { return this.anual ? (79 * 10) / 12 : 79; },\n  get empresa() { return this.anual ? (249 * 10) / 12 : 249; },\n});\n</script>"
+ },
+ {
+  "prefixo": "at-rodape",
+  "componente": "rodape",
+  "nome": "Rodapé",
+  "categoria": "Blocos de página",
+  "resumo": "Rodapé com colunas de links, redes e as informações que lojas brasileiras são obrigadas a mostrar.",
+  "corpo": "<footer class=\"at-rodape\">\n  <div class=\"at-container\">\n    <div class=\"at-rodape-grade\">\n      <div>\n        <a href=\"#\" class=\"at-barra-marca\">◆ Minha Loja</a>\n        <p class=\"at-texto-suave at-mt-2\">Moda e acessórios com entrega para todo o Brasil.</p>\n      </div>\n      <nav aria-label=\"Ajuda\"><h4>Ajuda</h4><ul><li><a href=\"#\">Trocas e devoluções</a></li><li><a href=\"#\">Prazos de entrega</a></li><li><a href=\"#\">Fale conosco</a></li></ul></nav>\n      <nav aria-label=\"Institucional\"><h4>Institucional</h4><ul><li><a href=\"#\">Quem somos</a></li><li><a href=\"#\">Trabalhe conosco</a></li><li><a href=\"#\">Política de privacidade</a></li></ul></nav>\n      <div><h4>Pagamento</h4><p class=\"at-texto-suave\">Pix · Cartão em até 10x · Boleto</p></div>\n    </div>\n    <div class=\"at-rodape-base\">\n      <span>Minha Loja Comércio Ltda. · CNPJ 12.345.678/0001-95 · Av. Paulista, 1000, São Paulo, SP</span>\n      <span>© 2026</span>\n    </div>\n  </div>\n</footer>"
+ },
+ {
+  "prefixo": "at-estado",
+  "componente": "estado",
+  "nome": "Estado (reatividade)",
+  "categoria": "JavaScript",
+  "resumo": "A ideia central do React, sem React: você muda os dados e a tela se atualiza sozinha. É assim que os componentes se conectam.",
+  "corpo": "<div class=\"at-linha\">\n  <button class=\"at-botao at-icone\" data-at-acao=\"contador.diminuir\" aria-label=\"Diminuir\">−</button>\n  <strong class=\"at-titulo-3 at-mb-0 at-numero\" data-at-texto=\"contador.valor\" aria-live=\"polite\"></strong>\n  <button class=\"at-botao at-icone\" data-at-acao=\"contador.aumentar\" aria-label=\"Aumentar\">+</button>\n  <span class=\"at-selo at-aviso\" data-at-mostrar=\"contador.alto\">Passou de 5!</span>\n</div>\n\n<script type=\"module\">\nAtalho.estado(\"contador\", {\n  valor: 0,\n  get alto() { return this.valor > 5; },\n  aumentar() { this.valor++; },\n  diminuir() { this.valor = Math.max(0, this.valor - 1); },\n});\n</script>"
+ },
+ {
+  "prefixo": "at-estado-2",
+  "componente": "estado",
+  "nome": "Estado (reatividade): Lista de tarefas que fica salva",
+  "categoria": "JavaScript",
+  "resumo": "A ideia central do React, sem React: você muda os dados e a tela se atualiza sozinha. É assim que os componentes se conectam.",
+  "corpo": "<form class=\"at-grupo-entrada\" style=\"max-width: 420px\" data-at-acao=\"tarefas.adicionar\">\n  <input class=\"at-entrada\" name=\"texto\" placeholder=\"Nova tarefa\" aria-label=\"Nova tarefa\" required autocomplete=\"off\">\n  <button class=\"at-botao at-primario\">Adicionar</button>\n</form>\n\n<p class=\"at-texto-suave at-texto-pequeno at-mt-4\" data-at-texto=\"tarefas.resumo\"></p>\n\n<ul class=\"at-pilha\" style=\"--at-gap: 6px; list-style: none; padding: 0; max-width: 420px\" data-at-lista=\"tarefas.itens\">\n  <template>\n    <li class=\"at-superficie at-linha at-entre\" style=\"padding: 8px 12px\">\n      <span data-at-campo=\"texto\"></span>\n      <button class=\"at-botao at-fantasma at-pequeno\" data-at-acao=\"tarefas.remover\">Concluir</button>\n    </li>\n  </template>\n</ul>\n\n<script type=\"module\">\nAtalho.estado(\"tarefas\", {\n  itens: [{ id: 1, texto: \"Estudar o componente Estado\" }],\n  get resumo() {\n    return this.itens.length\n      ? Atalho.formatar.plural(this.itens.length, \"tarefa pendente\", \"tarefas pendentes\")\n      : \"Tudo feito por hoje!\";\n  },\n  adicionar(dados, evento) {\n    this.itens = [...this.itens, { id: Date.now(), texto: dados.texto }];\n    evento.target.reset();\n  },\n  remover(tarefa) {\n    this.itens = this.itens.filter((t) => t.id !== tarefa.id);\n  },\n}, { salvar: true });\n</script>"
+ },
+ {
+  "prefixo": "at-formatar",
+  "componente": "formatar",
+  "nome": "Formatar (moeda, datas, números)",
+  "categoria": "JavaScript",
+  "resumo": "Funções prontas para o padrão brasileiro: R$ 1.234,56, 08/10/2026, \"há 5 minutos\", 1,2 mil, 3,4 MB.",
+  "corpo": "<div class=\"at-tabela-caixa\" style=\"max-width: 560px\">\n  <table class=\"at-tabela\">\n    <thead><tr><th>Código</th><th>Resultado</th></tr></thead>\n    <tbody id=\"tabela-formatos\"></tbody>\n  </table>\n</div>\n\n<script type=\"module\">\nconst f = Atalho.formatar;\nconst cincoMinutosAtras = Date.now() - 5 * 60 * 1000;\n\nconst exemplos = [\n  [\"f.moeda(1234.5)\", f.moeda(1234.5)],\n  [\"f.numero(98765.432, 2)\", f.numero(98765.432, 2)],\n  [\"f.porcentagem(0.125, 1)\", f.porcentagem(0.125, 1)],\n  [\"f.compacto(1250000)\", f.compacto(1250000)],\n  [\"f.data(new Date())\", f.data(new Date())],\n  [\"f.data(new Date(), \\\"long\\\")\", f.data(new Date(), \"long\")],\n  [\"f.relativo(cincoMinutosAtras)\", f.relativo(cincoMinutosAtras)],\n  [\"f.bytes(3500000)\", f.bytes(3500000)],\n  [\"f.plural(3, \\\"item\\\", \\\"itens\\\")\", f.plural(3, \"item\", \"itens\")],\n];\n\ndocument.querySelector(\"#tabela-formatos\").innerHTML = exemplos\n  .map(([codigo, resultado]) => \"<tr><td><code>\" + codigo + \"</code></td><td>\" + resultado + \"</td></tr>\")\n  .join(\"\");\n</script>"
+ },
+ {
+  "prefixo": "at-requisitar",
+  "componente": "requisitar",
+  "nome": "Buscar dados de uma API",
+  "categoria": "JavaScript",
+  "resumo": "fetch com tempo limite, JSON automático e erros em português. Com Estado, você ganha carregando, erro e resultado na tela sem esforço.",
+  "corpo": "<div class=\"at-entrada-icone\" style=\"max-width: 420px\">\n  <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>\n  <input class=\"at-entrada\" type=\"search\" placeholder=\"Buscar produtos (em inglês)\" aria-label=\"Buscar produtos\" data-at-acao=\"catalogo.buscar\" value=\"watch\">\n</div>\n\n<p class=\"at-texto-suave at-texto-pequeno at-mt-4\" aria-live=\"polite\" data-at-texto=\"catalogo.status\"></p>\n<div class=\"at-alerta at-perigo\" data-at-mostrar=\"catalogo.erro\"><div class=\"at-alerta-conteudo\" data-at-texto=\"catalogo.erro\"></div></div>\n\n<div class=\"at-grade\" style=\"--min: 150px\" data-at-mostrar=\"catalogo.carregando\">\n  <div class=\"at-esqueleto at-imagem\"></div><div class=\"at-esqueleto at-imagem\"></div><div class=\"at-esqueleto at-imagem\"></div>\n</div>\n\n<div class=\"at-grade\" style=\"--min: 150px\" data-at-lista=\"catalogo.produtos\" data-at-mostrar=\"!catalogo.carregando\">\n  <template>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" data-at-atributos=\"src: thumbnail, alt: title\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h4 class=\"at-produto-nome\" data-at-campo=\"title\"></h4>\n        <span class=\"at-preco\" data-at-campo=\"price\" data-at-formato=\"moeda\"></span>\n      </div>\n    </article>\n  </template>\n</div>\n\n<script type=\"module\">\nlet controle;\n\nconst catalogo = Atalho.estado(\"catalogo\", {\n  produtos: [],\n  carregando: false,\n  erro: \"\",\n  status: \"\",\n\n  async buscar(termo) {\n    controle?.abort(); // cancela a busca anterior se a pessoa continuar digitando\n    controle = new AbortController();\n    this.carregando = true;\n    this.erro = \"\";\n\n    try {\n      const url = \"https://dummyjson.com/products/search?limit=6&select=title,price,thumbnail&q=\" + encodeURIComponent(termo);\n      const resposta = await Atalho.requisitar(url, { sinal: controle.signal });\n      this.produtos = resposta.products;\n      this.status = Atalho.formatar.plural(resposta.total, \"produto encontrado\", \"produtos encontrados\");\n    } catch (erro) {\n      if (erro.name === \"AbortError\") return;\n      this.produtos = [];\n      this.erro = erro.message;\n    }\n    this.carregando = false;\n  },\n});\n\ncatalogo.buscar(\"watch\");\n</script>"
+ },
+ {
+  "prefixo": "at-eventos",
+  "componente": "eventos",
+  "nome": "Eventos do Atalho",
+  "categoria": "JavaScript",
+  "resumo": "Todos os componentes avisam o que aconteceu com eventos do navegador. É o jeito de ligar o Atalho ao seu código e ao seu servidor.",
+  "corpo": "<div class=\"at-abas\" data-at=\"abas\">\n  <button class=\"at-aba\" aria-controls=\"ev-um\">Primeira</button>\n  <button class=\"at-aba\" aria-controls=\"ev-dois\">Segunda</button>\n</div>\n<div class=\"at-painel\" id=\"ev-um\">Conteúdo um</div>\n<div class=\"at-painel\" id=\"ev-dois\">Conteúdo dois</div>\n<pre id=\"registro-eventos\" class=\"at-superficie\" style=\"font-size: 12px; min-height: 80px; margin: 0\"></pre>\n\n<script type=\"module\">\nconst registro = document.querySelector(\"#registro-eventos\");\n\ndocument.addEventListener(\"at:aba\", (evento) => {\n  registro.textContent += \"at:aba → \" + evento.detail.aba.textContent + \"\\n\";\n});\n</script>"
+ },
+ {
+  "prefixo": "at-receita-loja",
+  "componente": "receita-loja",
+  "nome": "Loja com carrinho",
+  "categoria": "Receitas completas",
+  "resumo": "Vitrine, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo conectado pelo Estado e salvo no navegador.",
+  "corpo": "<header class=\"at-barra\" style=\"position: static\">\n  <div class=\"at-barra-conteudo\" style=\"padding-inline: 16px\">\n    <span class=\"at-barra-marca\">◆ Loja Exemplo</span>\n    <div class=\"at-barra-acoes\">\n      <button class=\"at-botao at-icone at-contador-selo\" commandfor=\"gaveta-carrinho\" command=\"show-modal\" aria-label=\"Abrir carrinho\">\n        <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"20\" r=\"1.5\"/><circle cx=\"18\" cy=\"20\" r=\"1.5\"/><path d=\"M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6\"/></svg>\n        <span data-contador data-at-texto=\"carrinho.quantidade\" data-at-mostrar=\"carrinho.quantidade\"></span>\n      </button>\n    </div>\n  </div>\n</header>\n\n<div class=\"at-grade at-mt-6\" style=\"--min: 190px\" data-at-lista=\"vitrine.produtos\">\n  <template>\n    <article class=\"at-cartao at-produto\">\n      <img class=\"at-cartao-midia\" data-at-atributos=\"src: imagem, alt: nome\" loading=\"lazy\">\n      <div class=\"at-cartao-corpo\">\n        <h3 class=\"at-produto-nome\" data-at-campo=\"nome\"></h3>\n        <span class=\"at-preco-antigo\" data-at-campo=\"precoAntigo\" data-at-formato=\"moeda\"></span>\n        <span class=\"at-preco\" data-at-campo=\"preco\" data-at-formato=\"moeda\"></span>\n        <button class=\"at-botao at-primario at-bloco\" data-at-acao=\"carrinho.adicionar\">Comprar</button>\n      </div>\n    </article>\n  </template>\n</div>\n\n<dialog class=\"at-gaveta\" id=\"gaveta-carrinho\" aria-labelledby=\"carrinho-titulo\">\n  <div class=\"at-modal-cabecalho\">\n    <h3 id=\"carrinho-titulo\">Seu carrinho</h3>\n    <button class=\"at-botao at-icone at-fantasma at-pequeno\" commandfor=\"gaveta-carrinho\" command=\"close\" aria-label=\"Fechar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>\n  </div>\n\n  <div class=\"at-modal-corpo\">\n    <div class=\"at-vazio\" data-at-mostrar=\"carrinho.vazio\">\n      <svg viewBox=\"0 0 24 24\" width=\"48\" height=\"48\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 13h5l2 3h4l2-3h5\"/><path d=\"M5 5h14l2 8v6H3v-6z\"/></svg>\n      <h3>Seu carrinho está vazio</h3>\n      <p>Que tal dar uma olhada nas ofertas?</p>\n    </div>\n\n    <ul class=\"at-pilha\" style=\"--at-gap: 12px; list-style: none; padding: 0; margin: 0\" data-at-lista=\"carrinho.itens\">\n      <template>\n        <li class=\"at-linha at-topo\">\n          <img data-at-atributos=\"src: imagem, alt: nome\" width=\"64\" height=\"64\" style=\"object-fit: contain; background: #fff; border-radius: 8px\">\n          <div class=\"at-cresce\">\n            <div class=\"at-texto-pequeno\" data-at-campo=\"nome\"></div>\n            <strong data-at-campo=\"subtotal\" data-at-formato=\"moeda\"></strong>\n            <div class=\"at-linha at-mt-2\" style=\"--at-gap: 4px\">\n              <button class=\"at-botao at-icone at-pequeno\" data-at-acao=\"carrinho.diminuir\" aria-label=\"Diminuir\">−</button>\n              <span class=\"at-numero\" style=\"min-width: 2ch; text-align: center\" data-at-campo=\"quantidade\"></span>\n              <button class=\"at-botao at-icone at-pequeno\" data-at-acao=\"carrinho.aumentar\" aria-label=\"Aumentar\">+</button>\n              <button class=\"at-botao at-link at-pequeno\" style=\"margin-left: auto\" data-at-acao=\"carrinho.remover\">Remover</button>\n            </div>\n          </div>\n        </li>\n      </template>\n    </ul>\n  </div>\n\n  <div class=\"at-modal-rodape\" style=\"flex-direction: column; align-items: stretch\">\n    <div class=\"at-linha at-entre\">\n      <span>Total</span>\n      <strong class=\"at-titulo-4 at-mb-0\" data-at-texto=\"carrinho.total\" data-at-formato=\"moeda\" aria-live=\"polite\"></strong>\n    </div>\n    <button class=\"at-botao at-primario at-grande at-bloco\" data-at-desabilitar=\"carrinho.vazio\" data-at-acao=\"carrinho.finalizar\">Finalizar compra</button>\n  </div>\n</dialog>\n\n<script type=\"module\">\nAtalho.estado(\"vitrine\", {\n  produtos: [\n    {\n      \"id\": 101,\n      \"nome\": \"Tênis cano alto vermelho e preto\",\n      \"preco\": 599.9,\n      \"precoAntigo\": 799.9,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp\"\n    },\n    {\n      \"id\": 102,\n      \"nome\": \"Óculos de sol clássico com proteção UV\",\n      \"preco\": 189.9,\n      \"precoAntigo\": 229.9,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp\"\n    },\n    {\n      \"id\": 103,\n      \"nome\": \"Relógio com pulseira de couro marrom\",\n      \"preco\": 349,\n      \"precoAntigo\": null,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp\"\n    },\n    {\n      \"id\": 104,\n      \"nome\": \"Notebook 14 polegadas 16 GB RAM 512 GB SSD\",\n      \"preco\": 8999,\n      \"precoAntigo\": 10499,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp\"\n    }\n  ],\n});\n\nconst recalcular = (itens) => itens.map((item) => ({ ...item, subtotal: item.preco * item.quantidade }));\n\nAtalho.estado(\"carrinho\", {\n  itens: [],\n\n  get quantidade() { return this.itens.reduce((soma, item) => soma + item.quantidade, 0); },\n  get total() { return this.itens.reduce((soma, item) => soma + item.subtotal, 0); },\n  get vazio() { return this.itens.length === 0; },\n\n  adicionar(produto) {\n    const existe = this.itens.find((item) => item.id === produto.id);\n    this.itens = recalcular(existe\n      ? this.itens.map((item) => (item.id === produto.id ? { ...item, quantidade: item.quantidade + 1 } : item))\n      : [...this.itens, { ...produto, quantidade: 1 }]);\n\n    Atalho.notificar(produto.nome, {\n      tipo: \"sucesso\",\n      titulo: \"Adicionado ao carrinho\",\n      acao: { texto: \"Ver carrinho\", aoClicar: () => document.querySelector(\"#gaveta-carrinho\").showModal() },\n    });\n  },\n  aumentar(item) {\n    this.itens = recalcular(this.itens.map((i) => (i.id === item.id ? { ...i, quantidade: i.quantidade + 1 } : i)));\n  },\n  diminuir(item) {\n    this.itens = recalcular(this.itens\n      .map((i) => (i.id === item.id ? { ...i, quantidade: i.quantidade - 1 } : i))\n      .filter((i) => i.quantidade > 0));\n  },\n  remover(item) { this.itens = this.itens.filter((i) => i.id !== item.id); },\n  finalizar() {\n    Atalho.notificar(\"Total de \" + Atalho.formatar.moeda(this.total) + \". Agora é só ligar ao seu pagamento!\", { titulo: \"Pedido criado\" });\n    this.itens = [];\n    document.querySelector(\"#gaveta-carrinho\").close();\n  },\n}, { salvar: true });\n</script>"
+ },
+ {
+  "prefixo": "at-receita-cadastro",
+  "componente": "receita-cadastro",
+  "nome": "Cadastro com CEP",
+  "categoria": "Receitas completas",
+  "resumo": "Cadastro brasileiro completo: dados pessoais com máscaras, endereço automático pelo CEP, senha com força, termos e confirmação.",
+  "corpo": "<div class=\"at-cartao\" style=\"max-width: 760px; margin-inline: auto\">\n  <div class=\"at-cartao-corpo\" style=\"border-bottom: 1px solid var(--at-borda)\">\n    <h2 class=\"at-titulo-3 at-mb-0\">Crie sua conta</h2>\n    <p class=\"at-texto-suave at-mb-0\">Leva menos de 2 minutos: o endereço se preenche sozinho pelo CEP.</p>\n  </div>\n  <form id=\"form-cadastro\" data-at-validar class=\"at-cartao-corpo at-pilha\" style=\"--at-gap: 28px\">\n    <fieldset class=\"at-formulario\" style=\"border: 0; padding: 0; margin: 0\">\n      <legend class=\"at-titulo-4\">Seus dados</legend>\n      <div class=\"at-campo\">\n        <label class=\"at-rotulo\" for=\"cad-nome\">Nome completo</label>\n        <input class=\"at-entrada\" id=\"cad-nome\" name=\"nome\" required minlength=\"5\" autocomplete=\"name\">\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-cpf\">CPF</label>\n        <input class=\"at-entrada\" id=\"cad-cpf\" name=\"cpf\" required data-at-mascara=\"cpf\">\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-nasc\">Data de nascimento</label>\n        <input class=\"at-entrada\" id=\"cad-nasc\" name=\"nascimento\" type=\"date\" required max=\"2010-12-31\" autocomplete=\"bday\">\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-email\">E-mail</label>\n        <input class=\"at-entrada\" id=\"cad-email\" name=\"email\" type=\"email\" required autocomplete=\"email\">\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-cel\">Celular</label>\n        <input class=\"at-entrada\" id=\"cad-cel\" name=\"celular\" type=\"tel\" required data-at-mascara=\"telefone\" autocomplete=\"tel-national\">\n      </div>\n    </fieldset>\n\n    <fieldset class=\"at-formulario\" style=\"border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0\">\n      <legend class=\"at-titulo-4\">Endereço</legend>\n      <div class=\"at-campo at-terco\">\n        <label class=\"at-rotulo\" for=\"cad-cep\">CEP</label>\n        <input class=\"at-entrada\" id=\"cad-cep\" name=\"cep\" required data-at-mascara=\"cep\" data-at-cep autocomplete=\"postal-code\">\n      </div>\n      <div class=\"at-campo at-dois-tercos\">\n        <label class=\"at-rotulo\" for=\"cad-rua\">Rua</label>\n        <input class=\"at-entrada\" id=\"cad-rua\" name=\"rua\" required data-at-cep-preencher=\"logradouro\">\n      </div>\n      <div class=\"at-campo at-terco\">\n        <label class=\"at-rotulo\" for=\"cad-num\">Número</label>\n        <input class=\"at-entrada\" id=\"cad-num\" name=\"numero\" required data-at-cep-foco>\n      </div>\n      <div class=\"at-campo at-dois-tercos\">\n        <label class=\"at-rotulo\" for=\"cad-comp\">Complemento <span class=\"at-opcional\">(opcional)</span></label>\n        <input class=\"at-entrada\" id=\"cad-comp\" name=\"complemento\">\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-bairro\">Bairro</label>\n        <input class=\"at-entrada\" id=\"cad-bairro\" name=\"bairro\" required data-at-cep-preencher=\"bairro\">\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-cidade\">Cidade / UF</label>\n        <input class=\"at-entrada\" id=\"cad-cidade\" name=\"cidade\" required data-at-cep-preencher=\"localidade\">\n      </div>\n    </fieldset>\n\n    <fieldset class=\"at-formulario\" style=\"border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0\">\n      <legend class=\"at-titulo-4\">Acesso</legend>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-senha\">Senha</label>\n        <div class=\"at-senha\">\n          <input class=\"at-entrada\" id=\"cad-senha\" name=\"senha\" type=\"password\" required minlength=\"8\" autocomplete=\"new-password\">\n          <button type=\"button\" data-at-ver-senha>Mostrar</button>\n        </div>\n        <div class=\"at-forca\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span></div>\n        <span class=\"at-forca-texto\" aria-live=\"polite\"></span>\n      </div>\n      <div class=\"at-campo at-meio\">\n        <label class=\"at-rotulo\" for=\"cad-senha2\">Confirme a senha</label>\n        <input class=\"at-entrada\" id=\"cad-senha2\" type=\"password\" required data-at-igual=\"#cad-senha\" data-msg-igual=\"As senhas não são iguais.\" autocomplete=\"new-password\">\n      </div>\n      <div class=\"at-campo\">\n        <label class=\"at-check\">\n          <input type=\"checkbox\" name=\"termos\" required data-msg-obrigatorio=\"Aceite os termos para continuar.\">\n          <span>Li e aceito os <a href=\"#\">termos de uso</a> e a <a href=\"#\">política de privacidade</a>.</span>\n        </label>\n      </div>\n    </fieldset>\n\n    <button class=\"at-botao at-primario at-grande at-bloco\">Criar minha conta</button>\n    <p class=\"at-texto-pequeno at-texto-suave at-texto-centro at-mb-0\">Já tem conta? <a href=\"#\">Entrar</a></p>\n  </form>\n</div>\n\n<dialog class=\"at-modal at-pequeno\" id=\"modal-cadastro\">\n  <div class=\"at-modal-corpo at-texto-centro\">\n    <div class=\"at-titulo-1\" aria-hidden=\"true\">🎉</div>\n    <h3 class=\"at-titulo-4\">Conta criada!</h3>\n    <p class=\"at-texto-suave\" id=\"cadastro-mensagem\"></p>\n    <button class=\"at-botao at-primario at-bloco\" commandfor=\"modal-cadastro\" command=\"close\">Começar</button>\n  </div>\n</dialog>\n\n<script type=\"module\">\ndocument.querySelector(\"#form-cadastro\").addEventListener(\"at:enviar\", (evento) => {\n  const { dados, botao, formulario } = evento.detail;\n  botao.setAttribute(\"aria-busy\", \"true\");\n\n  // Troque o setTimeout pela sua API:\n  // await Atalho.requisitar(\"/api/clientes\", { metodo: \"POST\", corpo: dados });\n  setTimeout(() => {\n    botao.removeAttribute(\"aria-busy\");\n    const primeiroNome = dados.nome.split(\" \")[0];\n    document.querySelector(\"#cadastro-mensagem\").textContent =\n      \"Bem-vindo(a), \" + primeiroNome + \". Enviamos a confirmação para \" + dados.email + \".\";\n    document.querySelector(\"#modal-cadastro\").showModal();\n    formulario.reset();\n  }, 1200);\n});\n</script>"
+ },
+ {
+  "prefixo": "at-receita-painel",
+  "componente": "receita-painel",
+  "nome": "Painel administrativo",
+  "categoria": "Receitas completas",
+  "resumo": "Menu lateral, indicadores, busca, tabela com ordenação, ações por linha e exportação. A tela que todo sistema de empresa tem.",
+  "corpo": "<div class=\"at-app\" style=\"min-height: 560px\">\n  <aside class=\"at-lateral\" style=\"height: auto\">\n    <div class=\"at-lateral-topo\"><span class=\"at-barra-marca\">◆ Gestão</span></div>\n    <nav aria-label=\"Menu principal\">\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 11 12 3l9 8v10h-6v-6H9v6H3z\"/></svg> Início</a>\n      <a href=\"#\" class=\"at-lateral-link\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7l9-4 9 4v10l-9 4-9-4z\"/><path d=\"M3 7l9 4 9-4M12 11v10\"/></svg> Pedidos <span class=\"at-selo at-primario\">3</span></a>\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"4\"/><path d=\"M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-5-6.7\"/></svg> Clientes</a>\n      <a href=\"#\" class=\"at-lateral-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20V10M10 20V4M16 20v-7M22 20H2\"/></svg> Relatórios</a>\n    </nav>\n  </aside>\n\n  <main class=\"at-app-conteudo at-pilha\" style=\"--at-gap: 24px\">\n    <div>\n      <nav class=\"at-trilha\" aria-label=\"Você está em\"><ol><li><a href=\"#\">Início</a></li><li aria-current=\"page\">Pedidos</li></ol></nav>\n      <div class=\"at-linha at-entre at-mt-2\">\n        <h2 class=\"at-titulo-3 at-mb-0\">Pedidos</h2>\n        <button class=\"at-botao at-primario\" data-at-notificar=\"Abra aqui o formulário de novo pedido\" data-at-tipo=\"info\">Novo pedido</button>\n      </div>\n    </div>\n\n    <div class=\"at-colunas-3\" style=\"--at-gap: 16px\">\n      <div class=\"at-indicador\"><span class=\"at-indicador-rotulo\">Hoje</span><strong class=\"at-indicador-valor\">R$ 3.840</strong><span class=\"at-indicador-variacao\" data-direcao=\"sobe\">↑ 18% vs. ontem</span></div>\n      <div class=\"at-indicador\"><span class=\"at-indicador-rotulo\">A enviar</span><strong class=\"at-indicador-valor\">3</strong><span class=\"at-indicador-variacao\">1 atrasado</span></div>\n      <div class=\"at-indicador\"><span class=\"at-indicador-rotulo\">Ticket médio</span><strong class=\"at-indicador-valor\">R$ 412</strong><span class=\"at-indicador-variacao\" data-direcao=\"desce\">↓ 2% vs. setembro</span></div>\n    </div>\n\n    <div>\n      <div class=\"at-tabela-ferramentas\">\n        <div class=\"at-entrada-icone at-cresce\" style=\"max-width: 300px\">\n          <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>\n          <input class=\"at-entrada\" id=\"painel-busca\" type=\"search\" placeholder=\"Buscar pedidos\" aria-label=\"Buscar pedidos\">\n        </div>\n        <button class=\"at-botao\" data-at-exportar=\"#painel-tabela\" data-arquivo=\"pedidos.csv\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 4v12M6 10l6 6 6-6M4 20h16\"/></svg> Exportar</button>\n      </div>\n      <div class=\"at-tabela-caixa\">\n        <table class=\"at-tabela\" id=\"painel-tabela\" data-at=\"tabela\" data-filtro=\"#painel-busca\">\n          <thead><tr><th data-ordenar=\"numero\">Pedido</th><th data-ordenar>Cliente</th><th>Status</th><th data-ordenar=\"numero\" class=\"at-direita\">Total</th><th data-nao-exportar><span class=\"at-sr\">Ações</span></th></tr></thead>\n          <tbody>\n            <tr>\n              <td>#1048</td><td>Maria Oliveira</td><td><span class=\"at-selo at-sucesso\">Pago</span></td>\n              <td class=\"at-direita\" data-valor=\"1250\">R$ 1.250,00</td>\n              <td class=\"at-encolher\" data-nao-exportar>\n                <button class=\"at-botao at-icone at-fantasma at-pequeno\" popovertarget=\"acoes-1048\" aria-label=\"Ações do pedido 1048\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"5\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/></svg></button>\n                <div id=\"acoes-1048\" popover class=\"at-menu\" data-alinhar=\"fim\">\n                  <button class=\"at-menu-item\">Ver detalhes</button>\n                  <button class=\"at-menu-item\" data-at-notificar=\"Etiqueta do pedido 1048 gerada\">Gerar etiqueta</button>\n                  <hr class=\"at-menu-separador\">\n                  <button class=\"at-menu-item at-perigo\">Cancelar pedido</button>\n                </div>\n              </td>\n            </tr>\n            <tr>\n              <td>#1047</td><td>João Santos</td><td><span class=\"at-selo at-aviso\">A enviar</span></td>\n              <td class=\"at-direita\" data-valor=\"389.9\">R$ 389,90</td>\n              <td class=\"at-encolher\" data-nao-exportar>\n                <button class=\"at-botao at-icone at-fantasma at-pequeno\" popovertarget=\"acoes-1047\" aria-label=\"Ações do pedido 1047\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"5\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/></svg></button>\n                <div id=\"acoes-1047\" popover class=\"at-menu\" data-alinhar=\"fim\">\n                  <button class=\"at-menu-item\">Ver detalhes</button>\n                  <button class=\"at-menu-item\" data-at-notificar=\"Etiqueta do pedido 1047 gerada\">Gerar etiqueta</button>\n                  <hr class=\"at-menu-separador\">\n                  <button class=\"at-menu-item at-perigo\">Cancelar pedido</button>\n                </div>\n              </td>\n            </tr>\n            <tr>\n              <td>#1046</td><td>Ana Costa</td><td><span class=\"at-selo at-perigo\">Atrasado</span></td>\n              <td class=\"at-direita\" data-valor=\"89.9\">R$ 89,90</td>\n              <td class=\"at-encolher\" data-nao-exportar>\n                <button class=\"at-botao at-icone at-fantasma at-pequeno\" popovertarget=\"acoes-1046\" aria-label=\"Ações do pedido 1046\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"5\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/></svg></button>\n                <div id=\"acoes-1046\" popover class=\"at-menu\" data-alinhar=\"fim\">\n                  <button class=\"at-menu-item\">Ver detalhes</button>\n                  <button class=\"at-menu-item\" data-at-notificar=\"Etiqueta do pedido 1046 gerada\">Gerar etiqueta</button>\n                  <hr class=\"at-menu-separador\">\n                  <button class=\"at-menu-item at-perigo\">Cancelar pedido</button>\n                </div>\n              </td>\n            </tr>\n            <tr>\n              <td>#1045</td><td>Lucas Pereira</td><td><span class=\"at-selo at-info\">Enviado</span></td>\n              <td class=\"at-direita\" data-valor=\"2100\">R$ 2.100,00</td>\n              <td class=\"at-encolher\" data-nao-exportar>\n                <button class=\"at-botao at-icone at-fantasma at-pequeno\" popovertarget=\"acoes-1045\" aria-label=\"Ações do pedido 1045\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"5\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/></svg></button>\n                <div id=\"acoes-1045\" popover class=\"at-menu\" data-alinhar=\"fim\">\n                  <button class=\"at-menu-item\">Ver detalhes</button>\n                  <button class=\"at-menu-item\" data-at-notificar=\"Etiqueta do pedido 1045 gerada\">Gerar etiqueta</button>\n                  <hr class=\"at-menu-separador\">\n                  <button class=\"at-menu-item at-perigo\">Cancelar pedido</button>\n                </div>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </main>\n</div>"
+ },
+ {
+  "prefixo": "at-receita-login",
+  "componente": "receita-login",
+  "nome": "Login em duas etapas",
+  "categoria": "Receitas completas",
+  "resumo": "E-mail e senha, depois o código de verificação, depois a confirmação. As telas trocam pelo Estado, sem recarregar a página.",
+  "corpo": "<div class=\"at-cartao\" style=\"max-width: 400px; margin-inline: auto\">\n  <div class=\"at-cartao-corpo at-pilha\">\n    <ol class=\"at-etapas\">\n      <li id=\"passo-1\" aria-current=\"step\">Senha</li>\n      <li id=\"passo-2\">Código</li>\n      <li id=\"passo-3\">Pronto</li>\n    </ol>\n\n    <form class=\"at-pilha\" data-at-validar data-at-acao=\"login.entrar\" data-at-mostrar=\"login.naSenha\">\n      <h3 class=\"at-titulo-4 at-mb-0\">Entrar na sua conta</h3>\n      <div class=\"at-campo\">\n        <label class=\"at-rotulo\" for=\"login-email\">E-mail</label>\n        <input class=\"at-entrada\" id=\"login-email\" name=\"email\" type=\"email\" required autocomplete=\"username\">\n      </div>\n      <div class=\"at-campo\">\n        <label class=\"at-rotulo\" for=\"login-senha\">Senha</label>\n        <div class=\"at-senha\">\n          <input class=\"at-entrada\" id=\"login-senha\" name=\"senha\" type=\"password\" required minlength=\"8\" autocomplete=\"current-password\">\n          <button type=\"button\" data-at-ver-senha>Mostrar</button>\n        </div>\n      </div>\n      <button class=\"at-botao at-primario at-bloco\" id=\"login-entrar\">Continuar</button>\n    </form>\n\n    <div class=\"at-pilha\" data-at-mostrar=\"login.noCodigo\" hidden>\n      <h3 class=\"at-titulo-4 at-mb-0\">Digite o código</h3>\n      <p class=\"at-texto-suave at-mb-0\">Enviamos para <strong data-at-texto=\"login.email\"></strong>.</p>\n      <div class=\"at-codigo\" data-at=\"codigo\" id=\"login-codigo\"><input><input><input><input><input><input></div>\n      <button class=\"at-botao at-link\" data-at-acao=\"login.voltar\">Usar outro e-mail</button>\n    </div>\n\n    <div class=\"at-texto-centro\" data-at-mostrar=\"login.pronto\" hidden>\n      <div class=\"at-titulo-1\" aria-hidden=\"true\">✓</div>\n      <h3 class=\"at-titulo-4\">Tudo certo!</h3>\n      <p class=\"at-texto-suave\">Você entrou como <span data-at-texto=\"login.email\"></span>.</p>\n      <button class=\"at-botao at-bloco\" data-at-acao=\"login.voltar\">Sair</button>\n    </div>\n  </div>\n</div>\n\n<script type=\"module\">\nconst passos = [...document.querySelectorAll(\"#passo-1, #passo-2, #passo-3\")];\n\nconst login = Atalho.estado(\"login\", {\n  etapa: 0,\n  email: \"\",\n  get naSenha() { return this.etapa === 0; },\n  get noCodigo() { return this.etapa === 1; },\n  get pronto() { return this.etapa === 2; },\n\n  entrar(dados) {\n    this.email = dados.email;\n    this.etapa = 1;\n  },\n  verificar(codigo) {\n    const campo = document.querySelector(\"#login-codigo\");\n    if (codigo !== \"123456\") {\n      campo.setAttribute(\"aria-invalid\", \"true\");\n      return Atalho.notificar(\"Código incorreto.\", { tipo: \"perigo\" });\n    }\n    this.etapa = 2;\n  },\n  voltar() { this.etapa = 0; },\n});\n\ndocument.querySelector(\"#login-codigo\").addEventListener(\"at:codigo\", (evento) => login.verificar(evento.detail.valor));\n\n// Atualiza o indicador de etapas e o foco sempre que a etapa muda\nlet etapaAnterior = 0;\nAtalho.observar(\"login\", ({ etapa }) => {\n  passos.forEach((passo, indice) => {\n    if (indice < etapa) passo.dataset.estado = \"feito\"; else delete passo.dataset.estado;\n    if (indice === etapa) passo.setAttribute(\"aria-current\", \"step\"); else passo.removeAttribute(\"aria-current\");\n  });\n  const telaAtual = document.querySelector(\"[data-at-mostrar='login.\" + [\"naSenha\", \"noCodigo\", \"pronto\"][etapa] + \"']\");\n  if (etapa !== etapaAnterior) telaAtual?.querySelector(\"input, button\")?.focus();\n  etapaAnterior = etapa;\n});\n</script>"
+ },
+ {
+  "prefixo": "at-autocompletar",
+  "componente": "autocompletar",
+  "nome": "Autocompletar",
+  "categoria": "Formulários",
+  "resumo": "Campo que sugere opções enquanto a pessoa digita, ignorando acentos. Escolha com o mouse ou com as setas e Enter.",
+  "corpo": "<div class=\"at-campo\" style=\"max-width: 360px\">\n  <label class=\"at-rotulo\" for=\"banco\">Banco</label>\n  <div class=\"at-autocompletar\" data-at=\"autocompletar\" id=\"caixa-banco\">\n    <input class=\"at-entrada\" id=\"banco\" placeholder=\"Digite o nome ou o código\">\n    <ul class=\"at-sugestoes\">\n      <li data-valor=\"001\">Banco do Brasil <small>001</small></li>\n      <li data-valor=\"237\">Bradesco <small>237</small></li>\n      <li data-valor=\"104\" data-palavras=\"caixa economica\">Caixa Econômica Federal <small>104</small></li>\n      <li data-valor=\"341\">Itaú Unibanco <small>341</small></li>\n      <li data-valor=\"260\" data-palavras=\"roxinho\">Nubank <small>260</small></li>\n      <li data-valor=\"077\">Banco Inter <small>077</small></li>\n      <li data-valor=\"033\">Santander <small>033</small></li>\n      <li data-valor=\"336\">C6 Bank <small>336</small></li>\n    </ul>\n  </div>\n</div>\n\n<script type=\"module\">\ndocument.querySelector(\"#caixa-banco\").addEventListener(\"at:selecionar\", (evento) => {\n  Atalho.notificar(\"Banco escolhido: código \" + evento.detail.valor);\n});\n</script>"
+ },
+ {
+  "prefixo": "at-quantidade",
+  "componente": "quantidade",
+  "nome": "Quantidade (+ e −)",
+  "categoria": "Formulários",
+  "resumo": "Seletor de quantidade com botões de mais e menos, respeitando mínimo, máximo e estoque.",
+  "corpo": "<div class=\"at-linha\">\n  <span>Inteira <strong>R$ 60,00</strong></span>\n  <div class=\"at-quantidade\" data-at=\"quantidade\">\n    <button data-passo=\"-1\">−</button>\n    <input type=\"number\" value=\"1\" min=\"0\" max=\"6\" aria-label=\"Quantidade de ingressos\" data-at-valor=\"ingressos.quantidade\">\n    <button data-passo=\"1\">+</button>\n  </div>\n  <span>Total: <strong data-at-texto=\"ingressos.total\" data-at-formato=\"moeda\"></strong></span>\n</div>\n\n<script type=\"module\">\nAtalho.estado(\"ingressos\", {\n  quantidade: 1,\n  get total() { return this.quantidade * 60; },\n});\n</script>"
+ },
+ {
+  "prefixo": "at-contador-caracteres",
+  "componente": "contador-caracteres",
+  "nome": "Contador de caracteres",
+  "categoria": "Formulários",
+  "resumo": "Mostra quantos caracteres faltam e avisa com cor quando a pessoa está perto do limite.",
+  "corpo": "<div class=\"at-campo\" style=\"max-width: 420px\">\n  <div class=\"at-linha at-entre\">\n    <label class=\"at-rotulo\" for=\"bio\">Biografia</label>\n    <span class=\"at-contagem\" data-contagem-de=\"bio\" aria-live=\"polite\"></span>\n  </div>\n  <textarea class=\"at-entrada\" id=\"bio\" maxlength=\"160\" data-at-contar rows=\"3\">Desenvolvedor em formação, apaixonado por café e por interfaces simples.</textarea>\n</div>"
+ },
+ {
+  "prefixo": "at-faixa",
+  "componente": "faixa",
+  "nome": "Faixa de valores (slider)",
+  "categoria": "Formulários",
+  "resumo": "Controle deslizante estilizado, com o valor mostrado ao lado e formatação brasileira.",
+  "corpo": "<div class=\"at-cartao\" style=\"max-width: 420px\">\n  <div class=\"at-cartao-corpo at-pilha\">\n    <div class=\"at-campo\">\n      <div class=\"at-linha at-entre\"><label class=\"at-rotulo\" for=\"valor-emprestimo\">Quanto você precisa?</label><output for=\"valor-emprestimo\" data-at-formato=\"moeda\"></output></div>\n      <input type=\"range\" class=\"at-faixa-entrada\" id=\"valor-emprestimo\" min=\"1000\" max=\"50000\" step=\"500\" value=\"12000\" data-at-valor=\"simulador.valor\">\n    </div>\n    <div class=\"at-campo\">\n      <div class=\"at-linha at-entre\"><label class=\"at-rotulo\" for=\"parcelas-emprestimo\">Em quantas vezes?</label><output for=\"parcelas-emprestimo\"></output></div>\n      <input type=\"range\" class=\"at-faixa-entrada\" id=\"parcelas-emprestimo\" min=\"6\" max=\"48\" step=\"6\" value=\"24\" data-at-valor=\"simulador.parcelas\">\n    </div>\n    <p class=\"at-mb-0\">Parcela estimada: <strong class=\"at-titulo-4\" data-at-texto=\"simulador.parcela\" data-at-formato=\"moeda\"></strong></p>\n  </div>\n</div>\n\n<script type=\"module\">\nAtalho.estado(\"simulador\", {\n  valor: 12000,\n  parcelas: 24,\n  // Juros de exemplo: 1,99% ao mês (tabela Price)\n  get parcela() {\n    const juros = 0.0199;\n    const n = Number(this.parcelas);\n    return (Number(this.valor) * juros) / (1 - (1 + juros) ** -n);\n  },\n});\n</script>"
+ },
+ {
+  "prefixo": "at-etiquetas-entrada",
+  "componente": "etiquetas-entrada",
+  "nome": "Entrada de etiquetas (tags)",
+  "categoria": "Formulários",
+  "resumo": "Campo em que cada palavra vira uma etiqueta removível ao apertar Enter ou vírgula. Ideal para habilidades, tags e e-mails.",
+  "corpo": "<div class=\"at-campo\" style=\"max-width: 480px\">\n  <label class=\"at-rotulo\" for=\"habilidades\">Habilidades</label>\n  <div class=\"at-etiquetas\" data-at=\"etiquetas\" data-nome=\"habilidades\" data-valores=\"HTML,CSS\" data-maximo=\"8\">\n    <input id=\"habilidades\" placeholder=\"Digite e aperte Enter\">\n  </div>\n  <span class=\"at-ajuda\">Até 8 habilidades. Enter ou vírgula para adicionar.</span>\n</div>"
+ },
+ {
+  "prefixo": "at-galeria",
+  "componente": "galeria",
+  "nome": "Galeria de fotos",
+  "categoria": "Exibir dados",
+  "resumo": "Grade de miniaturas que abre cada foto em tela cheia, com setas, contador e legenda.",
+  "corpo": "<div class=\"at-galeria\" data-at=\"galeria\" style=\"--min: 110px; max-width: 520px\">\n  <a href=\"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp\">\n    <img src=\"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp\" alt=\"Tênis vermelho e preto, vista lateral\" loading=\"lazy\">\n  </a>\n  <a href=\"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/1.webp\">\n    <img src=\"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp\" alt=\"Óculos de sol clássico\" loading=\"lazy\">\n  </a>\n  <a href=\"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/1.webp\">\n    <img src=\"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp\" alt=\"Relógio com pulseira de couro\" loading=\"lazy\">\n  </a>\n  <a href=\"https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/1.webp\">\n    <img src=\"https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp\" alt=\"Notebook 14 polegadas aberto\" loading=\"lazy\">\n  </a>\n</div>"
+ },
+ {
+  "prefixo": "at-video",
+  "componente": "video",
+  "nome": "Vídeo leve do YouTube",
+  "categoria": "Exibir dados",
+  "resumo": "Mostra a capa do vídeo e só carrega o player do YouTube no clique: página até 1 MB mais leve e sem cookies antes da hora.",
+  "corpo": "<a class=\"at-video\" data-at=\"video\" href=\"https://www.youtube.com/watch?v=aqz-KE-bpKQ\" style=\"max-width: 560px\">\n  <span>Big Buck Bunny · Blender Foundation (CC BY)</span>\n</a>"
+ },
+ {
+  "prefixo": "at-whatsapp",
+  "componente": "whatsapp",
+  "nome": "Botão do WhatsApp",
+  "categoria": "Ações",
+  "resumo": "Botão flutuante que abre uma conversa no WhatsApp com mensagem pronta. No celular vira só o ícone.",
+  "corpo": "<a class=\"at-whatsapp at-embutido\" href=\"https://wa.me/5511999999999?text=Ol%C3%A1!%20Vi%20o%20site%20e%20quero%20saber%20mais.\" target=\"_blank\" rel=\"noopener\">\n  <svg viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2z\"/></svg>\n  <span>Fale com a gente</span>\n</a>"
+ },
+ {
+  "prefixo": "at-contagem-regressiva",
+  "componente": "contagem-regressiva",
+  "nome": "Contagem regressiva",
+  "categoria": "Blocos de página",
+  "resumo": "Dias, horas, minutos e segundos até uma data: promoção, lançamento, evento. Termina sozinha e avisa por evento.",
+  "corpo": "<div class=\"at-superficie at-texto-centro\" style=\"max-width: 460px\">\n  <p class=\"at-sobretitulo\">Pré-venda termina em</p>\n  <div class=\"at-contagem-regressiva\" data-at=\"contagem\" data-ate=\"2026-10-20T23:59:59-03:00\" data-texto-fim=\"A pré-venda terminou.\"></div>\n</div>"
+ },
+ {
+  "prefixo": "at-notificacoes-sino",
+  "componente": "notificacoes-sino",
+  "nome": "Central de notificações",
+  "categoria": "Navegação",
+  "resumo": "O sino do topo com contador e lista de avisos, destacando os não lidos e com \"Marcar todas como lidas\".",
+  "corpo": "<button class=\"at-botao at-icone at-contador-selo\" popovertarget=\"painel-notificacoes\" aria-label=\"Notificações\">\n  <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z\"/><path d=\"M10 21h4\"/></svg>\n  <span data-contador data-at-texto=\"avisos.naoLidas\" data-at-mostrar=\"avisos.naoLidas\"></span>\n</button>\n\n<div id=\"painel-notificacoes\" popover class=\"at-menu at-menu-largo\">\n  <div class=\"at-menu-cabecalho\">\n    Notificações\n    <button class=\"at-botao at-link at-pequeno\" data-at-acao=\"avisos.lerTodas\" data-at-desabilitar=\"!avisos.naoLidas\">Marcar todas como lidas</button>\n  </div>\n  <ul class=\"at-lista-notificacoes\" data-at-lista=\"avisos.itens\">\n    <template>\n      <li data-at-atributos=\"data-nao-lida: naoLida\">\n        <span class=\"at-avatar at-pequeno\" data-at-campo=\"sigla\"></span>\n        <div><span data-at-campo=\"texto\"></span><time data-at-campo=\"quando\"></time></div>\n      </li>\n    </template>\n  </ul>\n</div>\n\n<script type=\"module\">\nAtalho.estado(\"avisos\", {\n  itens: [\n    { sigla: \"MO\", texto: \"Maria Oliveira fez um pedido de R$ 1.250,00\", quando: \"há 2 min\", naoLida: true },\n    { sigla: \"JS\", texto: \"João Santos respondeu sua mensagem\", quando: \"há 1 hora\", naoLida: true },\n    { sigla: \"PX\", texto: \"Pix de R$ 389,90 confirmado\", quando: \"ontem\", naoLida: false },\n  ],\n  get naoLidas() { return this.itens.filter((item) => item.naoLida).length; },\n  lerTodas() { this.itens = this.itens.map((item) => ({ ...item, naoLida: false })); },\n});\n</script>"
+ },
+ {
+  "prefixo": "at-lista-detalhes",
+  "componente": "lista-detalhes",
+  "nome": "Lista de detalhes",
+  "categoria": "Exibir dados",
+  "resumo": "Pares de rótulo e valor alinhados: dados do pedido, ficha técnica, resumo de cadastro.",
+  "corpo": "<dl class=\"at-detalhes\" style=\"max-width: 480px\">\n  <dt>Cliente</dt><dd>Maria Oliveira</dd>\n  <dt>Pagamento</dt><dd>Pix · aprovado em 07/10/2026, 14:32</dd>\n  <dt>Entrega</dt><dd>Av. Paulista, 1000 · São Paulo, SP</dd>\n  <dt>Status</dt><dd><span class=\"at-selo at-sucesso at-ponto\">Pago</span></dd>\n  <dt>Total</dt><dd>R$ 1.250,00</dd>\n</dl>"
+ },
+ {
+  "prefixo": "at-depoimentos",
+  "componente": "depoimentos",
+  "nome": "Depoimentos",
+  "categoria": "Blocos de página",
+  "resumo": "Citações de clientes com foto, nome e cargo: a prova social que toda landing page precisa.",
+  "corpo": "<div class=\"at-grade\" style=\"--min: 260px\">\n  <figure class=\"at-depoimento\">\n    <blockquote>Fechamos o mês em metade do tempo depois que tudo ficou num lugar só.</blockquote>\n    <figcaption><span class=\"at-avatar\">CM</span><span><strong>Carla Mendes</strong><small>Dona da Loja Sol, Recife</small></span></figcaption>\n  </figure>\n  <figure class=\"at-depoimento\">\n    <blockquote>O Pix com confirmação automática acabou com o \"manda o comprovante\".</blockquote>\n    <figcaption><span class=\"at-avatar\">RS</span><span><strong>Rafael Souza</strong><small>Artesão, Belo Horizonte</small></span></figcaption>\n  </figure>\n</div>"
+ },
+ {
+  "prefixo": "at-recursos",
+  "componente": "recursos",
+  "nome": "Grade de recursos",
+  "categoria": "Blocos de página",
+  "resumo": "Ícone, título e uma frase para cada benefício do produto. O bloco \"por que escolher a gente\".",
+  "corpo": "<div class=\"at-colunas-3\">\n  <div class=\"at-recurso\"><span class=\"at-recurso-icone\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h11v10H3zM14 9h4l3 3v4h-7z\"/><circle cx=\"7\" cy=\"18\" r=\"2\"/><circle cx=\"17\" cy=\"18\" r=\"2\"/></svg></span><h3>Frete calculado</h3><p>O cliente digita o CEP e vê prazo e preço das transportadoras na hora.</p></div>\n  <div class=\"at-recurso\"><span class=\"at-recurso-icone\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m8 12 3 3 5-6\"/></svg></span><h3>Pix na hora</h3><p>QR Code e copia e cola com confirmação automática do pagamento.</p></div>\n  <div class=\"at-recurso\"><span class=\"at-recurso-icone\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20V10M10 20V4M16 20v-7M22 20H2\"/></svg></span><h3>Relatórios</h3><p>Vendas, ticket médio e produtos mais vendidos, atualizados a cada minuto.</p></div>\n</div>"
+ },
+ {
+  "prefixo": "at-newsletter",
+  "componente": "newsletter",
+  "nome": "Newsletter",
+  "categoria": "Blocos de página",
+  "resumo": "Formulário de inscrição com validação, estado de carregando, mensagem de sucesso e consentimento da LGPD.",
+  "corpo": "<form class=\"at-superficie at-pilha\" id=\"form-newsletter\" data-at-validar style=\"max-width: 460px\">\n  <h3 class=\"at-titulo-4 at-mb-0\">Um artigo por semana no seu e-mail</h3>\n  <div class=\"at-grupo-entrada\">\n    <input class=\"at-entrada\" type=\"email\" name=\"email\" required placeholder=\"seu@email.com\" aria-label=\"Seu e-mail\" autocomplete=\"email\">\n    <button class=\"at-botao at-primario\">Assinar</button>\n  </div>\n  <label class=\"at-check at-texto-pequeno\"><input type=\"checkbox\" name=\"consentimento\" required data-msg-obrigatorio=\"Marque para confirmar a inscrição.\">\n    <span>Aceito receber os artigos por e-mail. Posso cancelar a qualquer momento.</span></label>\n  <p class=\"at-texto-pequeno at-mb-0\" aria-live=\"polite\" data-resultado></p>\n</form>\n\n<script type=\"module\">\ndocument.querySelector(\"#form-newsletter\").addEventListener(\"at:enviar\", async (evento) => {\n  const { dados, botao, formulario } = evento.detail;\n  botao.setAttribute(\"aria-busy\", \"true\");\n  // Troque pela chamada ao seu serviço de e-mail:\n  // await Atalho.requisitar(\"/api/newsletter\", { metodo: \"POST\", corpo: dados });\n  await new Promise((pronto) => setTimeout(pronto, 800));\n  botao.removeAttribute(\"aria-busy\");\n  formulario.querySelector(\"[data-resultado]\").textContent = \"Pronto! Confirme a inscrição no e-mail que enviamos para \" + dados.email + \".\";\n  formulario.reset();\n});\n</script>"
+ },
+ {
+  "prefixo": "at-voltar-topo",
+  "componente": "voltar-topo",
+  "nome": "Voltar ao topo",
+  "categoria": "Navegação",
+  "resumo": "Botão discreto que aparece depois que a pessoa rola a página e leva de volta ao início.",
+  "corpo": "<a class=\"at-voltar-topo\" href=\"#\" data-at=\"voltar-topo\" aria-label=\"Voltar ao topo\">↑</a>"
+ },
+ {
+  "prefixo": "at-carregar-mais",
+  "componente": "carregar-mais",
+  "nome": "Carregar mais (rolagem infinita)",
+  "categoria": "JavaScript",
+  "resumo": "Busca a próxima página de resultados quando a pessoa chega ao fim da lista, com botão de reserva.",
+  "corpo": "<ul class=\"at-pilha\" style=\"--at-gap: 8px; list-style: none; padding: 0; max-width: 420px\" id=\"lista-infinita\">\n</ul>\n<div class=\"at-carregar-mais\" data-at=\"carregar-mais\" id=\"marcador-infinito\" style=\"max-width: 420px\">\n  <button class=\"at-botao at-pequeno\">Carregar mais</button>\n</div>\n\n<script type=\"module\">\nconst lista = document.querySelector(\"#lista-infinita\");\nconst marcador = document.querySelector(\"#marcador-infinito\");\nlet pulados = 0;\n\nasync function carregar() {\n  if (marcador.getAttribute(\"aria-busy\") === \"true\") return;\n  marcador.setAttribute(\"aria-busy\", \"true\");\n  try {\n    const resposta = await Atalho.requisitar(\"https://dummyjson.com/products?limit=8&select=title,price&skip=\" + pulados);\n    for (const produto of resposta.products) {\n      const item = document.createElement(\"li\");\n      item.className = \"at-superficie at-linha at-entre\";\n      item.style.padding = \"10px 14px\";\n      item.innerHTML = \"<span></span><strong></strong>\";\n      item.querySelector(\"span\").textContent = produto.title;\n      item.querySelector(\"strong\").textContent = Atalho.formatar.moeda(produto.price);\n      lista.append(item);\n    }\n    pulados += resposta.products.length;\n    if (pulados >= resposta.total) marcador.hidden = true;\n  } catch (erro) {\n    Atalho.notificar(erro.message, { tipo: \"perigo\" });\n  } finally {\n    marcador.removeAttribute(\"aria-busy\");\n  }\n}\n\nmarcador.addEventListener(\"at:carregar\", carregar);\ncarregar();\n</script>"
+ },
+ {
+  "prefixo": "at-lista-grupo",
+  "componente": "lista-grupo",
+  "nome": "Lista agrupada (list group)",
+  "categoria": "Exibir dados",
+  "resumo": "Lista em caixa, com itens separados por linha: links de menu, configurações, contatos ou passos numerados.",
+  "corpo": "<ul class=\"at-lista-grupo\" style=\"max-width: 380px\">\n  <li><a class=\"at-lista-item\" href=\"#\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"4\"/><path d=\"M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-5-6.7\"/></svg> Perfil</a></li>\n  <li><a class=\"at-lista-item\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z\"/><path d=\"M10 21h4\"/></svg> Notificações <span class=\"at-selo at-perigo\">3</span></a></li>\n  <li><a class=\"at-lista-item\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12\"/><circle cx=\"16\" cy=\"6\" r=\"2\"/><circle cx=\"10\" cy=\"12\" r=\"2\"/><circle cx=\"18\" cy=\"18\" r=\"2\"/></svg> Preferências</a></li>\n  <li><a class=\"at-lista-item\" href=\"#\" aria-disabled=\"true\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 7l9-4 9 4v10l-9 4-9-4z\"/><path d=\"M3 7l9 4 9-4M12 11v10\"/></svg> Faturas (em breve)</a></li>\n</ul>"
+ },
+ {
+  "prefixo": "at-lista-grupo-2",
+  "componente": "lista-grupo",
+  "nome": "Lista agrupada (list group): Passos numerados",
+  "categoria": "Exibir dados",
+  "resumo": "Lista em caixa, com itens separados por linha: links de menu, configurações, contatos ou passos numerados.",
+  "corpo": "<ol class=\"at-lista-grupo at-numerada\" style=\"max-width: 420px\">\n  <li class=\"at-lista-item\">Crie a sua conta grátis</li>\n  <li class=\"at-lista-item\">Confirme o e-mail</li>\n  <li class=\"at-lista-item\">Escolha um modelo e publique</li>\n</ol>"
+ },
+ {
+  "prefixo": "at-balao",
+  "componente": "balao",
+  "nome": "Balão informativo (popover)",
+  "categoria": "Janelas e avisos",
+  "resumo": "Caixa que abre ao clicar, ao lado do botão, com um título e um texto mais longo que uma dica. Fecha com Esc ou clicando fora.",
+  "corpo": "<p class=\"at-linha\">\n  Taxa de entrega: <strong>R$ 7,90</strong>\n  <button class=\"at-botao at-icone at-pequeno at-fantasma\" popovertarget=\"balao-taxa\" aria-label=\"Como a taxa é calculada?\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg></button>\n</p>\n<div class=\"at-balao\" id=\"balao-taxa\" popover>\n  <strong class=\"at-balao-titulo\">Como a taxa é calculada?</strong>\n  <p>Pela distância entre a loja e o seu CEP. Pedidos acima de R$ 99 têm entrega grátis.</p>\n</div>"
+ },
+ {
+  "prefixo": "at-rotulo-flutuante",
+  "componente": "rotulo-flutuante",
+  "nome": "Rótulo flutuante (floating label)",
+  "categoria": "Formulários",
+  "resumo": "O rótulo fica dentro do campo e sobe quando a pessoa começa a digitar. Visual compacto de telas de login de bancos e apps.",
+  "corpo": "<form class=\"at-pilha\" style=\"max-width: 360px\" data-at-validar>\n  <div class=\"at-flutuante\">\n    <input class=\"at-entrada\" id=\"flut-email\" type=\"email\" placeholder=\" \" required autocomplete=\"username\">\n    <label for=\"flut-email\">E-mail</label>\n  </div>\n  <div class=\"at-flutuante\">\n    <input class=\"at-entrada\" id=\"flut-senha\" type=\"password\" placeholder=\" \" required minlength=\"8\" autocomplete=\"current-password\">\n    <label for=\"flut-senha\">Senha</label>\n  </div>\n  <div class=\"at-flutuante\">\n    <select class=\"at-entrada\" id=\"flut-pais\"><option>Brasil</option><option>Portugal</option></select>\n    <label for=\"flut-pais\">País</label>\n  </div>\n  <button class=\"at-botao at-primario\">Entrar</button>\n</form>"
+ },
+ {
+  "prefixo": "at-recolher",
+  "componente": "recolher",
+  "nome": "Recolher e expandir (collapse)",
+  "categoria": "Ações",
+  "resumo": "Um botão mostra e esconde um bloco com animação suave: filtros, detalhes do pedido, \"ler mais\".",
+  "corpo": "<div class=\"at-superficie\" style=\"max-width: 420px\">\n  <div class=\"at-linha at-entre\">\n    <strong>Pedido #1048 · R$ 189,90</strong>\n    <button class=\"at-botao at-pequeno\" data-at-alternar=\"#detalhes-pedido\" aria-expanded=\"false\" aria-controls=\"detalhes-pedido\">Ver detalhes</button>\n  </div>\n  <div class=\"at-recolher\" id=\"detalhes-pedido\">\n    <div>\n      <ul class=\"at-mt-4 at-mb-0\" style=\"padding-left: 1.2rem\">\n        <li>Tênis de corrida · R$ 159,90</li>\n        <li>Frete · R$ 30,00</li>\n        <li>Pagamento: Pix</li>\n      </ul>\n    </div>\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-indice",
+  "componente": "indice",
+  "nome": "Índice que acompanha a leitura (scrollspy)",
+  "categoria": "Navegação",
+  "resumo": "Lista de seções ao lado do texto que destaca sozinha a parte que a pessoa está lendo. Padrão de documentação e artigos longos.",
+  "corpo": "<div class=\"at-grade-12\" style=\"max-height: 280px; overflow: auto\">\n  <div class=\"at-col-tablet-4\">\n    <div class=\"at-indice-pai\">\n      <nav class=\"at-indice\" data-at=\"indice\" aria-label=\"Nesta página\">\n        <a href=\"#termos-uso\">Uso do serviço</a>\n        <a href=\"#termos-pagamento\">Pagamento</a>\n        <a href=\"#termos-cancelamento\">Cancelamento</a>\n      </nav>\n    </div>\n  </div>\n  <div class=\"at-col-tablet-8\">\n    <h3 id=\"termos-uso\" class=\"at-titulo-4\">Uso do serviço</h3>\n    <p style=\"min-height: 180px\">Você pode usar o serviço para fins pessoais e comerciais, respeitando a lei.</p>\n    <h3 id=\"termos-pagamento\" class=\"at-titulo-4\">Pagamento</h3>\n    <p style=\"min-height: 180px\">A cobrança é mensal e o recibo chega por e-mail.</p>\n    <h3 id=\"termos-cancelamento\" class=\"at-titulo-4\">Cancelamento</h3>\n    <p style=\"min-height: 180px\">Cancele quando quiser, sem multa, direto na sua conta.</p>\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-grupo-botoes",
+  "componente": "grupo-botoes",
+  "nome": "Grupo de botões e botão fechar",
+  "categoria": "Ações",
+  "resumo": "Botões colados que funcionam como um conjunto (alinhar texto, escolher visualização) e o botão \"×\" padrão para fechar caixas.",
+  "corpo": "<div class=\"at-linha\">\n  <div class=\"at-grupo-botoes\" role=\"group\" aria-label=\"Visualização\">\n    <button class=\"at-botao\" aria-pressed=\"true\">Lista</button>\n    <button class=\"at-botao\" aria-pressed=\"false\">Grade</button>\n    <button class=\"at-botao\" aria-pressed=\"false\">Mapa</button>\n  </div>\n  <div class=\"at-grupo-botoes\" role=\"group\" aria-label=\"Ações\">\n    <button class=\"at-botao at-icone\" aria-label=\"Editar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/></svg></button>\n    <button class=\"at-botao at-icone\" aria-label=\"Copiar\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"8\" y=\"8\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M4 16V5a1 1 0 0 1 1-1h11\"/></svg></button>\n    <button class=\"at-botao at-icone\" aria-label=\"Excluir\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14\"/></svg></button>\n  </div>\n</div>\n\n<script type=\"module\">\ndocument.querySelectorAll('[aria-label=\"Visualização\"] .at-botao').forEach((botao, _, todos) => {\n  botao.addEventListener(\"click\", () => todos.forEach((b) => b.setAttribute(\"aria-pressed\", String(b === botao))));\n});\n</script>"
+ },
+ {
+  "prefixo": "at-grupo-botoes-2",
+  "componente": "grupo-botoes",
+  "nome": "Grupo de botões e botão fechar: Botão fechar",
+  "categoria": "Ações",
+  "resumo": "Botões colados que funcionam como um conjunto (alinhar texto, escolher visualização) e o botão \"×\" padrão para fechar caixas.",
+  "corpo": "<div class=\"at-superficie at-linha at-entre\" style=\"max-width: 420px\" id=\"aviso-novidade\">\n  <span>Temos novidades no seu painel.</span>\n  <button class=\"at-fechar\" aria-label=\"Fechar aviso\" data-at-fechar=\"#aviso-novidade\">×</button>\n</div>"
+ },
+ {
+  "prefixo": "at-imagens",
+  "componente": "imagens",
+  "nome": "Imagens, figuras e proporção",
+  "categoria": "Exibir dados",
+  "resumo": "Imagens que se ajustam à tela, com cantos, miniatura e legenda, e caixas com proporção fixa (16:9, quadrada) para fotos e vídeos.",
+  "corpo": "<div class=\"at-linha at-topo\">\n  <figure class=\"at-figura\" style=\"max-width: 320px\">\n    <img class=\"at-imagem at-arredondada\" src=\"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp\" alt=\"Tênis vermelho e preto de cano alto\" width=\"320\" height=\"320\" loading=\"lazy\">\n    <figcaption>Tênis cano alto, coleção 2026.</figcaption>\n  </figure>\n  <div class=\"at-linha\">\n    <img class=\"at-imagem at-redonda\" src=\"https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/1.webp\" alt=\"Óculos de sol preto\" width=\"72\" height=\"72\" loading=\"lazy\">\n    <img class=\"at-imagem at-miniatura\" src=\"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/1.webp\" alt=\"Relógio com pulseira de couro\" width=\"96\" height=\"96\" loading=\"lazy\">\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-imagens-2",
+  "componente": "imagens",
+  "nome": "Imagens, figuras e proporção: Vídeo e foto com proporção fixa",
+  "categoria": "Exibir dados",
+  "resumo": "Imagens que se ajustam à tela, com cantos, miniatura e legenda, e caixas com proporção fixa (16:9, quadrada) para fotos e vídeos.",
+  "corpo": "<div class=\"at-grade-12\">\n  <div class=\"at-col-tablet-8\">\n    <div class=\"at-proporcao at-cantos-grandes\">\n      <iframe src=\"https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ\" title=\"Big Buck Bunny (vídeo de exemplo)\" loading=\"lazy\" allowfullscreen></iframe>\n    </div>\n  </div>\n  <div class=\"at-col-tablet-4\">\n    <div class=\"at-proporcao at-cantos-grandes\" style=\"--proporcao: 1 / 1\">\n      <img src=\"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/1.webp\" alt=\"Óculos de sol clássico\" width=\"300\" height=\"300\" loading=\"lazy\">\n    </div>\n  </div>\n</div>"
+ },
+ {
+  "prefixo": "at-grade-12",
+  "componente": "grade-12",
+  "nome": "Grade de 12 colunas",
+  "categoria": "Comece aqui",
+  "resumo": "A grade clássica do Bootstrap, em português: divida a linha em 12 partes e diga quantas cada bloco ocupa no celular, tablet e computador.",
+  "corpo": "<div class=\"at-grade-12\">\n  <main class=\"at-col-desktop-8 at-superficie\">Conteúdo principal: 12 colunas no celular, 8 no computador.</main>\n  <aside class=\"at-col-desktop-4 at-superficie\">Lateral: embaixo no celular, 4 colunas no computador.</aside>\n</div>"
+ },
+ {
+  "prefixo": "at-grade-12-2",
+  "componente": "grade-12",
+  "nome": "Grade de 12 colunas: Endereço com campos de larguras diferentes",
+  "categoria": "Comece aqui",
+  "resumo": "A grade clássica do Bootstrap, em português: divida a linha em 12 partes e diga quantas cada bloco ocupa no celular, tablet e computador.",
+  "corpo": "<form class=\"at-grade-12\" style=\"max-width: 640px\">\n  <div class=\"at-campo at-col-tablet-4\"><label class=\"at-rotulo\" for=\"g-cep\">CEP</label><input class=\"at-entrada\" id=\"g-cep\" data-at-mascara=\"cep\"></div>\n  <div class=\"at-campo at-col-tablet-8\"><label class=\"at-rotulo\" for=\"g-rua\">Rua</label><input class=\"at-entrada\" id=\"g-rua\"></div>\n  <div class=\"at-campo at-col-4 at-col-tablet-3\"><label class=\"at-rotulo\" for=\"g-num\">Número</label><input class=\"at-entrada\" id=\"g-num\" inputmode=\"numeric\"></div>\n  <div class=\"at-campo at-col-8 at-col-tablet-9\"><label class=\"at-rotulo\" for=\"g-comp\">Complemento <span class=\"at-opcional\">(opcional)</span></label><input class=\"at-entrada\" id=\"g-comp\"></div>\n</form>"
+ },
+ {
+  "prefixo": "at-utilitarios",
+  "componente": "utilitarios",
+  "nome": "Utilitários (espaçamento, flex, cores...)",
+  "categoria": "Comece aqui",
+  "resumo": "Classes de uma função só para ajustar espaçamento, alinhamento, texto, cores, bordas e sombras direto no HTML, como os utilities do Bootstrap.",
+  "corpo": "<div class=\"at-relativo at-flex at-alinhar-centro at-gap-4 at-p-5 at-borda at-cantos-grandes at-sombra\" style=\"max-width: 460px; background: var(--at-superficie)\">\n  <span class=\"at-avatar at-grande\">AL</span>\n  <div class=\"at-flex-1\">\n    <p class=\"at-m-0 at-negrito\">Ana Lima</p>\n    <p class=\"at-m-0 at-texto-suave at-truncar-2\">Designer de produto. Gosta de tipografia, café e de interfaces que explicam o que vão fazer antes de fazer.</p>\n  </div>\n  <a href=\"#\" class=\"at-link-esticado at-link-icone at-nao-encolhe\">Perfil <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>\n</div>"
+ },
+ {
+  "prefixo": "at-utilitarios-2",
+  "componente": "utilitarios",
+  "nome": "Utilitários (espaçamento, flex, cores...): Espaçamento, cores e alinhamento",
+  "categoria": "Comece aqui",
+  "resumo": "Classes de uma função só para ajustar espaçamento, alinhamento, texto, cores, bordas e sombras direto no HTML, como os utilities do Bootstrap.",
+  "corpo": "<div class=\"at-flex at-flex-quebra at-gap-3\">\n  <span class=\"at-px-4 at-py-2 at-pilula at-fundo-sucesso\">Pago</span>\n  <span class=\"at-px-4 at-py-2 at-pilula at-fundo-aviso\">Pendente</span>\n  <span class=\"at-px-4 at-py-2 at-pilula at-fundo-perigo\">Cancelado</span>\n</div>\n<p class=\"at-mt-5 at-texto-direita at-cor-primaria at-negrito\">Total: R$ 1.250,00</p>"
+ }
+]

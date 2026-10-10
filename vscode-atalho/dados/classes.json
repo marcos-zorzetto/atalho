@@ -1,0 +1,1946 @@
+[
+ {
+  "nome": "at-aba",
+  "componente": "abas",
+  "titulo": "Abas"
+ },
+ {
+  "nome": "at-abas",
+  "componente": "abas",
+  "titulo": "Abas"
+ },
+ {
+  "nome": "at-adicional",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-ajuda",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-alerta",
+  "componente": "alerta",
+  "titulo": "Alertas e faixa"
+ },
+ {
+  "nome": "at-alerta-conteudo",
+  "componente": "modal",
+  "titulo": "Modal (janela de diálogo)"
+ },
+ {
+  "nome": "at-alinhar-base"
+ },
+ {
+  "nome": "at-alinhar-centro",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-alinhar-fim"
+ },
+ {
+  "nome": "at-alinhar-inicio"
+ },
+ {
+  "nome": "at-altura-total"
+ },
+ {
+  "nome": "at-app",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-app-conteudo",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-arredondada",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-autocompletar",
+  "componente": "autocompletar",
+  "titulo": "Autocompletar"
+ },
+ {
+  "nome": "at-avaliar",
+  "componente": "avaliacao",
+  "titulo": "Avaliação (estrelas)"
+ },
+ {
+  "nome": "at-avatar",
+  "componente": "avatar",
+  "titulo": "Avatar"
+ },
+ {
+  "nome": "at-avatares",
+  "componente": "avatar",
+  "titulo": "Avatar"
+ },
+ {
+  "nome": "at-aviso",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-balao",
+  "componente": "balao",
+  "titulo": "Balão informativo (popover)"
+ },
+ {
+  "nome": "at-balao-titulo",
+  "componente": "balao",
+  "titulo": "Balão informativo (popover)"
+ },
+ {
+  "nome": "at-barra",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-barra-acoes",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-barra-conteudo",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-barra-expandir-desktop"
+ },
+ {
+  "nome": "at-barra-links",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-barra-marca",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-barra-menu",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-bloco",
+  "componente": "validacao",
+  "titulo": "Validação de formulário"
+ },
+ {
+  "nome": "at-bloco-d"
+ },
+ {
+  "nome": "at-borda",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-borda-base"
+ },
+ {
+  "nome": "at-borda-topo"
+ },
+ {
+  "nome": "at-botao",
+  "componente": "botao",
+  "titulo": "Botão"
+ },
+ {
+  "nome": "at-campo",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-cantos",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-cantos-0"
+ },
+ {
+  "nome": "at-cantos-grandes",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-capitalizar"
+ },
+ {
+  "nome": "at-carregar-mais",
+  "componente": "carregar-mais",
+  "titulo": "Carregar mais (rolagem infinita)"
+ },
+ {
+  "nome": "at-carrossel",
+  "componente": "carrossel",
+  "titulo": "Carrossel"
+ },
+ {
+  "nome": "at-carrossel-controles",
+  "componente": "carrossel",
+  "titulo": "Carrossel"
+ },
+ {
+  "nome": "at-carrossel-trilho",
+  "componente": "carrossel",
+  "titulo": "Carrossel"
+ },
+ {
+  "nome": "at-cartao",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-cartao-cabecalho",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-cartao-corpo",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-cartao-midia",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-cartao-rodape",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-cartao-titulo",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-centro",
+  "componente": "etapas",
+  "titulo": "Etapas"
+ },
+ {
+  "nome": "at-chamada",
+  "componente": "tipografia",
+  "titulo": "Texto e tipografia"
+ },
+ {
+  "nome": "at-chat",
+  "componente": "chat",
+  "titulo": "Chat"
+ },
+ {
+  "nome": "at-chat-envio",
+  "componente": "chat",
+  "titulo": "Chat"
+ },
+ {
+  "nome": "at-chat-mensagens",
+  "componente": "chat",
+  "titulo": "Chat"
+ },
+ {
+  "nome": "at-chave",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-check",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-circulo",
+  "componente": "carregando",
+  "titulo": "Carregando e progresso"
+ },
+ {
+  "nome": "at-clicavel"
+ },
+ {
+  "nome": "at-codigo",
+  "componente": "codigo",
+  "titulo": "Código de verificação"
+ },
+ {
+  "nome": "at-col-1"
+ },
+ {
+  "nome": "at-col-10"
+ },
+ {
+  "nome": "at-col-11"
+ },
+ {
+  "nome": "at-col-12"
+ },
+ {
+  "nome": "at-col-2"
+ },
+ {
+  "nome": "at-col-3"
+ },
+ {
+  "nome": "at-col-4",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-col-5"
+ },
+ {
+  "nome": "at-col-6"
+ },
+ {
+  "nome": "at-col-7"
+ },
+ {
+  "nome": "at-col-8",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-col-9"
+ },
+ {
+  "nome": "at-col-desktop-1"
+ },
+ {
+  "nome": "at-col-desktop-10"
+ },
+ {
+  "nome": "at-col-desktop-11"
+ },
+ {
+  "nome": "at-col-desktop-12"
+ },
+ {
+  "nome": "at-col-desktop-2"
+ },
+ {
+  "nome": "at-col-desktop-3"
+ },
+ {
+  "nome": "at-col-desktop-4",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-col-desktop-5"
+ },
+ {
+  "nome": "at-col-desktop-6"
+ },
+ {
+  "nome": "at-col-desktop-7"
+ },
+ {
+  "nome": "at-col-desktop-8",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-col-desktop-9"
+ },
+ {
+  "nome": "at-col-largo-1"
+ },
+ {
+  "nome": "at-col-largo-10"
+ },
+ {
+  "nome": "at-col-largo-11"
+ },
+ {
+  "nome": "at-col-largo-12"
+ },
+ {
+  "nome": "at-col-largo-2"
+ },
+ {
+  "nome": "at-col-largo-3"
+ },
+ {
+  "nome": "at-col-largo-4"
+ },
+ {
+  "nome": "at-col-largo-5"
+ },
+ {
+  "nome": "at-col-largo-6"
+ },
+ {
+  "nome": "at-col-largo-7"
+ },
+ {
+  "nome": "at-col-largo-8"
+ },
+ {
+  "nome": "at-col-largo-9"
+ },
+ {
+  "nome": "at-col-tablet-1"
+ },
+ {
+  "nome": "at-col-tablet-10"
+ },
+ {
+  "nome": "at-col-tablet-11"
+ },
+ {
+  "nome": "at-col-tablet-12"
+ },
+ {
+  "nome": "at-col-tablet-2"
+ },
+ {
+  "nome": "at-col-tablet-3",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-col-tablet-4",
+  "componente": "indice",
+  "titulo": "Índice que acompanha a leitura (scrollspy)"
+ },
+ {
+  "nome": "at-col-tablet-5"
+ },
+ {
+  "nome": "at-col-tablet-6"
+ },
+ {
+  "nome": "at-col-tablet-7"
+ },
+ {
+  "nome": "at-col-tablet-8",
+  "componente": "indice",
+  "titulo": "Índice que acompanha a leitura (scrollspy)"
+ },
+ {
+  "nome": "at-col-tablet-9",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-colunas-2"
+ },
+ {
+  "nome": "at-colunas-3",
+  "componente": "receita-painel",
+  "titulo": "Painel administrativo"
+ },
+ {
+  "nome": "at-colunas-4",
+  "componente": "indicador",
+  "titulo": "Indicadores (KPIs)"
+ },
+ {
+  "nome": "at-comando",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-comando-busca",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-comando-grupo",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-comando-item",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-comando-lista",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-comando-rodape",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-comando-vazio",
+  "componente": "comando",
+  "titulo": "Busca rápida (Ctrl+K)"
+ },
+ {
+  "nome": "at-contador-selo",
+  "componente": "botao",
+  "titulo": "Botão"
+ },
+ {
+  "nome": "at-contagem",
+  "componente": "contador-caracteres",
+  "titulo": "Contador de caracteres"
+ },
+ {
+  "nome": "at-contagem-regressiva",
+  "componente": "contagem-regressiva",
+  "titulo": "Contagem regressiva"
+ },
+ {
+  "nome": "at-container",
+  "componente": "instalacao",
+  "titulo": "Instalação"
+ },
+ {
+  "nome": "at-cookies",
+  "componente": "cookies",
+  "titulo": "Aviso de cookies (LGPD)"
+ },
+ {
+  "nome": "at-cor-aviso"
+ },
+ {
+  "nome": "at-cor-info"
+ },
+ {
+  "nome": "at-cor-perigo"
+ },
+ {
+  "nome": "at-cor-primaria",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-cor-sucesso"
+ },
+ {
+  "nome": "at-cor-texto"
+ },
+ {
+  "nome": "at-cresce",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-depoimento",
+  "componente": "depoimentos",
+  "titulo": "Depoimentos"
+ },
+ {
+  "nome": "at-destaque",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-detalhes",
+  "componente": "lista-detalhes",
+  "titulo": "Lista de detalhes"
+ },
+ {
+  "nome": "at-direita",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-divisor"
+ },
+ {
+  "nome": "at-divisor-vertical"
+ },
+ {
+  "nome": "at-dois-tercos",
+  "componente": "mascaras",
+  "titulo": "Máscaras (CPF, CNPJ, telefone...)"
+ },
+ {
+  "nome": "at-embutido",
+  "componente": "cookies",
+  "titulo": "Aviso de cookies (LGPD)"
+ },
+ {
+  "nome": "at-encolher",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-entrada",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-entrada-icone",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-entre",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-erro-msg"
+ },
+ {
+  "nome": "at-esqueleto",
+  "componente": "carregando",
+  "titulo": "Carregando e progresso"
+ },
+ {
+  "nome": "at-esquerda"
+ },
+ {
+  "nome": "at-estreito"
+ },
+ {
+  "nome": "at-estrelas",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-etapas",
+  "componente": "etapas",
+  "titulo": "Etapas"
+ },
+ {
+  "nome": "at-etiqueta",
+  "componente": "selo",
+  "titulo": "Selos e etiquetas"
+ },
+ {
+  "nome": "at-etiquetas",
+  "componente": "etiquetas-entrada",
+  "titulo": "Entrada de etiquetas (tags)"
+ },
+ {
+  "nome": "at-faixa",
+  "componente": "faixa",
+  "titulo": "Faixa de valores (slider)"
+ },
+ {
+  "nome": "at-faixa-entrada",
+  "componente": "faixa",
+  "titulo": "Faixa de valores (slider)"
+ },
+ {
+  "nome": "at-fantasma",
+  "componente": "botao",
+  "titulo": "Botão"
+ },
+ {
+  "nome": "at-fechar",
+  "componente": "grupo-botoes",
+  "titulo": "Grupo de botões e botão fechar"
+ },
+ {
+  "nome": "at-figura",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-fim",
+  "componente": "menu-suspenso",
+  "titulo": "Menu suspenso"
+ },
+ {
+  "nome": "at-fixo-topo"
+ },
+ {
+  "nome": "at-flex",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-flex-1",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-flex-coluna"
+ },
+ {
+  "nome": "at-flex-linha"
+ },
+ {
+  "nome": "at-flex-quebra",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-flutuante",
+  "componente": "rotulo-flutuante",
+  "titulo": "Rótulo flutuante (floating label)"
+ },
+ {
+  "nome": "at-forca",
+  "componente": "senha",
+  "titulo": "Senha (mostrar e força)"
+ },
+ {
+  "nome": "at-forca-texto",
+  "componente": "senha",
+  "titulo": "Senha (mostrar e força)"
+ },
+ {
+  "nome": "at-formulario",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-frete",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-fundo-aviso",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-fundo-info"
+ },
+ {
+  "nome": "at-fundo-perigo",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-fundo-primaria"
+ },
+ {
+  "nome": "at-fundo-suave"
+ },
+ {
+  "nome": "at-fundo-sucesso",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-fundo-superficie"
+ },
+ {
+  "nome": "at-galeria",
+  "componente": "galeria",
+  "titulo": "Galeria de fotos"
+ },
+ {
+  "nome": "at-gap-0"
+ },
+ {
+  "nome": "at-gap-1"
+ },
+ {
+  "nome": "at-gap-2"
+ },
+ {
+  "nome": "at-gap-3",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-gap-4",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-gap-5"
+ },
+ {
+  "nome": "at-gap-6"
+ },
+ {
+  "nome": "at-gap-7"
+ },
+ {
+  "nome": "at-gap-8"
+ },
+ {
+  "nome": "at-gaveta",
+  "componente": "gaveta",
+  "titulo": "Gaveta (painel lateral)"
+ },
+ {
+  "nome": "at-girando",
+  "componente": "carregando",
+  "titulo": "Carregando e progresso"
+ },
+ {
+  "nome": "at-grade",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-grade-12",
+  "componente": "grade-12",
+  "titulo": "Grade de 12 colunas"
+ },
+ {
+  "nome": "at-grande",
+  "componente": "botao",
+  "titulo": "Botão"
+ },
+ {
+  "nome": "at-grid"
+ },
+ {
+  "nome": "at-grupo-botoes",
+  "componente": "grupo-botoes",
+  "titulo": "Grupo de botões e botão fechar"
+ },
+ {
+  "nome": "at-grupo-entrada",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-hero",
+  "componente": "hero",
+  "titulo": "Hero (topo da landing page)"
+ },
+ {
+  "nome": "at-icone",
+  "componente": "cores-e-temas",
+  "titulo": "Cores e tema escuro"
+ },
+ {
+  "nome": "at-icone-campo"
+ },
+ {
+  "nome": "at-imagem",
+  "componente": "requisitar",
+  "titulo": "Buscar dados de uma API"
+ },
+ {
+  "nome": "at-indicador",
+  "componente": "indicador",
+  "titulo": "Indicadores (KPIs)"
+ },
+ {
+  "nome": "at-indicador-rotulo",
+  "componente": "indicador",
+  "titulo": "Indicadores (KPIs)"
+ },
+ {
+  "nome": "at-indicador-valor",
+  "componente": "indicador",
+  "titulo": "Indicadores (KPIs)"
+ },
+ {
+  "nome": "at-indicador-variacao",
+  "componente": "indicador",
+  "titulo": "Indicadores (KPIs)"
+ },
+ {
+  "nome": "at-indice",
+  "componente": "indice",
+  "titulo": "Índice que acompanha a leitura (scrollspy)"
+ },
+ {
+  "nome": "at-indice-pai",
+  "componente": "indice",
+  "titulo": "Índice que acompanha a leitura (scrollspy)"
+ },
+ {
+  "nome": "at-info",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-inline"
+ },
+ {
+  "nome": "at-inline-bloco"
+ },
+ {
+  "nome": "at-inline-flex"
+ },
+ {
+  "nome": "at-italico"
+ },
+ {
+  "nome": "at-justificar-ao-redor"
+ },
+ {
+  "nome": "at-justificar-centro"
+ },
+ {
+  "nome": "at-justificar-entre"
+ },
+ {
+  "nome": "at-justificar-fim"
+ },
+ {
+  "nome": "at-justificar-inicio"
+ },
+ {
+  "nome": "at-kanban",
+  "componente": "kanban",
+  "titulo": "Quadro Kanban"
+ },
+ {
+  "nome": "at-kanban-cartao",
+  "componente": "kanban",
+  "titulo": "Quadro Kanban"
+ },
+ {
+  "nome": "at-kanban-coluna",
+  "componente": "kanban",
+  "titulo": "Quadro Kanban"
+ },
+ {
+  "nome": "at-kanban-lista",
+  "componente": "kanban",
+  "titulo": "Quadro Kanban"
+ },
+ {
+  "nome": "at-largura-auto"
+ },
+ {
+  "nome": "at-largura-max-texto"
+ },
+ {
+  "nome": "at-largura-total"
+ },
+ {
+  "nome": "at-lateral",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-lateral-link",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-lateral-rodape",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-lateral-titulo",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-lateral-topo",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-linha",
+  "componente": "cores-e-temas",
+  "titulo": "Cores e tema escuro"
+ },
+ {
+  "nome": "at-linha-tempo",
+  "componente": "linha-do-tempo",
+  "titulo": "Linha do tempo (rastreio)"
+ },
+ {
+  "nome": "at-linha-tempo-marca",
+  "componente": "linha-do-tempo",
+  "titulo": "Linha do tempo (rastreio)"
+ },
+ {
+  "nome": "at-link",
+  "componente": "codigo",
+  "titulo": "Código de verificação"
+ },
+ {
+  "nome": "at-link-esticado",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-link-icone",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-lista-grupo",
+  "componente": "lista-grupo",
+  "titulo": "Lista agrupada (list group)"
+ },
+ {
+  "nome": "at-lista-item",
+  "componente": "lista-grupo",
+  "titulo": "Lista agrupada (list group)"
+ },
+ {
+  "nome": "at-lista-notificacoes",
+  "componente": "notificacoes-sino",
+  "titulo": "Central de notificações"
+ },
+ {
+  "nome": "at-m-0",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-m-1"
+ },
+ {
+  "nome": "at-m-2"
+ },
+ {
+  "nome": "at-m-3"
+ },
+ {
+  "nome": "at-m-4"
+ },
+ {
+  "nome": "at-m-5"
+ },
+ {
+  "nome": "at-m-6"
+ },
+ {
+  "nome": "at-m-7"
+ },
+ {
+  "nome": "at-m-8"
+ },
+ {
+  "nome": "at-maiusculas"
+ },
+ {
+  "nome": "at-mb-0",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-mb-1"
+ },
+ {
+  "nome": "at-mb-2",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-mb-3"
+ },
+ {
+  "nome": "at-mb-4",
+  "componente": "carrossel",
+  "titulo": "Carrossel"
+ },
+ {
+  "nome": "at-mb-5"
+ },
+ {
+  "nome": "at-mb-6",
+  "componente": "planos",
+  "titulo": "Planos e preços"
+ },
+ {
+  "nome": "at-mb-7"
+ },
+ {
+  "nome": "at-mb-8"
+ },
+ {
+  "nome": "at-me-0"
+ },
+ {
+  "nome": "at-me-1"
+ },
+ {
+  "nome": "at-me-2"
+ },
+ {
+  "nome": "at-me-3"
+ },
+ {
+  "nome": "at-me-4"
+ },
+ {
+  "nome": "at-me-5"
+ },
+ {
+  "nome": "at-me-6"
+ },
+ {
+  "nome": "at-me-7"
+ },
+ {
+  "nome": "at-me-8"
+ },
+ {
+  "nome": "at-me-auto"
+ },
+ {
+  "nome": "at-meio",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-mensagem",
+  "componente": "chat",
+  "titulo": "Chat"
+ },
+ {
+  "nome": "at-menu",
+  "componente": "menu-suspenso",
+  "titulo": "Menu suspenso"
+ },
+ {
+  "nome": "at-menu-cabecalho",
+  "componente": "notificacoes-sino",
+  "titulo": "Central de notificações"
+ },
+ {
+  "nome": "at-menu-item",
+  "componente": "menu-suspenso",
+  "titulo": "Menu suspenso"
+ },
+ {
+  "nome": "at-menu-largo",
+  "componente": "notificacoes-sino",
+  "titulo": "Central de notificações"
+ },
+ {
+  "nome": "at-menu-separador",
+  "componente": "menu-suspenso",
+  "titulo": "Menu suspenso"
+ },
+ {
+  "nome": "at-menu-titulo",
+  "componente": "menu-suspenso",
+  "titulo": "Menu suspenso"
+ },
+ {
+  "nome": "at-minha"
+ },
+ {
+  "nome": "at-miniatura",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-minusculas"
+ },
+ {
+  "nome": "at-modal",
+  "componente": "modal",
+  "titulo": "Modal (janela de diálogo)"
+ },
+ {
+  "nome": "at-modal-cabecalho",
+  "componente": "modal",
+  "titulo": "Modal (janela de diálogo)"
+ },
+ {
+  "nome": "at-modal-corpo",
+  "componente": "modal",
+  "titulo": "Modal (janela de diálogo)"
+ },
+ {
+  "nome": "at-modal-rodape",
+  "componente": "modal",
+  "titulo": "Modal (janela de diálogo)"
+ },
+ {
+  "nome": "at-mono"
+ },
+ {
+  "nome": "at-ms-0"
+ },
+ {
+  "nome": "at-ms-1"
+ },
+ {
+  "nome": "at-ms-2"
+ },
+ {
+  "nome": "at-ms-3"
+ },
+ {
+  "nome": "at-ms-4"
+ },
+ {
+  "nome": "at-ms-5"
+ },
+ {
+  "nome": "at-ms-6"
+ },
+ {
+  "nome": "at-ms-7"
+ },
+ {
+  "nome": "at-ms-8"
+ },
+ {
+  "nome": "at-ms-auto"
+ },
+ {
+  "nome": "at-mt-0"
+ },
+ {
+  "nome": "at-mt-1"
+ },
+ {
+  "nome": "at-mt-2",
+  "componente": "rodape",
+  "titulo": "Rodapé"
+ },
+ {
+  "nome": "at-mt-3"
+ },
+ {
+  "nome": "at-mt-4",
+  "componente": "hero",
+  "titulo": "Hero (topo da landing page)"
+ },
+ {
+  "nome": "at-mt-5",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-mt-6",
+  "componente": "etapas",
+  "titulo": "Etapas"
+ },
+ {
+  "nome": "at-mt-7"
+ },
+ {
+  "nome": "at-mt-8"
+ },
+ {
+  "nome": "at-mx-0"
+ },
+ {
+  "nome": "at-mx-1"
+ },
+ {
+  "nome": "at-mx-2"
+ },
+ {
+  "nome": "at-mx-3"
+ },
+ {
+  "nome": "at-mx-4"
+ },
+ {
+  "nome": "at-mx-5"
+ },
+ {
+  "nome": "at-mx-6"
+ },
+ {
+  "nome": "at-mx-7"
+ },
+ {
+  "nome": "at-mx-8"
+ },
+ {
+  "nome": "at-mx-auto"
+ },
+ {
+  "nome": "at-my-0"
+ },
+ {
+  "nome": "at-my-1"
+ },
+ {
+  "nome": "at-my-2"
+ },
+ {
+  "nome": "at-my-3"
+ },
+ {
+  "nome": "at-my-4"
+ },
+ {
+  "nome": "at-my-5"
+ },
+ {
+  "nome": "at-my-6"
+ },
+ {
+  "nome": "at-my-7"
+ },
+ {
+  "nome": "at-my-8"
+ },
+ {
+  "nome": "at-nao-encolhe",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-negrito",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-normal"
+ },
+ {
+  "nome": "at-notificacao",
+  "componente": "notificacao",
+  "titulo": "Notificação (toast)"
+ },
+ {
+  "nome": "at-notificacao-acao"
+ },
+ {
+  "nome": "at-notificacao-fechar"
+ },
+ {
+  "nome": "at-notificacao-texto"
+ },
+ {
+  "nome": "at-notificacoes"
+ },
+ {
+  "nome": "at-numerada",
+  "componente": "lista-grupo",
+  "titulo": "Lista agrupada (list group)"
+ },
+ {
+  "nome": "at-numero",
+  "componente": "estado",
+  "titulo": "Estado (reatividade)"
+ },
+ {
+  "nome": "at-numeros-tabulares"
+ },
+ {
+  "nome": "at-ocultar-transbordo"
+ },
+ {
+  "nome": "at-oculto"
+ },
+ {
+  "nome": "at-opcional",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-p-0"
+ },
+ {
+  "nome": "at-p-1"
+ },
+ {
+  "nome": "at-p-2"
+ },
+ {
+  "nome": "at-p-3"
+ },
+ {
+  "nome": "at-p-4"
+ },
+ {
+  "nome": "at-p-5",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-p-6"
+ },
+ {
+  "nome": "at-p-7"
+ },
+ {
+  "nome": "at-p-8"
+ },
+ {
+  "nome": "at-pagina",
+  "componente": "paginacao",
+  "titulo": "Paginação"
+ },
+ {
+  "nome": "at-paginacao",
+  "componente": "paginacao",
+  "titulo": "Paginação"
+ },
+ {
+  "nome": "at-paginacao-botoes",
+  "componente": "paginacao",
+  "titulo": "Paginação"
+ },
+ {
+  "nome": "at-paginacao-info",
+  "componente": "paginacao",
+  "titulo": "Paginação"
+ },
+ {
+  "nome": "at-painel",
+  "componente": "abas",
+  "titulo": "Abas"
+ },
+ {
+  "nome": "at-parcelas",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-pb-0"
+ },
+ {
+  "nome": "at-pb-1"
+ },
+ {
+  "nome": "at-pb-2"
+ },
+ {
+  "nome": "at-pb-3"
+ },
+ {
+  "nome": "at-pb-4"
+ },
+ {
+  "nome": "at-pb-5"
+ },
+ {
+  "nome": "at-pb-6"
+ },
+ {
+  "nome": "at-pb-7"
+ },
+ {
+  "nome": "at-pb-8"
+ },
+ {
+  "nome": "at-pe-0"
+ },
+ {
+  "nome": "at-pe-1"
+ },
+ {
+  "nome": "at-pe-2"
+ },
+ {
+  "nome": "at-pe-3"
+ },
+ {
+  "nome": "at-pe-4"
+ },
+ {
+  "nome": "at-pe-5"
+ },
+ {
+  "nome": "at-pe-6"
+ },
+ {
+  "nome": "at-pe-7"
+ },
+ {
+  "nome": "at-pe-8"
+ },
+ {
+  "nome": "at-pequeno",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-perigo",
+  "componente": "botao",
+  "titulo": "Botão"
+ },
+ {
+  "nome": "at-pilha",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-pilula",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-plano",
+  "componente": "planos",
+  "titulo": "Planos e preços"
+ },
+ {
+  "nome": "at-plano-preco",
+  "componente": "planos",
+  "titulo": "Planos e preços"
+ },
+ {
+  "nome": "at-planos",
+  "componente": "planos",
+  "titulo": "Planos e preços"
+ },
+ {
+  "nome": "at-ponto",
+  "componente": "selo",
+  "titulo": "Selos e etiquetas"
+ },
+ {
+  "nome": "at-preco",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-preco-antigo",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-preco-desconto",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-primario",
+  "componente": "instalacao",
+  "titulo": "Instalação"
+ },
+ {
+  "nome": "at-produto",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-produto-nome",
+  "componente": "produto",
+  "titulo": "Cartão de produto"
+ },
+ {
+  "nome": "at-progresso",
+  "componente": "carregando",
+  "titulo": "Carregando e progresso"
+ },
+ {
+  "nome": "at-proporcao",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-ps-0"
+ },
+ {
+  "nome": "at-ps-1"
+ },
+ {
+  "nome": "at-ps-2"
+ },
+ {
+  "nome": "at-ps-3"
+ },
+ {
+  "nome": "at-ps-4"
+ },
+ {
+  "nome": "at-ps-5"
+ },
+ {
+  "nome": "at-ps-6"
+ },
+ {
+  "nome": "at-ps-7"
+ },
+ {
+  "nome": "at-ps-8"
+ },
+ {
+  "nome": "at-pt-0"
+ },
+ {
+  "nome": "at-pt-1"
+ },
+ {
+  "nome": "at-pt-2"
+ },
+ {
+  "nome": "at-pt-3"
+ },
+ {
+  "nome": "at-pt-4"
+ },
+ {
+  "nome": "at-pt-5"
+ },
+ {
+  "nome": "at-pt-6"
+ },
+ {
+  "nome": "at-pt-7"
+ },
+ {
+  "nome": "at-pt-8"
+ },
+ {
+  "nome": "at-pular-conteudo"
+ },
+ {
+  "nome": "at-px-0"
+ },
+ {
+  "nome": "at-px-1"
+ },
+ {
+  "nome": "at-px-2"
+ },
+ {
+  "nome": "at-px-3"
+ },
+ {
+  "nome": "at-px-4",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-px-5"
+ },
+ {
+  "nome": "at-px-6"
+ },
+ {
+  "nome": "at-px-7"
+ },
+ {
+  "nome": "at-px-8"
+ },
+ {
+  "nome": "at-py-0"
+ },
+ {
+  "nome": "at-py-1"
+ },
+ {
+  "nome": "at-py-2",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-py-3"
+ },
+ {
+  "nome": "at-py-4"
+ },
+ {
+  "nome": "at-py-5"
+ },
+ {
+  "nome": "at-py-6"
+ },
+ {
+  "nome": "at-py-7"
+ },
+ {
+  "nome": "at-py-8"
+ },
+ {
+  "nome": "at-quantidade",
+  "componente": "quantidade",
+  "titulo": "Quantidade (+ e −)"
+ },
+ {
+  "nome": "at-quebrar-palavras"
+ },
+ {
+  "nome": "at-recolher",
+  "componente": "recolher",
+  "titulo": "Recolher e expandir (collapse)"
+ },
+ {
+  "nome": "at-recuo-1"
+ },
+ {
+  "nome": "at-recuo-2"
+ },
+ {
+  "nome": "at-recuo-3"
+ },
+ {
+  "nome": "at-recurso",
+  "componente": "recursos",
+  "titulo": "Grade de recursos"
+ },
+ {
+  "nome": "at-recurso-icone",
+  "componente": "recursos",
+  "titulo": "Grade de recursos"
+ },
+ {
+  "nome": "at-redonda",
+  "componente": "imagens",
+  "titulo": "Imagens, figuras e proporção"
+ },
+ {
+  "nome": "at-relativo",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-rodape",
+  "componente": "rodape",
+  "titulo": "Rodapé"
+ },
+ {
+  "nome": "at-rodape-base",
+  "componente": "rodape",
+  "titulo": "Rodapé"
+ },
+ {
+  "nome": "at-rodape-grade",
+  "componente": "rodape",
+  "titulo": "Rodapé"
+ },
+ {
+  "nome": "at-rolar-x"
+ },
+ {
+  "nome": "at-rotulo",
+  "componente": "campo",
+  "titulo": "Campos de formulário"
+ },
+ {
+  "nome": "at-sanfona",
+  "componente": "sanfona",
+  "titulo": "Sanfona (perguntas frequentes)"
+ },
+ {
+  "nome": "at-sanfona-conteudo",
+  "componente": "sanfona",
+  "titulo": "Sanfona (perguntas frequentes)"
+ },
+ {
+  "nome": "at-secao",
+  "componente": "instalacao",
+  "titulo": "Instalação"
+ },
+ {
+  "nome": "at-segmentado",
+  "componente": "abas",
+  "titulo": "Abas"
+ },
+ {
+  "nome": "at-selo",
+  "componente": "selo",
+  "titulo": "Selos e etiquetas"
+ },
+ {
+  "nome": "at-sem-borda"
+ },
+ {
+  "nome": "at-sem-quebra"
+ },
+ {
+  "nome": "at-sem-sombra"
+ },
+ {
+  "nome": "at-seminegrito"
+ },
+ {
+  "nome": "at-senha",
+  "componente": "senha",
+  "titulo": "Senha (mostrar e força)"
+ },
+ {
+  "nome": "at-so-celular"
+ },
+ {
+  "nome": "at-so-desktop",
+  "componente": "barra",
+  "titulo": "Barra de navegação"
+ },
+ {
+  "nome": "at-sobretitulo",
+  "componente": "tipografia",
+  "titulo": "Texto e tipografia"
+ },
+ {
+  "nome": "at-sombra",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-sombra-g"
+ },
+ {
+  "nome": "at-sombra-p"
+ },
+ {
+  "nome": "at-sr",
+  "componente": "upload",
+  "titulo": "Enviar arquivos"
+ },
+ {
+  "nome": "at-suave",
+  "componente": "botao",
+  "titulo": "Botão"
+ },
+ {
+  "nome": "at-sucesso",
+  "componente": "cartao",
+  "titulo": "Cartão"
+ },
+ {
+  "nome": "at-sugestoes",
+  "componente": "autocompletar",
+  "titulo": "Autocompletar"
+ },
+ {
+  "nome": "at-sugestoes-vazio"
+ },
+ {
+  "nome": "at-superficie",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-tabela",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-tabela-caixa",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-tabela-ferramentas",
+  "componente": "tabela",
+  "titulo": "Tabela de dados"
+ },
+ {
+  "nome": "at-tabela-vazia"
+ },
+ {
+  "nome": "at-tecla",
+  "componente": "tipografia",
+  "titulo": "Texto e tipografia"
+ },
+ {
+  "nome": "at-terco",
+  "componente": "mascaras",
+  "titulo": "Máscaras (CPF, CNPJ, telefone...)"
+ },
+ {
+  "nome": "at-texto-centro",
+  "componente": "receita-cadastro",
+  "titulo": "Cadastro com CEP"
+ },
+ {
+  "nome": "at-texto-direita",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-texto-esquerda"
+ },
+ {
+  "nome": "at-texto-grande"
+ },
+ {
+  "nome": "at-texto-justificado"
+ },
+ {
+  "nome": "at-texto-mini"
+ },
+ {
+  "nome": "at-texto-pequeno",
+  "componente": "tipografia",
+  "titulo": "Texto e tipografia"
+ },
+ {
+  "nome": "at-texto-suave",
+  "componente": "tipografia",
+  "titulo": "Texto e tipografia"
+ },
+ {
+  "nome": "at-titulo",
+  "componente": "instalacao",
+  "titulo": "Instalação"
+ },
+ {
+  "nome": "at-titulo-1",
+  "componente": "hero",
+  "titulo": "Hero (topo da landing page)"
+ },
+ {
+  "nome": "at-titulo-2",
+  "componente": "instalacao",
+  "titulo": "Instalação"
+ },
+ {
+  "nome": "at-titulo-3",
+  "componente": "lateral",
+  "titulo": "Menu lateral de sistema"
+ },
+ {
+  "nome": "at-titulo-4",
+  "componente": "layout",
+  "titulo": "Layout e grade"
+ },
+ {
+  "nome": "at-topo",
+  "componente": "carregando",
+  "titulo": "Carregando e progresso"
+ },
+ {
+  "nome": "at-trilha",
+  "componente": "trilha",
+  "titulo": "Trilha (breadcrumb)"
+ },
+ {
+  "nome": "at-truncar",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-truncar-2",
+  "componente": "utilitarios",
+  "titulo": "Utilitários (espaçamento, flex, cores...)"
+ },
+ {
+  "nome": "at-truncar-3"
+ },
+ {
+  "nome": "at-upload",
+  "componente": "upload",
+  "titulo": "Enviar arquivos"
+ },
+ {
+  "nome": "at-upload-lista",
+  "componente": "upload",
+  "titulo": "Enviar arquivos"
+ },
+ {
+  "nome": "at-upload-tipo"
+ },
+ {
+  "nome": "at-vazio",
+  "componente": "vazio",
+  "titulo": "Estado vazio"
+ },
+ {
+  "nome": "at-video",
+  "componente": "video",
+  "titulo": "Vídeo leve do YouTube"
+ },
+ {
+  "nome": "at-visualizador"
+ },
+ {
+  "nome": "at-visualizador-rodape"
+ },
+ {
+  "nome": "at-visualizador-topo"
+ },
+ {
+  "nome": "at-voltar-topo",
+  "componente": "voltar-topo",
+  "titulo": "Voltar ao topo"
+ },
+ {
+  "nome": "at-whatsapp",
+  "componente": "whatsapp",
+  "titulo": "Botão do WhatsApp"
+ }
+]

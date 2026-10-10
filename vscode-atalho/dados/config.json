@@ -1,0 +1,9 @@
+{
+ "site": "https://marcos-zorzetto.github.io/atalho/",
+ "cdn": "https://cdn.jsdelivr.net/gh/marcos-zorzetto/atalho@1/atalho",
+ "versaoBiblioteca": "1.2.2",
+ "supabase": {
+  "url": "https://onjmugnpjvflomrevknh.supabase.co",
+  "chavePublica": "sb_publishable__6ZgOxk9Ir-zZjz_QuDmdQ_rdxDSIhF"
+ }
+}

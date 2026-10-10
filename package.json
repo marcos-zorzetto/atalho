@@ -29,9 +29,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test \"scripts/*.test.mjs\" \"servicos/supabase/functions/*/*.test.ts\"",
+    "test": "node --test \"scripts/*.test.mjs\" \"servicos/supabase/functions/*/*.test.ts\" \"vscode-atalho/test/*.test.js\"",
     "atualizar": "node scripts/atualizar-documentacao.mjs --links",
     "build": "node scripts/gerar-site.mjs",
+    "extensao": "node scripts/gerar-extensao.mjs && cd vscode-atalho && npx --yes @vscode/vsce@3 package --no-dependencies",
     "imagens": "node scripts/gerar-imagens.mjs",
     "tipos": "node scripts/verificar-typescript.mjs",
     "site": "node scripts/gerar-site.mjs --local && npx --yes serve dist",

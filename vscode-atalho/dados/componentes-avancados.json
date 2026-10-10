@@ -1,0 +1,887 @@
+{
+ "categorias": [
+  {
+   "id": "topo",
+   "nome": "Topo (hero)"
+  },
+  {
+   "id": "navegacao",
+   "nome": "Navegação"
+  },
+  {
+   "id": "vendas",
+   "nome": "Vendas e preços"
+  },
+  {
+   "id": "prova",
+   "nome": "Prova social"
+  },
+  {
+   "id": "loja",
+   "nome": "Loja virtual"
+  },
+  {
+   "id": "agenda",
+   "nome": "Agenda e serviços"
+  },
+  {
+   "id": "formularios",
+   "nome": "Formulários"
+  },
+  {
+   "id": "dados",
+   "nome": "Painéis e gráficos"
+  },
+  {
+   "id": "midia",
+   "nome": "Fotos e vídeos"
+  },
+  {
+   "id": "comunicacao",
+   "nome": "Comunicação"
+  },
+  {
+   "id": "rodape",
+   "nome": "Rodapé e chamadas"
+  },
+  {
+   "id": "utilidades",
+   "nome": "Utilidades"
+  }
+ ],
+ "itens": [
+  {
+   "id": "hero-gradiente",
+   "nome": "Topo com gradiente e chamada",
+   "nivel": "publico",
+   "categoria": "topo",
+   "descricao": "Título forte, texto de apoio, dois botões e selo de confiança sobre um gradiente elegante."
+  },
+  {
+   "id": "precos-tres-planos",
+   "nome": "Tabela de preços com 3 planos",
+   "nivel": "publico",
+   "categoria": "vendas",
+   "descricao": "Planos lado a lado com o recomendado em destaque, alternância mensal/anual e lista de benefícios."
+  },
+  {
+   "id": "depoimentos-carrossel",
+   "nome": "Depoimentos em carrossel",
+   "nivel": "publico",
+   "categoria": "prova",
+   "descricao": "Depoimentos com foto, nome, cargo e estrelas, passando sozinhos e com setas."
+  },
+  {
+   "id": "logos-clientes",
+   "nome": "Faixa de logos de clientes",
+   "nivel": "publico",
+   "categoria": "prova",
+   "descricao": "Logos de clientes ou parceiros em tons de cinza que ganham cor ao passar o mouse."
+  },
+  {
+   "id": "faq-busca",
+   "nome": "Perguntas frequentes com busca",
+   "nivel": "publico",
+   "categoria": "comunicacao",
+   "descricao": "Sanfona de perguntas com campo de busca que filtra na hora e destaca o termo."
+  },
+  {
+   "id": "rodape-empresa",
+   "nome": "Rodapé completo de empresa",
+   "nivel": "publico",
+   "categoria": "rodape",
+   "descricao": "Logo, colunas de links, redes sociais, contato, CNPJ/NIF e direitos autorais."
+  },
+  {
+   "id": "botao-whatsapp-pedido",
+   "nome": "Botão de pedido pelo WhatsApp",
+   "nivel": "publico",
+   "categoria": "comunicacao",
+   "descricao": "Botão flutuante que abre o WhatsApp com a mensagem já escrita, com balão de \"posso ajudar?\"."
+  },
+  {
+   "id": "kpis-sparkline",
+   "nome": "Indicadores com minigráfico",
+   "nivel": "publico",
+   "categoria": "dados",
+   "descricao": "Cartões de faturamento, pedidos e clientes com variação e um minigráfico de tendência."
+  },
+  {
+   "id": "galeria-lightbox",
+   "nome": "Galeria com ampliação",
+   "nivel": "publico",
+   "categoria": "midia",
+   "descricao": "Grade de fotos em mosaico que abre em tela cheia com setas, teclado e legenda."
+  },
+  {
+   "id": "aberto-agora",
+   "nome": "Horário de funcionamento \"aberto agora\"",
+   "nivel": "publico",
+   "categoria": "agenda",
+   "descricao": "Mostra se o negócio está aberto neste momento, quando abre e o horário da semana."
+  },
+  {
+   "id": "hero-dividido",
+   "nome": "Topo dividido com foto",
+   "nivel": "membro",
+   "categoria": "topo",
+   "descricao": "Texto à esquerda e foto à direita, com números de prova social e botão principal."
+  },
+  {
+   "id": "navbar-transparente",
+   "nome": "Menu que muda ao rolar",
+   "nivel": "membro",
+   "categoria": "navegacao",
+   "descricao": "Menu transparente sobre a foto do topo que fica sólido com sombra ao rolar, com menu de celular."
+  },
+  {
+   "id": "formulario-etapas",
+   "nome": "Formulário em etapas",
+   "nivel": "membro",
+   "categoria": "formularios",
+   "descricao": "Cadastro dividido em passos com barra de progresso, validação por etapa e revisão final."
+  },
+  {
+   "id": "upload-previa",
+   "nome": "Envio de arquivos com prévia",
+   "nivel": "membro",
+   "categoria": "formularios",
+   "descricao": "Arraste fotos e documentos, veja a prévia, o tamanho e remova antes de enviar."
+  },
+  {
+   "id": "calendario-eventos",
+   "nome": "Calendário do mês com eventos",
+   "nivel": "membro",
+   "categoria": "agenda",
+   "descricao": "Calendário mensal com eventos coloridos, navegação entre meses e detalhes do dia."
+  },
+  {
+   "id": "grafico-barras",
+   "nome": "Gráfico de barras animado",
+   "nivel": "membro",
+   "categoria": "dados",
+   "descricao": "Barras em SVG com valores, legenda e dica ao passar o mouse, sem biblioteca."
+  },
+  {
+   "id": "carrinho-lateral",
+   "nome": "Carrinho lateral",
+   "nivel": "membro",
+   "categoria": "loja",
+   "descricao": "Gaveta com os itens, quantidade, subtotal, frete grátis a partir de um valor e botão de finalizar."
+  },
+  {
+   "id": "data-horario",
+   "nome": "Escolha de data e horário",
+   "nivel": "membro",
+   "categoria": "agenda",
+   "descricao": "Seleção de dia e dos horários livres, como nos apps de agendamento de salão e clínica."
+  },
+  {
+   "id": "antes-depois",
+   "nome": "Comparador antes e depois",
+   "nivel": "membro",
+   "categoria": "midia",
+   "descricao": "Duas fotos sobrepostas com uma barra que a pessoa arrasta para comparar."
+  },
+  {
+   "id": "cookies-preferencias",
+   "nome": "Aviso de cookies com preferências",
+   "nivel": "membro",
+   "categoria": "utilidades",
+   "descricao": "Aviso de cookies (LGPD/RGPD) com aceitar, recusar e escolher categorias, salvando a escolha."
+  },
+  {
+   "id": "hero-video",
+   "nome": "Topo com vídeo de fundo",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Vídeo em loop no fundo com camada escura, título e botão; vira imagem no celular para economizar dados."
+  },
+  {
+   "id": "hero-formulario",
+   "nome": "Topo com formulário de captura",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Proposta à esquerda e formulário de contato à direita: ideal para gerar orçamentos."
+  },
+  {
+   "id": "hero-app",
+   "nome": "Topo de aplicativo com celular",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Moldura de celular com a tela do app, selos das lojas e avaliações."
+  },
+  {
+   "id": "hero-oferta",
+   "nome": "Topo de oferta com contagem regressiva",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Promoção com preço riscado, desconto e contador até o fim da oferta."
+  },
+  {
+   "id": "hero-busca-imoveis",
+   "nome": "Topo com busca de imóveis",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Foto de fundo e busca com cidade, tipo, quartos e faixa de preço."
+  },
+  {
+   "id": "hero-delivery",
+   "nome": "Topo de delivery com endereço",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Campo de CEP ou endereço, tempo de entrega e categorias do cardápio."
+  },
+  {
+   "id": "hero-agendamento",
+   "nome": "Topo com agendamento rápido",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Escolha de serviço e dia direto no topo, com botão de confirmar."
+  },
+  {
+   "id": "hero-carrossel",
+   "nome": "Topo em carrossel",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Vários destaques passando com transição suave, pontos e setas."
+  },
+  {
+   "id": "hero-metricas",
+   "nome": "Topo com métricas de resultado",
+   "nivel": "pro",
+   "categoria": "topo",
+   "descricao": "Título, chamada e uma faixa de números grandes que provam resultado."
+  },
+  {
+   "id": "mega-menu",
+   "nome": "Mega menu",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Menu com painéis grandes, colunas, ícones e destaque, acessível pelo teclado."
+  },
+  {
+   "id": "menu-lateral-recolhivel",
+   "nome": "Menu lateral que recolhe",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Menu de sistema que recolhe para só ícones e lembra a escolha."
+  },
+  {
+   "id": "barra-inferior-app",
+   "nome": "Barra inferior de aplicativo",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Navegação fixa no rodapé do celular, com ícone ativo e botão central de destaque."
+  },
+  {
+   "id": "abas-indicador",
+   "nome": "Abas com indicador deslizante",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Abas em que a marcação desliza até a aba escolhida."
+  },
+  {
+   "id": "indice-flutuante",
+   "nome": "Índice flutuante do artigo",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Sumário fixo ao lado do texto que marca a seção que está sendo lida."
+  },
+  {
+   "id": "barra-anuncio",
+   "nome": "Barra de anúncio no topo",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Faixa fina com aviso ou cupom, que a pessoa pode fechar (e não volta)."
+  },
+  {
+   "id": "trilha-icones",
+   "nome": "Trilha de navegação com ícones",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "\"Você está em\" com ícones, que encurta no celular."
+  },
+  {
+   "id": "paginacao-numeros",
+   "nome": "Paginação completa",
+   "nivel": "pro",
+   "categoria": "navegacao",
+   "descricao": "Números, reticências, anterior/próximo e \"itens por página\"."
+  },
+  {
+   "id": "comparativo-planos",
+   "nome": "Tabela comparativa de recursos",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "Recursos em linhas e planos em colunas, com ✓ e ✕ e cabeçalho fixo."
+  },
+  {
+   "id": "calculadora-orcamento",
+   "nome": "Calculadora de orçamento",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "O cliente marca o que precisa e vê o valor estimado na hora, com botão para pedir proposta."
+  },
+  {
+   "id": "oferta-relampago",
+   "nome": "Oferta relâmpago",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "Produto em oferta com contador, barra de estoque acabando e botão de compra."
+  },
+  {
+   "id": "simulador-parcelas",
+   "nome": "Simulador de parcelas",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "Mostra o valor em 1x a 12x, com e sem juros, e o desconto no Pix."
+  },
+  {
+   "id": "selo-garantia",
+   "nome": "Selo de garantia",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "Bloco de garantia de 7 ou 30 dias que reduz o medo de comprar."
+  },
+  {
+   "id": "upsell",
+   "nome": "Ofertas para levar junto",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "\"Quem comprou também levou\": produtos sugeridos com um clique para adicionar."
+  },
+  {
+   "id": "precos-alternancia",
+   "nome": "Preços com seletor de moeda",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "Plano em reais, euros ou dólares, e mensal ou anual, com a economia calculada."
+  },
+  {
+   "id": "cupom-desconto",
+   "nome": "Campo de cupom de desconto",
+   "nivel": "pro",
+   "categoria": "vendas",
+   "descricao": "Aplica o cupom, mostra o desconto e o novo total, com mensagens de erro claras."
+  },
+  {
+   "id": "avaliacoes-google",
+   "nome": "Avaliações estilo Google",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Nota média, total de avaliações, barras de 1 a 5 estrelas e comentários."
+  },
+  {
+   "id": "numeros-resultados",
+   "nome": "Números de resultado",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Contadores animados de clientes, projetos e anos de experiência."
+  },
+  {
+   "id": "estudo-de-caso",
+   "nome": "Cartão de estudo de caso",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Cliente, desafio, solução e resultado em números, com foto."
+  },
+  {
+   "id": "venda-recente",
+   "nome": "Aviso de compra recente",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Pequeno aviso no canto: \"Ana, de Lisboa, comprou há 5 minutos\"."
+  },
+  {
+   "id": "depoimento-video",
+   "nome": "Depoimento em vídeo",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Capa do vídeo com botão de play que só carrega o vídeo ao clicar."
+  },
+  {
+   "id": "mural-depoimentos",
+   "nome": "Mural de depoimentos",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Vários depoimentos em mosaico, como um mural de posts."
+  },
+  {
+   "id": "selos-confianca",
+   "nome": "Selos de confiança",
+   "nivel": "pro",
+   "categoria": "prova",
+   "descricao": "Site seguro, pagamento protegido, entrega garantida e formas de pagamento."
+  },
+  {
+   "id": "produto-variacoes",
+   "nome": "Produto com variações",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Fotos, cor e tamanho selecionáveis, preço, parcelas, estoque e botão de compra."
+  },
+  {
+   "id": "galeria-produto",
+   "nome": "Galeria de produto com zoom",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Miniaturas e foto grande com zoom ao passar o mouse."
+  },
+  {
+   "id": "mini-carrinho",
+   "nome": "Mini carrinho no topo",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Ícone com contador que abre a lista resumida do carrinho."
+  },
+  {
+   "id": "checkout-etapas",
+   "nome": "Checkout em etapas",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Identificação, entrega e pagamento com resumo do pedido sempre visível."
+  },
+  {
+   "id": "frete-cep",
+   "nome": "Cálculo de frete pelo CEP",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Digita o CEP e vê opções de entrega com prazo e valor."
+  },
+  {
+   "id": "lista-desejos",
+   "nome": "Lista de desejos",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Coração que salva o produto, com contador e lista guardada no navegador."
+  },
+  {
+   "id": "filtros-loja",
+   "nome": "Filtros de loja",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Categorias, faixa de preço, marcas e ordenação que filtram os produtos na hora."
+  },
+  {
+   "id": "comparar-produtos",
+   "nome": "Comparar produtos",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Selecione até 3 produtos e compare as características lado a lado."
+  },
+  {
+   "id": "rastreio-pedido",
+   "nome": "Rastreio de pedido",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Linha do tempo do pedido: pago, separado, enviado, saiu para entrega e entregue."
+  },
+  {
+   "id": "vitrine-categorias",
+   "nome": "Vitrine de categorias",
+   "nivel": "pro",
+   "categoria": "loja",
+   "descricao": "Categorias com foto grande em grade elegante, como as grandes lojas."
+  },
+  {
+   "id": "agenda-semanal",
+   "nome": "Agenda semanal",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Grade da semana com compromissos por horário, como a agenda do Google."
+  },
+  {
+   "id": "escolher-profissional",
+   "nome": "Escolher profissional",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Cartões dos profissionais com foto, especialidade, nota e próximo horário livre."
+  },
+  {
+   "id": "menu-servicos",
+   "nome": "Cardápio de serviços com preços",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Serviços com duração, preço e botão de agendar, separados por categoria."
+  },
+  {
+   "id": "confirmacao-agendamento",
+   "nome": "Confirmação de agendamento",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Resumo com data, hora, profissional, endereço e botões de lembrete e WhatsApp."
+  },
+  {
+   "id": "fila-espera",
+   "nome": "Fila de espera online",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Pessoa entra na fila e vê a posição e o tempo estimado em tempo real."
+  },
+  {
+   "id": "unidades-mapa",
+   "nome": "Unidades com mapa",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Lista de unidades com endereço, telefone e mapa que muda ao escolher."
+  },
+  {
+   "id": "cardapio-digital",
+   "nome": "Cardápio digital",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Cardápio com categorias fixas no topo, fotos, preços e botão de pedir."
+  },
+  {
+   "id": "planos-academia",
+   "nome": "Planos de academia ou curso",
+   "nivel": "pro",
+   "categoria": "agenda",
+   "descricao": "Planos com horários, modalidades e matrícula pelo WhatsApp."
+  },
+  {
+   "id": "intervalo-datas",
+   "nome": "Escolha de intervalo de datas",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Calendário duplo para check-in e check-out, com noites contadas."
+  },
+  {
+   "id": "autocompletar-cidades",
+   "nome": "Busca de cidades com sugestões",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Sugestões enquanto digita, ignorando acentos, com teclado e destaque."
+  },
+  {
+   "id": "assinatura-digital",
+   "nome": "Assinatura na tela",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Área para assinar com o dedo ou mouse, limpar e salvar como imagem."
+  },
+  {
+   "id": "avaliar-estrelas",
+   "nome": "Avaliação com estrelas e comentário",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Escolha de 1 a 5 estrelas com texto de apoio e comentário opcional."
+  },
+  {
+   "id": "contato-whatsapp",
+   "nome": "Contato que envia para o WhatsApp",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Formulário que monta a mensagem e abre o WhatsApp do negócio."
+  },
+  {
+   "id": "cpf-cnpj",
+   "nome": "Campo CPF/CNPJ inteligente",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Detecta CPF ou CNPJ enquanto digita, aplica a máscara e valida."
+  },
+  {
+   "id": "seletor-cores",
+   "nome": "Seletor de cores",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Paleta de cores prontas e cor personalizada, com prévia."
+  },
+  {
+   "id": "enquete",
+   "nome": "Enquete com resultado",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Pergunta com opções que mostra as porcentagens depois do voto."
+  },
+  {
+   "id": "newsletter-avancada",
+   "nome": "Newsletter com interesses",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Inscrição com escolha de temas e consentimento da LGPD/RGPD."
+  },
+  {
+   "id": "orcamento-detalhado",
+   "nome": "Pedido de orçamento detalhado",
+   "nivel": "pro",
+   "categoria": "formularios",
+   "descricao": "Formulário com tipo de serviço, prazo, verba e anexos."
+  },
+  {
+   "id": "grafico-linha",
+   "nome": "Gráfico de linha",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Linha com área, pontos, eixo e dica do valor ao passar o mouse."
+  },
+  {
+   "id": "grafico-rosca",
+   "nome": "Gráfico de rosca",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Divisão em porcentagens com legenda e total no centro."
+  },
+  {
+   "id": "tabela-edicao",
+   "nome": "Tabela com edição na linha",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Edite células com duplo clique, adicione e exclua linhas, exporte para planilha."
+  },
+  {
+   "id": "kanban",
+   "nome": "Quadro Kanban",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Colunas de tarefas com arrastar e soltar, contadores e nova tarefa."
+  },
+  {
+   "id": "linha-tempo-atividades",
+   "nome": "Linha do tempo de atividades",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Últimas atividades do sistema com ícones, horários e agrupamento por dia."
+  },
+  {
+   "id": "lista-tarefas",
+   "nome": "Lista de tarefas",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Adicione, marque, filtre e reordene tarefas, salvas no navegador."
+  },
+  {
+   "id": "resumo-financeiro",
+   "nome": "Resumo financeiro",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Saldo, entradas, saídas e últimas movimentações com cores."
+  },
+  {
+   "id": "mapa-calor",
+   "nome": "Mapa de calor de atividade",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Quadradinhos do ano inteiro, como as contribuições do GitHub."
+  },
+  {
+   "id": "medidor-meta",
+   "nome": "Medidor de meta",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Velocímetro com a porcentagem da meta do mês."
+  },
+  {
+   "id": "tabela-ranking",
+   "nome": "Ranking de vendedores",
+   "nivel": "pro",
+   "categoria": "dados",
+   "descricao": "Pódio dos 3 primeiros e lista com barras de progresso."
+  },
+  {
+   "id": "carrossel-cartoes",
+   "nome": "Carrossel de cartões",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Cartões que deslizam com o dedo, setas e encaixe suave."
+  },
+  {
+   "id": "player-video",
+   "nome": "Player de vídeo personalizado",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Play, barra de progresso, volume, velocidade e tela cheia com o seu visual."
+  },
+  {
+   "id": "player-podcast",
+   "nome": "Player de podcast",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Capa, episódio, avançar 15 segundos, velocidade e lista de episódios."
+  },
+  {
+   "id": "stories",
+   "nome": "Stories estilo Instagram",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Círculos de stories que abrem em tela cheia com barras de tempo."
+  },
+  {
+   "id": "mapa-leve",
+   "nome": "Mapa que carrega ao clicar",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Prévia leve do mapa que só carrega o Google Maps ou OpenStreetMap ao clicar."
+  },
+  {
+   "id": "slideshow-ken-burns",
+   "nome": "Slideshow com zoom lento",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Fotos trocando com zoom suave, estilo documentário."
+  },
+  {
+   "id": "portfolio-filtro",
+   "nome": "Portfólio com filtro",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Trabalhos em grade com filtro por categoria e animação ao trocar."
+  },
+  {
+   "id": "video-modal",
+   "nome": "Vídeo em janela",
+   "nivel": "pro",
+   "categoria": "midia",
+   "descricao": "Botão de play que abre o vídeo do YouTube numa janela elegante."
+  },
+  {
+   "id": "chat-atendimento",
+   "nome": "Chat de atendimento",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Janela de chat flutuante com respostas rápidas e envio para o WhatsApp."
+  },
+  {
+   "id": "central-notificacoes",
+   "nome": "Central de notificações",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Sino com contador, lista de avisos lidos e não lidos e \"marcar todas\"."
+  },
+  {
+   "id": "popup-saida",
+   "nome": "Pop-up de saída",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Oferta que aparece quando a pessoa vai sair do site (uma vez só)."
+  },
+  {
+   "id": "toasts",
+   "nome": "Avisos rápidos (toasts)",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Avisos de sucesso, erro e aviso que se empilham e somem sozinhos."
+  },
+  {
+   "id": "banner-promocional",
+   "nome": "Banner promocional fixo",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Faixa no rodapé com oferta e botão, que fecha e lembra."
+  },
+  {
+   "id": "perfil-cartao",
+   "nome": "Cartão de perfil",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Foto, nome, cargo, redes sociais e botão de seguir/contato."
+  },
+  {
+   "id": "comentarios",
+   "nome": "Comentários com respostas",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Lista de comentários com respostas, curtidas e campo para comentar."
+  },
+  {
+   "id": "equipe",
+   "nome": "Seção de equipe",
+   "nivel": "pro",
+   "categoria": "comunicacao",
+   "descricao": "Fotos da equipe com cargo e redes ao passar o mouse."
+  },
+  {
+   "id": "cta-dividido",
+   "nome": "Chamada final dividida",
+   "nivel": "pro",
+   "categoria": "rodape",
+   "descricao": "Bloco de fechamento com benefício, prova e dois botões."
+  },
+  {
+   "id": "cta-app",
+   "nome": "Chamada para baixar o app",
+   "nivel": "pro",
+   "categoria": "rodape",
+   "descricao": "Celular com o app, QR Code e selos das lojas."
+  },
+  {
+   "id": "rodape-minimo",
+   "nome": "Rodapé minimalista",
+   "nivel": "pro",
+   "categoria": "rodape",
+   "descricao": "Uma linha com logo, links essenciais e redes, elegante e leve."
+  },
+  {
+   "id": "contato-mapa",
+   "nome": "Seção de contato com mapa",
+   "nivel": "pro",
+   "categoria": "rodape",
+   "descricao": "Endereço, telefone, WhatsApp, horário e mapa lado a lado."
+  },
+  {
+   "id": "cta-newsletter",
+   "nome": "Chamada de newsletter",
+   "nivel": "pro",
+   "categoria": "rodape",
+   "descricao": "Faixa com benefício da newsletter e campo de e-mail em destaque."
+  },
+  {
+   "id": "tema-escuro",
+   "nome": "Botão de tema escuro",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Alterna claro e escuro com animação do ícone e lembra a escolha."
+  },
+  {
+   "id": "seletor-idioma",
+   "nome": "Seletor de idioma",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Bandeiras e nomes dos idiomas num menu compacto."
+  },
+  {
+   "id": "voltar-topo-progresso",
+   "nome": "Voltar ao topo com progresso",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Botão redondo que mostra quanto da página já foi lido."
+  },
+  {
+   "id": "compartilhar",
+   "nome": "Compartilhar nas redes",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Compartilhamento nativo do celular e botões de WhatsApp, Facebook, LinkedIn e copiar link."
+  },
+  {
+   "id": "recibo-impressao",
+   "nome": "Recibo pronto para imprimir",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Recibo ou orçamento com logo e itens, que imprime bonito (ou salva em PDF)."
+  },
+  {
+   "id": "contador-evento",
+   "nome": "Contagem para evento",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Dias, horas, minutos e segundos até a data, com \"adicionar à agenda\"."
+  },
+  {
+   "id": "qr-code",
+   "nome": "Gerador de QR Code",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Gera QR Code de link, Pix ou Wi-Fi na hora, para baixar e imprimir."
+  },
+  {
+   "id": "busca-site",
+   "nome": "Busca do site com atalho",
+   "nivel": "pro",
+   "categoria": "utilidades",
+   "descricao": "Caixa de busca que abre com Ctrl+K e lista resultados com o teclado."
+  }
+ ]
+}

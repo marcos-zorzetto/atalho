@@ -1,0 +1,63 @@
+{
+  "name": "atalho",
+  "displayName": "Atalho: componentes em português",
+  "description": "Trechos prontos da biblioteca Atalho (HTML, CSS e JS em português): digite at- e escolha. Com a conta grátis, a biblioteca inteira; no Pro, mais de 100 componentes avançados e 48 animações.",
+  "version": "1.0.0",
+  "publisher": "marcos-zorzetto",
+  "author": { "name": "Marcos Zorzetto" },
+  "license": "MIT",
+  "icon": "midia/icone.png",
+  "homepage": "https://marcos-zorzetto.github.io/atalho/",
+  "repository": { "type": "git", "url": "https://github.com/marcos-zorzetto/atalho", "directory": "vscode-atalho" },
+  "bugs": { "url": "https://github.com/marcos-zorzetto/atalho/issues" },
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Snippets", "Programming Languages", "Other"],
+  "keywords": ["atalho", "português", "componentes", "html", "css", "bootstrap", "snippets", "animações", "ui", "pt-br"],
+  "galleryBanner": { "color": "#facc15", "theme": "light" },
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [
+      { "command": "atalho.entrar", "title": "Entrar na conta", "category": "Atalho", "icon": "$(account)" },
+      { "command": "atalho.criarConta", "title": "Criar conta grátis", "category": "Atalho" },
+      { "command": "atalho.sair", "title": "Sair da conta", "category": "Atalho", "icon": "$(sign-out)" },
+      { "command": "atalho.inserir", "title": "Inserir componente", "category": "Atalho", "icon": "$(search)" },
+      { "command": "atalho.novaPagina", "title": "Nova página com o Atalho", "category": "Atalho", "icon": "$(new-file)" },
+      { "command": "atalho.atualizar", "title": "Atualizar componentes", "category": "Atalho", "icon": "$(refresh)" },
+      { "command": "atalho.assinarPro", "title": "Conhecer o Pro", "category": "Atalho", "icon": "$(star-full)" },
+      { "command": "atalho.documentacao", "title": "Abrir a documentação", "category": "Atalho", "icon": "$(book)" },
+      { "command": "atalho.inserirItem", "title": "Inserir", "category": "Atalho" }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "atalho.inserirItem", "when": "false" },
+        { "command": "atalho.sair", "when": "atalho.conectado" },
+        { "command": "atalho.entrar", "when": "!atalho.conectado" }
+      ],
+      "view/title": [
+        { "command": "atalho.inserir", "when": "view == atalho.painel && atalho.conectado", "group": "navigation@1" },
+        { "command": "atalho.novaPagina", "when": "view == atalho.painel && atalho.conectado", "group": "navigation@2" },
+        { "command": "atalho.atualizar", "when": "view == atalho.painel && atalho.conectado", "group": "navigation@3" },
+        { "command": "atalho.documentacao", "when": "view == atalho.painel", "group": "navigation@4" },
+        { "command": "atalho.sair", "when": "view == atalho.painel && atalho.conectado", "group": "conta" }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [{ "id": "atalho", "title": "Atalho", "icon": "midia/barra.svg" }]
+    },
+    "views": {
+      "atalho": [{ "id": "atalho.painel", "name": "Componentes" }]
+    },
+    "viewsWelcome": [
+      {
+        "view": "atalho.painel",
+        "contents": "Componentes prontos em português, para colar e usar.\nCom a conta grátis você libera a biblioteca inteira, as classes e 30 componentes e animações avançados. No Pro, tudo.\n[Entrar](command:atalho.entrar)\n[Criar conta grátis](command:atalho.criarConta)\nÉ a mesma conta do site do Atalho.",
+        "when": "!atalho.conectado"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "empacotar": "npx --yes @vscode/vsce@3 package --no-dependencies"
+  }
+}
