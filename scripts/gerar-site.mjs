@@ -27,6 +27,7 @@ import { paginaExemplo, redirecionamentoExemplo } from "./site/pagina-exemplo.mj
 import { paginaAnimacoes, paginaComponentesAvancados } from "./site/pagina-vitrine.mjs";
 import { gerarIconesPhosphor } from "./site/icones-phosphor.mjs";
 import { paginaAdmin } from "./site/pagina-admin.mjs";
+import { build as empacotar } from "esbuild";
 
 const DIST = path.join(RAIZ, "dist");
 
@@ -64,9 +65,20 @@ export async function gerarSite() {
   for (const pasta of ["miniaturas", "capturas"]) {
     await cp(path.join(RAIZ, "exemplos", pasta), path.join(DIST, "exemplos", pasta), { recursive: true });
   }
-  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "vitrine.js", "icones.js"]) {
+  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "vitrine.js", "icones.js", "inicio.css", "inicio.js"]) {
     await cp(path.join(RAIZ, "site", arquivo), path.join(DIST, "site", arquivo));
   }
+  // Cenas 3D: só o que é usado do Three.js entra no pacote (minificado)
+  await empacotar({
+    entryPoints: [path.join(RAIZ, "site/3d/cena-inicio.js"), path.join(RAIZ, "site/3d/aurora.js")],
+    outdir: path.join(DIST, "site/3d"),
+    bundle: true,
+    format: "esm",
+    minify: true,
+    target: "es2022",
+    legalComments: "none",
+    logLevel: "warning",
+  });
   for (const arquivo of ["favicon.svg", "og.png"]) {
     if (existsSync(path.join(RAIZ, arquivo))) await cp(path.join(RAIZ, arquivo), path.join(DIST, arquivo));
   }

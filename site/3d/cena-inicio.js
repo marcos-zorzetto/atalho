@@ -310,10 +310,14 @@ export function iniciarCena(canvas, opcoes = {}) {
     if (!l || !a) return;
     renderer.setSize(l, a, false);
     camera.aspect = l / a;
-    // Em ecrãs estreitos, afasta a câmara para caber tudo
-    camera.position.z = l / a < 0.9 ? 17 : l / a < 1.3 ? 14 : 12;
+    // Ecrã largo: a cena fica à direita do texto. Estreito: atrás do texto, mais longe
+    const largo = l / a >= 1.15;
+    camera.position.z = largo ? 13 : 15.5;
+    deslocamento = largo ? Math.min(5.6, (l / a) * 2.9) : 0;
+    camera.userData.yBase = 0.2;
     camera.updateProjectionMatrix();
   };
+  let deslocamento = 0;
   const observadorTamanho = new ResizeObserver(ajustar);
   observadorTamanho.observe(canvas);
   ajustar();
@@ -334,6 +338,7 @@ export function iniciarCena(canvas, opcoes = {}) {
     rotacao.x = MathUtils.lerp(rotacao.x, alvo.y * 0.12, 0.05);
     rotacao.y = MathUtils.lerp(rotacao.y, alvo.x * 0.22, 0.05);
     palco.rotation.set(rotacao.x, rotacao.y, 0);
+    palco.position.x = MathUtils.lerp(palco.position.x, deslocamento, 0.08);
 
     // A tecla flutua, e "carrega" um pouco quando se rola a página
     tecla.position.y = Math.sin(tempo * 0.9) * 0.12 - progresso * 0.4;
@@ -362,8 +367,9 @@ export function iniciarCena(canvas, opcoes = {}) {
     pos.needsUpdate = true;
     poeira.rotation.y = tempo * 0.02;
 
-    camera.position.y = 0.2 - progresso * 0.6;
-    camera.lookAt(0, -progresso * 0.3, 0);
+    const yBase = camera.userData.yBase ?? 0.2;
+    camera.position.y = yBase - progresso * 0.6;
+    camera.lookAt(0, yBase - 0.2 - progresso * 0.3, 0);
     renderer.render(cena, camera);
   }
 

@@ -94,10 +94,10 @@ export function pagina(p) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${url("favicon.svg")}" type="image/svg+xml">
   <link rel="sitemap" type="application/xml" href="${url("sitemap.xml")}">
-  <script>try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="${url("atalho/atalho.css")}">
   <link rel="stylesheet" href="${url("site/site.css")}">
   ${scripts

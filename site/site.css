@@ -4,7 +4,8 @@
  */
 
 :root {
-  --site-fonte-titulo: "Bricolage Grotesque", var(--at-fonte);
+  --site-fonte-titulo: "Inter Tight", "Inter", var(--at-fonte);
+  --at-fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --site-fonte-codigo: "JetBrains Mono", var(--at-fonte-codigo);
   --site-codigo-fundo: #1c1917;
   --site-codigo-texto: #e7e5e4;
@@ -793,3 +794,23 @@ mark { background: color-mix(in srgb, var(--at-cor-destaque) 55%, transparent); 
 .site-icones-barra .at-aba[aria-checked="true"] { color: var(--at-texto); background: var(--at-superficie); box-shadow: var(--at-sombra-1); }
 .site-icones-phosphor li, .site-icones-phosphor .site-icone { height: 100%; }
 .site-recurso-icone { display: inline-grid; place-items: center; width: 44px; height: 44px; margin-bottom: var(--at-espaco-3); color: var(--at-cor-primaria); background: var(--at-cor-primaria-suave); border-radius: 12px; }
+
+/* ==========================================================================
+   Acabamento "produto" (2026): barra em vidro, tipografia e movimento suave
+   ========================================================================== */
+
+body { font-feature-settings: "cv11", "ss01"; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.site-titulo { font-weight: 700; letter-spacing: -0.04em; }
+
+.site-barra {
+  background: color-mix(in srgb, var(--at-fundo) 72%, transparent) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid color-mix(in srgb, var(--at-borda) 70%, transparent) !important;
+}
+/* Na página inicial, a barra começa transparente sobre o preto e ganha vidro ao rolar */
+.site-cinema .site-barra { color-scheme: dark; --at-texto: #f4f4f5; --at-texto-suave: #a1a1aa; --at-borda: rgb(255 255 255 / 0.1); --at-borda-forte: rgb(255 255 255 / 0.18); --at-superficie: rgb(255 255 255 / 0.06); --at-superficie-2: rgb(255 255 255 / 0.1); background: rgb(5 5 5 / 0.55) !important; }
+
+.at-botao { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s, box-shadow 0.35s, border-color 0.2s; }
+.at-botao:not(:disabled):active { transform: scale(0.97); }
+.at-cartao { transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
