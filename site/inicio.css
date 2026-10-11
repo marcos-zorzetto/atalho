@@ -96,12 +96,19 @@
 @keyframes cine-respirar { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.12); opacity: 1; } }
 
 /* Degradê que garante a leitura do texto por cima da cena 3D */
-.cine-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgb(5 5 5 / 0.92) 0%, rgb(5 5 5 / 0.72) 34%, rgb(5 5 5 / 0) 62%); }
-/* Ecrã estreito (telemóvel, tablet ao alto): a cena ocupa a parte de cima e o texto vem por baixo */
-@media (max-aspect-ratio: 23/20) {
-  .cine-hero { align-items: end; padding-top: min(52svh, 520px); }
-  .cine-hero-3d { height: min(58svh, 600px); }
-  .cine-hero::before { background: linear-gradient(180deg, rgb(5 5 5 / 0) 0%, rgb(5 5 5 / 0) min(36svh, 360px), rgb(5 5 5 / 0.95) min(58svh, 600px)); }
+/* Por padrão (telemóvel, tablet, portátil estreito): cena 3D em cima e texto por baixo, sem nunca se sobreporem */
+.cine-hero { align-items: end; padding-top: min(50svh, 500px); }
+.cine-hero-3d { height: min(56svh, 580px); }
+.cine-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgb(5 5 5 / 0) 0%, rgb(5 5 5 / 0) min(34svh, 340px), var(--cine-preto) min(54svh, 560px)); }
+
+/* Ecrã largo: a cena vive só na coluna da direita (não passa por trás do texto) */
+@media (min-aspect-ratio: 7/5) and (min-width: 1100px) {
+  .cine-hero { align-items: center; padding-top: 120px; }
+  .cine-hero-3d { left: auto; right: 0; width: 50%; height: 100%; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%); mask-image: linear-gradient(90deg, transparent 0%, #000 30%); }
+  .cine-hero::before { display: none; }
+  .cine-hero-texto > * { max-width: min(38rem, 40vw); }
+  .cine-hero-texto > .cine-busca, .cine-hero-texto > .site-sugestoes, .cine-hero .cine-sub { max-width: min(38rem, 40vw); }
+  .cine-titulo { font-size: clamp(3.2rem, 5vw, 5.6rem); }
 }
 
 /* O texto fica à esquerda e a cena 3D respira à volta */
@@ -181,7 +188,7 @@
 .cine-telemovel-ecra strong { font-size: 1.5rem; letter-spacing: -0.03em; }
 .cine-telemovel-ecra span { font-size: 0.72rem; color: #64748b; }
 .cine-telemovel-app { padding: 3px 10px; font-weight: 800; color: #fff !important; background: #e1251b; border-radius: 6px; }
-.cine-telemovel-ok { margin-top: 6px; padding: 8px 18px; font-weight: 700; color: #fff !important; background: #16a34a; border-radius: 999px; animation: cine-pulsar 2.4s ease-in-out infinite; }
+.cine-telemovel-ok { margin-top: 6px; padding: 8px 18px; font-weight: 700; color: #fff !important; background: #15803d; border-radius: 999px; animation: cine-pulsar 2.4s ease-in-out infinite; }
 @keyframes cine-flutuar { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
 @keyframes cine-pulsar { 0%, 100% { box-shadow: 0 0 0 0 rgb(22 163 74 / 0.5); } 50% { box-shadow: 0 0 0 10px rgb(22 163 74 / 0); } }
 

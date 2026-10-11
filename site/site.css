@@ -809,8 +809,11 @@ body { font-feature-settings: "cv11", "ss01"; -webkit-font-smoothing: antialiase
   border-bottom: 1px solid color-mix(in srgb, var(--at-borda) 70%, transparent) !important;
 }
 /* Na página inicial, a barra começa transparente sobre o preto e ganha vidro ao rolar */
-.site-cinema .site-barra { color-scheme: dark; --at-texto: #f4f4f5; --at-texto-suave: #a1a1aa; --at-borda: rgb(255 255 255 / 0.1); --at-borda-forte: rgb(255 255 255 / 0.18); --at-superficie: rgb(255 255 255 / 0.06); --at-superficie-2: rgb(255 255 255 / 0.1); background: rgb(5 5 5 / 0.55) !important; }
+.site-cinema .site-barra { color-scheme: dark; --at-texto: #f4f4f5; --at-texto-suave: #a1a1aa; --at-borda: rgb(255 255 255 / 0.1); --at-borda-forte: rgb(255 255 255 / 0.18); --at-superficie: rgb(255 255 255 / 0.06); --at-superficie-2: rgb(255 255 255 / 0.1); background: rgb(5 5 5 / 0.86) !important; }
 
 .at-botao { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s, box-shadow 0.35s, border-color 0.2s; }
 .at-botao:not(:disabled):active { transform: scale(0.97); }
 .at-cartao { transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.site-cinema .site-link-pro { color: #5eead4 !important; }
+.site-meta { flex-wrap: wrap; min-width: 0; }
+.site-selo-baseline { max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-align: left; }

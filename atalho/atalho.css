@@ -1235,20 +1235,21 @@ select.at-entrada {
   background: #292524;
   border-radius: var(--at-raio-sm);
   box-shadow: var(--at-sombra-2);
-  opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, 4px);
-  transition: opacity 120ms, transform 120ms;
+  transform: translate(-50%, 0);
+  /* Escondida de verdade (display: none): uma dica invisível perto da margem alargava a página no telemóvel */
+  display: none;
 }
 
-[data-at-dica][data-at-dica-lado="baixo"]::after { top: calc(100% + 8px); bottom: auto; transform: translate(-50%, -4px); }
+[data-at-dica][data-at-dica-lado="baixo"]::after { top: calc(100% + 8px); bottom: auto; }
 
 [data-at-dica]:hover::after,
 [data-at-dica]:focus-visible::after {
-  opacity: 1;
-  transform: translate(-50%, 0);
-  transition-delay: 300ms;
+  display: block;
+  max-width: min(240px, calc(100vw - 32px));
+  animation: at-dica-aparecer 120ms 300ms both;
 }
+@keyframes at-dica-aparecer { from { opacity: 0; translate: 0 4px; } }
 
 /* Notificações (toast) */
 .at-notificacoes {

@@ -30,6 +30,8 @@ const curva = (id, padrao = CURVAS[0][0]) => ({ var: `--${id}-curva`, rotulo: "C
 const repeticoes = (id, padrao = "infinite") => opcao(id, "repeticoes", "Repetições", [["1", "Uma vez"], ["2", "Duas vezes"], ["3", "Três vezes"], ["infinite", "Sem parar"]], padrao);
 
 export const CATEGORIAS = [
+  { id: "cinema", nome: "Cinema 3D" },
+  { id: "luz", nome: "Luz e atmosfera" },
   { id: "entrada", nome: "Entrada" },
   { id: "atencao", nome: "Chamar atenção" },
   { id: "rolagem", nome: "Ao fazer scroll na página" },

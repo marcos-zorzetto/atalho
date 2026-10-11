@@ -310,10 +310,9 @@ export function iniciarCena(canvas, opcoes = {}) {
     if (!l || !a) return;
     renderer.setSize(l, a, false);
     camera.aspect = l / a;
-    // Ecrã largo: a cena fica à direita do texto. Estreito: atrás do texto, mais longe
-    const largo = l / a >= 1.15;
-    camera.position.z = largo ? 13 : 15.5;
-    deslocamento = largo ? Math.min(5.6, (l / a) * 2.9) : 0;
+    // O canvas já ocupa só a área livre (coluna da direita ou topo): a cena fica centrada nele
+    camera.position.z = l / a < 0.85 ? 18 : l / a < 1.3 ? 15.5 : 13.5;
+    deslocamento = 0;
     camera.userData.yBase = 0.2;
     camera.updateProjectionMatrix();
   };
