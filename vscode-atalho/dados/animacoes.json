@@ -1,6 +1,14 @@
 {
  "categorias": [
   {
+   "id": "cinema",
+   "nome": "Cinema 3D"
+  },
+  {
+   "id": "luz",
+   "nome": "Luz e atmosfera"
+  },
+  {
    "id": "entrada",
    "nome": "Entrada"
   },
