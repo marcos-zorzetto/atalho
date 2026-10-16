@@ -4,8 +4,8 @@
  * package.json, guias e o README do atalho-pro, se estiver ao lado).
  * O site em si não precisa: ele lê a variável ATALHO_URL na publicação.
  *
- * Uso: node scripts/migrar-dominio.mjs https://atalhoui.com/
- *      node scripts/migrar-dominio.mjs https://atalhoui.com/ --conferir   (só mostra o que mudaria)
+ * Uso: node scripts/migrar-dominio.mjs https://atalho.com.pt/
+ *      node scripts/migrar-dominio.mjs https://atalho.com.pt/ --conferir   (só mostra o que mudaria)
  */
 import { readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -22,7 +22,7 @@ try {
   novo = new URL(novoTexto);
   if (novo.protocol !== "https:") throw new Error();
 } catch {
-  console.error("Informe o domínio novo com https, ex.: node scripts/migrar-dominio.mjs https://atalhoui.com/");
+  console.error("Informe o domínio novo com https, ex.: node scripts/migrar-dominio.mjs https://atalho.com.pt/");
   process.exit(1);
 }
 const NOVO = novo.href.replace(/\/?$/, "/");

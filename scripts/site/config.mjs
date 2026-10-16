@@ -3,7 +3,7 @@
  * Domínio próprio: defina só ATALHO_URL (no GitHub, em Settings → Secrets and
  * variables → Actions → Variables). A base dos links sai do próprio endereço:
  *   https://marcos-zorzetto.github.io/atalho/ → links com /atalho/
- *   https://atalhoui.com/                     → links na raiz (/)
+ *   https://atalho.com.pt/                     → links na raiz (/)
  * Guia completo: servicos/MIGRAR-DOMINIO.md
  */
 import { readFileSync } from "node:fs";

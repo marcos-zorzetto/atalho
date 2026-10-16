@@ -2,7 +2,7 @@
 /**
  * Responsividade em dispositivos reais: ecrã, densidade, toque e motor de cada aparelho
  * (Safari/WebKit nos iPhone e iPad, Chromium nos Android, Firefox nos portáteis), do
- * iPhone SE ao ecrã 4K. Adaptado dos testes do site da Alisense.
+ * iPhone SE ao ecrã 4K.
  *
  * Por página e dispositivo: nada mais largo que o ecrã, texto que não transborda, letra
  * de pelo menos 12px, alvos de toque de pelo menos 24×24px (WCAG 2.5.8) e sem erros na

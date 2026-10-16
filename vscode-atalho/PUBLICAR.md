@@ -69,8 +69,8 @@ Os componentes avançados e as animações **não** precisam de nova versão. El
 
 ## 5. Domínio próprio
 
-Quando o site mudar para atalhoui.com:
+Quando o site mudar para atalho.com.pt:
 
-1. Rode com `ATALHO_URL=https://atalhoui.com/ node scripts/gerar-extensao.mjs`.
+1. Rode com `ATALHO_URL=https://atalho.com.pt/ node scripts/gerar-extensao.mjs`.
 2. Troque `homepage` no `package.json` e os links do `README.md`.
 3. Publique uma nova versão.

@@ -17,7 +17,7 @@ const DIST = path.join(RAIZ, "dist");
 const SAIDA = path.join(RAIZ, "dist-redirecionar");
 const NOVO = SITE.url;
 if (new URL(NOVO).hostname.endsWith(".github.io")) {
-  console.error("Defina ATALHO_URL com o domínio novo (ex.: https://atalhoui.com/).");
+  console.error("Defina ATALHO_URL com o domínio novo (ex.: https://atalho.com.pt/).");
   process.exit(1);
 }
 

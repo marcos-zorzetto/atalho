@@ -4,7 +4,7 @@
  * sem acesso ao repositório privado, confere segurança e SEO e cria o zip para o
  * File Manager do cPanel (Upload → Extract).
  *
- * Uso: node scripts/empacotar-ptservidor.mjs https://atalhoui.com/
+ * Uso: node scripts/empacotar-ptservidor.mjs https://atalho.com.pt/
  * Saída: atalho-site.zip na raiz (não vai para o Git).
  * Guia: servicos/PTSERVIDOR.md
  */
@@ -19,7 +19,7 @@ try {
   url = new URL(endereco);
   if (url.protocol !== "https:" || url.pathname !== "/") throw new Error();
 } catch {
-  console.error("Indique o endereço final, com https e na raiz do domínio: node scripts/empacotar-ptservidor.mjs https://atalhoui.com/");
+  console.error("Indique o endereço final, com https e na raiz do domínio: node scripts/empacotar-ptservidor.mjs https://atalho.com.pt/");
   process.exit(1);
 }
 

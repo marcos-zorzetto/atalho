@@ -3,9 +3,9 @@
  * Segurança do site publicado: cabeçalhos, CSP, redirecionamentos, certificado TLS,
  * ficheiros sensíveis e conteúdo misto. Só faz pedidos GET/HEAD, espaçados (a PTServidor
  * tem uma proteção anti-robô que bloqueia rajadas de pedidos durante uns minutos).
- * Adaptado dos testes do site da Alisense.
  *
- * Uso: node testes/seguranca-publicado.mjs https://atalhoui.com
+ *
+ * Uso: node testes/seguranca-publicado.mjs https://atalho.com.pt
  */
 import tls from "node:tls";
 

@@ -170,7 +170,7 @@ npm run e2e            # interações num navegador a sério (Edge ou Chrome)
 npm run auditoria      # acessibilidade WCAG 2.1 AA e layout em 5 vistas
 npm run site           # serve o site em http://localhost:3000
 npm run atualizar      # corre o robô de atualização localmente
-node scripts/empacotar-ptservidor.mjs https://atalhoui.com/   # zip para o cPanel
+node scripts/empacotar-ptservidor.mjs https://atalho.com.pt/   # zip para o cPanel
 ```
 
 Estrutura:

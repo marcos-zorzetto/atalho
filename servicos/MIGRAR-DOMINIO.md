@@ -1,4 +1,6 @@
-# Migrar para domínio próprio (melhor custo-benefício)
+# Migrar para domínio próprio (plano antigo)
+
+> **Substituído** a 16/10/2026: o Atalho está em **https://atalho.com.pt/**, na PTServidor. O guia em uso é [PTSERVIDOR.md](PTSERVIDOR.md); este fica como histórico da alternativa Cloudflare.
 
 Plano preparado em 9 de outubro de 2026. O código já está pronto: a mudança é feita
 com **duas variáveis no GitHub** e alguns ajustes nos painéis. Nada no código
@@ -9,7 +11,6 @@ precisa ser reescrito no dia.
 | Item | Escolha | Custo por ano |
 |---|---|---|
 | Domínio do Atalho | **atalhoui.com** na Cloudflare Registrar (preço de custo, sem margem e sem aumento na renovação) | ≈ US$ 10,50 (≈ €9,50) |
-| Domínio da Alisense | **alisense.pt** num registrador português (a Cloudflare não vende .pt) | ≈ €12 a €19 |
 | Hospedagem dos dois sites | **Cloudflare** (Workers com arquivos estáticos, plano grátis): CDN mundial, HTTPS, uso comercial permitido | €0 |
 | E-mail que recebe (contato@...) | **Cloudflare Email Routing**: encaminha para o seu e-mail atual | €0 |
 | E-mail que envia (confirmação de conta, respostas) | **Brevo** com o domínio autenticado (300 e-mails/dia grátis) | €0 |
@@ -36,9 +37,6 @@ ele não deixa configurar cabeçalhos de segurança. Na Cloudflare, o arquivo
 | atalhoui.com | **livre** (recomendado: "Atalho UI", curto e internacional) |
 | atalhocss.com | livre (alternativa) |
 | atalho.com, atalho.dev | ocupados |
-| alisense.pt | **livre** (recomendado: empresa em Portugal, passa confiança local) |
-| alisense.com | ocupado |
-| alisense.org | em resgate na Hostinger desde 27/09. Recuperar no resgate custa caro (em geral €80+). Se ninguém recuperar, fica livre por volta de **1 a 2 de novembro de 2026** e pode ser registrado pelo preço normal (≈ US$ 11 na Cloudflare) para redirecionar ao alisense.pt |
 
 > Antes de comprar, confira o preço no carrinho: valores de terceiros mudam. Compare
 > sempre o preço da **renovação**, não só o do primeiro ano.
@@ -108,27 +106,6 @@ ele não deixa configurar cabeçalhos de segurança. Na Cloudflare, o arquivo
 **Voltar atrás**, se algo der errado: mude `ATALHO_HOSPEDAGEM` para `github`, apague
 `ATALHO_URL` e rode o workflow **Publicar site** de novo. Tudo volta ao GitHub Pages
 como hoje.
-
----
-
-## Parte 2 · Alisense em alisense.pt
-
-1. Registre `alisense.pt` num registrador português (compare OVHcloud, PTisp, Amen e
-   Dominios.pt: veja o preço da **renovação com IVA**). Não contrate hospedagem nem e-mail
-   no pacote.
-2. Na Cloudflare: **Add a domain** → `alisense.pt` → plano Free. A Cloudflare mostra dois
-   *nameservers*: troque os do registrador por eles (no painel do registrador, em DNS).
-   Leva de minutos a algumas horas.
-3. O site da Alisense é publicado do mesmo jeito (pasta `alisense-site`, que já tem o
-   `wrangler.jsonc`): domínio próprio em **Workers → alisense → Domains & Routes**.
-4. E-mail: Email Routing com `ola@alisense.pt` (ou `contato@`) para o seu e-mail e o da
-   sua esposa; envio pelo Brevo com o domínio autenticado, como no passo 5 do Atalho.
-   Precisa de caixa de entrada própria, com app no celular? Zoho Mail ou Hostinger Mail
-   custam cerca de €1 a €3 por pessoa por mês. Google Workspace (≈ €7) só se precisarem
-   de Drive e Meet com o domínio.
-5. Atualize a bio do Instagram (@alisense86), o Facebook e o WhatsApp Business com o site novo.
-6. Se o `alisense.org` ficar livre em novembro, registre-o na Cloudflare e crie uma
-   regra de redirecionamento (**Rules → Redirect Rules**) para `https://alisense.pt`.
 
 ---
 

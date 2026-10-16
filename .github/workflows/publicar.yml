@@ -3,7 +3,7 @@
 #
 # Onde publicar é decidido por duas variáveis do repositório
 # (Settings → Secrets and variables → Actions → Variables):
-#   ATALHO_URL         endereço oficial, ex.: https://atalhoui.com/ (vazio: GitHub Pages padrão)
+#   ATALHO_URL         endereço oficial, ex.: https://atalho.com.pt/ (vazio: GitHub Pages padrão)
 #   ATALHO_HOSPEDAGEM  "github" (padrão), "ptservidor" ou "cloudflare"
 # Na PTServidor e na Cloudflare, o endereço antigo do GitHub Pages passa a redirecionar
 # para o novo. Guias: servicos/PTSERVIDOR.md e servicos/MIGRAR-DOMINIO.md
