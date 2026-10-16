@@ -128,7 +128,7 @@
     }
   }
 
-  /** Loja: a receita é o total pago; a Lemon Squeezy repassa descontando o IVA e as taxas dela. */
+  /** Loja: a receita é o total pago; a Revolut deposita na conta descontando a taxa dela (cerca de 1% + 0,20 €). */
   async function carregarLoja() {
     const loja = await chamar("admin_loja");
     const euro = (centavos) => new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(centavos / 100);

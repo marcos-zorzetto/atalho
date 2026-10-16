@@ -454,3 +454,28 @@ create policy "conteudos: quem tem acesso lê" on public.conteudos for select to
 -- Só muda quem ainda tem os preços antigos (não mexe em preços ajustados à mão).
 update public.produtos set preco_centavos = 900 where id = 'pro-mensal' and preco_centavos = 490;
 update public.produtos set preco_centavos = 7900 where id = 'pro-anual' and preco_centavos = 3900;
+
+-- ===========================================================================
+-- PAGAMENTOS PELA REVOLUT BUSINESS (versão 1.5, 16/10/2026)
+-- O dinheiro entra diretamente na conta Revolut Business. A Revolut cobra as
+-- renovações; os avisos chegam a servicos/supabase/functions/revolut-webhook
+-- e o checkout é criado por revolut-loja. As colunas da Lemon Squeezy ficam
+-- para o histórico.
+-- ===========================================================================
+
+-- Variação do plano de subscrição na Revolut (plan_variation_id), por produto
+alter table public.produtos add column if not exists variante_revolut text unique;
+
+-- Compras avulsas pagas na Revolut
+alter table public.compras alter column pedido_lemon drop not null;
+alter table public.compras add column if not exists pedido_revolut text;
+
+-- Cliente da Revolut de cada conta (criado no primeiro checkout). Só o servidor lê e escreve.
+create table if not exists public.clientes_revolut (
+  usuario_id uuid primary key references auth.users (id) on delete cascade,
+  cliente_id text not null unique,
+  criado_em timestamptz not null default now()
+);
+alter table public.clientes_revolut enable row level security;
+revoke all on public.clientes_revolut from anon, authenticated;
+grant select, insert, update, delete on public.clientes_revolut to service_role;

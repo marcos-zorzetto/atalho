@@ -686,11 +686,11 @@ teste("Admin: números, busca, paginação e folha de cálculo da lista de esper
 }, { supabase: { pessoa: "admin", usuarios: 31 } });
 
 /* ------------------------------------------------------------------------
-   Loja: planos, checkout da Lemon Squeezy e plano na conta
+   Loja: planos, checkout da Revolut e plano na conta
    ------------------------------------------------------------------------ */
 
-const LINKS = { "pro-mensal": "https://atalho.lemonsqueezy.com/buy/mensal-teste", "pro-anual": "https://atalho.lemonsqueezy.com/buy/anual-teste" };
-const ASSINATURA_ATIVA = { id: "77", produto_id: "pro-anual", status: "active", renova_em: "2027-10-09T00:00:00Z", termina_em: null, portal_url: "https://atalho.lemonsqueezy.com/billing/77" };
+const LOJA = { ativo: true };
+const ASSINATURA_ATIVA = { id: "77", produto_id: "pro-anual", status: "active", renova_em: "2027-10-09T00:00:00Z", termina_em: null, portal_url: null };
 
 teste("Preços: alterna mensal e anual, e sem pagamentos leva à lista de espera", async (aba) => {
   await abrir(aba, "pro/");
@@ -706,16 +706,11 @@ teste("Preços: alterna mensal e anual, e sem pagamentos leva à lista de espera
   assert.equal(await aba.locator("#modal-compra").count(), 0, "sem pagamentos não abre o checkout");
 });
 
-teste("Preços: link que não é da Lemon Squeezy é ignorado", async (aba) => {
-  await abrir(aba, "pro/");
-  await aba.locator(".at-plano[data-destaque]").getByRole("button", { name: "Entrar na lista de espera" }).waitFor();
-}, { supabase: { pessoa: "membro", loja: { links: { "pro-mensal": "https://golpe.exemplo.com/buy", "pro-anual": "http://atalho.lemonsqueezy.com/buy/x" } } } });
-
 teste("Preços: visitante que assina é levado a criar a conta antes", async (aba) => {
   await abrir(aba, "pro/");
   await aba.getByRole("button", { name: "Subscrever o Pro mensal" }).click();
   await aba.waitForURL(/\/conta\/\?voltar=%2Fpro%2F&criar$/);
-}, { supabase: { pessoa: null, loja: { links: LINKS } } });
+}, { supabase: { pessoa: null, loja: LOJA } });
 
 teste("Sistemas: catálogo público com todos os sistemas; visitante que descarrega vai criar a conta", async (aba) => {
   await abrir(aba, "sistemas/");
@@ -742,51 +737,66 @@ teste("Sistemas: membro sem Pro vê o convite; assinante descarrega o zip com o 
   assert.ok(zip.startsWith("PK"));
 }, { supabase: { pessoa: "membro" } });
 
-teste("Preços: membro confirma a desistência e vai ao checkout só com o id da conta", async (aba) => {
-  let checkout = null;
-  await aba.context().route("https://atalho.lemonsqueezy.com/**", (rota) => {
-    checkout = rota.request().url();
-    return rota.fulfill({ contentType: "text/html", body: "<title>Checkout</title>" });
+teste("Preços: membro confirma a desistência e vai à página da Revolut; a função recebe só o produto", async (aba) => {
+  let pagina = null;
+  let corpoFuncao = null;
+  await aba.context().route("https://checkout.revolut.com/**", (rota) => {
+    pagina = rota.request().url();
+    return rota.fulfill({ contentType: "text/html", body: "<title>Revolut</title>" });
   });
+  aba.on("request", (r) => r.url().includes("/functions/v1/revolut-loja") && r.method() === "POST" && (corpoFuncao = JSON.parse(r.postData() || "{}")));
   await abrir(aba, "pro/");
   await aba.getByRole("switch", { name: "Cobrança anual" }).check();
   await aba.getByRole("button", { name: "Subscrever o Pro anual" }).click();
   const dialogo = aba.getByRole("dialog", { name: "Antes de ir para o pagamento" });
   await dialogo.waitFor();
   assert.match(texto(await dialogo.innerText()), /Atalho Pro \(anual\) · 79 € por ano/);
+  assert.match(texto(await dialogo.innerText()), /Revolut/);
   const pagar = dialogo.getByRole("button", { name: "Ir para o pagamento" });
   assert.equal(await pagar.isDisabled(), true, "sem o consentimento não paga");
   await dialogo.getByRole("checkbox").check();
   await pagar.click();
-  await aba.waitForURL(/lemonsqueezy\.com/);
-  const endereco = new URL(checkout);
-  assert.equal(endereco.pathname, "/buy/anual-teste");
-  assert.equal(endereco.searchParams.get("checkout[custom][usuario_id]"), "00000000-0000-4000-8000-000000000002");
-  assert.doesNotMatch(checkout, /ana|exemplo\.com|Souza/i, "nenhum dado pessoal no endereço");
-}, { supabase: { pessoa: "membro", loja: { links: LINKS } } });
+  await aba.waitForURL(/checkout\.revolut\.com/);
+  assert.equal(new URL(pagina).pathname, "/payment-link/teste");
+  assert.doesNotMatch(pagina, /ana|exemplo\.com|Souza/i, "nenhum dado pessoal no endereço");
+  assert.deepEqual(corpoFuncao, { acao: "checkout", produto: "pro-anual" });
+}, { supabase: { pessoa: "membro", loja: LOJA } });
+
+teste("Preços: página de pagamento que não é da Revolut é recusada", async (aba) => {
+  await abrir(aba, "pro/");
+  await aba.getByRole("button", { name: "Subscrever o Pro mensal" }).click();
+  const dialogo = aba.getByRole("dialog", { name: "Antes de ir para o pagamento" });
+  await dialogo.getByRole("checkbox").check();
+  await dialogo.getByRole("button", { name: "Ir para o pagamento" }).click();
+  await aba.getByText("A página de pagamento não é da Revolut.").waitFor();
+  assert.match(new URL(aba.url()).pathname, /\/pro\/$/, "fica no Atalho");
+}, { supabase: { pessoa: "membro", loja: { ativo: true, checkoutUrl: "https://golpe.exemplo.com/pagar" } } });
 
 teste("Preços: quem já assina vê 'O seu plano atual'", async (aba) => {
   await abrir(aba, "pro/");
   await aba.locator("[data-loja-plano-atual]").waitFor();
   assert.equal(await aba.getByRole("button", { name: "O seu plano atual" }).first().isDisabled(), true);
   assert.equal(await aba.getByRole("link", { name: "Já é membro" }).count(), 1);
-}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA] } } });
+}, { supabase: { pessoa: "membro", loja: { ...LOJA, assinaturas: [ASSINATURA_ATIVA] } } });
 
-teste("Conta: assinante vê o plano, a renovação, as compras e o portal", async (aba) => {
+teste("Conta: assinante vê o plano, a renovação, as compras e pode cancelar", async (aba) => {
   await abrir(aba, "conta/");
   const plano = aba.locator("[data-conta-plano]");
   await plano.getByText("Atalho Pro anual").waitFor();
   assert.match(texto(await plano.innerText()), /Renova em 9 de outubro de 2027/);
   assert.match(texto(await plano.innerText()), /CRM · comprado em/);
-  assert.equal(await plano.getByRole("link", { name: "Gerir subscrição" }).getAttribute("href"), ASSINATURA_ATIVA.portal_url);
   assert.equal(await aba.locator("[data-conta-lista-bloco]").isVisible(), false, "com pagamentos no ar, some a lista de espera");
-}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA], compras: [{ produto_id: "pagina-crm", criado_em: "2026-10-01T10:00:00Z", produtos: { nome: "CRM" } }] } } });
+  aba.once("dialog", (d) => d.accept());
+  await plano.getByRole("button", { name: "Cancelar subscrição" }).click();
+  await aba.getByText("Subscrição cancelada. Não haverá mais cobranças.").waitFor();
+  await plano.getByText("Atalho Pro anual (cancelado)").waitFor();
+  assert.match(texto(await plano.innerText()), /O seu acesso continua até 9 de outubro de 2027/);
+}, { supabase: { pessoa: "membro", loja: { ...LOJA, assinaturas: [{ ...ASSINATURA_ATIVA }], compras: [{ produto_id: "pagina-crm", criado_em: "2026-10-01T10:00:00Z", produtos: { nome: "CRM" } }] } } });
 
-teste("Conta: cobrança atrasada pede para atualizar o cartão; membro sem plano vê o convite", async (aba) => {
+teste("Conta: cobrança atrasada avisa que a Revolut vai tentar de novo", async (aba) => {
   await abrir(aba, "conta/");
-  const plano = aba.locator("[data-conta-plano]");
-  await plano.getByRole("link", { name: "Atualizar pagamento" }).waitFor();
-}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [{ ...ASSINATURA_ATIVA, status: "past_due" }] } } });
+  await aba.locator("[data-conta-plano]").getByText("A Revolut vai tentar de novo", { exact: false }).waitFor();
+}, { supabase: { pessoa: "membro", loja: { ...LOJA, assinaturas: [{ ...ASSINATURA_ATIVA, status: "past_due" }] } } });
 
 teste("Conta: membro sem plano vê o convite para o Pro", async (aba) => {
   await abrir(aba, "conta/");
@@ -798,7 +808,7 @@ teste("Conta: na volta do pagamento, confirma o acesso liberado", async (aba) =>
   await abrir(aba, "conta/?pagamento=ok");
   await aba.getByText("Acesso desbloqueado. Bom proveito!").waitFor();
   assert.equal(new URL(aba.url()).search, "", "o aviso não se repete ao recarregar");
-}, { supabase: { pessoa: "membro", loja: { links: LINKS, assinaturas: [ASSINATURA_ATIVA] } } });
+}, { supabase: { pessoa: "membro", loja: { ...LOJA, assinaturas: [ASSINATURA_ATIVA] } } });
 
 teste("Admin: números da loja", async (aba) => {
   await abrir(aba, "admin/");

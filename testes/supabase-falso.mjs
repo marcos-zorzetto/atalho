@@ -50,7 +50,7 @@ const json = (rota, corpo, status = 200) =>
 /**
  * Prepara a aba. `pessoa`: "admin", "membro" ou null (visitante).
  * `conteudos`: { id: html } servidos pela tabela "conteudos".
- * `loja`: { links: { produto: url }, assinaturas: [...], compras: [...] } da pessoa.
+ * `loja`: { ativo: pagamentos ligados, checkoutUrl: página devolvida pela função revolut-loja, assinaturas: [...], compras: [...] } da pessoa.
  * `animacoes` e `componentes`: { id: { nivel: "publico" | "membro" | "pro", html } } (tipos "animacao" e "componente"):
  *   como no banco, visitante recebe o publico; membro publico + membro; quem assina (ou é admin) recebe todos.
  * Retorna a lista de requisições feitas à API, para conferir nos testes.
@@ -62,7 +62,7 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
   await contexto.route("**/site/config.js", (rota) =>
     rota.fulfill({
       contentType: "text/javascript",
-      body: `window.ATALHO_CONFIG = { supabase: { url: "${PROJETO}", chavePublica: "${CHAVE}" }, assistente: { url: "" }, pagamentos: { links: ${JSON.stringify(loja.links || {})} } };`,
+      body: `window.ATALHO_CONFIG = { supabase: { url: "${PROJETO}", chavePublica: "${CHAVE}" }, assistente: { url: "" }, pagamentos: { ativo: ${Boolean(loja.ativo)} } };`,
     })
   );
 
@@ -85,6 +85,21 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
     if (caminho.startsWith("/auth/v1/user")) return quem ? json(rota, sessao(quem).user) : json(rota, { message: "invalid JWT" }, 401);
     if (caminho.startsWith("/auth/v1/logout")) return rota.fulfill({ status: 204, headers: { "access-control-allow-origin": "*" } });
     if (caminho.startsWith("/auth/v1/")) return json(rota, {});
+
+    // Função revolut-loja (checkout e cancelamento), como no servidor: só com sessão
+    if (caminho === "/functions/v1/revolut-loja") {
+      const corpo = JSON.parse(pedido.postData() || "{}");
+      pedidos.push({ metodo: "FUNCAO", caminho, logado, corpo });
+      if (!logado) return json(rota, { erro: "Entre na sua conta para continuar." }, 401);
+      if (corpo.acao === "checkout") return json(rota, { url: loja.checkoutUrl || "https://checkout.revolut.com/payment-link/teste" });
+      if (corpo.acao === "cancelar") {
+        const a = (loja.assinaturas || []).find((x) => x.id === corpo.assinatura);
+        if (!a) return json(rota, { erro: "Subscrição não encontrada." }, 404);
+        Object.assign(a, { status: "cancelled", termina_em: a.renova_em, renova_em: null });
+        return json(rota, { ok: true });
+      }
+      return json(rota, { erro: "Ação desconhecida." }, 400);
+    }
 
     // Trechos da vitrine (animações e componentes), com as mesmas regras do banco:
     // visitante só o "publico"; membro publico + membro; Pro (ou admin) tudo

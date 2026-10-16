@@ -15,12 +15,9 @@ window.ATALHO_CONFIG = {
   assistente: {
     url: "",
   },
-  // Links de compra da Lemon Squeezy (Products → Share → "Checkout URL"), um por produto.
-  // Vazio = ainda não está à venda: o botão leva para a lista de espera.
+  // Pagamentos pela Revolut Business (funções revolut-loja e revolut-webhook do Supabase).
+  // false = ainda não está à venda: o botão leva para a lista de espera.
   pagamentos: {
-    links: {
-      "pro-mensal": "",
-      "pro-anual": "",
-    },
+    ativo: false,
   },
 };

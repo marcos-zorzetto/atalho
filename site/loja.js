@@ -1,10 +1,12 @@
 /*
- * Loja do Atalho: assinatura Pro e compras avulsas, cobradas pela Lemon Squeezy.
+ * Loja do Atalho: assinatura Pro e compras avulsas, cobradas pela Revolut Business
+ * (o dinheiro entra diretamente na conta Revolut).
  * Carregado em /pro/, /conta/ e nas vitrines /exemplos/<id>/.
  *
  * Fluxo: botão [data-comprar="produto"] → (entrar na conta, se precisar) →
- * consentimento sobre o direito de desistência → checkout da Lemon Squeezy com o
- * id da conta em checkout[custom][usuario_id] → webhook grava no banco → acesso liberado.
+ * consentimento sobre o direito de desistência → função revolut-loja do Supabase
+ * (cria a subscrição ou o pedido com o id da conta) → página de pagamento da
+ * Revolut → webhook revolut-webhook grava no banco → acesso libertado.
  *
  * Segurança: este ficheiro só LÊ o que é da própria pessoa (as regras do banco
  * garantem). Liberar acesso só acontece pelo webhook, com a assinatura conferida.
@@ -15,24 +17,41 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const { ativo, cliente, traduzir, notificar, usuario: usuarioAtual, linkConta } = window.AtalhoSupabase;
-  const links = ((window.ATALHO_CONFIG || {}).pagamentos || {}).links || {};
+  const pagamentosLigados = Boolean(((window.ATALHO_CONFIG || {}).pagamentos || {}).ativo);
   const base = document.body.dataset.base || "/";
   const pagina = document.body.dataset.pagina;
 
   const euro = (centavos) => new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(centavos / 100).replace(/,00(?=\s*€)/, "");
   const data = (texto) => new Intl.DateTimeFormat("pt-PT", { dateStyle: "long" }).format(new Date(texto));
 
-  /** Só aceita checkout e portal da própria Lemon Squeezy, em https. */
-  function enderecoLemon(texto) {
+  /** Só se envia a pessoa para a página de pagamento da própria Revolut, em https. */
+  function enderecoRevolut(texto) {
     try {
       const endereco = new URL(texto);
-      return endereco.protocol === "https:" && /(^|\.)lemonsqueezy\.com$/.test(endereco.hostname) ? endereco : null;
+      return endereco.protocol === "https:" && /(^|\.)revolut\.com$/.test(endereco.hostname) ? endereco : null;
     } catch {
       return null;
     }
   }
 
-  const vendendo = (produto) => ativo && Boolean(enderecoLemon(links[produto] || ""));
+  /** Erro já escrito para a pessoa (vem da loja ou da função revolut-loja): mostra-se tal como está. */
+  class ErroLoja extends Error {}
+  const mensagemErro = (erro) => (erro instanceof ErroLoja ? erro.message : traduzir(erro));
+
+  /** Chama a função revolut-loja do Supabase com a sessão da pessoa. */
+  async function loja(corpo) {
+    const { data, error } = await cliente.functions.invoke("revolut-loja", { body: corpo });
+    if (error) {
+      let mensagem = "Não foi possível falar com o serviço de pagamentos.";
+      try {
+        mensagem = (await error.context.json()).erro || mensagem;
+      } catch {}
+      throw new ErroLoja(mensagem);
+    }
+    return data;
+  }
+
+  const vendendo = () => ativo && pagamentosLigados;
   const ATIVOS = ["on_trial", "active", "past_due"];
   const daAcesso = (a) => ATIVOS.includes(a.status) || (a.status === "cancelled" && a.termina_em && new Date(a.termina_em) > new Date());
 
@@ -73,7 +92,7 @@
         <p class="at-mb-0"><strong data-compra-nome></strong> · <span data-compra-preco></span></p>
         <label class="at-check"><input type="checkbox" name="imediato" required data-compra-consentimento>
           <span>Quero acesso imediato ao conteúdo digital e reconheço que, ao recebê-lo, perco o direito de desistência de 14 dias.</span></label>
-        <p class="at-texto-suave at-texto-pequeno at-mb-0">O pagamento é feito na Lemon Squeezy, revendedora oficial do Atalho: ela cobra, recolhe o IVA e envia a fatura. Ao continuar, aceita os <a href="${base}termos/#venda">termos de venda</a>.</p>
+        <p class="at-texto-suave at-texto-pequeno at-mb-0">O pagamento é feito numa página segura da Revolut (cartão, Apple Pay, Google Pay ou Revolut Pay) e a fatura chega por e-mail. Ao continuar, aceita os <a href="${base}termos/#venda">termos de venda</a>.</p>
         <div class="at-linha at-fim">
           <button class="at-botao at-fantasma" value="cancelar" formnovalidate>Cancelar</button>
           <button class="at-botao at-primario" value="pagar" data-compra-pagar disabled>Ir para o pagamento</button>
@@ -112,12 +131,19 @@
     $("[data-compra-consentimento]", dialogo).checked = false;
     $("[data-compra-pagar]", dialogo).disabled = true;
     dialogo.returnValue = "";
-    dialogo.onclose = () => {
+    dialogo.onclose = async () => {
       if (dialogo.returnValue !== "pagar") return;
-      const destino = enderecoLemon(links[id]);
-      // Só o id da conta vai no endereço (nada de e-mail ou nome): o webhook usa para liberar o acesso
-      destino.searchParams.set("checkout[custom][usuario_id]", pessoa.id);
-      location.href = destino.href;
+      botao?.setAttribute("aria-busy", "true");
+      try {
+        // A função cria a subscrição na Revolut com o id da conta (nada de dados no endereço)
+        const { url } = await loja({ acao: "checkout", produto: id });
+        const destino = enderecoRevolut(url || "");
+        if (!destino) throw new ErroLoja("A página de pagamento não é da Revolut.");
+        location.href = destino.href;
+      } catch (erro) {
+        botao?.removeAttribute("aria-busy");
+        notificar(mensagemErro(erro), "perigo");
+      }
     };
     dialogo.showModal();
   }
@@ -167,7 +193,7 @@
 
   function textoAssinatura(a) {
     const intervalo = a.produto_id === "pro-anual" ? "anual" : "mensal";
-    if (a.status === "past_due") return { titulo: `Atalho Pro ${intervalo}`, detalhe: "Não conseguimos cobrar a última renovação. Atualize o cartão para não perder o acesso.", tipo: "aviso" };
+    if (a.status === "past_due") return { titulo: `Atalho Pro ${intervalo}`, detalhe: "Não conseguimos cobrar a última renovação. A Revolut vai tentar de novo; confirme que o cartão tem saldo e está válido.", tipo: "aviso" };
     if (a.status === "cancelled") return { titulo: `Atalho Pro ${intervalo} (cancelado)`, detalhe: `O seu acesso continua até ${data(a.termina_em)}.`, tipo: "info" };
     if (a.status === "on_trial") return { titulo: `Atalho Pro ${intervalo} (teste grátis)`, detalhe: a.renova_em ? `A primeira cobrança é em ${data(a.renova_em)}.` : "", tipo: "sucesso" };
     return { titulo: `Atalho Pro ${intervalo}`, detalhe: a.renova_em ? `Renova em ${data(a.renova_em)}.` : "Subscrição ativa.", tipo: "sucesso" };
@@ -191,10 +217,10 @@
       const t = textoAssinatura(pro);
       titulo.textContent = t.titulo;
       detalhe.textContent = t.detalhe;
-      const portal = enderecoLemon(pro.portal_url || "");
-      if (portal) {
-        const link = Object.assign(document.createElement("a"), { className: `at-botao${t.tipo === "aviso" ? " at-primario" : ""}`, href: portal.href, rel: "noopener", textContent: t.tipo === "aviso" ? "Atualizar pagamento" : "Gerir subscrição" });
-        corpo.append(link);
+      if (["active", "on_trial", "past_due"].includes(pro.status)) {
+        const cancelarBotao = Object.assign(document.createElement("button"), { type: "button", className: "at-botao", textContent: "Cancelar subscrição" });
+        cancelarBotao.addEventListener("click", () => cancelarSubscricao(pro, cancelarBotao));
+        corpo.append(cancelarBotao);
       }
     } else {
       titulo.textContent = "Membro (grátis)";
@@ -216,6 +242,21 @@
     }
   }
 
+  async function cancelarSubscricao(assinatura, botao) {
+    const fim = assinatura.renova_em ? ` Continua com acesso até ${data(assinatura.renova_em)}.` : "";
+    if (!confirm(`Cancelar a subscrição do Atalho Pro?${fim} Não há multa.`)) return;
+    botao.setAttribute("aria-busy", "true");
+    try {
+      await loja({ acao: "cancelar", assinatura: assinatura.id });
+      notificar("Subscrição cancelada. Não haverá mais cobranças.", "sucesso");
+      desenharPlano(await situacao());
+    } catch (erro) {
+      notificar(mensagemErro(erro), "perigo");
+    } finally {
+      botao.removeAttribute("aria-busy");
+    }
+  }
+
   async function iniciarConta() {
     if (!ativo) return;
     // Pagamentos no ar: a lista de espera do Pro deixa de fazer sentido
@@ -223,7 +264,7 @@
     let atual = await situacao();
     if (!atual.pessoa) return;
     desenharPlano(atual);
-    // Voltou do pagamento: o aviso da Lemon Squeezy leva alguns segundos para chegar
+    // Voltou do pagamento: o aviso da Revolut leva alguns segundos para chegar
     if (new URLSearchParams(location.search).get("pagamento") === "ok") {
       notificar("Pagamento recebido! A desbloquear o seu acesso…", "sucesso", { duracao: 8000 });
       const antes = atual.compras.length;

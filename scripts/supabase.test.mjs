@@ -169,6 +169,14 @@ test("loja: ninguém se dá o Pro nem compra sem pagar pela API", async () => {
   await assert.rejects(como(BRUNO, `update public.conteudos set acesso = 'membro'`), negado);
 });
 
+test("loja (Revolut): clientes da Revolut só o servidor vê; ninguém troca o plano de um produto", async () => {
+  await assert.rejects(como(null, `select * from public.clientes_revolut`), negado, "visitante leu clientes_revolut");
+  await assert.rejects(como(BRUNO, `select * from public.clientes_revolut`), negado);
+  await assert.rejects(como(BRUNO, `insert into public.clientes_revolut (usuario_id, cliente_id) values ('${BRUNO}', 'cus_x')`), negado);
+  await assert.rejects(como(BRUNO, `update public.produtos set variante_revolut = 'var-falsa'`), negado);
+  await assert.rejects(como(BRUNO, `insert into public.compras (id, usuario_id, produto_id, pedido_revolut) values ('falsa-r', '${BRUNO}', 'pro-mensal', 'ord')`), negado);
+});
+
 test("loja: conteúdo Pro só para quem assina, comprou ou é administrador", async () => {
   await db.exec(`
     insert into public.produtos (id, tipo, nome, preco_centavos) values ('pagina-crm', 'pagina', 'CRM', 900), ('pagina-agenda', 'pagina', 'Agenda', 900);

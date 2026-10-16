@@ -378,8 +378,8 @@ export function paginaPatrocinar({ docs }) {
 
 /* ------------------------------------------------------------------------ */
 
-/** Preços exibidos (o cobrado é o da Lemon Squeezy; os valores ficam iguais aos da tabela produtos). */
-// Preços com IVA incluído (obrigatório para consumidores na UE). Os cobrados são os da Lemon Squeezy:
+/** Preços exibidos (o cobrado é o configurado na Revolut; os valores ficam iguais aos da tabela produtos). */
+// Preço final ao consumidor (obrigatório na UE mostrar o preço total). Os cobrados são os da Revolut:
 // ao mudar aqui, mude lá e na tabela public.produtos (servicos/supabase/schema.sql).
 export const PRECOS = { proMensal: 9, proAnual: 79, pagina: 9, componente: 3 };
 // "39 €" em vez de "39,00 €"; cêntimos só quando existem
@@ -415,11 +415,11 @@ export function paginaPro({ exemplos = [] } = {}) {
   const perguntas = [
     ["Preciso de pagar para usar o Atalho?", "Não. A biblioteca, a documentação e todos os componentes equivalentes aos do Bootstrap são grátis para sempre, incluindo em projetos comerciais (licença MIT). Com uma conta grátis, ainda desbloqueia as páginas completas."],
     ["O que muda no Pro?", `O Pro desbloqueia os ${SISTEMAS.length} sistemas completos (PHP e SQLite, instalam-se em qualquer alojamento português), todas as páginas e modelos Pro, os blocos premium e tudo o que for lançado enquanto a subscrição estiver ativa.`],
-    ["Os preços incluem IVA?", "Sim. Os preços mostrados já incluem o IVA à taxa de Portugal. Empresas da UE com NIF válido podem indicar o número no pagamento para faturação sem IVA (autoliquidação)."],
+    ["O preço inclui tudo?", "Sim. O preço mostrado é o valor final que paga, sem taxas escondidas. Recebe a fatura por e-mail; se precisar do NIF da sua empresa na fatura, indique-o respondendo ao e-mail de confirmação."],
     ["Posso comprar só uma página, sem subscrever?", `Sim. Cada página Pro pode ser comprada sozinha por ${euro(PRECOS.pagina)} e cada componente premium por ${euro(PRECOS.componente)}. É seu para sempre, sem mensalidade.`],
-    ["Como cancelo a subscrição?", "Na página A minha conta, no botão Gerir subscrição. O cancelamento é imediato e continua a ter acesso até ao fim do período que já pagou. Não há multa nem período de fidelização."],
-    ["Quem cobra? Há fatura?", "O pagamento é processado pela Lemon Squeezy, que atua como revendedora oficial (merchant of record): ela cobra, recolhe o IVA do seu país e envia a fatura por e-mail. O Atalho nunca vê os dados do seu cartão."],
-    ["Quais formas de pagamento?", "Cartão de crédito ou débito, PayPal, Apple Pay e Google Pay. O valor é cobrado em euros; se o seu cartão for de outro país, o banco faz a conversão."],
+    ["Como cancelo a subscrição?", "Na página A minha conta, no botão Cancelar subscrição. O cancelamento é imediato e continua a ter acesso até ao fim do período que já pagou. Não há multa nem período de fidelização."],
+    ["Quem cobra? Há fatura?", "O pagamento é processado pela Revolut, numa página segura da própria Revolut, e o vendedor é o Atalho (Portugal). A fatura é enviada por e-mail. O Atalho nunca vê os dados do seu cartão."],
+    ["Quais formas de pagamento?", "Cartão de crédito ou débito, Apple Pay, Google Pay e Revolut Pay. O valor é cobrado em euros; se o seu cartão for de outro país, o banco faz a conversão."],
     ["E o direito de desistência?", "Na União Europeia, quem compra conteúdo digital tem 14 dias para desistir, a menos que peça o acesso imediato e reconheça que perde esse direito ao recebê-lo. Antes de pagar, perguntamos isso de forma clara. Se algo não funcionar como descrito, escreva-nos e resolvemos."],
     ["Posso usar em projetos de clientes?", "Sim. O que descarregar pode ser usado em quantos projetos quiser, os seus ou de clientes. Só não pode revender ou redistribuir os modelos Pro como modelos (por exemplo, num marketplace de templates)."],
   ];
@@ -577,7 +577,7 @@ export function paginaConta({ exemplos }) {
           <label class="at-linha"><input type="checkbox" role="switch" class="at-chave" data-conta-lista-espera> Quero ser avisado do lançamento do Atalho Pro</label>
         </div>
         <h2 class="site-secao-titulo at-mt-6">Os seus dados</h2>
-        <p class="at-texto-suave">Guardamos só nome, e-mail, favoritos, a sua escolha sobre a lista do Pro e, se comprar, o plano e as compras (os dados de pagamento ficam só na Lemon Squeezy). Veja a <a href="${url("privacidade/")}">política de privacidade</a>.</p>
+        <p class="at-texto-suave">Guardamos só nome, e-mail, favoritos, a sua escolha sobre a lista do Pro e, se comprar, o plano e as compras (os dados de pagamento ficam só na Revolut). Veja a <a href="${url("privacidade/")}">política de privacidade</a>.</p>
         <button class="at-botao at-perigo" commandfor="modal-excluir-conta" command="show-modal">Eliminar a minha conta</button>
         <dialog class="at-modal at-pequeno" id="modal-excluir-conta" aria-labelledby="excluir-conta-titulo">
           <form method="dialog">
@@ -634,8 +634,8 @@ export function paginaPrivacidade() {
       </ul>
       <h2 class="site-secao-titulo">2.1. Se comprar ou subscrever o Pro</h2>
       <ul>
-        <li><strong>Quem processa o pagamento:</strong> a Lemon Squeezy (Lemon Squeezy LLC), que atua como revendedora oficial (merchant of record). Ela recolhe e trata os dados de pagamento e de faturação (nome, e-mail, país, cartão ou PayPal) como responsável pelo tratamento, conforme a política de privacidade dela. O Atalho nunca recebe os dados do seu cartão.</li>
-        <li><strong>O que o Atalho guarda:</strong> o identificador da sua conta ligado ao plano ou à compra, a situação da subscrição (ativa, cancelada, datas de renovação e de término), o valor pago e o endereço do portal de subscrição, recebidos da Lemon Squeezy por um aviso assinado digitalmente.</li>
+        <li><strong>Quem processa o pagamento:</strong> a Revolut (Revolut Bank UAB), numa página de pagamento da própria Revolut. Ela trata os dados do cartão e de pagamento como responsável pelo tratamento, conforme a política de privacidade dela. O Atalho nunca recebe os dados do seu cartão; recebe da Revolut o seu e-mail e o resultado do pagamento.</li>
+        <li><strong>O que o Atalho guarda:</strong> o identificador da sua conta ligado ao plano ou à compra, a situação da subscrição (ativa, cancelada, datas de renovação e de término), e o valor pago, recebidos da Revolut por um aviso assinado digitalmente, além dos dados necessários à fatura.</li>
         <li><strong>Finalidade e base legal:</strong> disponibilizar o conteúdo que comprou (execução do contrato: RGPD art. 6.º, n.º 1, b; LGPD art. 7º, V) e cumprir obrigações contabilísticas (RGPD art. 6.º, n.º 1, c; LGPD art. 7º, II).</li>
         <li><strong>Por quanto tempo:</strong> enquanto a conta existir; registos de pagamento podem ser mantidos pelo prazo exigido pela lei fiscal, mesmo após a eliminação da conta, sem os demais dados.</li>
       </ul>
@@ -659,7 +659,7 @@ export function paginaPrivacidade() {
 }
 
 export function paginaTermos() {
-  const conteudo = `${cabecalhoPagina("Legal", "Termos de uso", "Última atualização: 9 de outubro de 2026.")}
+  const conteudo = `${cabecalhoPagina("Legal", "Termos de uso", "Última atualização: 16 de outubro de 2026.")}
     ${artigo(`
       <h2 class="site-secao-titulo">1. O que é o Atalho</h2>
       <p>O Atalho é uma biblioteca gratuita de componentes de interface e a documentação que a acompanha, mantida por ${SITE.autor}.</p>
@@ -671,7 +671,7 @@ export function paginaTermos() {
       <p>Você é responsável pela sua palavra-passe. Contas usadas para abuso (como tentar sobrecarregar o assistente de IA) podem ser removidas.</p>
       <h2 class="site-secao-titulo" id="venda">5. Atalho Pro e compras</h2>
       <ul>
-        <li><strong>Vendedor:</strong> as vendas são feitas pela Lemon Squeezy, revendedora oficial (merchant of record) do Atalho. Ela cobra, emite a fatura e recolhe os impostos (como o IVA). Os termos de compra dela também se aplicam.</li>
+        <li><strong>Vendedor:</strong> o Atalho, mantido por ${SITE.autor} (Portugal). O pagamento é processado pela Revolut; a fatura é emitida pelo vendedor e enviada por e-mail.</li>
         <li><strong>Subscrição Pro:</strong> cobrada por mês ou por ano, renova-se automaticamente até ser cancelada. Pode cancelar quando quiser em "A minha conta", sem multa; o acesso continua até ao fim do período já pago. Mudanças de preço valem só para a próxima renovação e são avisadas antes.</li>
         <li><strong>Compra avulsa:</strong> pagamento único por uma página ou um componente, com acesso enquanto o Atalho existir. Se o serviço for encerrado, você recebe o ficheiro para guardar.</li>
         <li><strong>Direito de desistência (UE):</strong> por ser conteúdo digital entregue na hora, antes de pagar você pede o acesso imediato e reconhece que, com isso, perde o direito de desistência de 14 dias. Se o conteúdo não funcionar como descrito, escreva-nos: corrigimos ou devolvemos o valor.</li>

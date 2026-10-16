@@ -20,7 +20,7 @@ const ORIGENS = {
   // Produtos de exemplo da receita da loja
   produtos: "https://dummyjson.com",
   // Pagamentos (checkout e portal do cliente)
-  pagamentos: "https://*.lemonsqueezy.com",
+  pagamentos: "https://*.revolut.com",
   // Letra das páginas completas
   letrasCss: "https://fonts.googleapis.com",
   letras: "https://fonts.gstatic.com",
