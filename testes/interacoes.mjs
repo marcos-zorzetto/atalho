@@ -931,6 +931,37 @@ teste("Animações (atalho-pro): todas rodam sem erro, se mexem e respeitam 'red
   assert.equal(problemas.length, 0, problemas.join(" || "));
 }, { pro: true, contexto: { reducedMotion: "no-preference" } });
 
+/*
+ * "4k": nítido em ecrãs de alta densidade. Cada animação corre a 3840×2160 e num telemóvel
+ * com densidade 3; as telas (canvas/WebGL) têm de desenhar à resolução real do ecrã
+ * (devicePixelRatio, com teto de 2 por desempenho) e o efeito não pode depender de imagens
+ * rasterizadas (fotos só como conteúdo trocável, em <img> ou background-image).
+ */
+// Campos suaves, sem arestas (gradiente, nevoeiro, fumo, cáusticas da água, grão de filme): desenham de propósito a
+// meia resolução e o navegador interpola. Visualmente igual e 4× mais leve para a GPU num ecrã 4K.
+const ANIMACOES_SUAVES = new Set(["gradiente-malha", "nevoeiro-luz", "fumo", "agua-reflexo", "ruido-filme"]);
+for (const [nomeVisao, visao] of [["4K", { viewport: { width: 3840, height: 2160 }, deviceScaleFactor: 1 }], ["telemóvel retina", { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true }]]) {
+  teste(`Animações (atalho-pro): nítidas em ${nomeVisao}, sem erros nem a sair do ecrã`, async (aba) => {
+    const problemas = [];
+    for (const a of ANIMACOES) {
+      const { html } = ANIMACOES_CODIGO[a.id];
+      await aba.setContent(`<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>body { margin: 0; min-height: 100vh; }</style></head><body>${html}</body></html>`, { waitUntil: "load" });
+      await aba.evaluate(() => scrollTo(0, 0));
+      await aba.waitForTimeout(350);
+      const r = await aba.evaluate((suave) => {
+        const teto = Math.min(devicePixelRatio, 2) * (suave ? 0.5 : 1);
+        const telas = [...document.querySelectorAll("canvas")].filter((c) => c.clientWidth > 40 && c.clientHeight > 40);
+        const desfocadas = telas.filter((c) => c.width / c.clientWidth < teto - 0.05).map((c) => `${c.width}px para ${c.clientWidth}px de ecrã`);
+        return { desfocadas, largo: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+      }, ANIMACOES_SUAVES.has(a.id));
+      if (r.desfocadas.length) problemas.push(`${a.id}: canvas desfocado (${r.desfocadas[0]})`);
+      if (r.largo > 1) problemas.push(`${a.id}: ${r.largo}px a sair do ecrã`);
+      if (aba.errosJs.length) problemas.push(`${a.id}: ${aba.errosJs.splice(0).join(" | ")}`);
+    }
+    assert.equal(problemas.length, 0, problemas.join(" || "));
+  }, { pro: true, contexto: { reducedMotion: "no-preference", ...visao } });
+}
+
 teste("Componentes avançados (atalho-pro): todos abrem sem erro e cabem no telemóvel e no tablet", async (aba) => {
   const problemas = [];
   const componentes = lerComponentesPro();
