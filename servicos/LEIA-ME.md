@@ -14,8 +14,8 @@ O site funciona sem nada disto: as contas aparecem como "em breve", as páginas 
    - **Confirm email:** ligado (a pessoa confirma o e-mail antes de entrar);
    - **Minimum password length:** `8`.
 4. Em **Authentication → URL Configuration**:
-   - **Site URL:** `https://marcos-zorzetto.github.io/atalho/`
-   - **Redirect URLs:** `https://marcos-zorzetto.github.io/atalho/**` e `http://localhost:5181/**`
+   - **Site URL:** `https://atalho.com.pt/`
+   - **Redirect URLs:** `https://atalho.com.pt/**` e `http://localhost:5181/**`
 5. Em **Project Settings → API Keys**, copie a **Project URL** e a chave **publishable** (`sb_publishable_...`) para [`../site/config.js`](../site/config.js). Nunca use a chave secreta (`sb_secret_...`) no site.
 
 ```js
@@ -105,7 +105,7 @@ A Lemon Squeezy é a **revendedora oficial** (merchant of record): ela cobra, re
    - **Mensal**: €9 por mês (IVA incluído: em *Tax*, marque "Prices include tax")
    - **Anual**: €79 por ano (IVA incluído)
 
-   Em *Confirmation modal → Button link*, coloque `https://marcos-zorzetto.github.io/atalho/conta/?pagamento=ok`, para a pessoa voltar para a conta, onde o acesso aparece liberado.
+   Em *Confirmation modal → Button link*, coloque `https://atalho.com.pt/conta/?pagamento=ok`, para a pessoa voltar para a conta, onde o acesso aparece liberado.
 3. Em cada variante, use **Share → Checkout URL** e cole o link em `site/config.js`:
 
    ```js

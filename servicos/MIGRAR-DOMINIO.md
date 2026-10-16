@@ -99,7 +99,7 @@ ele não deixa configurar cabeçalhos de segurança. Na Cloudflare, o arquivo
 
 ### 8. Conferir (10 minutos)
 - [ ] `https://atalhoui.com/` abre, com cadeado
-- [ ] `https://marcos-zorzetto.github.io/atalho/componentes/modal/` leva a `https://atalhoui.com/componentes/modal/`
+- [ ] `https://atalho.com.pt/componentes/modal/` leva a `https://atalhoui.com/componentes/modal/`
 - [ ] Criar conta → e-mail chega → link volta para atalhoui.com já conectado
 - [ ] /exemplos/loja/ abre para membro; /admin/ abre para você
 - [ ] /pro/ → assinar em modo de teste da Lemon Squeezy → plano aparece em Minha conta

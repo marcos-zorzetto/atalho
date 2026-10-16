@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="https://marcos-zorzetto.github.io/atalho/">Site e documentação</a> ·
-  <a href="https://marcos-zorzetto.github.io/atalho/componentes/">Componentes</a> ·
-  <a href="https://marcos-zorzetto.github.io/atalho/exemplos/">Exemplos completos</a> ·
-  <a href="https://marcos-zorzetto.github.io/atalho/sistemas/">Sistemas</a> ·
-  <a href="https://marcos-zorzetto.github.io/atalho/editor/">Editor ao vivo</a>
+  <a href="https://atalho.com.pt/">Site e documentação</a> ·
+  <a href="https://atalho.com.pt/componentes/">Componentes</a> ·
+  <a href="https://atalho.com.pt/exemplos/">Exemplos completos</a> ·
+  <a href="https://atalho.com.pt/sistemas/">Sistemas</a> ·
+  <a href="https://atalho.com.pt/editor/">Editor ao vivo</a>
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ E use:
 <input class="at-entrada" data-at-cp-preencher="localidade">
 ```
 
-Sem npm, sem build, sem framework. Prefere não depender de uma CDN? Descarregue a pasta [`atalho/`](atalho/). Quer experimentar antes? Abra o [editor ao vivo](https://marcos-zorzetto.github.io/atalho/editor/).
+Sem npm, sem build, sem framework. Prefere não depender de uma CDN? Descarregue a pasta [`atalho/`](atalho/). Quer experimentar antes? Abra o [editor ao vivo](https://atalho.com.pt/editor/).
 
 ## Componentes ligados (a ideia do React, sem React)
 
@@ -83,7 +83,7 @@ Atalho.estado("carrinho", {
 <strong data-at-texto="carrinho.total" data-at-formato="moeda"></strong>
 ```
 
-Mude os dados e tudo o que depende deles atualiza-se sozinho. Veja a [receita da loja com carrinho](https://marcos-zorzetto.github.io/atalho/componentes/receita-loja/).
+Mude os dados e tudo o que depende deles atualiza-se sozinho. Veja a [receita da loja com carrinho](https://atalho.com.pt/componentes/receita-loja/).
 
 ## TypeScript
 
@@ -98,11 +98,11 @@ const carrinho = Atalho.estado<Carrinho>("carrinho", {
 });
 ```
 
-Guia completo: [TypeScript no Atalho](https://marcos-zorzetto.github.io/atalho/typescript/).
+Guia completo: [TypeScript no Atalho](https://atalho.com.pt/typescript/).
 
 ## PHP
 
-[`php/atalho.php`](php/atalho.php) (PHP 8.1+, um só ficheiro) repete no servidor as mesmas regras do navegador: NIF, IBAN, código postal, validação com mensagens em português, respostas JSON, CSRF, upload seguro e paginação. Exemplos prontos em [`php/exemplos/`](php/exemplos/) e o guia em [PHP no servidor](https://marcos-zorzetto.github.io/atalho/php/).
+[`php/atalho.php`](php/atalho.php) (PHP 8.1+, um só ficheiro) repete no servidor as mesmas regras do navegador: NIF, IBAN, código postal, validação com mensagens em português, respostas JSON, CSRF, upload seguro e paginação. Exemplos prontos em [`php/exemplos/`](php/exemplos/) e o guia em [PHP no servidor](https://atalho.com.pt/php/).
 
 ## O que tem dentro
 
@@ -146,7 +146,7 @@ Para ligar a etapa de IA, crie o segredo `ANTHROPIC_API_KEY` em *Settings → Se
 
 Os componentes e a documentação são abertos a todos. As **páginas completas** ficam disponíveis para quem cria uma conta grátis: a montra de cada uma (`/exemplos/<id>/`) é pública e aparece no Google, e o código só chega ao navegador de quem entrou na conta. Esse código não está neste repositório: vive no repositório privado `atalho-pro` e é entregue pelo Supabase, que confere a sessão em cada pedido.
 
-O **Atalho Pro** (9 €/mês ou 79 €/ano, IVA incluído) junta os [36 sistemas completos](https://marcos-zorzetto.github.io/atalho/sistemas/), os componentes avançados e as animações. Cada sistema instala-se num passo em qualquer alojamento com PHP 8.1 (enviar o zip e abrir o endereço), com dados de exemplo, documentação em português e ferramentas do RGPD.
+O **Atalho Pro** (9 €/mês ou 79 €/ano, IVA incluído) junta os [36 sistemas completos](https://atalho.com.pt/sistemas/), os componentes avançados e as animações. Cada sistema instala-se num passo em qualquer alojamento com PHP 8.1 (enviar o zip e abrir o endereço), com dados de exemplo, documentação em português e ferramentas do RGPD.
 
 O administrador do site tem um painel em `/admin/` com utilizadores, registos por dia, lista de espera do Pro (exportável para folha de cálculo) e o conteúdo publicado. Os dados vêm de funções da base de dados que recusam quem não é administrador.
 
@@ -187,7 +187,7 @@ docs/            roadmap e decisões do projeto
 exemplos/        miniaturas e capturas das páginas completas (o código fica no atalho-pro)
 ```
 
-Encontrou um erro ou quer sugerir um componente? [Abra uma issue](https://github.com/marcos-zorzetto/atalho/issues). Quer apoiar o projeto? Veja [como patrocinar](https://marcos-zorzetto.github.io/atalho/patrocinar/). O que vem a seguir está no [roadmap](docs/ROADMAP-SUPERAR-BOOTSTRAP.md).
+Encontrou um erro ou quer sugerir um componente? [Abra uma issue](https://github.com/marcos-zorzetto/atalho/issues). Quer apoiar o projeto? Veja [como patrocinar](https://atalho.com.pt/patrocinar/). O que vem a seguir está no [roadmap](docs/ROADMAP-SUPERAR-BOOTSTRAP.md).
 
 ## Créditos
 
