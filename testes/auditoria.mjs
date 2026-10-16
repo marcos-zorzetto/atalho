@@ -17,6 +17,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { RAIZ } from "../scripts/docs.mjs";
+import { cabecalhosPara } from "../scripts/site/alojamento.mjs";
 import { proDisponivel, arquivoExemplo } from "../scripts/pro.mjs";
 import { supabaseFalso, semServicosReais } from "./supabase-falso.mjs";
 
@@ -35,10 +36,10 @@ const servidor = createServer(async (req, res) => {
   const arquivo = path.join(DIST, caminho);
   try {
     if (!arquivo.startsWith(DIST) || !(await stat(arquivo)).isFile()) throw new Error();
-    res.writeHead(200, { "Content-Type": TIPOS[path.extname(arquivo)] || "application/octet-stream", "Cache-Control": "no-store" });
+    res.writeHead(200, { ...cabecalhosPara(caminho), "Content-Type": TIPOS[path.extname(arquivo)] || "application/octet-stream", "Cache-Control": "no-store" });
     res.end(await readFile(arquivo));
   } catch {
-    res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+    res.writeHead(404, { ...cabecalhosPara(caminho), "Content-Type": "text/html; charset=utf-8" });
     res.end(await readFile(path.join(DIST, "404.html")));
   }
 });

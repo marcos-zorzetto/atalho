@@ -232,6 +232,50 @@ test("o código das páginas completas não vai para o site público", async () 
   }
 });
 
+/** Todo o texto do site gerado (para procurar fugas). */
+async function textoDoSite() {
+  const itens = await readdir(DIST, { withFileTypes: true, recursive: true });
+  const textos = [];
+  for (const i of itens) {
+    if (i.isFile() && /\.(html|js|css|json|txt|xml|svg|md)$|^\.htaccess$|^_headers$/.test(i.name)) textos.push(await readFile(path.join(i.parentPath ?? i.path, i.name), "utf8"));
+  }
+  return textos.join("\n");
+}
+
+test("nada do atalho-pro (páginas, componentes, animações, sistemas) chega ao site público", async (t) => {
+  const { PASTA_PRO, proDisponivel } = await import("./pro.mjs");
+  if (!proDisponivel) return t.skip("sem a pasta do atalho-pro");
+  const site = await textoDoSite();
+  const fugas = [];
+  const pastaConteudos = path.join(PASTA_PRO, "conteudos");
+  for (const i of await readdir(pastaConteudos, { withFileTypes: true, recursive: true })) {
+    if (!i.isFile() || !/\.(html|php|js|css|sql)$/.test(i.name)) continue;
+    const linhas = (await readFile(path.join(i.parentPath ?? i.path, i.name), "utf8"))
+      .split("\n")
+      .map((l) => l.trim())
+      .filter((l) => l.length > 70 && !/^(<link|<script src|<meta|https?:)/.test(l));
+    // As três linhas mais longas de cada ficheiro servem de impressão digital
+    for (const linha of linhas.sort((a, b) => b.length - a.length).slice(0, 3)) {
+      if (site.includes(linha)) { fugas.push(path.relative(PASTA_PRO, path.join(i.parentPath ?? i.path, i.name))); break; }
+    }
+  }
+  assert.deepEqual(fugas, [], `código do Pro encontrado em dist/: ${fugas.join(", ")}`);
+});
+
+test("nenhum segredo vai para o site público", async () => {
+  const site = await textoDoSite();
+  const padroes = [/sb_secret_[A-Za-z0-9_-]{10,}/, /service_role/, /-----BEGIN [A-Z ]*PRIVATE KEY-----/, /sk-ant-[A-Za-z0-9_-]{10,}/, /eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[A-Za-z0-9_-]{20,}/, /LEMON_WEBHOOK_SECRET\s*=\s*\S{8,}/, /ghp_[A-Za-z0-9]{30,}/];
+  for (const p of padroes) assert.doesNotMatch(site, p);
+});
+
+test(".htaccess do alojamento: HTTPS, CSP, cabeçalhos de segurança e 404", async () => {
+  const conf = await ler(".htaccess");
+  for (const esperado of ["RewriteRule ^ https://", "Content-Security-Policy", "Strict-Transport-Security", "X-Content-Type-Options \"nosniff\"", "frame-ancestors 'self'", "object-src 'none'", "Options -Indexes", "ErrorDocument 404 "])
+    assert.ok(conf.includes(esperado), `falta no .htaccess: ${esperado}`);
+  assert.match(conf, /RewriteRule \(\^\|\/\)\\\.\(\?!well-known\/\) - \[F,L\]/, "ficheiros escondidos (.git, .env) devem ser recusados");
+  assert.match(conf, /<If "%\{REQUEST_URI\} =~ m#\^\/(atalho\/)?admin\/#">\n {2}Header always set X-Robots-Tag "noindex, nofollow"/);
+});
+
 test("painel do administrador e conta não aparecem no Google", async () => {
   const robots = await readFile(path.join(RAIZ, "dist", "robots.txt"), "utf8");
   assert.match(robots, /Disallow: \/(atalho\/)?admin\//);

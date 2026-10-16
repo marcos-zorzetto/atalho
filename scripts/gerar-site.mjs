@@ -14,6 +14,7 @@ import path from "node:path";
 import vm from "node:vm";
 import { carregarDocs, carregarBaseline, RAIZ } from "./docs.mjs";
 import { SITE, url, urlAbsoluta } from "./site/config.mjs";
+import { htaccess, cabecalhosCloudflare } from "./site/alojamento.mjs";
 import { paginaComponente } from "./site/pagina-componente.mjs";
 import { paginaInicio, paginaCatalogo } from "./site/pagina-inicio.mjs";
 import {
@@ -181,33 +182,10 @@ ${indexaveis
   const host = new URL(SITE.url).hostname;
   if (SITE.hospedagem === "github" && !host.endsWith(".github.io") && host !== "localhost") await escrever("CNAME", `${host}\n`);
 
-  // Cloudflare: cabeçalhos de segurança e cache (o GitHub Pages ignora este arquivo)
-  await escrever(
-    "_headers",
-    `/*
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
-  X-Frame-Options: SAMEORIGIN
-
-${url("atalho/*")}
-  Cache-Control: public, max-age=3600, must-revalidate
-
-${url("exemplos/capturas/*")}
-  Cache-Control: public, max-age=604800
-
-${url("exemplos/miniaturas/*")}
-  Cache-Control: public, max-age=604800
-
-${url("admin/*")}
-  X-Robots-Tag: noindex, nofollow
-  Cache-Control: no-store
-
-${url("conta/*")}
-  X-Robots-Tag: noindex, nofollow
-`
-  );
+  // Cabeçalhos de segurança e cache: .htaccess (Apache da PTServidor) e _headers (Cloudflare).
+  // O GitHub Pages ignora os dois.
+  await escrever(".htaccess", htaccess({ base: SITE.base, host }));
+  await escrever("_headers", cabecalhosCloudflare({ base: SITE.base }));
 
   const total = (await listar(DIST)).length;
   console.log(`Site gerado em dist/ (${paginas.size} páginas, ${total} arquivos) em ${Date.now() - inicio} ms. Base: ${SITE.base}`);
