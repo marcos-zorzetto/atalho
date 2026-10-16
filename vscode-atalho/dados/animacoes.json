@@ -377,6 +377,223 @@
    "nivel": "pro",
    "categoria": "transicao",
    "descricao": "Avisos que chegam, empilham-se e saem a deslizar, como no iPhone."
+  },
+  {
+   "id": "produto-3d-rolagem",
+   "nome": "Produto 3D na rolagem",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "O seu produto em 3D gira 360° e aproxima-se enquanto o cliente faz scroll, com textos que mudam por etapas. Lançamentos e páginas de produto."
+  },
+  {
+   "id": "smartphone-3d",
+   "nome": "Smartphone 3D",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Telemóvel em 3D realista, com a sua app no ecrã, que gira e segue o rato. Perfeito para apresentar uma app ou loja online."
+  },
+  {
+   "id": "portatil-abrir",
+   "nome": "Portátil a abrir",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Um portátil em 3D abre a tampa com o scroll e o ecrã acende com o seu painel. Ideal para software, SaaS e serviços digitais."
+  },
+  {
+   "id": "vista-explodida",
+   "nome": "Vista explodida",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "As camadas da sua interface separam-se em profundidade com o scroll, como nas páginas da Apple. Mostra tudo o que o produto tem por dentro."
+  },
+  {
+   "id": "cartoes-flutuantes-3d",
+   "nome": "Cartões flutuantes 3D",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Montra de produtos a flutuar em profundidades diferentes, com parallax do rato e reflexos de luz. Lojas e portefólios."
+  },
+  {
+   "id": "esfera-metalica",
+   "nome": "Esfera metálica",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Esfera de cromo líquido que ondula e reage ao rato, com reflexos de estúdio. Um topo de página de luxo."
+  },
+  {
+   "id": "blob-organico",
+   "nome": "Blob orgânico",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Forma orgânica iridescente que respira e muda de cor devagar. Fundo hipnótico para marcas criativas e tecnologia."
+  },
+  {
+   "id": "bolhas-vidro",
+   "nome": "Bolhas de vidro",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Bolhas de vidro com refração e brilho de arco-íris a subir e a desviar-se do rato. Cosmética, bebidas e bem-estar."
+  },
+  {
+   "id": "rede-neural",
+   "nome": "Rede neural",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Rede 3D de nós e ligações com pulsos de luz a percorrê-la. O visual certo para inteligência artificial e tecnologia."
+  },
+  {
+   "id": "onda-pontos",
+   "nome": "Onda de pontos",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Um mar de pontos em 3D a ondular, ao estilo da Stripe, que reage ao rato. Fundo elegante para fintech e SaaS."
+  },
+  {
+   "id": "globo-clientes",
+   "nome": "Globo de clientes",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Globo 3D com arcos de luz entre cidades europeias. Mostre onde estão os seus clientes, parceiros ou lojas."
+  },
+  {
+   "id": "tunel-luz",
+   "nome": "Túnel de luz",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Um túnel de luz em alta velocidade que acelera com o scroll. Transição de impacto para lançamentos e eventos."
+  },
+  {
+   "id": "terreno-wireframe",
+   "nome": "Terreno wireframe",
+   "nivel": "pro",
+   "categoria": "cinema",
+   "descricao": "Paisagem retro em 3D (synthwave) com montanhas e um sol em degradê a avançar sem parar. Música, jogos e eventos."
+  },
+  {
+   "id": "gradiente-malha",
+   "nome": "Gradiente em malha",
+   "nivel": "pro",
+   "categoria": "luz",
+   "descricao": "Gradiente em malha que se mistura lentamente com as suas quatro cores, como nos sites da Stripe. Fundo premium para o topo da página."
+  },
+  {
+   "id": "nevoeiro-luz",
+   "nome": "Nevoeiro com luz",
+   "nivel": "pro",
+   "categoria": "luz",
+   "descricao": "Raios de luz a atravessar o nevoeiro, com poeira a flutuar. Atmosfera de cinema para marcas de luxo e eventos."
+  },
+  {
+   "id": "fumo",
+   "nome": "Fumo",
+   "nivel": "pro",
+   "categoria": "luz",
+   "descricao": "Fumo realista a subir devagar, na cor que escolher. Fundo sofisticado para restaurantes, bares e moda."
+  },
+  {
+   "id": "agua-reflexo",
+   "nome": "Água com reflexo",
+   "nivel": "pro",
+   "categoria": "luz",
+   "descricao": "A luz da água a dançar no fundo de uma piscina. Hotéis, spas, alojamento local e turismo."
+  },
+  {
+   "id": "fogo-brasas",
+   "nome": "Fogo e brasas",
+   "nivel": "pro",
+   "categoria": "luz",
+   "descricao": "Brasas e faíscas a subir com brilho por cima de uma foto. Churrasqueiras, pizzarias e promoções quentes."
+  },
+  {
+   "id": "ruido-filme",
+   "nome": "Grão de filme",
+   "nivel": "pro",
+   "categoria": "luz",
+   "descricao": "Grão de filme, vinheta e tremura de projetor por cima de qualquer imagem. Dá ar de cinema a fotos e vídeos."
+  },
+  {
+   "id": "luz-cursor",
+   "nome": "Luz que segue o cursor",
+   "nivel": "pro",
+   "categoria": "interacao",
+   "descricao": "Uma luz suave segue o rato e ilumina os cartões por baixo, como uma lanterna. Torna qualquer secção escura interativa."
+  },
+  {
+   "id": "linhas-fluxo",
+   "nome": "Linhas de fluxo",
+   "nivel": "pro",
+   "categoria": "fundo",
+   "descricao": "Centenas de linhas finas a fluir como correntes de vento. Fundo elegante e calmo para consultoria e tecnologia."
+  },
+  {
+   "id": "ondas-som",
+   "nome": "Ondas de som",
+   "nivel": "pro",
+   "categoria": "feedback",
+   "descricao": "Equalizador de áudio realista a reagir ao som. Podcasts, rádios, músicos e leitores de áudio."
+  },
+  {
+   "id": "constelacao",
+   "nome": "Constelação",
+   "nivel": "pro",
+   "categoria": "fundo",
+   "descricao": "Estrelas em profundidade que se ligam por linhas quando ficam perto e fogem do rato. Fundo para redes e comunidades."
+  },
+  {
+   "id": "video-rolagem",
+   "nome": "Vídeo na rolagem",
+   "nivel": "pro",
+   "categoria": "rolagem",
+   "descricao": "O vídeo avança e recua com o scroll, como nas páginas de produto da Apple. Funciona com o seu vídeo ou com quadros desenhados."
+  },
+  {
+   "id": "sequencia-imagens",
+   "nome": "Sequência de imagens",
+   "nivel": "pro",
+   "categoria": "rolagem",
+   "descricao": "Uma sequência de imagens que o scroll percorre quadro a quadro, como os auriculares da Apple. Produtos a rodar ou a montar-se."
+  },
+  {
+   "id": "titulo-gigante-zoom",
+   "nome": "Título gigante com zoom",
+   "nivel": "pro",
+   "categoria": "rolagem",
+   "descricao": "Um título enorme que encolhe com o scroll enquanto a foto aparece por trás. Abertura de impacto para qualquer página."
+  },
+  {
+   "id": "galeria-horizontal-fixa",
+   "nome": "Galeria horizontal fixa",
+   "nivel": "pro",
+   "categoria": "rolagem",
+   "descricao": "A secção fica presa e o scroll vertical faz deslizar os cartões na horizontal. Portefólios, coleções e passos de um serviço."
+  },
+  {
+   "id": "cartoes-empilhados",
+   "nome": "Cartões empilhados",
+   "nivel": "pro",
+   "categoria": "rolagem",
+   "descricao": "Cada cartão fica preso no topo e o seguinte sobe por cima, como um baralho. Conte a história do seu serviço em etapas."
+  },
+  {
+   "id": "numero-gigante-rolagem",
+   "nome": "Número gigante no scroll",
+   "nivel": "pro",
+   "categoria": "rolagem",
+   "descricao": "Um número gigante conta até ao valor certo enquanto o cliente faz scroll. Resultados, faturação e conquistas."
+  },
+  {
+   "id": "antes-depois-brilho",
+   "nome": "Antes/depois com brilho",
+   "nivel": "pro",
+   "categoria": "interacao",
+   "descricao": "Comparação antes/depois com divisória arrastável e brilho, que funciona com rato, toque e teclado. Obras, estética e design."
+  },
+  {
+   "id": "botao-liquido",
+   "nome": "Botão líquido",
+   "nivel": "pro",
+   "categoria": "interacao",
+   "descricao": "Botão com efeito líquido: gotas que se separam e voltam a juntar ao passar o rato. O botão principal que ninguém esquece."
   }
  ]
 }

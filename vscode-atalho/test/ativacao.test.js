@@ -135,7 +135,7 @@ test("com conta (membro): trechos, classes, dica e painel com cadeados", async (
   assert.equal(proNo.command.command, "atalho.assinarPro");
   assert.equal(base.description, String(require("../dados/trechos-base.json").length));
   assert.match(avancados.description, /^1 de 119$/);
-  assert.match(animacoes.description, /^1 de 48$/);
+  assert.equal(animacoes.description, `1 de ${require("../dados/animacoes.json").itens.length}`);
   const folhas = avancados.filhos.flatMap((c) => c.filhos);
   assert.equal(folhas.find((f) => f.label === "Topo com gradiente e chamada").iconPath.id, "symbol-snippet");
   assert.ok(folhas.some((f) => f.iconPath.id === "lock"));

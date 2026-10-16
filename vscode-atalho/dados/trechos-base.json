@@ -653,7 +653,7 @@
   "nome": "Contagem regressiva",
   "categoria": "Blocos de página",
   "resumo": "Dias, horas, minutos e segundos até uma data: promoção, lançamento, evento. Termina sozinha e avisa por evento.",
-  "corpo": "<div class=\"at-superficie at-texto-centro\" style=\"max-width: 460px\">\n  <p class=\"at-sobretitulo\">Pré-venda termina em</p>\n  <div class=\"at-contagem-regressiva\" data-at=\"contagem\" data-ate=\"2026-10-21T23:59:59+00:00\" data-texto-fim=\"A pré-venda terminou.\"></div>\n</div>"
+  "corpo": "<div class=\"at-superficie at-texto-centro\" style=\"max-width: 460px\">\n  <p class=\"at-sobretitulo\">Pré-venda termina em</p>\n  <div class=\"at-contagem-regressiva\" data-at=\"contagem\" data-ate=\"2026-10-26T23:59:59+00:00\" data-texto-fim=\"A pré-venda terminou.\"></div>\n</div>"
  },
  {
   "prefixo": "at-notificacoes-sino",

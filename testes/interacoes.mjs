@@ -15,6 +15,7 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { RAIZ } from "../scripts/docs.mjs";
+import { cabecalhosPara } from "../scripts/site/alojamento.mjs";
 import { proDisponivel, arquivoExemplo, lerAnimacoesPro, lerComponentesPro } from "../scripts/pro.mjs";
 import { supabaseFalso, semServicosReais, PROJETO } from "./supabase-falso.mjs";
 
@@ -28,7 +29,7 @@ const servidor = createServer(async (req, res) => {
   const arquivo = exemplo && proDisponivel ? arquivoExemplo(exemplo[1]) : path.join(DIST, caminho);
   try {
     if ((!exemplo && !arquivo.startsWith(DIST)) || !(await stat(arquivo)).isFile()) throw new Error();
-    res.writeHead(200, { "Content-Type": TIPOS[path.extname(arquivo)] || "application/octet-stream" });
+    res.writeHead(200, { ...cabecalhosPara(caminho), "Content-Type": TIPOS[path.extname(arquivo)] || "application/octet-stream" });
     res.end(await readFile(arquivo));
   } catch {
     res.writeHead(404);
@@ -54,6 +55,8 @@ async function novaAba(opcoes = {}) {
   const aba = await contexto.newPage();
   aba.errosJs = [];
   aba.on("pageerror", (erro) => aba.errosJs.push(erro.message));
+  // A política de segurança (CSP) do alojamento bloqueou algo: o site real também falharia
+  aba.on("console", (msg) => { if (msg.type() === "error" && /Content Security Policy/i.test(msg.text())) aba.errosJs.push(`CSP: ${msg.text()}`); });
   // Trava: nenhum teste pode tocar o banco de produção
   aba.on("request", (pedido) => {
     const host = new URL(pedido.url()).hostname;
@@ -874,6 +877,8 @@ teste("Animações (atalho-pro): todas rodam sem erro, se mexem e respeitam 'red
     const { html } = ANIMACOES_CODIGO[a.id];
     const valores = a.parametros.map((p) => `${p.var}: ${p.tipo === "numero" ? `${p.padrao}${p.unidade || ""}` : p.padrao};`).join(" ");
     await aba.setContent(`<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><link rel="stylesheet" href="${BASE}/atalho/atalho.css"><style>:root { ${valores} } body { min-height: 100vh; }</style></head><body>${html}</body></html>`, { waitUntil: "load" });
+    // O scroll da animação anterior sobrevive ao setContent: cada uma começa do topo
+    await aba.evaluate(() => scrollTo(0, 0));
     await aba.waitForTimeout(150);
     const antes = await aba.evaluate(() => document.body.innerHTML);
     await aba.mouse.move(400, 300);
