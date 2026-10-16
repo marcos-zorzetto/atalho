@@ -132,7 +132,7 @@ for (const visao of VISOES) {
       if (visao.axe) {
         await aba.evaluate(axeFonte);
         const resultado = await aba.evaluate(async () =>
-          window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"] }, resultTypes: ["violations"] })
+          window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"] }, resultTypes: ["violations"], preload: false }) // preload: o axe descarregaria as folhas de estilo externas, o que a CSP (bem) bloqueia
         );
         for (const v of resultado.violations) {
           registrar(pagina, visao.nome, `acessibilidade: ${v.id} (${v.impact})`, `${v.help} → ${v.nodes.slice(0, 3).map((n) => n.target.join(" ")).join(" | ")} [${v.nodes.length}]`);
