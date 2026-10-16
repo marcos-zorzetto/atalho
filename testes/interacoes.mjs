@@ -5,6 +5,7 @@
  *
  * Uso: node testes/interacoes.mjs              (gere antes: node scripts/gerar-site.mjs --local)
  *      node testes/interacoes.mjs --somente=pro  (só as páginas completas do atalho-pro)
+ *      node testes/interacoes.mjs --nome=Preços   (só os testes com esse texto no nome)
  *
  * As páginas completas ficam no repositório privado atalho-pro (scripts/pro.mjs).
  * Sem ele, os testes delas são pulados, com aviso.
@@ -694,10 +695,10 @@ const ASSINATURA_ATIVA = { id: "77", produto_id: "pro-anual", status: "active", 
 teste("Preços: alterna mensal e anual, e sem pagamentos leva à lista de espera", async (aba) => {
   await abrir(aba, "pro/");
   const pro = aba.locator(".at-plano[data-destaque]");
-  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /4,90 €/);
+  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /9 €/);
   await aba.getByRole("switch", { name: "Cobrança anual" }).check();
-  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /39 €\s*\/ano/);
-  assert.match(texto(await pro.innerText()), /equivale a 3,25 €\/mês/);
+  assert.match(texto(await pro.locator(".at-plano-preco").innerText()), /79 €\s*\/ano/);
+  assert.match(texto(await pro.innerText()), /equivale a 6,58 €\/mês/);
   const botao = pro.getByRole("button", { name: "Entrar na lista de espera" });
   await botao.click();
   await aba.locator("#lista-espera").waitFor();
@@ -716,6 +717,31 @@ teste("Preços: visitante que assina é levado a criar a conta antes", async (ab
   await aba.waitForURL(/\/conta\/\?voltar=%2Fpro%2F&criar$/);
 }, { supabase: { pessoa: null, loja: { links: LINKS } } });
 
+teste("Sistemas: catálogo público com todos os sistemas; visitante que descarrega vai criar a conta", async (aba) => {
+  await abrir(aba, "sistemas/");
+  const { SISTEMAS } = await import("../scripts/site/pagina-sistemas.mjs");
+  assert.equal(await aba.locator("[data-sistema-baixar]").count(), SISTEMAS.length);
+  assert.ok(SISTEMAS.length > 30);
+  await aba.locator('[data-sistema-baixar="crm"]').click();
+  await aba.waitForURL(/\/conta\/\?voltar=%2Fsistemas%2F&criar$/);
+}, { supabase: { pessoa: null } });
+
+teste("Sistemas: membro sem Pro vê o convite; assinante descarrega o zip com o atalho.css", async (aba) => {
+  await abrir(aba, "sistemas/");
+  await aba.locator('[data-sistema-baixar="crm"]').click();
+  await aba.locator("[data-sistemas-aviso]").getByText("faz parte do Atalho Pro").waitFor();
+  // Com o pacote no banco (só chega a quem tem o Pro), o navegador monta o zip
+  const pacote = JSON.stringify({ formato: 2, id: "agendamentos", ficheiros: { "index.php": "<?php // teste", "LEIA-ME.md": "# Agendamentos" } });
+  await aba.context().route("**/rest/v1/conteudos*", (rota) =>
+    new URL(rota.request().url()).searchParams.get("id") === "eq.sis-agendamentos" ? rota.fulfill({ json: [{ html: pacote }] }) : rota.fallback()
+  );
+  const [download] = await Promise.all([aba.waitForEvent("download"), aba.locator('[data-sistema-baixar="agendamentos"]').click()]);
+  assert.equal(download.suggestedFilename(), "agendamentos.zip");
+  const zip = await readFile(await download.path(), "latin1");
+  for (const nome of ["agendamentos/index.php", "agendamentos/LEIA-ME.md", "agendamentos/atalho/atalho.css", "agendamentos/atalho/atalho.js"]) assert.ok(zip.includes(nome), `falta ${nome} no zip`);
+  assert.ok(zip.startsWith("PK"));
+}, { supabase: { pessoa: "membro" } });
+
 teste("Preços: membro confirma a desistência e vai ao checkout só com o id da conta", async (aba) => {
   let checkout = null;
   await aba.context().route("https://atalho.lemonsqueezy.com/**", (rota) => {
@@ -727,7 +753,7 @@ teste("Preços: membro confirma a desistência e vai ao checkout só com o id da
   await aba.getByRole("button", { name: "Subscrever o Pro anual" }).click();
   const dialogo = aba.getByRole("dialog", { name: "Antes de ir para o pagamento" });
   await dialogo.waitFor();
-  assert.match(texto(await dialogo.innerText()), /Atalho Pro \(anual\) · 39 € por ano/);
+  assert.match(texto(await dialogo.innerText()), /Atalho Pro \(anual\) · 79 € por ano/);
   const pagar = dialogo.getByRole("button", { name: "Ir para o pagamento" });
   assert.equal(await pagar.isDisabled(), true, "sem o consentimento não paga");
   await dialogo.getByRole("checkbox").check();
@@ -933,7 +959,8 @@ teste("Componentes avançados (atalho-pro): todos abrem sem erro e cabem no tele
 /* ------------------------------------------------------------------------ */
 
 const somente = process.argv.find((a) => a.startsWith("--somente="))?.split("=")[1];
-const selecionados = testes.filter(({ opcoes }) => (somente === "pro" ? opcoes.pro : true));
+const nome = process.argv.find((a) => a.startsWith("--nome="))?.split("=")[1];
+const selecionados = testes.filter(({ nome: n, opcoes }) => (somente === "pro" ? opcoes.pro : true) && (!nome || n.includes(nome)));
 const pulados = selecionados.filter(({ opcoes }) => opcoes.pro && !proDisponivel);
 if (somente === "pro" && !proDisponivel) {
   console.error("--somente=pro precisa da pasta do atalho-pro (defina ATALHO_PRO).");

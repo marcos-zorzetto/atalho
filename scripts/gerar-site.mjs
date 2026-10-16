@@ -15,6 +15,7 @@ import vm from "node:vm";
 import { carregarDocs, carregarBaseline, RAIZ } from "./docs.mjs";
 import { SITE, url, urlAbsoluta } from "./site/config.mjs";
 import { htaccess, cabecalhosCloudflare } from "./site/alojamento.mjs";
+import { paginaSistemas } from "./site/pagina-sistemas.mjs";
 import { paginaComponente } from "./site/pagina-componente.mjs";
 import { paginaInicio, paginaCatalogo } from "./site/pagina-inicio.mjs";
 import {
@@ -66,7 +67,7 @@ export async function gerarSite() {
   for (const pasta of ["miniaturas", "capturas"]) {
     await cp(path.join(RAIZ, "exemplos", pasta), path.join(DIST, "exemplos", pasta), { recursive: true });
   }
-  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "vitrine.js", "icones.js", "inicio.css", "inicio.js"]) {
+  for (const arquivo of ["site.css", "site.js", "conta.js", "config.js", "assistente.js", "editor.js", "supabase.js", "membros.js", "admin.js", "loja.js", "vitrine.js", "sistemas.js", "icones.js", "inicio.css", "inicio.js"]) {
     await cp(path.join(RAIZ, "site", arquivo), path.join(DIST, "site", arquivo));
   }
   // Cenas 3D: só o que é usado do Three.js entra no pacote (minificado)
@@ -119,6 +120,7 @@ export async function gerarSite() {
     ["php/index.html", paginaPHP(contexto)],
     ["patrocinar/index.html", paginaPatrocinar(contexto)],
     ["pro/index.html", paginaPro(contexto)],
+    ["sistemas/index.html", paginaSistemas(contexto)],
     ["animacoes/index.html", paginaAnimacoes(contexto)],
     ["avancados/index.html", paginaComponentesAvancados(contexto)],
     ["conta/index.html", paginaConta(contexto)],

@@ -102,8 +102,8 @@ A Lemon Squeezy é a **revendedora oficial** (merchant of record): ela cobra, re
 
 1. Crie a conta em [lemonsqueezy.com](https://www.lemonsqueezy.com) e uma loja chamada **Atalho**, com moeda **EUR**. Complete a verificação de identidade e os dados para receber (*Settings → Payouts*). Até ativar, tudo funciona em **modo de teste**.
 2. **Products → New product → "Atalho Pro"**, do tipo assinatura, com duas variantes:
-   - **Mensal**: €4,90 por mês
-   - **Anual**: €39 por ano
+   - **Mensal**: €9 por mês (IVA incluído: em *Tax*, marque "Prices include tax")
+   - **Anual**: €79 por ano (IVA incluído)
 
    Em *Confirmation modal → Button link*, coloque `https://marcos-zorzetto.github.io/atalho/conta/?pagamento=ok`, para a pessoa voltar para a conta, onde o acesso aparece liberado.
 3. Em cada variante, use **Share → Checkout URL** e cole o link em `site/config.js`:

@@ -1,0 +1,913 @@
+[
+ {
+  "id": "agendamentos",
+  "nome": "Agendamentos",
+  "descricao": "Marcações online com calendário, serviços, profissionais e fichas de cliente.",
+  "cor": "#0f766e",
+  "tabelas": [
+   "Marcações",
+   "Clientes",
+   "Serviços",
+   "Profissionais"
+  ],
+  "publico": {
+   "formularios": [
+    "Marcar"
+   ],
+   "listas": [
+    "Serviços e preços"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 15
+ },
+ {
+  "id": "alojamento-local",
+  "nome": "Alojamento local",
+  "descricao": "Reservas diretas para alojamento local, com unidades, hóspedes, check-in e taxa turística.",
+  "cor": "#0e7490",
+  "tabelas": [
+   "Reservas",
+   "Unidades",
+   "Limpezas"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir reserva"
+   ],
+   "listas": [
+    "Quartos e casas"
+   ],
+   "consultas": [
+    "A minha reserva"
+   ]
+  },
+  "documentos": [
+   "Confirmação de reserva"
+  ],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
+  "id": "arrendamentos",
+  "nome": "Arrendamentos",
+  "descricao": "Imóveis, inquilinos, contratos registados nas Finanças, rendas em dia ou em atraso e pedidos de manutenção.",
+  "cor": "#7c2d12",
+  "tabelas": [
+   "Rendas",
+   "Contratos",
+   "Imóveis",
+   "Inquilinos",
+   "Manutenção"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir manutenção"
+   ],
+   "listas": [],
+   "consultas": [
+    "Acompanhar pedido"
+   ]
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 10
+ },
+ {
+  "id": "assistencia-tecnica",
+  "nome": "Assistência técnica",
+  "descricao": "Reparações com código de entrada, diagnóstico, orçamento, peças e estado consultável pelo cliente.",
+  "cor": "#0f766e",
+  "tabelas": [
+   "Reparações",
+   "Peças",
+   "Técnicos"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir reparação"
+   ],
+   "listas": [],
+   "consultas": [
+    "Estado da reparação"
+   ]
+  },
+  "documentos": [
+   "Guia de reparação"
+  ],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
+  "id": "associacao",
+  "nome": "Associação",
+  "descricao": "Sócios com número, quotas, atividades, voluntários e propostas de adesão online.",
+  "cor": "#0f766e",
+  "tabelas": [
+   "Sócios",
+   "Quotas",
+   "Atividades"
+  ],
+  "publico": {
+   "formularios": [
+    "Tornar-me sócio"
+   ],
+   "listas": [
+    "Atividades"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 8
+ },
+ {
+  "id": "biblioteca",
+  "nome": "Biblioteca",
+  "descricao": "Catálogo público, leitores, empréstimos com prazo, atrasos e reservas de livros pelo site.",
+  "cor": "#92400e",
+  "tabelas": [
+   "Livros",
+   "Leitores",
+   "Empréstimos",
+   "Reservas"
+  ],
+  "publico": {
+   "formularios": [
+    "Reservar livro"
+   ],
+   "listas": [
+    "Catálogo"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 10
+ },
+ {
+  "id": "blog",
+  "nome": "Blog",
+  "descricao": "Blog e notícias com rascunhos, publicação agendada, categorias e comentários moderados.",
+  "cor": "#9333ea",
+  "tabelas": [
+   "Artigos",
+   "Categorias",
+   "Autores",
+   "Comentários"
+  ],
+  "publico": {
+   "formularios": [
+    "Deixar um comentário"
+   ],
+   "listas": [
+    "Artigos"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 8
+ },
+ {
+  "id": "clinica",
+  "nome": "Clínica",
+  "descricao": "Consultas, utentes, profissionais e notas clínicas, com marcação online e cuidados de RGPD para dados de saúde.",
+  "cor": "#0891b2",
+  "tabelas": [
+   "Consultas",
+   "Utentes",
+   "Profissionais",
+   "Especialidades"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir consulta"
+   ],
+   "listas": [
+    "Especialidades"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 11
+ },
+ {
+  "id": "compras",
+  "nome": "Compras",
+  "descricao": "Notas de encomenda a fornecedores com IVA, aprovações, receção da mercadoria e faturas por pagar.",
+  "cor": "#0e7490",
+  "tabelas": [
+   "Notas de encomenda",
+   "Fornecedores"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [
+   "Nota de encomenda"
+  ],
+  "calendario": false,
+  "quadro": true,
+  "linhas": true,
+  "exemplos": 5
+ },
+ {
+  "id": "condominio",
+  "nome": "Condomínio",
+  "descricao": "Frações, condóminos, quotas e despesas, ocorrências reportadas pelos moradores e atas de assembleia.",
+  "cor": "#4d7c0f",
+  "tabelas": [
+   "Frações",
+   "Condóminos",
+   "Quotas",
+   "Despesas",
+   "Ocorrências",
+   "Assembleias"
+  ],
+  "publico": {
+   "formularios": [
+    "Reportar ocorrência"
+   ],
+   "listas": [],
+   "consultas": [
+    "Acompanhar ocorrência"
+   ]
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 15
+ },
+ {
+  "id": "contratos",
+  "nome": "Contratos",
+  "descricao": "Contratos com clientes e fornecedores, avenças, renovações, prazos de denúncia e alertas.",
+  "cor": "#57534e",
+  "tabelas": [
+   "Contratos",
+   "Clientes e fornecedores"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 6
+ },
+ {
+  "id": "crm",
+  "nome": "CRM",
+  "descricao": "Contactos, empresas, funil de vendas e tarefas de seguimento, com formulário de contacto para o site.",
+  "cor": "#4f46e5",
+  "tabelas": [
+   "Oportunidades",
+   "Contactos",
+   "Empresas",
+   "Atividades"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir contacto"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 13
+ },
+ {
+  "id": "donativos",
+  "nome": "Donativos",
+  "descricao": "Doadores, donativos com recibo, campanhas com objetivo e promessas de donativo pelo site.",
+  "cor": "#be185d",
+  "tabelas": [
+   "Donativos",
+   "Doadores",
+   "Campanhas"
+  ],
+  "publico": {
+   "formularios": [
+    "Fazer um donativo"
+   ],
+   "listas": [
+    "Campanhas"
+   ],
+   "consultas": []
+  },
+  "documentos": [
+   "Recibo de donativo"
+  ],
+  "calendario": false,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
+  "id": "encomendas-pastelaria",
+  "nome": "Encomendas da pastelaria",
+  "descricao": "Encomendas com data e hora de entrega, calendário de produção, produtos e pedidos pelo site.",
+  "cor": "#a16207",
+  "tabelas": [
+   "Encomendas",
+   "Produtos"
+  ],
+  "publico": {
+   "formularios": [
+    "Fazer encomenda"
+   ],
+   "listas": [
+    "Montra"
+   ],
+   "consultas": []
+  },
+  "documentos": [
+   "Encomenda"
+  ],
+  "calendario": true,
+  "quadro": true,
+  "linhas": true,
+  "exemplos": 6
+ },
+ {
+  "id": "equipamentos-ti",
+  "nome": "Equipamentos e TI",
+  "descricao": "Ativos com n.º de inventário, atribuição a colaboradores, garantias, licenças e pedidos internos.",
+  "cor": "#1e40af",
+  "tabelas": [
+   "Equipamentos",
+   "Licenças",
+   "Colaboradores",
+   "Pedidos internos"
+  ],
+  "publico": {
+   "formularios": [
+    "Abrir pedido de TI"
+   ],
+   "listas": [],
+   "consultas": [
+    "Estado do pedido"
+   ]
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 8
+ },
+ {
+  "id": "eventos",
+  "nome": "Eventos",
+  "descricao": "Agenda de eventos e workshops com inscrições online, lotação, bilhetes com código e presenças.",
+  "cor": "#ea580c",
+  "tabelas": [
+   "Eventos",
+   "Inscrições",
+   "Oradores"
+  ],
+  "publico": {
+   "formularios": [
+    "Inscrição"
+   ],
+   "listas": [
+    "Agenda"
+   ],
+   "consultas": [
+    "O meu bilhete"
+   ]
+  },
+  "documentos": [
+   "Bilhete"
+  ],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 9
+ },
+ {
+  "id": "explicacoes",
+  "nome": "Explicações",
+  "descricao": "Alunos, encarregados de educação, turmas, sumários, presenças e mensalidades, com pré-inscrição online.",
+  "cor": "#2563eb",
+  "tabelas": [
+   "Alunos",
+   "Turmas",
+   "Sumários",
+   "Mensalidades"
+  ],
+  "publico": {
+   "formularios": [
+    "Pré-inscrição"
+   ],
+   "listas": [
+    "Turmas e horários"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 9
+ },
+ {
+  "id": "financas",
+  "nome": "Finanças",
+  "descricao": "Receitas e despesas, contas a pagar e a receber, categorias e saldo por conta, prontos para o contabilista.",
+  "cor": "#047857",
+  "tabelas": [
+   "Movimentos",
+   "Categorias",
+   "Contas"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 12
+ },
+ {
+  "id": "folha-horas",
+  "nome": "Folha de horas",
+  "descricao": "Registo de entradas e saídas, horas extra, férias e faltas por colaborador, conforme o Código do Trabalho.",
+  "cor": "#0369a1",
+  "tabelas": [
+   "Registos de horas",
+   "Férias e faltas",
+   "Colaboradores"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 8
+ },
+ {
+  "id": "formacao",
+  "nome": "Formação",
+  "descricao": "Cursos, ações de formação, inscrições online, assiduidade, avaliação e certificados.",
+  "cor": "#4338ca",
+  "tabelas": [
+   "Ações de formação",
+   "Cursos",
+   "Inscrições"
+  ],
+  "publico": {
+   "formularios": [
+    "Inscrição"
+   ],
+   "listas": [
+    "Próximas ações",
+    "Cursos"
+   ],
+   "consultas": [
+    "A minha inscrição"
+   ]
+  },
+  "documentos": [
+   "Certificado"
+  ],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 8
+ },
+ {
+  "id": "frota",
+  "nome": "Frota",
+  "descricao": "Viaturas, condutores, abastecimentos e manutenções, com alertas de inspeção, seguro e IUC.",
+  "cor": "#374151",
+  "tabelas": [
+   "Viaturas",
+   "Condutores",
+   "Abastecimentos",
+   "Manutenções"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 8
+ },
+ {
+  "id": "ginasio",
+  "nome": "Ginásio",
+  "descricao": "Sócios, planos e mensalidades, horário de aulas com reserva de lugar e pedidos de aula experimental.",
+  "cor": "#dc2626",
+  "tabelas": [
+   "Sócios",
+   "Planos",
+   "Mensalidades",
+   "Aulas",
+   "Reservas de aulas"
+  ],
+  "publico": {
+   "formularios": [
+    "Aula experimental",
+    "Reservar lugar"
+   ],
+   "listas": [
+    "Horário das aulas",
+    "Planos e preços"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 15
+ },
+ {
+  "id": "helpdesk",
+  "nome": "Helpdesk",
+  "descricao": "Pedidos de suporte com código, prioridades, quadro de estados e consulta pública do estado.",
+  "cor": "#7c3aed",
+  "tabelas": [
+   "Pedidos",
+   "Categorias",
+   "Agentes",
+   "Base de conhecimento"
+  ],
+  "publico": {
+   "formularios": [
+    "Abrir pedido"
+   ],
+   "listas": [
+    "Perguntas frequentes"
+   ],
+   "consultas": [
+    "Consultar pedido"
+   ]
+  },
+  "documentos": [],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 11
+ },
+ {
+  "id": "imobiliaria",
+  "nome": "Imobiliária",
+  "descricao": "Imóveis no site com pedidos de visita, interessados, visitas agendadas e funil de negócio.",
+  "cor": "#1d4ed8",
+  "tabelas": [
+   "Imóveis",
+   "Interessados",
+   "Visitas"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir informação ou visita"
+   ],
+   "listas": [
+    "Imóveis"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 6
+ },
+ {
+  "id": "inventario",
+  "nome": "Inventário",
+  "descricao": "Stock de artigos por armazém, entradas e saídas, alertas de stock mínimo e fornecedores.",
+  "cor": "#15803d",
+  "tabelas": [
+   "Artigos",
+   "Movimentos",
+   "Armazéns",
+   "Fornecedores"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": false,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 12
+ },
+ {
+  "id": "loja",
+  "nome": "Loja",
+  "descricao": "Catálogo online com encomendas, pagamento por MB WAY, Multibanco ou transferência, e gestão de stock.",
+  "cor": "#be123c",
+  "tabelas": [
+   "Encomendas",
+   "Produtos",
+   "Categorias",
+   "Clientes"
+  ],
+  "publico": {
+   "formularios": [
+    "Encomendar"
+   ],
+   "listas": [
+    "Produtos"
+   ],
+   "consultas": [
+    "Seguir encomenda"
+   ]
+  },
+  "documentos": [
+   "Encomenda"
+  ],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 11
+ },
+ {
+  "id": "newsletter",
+  "nome": "Newsletter",
+  "descricao": "Subscrições com dupla confirmação, campanhas por e-mail com link para anular e listas exportáveis.",
+  "cor": "#db2777",
+  "tabelas": [
+   "Subscritores",
+   "Campanhas"
+  ],
+  "publico": {
+   "formularios": [
+    "Subscrever"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 6
+ },
+ {
+  "id": "oficina",
+  "nome": "Oficina",
+  "descricao": "Ordens de reparação com peças e mão de obra, viaturas por matrícula, revisões e consulta do estado pelo cliente.",
+  "cor": "#525252",
+  "tabelas": [
+   "Ordens de reparação",
+   "Viaturas",
+   "Clientes"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": [
+    "Estado da reparação"
+   ]
+  },
+  "documentos": [
+   "Ordem de reparação"
+  ],
+  "calendario": false,
+  "quadro": true,
+  "linhas": true,
+  "exemplos": 6
+ },
+ {
+  "id": "orcamentos",
+  "nome": "Orçamentos",
+  "descricao": "Orçamentos e faturas pró-forma com artigos, IVA por linha, totais automáticos e PDF pronto a enviar.",
+  "cor": "#0369a1",
+  "tabelas": [
+   "Orçamentos",
+   "Faturas pró-forma",
+   "Clientes",
+   "Artigos"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [
+   "Orçamento",
+   "Fatura pró-forma"
+  ],
+  "calendario": false,
+  "quadro": true,
+  "linhas": true,
+  "exemplos": 9
+ },
+ {
+  "id": "pedidos-orcamento",
+  "nome": "Pedidos de orçamento",
+  "descricao": "Formulário de pedido de orçamento no site, visitas técnicas, propostas e funil até à adjudicação.",
+  "cor": "#c2410c",
+  "tabelas": [
+   "Pedidos",
+   "Serviços"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir orçamento"
+   ],
+   "listas": [
+    "Serviços"
+   ],
+   "consultas": [
+    "Estado do pedido"
+   ]
+  },
+  "documentos": [],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 6
+ },
+ {
+  "id": "portal-cliente",
+  "nome": "Portal do cliente",
+  "descricao": "Processos e projetos com etapas, prazos, documentos pedidos e consulta do estado pelo cliente.",
+  "cor": "#334155",
+  "tabelas": [
+   "Processos",
+   "Clientes",
+   "Tarefas"
+  ],
+  "publico": {
+   "formularios": [
+    "Novo pedido"
+   ],
+   "listas": [],
+   "consultas": [
+    "Consultar processo"
+   ]
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
+  "id": "projetos",
+  "nome": "Projetos",
+  "descricao": "Projetos, tarefas em quadro, prazos, horas registadas e orçamento consumido.",
+  "cor": "#6d28d9",
+  "tabelas": [
+   "Tarefas",
+   "Projetos",
+   "Horas",
+   "Pessoas"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 11
+ },
+ {
+  "id": "reclamacoes",
+  "nome": "Reclamações e sugestões",
+  "descricao": "Reclamações, sugestões e elogios com código de seguimento, prazos de resposta e indicadores de qualidade.",
+  "cor": "#b91c1c",
+  "tabelas": [
+   "Reclamações e sugestões",
+   "Modelos de resposta"
+  ],
+  "publico": {
+   "formularios": [
+    "Enviar reclamação ou sugestão"
+   ],
+   "listas": [],
+   "consultas": [
+    "Acompanhar"
+   ]
+  },
+  "documentos": [],
+  "calendario": false,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 5
+ },
+ {
+  "id": "recrutamento",
+  "nome": "Recrutamento",
+  "descricao": "Ofertas de emprego no site, candidaturas, fases de seleção e entrevistas, com prazos do RGPD.",
+  "cor": "#0d9488",
+  "tabelas": [
+   "Candidaturas",
+   "Ofertas",
+   "Entrevistas"
+  ],
+  "publico": {
+   "formularios": [
+    "Candidatura"
+   ],
+   "listas": [
+    "Ofertas de emprego"
+   ],
+   "consultas": [
+    "Estado da candidatura"
+   ]
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 6
+ },
+ {
+  "id": "reservas",
+  "nome": "Reservas",
+  "descricao": "Reservas de mesa online com lotação por turno, calendário do serviço e fichas de cliente.",
+  "cor": "#b45309",
+  "tabelas": [
+   "Reservas",
+   "Mesas",
+   "Clientes"
+  ],
+  "publico": {
+   "formularios": [
+    "Reservar mesa"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 10
+ },
+ {
+  "id": "veterinario",
+  "nome": "Veterinário",
+  "descricao": "Tutores e animais com microchip, consultas, vacinas e lembretes, e marcação online.",
+  "cor": "#16a34a",
+  "tabelas": [
+   "Consultas",
+   "Animais",
+   "Tutores",
+   "Vacinas"
+  ],
+  "publico": {
+   "formularios": [
+    "Marcar consulta"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 9
+ }
+]

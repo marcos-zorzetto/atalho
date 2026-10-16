@@ -155,7 +155,7 @@ test("cada membro só vê os próprios favoritos e a própria entrada na lista",
 
 test("loja: preços são públicos; assinaturas, compras e pagamentos não", async () => {
   const precos = await como(null, `select id, preco_centavos from public.produtos where tipo = 'assinatura' order by id`);
-  assert.deepEqual(precos, [{ id: "pro-anual", preco_centavos: 3900 }, { id: "pro-mensal", preco_centavos: 490 }]);
+  assert.deepEqual(precos, [{ id: "pro-anual", preco_centavos: 7900 }, { id: "pro-mensal", preco_centavos: 900 }]);
   for (const tabela of ["assinaturas", "compras", "pagamentos"]) {
     await assert.rejects(como(null, `select * from public.${tabela}`), negado, `visitante leu ${tabela}`);
   }

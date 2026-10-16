@@ -1,4 +1,5 @@
 import { SITE, url } from "./config.mjs";
+import { SISTEMAS } from "./pagina-sistemas.mjs";
 import { pagina, ICONES_SITE, SCRIPTS_SUPABASE } from "./layout.mjs";
 import { PESOS, CATEGORIAS_PT, VERSAO_PHOSPHOR } from "./icones-phosphor.mjs";
 import { esc, realcarHTML, realcarTS, realcarPHP, realcarCSS, realcarTerminal } from "./realce.mjs";
@@ -378,7 +379,9 @@ export function paginaPatrocinar({ docs }) {
 /* ------------------------------------------------------------------------ */
 
 /** Preços exibidos (o cobrado é o da Lemon Squeezy; os valores ficam iguais aos da tabela produtos). */
-export const PRECOS = { proMensal: 4.9, proAnual: 39, pagina: 9, componente: 3 };
+// Preços com IVA incluído (obrigatório para consumidores na UE). Os cobrados são os da Lemon Squeezy:
+// ao mudar aqui, mude lá e na tabela public.produtos (servicos/supabase/schema.sql).
+export const PRECOS = { proMensal: 9, proAnual: 79, pagina: 9, componente: 3 };
 // "39 €" em vez de "39,00 €"; cêntimos só quando existem
 const euro = (valor) => new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(valor).replace(/,00(?=\s*€)/, "");
 
@@ -404,14 +407,15 @@ export function paginaPro({ exemplos = [] } = {}) {
       destaque: "Mais completo",
       preco: `<span data-at-mostrar="!precos.anual">${euro(PRECOS.proMensal)} <small>/mês</small></span><span data-at-mostrar="precos.anual" hidden>${euro(PRECOS.proAnual)} <small>/ano</small></span>`,
       nota: `<span data-at-mostrar="!precos.anual">cancele quando quiser</span><span data-at-mostrar="precos.anual" hidden>equivale a ${euro(PRECOS.proAnual / 12)}/mês</span>`,
-      itens: ["Tudo do Membro", "Todas as páginas e modelos Pro, com novidades todos os meses", "Blocos premium para landing pages, painéis e lojas", "Licença para usar em projetos de clientes", "Se cancelar, o acesso continua até ao fim do período pago"],
+      itens: ["Tudo do Membro", `<a href="${url("sistemas/")}">${SISTEMAS.length} sistemas completos</a> para instalar num passo: CRM, marcações, orçamentos, loja, reservas…`, "Todas as páginas, componentes premium e animações 3D, com novidades todos os meses", "Licença para usar em projetos de clientes", "Se cancelar, o acesso continua até ao fim do período pago"],
       botao: `<button class="at-botao at-primario at-bloco" data-comprar="pro-mensal" data-at-mostrar="!precos.anual">Subscrever o Pro mensal</button>
           <button class="at-botao at-primario at-bloco" data-comprar="pro-anual" data-at-mostrar="precos.anual" hidden>Subscrever o Pro anual</button>`,
     },
   ];
   const perguntas = [
     ["Preciso de pagar para usar o Atalho?", "Não. A biblioteca, a documentação e todos os componentes equivalentes aos do Bootstrap são grátis para sempre, incluindo em projetos comerciais (licença MIT). Com uma conta grátis, ainda desbloqueia as páginas completas."],
-    ["O que muda no Pro?", "O Pro desbloqueia todas as páginas e modelos marcados como Pro, os blocos premium e tudo o que for lançado enquanto a subscrição estiver ativa. É para quem quer entregar projetos mais rápido."],
+    ["O que muda no Pro?", `O Pro desbloqueia os ${SISTEMAS.length} sistemas completos (PHP e SQLite, instalam-se em qualquer alojamento português), todas as páginas e modelos Pro, os blocos premium e tudo o que for lançado enquanto a subscrição estiver ativa.`],
+    ["Os preços incluem IVA?", "Sim. Os preços mostrados já incluem o IVA à taxa de Portugal. Empresas da UE com NIF válido podem indicar o número no pagamento para faturação sem IVA (autoliquidação)."],
     ["Posso comprar só uma página, sem subscrever?", `Sim. Cada página Pro pode ser comprada sozinha por ${euro(PRECOS.pagina)} e cada componente premium por ${euro(PRECOS.componente)}. É seu para sempre, sem mensalidade.`],
     ["Como cancelo a subscrição?", "Na página A minha conta, no botão Gerir subscrição. O cancelamento é imediato e continua a ter acesso até ao fim do período que já pagou. Não há multa nem período de fidelização."],
     ["Quem cobra? Há fatura?", "O pagamento é processado pela Lemon Squeezy, que atua como revendedora oficial (merchant of record): ela cobra, recolhe o IVA do seu país e envia a fatura por e-mail. O Atalho nunca vê os dados do seu cartão."],

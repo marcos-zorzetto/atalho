@@ -20,8 +20,8 @@ export async function semServicosReais(contexto) {
 const CHAVE = "sb_publishable_teste";
 
 export const PRODUTOS = [
-  { id: "pro-mensal", tipo: "assinatura", nome: "Atalho Pro (mensal)", preco_centavos: 490, intervalo: "mes" },
-  { id: "pro-anual", tipo: "assinatura", nome: "Atalho Pro (anual)", preco_centavos: 3900, intervalo: "ano" },
+  { id: "pro-mensal", tipo: "assinatura", nome: "Atalho Pro (mensal)", preco_centavos: 900, intervalo: "mes" },
+  { id: "pro-anual", tipo: "assinatura", nome: "Atalho Pro (anual)", preco_centavos: 7900, intervalo: "ano" },
 ];
 
 export const PESSOAS = {

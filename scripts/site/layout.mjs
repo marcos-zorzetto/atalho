@@ -41,6 +41,7 @@ const NAVEGACAO = [
   { rotulo: "Ícones", caminho: "icones/", chave: "icones" },
   { rotulo: "Editor", caminho: "editor/", chave: "editor" },
   { rotulo: "Animações", caminho: "animacoes/", chave: "animacoes" },
+  { rotulo: "Sistemas", caminho: "sistemas/", chave: "sistemas" },
   { rotulo: "Pro", caminho: "pro/", chave: "pro", destaque: true },
 ];
 

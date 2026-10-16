@@ -305,8 +305,8 @@ grant select on public.produtos to anon, authenticated;
 grant select, insert, update, delete on public.produtos to service_role;
 
 insert into public.produtos (id, tipo, nome, preco_centavos, intervalo) values
-  ('pro-mensal', 'assinatura', 'Atalho Pro (mensal)', 490, 'mes'),
-  ('pro-anual', 'assinatura', 'Atalho Pro (anual)', 3900, 'ano')
+  ('pro-mensal', 'assinatura', 'Atalho Pro (mensal)', 900, 'mes'),
+  ('pro-anual', 'assinatura', 'Atalho Pro (anual)', 7900, 'ano')
 on conflict (id) do nothing;
 
 -- Assinaturas: uma linha por assinatura da Lemon Squeezy
@@ -449,3 +449,8 @@ grant select on public.conteudos to anon;
 drop policy if exists "conteudos: quem tem acesso lê" on public.conteudos;
 create policy "conteudos: quem tem acesso lê" on public.conteudos for select to authenticated
   using (acesso in ('publico', 'membro') or public.tem_pro() or public.comprou(produto_id) or public.eh_admin());
+
+-- Preços de outubro de 2026 (Pro com os 36 sistemas completos): 9 €/mês e 79 €/ano, IVA incluído.
+-- Só muda quem ainda tem os preços antigos (não mexe em preços ajustados à mão).
+update public.produtos set preco_centavos = 900 where id = 'pro-mensal' and preco_centavos = 490;
+update public.produtos set preco_centavos = 7900 where id = 'pro-anual' and preco_centavos = 3900;
