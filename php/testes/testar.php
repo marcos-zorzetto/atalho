@@ -89,7 +89,7 @@ $erros = validar(
 confere('validar: nome curto', $erros['nome'] ?? null, 'Use pelo menos 3 caracteres.');
 confere('validar: e-mail', $erros['email'] ?? null, 'Introduza um e-mail válido, como nome@exemplo.pt.');
 confere('validar: NIF ok', isset($erros['nif']), false);
-confere('validar: IBAN errado', $erros['iban'] ?? null, 'IBAN inválido. Confira o país e os números.');
+confere('validar: IBAN errado', $erros['iban'] ?? null, 'IBAN inválido. Verifique o país e os números.');
 confere('validar: CPF ok', isset($erros['cpf']), false);
 confere('validar: opcional vazio passa', isset($erros['obs']), false);
 confere('validar: obrigatório ausente', $erros['cep'] ?? null, 'Preencha este campo.');
