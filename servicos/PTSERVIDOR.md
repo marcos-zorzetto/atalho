@@ -82,5 +82,8 @@ devem responder 301 para `https://atalho.com.pt/`.
 2. No cPanel, a tarefa **Cron Jobs** corre `~/publicar-atalho.sh` (cópia de
    `servicos/ptservidor/publicar-atalho.sh`) de 10 em 10 minutos: se o ramo tiver uma versão
    nova, copia-a para `~/atalho.com.pt`. O registo fica em `~/publicar-atalho.log`.
+   Comando da tarefa (o File Manager grava os ficheiros com fins de linha do Windows, por isso
+   o `tr` limpa-os antes de os passar ao bash):
+   `tr -d '' < $HOME/publicar-atalho.sh | /bin/bash >> $HOME/publicar-atalho.log 2>&1`
 3. Depois de uma publicação, a cache do nginx pode mostrar a versão anterior uns minutos
    (cPanel → página inicial → NGINX Caching → *Clear Cache* resolve na hora).
