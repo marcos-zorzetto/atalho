@@ -2778,3 +2778,6 @@ a.at-lista-item:hover, button.at-lista-item:hover { background: var(--at-superfi
   /* Menu e balão: a posição muda na hora, sem nem um quadro no lugar antigo */
   .at-menu, .at-balao { transition-property: opacity !important; }
 }
+
+/* Caixas de seleção nas tabelas: alvo de toque de 24×24px (WCAG 2.2, critério 2.5.8) */
+.at-tabela input[type="checkbox"] { inline-size: 1.5rem; block-size: 1.5rem; margin: 0; accent-color: var(--at-cor-primaria); cursor: pointer; vertical-align: middle; }

@@ -80,7 +80,11 @@ export const REGRAS = [
 /** Cabeçalhos para um pedido (usado pelos servidores dos testes). */
 export function cabecalhosPara(caminho) {
   const relativo = caminho.replace(/^\//, "");
-  return Object.assign({}, cabecalhosSeguranca(), ...REGRAS.filter((r) => relativo.startsWith(r.pasta)).map((r) => r.cabecalhos));
+  const todos = Object.assign({}, cabecalhosSeguranca(), ...REGRAS.filter((r) => relativo.startsWith(r.pasta)).map((r) => r.cabecalhos));
+  // Em http://127.0.0.1 o Safari (WebKit) levaria todos os pedidos para https e nada carregaria
+  delete todos["Strict-Transport-Security"];
+  todos["Content-Security-Policy"] = todos["Content-Security-Policy"].replace(/; upgrade-insecure-requests$/, "");
+  return todos;
 }
 
 const aspas = (valor) => `"${valor.replace(/"/g, '\\"')}"`;
