@@ -79,3 +79,13 @@ curl -sI "https://atalhoui.com/?x=1"
 Devem aparecer `strict-transport-security`, `content-security-policy`,
 `x-content-type-options: nosniff`, `x-frame-options` e `referrer-policy`. `http://` e `www.`
 devem responder 301 para `https://atalhoui.com/`.
+
+## Publicação automática sem palavras-passe (em uso desde 16/10/2026)
+
+1. A cada push na `main`, o workflow **Publicar site** gera o site e guarda-o no ramo
+   `ptservidor-site` (só o `dist/`, já com o `.htaccess`).
+2. No cPanel, a tarefa **Cron Jobs** corre `~/publicar-atalho.sh` (cópia de
+   `servicos/ptservidor/publicar-atalho.sh`) de 10 em 10 minutos: se o ramo tiver uma versão
+   nova, copia-a para `~/atalho.com.pt`. O registo fica em `~/publicar-atalho.log`.
+3. Depois de uma publicação, a cache do nginx pode mostrar a versão anterior uns minutos
+   (cPanel → página inicial → NGINX Caching → *Clear Cache* resolve na hora).

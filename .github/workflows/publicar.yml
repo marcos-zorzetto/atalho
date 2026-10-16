@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # para guardar o site gerado no ramo ptservidor-site
   pages: write
   id-token: write
 
@@ -51,7 +51,21 @@ jobs:
       - name: Gerar o site
         run: node scripts/gerar-site.mjs
 
-      # PTServidor (cPanel): envia o dist/ por FTPS com o lftp do Ubuntu (sem ações de terceiros).
+      # PTServidor (cPanel), sem palavras-passe: o site gerado fica no ramo ptservidor-site e uma
+      # tarefa cron no cPanel (~/publicar-atalho.sh) vai buscá-lo de 10 em 10 minutos.
+      - name: Guardar o site no ramo ptservidor-site
+        if: env.ATALHO_HOSPEDAGEM == 'ptservidor'
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          cp -r dist /tmp/site && cd /tmp/site
+          git init -q -b ptservidor-site
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Site gerado a partir de ${GITHUB_SHA::7}"
+          git push -q -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ptservidor-site
+
+      # PTServidor (cPanel), alternativa: envia o dist/ por FTPS com o lftp do Ubuntu (sem ações de terceiros).
       # Só corre se os segredos existirem; sem eles, publique à mão com scripts/empacotar-ptservidor.mjs.
       - name: Publicar na PTServidor (FTPS)
         if: env.ATALHO_HOSPEDAGEM == 'ptservidor' && env.FTP_SERVIDOR != ''
