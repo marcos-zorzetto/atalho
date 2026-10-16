@@ -210,7 +210,7 @@ export function conteudoInicio({ total, exemplos, docs, vitrine, categorias, bas
         <p class="cine-sobretitulo" data-revelar>Páginas completas</p>
         <h2 class="cine-h2" id="paginas-titulo" data-revelar>Copie o ecrã inteiro,<br><span class="cine-suave">não só o botão.</span></h2>
       </div>
-      <div class="cine-galeria" tabindex="0" aria-label="Páginas completas (role para o lado)">
+      <div class="cine-galeria" tabindex="0" aria-label="Páginas completas">
         ${exemplos
           .slice(0, 6)
           .map(
