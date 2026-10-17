@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formatar (moeda, datas, números) | Atalho</title>
+  <meta name="description" content="Funções prontas no idioma da página: 1234,56 €, 08/10/2026, &quot;há 5 minutos&quot;, 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.">
+  <link rel="canonical" href="https://atalho.com.pt/componentes/formatar/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Formatar (moeda, datas, números) · Atalho">
+  <meta property="og:description" content="Funções prontas no idioma da página: 1234,56 €, 08/10/2026, &quot;há 5 minutos&quot;, 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.">
+  <meta property="og:url" content="https://atalho.com.pt/componentes/formatar/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Formatar (moeda, datas, números) em HTML, CSS e JavaScript","description":"Funções prontas no idioma da página: 1234,56 €, 08/10/2026, \"há 5 minutos\", 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.","inLanguage":"pt-PT","url":"https://atalho.com.pt/componentes/formatar/","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"publisher":{"@type":"Organization","name":"Atalho","url":"https://atalho.com.pt/"},"keywords":"formatar, moeda, euro, dinheiro, data, hora, intl, toLocaleString, número, porcentagem, tempo relativo, há 5 minutos, bytes","proficiencyLevel":"Beginner"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://atalho.com.pt/"},{"@type":"ListItem","position":2,"name":"Componentes","item":"https://atalho.com.pt/componentes/"},{"@type":"ListItem","position":3,"name":"Formatar (moeda, datas, números)","item":"https://atalho.com.pt/componentes/formatar/"}]}</script>
+  
+</head>
+<body data-pagina="componente" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/" aria-current="page">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+<div class="site-docs">
+    <nav class="site-menu-docs" id="menu-docs" aria-label="Todos os componentes"><h2>Comece aqui</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/cores-e-temas/">Cores e tema escuro</a></li><li><a href="/componentes/layout/">Layout e grade</a></li><li><a href="/componentes/tipografia/">Texto e tipografia</a></li><li><a href="/componentes/grade-12/">Grelha de 12 colunas <span class="site-novo">novo</span></a></li><li><a href="/componentes/utilitarios/">Utilitários (espaçamento, flex, cores...) <span class="site-novo">novo</span></a></li></ul><h2>Formulários</h2><ul><li><a href="/componentes/campo/">Campos de formulário</a></li><li><a href="/componentes/mascaras/">Máscaras (NIF, IBAN, telemóvel...)</a></li><li><a href="/componentes/cep/">Morada pelo código postal</a></li><li><a href="/componentes/validacao/">Validação de formulário</a></li><li><a href="/componentes/senha/">Palavra-passe (mostrar e força)</a></li><li><a href="/componentes/codigo/">Código de verificação</a></li><li><a href="/componentes/upload/">Enviar ficheiros</a></li><li><a href="/componentes/autocompletar/">Autocompletar <span class="site-novo">novo</span></a></li><li><a href="/componentes/quantidade/">Quantidade (+ e −) <span class="site-novo">novo</span></a></li><li><a href="/componentes/contador-caracteres/">Contador de caracteres <span class="site-novo">novo</span></a></li><li><a href="/componentes/faixa/">Faixa de valores (slider) <span class="site-novo">novo</span></a></li><li><a href="/componentes/etiquetas-entrada/">Entrada de etiquetas (tags) <span class="site-novo">novo</span></a></li><li><a href="/componentes/rotulo-flutuante/">Rótulo flutuante (floating label) <span class="site-novo">novo</span></a></li></ul><h2>Ações</h2><ul><li><a href="/componentes/botao/">Botão</a></li><li><a href="/componentes/menu-suspenso/">Menu suspenso</a></li><li><a href="/componentes/copiar/">Copiar (IBAN, referência, cupão, link)</a></li><li><a href="/componentes/whatsapp/">Botão do WhatsApp <span class="site-novo">novo</span></a></li><li><a href="/componentes/recolher/">Recolher e expandir (collapse) <span class="site-novo">novo</span></a></li><li><a href="/componentes/grupo-botoes/">Grupo de botões e botão fechar <span class="site-novo">novo</span></a></li></ul><h2>Navegação</h2><ul><li><a href="/componentes/barra/">Barra de navegação</a></li><li><a href="/componentes/lateral/">Menu lateral de sistema</a></li><li><a href="/componentes/abas/">Abas</a></li><li><a href="/componentes/trilha/">Trilha (breadcrumb)</a></li><li><a href="/componentes/paginacao/">Paginação</a></li><li><a href="/componentes/etapas/">Etapas</a></li><li><a href="/componentes/comando/">Pesquisa rápida (Ctrl+K)</a></li><li><a href="/componentes/notificacoes-sino/">Central de notificações <span class="site-novo">novo</span></a></li><li><a href="/componentes/voltar-topo/">Voltar ao topo <span class="site-novo">novo</span></a></li><li><a href="/componentes/indice/">Índice que acompanha a leitura (scrollspy) <span class="site-novo">novo</span></a></li></ul><h2>Janelas e avisos</h2><ul><li><a href="/componentes/modal/">Modal (janela de diálogo)</a></li><li><a href="/componentes/gaveta/">Gaveta (painel lateral)</a></li><li><a href="/componentes/dica/">Dica (tooltip)</a></li><li><a href="/componentes/notificacao/">Notificação (toast)</a></li><li><a href="/componentes/balao/">Balão informativo (popover) <span class="site-novo">novo</span></a></li></ul><h2>Exibir dados</h2><ul><li><a href="/componentes/cartao/">Cartão</a></li><li><a href="/componentes/produto/">Cartão de produto</a></li><li><a href="/componentes/tabela/">Tabela de dados</a></li><li><a href="/componentes/indicador/">Indicadores (KPIs)</a></li><li><a href="/componentes/selo/">Selos e etiquetas</a></li><li><a href="/componentes/avatar/">Avatar</a></li><li><a href="/componentes/linha-do-tempo/">Linha do tempo (seguimento)</a></li><li><a href="/componentes/avaliacao/">Avaliação (estrelas)</a></li><li><a href="/componentes/carrossel/">Carrossel</a></li><li><a href="/componentes/sanfona/">Acordeão (perguntas frequentes)</a></li><li><a href="/componentes/chat/">Chat</a></li><li><a href="/componentes/kanban/">Quadro Kanban</a></li><li><a href="/componentes/galeria/">Galeria de fotos <span class="site-novo">novo</span></a></li><li><a href="/componentes/video/">Vídeo leve do YouTube <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-detalhes/">Lista de detalhes <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-grupo/">Lista agrupada (list group) <span class="site-novo">novo</span></a></li><li><a href="/componentes/imagens/">Imagens, figuras e proporção <span class="site-novo">novo</span></a></li></ul><h2>Feedback</h2><ul><li><a href="/componentes/alerta/">Alertas e faixa</a></li><li><a href="/componentes/carregando/">A carregar e progresso</a></li><li><a href="/componentes/vazio/">Estado vazio</a></li><li><a href="/componentes/cookies/">Aviso de cookies (RGPD)</a></li></ul><h2>Blocos de página</h2><ul><li><a href="/componentes/hero/">Hero (topo da landing page)</a></li><li><a href="/componentes/planos/">Planos e preços</a></li><li><a href="/componentes/rodape/">Rodapé</a></li><li><a href="/componentes/contagem-regressiva/">Contagem regressiva <span class="site-novo">novo</span></a></li><li><a href="/componentes/depoimentos/">Depoimentos <span class="site-novo">novo</span></a></li><li><a href="/componentes/recursos/">Grade de recursos <span class="site-novo">novo</span></a></li><li><a href="/componentes/newsletter/">Newsletter <span class="site-novo">novo</span></a></li></ul><h2>JavaScript</h2><ul><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/formatar/" aria-current="page">Formatar (moeda, datas, números)</a></li><li><a href="/componentes/requisitar/">Obter dados de uma API</a></li><li><a href="/componentes/eventos/">Eventos do Atalho</a></li><li><a href="/componentes/carregar-mais/">Carregar mais (scroll infinito) <span class="site-novo">novo</span></a></li></ul><h2>Receitas completas</h2><ul><li><a href="/componentes/receita-loja/">Loja com carrinho</a></li><li><a href="/componentes/receita-cadastro/">Registo com morada automática</a></li><li><a href="/componentes/receita-painel/">Painel administrativo</a></li><li><a href="/componentes/receita-login/">Login em duas etapas</a></li></ul></nav>
+    <article class="site-artigo" data-componente="formatar">
+      <div class="site-docs-barra-celular">
+        <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Todos os componentes</button>
+      </div>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
+        <li><a href="/">Início</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/componentes/estado/">JavaScript</a></li>
+        <li aria-current="page">Formatar (moeda, datas, números)</li>
+      </ol></nav>
+      <div class="site-titulo-linha">
+        <h1 class="site-titulo site-h2" tabindex="-1">Formatar (moeda, datas, números)</h1>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="formatar" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/></svg><span>Adicionar aos favoritos</span></button>
+      </div>
+      <p class="at-chamada">Funções prontas no idioma da página: 1234,56 €, 08/10/2026, &quot;há 5 minutos&quot;, 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.</p>
+      <div class="site-meta">
+        <span class="site-linguagem" data-linguagem="html">HTML</span><span class="site-linguagem" data-linguagem="js">JavaScript</span>
+      </div>
+      <div class="site-meta"><span class="site-meta-rotulo">Padrão usado em</span><span class="site-referencia">Intl, a API de internacionalização dos navegadores</span></div>
+      <div class="site-meta"><span class="site-meta-rotulo">Suporte dos navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde setembro de 2017." tabindex="0">Intl · Em todos os navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde setembro de 2020." tabindex="0">Intl.RelativeTimeFormat · Em todos os navegadores</span></div>
+
+      <section aria-labelledby="quando-usar"><h2 class="site-secao-titulo" id="quando-usar"><a href="#quando-usar">Quando usar</a></h2>
+<div class="site-listas">
+          <div><ul class="site-lista "><li>Sempre que mostrar dinheiro, data ou número para uma pessoa. Nunca monte valor + &quot; €&quot; à mão.</li></ul></div>
+          
+        </div>
+</section>
+
+<section aria-labelledby="como-funciona"><h2 class="site-secao-titulo" id="como-funciona"><a href="#como-funciona">Como funciona</a></h2>
+<div class="site-explicacao"><p>São atalhos para a API Intl do navegador, no idioma do &lt;html lang&gt; (pt-PT por omissão) e na moeda de &lt;html data-at-moeda&gt; (euro por omissão). Atalho.configurar({ idioma, moeda }) troca os dois. No HTML, use os mesmos nomes em data-at-formato.</p></div>
+</section>
+
+<section aria-labelledby="exemplos"><h2 class="site-secao-titulo" id="exemplos"><a href="#exemplos">Exemplo</a></h2>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-tudo-de-uma-vez"><a href="#exemplo-tudo-de-uma-vez">Tudo de uma vez</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="0">
+<div class="at-tabela-caixa" style="max-width: 560px">
+  <table class="at-tabela">
+    <thead><tr><th>Código</th><th>Resultado</th></tr></thead>
+    <tbody id="tabela-formatos"></tbody>
+  </table>
+</div>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex0-html" id="ex0-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-js" id="ex0-aba-js" tabindex="-1">JavaScript</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGRpdiBjbGFzcz1cImF0LXRhYmVsYS1jYWl4YVwiIHN0eWxlPVwibWF4LXdpZHRoOiA1NjBweFwiPlxuICA8dGFibGUgY2xhc3M9XCJhdC10YWJlbGFcIj5cbiAgICA8dGhlYWQ-PHRyPjx0aD5Dw7NkaWdvPC90aD48dGg-UmVzdWx0YWRvPC90aD48L3RyPjwvdGhlYWQ-XG4gICAgPHRib2R5IGlkPVwidGFiZWxhLWZvcm1hdG9zXCI-PC90Ym9keT5cbiAgPC90YWJsZT5cbjwvZGl2PiIsImNzcyI6IiIsImpzIjoiY29uc3QgZiA9IEF0YWxoby5mb3JtYXRhcjtcbmNvbnN0IGNpbmNvTWludXRvc0F0cmFzID0gRGF0ZS5ub3coKSAtIDUgKiA2MCAqIDEwMDA7XG5cbmNvbnN0IGV4ZW1wbG9zID0gW1xuICBbXCJmLm1vZWRhKDEyMzQuNSlcIiwgZi5tb2VkYSgxMjM0LjUpXSxcbiAgW1wiZi5udW1lcm8oOTg3NjUuNDMyLCAyKVwiLCBmLm51bWVybyg5ODc2NS40MzIsIDIpXSxcbiAgW1wiZi5wb3JjZW50YWdlbSgwLjEyNSwgMSlcIiwgZi5wb3JjZW50YWdlbSgwLjEyNSwgMSldLFxuICBbXCJmLmNvbXBhY3RvKDEyNTAwMDApXCIsIGYuY29tcGFjdG8oMTI1MDAwMCldLFxuICBbXCJmLmRhdGEobmV3IERhdGUoKSlcIiwgZi5kYXRhKG5ldyBEYXRlKCkpXSxcbiAgW1wiZi5kYXRhKG5ldyBEYXRlKCksIFxcXCJsb25nXFxcIilcIiwgZi5kYXRhKG5ldyBEYXRlKCksIFwibG9uZ1wiKV0sXG4gIFtcImYucmVsYXRpdm8oY2luY29NaW51dG9zQXRyYXMpXCIsIGYucmVsYXRpdm8oY2luY29NaW51dG9zQXRyYXMpXSxcbiAgW1wiZi5ieXRlcygzNTAwMDAwKVwiLCBmLmJ5dGVzKDM1MDAwMDApXSxcbiAgW1wiZi5wbHVyYWwoMywgXFxcIml0ZW1cXFwiLCBcXFwiaXRlbnNcXFwiKVwiLCBmLnBsdXJhbCgzLCBcIml0ZW1cIiwgXCJpdGVuc1wiKV0sXG5dO1xuXG5kb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI3RhYmVsYS1mb3JtYXRvc1wiKS5pbm5lckhUTUwgPSBleGVtcGxvc1xuICAubWFwKChbY29kaWdvLCByZXN1bHRhZG9dKSA9PiBcIjx0cj48dGQ-PGNvZGU-XCIgKyBjb2RpZ28gKyBcIjwvY29kZT48L3RkPjx0ZD5cIiArIHJlc3VsdGFkbyArIFwiPC90ZD48L3RyPlwiKVxuICAuam9pbihcIlwiKTsifQ">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex0-html" role="tabpanel" aria-labelledby="ex0-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-tabela-caixa&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;max-width: 560px&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">table</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-tabela&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">thead</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">tr</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">th</span><span class="tk-pon">&gt;</span>Código<span class="tk-pon">&lt;/</span><span class="tk-tag">th</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">th</span><span class="tk-pon">&gt;</span>Resultado<span class="tk-pon">&lt;/</span><span class="tk-tag">th</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">tr</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">thead</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">tbody</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;tabela-formatos&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">tbody</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">table</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex0-js" role="tabpanel" aria-labelledby="ex0-aba-js" tabindex="0" hidden><code><span class="tk-pal">const</span> f = Atalho.formatar;
+<span class="tk-pal">const</span> cincoMinutosAtras = Date.now() - <span class="tk-num">5</span> * <span class="tk-num">60</span> * <span class="tk-num">1000</span>;
+
+<span class="tk-pal">const</span> exemplos = [
+  [<span class="tk-str">&quot;f.moeda(1234.5)&quot;</span>, f.moeda(<span class="tk-num">1234.5</span>)],
+  [<span class="tk-str">&quot;f.numero(98765.432, 2)&quot;</span>, f.numero(<span class="tk-num">98765.432</span>, <span class="tk-num">2</span>)],
+  [<span class="tk-str">&quot;f.porcentagem(0.125, 1)&quot;</span>, f.porcentagem(<span class="tk-num">0.125</span>, <span class="tk-num">1</span>)],
+  [<span class="tk-str">&quot;f.compacto(1250000)&quot;</span>, f.compacto(<span class="tk-num">1250000</span>)],
+  [<span class="tk-str">&quot;f.data(new Date())&quot;</span>, f.data(<span class="tk-pal">new</span> Date())],
+  [<span class="tk-str">&quot;f.data(new Date(), \&quot;long\&quot;)&quot;</span>, f.data(<span class="tk-pal">new</span> Date(), <span class="tk-str">&quot;long&quot;</span>)],
+  [<span class="tk-str">&quot;f.relativo(cincoMinutosAtras)&quot;</span>, f.relativo(cincoMinutosAtras)],
+  [<span class="tk-str">&quot;f.bytes(3500000)&quot;</span>, f.bytes(<span class="tk-num">3500000</span>)],
+  [<span class="tk-str">&quot;f.plural(3, \&quot;item\&quot;, \&quot;itens\&quot;)&quot;</span>, f.plural(<span class="tk-num">3</span>, <span class="tk-str">&quot;item&quot;</span>, <span class="tk-str">&quot;itens&quot;</span>)],
+];
+
+document.querySelector(<span class="tk-str">&quot;#tabela-formatos&quot;</span>).innerHTML = exemplos
+  .map(([codigo, resultado]) =&gt; <span class="tk-str">&quot;&lt;tr&gt;&lt;td&gt;&lt;code&gt;&quot;</span> + codigo + <span class="tk-str">&quot;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&quot;</span> + resultado + <span class="tk-str">&quot;&lt;/td&gt;&lt;/tr&gt;&quot;</span>)
+  .join(<span class="tk-str">&quot;&quot;</span>);</code></pre>
+        </div>
+      </div>
+</section>
+
+<section aria-labelledby="referencia"><h2 class="site-secao-titulo" id="referencia"><a href="#referencia">Referência</a></h2>
+<div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Referência de Formatar (moeda, datas, números)"><table class="at-tabela site-tabela-api">
+          <thead><tr><th scope="col">Nome</th><th scope="col">Tipo</th><th scope="col">O que faz</th></tr></thead>
+          <tbody><tr><td><code>moeda(1234.5, codigo?)</code></td><td>função</td><td>1234,50 € (ou moeda(10, &quot;GBP&quot;) → 10,00 £)</td></tr><tr><td><code>numero(12345.5, casas?)</code></td><td>função</td><td>12 345,5</td></tr><tr><td><code>porcentagem(0.125, 1)</code></td><td>função</td><td>12,5%</td></tr><tr><td><code>compacto(1200)</code></td><td>função</td><td>1,2 mil</td></tr><tr><td><code>data(valor, &quot;short|medium|long|full&quot;)</code></td><td>função</td><td>08/10/2026 ou 8 de outubro de 2026</td></tr><tr><td><code>dataHora(valor) / hora(valor)</code></td><td>função</td><td>08/10/2026, 14:30 / 14:30</td></tr><tr><td><code>relativo(valor)</code></td><td>função</td><td>há 5 minutos, amanhã, há 2 semanas</td></tr><tr><td><code>bytes(3500000)</code></td><td>função</td><td>3,3 MB</td></tr><tr><td><code>plural(2, &quot;item&quot;)</code></td><td>função</td><td>2 itens</td></tr></tbody>
+        </table></div>
+</section>
+
+<section aria-labelledby="combina-com"><h2 class="site-secao-titulo" id="combina-com"><a href="#combina-com">Combina com</a></h2>
+<div class="site-relacionados"><a href="/componentes/estado/"><strong>Estado (reatividade)</strong><span>A ideia central do React, sem React: muda os dados e o ecrã atualiza-se sozinho. É assim que os componentes se conectam.</span></a><a href="/componentes/tabela/"><strong>Tabela de dados</strong><span>Tabela de sistema completa: ordenar por coluna, pesquisar, paginar, selecionar linhas e exportar para Excel. Tudo com atributos no HTML.</span></a><a href="/componentes/indicador/"><strong>Indicadores (KPIs)</strong><span>Os números grandes do topo de qualquer painel: faturação, encomendas, clientes, com a variação em relação ao período anterior.</span></a></div>
+</section>
+
+<section aria-labelledby="documentacao-oficial"><h2 class="site-secao-titulo" id="documentacao-oficial"><a href="#documentacao-oficial">Documentação oficial (MDN)</a></h2>
+<ul class="site-links-mdn"><li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat" target="_blank" rel="noopener"><span class="site-idioma" data-idioma="pt">PT</span>Intl.NumberFormat</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat" target="_blank" rel="noopener"><span class="site-idioma" data-idioma="en">EN</span>Intl.DateTimeFormat</a> <small class="at-texto-suave">ainda sem tradução para português</small></li><li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat" target="_blank" rel="noopener"><span class="site-idioma" data-idioma="pt">PT</span>Intl.RelativeTimeFormat</a></li></ul>
+</section>
+
+      <nav class="site-navegacao-docs" aria-label="Anterior e próximo">
+        <a href="/componentes/estado/" rel="prev"><small>← Anterior</small><strong>Estado (reatividade)</strong></a>
+        <a href="/componentes/requisitar/" rel="next"><small>Próximo →</small><strong>Obter dados de uma API</strong></a>
+      </nav>
+      <p class="at-texto-suave at-texto-pequeno at-mt-6">Encontrou um erro? <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=%5BFormatar%20(moeda%2C%20datas%2C%20n%C3%BAmeros)%5D%20" target="_blank" rel="noopener">Abra uma issue</a> ou <a href="https://github.com/marcos-zorzetto/atalho/tree/main/site/dados" target="_blank" rel="noopener">edite no GitHub</a>.</p>
+    </article>
+    <aside class="site-indice" aria-label="Nesta página">
+      <div class="site-indice-fixo">
+        <h2>Nesta página</h2>
+        <ul><li><a href="#quando-usar">Quando usar</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#exemplos">Exemplo</a></li><li><a href="#referencia">Referência</a></li><li><a href="#combina-com">Combina com</a></li><li><a href="#documentacao-oficial">Documentação oficial (MDN)</a></li></ul>
+        <aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
+    <a href="/patrocinar/" class="site-patrocinio-link">
+      <span class="site-patrocinio-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
+    </a>
+    <small>Espaço publicitário</small>
+  </aside>
+      </div>
+    </aside>
+  </div>
+  <script type="application/json" id="exemplos-js">["const f = Atalho.formatar;\nconst cincoMinutosAtras = Date.now() - 5 * 60 * 1000;\n\nconst exemplos = [\n  [\"f.moeda(1234.5)\", f.moeda(1234.5)],\n  [\"f.numero(98765.432, 2)\", f.numero(98765.432, 2)],\n  [\"f.porcentagem(0.125, 1)\", f.porcentagem(0.125, 1)],\n  [\"f.compacto(1250000)\", f.compacto(1250000)],\n  [\"f.data(new Date())\", f.data(new Date())],\n  [\"f.data(new Date(), \\\"long\\\")\", f.data(new Date(), \"long\")],\n  [\"f.relativo(cincoMinutosAtras)\", f.relativo(cincoMinutosAtras)],\n  [\"f.bytes(3500000)\", f.bytes(3500000)],\n  [\"f.plural(3, \\\"item\\\", \\\"itens\\\")\", f.plural(3, \"item\", \"itens\")],\n];\n\ndocument.querySelector(\"#tabela-formatos\").innerHTML = exemplos\n  .map(([codigo, resultado]) => \"\u003ctr>\u003ctd>\u003ccode>\" + codigo + \"\u003c/code>\u003c/td>\u003ctd>\" + resultado + \"\u003c/td>\u003c/tr>\")\n  .join(\"\");"]</script>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

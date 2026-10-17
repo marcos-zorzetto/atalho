@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>44 sistemas completos em PHP para o seu negócio · Atalho Pro</title>
+  <meta name="description" content="CRM, marcações, orçamentos, loja, reservas, helpdesk, inventário e mais 37. Instalação num passo em alojamento PHP, em português de Portugal, com RGPD.">
+  <link rel="canonical" href="https://atalho.com.pt/sistemas/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="44 sistemas completos em PHP para o seu negócio · Atalho Pro">
+  <meta property="og:description" content="CRM, marcações, orçamentos, loja, reservas, helpdesk, inventário e mais 37. Instalação num passo em alojamento PHP, em português de Portugal, com RGPD.">
+  <meta property="og:url" content="https://atalho.com.pt/sistemas/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js" integrity="sha384-iLddHTLokph6Omwoyid4XKxHaWa6w41BnoEj0q5oOrzmYPpHIKt1wyjReA7s//pP" crossorigin="anonymous" defer></script>
+  <script src="/site/supabase.js?v=6070e870c2" defer></script>
+  <script src="/site/sistemas.js?v=8b203e8ac0" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Sistemas completos do Atalho Pro","numberOfItems":44,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"SoftwareApplication","name":"Agendamentos","description":"Marcações online com calendário, serviços, profissionais e fichas de cliente.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#agendamentos"}},{"@type":"ListItem","position":2,"item":{"@type":"SoftwareApplication","name":"Alojamento local","description":"Reservas diretas para alojamento local, com unidades, hóspedes, check-in e taxa turística.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#alojamento-local"}},{"@type":"ListItem","position":3,"item":{"@type":"SoftwareApplication","name":"Aluguer de equipamentos","description":"Catálogo online, alugueres com datas e caução, devoluções e manutenção de cada equipamento.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#aluguer-equipamentos"}},{"@type":"ListItem","position":4,"item":{"@type":"SoftwareApplication","name":"Arrendamentos","description":"Imóveis, inquilinos, contratos registados nas Finanças, rendas em dia ou em atraso e pedidos de manutenção.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#arrendamentos"}},{"@type":"ListItem","position":5,"item":{"@type":"SoftwareApplication","name":"Assistência técnica","description":"Reparações com código de entrada, diagnóstico, orçamento, peças e estado consultável pelo cliente.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#assistencia-tecnica"}},{"@type":"ListItem","position":6,"item":{"@type":"SoftwareApplication","name":"Associação","description":"Sócios com número, quotas, atividades, voluntários e propostas de adesão online.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#associacao"}},{"@type":"ListItem","position":7,"item":{"@type":"SoftwareApplication","name":"Biblioteca","description":"Catálogo público, leitores, empréstimos com prazo, atrasos e reservas de livros pelo site.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#biblioteca"}},{"@type":"ListItem","position":8,"item":{"@type":"SoftwareApplication","name":"Blog","description":"Blog e notícias com rascunhos, publicação agendada, categorias e comentários moderados.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#blog"}},{"@type":"ListItem","position":9,"item":{"@type":"SoftwareApplication","name":"Catering","description":"Pedidos de orçamento por convidados, menus com preço por pessoa e eventos por fase, com sinal.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#catering"}},{"@type":"ListItem","position":10,"item":{"@type":"SoftwareApplication","name":"Clínica","description":"Consultas, utentes, profissionais e notas clínicas, com marcação online e cuidados de RGPD para dados de saúde.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#clinica"}},{"@type":"ListItem","position":11,"item":{"@type":"SoftwareApplication","name":"Clube desportivo","description":"Atletas por escalão, treinos, jogos e mensalidades, com inscrição e calendário de jogos online.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#clube-desportivo"}},{"@type":"ListItem","position":12,"item":{"@type":"SoftwareApplication","name":"Compras","description":"Notas de encomenda a fornecedores com IVA, aprovações, receção da mercadoria e faturas por pagar.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#compras"}},{"@type":"ListItem","position":13,"item":{"@type":"SoftwareApplication","name":"Condomínio","description":"Frações, condóminos, quotas e despesas, ocorrências reportadas pelos moradores e atas de assembleia.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#condominio"}},{"@type":"ListItem","position":14,"item":{"@type":"SoftwareApplication","name":"Contratos","description":"Contratos com clientes e fornecedores, avenças, renovações, prazos de denúncia e alertas.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#contratos"}},{"@type":"ListItem","position":15,"item":{"@type":"SoftwareApplication","name":"CRM","description":"Contactos, empresas, funil de vendas e tarefas de seguimento, com formulário de contacto para o site.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#crm"}},{"@type":"ListItem","position":16,"item":{"@type":"SoftwareApplication","name":"Donativos","description":"Doadores, donativos com recibo, campanhas com objetivo e promessas de donativo pelo site.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#donativos"}},{"@type":"ListItem","position":17,"item":{"@type":"SoftwareApplication","name":"Encomendas da pastelaria","description":"Encomendas com data e hora de entrega, calendário de produção, produtos e pedidos pelo site.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#encomendas-pastelaria"}},{"@type":"ListItem","position":18,"item":{"@type":"SoftwareApplication","name":"Equipamentos e TI","description":"Ativos com n.º de inventário, atribuição a colaboradores, garantias, licenças e pedidos internos.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#equipamentos-ti"}},{"@type":"ListItem","position":19,"item":{"@type":"SoftwareApplication","name":"Escola de condução","description":"Alunos, aulas práticas por instrutor e viatura, exames e pagamentos, com inscrição online.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#escola-conducao"}},{"@type":"ListItem","position":20,"item":{"@type":"SoftwareApplication","name":"Eventos","description":"Agenda de eventos e workshops com inscrições online, lotação, bilhetes com código e presenças.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#eventos"}},{"@type":"ListItem","position":21,"item":{"@type":"SoftwareApplication","name":"Explicações","description":"Alunos, encarregados de educação, turmas, sumários, presenças e mensalidades, com pré-inscrição online.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#explicacoes"}},{"@type":"ListItem","position":22,"item":{"@type":"SoftwareApplication","name":"Finanças","description":"Receitas e despesas, contas a pagar e a receber, categorias e saldo por conta, prontos para o contabilista.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#financas"}},{"@type":"ListItem","position":23,"item":{"@type":"SoftwareApplication","name":"Folha de horas","description":"Registo de entradas e saídas, horas extra, férias e faltas por colaborador, conforme o Código do Trabalho.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#folha-horas"}},{"@type":"ListItem","position":24,"item":{"@type":"SoftwareApplication","name":"Formação","description":"Cursos, ações de formação, inscrições online, assiduidade, avaliação e certificados.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#formacao"}},{"@type":"ListItem","position":25,"item":{"@type":"SoftwareApplication","name":"Frota","description":"Viaturas, condutores, abastecimentos e manutenções, com alertas de inspeção, seguro e IUC.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#frota"}},{"@type":"ListItem","position":26,"item":{"@type":"SoftwareApplication","name":"Ginásio","description":"Sócios, planos e mensalidades, horário de aulas com reserva de lugar e pedidos de aula experimental.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#ginasio"}},{"@type":"ListItem","position":27,"item":{"@type":"SoftwareApplication","name":"Helpdesk","description":"Pedidos de suporte com código, prioridades, quadro de estados e consulta pública do estado.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#helpdesk"}},{"@type":"ListItem","position":28,"item":{"@type":"SoftwareApplication","name":"Imobiliária","description":"Imóveis no site com pedidos de visita, interessados, visitas agendadas e funil de negócio.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#imobiliaria"}},{"@type":"ListItem","position":29,"item":{"@type":"SoftwareApplication","name":"Inventário","description":"Stock de artigos por armazém, entradas e saídas, alertas de stock mínimo e fornecedores.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#inventario"}},{"@type":"ListItem","position":30,"item":{"@type":"SoftwareApplication","name":"Lavandaria","description":"Talões de entrada, estado de cada lote no quadro e consulta online pelo número do talão.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#lavandaria"}},{"@type":"ListItem","position":31,"item":{"@type":"SoftwareApplication","name":"Loja","description":"Catálogo online com encomendas, pagamento por MB WAY, Multibanco ou transferência, e gestão de stock.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#loja"}},{"@type":"ListItem","position":32,"item":{"@type":"SoftwareApplication","name":"Mediação de seguros","description":"Clientes, apólices por ramo, renovações a vencer, sinistros e pedidos de simulação online.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#mediacao-seguros"}},{"@type":"ListItem","position":33,"item":{"@type":"SoftwareApplication","name":"Newsletter","description":"Subscrições com dupla confirmação, campanhas por e-mail com link para anular e listas exportáveis.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#newsletter"}},{"@type":"ListItem","position":34,"item":{"@type":"SoftwareApplication","name":"Obras e remodelações","description":"Pedidos de orçamento, obras por fase, diário de obra, despesas e margem de cada obra.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#obras"}},{"@type":"ListItem","position":35,"item":{"@type":"SoftwareApplication","name":"Oficina","description":"Ordens de reparação com peças e mão de obra, viaturas por matrícula, revisões e consulta do estado pelo cliente.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#oficina"}},{"@type":"ListItem","position":36,"item":{"@type":"SoftwareApplication","name":"Orçamentos","description":"Orçamentos e faturas pró-forma com artigos, IVA por linha, totais automáticos e PDF pronto a enviar.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#orcamentos"}},{"@type":"ListItem","position":37,"item":{"@type":"SoftwareApplication","name":"Pedidos de orçamento","description":"Formulário de pedido de orçamento no site, visitas técnicas, propostas e funil até à adjudicação.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#pedidos-orcamento"}},{"@type":"ListItem","position":38,"item":{"@type":"SoftwareApplication","name":"Portal do cliente","description":"Processos e projetos com etapas, prazos, documentos pedidos e consulta do estado pelo cliente.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#portal-cliente"}},{"@type":"ListItem","position":39,"item":{"@type":"SoftwareApplication","name":"Projetos","description":"Projetos, tarefas em quadro, prazos, horas registadas e orçamento consumido.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#projetos"}},{"@type":"ListItem","position":40,"item":{"@type":"SoftwareApplication","name":"Reclamações e sugestões","description":"Reclamações, sugestões e elogios com código de seguimento, prazos de resposta e indicadores de qualidade.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#reclamacoes"}},{"@type":"ListItem","position":41,"item":{"@type":"SoftwareApplication","name":"Recrutamento","description":"Ofertas de emprego no site, candidaturas, fases de seleção e entrevistas, com prazos do RGPD.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#recrutamento"}},{"@type":"ListItem","position":42,"item":{"@type":"SoftwareApplication","name":"Reservas","description":"Reservas de mesa online com lotação por turno, calendário do serviço e fichas de cliente.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#reservas"}},{"@type":"ListItem","position":43,"item":{"@type":"SoftwareApplication","name":"Restaurante","description":"Menu digital com alergénios e encomendas para levantar ou entregar, com quadro da cozinha.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#restaurante"}},{"@type":"ListItem","position":44,"item":{"@type":"SoftwareApplication","name":"Veterinário","description":"Tutores e animais com microchip, consultas, vacinas e lembretes, e marcação online.","applicationCategory":"BusinessApplication","operatingSystem":"PHP 8.1+","url":"https://atalho.com.pt/sistemas/#veterinario"}}]}</script>
+  
+</head>
+<body data-pagina="sistemas" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/" aria-current="page">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+
+    <section class="site-cabecalho-pagina">
+      <div class="site-container">
+        <span class="at-sobretitulo">Atalho Pro</span>
+        <h1 class="site-titulo site-h2">44 sistemas completos, prontos a instalar</h1>
+        <p class="at-chamada">CRM, marcações, orçamentos, loja, reservas, helpdesk, inventário e muito mais. Instala num passo em qualquer alojamento com PHP, sem base de dados para configurar, tudo em português de Portugal.</p>
+      </div>
+    </section>
+    <section class="site-secao-curta">
+      <div class="site-container">
+        <ol class="site-passos-sistema">
+          <li><strong>Descarregue o zip</strong> do sistema que quer (com o Pro).</li>
+          <li><strong>Envie para o alojamento</strong> e extraia (no cPanel: File Manager → Upload → Extract).</li>
+          <li><strong>Abra o endereço</strong>, escreva o nome do negócio e a sua palavra-passe. Pronto, com dados de exemplo.</li>
+          <li><strong>Ajuste ao seu negócio</strong> em Personalizar: nomes, campos, opções e textos da página pública, sem programar.</li>
+        </ol>
+        <div class="site-recursos at-mt-6">
+          <div class="site-recurso"><h3>Feito para Portugal</h3><p>NIF, IBAN, código postal, +351, euro e IVA a 23, 13 e 6%. MB WAY, Multibanco e transferência nas instruções de pagamento.</p></div>
+          <div class="site-recurso"><h3>RGPD de origem</h3><p>Consentimento nos formulários, histórico de quem fez o quê, exportação dos dados de uma pessoa e anonimização com um clique.</p></div>
+          <div class="site-recurso"><h3>Seguro</h3><p>Palavras-passe cifradas, proteção CSRF, limite de tentativas, cabeçalhos de segurança e base de dados fechada ao navegador.</p></div>
+          <div class="site-recurso"><h3>Testado a sério</h3><p>Cada sistema é instalado e percorrido página a página num PHP 8.1 real e num navegador, com auditoria de acessibilidade, a cada mudança.</p></div>
+        </div>
+        <p class="at-texto-suave at-texto-pequeno at-mt-4">Os sistemas de faturação emitem orçamentos e faturas pró-forma; a fatura com valor fiscal sai do seu programa certificado pela AT.</p>
+        <p class="at-texto-suave at-texto-pequeno" data-sistemas-aviso hidden></p>
+      </div>
+    </section>
+    <div class="site-sistemas-barra" data-sistemas-barra>
+      <div class="site-container">
+        <div class="site-sistemas-procura">
+          <label class="at-sr" for="procurar-sistema">Procurar sistema</label>
+          <input class="at-entrada" id="procurar-sistema" type="search" placeholder="Procurar: faturas, marcações, stock…" autocomplete="off" data-sistemas-procura>
+          <span class="site-sistemas-contagem" data-sistemas-contagem aria-live="polite">44 sistemas</span>
+        </div>
+        <div class="site-sistemas-filtros" role="group" aria-label="Filtrar por área">
+          <button type="button" class="site-filtro" aria-pressed="true" data-sistemas-filtro="todos">Todos <span>44</span></button>
+          <button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="vendas">Vendas e clientes <span>9</span></button><button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="marcacoes">Marcações e reservas <span>8</span></button><button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="restauracao">Restauração e eventos <span>2</span></button><button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="atendimento">Atendimento e serviços <span>7</span></button><button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="operacoes">Operações e equipa <span>8</span></button><button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="imoveis">Imóveis <span>3</span></button><button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="comunidades">Comunidades e conteúdo <span>7</span></button>
+        </div>
+      </div>
+    </div>
+    <section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="vendas" aria-labelledby="grupo-vendas" style="--grupo-cor: #4f46e5">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">9 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-vendas">Vendas e clientes</h2>
+            <p class="site-grupo-frase">Do primeiro contacto à fatura pró-forma: clientes, propostas, encomendas, contratos e contas.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Vendas e clientes"><li><a href="#crm">CRM</a></li><li><a href="#orcamentos">Orçamentos</a></li><li><a href="#loja">Loja</a></li><li><a href="#pedidos-orcamento">Pedidos de orçamento</a></li><li><a href="#encomendas-pastelaria">Encomendas da pastelaria</a></li><li><a href="#compras">Compras</a></li><li><a href="#contratos">Contratos</a></li><li><a href="#financas">Finanças</a></li><li><a href="#mediacao-seguros">Mediação de seguros</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><g><rect x="40" y="24" width="168" height="152" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M40 36a12 12 0 0 1 12-12h144a12 12 0 0 1 12 12v10H40z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="54" cy="35" r="3" fill="var(--grupo-cor)"/><circle cx="64" cy="35" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="74" cy="35" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="56" y="50" width="70" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.9"/><rect x="56" y="64" width="48" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="56" y="86" width="88" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="166" y="86" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="56" y="104" width="88" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="166" y="104" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="56" y="122" width="88" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="166" y="122" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><path d="M56 142h136" stroke="var(--at-borda)"/><rect x="56" y="152" width="40" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="150" y="148" width="42" height="14" rx="4" fill="var(--grupo-cor)"/></g><g><rect x="196" y="70" width="104" height="96" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M196 82a12 12 0 0 1 12-12h80a12 12 0 0 1 12 12v10H196z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="210" cy="81" r="3" fill="var(--grupo-cor)"/><circle cx="220" cy="81" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="230" cy="81" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="214" y="136" width="12" height="18" rx="3" fill="var(--grupo-cor)" opacity="0.575"/><rect x="234" y="120" width="12" height="34" rx="3" fill="var(--grupo-cor)" opacity="0.7749999999999999"/><rect x="254" y="128" width="12" height="26" rx="3" fill="var(--grupo-cor)" opacity="0.675"/><rect x="274" y="106" width="12" height="48" rx="3" fill="var(--grupo-cor)" opacity="0.95"/><path d="M210 154h80" stroke="var(--at-borda)"/></g></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #4f46e5" id="crm" data-sistema data-grupo="vendas" data-busca="crm contactos, empresas, funil de vendas e tarefas de seguimento, com formulário de contacto para o site. vendas e clientes oportunidades contactos empresas atividades pedir contacto">
+        <h3 class="site-sistema-nome">CRM</h3>
+        <p class="site-sistema-descricao">Contactos, empresas, funil de vendas e tarefas de seguimento, com formulário de contacto para o site.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Oportunidades · Contactos · Empresas · Atividades</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir contacto</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="crm" data-sistema-nome="CRM">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0369a1" id="orcamentos" data-sistema data-grupo="vendas" data-busca="orçamentos orçamentos e faturas pró-forma com artigos, iva por linha, totais automáticos e pdf pronto a enviar. vendas e clientes orçamentos faturas pró-forma clientes artigos">
+        <h3 class="site-sistema-nome">Orçamentos</h3>
+        <p class="site-sistema-descricao">Orçamentos e faturas pró-forma com artigos, IVA por linha, totais automáticos e PDF pronto a enviar.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Quadro</li><li>PDF</li><li>IVA por linha</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Orçamentos · Faturas pró-forma · Clientes · Artigos</dd>
+            
+            <dt>Documentos</dt><dd>Orçamento · Fatura pró-forma</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="orcamentos" data-sistema-nome="Orçamentos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #be123c" id="loja" data-sistema data-grupo="vendas" data-busca="loja catálogo online com encomendas, pagamento por mb way, multibanco ou transferência, e gestão de stock. vendas e clientes encomendas produtos categorias clientes encomendar produtos seguir encomenda">
+        <h3 class="site-sistema-nome">Loja</h3>
+        <p class="site-sistema-descricao">Catálogo online com encomendas, pagamento por MB WAY, Multibanco ou transferência, e gestão de stock.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li><li>PDF</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Encomendas · Produtos · Categorias · Clientes</dd>
+            <dt>Para os seus clientes</dt><dd>Encomendar · Produtos · Seguir encomenda</dd>
+            <dt>Documentos</dt><dd>Encomenda</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="loja" data-sistema-nome="Loja">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #c2410c" id="pedidos-orcamento" data-sistema data-grupo="vendas" data-busca="pedidos de orçamento formulário de pedido de orçamento no site, visitas técnicas, propostas e funil até à adjudicação. vendas e clientes pedidos serviços pedir orçamento serviços estado do pedido">
+        <h3 class="site-sistema-nome">Pedidos de orçamento</h3>
+        <p class="site-sistema-descricao">Formulário de pedido de orçamento no site, visitas técnicas, propostas e funil até à adjudicação.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Pedidos · Serviços</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir orçamento · Serviços · Estado do pedido</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="pedidos-orcamento" data-sistema-nome="Pedidos de orçamento">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #a16207" id="encomendas-pastelaria" data-sistema data-grupo="vendas" data-busca="encomendas da pastelaria encomendas com data e hora de entrega, calendário de produção, produtos e pedidos pelo site. vendas e clientes encomendas produtos fazer encomenda montra">
+        <h3 class="site-sistema-nome">Encomendas da pastelaria</h3>
+        <p class="site-sistema-descricao">Encomendas com data e hora de entrega, calendário de produção, produtos e pedidos pelo site.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li><li>PDF</li><li>IVA por linha</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Encomendas · Produtos</dd>
+            <dt>Para os seus clientes</dt><dd>Fazer encomenda · Montra</dd>
+            <dt>Documentos</dt><dd>Encomenda</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="encomendas-pastelaria" data-sistema-nome="Encomendas da pastelaria">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0e7490" id="compras" data-sistema data-grupo="vendas" data-busca="compras notas de encomenda a fornecedores com iva, aprovações, receção da mercadoria e faturas por pagar. vendas e clientes notas de encomenda fornecedores">
+        <h3 class="site-sistema-nome">Compras</h3>
+        <p class="site-sistema-descricao">Notas de encomenda a fornecedores com IVA, aprovações, receção da mercadoria e faturas por pagar.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Quadro</li><li>PDF</li><li>IVA por linha</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Notas de encomenda · Fornecedores</dd>
+            
+            <dt>Documentos</dt><dd>Nota de encomenda</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="compras" data-sistema-nome="Compras">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #57534e" id="contratos" data-sistema data-grupo="vendas" data-busca="contratos contratos com clientes e fornecedores, avenças, renovações, prazos de denúncia e alertas. vendas e clientes contratos clientes e fornecedores">
+        <h3 class="site-sistema-nome">Contratos</h3>
+        <p class="site-sistema-descricao">Contratos com clientes e fornecedores, avenças, renovações, prazos de denúncia e alertas.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Contratos · Clientes e fornecedores</dd>
+            
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="contratos" data-sistema-nome="Contratos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #047857" id="financas" data-sistema data-grupo="vendas" data-busca="finanças receitas e despesas, contas a pagar e a receber, categorias e saldo por conta, prontos para o contabilista. vendas e clientes movimentos categorias contas">
+        <h3 class="site-sistema-nome">Finanças</h3>
+        <p class="site-sistema-descricao">Receitas e despesas, contas a pagar e a receber, categorias e saldo por conta, prontos para o contabilista.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Movimentos · Categorias · Contas</dd>
+            
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="financas" data-sistema-nome="Finanças">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0f766e" id="mediacao-seguros" data-sistema data-grupo="vendas" data-busca="mediação de seguros clientes, apólices por ramo, renovações a vencer, sinistros e pedidos de simulação online. vendas e clientes clientes apólices sinistros pedidos de simulação pedir simulação">
+        <h3 class="site-sistema-nome">Mediação de seguros</h3>
+        <p class="site-sistema-descricao">Clientes, apólices por ramo, renovações a vencer, sinistros e pedidos de simulação online.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Clientes · Apólices · Sinistros · Pedidos de simulação</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir simulação</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="mediacao-seguros" data-sistema-nome="Mediação de seguros">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section><section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="marcacoes" aria-labelledby="grupo-marcacoes" style="--grupo-cor: #0f766e">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">8 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-marcacoes">Marcações e reservas</h2>
+            <p class="site-grupo-frase">Agenda online em que o cliente marca sozinho, sem sobreposições e com tudo num calendário.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Marcações e reservas"><li><a href="#agendamentos">Agendamentos</a></li><li><a href="#reservas">Reservas</a></li><li><a href="#alojamento-local">Alojamento local</a></li><li><a href="#clinica">Clínica</a></li><li><a href="#veterinario">Veterinário</a></li><li><a href="#ginasio">Ginásio</a></li><li><a href="#eventos">Eventos</a></li><li><a href="#escola-conducao">Escola de condução</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><g><rect x="36" y="22" width="248" height="156" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M36 34a12 12 0 0 1 12-12h224a12 12 0 0 1 12 12v10H36z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="50" cy="33" r="3" fill="var(--grupo-cor)"/><circle cx="60" cy="33" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="70" cy="33" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="54" y="44" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="100" y="44" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="146" y="44" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="192" y="44" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="238" y="44" width="26" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="50" y="60" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="96" y="60" width="40" height="30" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)"/><rect x="102" y="68" width="24" height="4" rx="2" fill="var(--grupo-cor)"/><rect x="102" y="77" width="16" height="4" rx="2" fill="var(--grupo-cor)" opacity=".5"/><rect x="142" y="60" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="188" y="60" width="40" height="30" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)"/><rect x="194" y="68" width="24" height="4" rx="2" fill="var(--grupo-cor)"/><rect x="194" y="77" width="16" height="4" rx="2" fill="var(--grupo-cor)" opacity=".5"/><rect x="234" y="60" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="50" y="96" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="96" y="96" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="142" y="96" width="40" height="30" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)"/><rect x="148" y="104" width="24" height="4" rx="2" fill="var(--grupo-cor)"/><rect x="148" y="113" width="16" height="4" rx="2" fill="var(--grupo-cor)" opacity=".5"/><rect x="188" y="96" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="234" y="96" width="40" height="30" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)"/><rect x="240" y="104" width="24" height="4" rx="2" fill="var(--grupo-cor)"/><rect x="240" y="113" width="16" height="4" rx="2" fill="var(--grupo-cor)" opacity=".5"/><rect x="50" y="132" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="96" y="132" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="142" y="132" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/><rect x="188" y="132" width="40" height="30" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)"/><rect x="194" y="140" width="24" height="4" rx="2" fill="var(--grupo-cor)"/><rect x="194" y="149" width="16" height="4" rx="2" fill="var(--grupo-cor)" opacity=".5"/><rect x="234" y="132" width="40" height="30" rx="6" fill="none" stroke="var(--at-borda)"/></g></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #0f766e" id="agendamentos" data-sistema data-grupo="marcacoes" data-busca="agendamentos marcações online com calendário, serviços, profissionais e fichas de cliente. marcações e reservas marcações clientes serviços profissionais marcar serviços e preços">
+        <h3 class="site-sistema-nome">Agendamentos</h3>
+        <p class="site-sistema-descricao">Marcações online com calendário, serviços, profissionais e fichas de cliente.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Marcações · Clientes · Serviços · Profissionais</dd>
+            <dt>Para os seus clientes</dt><dd>Marcar · Serviços e preços</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="agendamentos" data-sistema-nome="Agendamentos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #b45309" id="reservas" data-sistema data-grupo="marcacoes" data-busca="reservas reservas de mesa online com lotação por turno, calendário do serviço e fichas de cliente. marcações e reservas reservas mesas clientes reservar mesa">
+        <h3 class="site-sistema-nome">Reservas</h3>
+        <p class="site-sistema-descricao">Reservas de mesa online com lotação por turno, calendário do serviço e fichas de cliente.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Reservas · Mesas · Clientes</dd>
+            <dt>Para os seus clientes</dt><dd>Reservar mesa</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="reservas" data-sistema-nome="Reservas">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0e7490" id="alojamento-local" data-sistema data-grupo="marcacoes" data-busca="alojamento local reservas diretas para alojamento local, com unidades, hóspedes, check-in e taxa turística. marcações e reservas reservas unidades limpezas pedir reserva quartos e casas a minha reserva">
+        <h3 class="site-sistema-nome">Alojamento local</h3>
+        <p class="site-sistema-descricao">Reservas diretas para alojamento local, com unidades, hóspedes, check-in e taxa turística.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li><li>PDF</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Reservas · Unidades · Limpezas</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir reserva · Quartos e casas · A minha reserva</dd>
+            <dt>Documentos</dt><dd>Confirmação de reserva</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="alojamento-local" data-sistema-nome="Alojamento local">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0891b2" id="clinica" data-sistema data-grupo="marcacoes" data-busca="clínica consultas, utentes, profissionais e notas clínicas, com marcação online e cuidados de rgpd para dados de saúde. marcações e reservas consultas utentes profissionais especialidades pedir consulta especialidades">
+        <h3 class="site-sistema-nome">Clínica</h3>
+        <p class="site-sistema-descricao">Consultas, utentes, profissionais e notas clínicas, com marcação online e cuidados de RGPD para dados de saúde.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Consultas · Utentes · Profissionais · Especialidades</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir consulta · Especialidades</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="clinica" data-sistema-nome="Clínica">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #16a34a" id="veterinario" data-sistema data-grupo="marcacoes" data-busca="veterinário tutores e animais com microchip, consultas, vacinas e lembretes, e marcação online. marcações e reservas consultas animais tutores vacinas marcar consulta">
+        <h3 class="site-sistema-nome">Veterinário</h3>
+        <p class="site-sistema-descricao">Tutores e animais com microchip, consultas, vacinas e lembretes, e marcação online.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Consultas · Animais · Tutores · Vacinas</dd>
+            <dt>Para os seus clientes</dt><dd>Marcar consulta</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="veterinario" data-sistema-nome="Veterinário">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #dc2626" id="ginasio" data-sistema data-grupo="marcacoes" data-busca="ginásio sócios, planos e mensalidades, horário de aulas com reserva de lugar e pedidos de aula experimental. marcações e reservas sócios planos mensalidades aulas reservas de aulas aula experimental reservar lugar horário das aulas planos e preços">
+        <h3 class="site-sistema-nome">Ginásio</h3>
+        <p class="site-sistema-descricao">Sócios, planos e mensalidades, horário de aulas com reserva de lugar e pedidos de aula experimental.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (5)</dt><dd>Sócios · Planos · Mensalidades · Aulas · Reservas de aulas</dd>
+            <dt>Para os seus clientes</dt><dd>Aula experimental · Reservar lugar · Horário das aulas · Planos e preços</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">5 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="ginasio" data-sistema-nome="Ginásio">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #ea580c" id="eventos" data-sistema data-grupo="marcacoes" data-busca="eventos agenda de eventos e workshops com inscrições online, lotação, bilhetes com código e presenças. marcações e reservas eventos inscrições oradores inscrição agenda o meu bilhete">
+        <h3 class="site-sistema-nome">Eventos</h3>
+        <p class="site-sistema-descricao">Agenda de eventos e workshops com inscrições online, lotação, bilhetes com código e presenças.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li><li>PDF</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Eventos · Inscrições · Oradores</dd>
+            <dt>Para os seus clientes</dt><dd>Inscrição · Agenda · O meu bilhete</dd>
+            <dt>Documentos</dt><dd>Bilhete</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="eventos" data-sistema-nome="Eventos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #1d4ed8" id="escola-conducao" data-sistema data-grupo="marcacoes" data-busca="escola de condução alunos, aulas práticas por instrutor e viatura, exames e pagamentos, com inscrição online. marcações e reservas alunos instrutores viaturas aulas exames pagamentos inscrição">
+        <h3 class="site-sistema-nome">Escola de condução</h3>
+        <p class="site-sistema-descricao">Alunos, aulas práticas por instrutor e viatura, exames e pagamentos, com inscrição online.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (6)</dt><dd>Alunos · Instrutores · Viaturas · Aulas · Exames · Pagamentos</dd>
+            <dt>Para os seus clientes</dt><dd>Inscrição</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">6 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="escola-conducao" data-sistema-nome="Escola de condução">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section><section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="restauracao" aria-labelledby="grupo-restauracao" style="--grupo-cor: #c2410c">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">2 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-restauracao">Restauração e eventos</h2>
+            <p class="site-grupo-frase">Menus com alergénios, encomendas e eventos por convidados, da cozinha à mesa.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Restauração e eventos"><li><a href="#restaurante">Restaurante</a></li><li><a href="#catering">Catering</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><g><rect x="40" y="22" width="150" height="156" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M40 34a12 12 0 0 1 12-12h126a12 12 0 0 1 12 12v10H40z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="54" cy="33" r="3" fill="var(--grupo-cor)"/><circle cx="64" cy="33" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="74" cy="33" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="58" y="48" width="60" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.9"/><rect x="58" y="72" width="72" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="58" y="82" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="160" y="72" width="18" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/><rect x="58" y="98" width="72" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="58" y="108" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="160" y="98" width="18" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/><rect x="58" y="124" width="72" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="58" y="134" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="160" y="124" width="18" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/><rect x="58" y="150" width="72" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="58" y="160" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="160" y="150" width="18" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/></g><circle cx="250" cy="104" r="44" fill="var(--at-superficie)" stroke="var(--at-borda)"/><circle cx="250" cy="104" r="30" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)" stroke-opacity=".4"/><path d="M200 76v24m-5-24v11a5 5 0 0 0 10 0V76M200 106v44" stroke="var(--at-texto-suave)" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M306 76c-6 0-9 8-9 20h9v54" stroke="var(--at-texto-suave)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #c2410c" id="restaurante" data-sistema data-grupo="restauracao" data-busca="restaurante menu digital com alergénios e encomendas para levantar ou entregar, com quadro da cozinha. restauração e eventos encomendas pratos fazer encomenda menu">
+        <h3 class="site-sistema-nome">Restaurante</h3>
+        <p class="site-sistema-descricao">Menu digital com alergénios e encomendas para levantar ou entregar, com quadro da cozinha.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Encomendas · Pratos</dd>
+            <dt>Para os seus clientes</dt><dd>Fazer encomenda · Menu</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="restaurante" data-sistema-nome="Restaurante">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #9d174d" id="catering" data-sistema data-grupo="restauracao" data-busca="catering pedidos de orçamento por convidados, menus com preço por pessoa e eventos por fase, com sinal. restauração e eventos eventos menus pedir proposta menus">
+        <h3 class="site-sistema-nome">Catering</h3>
+        <p class="site-sistema-descricao">Pedidos de orçamento por convidados, menus com preço por pessoa e eventos por fase, com sinal.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Eventos · Menus</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir proposta · Menus</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="catering" data-sistema-nome="Catering">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section><section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="atendimento" aria-labelledby="grupo-atendimento" style="--grupo-cor: #0369a1">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">7 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-atendimento">Atendimento e serviços</h2>
+            <p class="site-grupo-frase">Pedidos, reparações, talões e alugueres com um estado que o cliente consulta sem telefonar.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Atendimento e serviços"><li><a href="#helpdesk">Helpdesk</a></li><li><a href="#portal-cliente">Portal do cliente</a></li><li><a href="#assistencia-tecnica">Assistência técnica</a></li><li><a href="#oficina">Oficina</a></li><li><a href="#lavandaria">Lavandaria</a></li><li><a href="#aluguer-equipamentos">Aluguer de equipamentos</a></li><li><a href="#reclamacoes">Reclamações e sugestões</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><g><rect x="36" y="22" width="160" height="156" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M36 34a12 12 0 0 1 12-12h136a12 12 0 0 1 12 12v10H36z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="50" cy="33" r="3" fill="var(--grupo-cor)"/><circle cx="60" cy="33" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="70" cy="33" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="52" y="50" width="96" height="22" rx="11" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" opacity="1"/><rect x="62" y="59" width="70" height="4" rx="2" fill="var(--grupo-cor)" opacity=".8"/><rect x="92" y="80" width="88" height="22" rx="11" fill="var(--grupo-cor)" opacity="0.85"/><rect x="102" y="89" width="62" height="4" rx="2" fill="var(--at-superficie)" opacity=".8"/><rect x="52" y="110" width="110" height="22" rx="11" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" opacity="1"/><rect x="62" y="119" width="84" height="4" rx="2" fill="var(--grupo-cor)" opacity=".8"/><rect x="104" y="140" width="76" height="22" rx="11" fill="var(--grupo-cor)" opacity="0.85"/><rect x="114" y="149" width="50" height="4" rx="2" fill="var(--at-superficie)" opacity=".8"/></g><g><rect x="208" y="46" width="96" height="120" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M208 58a12 12 0 0 1 12-12h72a12 12 0 0 1 12 12v10H208z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="222" cy="57" r="3" fill="var(--grupo-cor)"/><circle cx="232" cy="57" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="242" cy="57" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="220" y="76" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><circle cx="286" cy="79" r="6" fill="var(--grupo-cor)" opacity="1"/><rect x="220" y="104" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><circle cx="286" cy="107" r="6" fill="var(--grupo-cor)" opacity="0.7"/><rect x="220" y="132" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><circle cx="286" cy="135" r="6" fill="var(--grupo-cor)" opacity="0.4"/></g></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #7c3aed" id="helpdesk" data-sistema data-grupo="atendimento" data-busca="helpdesk pedidos de suporte com código, prioridades, quadro de estados e consulta pública do estado. atendimento e serviços pedidos categorias agentes base de conhecimento abrir pedido perguntas frequentes consultar pedido">
+        <h3 class="site-sistema-nome">Helpdesk</h3>
+        <p class="site-sistema-descricao">Pedidos de suporte com código, prioridades, quadro de estados e consulta pública do estado.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Pedidos · Categorias · Agentes · Base de conhecimento</dd>
+            <dt>Para os seus clientes</dt><dd>Abrir pedido · Perguntas frequentes · Consultar pedido</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="helpdesk" data-sistema-nome="Helpdesk">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #334155" id="portal-cliente" data-sistema data-grupo="atendimento" data-busca="portal do cliente processos e projetos com etapas, prazos, documentos pedidos e consulta do estado pelo cliente. atendimento e serviços processos clientes tarefas novo pedido consultar processo">
+        <h3 class="site-sistema-nome">Portal do cliente</h3>
+        <p class="site-sistema-descricao">Processos e projetos com etapas, prazos, documentos pedidos e consulta do estado pelo cliente.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Processos · Clientes · Tarefas</dd>
+            <dt>Para os seus clientes</dt><dd>Novo pedido · Consultar processo</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="portal-cliente" data-sistema-nome="Portal do cliente">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0f766e" id="assistencia-tecnica" data-sistema data-grupo="atendimento" data-busca="assistência técnica reparações com código de entrada, diagnóstico, orçamento, peças e estado consultável pelo cliente. atendimento e serviços reparações peças técnicos pedir reparação estado da reparação">
+        <h3 class="site-sistema-nome">Assistência técnica</h3>
+        <p class="site-sistema-descricao">Reparações com código de entrada, diagnóstico, orçamento, peças e estado consultável pelo cliente.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li><li>PDF</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Reparações · Peças · Técnicos</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir reparação · Estado da reparação</dd>
+            <dt>Documentos</dt><dd>Guia de reparação</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="assistencia-tecnica" data-sistema-nome="Assistência técnica">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #525252" id="oficina" data-sistema data-grupo="atendimento" data-busca="oficina ordens de reparação com peças e mão de obra, viaturas por matrícula, revisões e consulta do estado pelo cliente. atendimento e serviços ordens de reparação viaturas clientes estado da reparação">
+        <h3 class="site-sistema-nome">Oficina</h3>
+        <p class="site-sistema-descricao">Ordens de reparação com peças e mão de obra, viaturas por matrícula, revisões e consulta do estado pelo cliente.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li><li>PDF</li><li>IVA por linha</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Ordens de reparação · Viaturas · Clientes</dd>
+            <dt>Para os seus clientes</dt><dd>Estado da reparação</dd>
+            <dt>Documentos</dt><dd>Ordem de reparação</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="oficina" data-sistema-nome="Oficina">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0891b2" id="lavandaria" data-sistema data-grupo="atendimento" data-busca="lavandaria talões de entrada, estado de cada lote no quadro e consulta online pelo número do talão. atendimento e serviços talões tabela de preços preços consultar talão">
+        <h3 class="site-sistema-nome">Lavandaria</h3>
+        <p class="site-sistema-descricao">Talões de entrada, estado de cada lote no quadro e consulta online pelo número do talão.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Talões · Tabela de preços</dd>
+            <dt>Para os seus clientes</dt><dd>Preços · Consultar talão</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="lavandaria" data-sistema-nome="Lavandaria">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #ea580c" id="aluguer-equipamentos" data-sistema data-grupo="atendimento" data-busca="aluguer de equipamentos catálogo online, alugueres com datas e caução, devoluções e manutenção de cada equipamento. atendimento e serviços equipamentos alugueres manutenções pedir aluguer catálogo">
+        <h3 class="site-sistema-nome">Aluguer de equipamentos</h3>
+        <p class="site-sistema-descricao">Catálogo online, alugueres com datas e caução, devoluções e manutenção de cada equipamento.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Equipamentos · Alugueres · Manutenções</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir aluguer · Catálogo</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="aluguer-equipamentos" data-sistema-nome="Aluguer de equipamentos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #b91c1c" id="reclamacoes" data-sistema data-grupo="atendimento" data-busca="reclamações e sugestões reclamações, sugestões e elogios com código de seguimento, prazos de resposta e indicadores de qualidade. atendimento e serviços reclamações e sugestões modelos de resposta enviar reclamação ou sugestão acompanhar">
+        <h3 class="site-sistema-nome">Reclamações e sugestões</h3>
+        <p class="site-sistema-descricao">Reclamações, sugestões e elogios com código de seguimento, prazos de resposta e indicadores de qualidade.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Reclamações e sugestões · Modelos de resposta</dd>
+            <dt>Para os seus clientes</dt><dd>Enviar reclamação ou sugestão · Acompanhar</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="reclamacoes" data-sistema-nome="Reclamações e sugestões">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section><section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="operacoes" aria-labelledby="grupo-operacoes" style="--grupo-cor: #a16207">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">8 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-operacoes">Operações e equipa</h2>
+            <p class="site-grupo-frase">Stock, projetos, obras, horas, frota e pessoas organizados em quadros e listas.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Operações e equipa"><li><a href="#inventario">Inventário</a></li><li><a href="#projetos">Projetos</a></li><li><a href="#obras">Obras e remodelações</a></li><li><a href="#folha-horas">Folha de horas</a></li><li><a href="#frota">Frota</a></li><li><a href="#equipamentos-ti">Equipamentos e TI</a></li><li><a href="#recrutamento">Recrutamento</a></li><li><a href="#formacao">Formação</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><g><rect x="30" y="22" width="260" height="156" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M30 34a12 12 0 0 1 12-12h236a12 12 0 0 1 12 12v10H30z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="44" cy="33" r="3" fill="var(--grupo-cor)"/><circle cx="54" cy="33" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="64" cy="33" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="44" y="44" width="40" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.8"/><rect x="44" y="58" width="72" height="28" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--at-borda)"/><rect x="52" y="66" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="52" y="76" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="44" y="92" width="72" height="28" rx="6" fill="var(--at-superficie)" stroke="var(--at-borda)"/><rect x="52" y="100" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="52" y="110" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="44" y="126" width="72" height="28" rx="6" fill="var(--at-superficie)" stroke="var(--at-borda)"/><rect x="52" y="134" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="52" y="144" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="126" y="44" width="40" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.8"/><rect x="126" y="58" width="72" height="28" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--at-borda)"/><rect x="134" y="66" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="134" y="76" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="126" y="92" width="72" height="28" rx="6" fill="var(--at-superficie)" stroke="var(--at-borda)"/><rect x="134" y="100" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="134" y="110" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="208" y="44" width="40" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.8"/><rect x="208" y="58" width="72" height="28" rx="6" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--at-borda)"/><rect x="216" y="66" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="216" y="76" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="208" y="92" width="72" height="28" rx="6" fill="var(--at-superficie)" stroke="var(--at-borda)"/><rect x="216" y="100" width="44" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="216" y="110" width="28" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/></g></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #15803d" id="inventario" data-sistema data-grupo="operacoes" data-busca="inventário stock de artigos por armazém, entradas e saídas, alertas de stock mínimo e fornecedores. operações e equipa artigos movimentos armazéns fornecedores">
+        <h3 class="site-sistema-nome">Inventário</h3>
+        <p class="site-sistema-descricao">Stock de artigos por armazém, entradas e saídas, alertas de stock mínimo e fornecedores.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Artigos · Movimentos · Armazéns · Fornecedores</dd>
+            
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="inventario" data-sistema-nome="Inventário">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #6d28d9" id="projetos" data-sistema data-grupo="operacoes" data-busca="projetos projetos, tarefas em quadro, prazos, horas registadas e orçamento consumido. operações e equipa tarefas projetos horas pessoas">
+        <h3 class="site-sistema-nome">Projetos</h3>
+        <p class="site-sistema-descricao">Projetos, tarefas em quadro, prazos, horas registadas e orçamento consumido.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Tarefas · Projetos · Horas · Pessoas</dd>
+            
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="projetos" data-sistema-nome="Projetos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #a16207" id="obras" data-sistema data-grupo="operacoes" data-busca="obras e remodelações pedidos de orçamento, obras por fase, diário de obra, despesas e margem de cada obra. operações e equipa obras diário de obra despesas pedir orçamento">
+        <h3 class="site-sistema-nome">Obras e remodelações</h3>
+        <p class="site-sistema-descricao">Pedidos de orçamento, obras por fase, diário de obra, despesas e margem de cada obra.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Obras · Diário de obra · Despesas</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir orçamento</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="obras" data-sistema-nome="Obras e remodelações">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0369a1" id="folha-horas" data-sistema data-grupo="operacoes" data-busca="folha de horas registo de entradas e saídas, horas extra, férias e faltas por colaborador, conforme o código do trabalho. operações e equipa registos de horas férias e faltas colaboradores">
+        <h3 class="site-sistema-nome">Folha de horas</h3>
+        <p class="site-sistema-descricao">Registo de entradas e saídas, horas extra, férias e faltas por colaborador, conforme o Código do Trabalho.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Registos de horas · Férias e faltas · Colaboradores</dd>
+            
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="folha-horas" data-sistema-nome="Folha de horas">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #374151" id="frota" data-sistema data-grupo="operacoes" data-busca="frota viaturas, condutores, abastecimentos e manutenções, com alertas de inspeção, seguro e iuc. operações e equipa viaturas condutores abastecimentos manutenções">
+        <h3 class="site-sistema-nome">Frota</h3>
+        <p class="site-sistema-descricao">Viaturas, condutores, abastecimentos e manutenções, com alertas de inspeção, seguro e IUC.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Viaturas · Condutores · Abastecimentos · Manutenções</dd>
+            
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="frota" data-sistema-nome="Frota">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #1e40af" id="equipamentos-ti" data-sistema data-grupo="operacoes" data-busca="equipamentos e ti ativos com n.º de inventário, atribuição a colaboradores, garantias, licenças e pedidos internos. operações e equipa equipamentos licenças colaboradores pedidos internos abrir pedido de ti estado do pedido">
+        <h3 class="site-sistema-nome">Equipamentos e TI</h3>
+        <p class="site-sistema-descricao">Ativos com n.º de inventário, atribuição a colaboradores, garantias, licenças e pedidos internos.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Equipamentos · Licenças · Colaboradores · Pedidos internos</dd>
+            <dt>Para os seus clientes</dt><dd>Abrir pedido de TI · Estado do pedido</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="equipamentos-ti" data-sistema-nome="Equipamentos e TI">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #0d9488" id="recrutamento" data-sistema data-grupo="operacoes" data-busca="recrutamento ofertas de emprego no site, candidaturas, fases de seleção e entrevistas, com prazos do rgpd. operações e equipa candidaturas ofertas entrevistas candidatura ofertas de emprego estado da candidatura">
+        <h3 class="site-sistema-nome">Recrutamento</h3>
+        <p class="site-sistema-descricao">Ofertas de emprego no site, candidaturas, fases de seleção e entrevistas, com prazos do RGPD.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Candidaturas · Ofertas · Entrevistas</dd>
+            <dt>Para os seus clientes</dt><dd>Candidatura · Ofertas de emprego · Estado da candidatura</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="recrutamento" data-sistema-nome="Recrutamento">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #4338ca" id="formacao" data-sistema data-grupo="operacoes" data-busca="formação cursos, ações de formação, inscrições online, assiduidade, avaliação e certificados. operações e equipa ações de formação cursos inscrições inscrição próximas ações cursos a minha inscrição">
+        <h3 class="site-sistema-nome">Formação</h3>
+        <p class="site-sistema-descricao">Cursos, ações de formação, inscrições online, assiduidade, avaliação e certificados.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li><li>PDF</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Ações de formação · Cursos · Inscrições</dd>
+            <dt>Para os seus clientes</dt><dd>Inscrição · Próximas ações · Cursos · A minha inscrição</dd>
+            <dt>Documentos</dt><dd>Certificado</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="formacao" data-sistema-nome="Formação">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section><section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="imoveis" aria-labelledby="grupo-imoveis" style="--grupo-cor: #15803d">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">3 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-imoveis">Imóveis</h2>
+            <p class="site-grupo-frase">Imóveis à venda e para arrendar, condomínios, rendas e quotas com avisos de prazo.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Imóveis"><li><a href="#imobiliaria">Imobiliária</a></li><li><a href="#condominio">Condomínio</a></li><li><a href="#arrendamentos">Arrendamentos</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><path d="M48 104l62-52 62 52v66H48z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)" stroke-opacity=".5" stroke-linejoin="round"/><rect x="96" y="128" width="28" height="42" rx="3" fill="var(--at-superficie)" stroke="var(--at-borda)"/><rect x="62" y="114" width="22" height="20" rx="3" fill="var(--at-superficie)" stroke="var(--at-borda)"/><rect x="136" y="114" width="22" height="20" rx="3" fill="var(--at-superficie)" stroke="var(--at-borda)"/><g><rect x="186" y="30" width="118" height="140" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M186 42a12 12 0 0 1 12-12h94a12 12 0 0 1 12 12v10H186z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="200" cy="41" r="3" fill="var(--grupo-cor)"/><circle cx="210" cy="41" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="220" cy="41" r="3" fill="var(--grupo-cor)" opacity=".25"/><rect x="198" y="58" width="30" height="28" rx="5" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="236" y="62" width="52" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="236" y="74" width="34" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/><rect x="198" y="96" width="30" height="28" rx="5" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="236" y="100" width="52" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="236" y="112" width="34" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/><rect x="198" y="134" width="30" height="28" rx="5" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="236" y="138" width="52" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="236" y="150" width="34" height="6" rx="3" fill="var(--grupo-cor)" opacity="0.7"/></g></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #1d4ed8" id="imobiliaria" data-sistema data-grupo="imoveis" data-busca="imobiliária imóveis no site com pedidos de visita, interessados, visitas agendadas e funil de negócio. imóveis imóveis interessados visitas pedir informação ou visita imóveis">
+        <h3 class="site-sistema-nome">Imobiliária</h3>
+        <p class="site-sistema-descricao">Imóveis no site com pedidos de visita, interessados, visitas agendadas e funil de negócio.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Imóveis · Interessados · Visitas</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir informação ou visita · Imóveis</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="imobiliaria" data-sistema-nome="Imobiliária">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #4d7c0f" id="condominio" data-sistema data-grupo="imoveis" data-busca="condomínio frações, condóminos, quotas e despesas, ocorrências reportadas pelos moradores e atas de assembleia. imóveis frações condóminos quotas despesas ocorrências assembleias reportar ocorrência acompanhar ocorrência">
+        <h3 class="site-sistema-nome">Condomínio</h3>
+        <p class="site-sistema-descricao">Frações, condóminos, quotas e despesas, ocorrências reportadas pelos moradores e atas de assembleia.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (6)</dt><dd>Frações · Condóminos · Quotas · Despesas · Ocorrências · Assembleias</dd>
+            <dt>Para os seus clientes</dt><dd>Reportar ocorrência · Acompanhar ocorrência</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">6 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="condominio" data-sistema-nome="Condomínio">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #7c2d12" id="arrendamentos" data-sistema data-grupo="imoveis" data-busca="arrendamentos imóveis, inquilinos, contratos registados nas finanças, rendas em dia ou em atraso e pedidos de manutenção. imóveis rendas contratos imóveis inquilinos manutenção pedir manutenção acompanhar pedido">
+        <h3 class="site-sistema-nome">Arrendamentos</h3>
+        <p class="site-sistema-descricao">Imóveis, inquilinos, contratos registados nas Finanças, rendas em dia ou em atraso e pedidos de manutenção.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (5)</dt><dd>Rendas · Contratos · Imóveis · Inquilinos · Manutenção</dd>
+            <dt>Para os seus clientes</dt><dd>Pedir manutenção · Acompanhar pedido</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">5 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="arrendamentos" data-sistema-nome="Arrendamentos">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section><section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="comunidades" aria-labelledby="grupo-comunidades" style="--grupo-cor: #be185d">
+      <div class="site-container">
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">7 sistemas</span>
+            <h2 class="site-grupo-titulo" id="grupo-comunidades">Comunidades e conteúdo</h2>
+            <p class="site-grupo-frase">Sócios, atletas, alunos, donativos, livros, artigos e listas de e-mail.</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de Comunidades e conteúdo"><li><a href="#associacao">Associação</a></li><li><a href="#clube-desportivo">Clube desportivo</a></li><li><a href="#donativos">Donativos</a></li><li><a href="#explicacoes">Explicações</a></li><li><a href="#biblioteca">Biblioteca</a></li><li><a href="#blog">Blog</a></li><li><a href="#newsletter">Newsletter</a></li></ul>
+          </div>
+          <svg class="site-grupo-ilustracao" viewBox="0 0 320 200" fill="none" aria-hidden="true" focusable="false"><g><rect x="30" y="22" width="180" height="156" rx="12" fill="var(--at-superficie)" stroke="var(--at-borda)"/><path d="M30 34a12 12 0 0 1 12-12h156a12 12 0 0 1 12 12v10H30z" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><circle cx="44" cy="33" r="3" fill="var(--grupo-cor)"/><circle cx="54" cy="33" r="3" fill="var(--grupo-cor)" opacity=".5"/><circle cx="64" cy="33" r="3" fill="var(--grupo-cor)" opacity=".25"/><circle cx="56" cy="60" r="11" fill="var(--grupo-cor)" opacity="0.9"/><rect x="76" y="52" width="70" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="76" y="62" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="158" y="53" width="40" height="14" rx="7" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="164" y="58" width="28" height="4" rx="2" fill="var(--grupo-cor)"/><circle cx="56" cy="92" r="11" fill="var(--grupo-cor)" opacity="0.72"/><rect x="76" y="84" width="70" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="76" y="94" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="158" y="85" width="40" height="14" rx="7" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="164" y="90" width="28" height="4" rx="2" fill="var(--grupo-cor)"/><circle cx="56" cy="124" r="11" fill="var(--grupo-cor)" opacity="0.54"/><rect x="76" y="116" width="70" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="76" y="126" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="158" y="117" width="40" height="14" rx="7" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="164" y="122" width="28" height="4" rx="2" fill="var(--grupo-cor)"/><circle cx="56" cy="156" r="11" fill="var(--grupo-cor)" opacity="0.36"/><rect x="76" y="148" width="70" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.35"/><rect x="76" y="158" width="46" height="6" rx="3" fill="var(--at-texto-suave)" opacity="0.2"/><rect x="158" y="149" width="40" height="14" rx="7" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))"/><rect x="164" y="154" width="28" height="4" rx="2" fill="var(--grupo-cor)"/></g><circle cx="252" cy="76" r="24" fill="color-mix(in srgb, var(--grupo-cor) 18%, var(--at-superficie))" stroke="var(--grupo-cor)" stroke-opacity=".5"/><circle cx="252" cy="70" r="8" fill="var(--grupo-cor)"/><path d="M238 92c3-8 8-11 14-11s11 3 14 11" fill="var(--grupo-cor)"/><circle cx="226" cy="134" r="18" fill="var(--at-superficie)" stroke="var(--at-borda)"/><circle cx="278" cy="134" r="18" fill="var(--at-superficie)" stroke="var(--at-borda)"/><circle cx="226" cy="130" r="6" fill="var(--at-texto-suave)" opacity=".5"/><circle cx="278" cy="130" r="6" fill="var(--at-texto-suave)" opacity=".5"/></svg>
+        </header>
+        <div class="site-sistemas">
+      <article class="site-sistema" style="--sistema-cor: #0f766e" id="associacao" data-sistema data-grupo="comunidades" data-busca="associação sócios com número, quotas, atividades, voluntários e propostas de adesão online. comunidades e conteúdo sócios quotas atividades tornar-me sócio atividades">
+        <h3 class="site-sistema-nome">Associação</h3>
+        <p class="site-sistema-descricao">Sócios com número, quotas, atividades, voluntários e propostas de adesão online.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Sócios · Quotas · Atividades</dd>
+            <dt>Para os seus clientes</dt><dd>Tornar-me sócio · Atividades</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="associacao" data-sistema-nome="Associação">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #15803d" id="clube-desportivo" data-sistema data-grupo="comunidades" data-busca="clube desportivo atletas por escalão, treinos, jogos e mensalidades, com inscrição e calendário de jogos online. comunidades e conteúdo atletas treinos jogos mensalidades inscrição de atleta próximos jogos">
+        <h3 class="site-sistema-nome">Clube desportivo</h3>
+        <p class="site-sistema-descricao">Atletas por escalão, treinos, jogos e mensalidades, com inscrição e calendário de jogos online.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Atletas · Treinos · Jogos · Mensalidades</dd>
+            <dt>Para os seus clientes</dt><dd>Inscrição de atleta · Próximos jogos</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="clube-desportivo" data-sistema-nome="Clube desportivo">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #be185d" id="donativos" data-sistema data-grupo="comunidades" data-busca="donativos doadores, donativos com recibo, campanhas com objetivo e promessas de donativo pelo site. comunidades e conteúdo donativos doadores campanhas fazer um donativo campanhas">
+        <h3 class="site-sistema-nome">Donativos</h3>
+        <p class="site-sistema-descricao">Doadores, donativos com recibo, campanhas com objetivo e promessas de donativo pelo site.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>PDF</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (3)</dt><dd>Donativos · Doadores · Campanhas</dd>
+            <dt>Para os seus clientes</dt><dd>Fazer um donativo · Campanhas</dd>
+            <dt>Documentos</dt><dd>Recibo de donativo</dd>
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">3 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="donativos" data-sistema-nome="Donativos">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #2563eb" id="explicacoes" data-sistema data-grupo="comunidades" data-busca="explicações alunos, encarregados de educação, turmas, sumários, presenças e mensalidades, com pré-inscrição online. comunidades e conteúdo alunos turmas sumários mensalidades pré-inscrição turmas e horários">
+        <h3 class="site-sistema-nome">Explicações</h3>
+        <p class="site-sistema-descricao">Alunos, encarregados de educação, turmas, sumários, presenças e mensalidades, com pré-inscrição online.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Alunos · Turmas · Sumários · Mensalidades</dd>
+            <dt>Para os seus clientes</dt><dd>Pré-inscrição · Turmas e horários</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="explicacoes" data-sistema-nome="Explicações">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #92400e" id="biblioteca" data-sistema data-grupo="comunidades" data-busca="biblioteca catálogo público, leitores, empréstimos com prazo, atrasos e reservas de livros pelo site. comunidades e conteúdo livros leitores empréstimos reservas reservar livro catálogo">
+        <h3 class="site-sistema-nome">Biblioteca</h3>
+        <p class="site-sistema-descricao">Catálogo público, leitores, empréstimos com prazo, atrasos e reservas de livros pelo site.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Livros · Leitores · Empréstimos · Reservas</dd>
+            <dt>Para os seus clientes</dt><dd>Reservar livro · Catálogo</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="biblioteca" data-sistema-nome="Biblioteca">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #9333ea" id="blog" data-sistema data-grupo="comunidades" data-busca="blog blog e notícias com rascunhos, publicação agendada, categorias e comentários moderados. comunidades e conteúdo artigos categorias autores comentários deixar um comentário artigos">
+        <h3 class="site-sistema-nome">Blog</h3>
+        <p class="site-sistema-descricao">Blog e notícias com rascunhos, publicação agendada, categorias e comentários moderados.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Calendário</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (4)</dt><dd>Artigos · Categorias · Autores · Comentários</dd>
+            <dt>Para os seus clientes</dt><dd>Deixar um comentário · Artigos</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">4 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="blog" data-sistema-nome="Blog">Descarregar (Pro)</button>
+        </footer>
+      </article><article class="site-sistema" style="--sistema-cor: #db2777" id="newsletter" data-sistema data-grupo="comunidades" data-busca="newsletter subscrições com dupla confirmação, campanhas por e-mail com link para anular e listas exportáveis. comunidades e conteúdo subscritores campanhas subscrever">
+        <h3 class="site-sistema-nome">Newsletter</h3>
+        <p class="site-sistema-descricao">Subscrições com dupla confirmação, campanhas por e-mail com link para anular e listas exportáveis.</p>
+        <ul class="site-sistema-selos" aria-label="Inclui"><li>Página para clientes</li><li>Quadro</li></ul>
+        <details class="site-sistema-detalhes">
+          <summary>O que inclui</summary>
+          <dl>
+            <dt>Tabelas (2)</dt><dd>Subscritores · Campanhas</dd>
+            <dt>Para os seus clientes</dt><dd>Subscrever</dd>
+            
+          </dl>
+        </details>
+        <footer class="site-sistema-rodape">
+          <span class="site-sistema-tabelas">2 tabelas</span>
+          <button class="at-botao at-pequeno at-primario" type="button" data-sistema-baixar="newsletter" data-sistema-nome="Newsletter">Descarregar (Pro)</button>
+        </footer>
+      </article>
+        </div>
+      </div>
+    </section>
+    <section class="site-secao-curta" data-sistemas-vazio hidden>
+      <div class="site-container at-centro"><p>Nenhum sistema com esse nome. Experimente "faturas", "reservas" ou "stock", ou <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=Sistema%3A%20">peça o seu</a>.</p></div>
+    </section>
+    <section class="site-secao-curta">
+      <div class="site-container at-centro">
+        <h2 class="site-secao-titulo">Todos os sistemas no Pro</h2>
+        <p>Os 44 sistemas, as páginas completas e os componentes premium, com novidades todos os meses.</p>
+        <a class="at-botao at-primario" href="/pro/">Ver planos e preços</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

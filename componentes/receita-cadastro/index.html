@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registo com morada automática em HTML, CSS e JavaScript | Atalho</title>
+  <meta name="description" content="Registo completo: dados pessoais com NIF e telemóvel, morada automática pelo código postal, palavra-passe com força, termos e confirmação.">
+  <link rel="canonical" href="https://atalho.com.pt/componentes/receita-cadastro/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Registo com morada automática · Atalho">
+  <meta property="og:description" content="Registo completo: dados pessoais com NIF e telemóvel, morada automática pelo código postal, palavra-passe com força, termos e confirmação.">
+  <meta property="og:url" content="https://atalho.com.pt/componentes/receita-cadastro/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Registo com morada automática em HTML, CSS e JavaScript","description":"Registo completo: dados pessoais com NIF e telemóvel, morada automática pelo código postal, palavra-passe com força, termos e confirmação.","inLanguage":"pt-PT","url":"https://atalho.com.pt/componentes/receita-cadastro/","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"publisher":{"@type":"Organization","name":"Atalho","url":"https://atalho.com.pt/"},"keywords":"cadastro, formulário de registo, registro, sign up, criar conta, registo de cliente, endereço","proficiencyLevel":"Beginner"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://atalho.com.pt/"},{"@type":"ListItem","position":2,"name":"Componentes","item":"https://atalho.com.pt/componentes/"},{"@type":"ListItem","position":3,"name":"Registo com morada automática","item":"https://atalho.com.pt/componentes/receita-cadastro/"}]}</script>
+  
+</head>
+<body data-pagina="componente" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/" aria-current="page">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+<div class="site-docs">
+    <nav class="site-menu-docs" id="menu-docs" aria-label="Todos os componentes"><h2>Comece aqui</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/cores-e-temas/">Cores e tema escuro</a></li><li><a href="/componentes/layout/">Layout e grade</a></li><li><a href="/componentes/tipografia/">Texto e tipografia</a></li><li><a href="/componentes/grade-12/">Grelha de 12 colunas <span class="site-novo">novo</span></a></li><li><a href="/componentes/utilitarios/">Utilitários (espaçamento, flex, cores...) <span class="site-novo">novo</span></a></li></ul><h2>Formulários</h2><ul><li><a href="/componentes/campo/">Campos de formulário</a></li><li><a href="/componentes/mascaras/">Máscaras (NIF, IBAN, telemóvel...)</a></li><li><a href="/componentes/cep/">Morada pelo código postal</a></li><li><a href="/componentes/validacao/">Validação de formulário</a></li><li><a href="/componentes/senha/">Palavra-passe (mostrar e força)</a></li><li><a href="/componentes/codigo/">Código de verificação</a></li><li><a href="/componentes/upload/">Enviar ficheiros</a></li><li><a href="/componentes/autocompletar/">Autocompletar <span class="site-novo">novo</span></a></li><li><a href="/componentes/quantidade/">Quantidade (+ e −) <span class="site-novo">novo</span></a></li><li><a href="/componentes/contador-caracteres/">Contador de caracteres <span class="site-novo">novo</span></a></li><li><a href="/componentes/faixa/">Faixa de valores (slider) <span class="site-novo">novo</span></a></li><li><a href="/componentes/etiquetas-entrada/">Entrada de etiquetas (tags) <span class="site-novo">novo</span></a></li><li><a href="/componentes/rotulo-flutuante/">Rótulo flutuante (floating label) <span class="site-novo">novo</span></a></li></ul><h2>Ações</h2><ul><li><a href="/componentes/botao/">Botão</a></li><li><a href="/componentes/menu-suspenso/">Menu suspenso</a></li><li><a href="/componentes/copiar/">Copiar (IBAN, referência, cupão, link)</a></li><li><a href="/componentes/whatsapp/">Botão do WhatsApp <span class="site-novo">novo</span></a></li><li><a href="/componentes/recolher/">Recolher e expandir (collapse) <span class="site-novo">novo</span></a></li><li><a href="/componentes/grupo-botoes/">Grupo de botões e botão fechar <span class="site-novo">novo</span></a></li></ul><h2>Navegação</h2><ul><li><a href="/componentes/barra/">Barra de navegação</a></li><li><a href="/componentes/lateral/">Menu lateral de sistema</a></li><li><a href="/componentes/abas/">Abas</a></li><li><a href="/componentes/trilha/">Trilha (breadcrumb)</a></li><li><a href="/componentes/paginacao/">Paginação</a></li><li><a href="/componentes/etapas/">Etapas</a></li><li><a href="/componentes/comando/">Pesquisa rápida (Ctrl+K)</a></li><li><a href="/componentes/notificacoes-sino/">Central de notificações <span class="site-novo">novo</span></a></li><li><a href="/componentes/voltar-topo/">Voltar ao topo <span class="site-novo">novo</span></a></li><li><a href="/componentes/indice/">Índice que acompanha a leitura (scrollspy) <span class="site-novo">novo</span></a></li></ul><h2>Janelas e avisos</h2><ul><li><a href="/componentes/modal/">Modal (janela de diálogo)</a></li><li><a href="/componentes/gaveta/">Gaveta (painel lateral)</a></li><li><a href="/componentes/dica/">Dica (tooltip)</a></li><li><a href="/componentes/notificacao/">Notificação (toast)</a></li><li><a href="/componentes/balao/">Balão informativo (popover) <span class="site-novo">novo</span></a></li></ul><h2>Exibir dados</h2><ul><li><a href="/componentes/cartao/">Cartão</a></li><li><a href="/componentes/produto/">Cartão de produto</a></li><li><a href="/componentes/tabela/">Tabela de dados</a></li><li><a href="/componentes/indicador/">Indicadores (KPIs)</a></li><li><a href="/componentes/selo/">Selos e etiquetas</a></li><li><a href="/componentes/avatar/">Avatar</a></li><li><a href="/componentes/linha-do-tempo/">Linha do tempo (seguimento)</a></li><li><a href="/componentes/avaliacao/">Avaliação (estrelas)</a></li><li><a href="/componentes/carrossel/">Carrossel</a></li><li><a href="/componentes/sanfona/">Acordeão (perguntas frequentes)</a></li><li><a href="/componentes/chat/">Chat</a></li><li><a href="/componentes/kanban/">Quadro Kanban</a></li><li><a href="/componentes/galeria/">Galeria de fotos <span class="site-novo">novo</span></a></li><li><a href="/componentes/video/">Vídeo leve do YouTube <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-detalhes/">Lista de detalhes <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-grupo/">Lista agrupada (list group) <span class="site-novo">novo</span></a></li><li><a href="/componentes/imagens/">Imagens, figuras e proporção <span class="site-novo">novo</span></a></li></ul><h2>Feedback</h2><ul><li><a href="/componentes/alerta/">Alertas e faixa</a></li><li><a href="/componentes/carregando/">A carregar e progresso</a></li><li><a href="/componentes/vazio/">Estado vazio</a></li><li><a href="/componentes/cookies/">Aviso de cookies (RGPD)</a></li></ul><h2>Blocos de página</h2><ul><li><a href="/componentes/hero/">Hero (topo da landing page)</a></li><li><a href="/componentes/planos/">Planos e preços</a></li><li><a href="/componentes/rodape/">Rodapé</a></li><li><a href="/componentes/contagem-regressiva/">Contagem regressiva <span class="site-novo">novo</span></a></li><li><a href="/componentes/depoimentos/">Depoimentos <span class="site-novo">novo</span></a></li><li><a href="/componentes/recursos/">Grade de recursos <span class="site-novo">novo</span></a></li><li><a href="/componentes/newsletter/">Newsletter <span class="site-novo">novo</span></a></li></ul><h2>JavaScript</h2><ul><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/formatar/">Formatar (moeda, datas, números)</a></li><li><a href="/componentes/requisitar/">Obter dados de uma API</a></li><li><a href="/componentes/eventos/">Eventos do Atalho</a></li><li><a href="/componentes/carregar-mais/">Carregar mais (scroll infinito) <span class="site-novo">novo</span></a></li></ul><h2>Receitas completas</h2><ul><li><a href="/componentes/receita-loja/">Loja com carrinho</a></li><li><a href="/componentes/receita-cadastro/" aria-current="page">Registo com morada automática</a></li><li><a href="/componentes/receita-painel/">Painel administrativo</a></li><li><a href="/componentes/receita-login/">Login em duas etapas</a></li></ul></nav>
+    <article class="site-artigo" data-componente="receita-cadastro">
+      <div class="site-docs-barra-celular">
+        <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Todos os componentes</button>
+      </div>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
+        <li><a href="/">Início</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/componentes/receita-loja/">Receitas completas</a></li>
+        <li aria-current="page">Registo com morada automática</li>
+      </ol></nav>
+      <div class="site-titulo-linha">
+        <h1 class="site-titulo site-h2" tabindex="-1">Registo com morada automática</h1>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="receita-cadastro" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/></svg><span>Adicionar aos favoritos</span></button>
+      </div>
+      <p class="at-chamada">Registo completo: dados pessoais com NIF e telemóvel, morada automática pelo código postal, palavra-passe com força, termos e confirmação.</p>
+      <div class="site-meta">
+        <span class="site-linguagem" data-linguagem="html">HTML</span><span class="site-linguagem" data-linguagem="js">JavaScript</span><span class="site-linguagem" data-linguagem="php">PHP</span>
+      </div>
+      <div class="site-meta"><span class="site-meta-rotulo">Padrão usado em</span><span class="site-referencia">Worten e Fnac (registo)</span><span class="site-referencia">Bancos digitais (abertura de conta)</span></div>
+      <div class="site-meta"><span class="site-meta-rotulo">Suporte dos navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde dezembro de 2018." tabindex="0">Constraint validation API · Em todos os navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde março de 2017." tabindex="0">Fetch · Em todos os navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde março de 2022." tabindex="0">&lt;dialog&gt; · Em todos os navegadores</span></div>
+
+      <section aria-labelledby="quando-usar"><h2 class="site-secao-titulo" id="quando-usar"><a href="#quando-usar">Quando usar</a></h2>
+<div class="site-listas">
+          <div><ul class="site-lista "><li>Registo de clientes, checkout como visitante, ficha de matrícula.</li></ul></div>
+          
+        </div>
+</section>
+
+<section aria-labelledby="como-funciona"><h2 class="site-secao-titulo" id="como-funciona"><a href="#como-funciona">Como funciona</a></h2>
+<div class="site-explicacao"><p>Um único formulário com data-at-validar junta Campos, Máscaras, Morada pelo código postal, Palavra-passe e Validação. Ao enviar, o botão mostra o estado de carregamento e um modal confirma, usando o evento at:enviar.</p></div>
+</section>
+
+<section aria-labelledby="exemplos"><h2 class="site-secao-titulo" id="exemplos"><a href="#exemplos">Exemplo</a></h2>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-ficha-de-registo"><a href="#exemplo-ficha-de-registo">Ficha de registo</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="0">
+<div class="at-cartao" style="max-width: 760px; margin-inline: auto">
+  <div class="at-cartao-corpo" style="border-bottom: 1px solid var(--at-borda)">
+    <h2 class="at-titulo-3 at-mb-0">Crie a sua conta</h2>
+    <p class="at-texto-suave at-mb-0">Leva menos de 2 minutos: a morada preenche-se sozinha pelo código postal.</p>
+  </div>
+  <form id="form-cadastro" data-at-validar class="at-cartao-corpo at-pilha" style="--at-gap: 28px">
+    <fieldset class="at-formulario" style="border: 0; padding: 0; margin: 0">
+      <legend class="at-titulo-4">Os seus dados</legend>
+      <div class="at-campo">
+        <label class="at-rotulo" for="cad-nome">Nome completo</label>
+        <input class="at-entrada" id="cad-nome" name="nome" required minlength="5" autocomplete="name">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-nif">NIF</label>
+        <input class="at-entrada" id="cad-nif" name="nif" required data-at-mascara="nif" inputmode="numeric">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-nasc">Data de nascimento</label>
+        <input class="at-entrada" id="cad-nasc" name="nascimento" type="date" required max="2010-12-31" autocomplete="bday">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-email">E-mail</label>
+        <input class="at-entrada" id="cad-email" name="email" type="email" required autocomplete="email">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-cel">Telemóvel</label>
+        <input class="at-entrada" id="cad-cel" name="telemovel" type="tel" required data-at-mascara="telemovel" autocomplete="tel-national">
+      </div>
+    </fieldset>
+
+    <fieldset class="at-formulario" style="border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0">
+      <legend class="at-titulo-4">Morada</legend>
+      <div class="at-campo at-terco">
+        <label class="at-rotulo" for="cad-cp">Código postal</label>
+        <input class="at-entrada" id="cad-cp" name="codigo_postal" required data-at-mascara="codigo-postal" data-at-codigo-postal autocomplete="postal-code" placeholder="0000-000">
+      </div>
+      <div class="at-campo at-dois-tercos">
+        <label class="at-rotulo" for="cad-rua">Rua</label>
+        <input class="at-entrada" id="cad-rua" name="rua" required data-at-cp-preencher="rua" autocomplete="address-line1">
+      </div>
+      <div class="at-campo at-terco">
+        <label class="at-rotulo" for="cad-num">N.º</label>
+        <input class="at-entrada" id="cad-num" name="numero" required data-at-cp-foco>
+      </div>
+      <div class="at-campo at-dois-tercos">
+        <label class="at-rotulo" for="cad-comp">Andar / porta <span class="at-opcional">(opcional)</span></label>
+        <input class="at-entrada" id="cad-comp" name="andar" autocomplete="address-line2">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-localidade">Localidade</label>
+        <input class="at-entrada" id="cad-localidade" name="localidade" required data-at-cp-preencher="localidade" autocomplete="address-level2">
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-distrito">Distrito</label>
+        <input class="at-entrada" id="cad-distrito" name="distrito" required data-at-cp-preencher="distrito" autocomplete="address-level1">
+      </div>
+    </fieldset>
+
+    <fieldset class="at-formulario" style="border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0">
+      <legend class="at-titulo-4">Acesso</legend>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-senha">Palavra-passe</label>
+        <div class="at-senha">
+          <input class="at-entrada" id="cad-senha" name="senha" type="password" required minlength="8" autocomplete="new-password">
+          <button type="button" data-at-ver-senha>Mostrar</button>
+        </div>
+        <div class="at-forca" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <span class="at-forca-texto" aria-live="polite"></span>
+      </div>
+      <div class="at-campo at-meio">
+        <label class="at-rotulo" for="cad-senha2">Confirme a palavra-passe</label>
+        <input class="at-entrada" id="cad-senha2" type="password" required data-at-igual="#cad-senha" data-msg-igual="As palavras-passe não são iguais." autocomplete="new-password">
+      </div>
+      <div class="at-campo">
+        <label class="at-check">
+          <input type="checkbox" name="termos" required data-msg-obrigatorio="Aceite os termos para continuar.">
+          <span>Li e aceito os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a>.</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <button class="at-botao at-primario at-grande at-bloco">Criar a minha conta</button>
+    <p class="at-texto-pequeno at-texto-suave at-texto-centro at-mb-0">Já tem conta? <a href="#">Entrar</a></p>
+  </form>
+</div>
+
+<dialog class="at-modal at-pequeno" id="modal-cadastro">
+  <div class="at-modal-corpo at-texto-centro">
+    <div class="at-titulo-1" aria-hidden="true">🎉</div>
+    <h3 class="at-titulo-4">Conta criada!</h3>
+    <p class="at-texto-suave" id="cadastro-mensagem"></p>
+    <button class="at-botao at-primario at-bloco" commandfor="modal-cadastro" command="close">Começar</button>
+  </div>
+</dialog>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex0-html" id="ex0-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-js" id="ex0-aba-js" tabindex="-1">JavaScript</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-php" id="ex0-aba-php" tabindex="-1">PHP</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGRpdiBjbGFzcz1cImF0LWNhcnRhb1wiIHN0eWxlPVwibWF4LXdpZHRoOiA3NjBweDsgbWFyZ2luLWlubGluZTogYXV0b1wiPlxuICA8ZGl2IGNsYXNzPVwiYXQtY2FydGFvLWNvcnBvXCIgc3R5bGU9XCJib3JkZXItYm90dG9tOiAxcHggc29saWQgdmFyKC0tYXQtYm9yZGEpXCI-XG4gICAgPGgyIGNsYXNzPVwiYXQtdGl0dWxvLTMgYXQtbWItMFwiPkNyaWUgYSBzdWEgY29udGE8L2gyPlxuICAgIDxwIGNsYXNzPVwiYXQtdGV4dG8tc3VhdmUgYXQtbWItMFwiPkxldmEgbWVub3MgZGUgMiBtaW51dG9zOiBhIG1vcmFkYSBwcmVlbmNoZS1zZSBzb3ppbmhhIHBlbG8gY8OzZGlnbyBwb3N0YWwuPC9wPlxuICA8L2Rpdj5cbiAgPGZvcm0gaWQ9XCJmb3JtLWNhZGFzdHJvXCIgZGF0YS1hdC12YWxpZGFyIGNsYXNzPVwiYXQtY2FydGFvLWNvcnBvIGF0LXBpbGhhXCIgc3R5bGU9XCItLWF0LWdhcDogMjhweFwiPlxuICAgIDxmaWVsZHNldCBjbGFzcz1cImF0LWZvcm11bGFyaW9cIiBzdHlsZT1cImJvcmRlcjogMDsgcGFkZGluZzogMDsgbWFyZ2luOiAwXCI-XG4gICAgICA8bGVnZW5kIGNsYXNzPVwiYXQtdGl0dWxvLTRcIj5PcyBzZXVzIGRhZG9zPC9sZWdlbmQ-XG4gICAgICA8ZGl2IGNsYXNzPVwiYXQtY2FtcG9cIj5cbiAgICAgICAgPGxhYmVsIGNsYXNzPVwiYXQtcm90dWxvXCIgZm9yPVwiY2FkLW5vbWVcIj5Ob21lIGNvbXBsZXRvPC9sYWJlbD5cbiAgICAgICAgPGlucHV0IGNsYXNzPVwiYXQtZW50cmFkYVwiIGlkPVwiY2FkLW5vbWVcIiBuYW1lPVwibm9tZVwiIHJlcXVpcmVkIG1pbmxlbmd0aD1cIjVcIiBhdXRvY29tcGxldGU9XCJuYW1lXCI-XG4gICAgICA8L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3M9XCJhdC1jYW1wbyBhdC1tZWlvXCI-XG4gICAgICAgIDxsYWJlbCBjbGFzcz1cImF0LXJvdHVsb1wiIGZvcj1cImNhZC1uaWZcIj5OSUY8L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtbmlmXCIgbmFtZT1cIm5pZlwiIHJlcXVpcmVkIGRhdGEtYXQtbWFzY2FyYT1cIm5pZlwiIGlucHV0bW9kZT1cIm51bWVyaWNcIj5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cImF0LWNhbXBvIGF0LW1laW9cIj5cbiAgICAgICAgPGxhYmVsIGNsYXNzPVwiYXQtcm90dWxvXCIgZm9yPVwiY2FkLW5hc2NcIj5EYXRhIGRlIG5hc2NpbWVudG88L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtbmFzY1wiIG5hbWU9XCJuYXNjaW1lbnRvXCIgdHlwZT1cImRhdGVcIiByZXF1aXJlZCBtYXg9XCIyMDEwLTEyLTMxXCIgYXV0b2NvbXBsZXRlPVwiYmRheVwiPlxuICAgICAgPC9kaXY-XG4gICAgICA8ZGl2IGNsYXNzPVwiYXQtY2FtcG8gYXQtbWVpb1wiPlxuICAgICAgICA8bGFiZWwgY2xhc3M9XCJhdC1yb3R1bG9cIiBmb3I9XCJjYWQtZW1haWxcIj5FLW1haWw8L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtZW1haWxcIiBuYW1lPVwiZW1haWxcIiB0eXBlPVwiZW1haWxcIiByZXF1aXJlZCBhdXRvY29tcGxldGU9XCJlbWFpbFwiPlxuICAgICAgPC9kaXY-XG4gICAgICA8ZGl2IGNsYXNzPVwiYXQtY2FtcG8gYXQtbWVpb1wiPlxuICAgICAgICA8bGFiZWwgY2xhc3M9XCJhdC1yb3R1bG9cIiBmb3I9XCJjYWQtY2VsXCI-VGVsZW3Ds3ZlbDwvbGFiZWw-XG4gICAgICAgIDxpbnB1dCBjbGFzcz1cImF0LWVudHJhZGFcIiBpZD1cImNhZC1jZWxcIiBuYW1lPVwidGVsZW1vdmVsXCIgdHlwZT1cInRlbFwiIHJlcXVpcmVkIGRhdGEtYXQtbWFzY2FyYT1cInRlbGVtb3ZlbFwiIGF1dG9jb21wbGV0ZT1cInRlbC1uYXRpb25hbFwiPlxuICAgICAgPC9kaXY-XG4gICAgPC9maWVsZHNldD5cblxuICAgIDxmaWVsZHNldCBjbGFzcz1cImF0LWZvcm11bGFyaW9cIiBzdHlsZT1cImJvcmRlcjogMDsgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHZhcigtLWF0LWJvcmRhKTsgcGFkZGluZzogNHB4IDAgMDsgbWFyZ2luOiAwXCI-XG4gICAgICA8bGVnZW5kIGNsYXNzPVwiYXQtdGl0dWxvLTRcIj5Nb3JhZGE8L2xlZ2VuZD5cbiAgICAgIDxkaXYgY2xhc3M9XCJhdC1jYW1wbyBhdC10ZXJjb1wiPlxuICAgICAgICA8bGFiZWwgY2xhc3M9XCJhdC1yb3R1bG9cIiBmb3I9XCJjYWQtY3BcIj5Dw7NkaWdvIHBvc3RhbDwvbGFiZWw-XG4gICAgICAgIDxpbnB1dCBjbGFzcz1cImF0LWVudHJhZGFcIiBpZD1cImNhZC1jcFwiIG5hbWU9XCJjb2RpZ29fcG9zdGFsXCIgcmVxdWlyZWQgZGF0YS1hdC1tYXNjYXJhPVwiY29kaWdvLXBvc3RhbFwiIGRhdGEtYXQtY29kaWdvLXBvc3RhbCBhdXRvY29tcGxldGU9XCJwb3N0YWwtY29kZVwiIHBsYWNlaG9sZGVyPVwiMDAwMC0wMDBcIj5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cImF0LWNhbXBvIGF0LWRvaXMtdGVyY29zXCI-XG4gICAgICAgIDxsYWJlbCBjbGFzcz1cImF0LXJvdHVsb1wiIGZvcj1cImNhZC1ydWFcIj5SdWE8L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtcnVhXCIgbmFtZT1cInJ1YVwiIHJlcXVpcmVkIGRhdGEtYXQtY3AtcHJlZW5jaGVyPVwicnVhXCIgYXV0b2NvbXBsZXRlPVwiYWRkcmVzcy1saW5lMVwiPlxuICAgICAgPC9kaXY-XG4gICAgICA8ZGl2IGNsYXNzPVwiYXQtY2FtcG8gYXQtdGVyY29cIj5cbiAgICAgICAgPGxhYmVsIGNsYXNzPVwiYXQtcm90dWxvXCIgZm9yPVwiY2FkLW51bVwiPk4uwro8L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtbnVtXCIgbmFtZT1cIm51bWVyb1wiIHJlcXVpcmVkIGRhdGEtYXQtY3AtZm9jbz5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cImF0LWNhbXBvIGF0LWRvaXMtdGVyY29zXCI-XG4gICAgICAgIDxsYWJlbCBjbGFzcz1cImF0LXJvdHVsb1wiIGZvcj1cImNhZC1jb21wXCI-QW5kYXIgLyBwb3J0YSA8c3BhbiBjbGFzcz1cImF0LW9wY2lvbmFsXCI-KG9wY2lvbmFsKTwvc3Bhbj48L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtY29tcFwiIG5hbWU9XCJhbmRhclwiIGF1dG9jb21wbGV0ZT1cImFkZHJlc3MtbGluZTJcIj5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cImF0LWNhbXBvIGF0LW1laW9cIj5cbiAgICAgICAgPGxhYmVsIGNsYXNzPVwiYXQtcm90dWxvXCIgZm9yPVwiY2FkLWxvY2FsaWRhZGVcIj5Mb2NhbGlkYWRlPC9sYWJlbD5cbiAgICAgICAgPGlucHV0IGNsYXNzPVwiYXQtZW50cmFkYVwiIGlkPVwiY2FkLWxvY2FsaWRhZGVcIiBuYW1lPVwibG9jYWxpZGFkZVwiIHJlcXVpcmVkIGRhdGEtYXQtY3AtcHJlZW5jaGVyPVwibG9jYWxpZGFkZVwiIGF1dG9jb21wbGV0ZT1cImFkZHJlc3MtbGV2ZWwyXCI-XG4gICAgICA8L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3M9XCJhdC1jYW1wbyBhdC1tZWlvXCI-XG4gICAgICAgIDxsYWJlbCBjbGFzcz1cImF0LXJvdHVsb1wiIGZvcj1cImNhZC1kaXN0cml0b1wiPkRpc3RyaXRvPC9sYWJlbD5cbiAgICAgICAgPGlucHV0IGNsYXNzPVwiYXQtZW50cmFkYVwiIGlkPVwiY2FkLWRpc3RyaXRvXCIgbmFtZT1cImRpc3RyaXRvXCIgcmVxdWlyZWQgZGF0YS1hdC1jcC1wcmVlbmNoZXI9XCJkaXN0cml0b1wiIGF1dG9jb21wbGV0ZT1cImFkZHJlc3MtbGV2ZWwxXCI-XG4gICAgICA8L2Rpdj5cbiAgICA8L2ZpZWxkc2V0PlxuXG4gICAgPGZpZWxkc2V0IGNsYXNzPVwiYXQtZm9ybXVsYXJpb1wiIHN0eWxlPVwiYm9yZGVyOiAwOyBib3JkZXItdG9wOiAxcHggc29saWQgdmFyKC0tYXQtYm9yZGEpOyBwYWRkaW5nOiA0cHggMCAwOyBtYXJnaW46IDBcIj5cbiAgICAgIDxsZWdlbmQgY2xhc3M9XCJhdC10aXR1bG8tNFwiPkFjZXNzbzwvbGVnZW5kPlxuICAgICAgPGRpdiBjbGFzcz1cImF0LWNhbXBvIGF0LW1laW9cIj5cbiAgICAgICAgPGxhYmVsIGNsYXNzPVwiYXQtcm90dWxvXCIgZm9yPVwiY2FkLXNlbmhhXCI-UGFsYXZyYS1wYXNzZTwvbGFiZWw-XG4gICAgICAgIDxkaXYgY2xhc3M9XCJhdC1zZW5oYVwiPlxuICAgICAgICAgIDxpbnB1dCBjbGFzcz1cImF0LWVudHJhZGFcIiBpZD1cImNhZC1zZW5oYVwiIG5hbWU9XCJzZW5oYVwiIHR5cGU9XCJwYXNzd29yZFwiIHJlcXVpcmVkIG1pbmxlbmd0aD1cIjhcIiBhdXRvY29tcGxldGU9XCJuZXctcGFzc3dvcmRcIj5cbiAgICAgICAgICA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBkYXRhLWF0LXZlci1zZW5oYT5Nb3N0cmFyPC9idXR0b24-XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzPVwiYXQtZm9yY2FcIiBhcmlhLWhpZGRlbj1cInRydWVcIj48c3Bhbj48L3NwYW4-PHNwYW4-PC9zcGFuPjxzcGFuPjwvc3Bhbj48c3Bhbj48L3NwYW4-PC9kaXY-XG4gICAgICAgIDxzcGFuIGNsYXNzPVwiYXQtZm9yY2EtdGV4dG9cIiBhcmlhLWxpdmU9XCJwb2xpdGVcIj48L3NwYW4-XG4gICAgICA8L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3M9XCJhdC1jYW1wbyBhdC1tZWlvXCI-XG4gICAgICAgIDxsYWJlbCBjbGFzcz1cImF0LXJvdHVsb1wiIGZvcj1cImNhZC1zZW5oYTJcIj5Db25maXJtZSBhIHBhbGF2cmEtcGFzc2U8L2xhYmVsPlxuICAgICAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgaWQ9XCJjYWQtc2VuaGEyXCIgdHlwZT1cInBhc3N3b3JkXCIgcmVxdWlyZWQgZGF0YS1hdC1pZ3VhbD1cIiNjYWQtc2VuaGFcIiBkYXRhLW1zZy1pZ3VhbD1cIkFzIHBhbGF2cmFzLXBhc3NlIG7Do28gc8OjbyBpZ3VhaXMuXCIgYXV0b2NvbXBsZXRlPVwibmV3LXBhc3N3b3JkXCI-XG4gICAgICA8L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3M9XCJhdC1jYW1wb1wiPlxuICAgICAgICA8bGFiZWwgY2xhc3M9XCJhdC1jaGVja1wiPlxuICAgICAgICAgIDxpbnB1dCB0eXBlPVwiY2hlY2tib3hcIiBuYW1lPVwidGVybW9zXCIgcmVxdWlyZWQgZGF0YS1tc2ctb2JyaWdhdG9yaW89XCJBY2VpdGUgb3MgdGVybW9zIHBhcmEgY29udGludWFyLlwiPlxuICAgICAgICAgIDxzcGFuPkxpIGUgYWNlaXRvIG9zIDxhIGhyZWY9XCIjXCI-dGVybW9zIGRlIHVzbzwvYT4gZSBhIDxhIGhyZWY9XCIjXCI-cG9sw610aWNhIGRlIHByaXZhY2lkYWRlPC9hPi48L3NwYW4-XG4gICAgICAgIDwvbGFiZWw-XG4gICAgICA8L2Rpdj5cbiAgICA8L2ZpZWxkc2V0PlxuXG4gICAgPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LXByaW1hcmlvIGF0LWdyYW5kZSBhdC1ibG9jb1wiPkNyaWFyIGEgbWluaGEgY29udGE8L2J1dHRvbj5cbiAgICA8cCBjbGFzcz1cImF0LXRleHRvLXBlcXVlbm8gYXQtdGV4dG8tc3VhdmUgYXQtdGV4dG8tY2VudHJvIGF0LW1iLTBcIj5Kw6EgdGVtIGNvbnRhPyA8YSBocmVmPVwiI1wiPkVudHJhcjwvYT48L3A-XG4gIDwvZm9ybT5cbjwvZGl2PlxuXG48ZGlhbG9nIGNsYXNzPVwiYXQtbW9kYWwgYXQtcGVxdWVub1wiIGlkPVwibW9kYWwtY2FkYXN0cm9cIj5cbiAgPGRpdiBjbGFzcz1cImF0LW1vZGFsLWNvcnBvIGF0LXRleHRvLWNlbnRyb1wiPlxuICAgIDxkaXYgY2xhc3M9XCJhdC10aXR1bG8tMVwiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiPvCfjok8L2Rpdj5cbiAgICA8aDMgY2xhc3M9XCJhdC10aXR1bG8tNFwiPkNvbnRhIGNyaWFkYSE8L2gzPlxuICAgIDxwIGNsYXNzPVwiYXQtdGV4dG8tc3VhdmVcIiBpZD1cImNhZGFzdHJvLW1lbnNhZ2VtXCI-PC9wPlxuICAgIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1wcmltYXJpbyBhdC1ibG9jb1wiIGNvbW1hbmRmb3I9XCJtb2RhbC1jYWRhc3Ryb1wiIGNvbW1hbmQ9XCJjbG9zZVwiPkNvbWXDp2FyPC9idXR0b24-XG4gIDwvZGl2PlxuPC9kaWFsb2c-IiwiY3NzIjoiIiwianMiOiJkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2Zvcm0tY2FkYXN0cm9cIikuYWRkRXZlbnRMaXN0ZW5lcihcImF0OmVudmlhclwiLCAoZXZlbnRvKSA9PiB7XG4gIGNvbnN0IHsgZGFkb3MsIGJvdGFvLCBmb3JtdWxhcmlvIH0gPSBldmVudG8uZGV0YWlsO1xuICBib3Rhby5zZXRBdHRyaWJ1dGUoXCJhcmlhLWJ1c3lcIiwgXCJ0cnVlXCIpO1xuXG4gIC8vIFRyb3F1ZSBvIHNldFRpbWVvdXQgcGVsYSBzdWEgQVBJOlxuICAvLyBhd2FpdCBBdGFsaG8ucmVxdWlzaXRhcihcIi9hcGkvY2xpZW50ZXNcIiwgeyBtZXRvZG86IFwiUE9TVFwiLCBjb3JwbzogZGFkb3MgfSk7XG4gIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgIGJvdGFvLnJlbW92ZUF0dHJpYnV0ZShcImFyaWEtYnVzeVwiKTtcbiAgICBjb25zdCBwcmltZWlyb05vbWUgPSBkYWRvcy5ub21lLnNwbGl0KFwiIFwiKVswXTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2NhZGFzdHJvLW1lbnNhZ2VtXCIpLnRleHRDb250ZW50ID1cbiAgICAgIFwiQmVtLXZpbmRvKGEpLCBcIiArIHByaW1laXJvTm9tZSArIFwiLiBFbnZpw6Ftb3MgYSBjb25maXJtYcOnw6NvIHBhcmEgXCIgKyBkYWRvcy5lbWFpbCArIFwiLlwiO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIjbW9kYWwtY2FkYXN0cm9cIikuc2hvd01vZGFsKCk7XG4gICAgZm9ybXVsYXJpby5yZXNldCgpO1xuICB9LCAxMjAwKTtcbn0pOyJ9">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex0-html" role="tabpanel" aria-labelledby="ex0-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cartao&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;max-width: 760px; margin-inline: auto&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cartao-corpo&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;border-bottom: 1px solid var(--at-borda)&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">h2</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-3 at-mb-0&quot;</span><span class="tk-pon">&gt;</span>Crie a sua conta<span class="tk-pon">&lt;/</span><span class="tk-tag">h2</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">p</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-texto-suave at-mb-0&quot;</span><span class="tk-pon">&gt;</span>Leva menos de 2 minutos: a morada preenche-se sozinha pelo código postal.<span class="tk-pon">&lt;/</span><span class="tk-tag">p</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">form</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;form-cadastro&quot;</span> data-at-validar <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cartao-corpo at-pilha&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;--at-gap: 28px&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">fieldset</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-formulario&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;border: 0; padding: 0; margin: 0&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">legend</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-4&quot;</span><span class="tk-pon">&gt;</span>Os seus dados<span class="tk-pon">&lt;/</span><span class="tk-tag">legend</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-nome&quot;</span><span class="tk-pon">&gt;</span>Nome completo<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-nome&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;nome&quot;</span> required <span class="tk-atr">minlength</span><span class="tk-pon">=</span><span class="tk-str">&quot;5&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;name&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-nif&quot;</span><span class="tk-pon">&gt;</span>NIF<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-nif&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;nif&quot;</span> required <span class="tk-atr">data-at-mascara</span><span class="tk-pon">=</span><span class="tk-str">&quot;nif&quot;</span> <span class="tk-atr">inputmode</span><span class="tk-pon">=</span><span class="tk-str">&quot;numeric&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-nasc&quot;</span><span class="tk-pon">&gt;</span>Data de nascimento<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-nasc&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;nascimento&quot;</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;date&quot;</span> required <span class="tk-atr">max</span><span class="tk-pon">=</span><span class="tk-str">&quot;2010-12-31&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;bday&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-email&quot;</span><span class="tk-pon">&gt;</span>E-mail<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-email&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;email&quot;</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;email&quot;</span> required <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;email&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-cel&quot;</span><span class="tk-pon">&gt;</span>Telemóvel<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-cel&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;telemovel&quot;</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;tel&quot;</span> required <span class="tk-atr">data-at-mascara</span><span class="tk-pon">=</span><span class="tk-str">&quot;telemovel&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;tel-national&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">fieldset</span><span class="tk-pon">&gt;</span>
+
+    <span class="tk-pon">&lt;</span><span class="tk-tag">fieldset</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-formulario&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">legend</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-4&quot;</span><span class="tk-pon">&gt;</span>Morada<span class="tk-pon">&lt;/</span><span class="tk-tag">legend</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-terco&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-cp&quot;</span><span class="tk-pon">&gt;</span>Código postal<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-cp&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;codigo_postal&quot;</span> required <span class="tk-atr">data-at-mascara</span><span class="tk-pon">=</span><span class="tk-str">&quot;codigo-postal&quot;</span> data-at-codigo-postal <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;postal-code&quot;</span> <span class="tk-atr">placeholder</span><span class="tk-pon">=</span><span class="tk-str">&quot;0000-000&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-dois-tercos&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-rua&quot;</span><span class="tk-pon">&gt;</span>Rua<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-rua&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;rua&quot;</span> required <span class="tk-atr">data-at-cp-preencher</span><span class="tk-pon">=</span><span class="tk-str">&quot;rua&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;address-line1&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-terco&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-num&quot;</span><span class="tk-pon">&gt;</span>N.º<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-num&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;numero&quot;</span> required data-at-cp-foco<span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-dois-tercos&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-comp&quot;</span><span class="tk-pon">&gt;</span>Andar / porta <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-opcional&quot;</span><span class="tk-pon">&gt;</span>(opcional)<span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-comp&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;andar&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;address-line2&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-localidade&quot;</span><span class="tk-pon">&gt;</span>Localidade<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-localidade&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;localidade&quot;</span> required <span class="tk-atr">data-at-cp-preencher</span><span class="tk-pon">=</span><span class="tk-str">&quot;localidade&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;address-level2&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-distrito&quot;</span><span class="tk-pon">&gt;</span>Distrito<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-distrito&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;distrito&quot;</span> required <span class="tk-atr">data-at-cp-preencher</span><span class="tk-pon">=</span><span class="tk-str">&quot;distrito&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;address-level1&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">fieldset</span><span class="tk-pon">&gt;</span>
+
+    <span class="tk-pon">&lt;</span><span class="tk-tag">fieldset</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-formulario&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;border: 0; border-top: 1px solid var(--at-borda); padding: 4px 0 0; margin: 0&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">legend</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-4&quot;</span><span class="tk-pon">&gt;</span>Acesso<span class="tk-pon">&lt;/</span><span class="tk-tag">legend</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-senha&quot;</span><span class="tk-pon">&gt;</span>Palavra-passe<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-senha&quot;</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-senha&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;senha&quot;</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;password&quot;</span> required <span class="tk-atr">minlength</span><span class="tk-pon">=</span><span class="tk-str">&quot;8&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;new-password&quot;</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;button&quot;</span> data-at-ver-senha<span class="tk-pon">&gt;</span>Mostrar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-forca&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-forca-texto&quot;</span> <span class="tk-atr">aria-live</span><span class="tk-pon">=</span><span class="tk-str">&quot;polite&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo at-meio&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-rotulo&quot;</span> <span class="tk-atr">for</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-senha2&quot;</span><span class="tk-pon">&gt;</span>Confirme a palavra-passe<span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cad-senha2&quot;</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;password&quot;</span> required <span class="tk-atr">data-at-igual</span><span class="tk-pon">=</span><span class="tk-str">&quot;#cad-senha&quot;</span> <span class="tk-atr">data-msg-igual</span><span class="tk-pon">=</span><span class="tk-str">&quot;As palavras-passe não são iguais.&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;new-password&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-campo&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-check&quot;</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;checkbox&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;termos&quot;</span> required <span class="tk-atr">data-msg-obrigatorio</span><span class="tk-pon">=</span><span class="tk-str">&quot;Aceite os termos para continuar.&quot;</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>Li e aceito os <span class="tk-pon">&lt;</span><span class="tk-tag">a</span> <span class="tk-atr">href</span><span class="tk-pon">=</span><span class="tk-str">&quot;#&quot;</span><span class="tk-pon">&gt;</span>termos de uso<span class="tk-pon">&lt;/</span><span class="tk-tag">a</span><span class="tk-pon">&gt;</span> e a <span class="tk-pon">&lt;</span><span class="tk-tag">a</span> <span class="tk-atr">href</span><span class="tk-pon">=</span><span class="tk-str">&quot;#&quot;</span><span class="tk-pon">&gt;</span>política de privacidade<span class="tk-pon">&lt;/</span><span class="tk-tag">a</span><span class="tk-pon">&gt;</span>.<span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">fieldset</span><span class="tk-pon">&gt;</span>
+
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario at-grande at-bloco&quot;</span><span class="tk-pon">&gt;</span>Criar a minha conta<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">p</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-texto-pequeno at-texto-suave at-texto-centro at-mb-0&quot;</span><span class="tk-pon">&gt;</span>Já tem conta? <span class="tk-pon">&lt;</span><span class="tk-tag">a</span> <span class="tk-atr">href</span><span class="tk-pon">=</span><span class="tk-str">&quot;#&quot;</span><span class="tk-pon">&gt;</span>Entrar<span class="tk-pon">&lt;/</span><span class="tk-tag">a</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">p</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">form</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+
+<span class="tk-pon">&lt;</span><span class="tk-tag">dialog</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-modal at-pequeno&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;modal-cadastro&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-modal-corpo at-texto-centro&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-1&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span>🎉<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">h3</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-4&quot;</span><span class="tk-pon">&gt;</span>Conta criada!<span class="tk-pon">&lt;/</span><span class="tk-tag">h3</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">p</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-texto-suave&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cadastro-mensagem&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">p</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario at-bloco&quot;</span> <span class="tk-atr">commandfor</span><span class="tk-pon">=</span><span class="tk-str">&quot;modal-cadastro&quot;</span> <span class="tk-atr">command</span><span class="tk-pon">=</span><span class="tk-str">&quot;close&quot;</span><span class="tk-pon">&gt;</span>Começar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">dialog</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex0-js" role="tabpanel" aria-labelledby="ex0-aba-js" tabindex="0" hidden><code>document.querySelector(<span class="tk-str">&quot;#form-cadastro&quot;</span>).addEventListener(<span class="tk-str">&quot;at:enviar&quot;</span>, (evento) =&gt; {
+  <span class="tk-pal">const</span> { dados, botao, formulario } = evento.detail;
+  botao.setAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>, <span class="tk-str">&quot;true&quot;</span>);
+
+  <span class="tk-com">// Troque o setTimeout pela sua API:</span>
+  <span class="tk-com">// await Atalho.requisitar(&quot;/api/clientes&quot;, { metodo: &quot;POST&quot;, corpo: dados });</span>
+  setTimeout(() =&gt; {
+    botao.removeAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>);
+    <span class="tk-pal">const</span> primeiroNome = dados.nome.split(<span class="tk-str">&quot; &quot;</span>)[<span class="tk-num">0</span>];
+    document.querySelector(<span class="tk-str">&quot;#cadastro-mensagem&quot;</span>).textContent =
+      <span class="tk-str">&quot;Bem-vindo(a), &quot;</span> + primeiroNome + <span class="tk-str">&quot;. Enviámos a confirmação para &quot;</span> + dados.email + <span class="tk-str">&quot;.&quot;</span>;
+    document.querySelector(<span class="tk-str">&quot;#modal-cadastro&quot;</span>).showModal();
+    formulario.reset();
+  }, <span class="tk-num">1200</span>);
+});</code></pre>
+        <pre class="site-codigo" id="ex0-php" role="tabpanel" aria-labelledby="ex0-aba-php" tabindex="0" hidden><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/clientes.php — recebe a ficha de registo completa</span>
+require __DIR__ . <span class="tk-str">&#39;/atalho.php&#39;</span>;
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, lerJson, validar, responderErro, responderJson, somenteDigitos};
+
+exigirMetodo(<span class="tk-str">&#39;POST&#39;</span>);
+<span class="tk-var">$dados</span> = lerJson();
+<span class="tk-var">$erros</span> = validar(<span class="tk-var">$dados</span>, [
+    <span class="tk-str">&#39;nome&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;min:5&#39;</span>],
+    <span class="tk-str">&#39;cpf&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;cpf&#39;</span>],
+    <span class="tk-str">&#39;email&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;email&#39;</span>],
+    <span class="tk-str">&#39;celular&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;telefone&#39;</span>],
+    <span class="tk-str">&#39;cep&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;cep&#39;</span>],
+    <span class="tk-str">&#39;numero&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>],
+    <span class="tk-str">&#39;senha&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;min:8&#39;</span>],
+    <span class="tk-str">&#39;termos&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>],
+]);
+<span class="tk-pal">if</span> (<span class="tk-var">$erros</span>) {
+    responderErro(<span class="tk-str">&#39;Verifique os dados do formulário.&#39;</span>, <span class="tk-num">422</span>, <span class="tk-var">$erros</span>);
+}
+
+<span class="tk-var">$cliente</span> = [
+    <span class="tk-str">&#39;cpf&#39;</span> =&gt; somenteDigitos(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;cpf&#39;</span>]),
+    <span class="tk-str">&#39;senha_hash&#39;</span> =&gt; password_hash(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;senha&#39;</span>], PASSWORD_DEFAULT),
+    <span class="tk-str">&#39;aceitou_termos_em&#39;</span> =&gt; date(<span class="tk-str">&#39;c&#39;</span>), <span class="tk-com">// guarde a prova do aceite</span>
+];
+responderJson([<span class="tk-str">&#39;ok&#39;</span> =&gt; <span class="tk-pal">true</span>], <span class="tk-num">201</span>);</code></pre>
+        </div>
+      </div>
+</section>
+
+<section aria-labelledby="acessibilidade"><h2 class="site-secao-titulo" id="acessibilidade"><a href="#acessibilidade">Acessibilidade</a></h2>
+<ul class="site-lista "><li>Os grupos de campos usam &lt;fieldset&gt; e &lt;legend&gt; para o leitor de ecrã anunciar a secção.</li></ul>
+</section>
+
+<section aria-labelledby="combina-com"><h2 class="site-secao-titulo" id="combina-com"><a href="#combina-com">Combina com</a></h2>
+<div class="site-relacionados"><a href="/componentes/campo/"><strong>Campos de formulário</strong><span>Texto, seleção, área de texto, caixas de marcação, opções e chave liga/desliga com rótulo, ajuda e erro.</span></a><a href="/componentes/mascaras/"><strong>Máscaras (NIF, IBAN, telemóvel...)</strong><span>Formata enquanto a pessoa escreve: NIF, IBAN, código postal, telemóvel, telefone internacional, moeda, cartão, validade, data e matrícula. Também CPF, CNPJ e CEP para clientes do Brasil.</span></a><a href="/componentes/cep/"><strong>Morada pelo código postal</strong><span>A pessoa escreve o código postal e a rua, a localidade, o concelho e o distrito preenchem-se sozinhos. Usa a GEO API PT, gratuita e sem registo. Também funciona com o CEP do Brasil.</span></a><a href="/componentes/senha/"><strong>Palavra-passe (mostrar e força)</strong><span>Campo de palavra-passe com botão Mostrar/Ocultar e medidor de força que avisa enquanto a pessoa escreve.</span></a><a href="/componentes/validacao/"><strong>Validação de formulário</strong><span>Mensagens de erro claras, em português, no lugar certo e na hora certa. Sem biblioteca extra, com a validação nativa do navegador.</span></a><a href="/componentes/modal/"><strong>Modal (janela de diálogo)</strong><span>Janela por cima da página para confirmar algo importante ou preencher um formulário rápido. Abre sem escrever JavaScript.</span></a></div>
+</section>
+
+      <nav class="site-navegacao-docs" aria-label="Anterior e próximo">
+        <a href="/componentes/receita-loja/" rel="prev"><small>← Anterior</small><strong>Loja com carrinho</strong></a>
+        <a href="/componentes/receita-painel/" rel="next"><small>Próximo →</small><strong>Painel administrativo</strong></a>
+      </nav>
+      <p class="at-texto-suave at-texto-pequeno at-mt-6">Encontrou um erro? <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=%5BRegisto%20com%20morada%20autom%C3%A1tica%5D%20" target="_blank" rel="noopener">Abra uma issue</a> ou <a href="https://github.com/marcos-zorzetto/atalho/tree/main/site/dados" target="_blank" rel="noopener">edite no GitHub</a>.</p>
+    </article>
+    <aside class="site-indice" aria-label="Nesta página">
+      <div class="site-indice-fixo">
+        <h2>Nesta página</h2>
+        <ul><li><a href="#quando-usar">Quando usar</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#exemplos">Exemplo</a></li><li><a href="#acessibilidade">Acessibilidade</a></li><li><a href="#combina-com">Combina com</a></li></ul>
+        <aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
+    <a href="/patrocinar/" class="site-patrocinio-link">
+      <span class="site-patrocinio-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
+    </a>
+    <small>Espaço publicitário</small>
+  </aside>
+      </div>
+    </aside>
+  </div>
+  <script type="application/json" id="exemplos-js">["document.querySelector(\"#form-cadastro\").addEventListener(\"at:enviar\", (evento) => {\n  const { dados, botao, formulario } = evento.detail;\n  botao.setAttribute(\"aria-busy\", \"true\");\n\n  // Troque o setTimeout pela sua API:\n  // await Atalho.requisitar(\"/api/clientes\", { metodo: \"POST\", corpo: dados });\n  setTimeout(() => {\n    botao.removeAttribute(\"aria-busy\");\n    const primeiroNome = dados.nome.split(\" \")[0];\n    document.querySelector(\"#cadastro-mensagem\").textContent =\n      \"Bem-vindo(a), \" + primeiroNome + \". Enviámos a confirmação para \" + dados.email + \".\";\n    document.querySelector(\"#modal-cadastro\").showModal();\n    formulario.reset();\n  }, 1200);\n});"]</script>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

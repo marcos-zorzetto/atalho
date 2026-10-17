@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atalho · Componentes HTML, CSS e JavaScript em português</title>
+  <meta name="description" content="77 componentes de interface em português, prontos a copiar: NIF, código postal, carrinho, tabelas, modais e mais. Com TypeScript e PHP. Grátis.">
+  <link rel="canonical" href="https://atalho.com.pt/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Atalho · Componentes HTML, CSS e JavaScript em português">
+  <meta property="og:description" content="77 componentes de interface em português, prontos a copiar: NIF, código postal, carrinho, tabelas, modais e mais. Com TypeScript e PHP. Grátis.">
+  <meta property="og:url" content="https://atalho.com.pt/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/inicio.js?v=c2c03c112e" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Atalho","url":"https://atalho.com.pt/","inLanguage":"pt-PT","description":"Biblioteca de componentes HTML, CSS e JavaScript em português, nos padrões das grandes empresas, com exemplos em TypeScript e PHP. Grátis e de código aberto.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://atalho.com.pt/componentes/?busca={termo}"},"query-input":"required name=termo"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"Atalho","description":"Biblioteca de componentes HTML, CSS e JavaScript em português, nos padrões das grandes empresas, com exemplos em TypeScript e PHP. Grátis e de código aberto.","codeRepository":"https://github.com/marcos-zorzetto/atalho","programmingLanguage":["HTML","CSS","JavaScript","TypeScript","PHP"],"license":"https://opensource.org/licenses/MIT","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"version":"1.3.0"}</script>
+  <link rel="stylesheet" href="/site/inicio.css?v=19114076be">
+</head>
+<body data-pagina="inicio" data-base="/" class="site-cinema">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+
+    <section class="cine-hero" aria-labelledby="cine-titulo">
+      <canvas class="cine-hero-3d" aria-hidden="true" data-cena-3d></canvas>
+      <div class="cine-hero-luz" aria-hidden="true"></div>
+      <div class="site-container cine-hero-texto">
+        <button type="button" class="site-novidade cine-entrar" data-abrir-assistente>
+          <span class="at-selo at-destaque">Novo</span> Descreva o que precisa e o assistente monta <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <h1 id="cine-titulo" class="cine-titulo"><span class="cine-entrar">O atalho para sites</span> <span class="cine-entrar cine-ouro">que vendem.</span></h1>
+        <p class="cine-sub cine-entrar">77 componentes grátis, animações de cinema em 3D e sistemas completos prontos a instalar no seu alojamento. Em português, para Portugal e para a Europa.</p>
+        <div class="cine-acoes cine-entrar">
+          <a class="cine-botao cine-botao-primario" href="/componentes/instalacao/">Começar grátis</a>
+          <a class="cine-botao cine-botao-vidro" href="/animacoes/">Ver as animações <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="site-busca cine-busca cine-entrar" role="search">
+          <label class="site-busca-campo">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span class="at-sr">O que quer construir?</span>
+            <input id="busca-inicio" type="search" placeholder="O que quer construir?" autocomplete="off"
+                   role="combobox" aria-expanded="false" aria-controls="busca-inicio-resultados" aria-autocomplete="list">
+            <kbd class="at-tecla at-so-desktop">Ctrl K</kbd>
+          </label>
+          <ul class="site-busca-resultados" id="busca-inicio-resultados" role="listbox" aria-label="Componentes encontrados" hidden></ul>
+        </div>
+        <div class="site-sugestoes cine-entrar">
+          Experimente:
+          <button type="button" class="site-sugestao" data-sugestao="máscara de NIF">máscara de NIF</button><button type="button" class="site-sugestao" data-sugestao="carrinho de compras">carrinho de compras</button><button type="button" class="site-sugestao" data-sugestao="janela de confirmação">janela de confirmação</button><button type="button" class="site-sugestao" data-sugestao="tabela com filtro">tabela com filtro</button><button type="button" class="site-sugestao" data-sugestao="login com código">login com código</button>
+        </div>
+      </div>
+      <a class="cine-rolar" href="#manifesto" aria-label="Continuar a ler"><span></span></a>
+    </section>
+
+    <section class="cine-manifesto" id="manifesto" aria-label="O que é o Atalho">
+      <p class="site-container cine-manifesto-texto" data-palavras>Componentes prontos a copiar. Animações com qualidade de cinema. Sistemas inteiros prontos a instalar no seu alojamento. Tudo explicado em português, sem rodeios, para quem quer vender mais e programar menos.</p>
+    </section>
+
+    <section class="cine-numeros" aria-label="O Atalho em números">
+      <div class="site-container cine-numeros-grade">
+        <div data-revelar><strong data-contar="77">77</strong><span>componentes e receitas grátis</span></div>
+        <div data-revelar><strong data-contar="119">119</strong><span>componentes avançados</span></div>
+        <div data-revelar><strong data-contar="48">48</strong><span>animações editáveis</span></div>
+        <div data-revelar><strong>0</strong><span>dependências para instalar</span></div>
+      </div>
+    </section>
+
+    <section class="cine-secao" aria-labelledby="bento-titulo">
+      <div class="site-container">
+        <p class="cine-sobretitulo" data-revelar>Feito para vender</p>
+        <h2 class="cine-h2" id="bento-titulo" data-revelar>Tudo o que o Bootstrap tem.<br><span class="cine-suave">E o que faltava a quem vende em português.</span></h2>
+        <div class="cine-bento">
+          <article class="cine-bloco cine-bloco-largo cine-bloco-loja" data-revelar aria-label="Demonstração ao vivo">
+            <div class="cine-bloco-texto">
+              <span class="site-etiqueta-viva">AO VIVO</span>
+              <h3>Uma loja que já funciona.</h3>
+              <p>Carrinho, contador e notificação ligados pelo estado do Atalho. Sem framework, sem build.</p>
+            </div>
+            <article class="at-cartao cine-produto">
+              <div class="at-cartao-cabecalho">
+                <h4 class="at-texto-pequeno">Loja exemplo</h4>
+                <button class="at-botao at-icone at-contador-selo at-pequeno" aria-label="Carrinho">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6"/></svg>
+                  <span data-contador data-at-texto="vitrineInicio.quantidade" data-at-mostrar="vitrineInicio.quantidade"></span>
+                </button>
+              </div>
+              <div class="at-cartao-corpo at-linha at-topo" style="--at-gap: 16px">
+                <img src="https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" alt="Ténis cano alto vermelho e preto" width="104" height="104" style="background:#fff;border-radius:14px;object-fit:contain">
+                <div class="at-cresce at-pilha" style="--at-gap: 2px">
+                  <span class="at-texto-pequeno">Ténis cano alto vermelho e preto</span>
+                  <span class="at-preco-antigo">799,90 €</span>
+                  <div><span class="at-preco">599,90 €</span><span class="at-preco-desconto">25% OFF</span></div>
+                  <span class="at-parcelas">ou 3x 199,97 € sem juros</span>
+                  <button class="at-botao at-primario at-pequeno at-mt-2" data-at-acao="vitrineInicio.adicionar">Comprar</button>
+                </div>
+              </div>
+            </article>
+          </article>
+
+          <article class="cine-bloco" data-revelar>
+            <h3>NIF, IBAN e código postal.</h3>
+            <p>Validados enquanto se escreve. A morada preenche-se sozinha.</p>
+            <form class="at-formulario cine-form" data-at-validar id="form-inicio">
+              <div class="at-campo at-meio">
+                <label class="at-rotulo" for="inicio-cpf">NIF</label>
+                <input class="at-entrada" id="inicio-cpf" name="nif" required data-at-mascara="nif" placeholder="123 456 789">
+              </div>
+              <div class="at-campo at-meio">
+                <label class="at-rotulo" for="inicio-cep">Código postal</label>
+                <input class="at-entrada" id="inicio-cep" name="codigo_postal" required data-at-mascara="codigo-postal" data-at-codigo-postal placeholder="1250-096">
+              </div>
+              <div class="at-campo">
+                <label class="at-rotulo" for="inicio-rua">Morada</label>
+                <input class="at-entrada" id="inicio-rua" name="rua" required data-at-cp-preencher="rua" placeholder="Preenche-se sozinha pelo código postal">
+              </div>
+              <button class="at-botao at-bloco">Validar</button>
+            </form>
+          </article>
+
+          <article class="cine-bloco cine-bloco-escuro cine-bloco-mbway" data-revelar>
+            <div class="cine-telemovel" aria-hidden="true">
+              <div class="cine-telemovel-ecra">
+                <span class="cine-telemovel-app">MB WAY</span>
+                <strong>189,90 €</strong>
+                <span>Loja Exemplo, Lda.</span>
+                <span class="cine-telemovel-ok">Confirmar</span>
+              </div>
+            </div>
+            <h3>Pagamentos que os portugueses usam.</h3>
+            <p>MB WAY, referência Multibanco, cartão e 3x sem juros nos exemplos. Euro em todo o lado.</p>
+          </article>
+
+          <article class="cine-bloco" data-revelar>
+            <span class="cine-bloco-icone"><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M104,40a24,24,0,1,1,24,24A24,24,0,0,1,104,40ZM212,80H44c-12.87,0-16.71,17.5-5,22.9L96,128,73.13,214.93a12,12,0,0,0,21.75,10.14L128,168l33.12,57.07a12,12,0,0,0,21.75-10.14L160,128l57-25.1C228.69,97.5,224.85,80,212,80Z" opacity="0.2"/><path d="M160,40a32,32,0,1,0-32,32A32,32,0,0,0,160,40ZM128,56a16,16,0,1,1,16-16A16,16,0,0,1,128,56ZM231.5,87.71A19.62,19.62,0,0,0,212,72H44a20,20,0,0,0-8.38,38.16l.13.06,50.75,22.35-21,79.72A20,20,0,0,0,102,228.82l26-44.88,26,44.88a20,20,0,0,0,36.4-16.53l-21-79.72,50.75-22.35.13-.06A19.63,19.63,0,0,0,231.5,87.71Zm-17.8,7.9-56.93,25.07a8,8,0,0,0-4.51,9.36L175.13,217a7,7,0,0,0,.49,1.35,4,4,0,1,1-7.25,3.38c-.11-.22-.22-.43-.34-.63L134.92,164a8,8,0,0,0-13.84,0L88,221.06c-.12.2-.23.41-.34.63a4,4,0,1,1-7.25-3.38,7,7,0,0,0,.49-1.35L103.74,130a8,8,0,0,0-4.51-9.36L42.3,95.61A4,4,0,0,1,44,88H212a4,4,0,0,1,1.73,7.61Z"/></svg></span>
+            <h3>Acessível de verdade.</h3>
+            <p>Teclado, leitores de ecrã e ARIA corretos em cada componente. Testado em cinco tamanhos de ecrã a cada mudança.</p>
+          </article>
+
+          <article class="cine-bloco" data-revelar>
+            <span class="cine-bloco-icone"><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M96,240l16-80L48,136,160,16,144,96l64,24Z" opacity="0.2"/><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"/></svg></span>
+            <h3>Estado reativo, sem React.</h3>
+            <p>Muda o dado e o ecrã acompanha. Atributos em português, direto no HTML.</p>
+          </article>
+
+          <article class="cine-bloco cine-bloco-largo cine-bloco-ouro" data-revelar>
+            <div>
+              <span class="cine-bloco-icone"><svg width="34" height="34" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,56H56A24,24,0,0,0,32,80V192a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V80A24,24,0,0,0,200,56ZM164,184H92a20,20,0,0,1,0-40h72a20,20,0,0,1,0,40Z" opacity="0.2"/><path d="M200,48H136V16a8,8,0,0,0-16,0V48H56A32,32,0,0,0,24,80V192a32,32,0,0,0,32,32H200a32,32,0,0,0,32-32V80A32,32,0,0,0,200,48Zm16,144a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V80A16,16,0,0,1,56,64H200a16,16,0,0,1,16,16ZM72,108a12,12,0,1,1,12,12A12,12,0,0,1,72,108Zm88,0a12,12,0,1,1,12,12A12,12,0,0,1,160,108Zm4,28H92a28,28,0,0,0,0,56h72a28,28,0,0,0,0-56Zm-24,16v24H116V152ZM80,164a12,12,0,0,1,12-12h8v24H92A12,12,0,0,1,80,164Zm84,12h-8V152h8a12,12,0,0,1,0,24Z"/></svg></span>
+              <h3>Sempre atualizado, sozinho.</h3>
+              <p>Toda a semana um robô confere os dados oficiais dos navegadores e os links do MDN, e propõe as atualizações. Dados atuais: web-features 3.40.1, de 8 de outubro de 2026.</p>
+            </div>
+            <div class="cine-robo-numeros">
+              <div><strong>45</strong><span>recursos monitorizados</span></div>
+              <div><strong>35</strong><span>já em todos os navegadores</span></div>
+              <div><strong>58/97</strong><span>links do MDN em português</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cine-pro" aria-labelledby="pro-titulo">
+      <canvas class="cine-aurora" data-aurora aria-hidden="true"></canvas>
+      <div class="site-container cine-pro-conteudo">
+        <p class="cine-sobretitulo cine-sobretitulo-ouro" data-revelar>Atalho Pro</p>
+        <h2 class="cine-h2" id="pro-titulo" data-revelar>Animações de cinema.<br><span class="cine-ouro">No seu site, em minutos.</span></h2>
+        <p class="cine-sub" data-revelar>Produtos em 3D que giram com o scroll, vidro líquido, partículas que desenham o seu logótipo, auroras de luz como esta. O nível das páginas da Apple e da Samsung, para copiar, colar e mudar as cores.</p>
+        <ul class="cine-pro-lista" data-revelar>
+          <li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.16a8,8,0,0,1-4.16-7V80.2a8,8,0,0,1,.7-3.27Z" opacity="0.2"/><path d="M223.68,66.15,135.68,18h0a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32h0l80.34,44L128,120,47.66,76ZM40,90l80,43.78v85.79L40,175.82Zm96,129.57V133.82L216,90v85.78Z"/></svg><span>Produto 3D que gira com o scroll</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,144a80,80,0,0,1-160,0c0-72,80-128,80-128S208,72,208,144Z" opacity="0.2"/><path d="M174,47.75a254.19,254.19,0,0,0-41.45-38.3,8,8,0,0,0-9.18,0A254.19,254.19,0,0,0,82,47.75C54.51,79.32,40,112.6,40,144a88,88,0,0,0,176,0C216,112.6,201.49,79.32,174,47.75ZM128,216a72.08,72.08,0,0,1-72-72c0-57.23,55.47-105,72-118,16.53,13,72,60.75,72,118A72.08,72.08,0,0,1,128,216Zm55.89-62.66a57.6,57.6,0,0,1-46.56,46.55A8.75,8.75,0,0,1,136,200a8,8,0,0,1-1.32-15.89c16.57-2.79,30.63-16.85,33.44-33.45a8,8,0,0,1,15.78,2.68Z"/></svg><span>Vidro líquido</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M194.82,151.43l-55.09,20.3-20.3,55.09a7.92,7.92,0,0,1-14.86,0l-20.3-55.09-55.09-20.3a7.92,7.92,0,0,1,0-14.86l55.09-20.3,20.3-55.09a7.92,7.92,0,0,1,14.86,0l20.3,55.09,55.09,20.3A7.92,7.92,0,0,1,194.82,151.43Z" opacity="0.2"/><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"/></svg><span>Partículas que formam o seu logótipo</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M192,144a64.33,64.33,0,0,1-2,16H66a64,64,0,1,1,126-16Z" opacity="0.2"/><path d="M240,152H199.55a73.54,73.54,0,0,0,.45-8,72,72,0,0,0-144,0,73.54,73.54,0,0,0,.45,8H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM72,144a56,56,0,1,1,111.41,8H72.59A56.13,56.13,0,0,1,72,144Zm144,56a8,8,0,0,1-8,8H48a8,8,0,0,1,0-16H208A8,8,0,0,1,216,200ZM72.84,43.58a8,8,0,0,1,14.32-7.16l8,16a8,8,0,0,1-14.32,7.16Zm-56,48.84a8,8,0,0,1,10.74-3.57l16,8a8,8,0,0,1-7.16,14.31l-16-8A8,8,0,0,1,16.84,92.42Zm192,15.16a8,8,0,0,1,3.58-10.73l16-8a8,8,0,1,1,7.16,14.31l-16,8a8,8,0,0,1-10.74-3.58Zm-48-55.16,8-16a8,8,0,0,1,14.32,7.16l-8,16a8,8,0,1,1-14.32-7.16Z"/></svg><span>Aurora de luz</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M213.09,172.48a96,96,0,0,1-80.41,51.41l3.17-16.44a8,8,0,0,0-2-6.95l-19.74-20.33a8,8,0,0,1-1.44-8.69l13.7-30.74a8,8,0,0,1,8.38-4.67l22.82,3.08a8.11,8.11,0,0,1,3.12,1.11ZM116.71,95,129,88.24a7.46,7.46,0,0,0,1.5-1.07l26.91-24.33A8,8,0,0,0,159,53l-10.5-18.81A96.62,96.62,0,0,0,128,32,95.61,95.61,0,0,0,67.78,53.23L56,81.08A8,8,0,0,0,55.88,87l11.5,30.67a8,8,0,0,0,5.81,5l2.69.58L89.2,100a8,8,0,0,1,6.94-4h16.71A7.9,7.9,0,0,0,116.71,95Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.62,87.62,0,0,1-6.4,32.94l-44.7-27.49a15.92,15.92,0,0,0-6.24-2.23l-22.82-3.08a16.11,16.11,0,0,0-16,7.86h-8.72l-3.8-7.86a15.91,15.91,0,0,0-11-8.67l-8-1.73L96.14,104h16.71a16.06,16.06,0,0,0,7.73-2l12.25-6.76a16.62,16.62,0,0,0,3-2.14l26.91-24.34A15.93,15.93,0,0,0,166,49.1l-.36-.65A88.11,88.11,0,0,1,216,128ZM143.31,41.34,152,56.9,125.09,81.24,112.85,88H96.14a16,16,0,0,0-13.88,8l-8.73,15.23L63.38,84.19,74.32,58.32a87.87,87.87,0,0,1,69-17ZM40,128a87.53,87.53,0,0,1,8.54-37.8l11.34,30.27a16,16,0,0,0,11.62,10l21.43,4.61L96.74,143a16.09,16.09,0,0,0,14.4,9h1.48l-7.23,16.23a16,16,0,0,0,2.86,17.37l.14.14L128,205.94l-1.94,10A88.11,88.11,0,0,1,40,128Zm102.58,86.78,1.13-5.81a16.09,16.09,0,0,0-4-13.9,1.85,1.85,0,0,1-.14-.14L120,174.74,133.7,144l22.82,3.08,45.72,28.12A88.18,88.18,0,0,1,142.58,214.78Z"/></svg><span>Globo de clientes</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,80l-96,56L32,80l96-56Z" opacity="0.2"/><path d="M230.91,172A8,8,0,0,1,228,182.91l-96,56a8,8,0,0,1-8.06,0l-96-56A8,8,0,0,1,36,169.09l92,53.65,92-53.65A8,8,0,0,1,230.91,172ZM220,121.09l-92,53.65L36,121.09A8,8,0,0,0,28,134.91l96,56a8,8,0,0,0,8.06,0l96-56A8,8,0,1,0,220,121.09ZM24,80a8,8,0,0,1,4-6.91l96-56a8,8,0,0,1,8.06,0l96,56a8,8,0,0,1,0,13.82l-96,56a8,8,0,0,1-8.06,0l-96-56A8,8,0,0,1,24,80Zm23.88,0L128,126.74,208.12,80,128,33.26Z"/></svg><span>Camadas a abrir em 3D</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M32,176H224v24a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8ZM216,48H40a8,8,0,0,0-8,8V80H224V56A8,8,0,0,0,216,48Z" opacity="0.2"/><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,88h80v80H40Zm96-16V56h32V72Zm-16,0H88V56h32Zm0,112v16H88V184Zm16,0h32v16H136Zm0-16V88h80v80Zm80-96H184V56h32ZM72,56V72H40V56ZM40,184H72v16H40Zm176,16H184V184h32v16Z"/></svg><span>Vídeo que avança com o scroll</span></li><li><svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M176,112,74.34,213.66a8,8,0,0,1-11.31,0L42.34,193a8,8,0,0,1,0-11.31L144,80Z" opacity="0.2"/><path d="M248,152a8,8,0,0,1-8,8H224v16a8,8,0,0,1-16,0V160H192a8,8,0,0,1,0-16h16V128a8,8,0,0,1,16,0v16h16A8,8,0,0,1,248,152ZM56,72H72V88a8,8,0,0,0,16,0V72h16a8,8,0,0,0,0-16H88V40a8,8,0,0,0-16,0V56H56a8,8,0,0,0,0,16ZM184,192h-8v-8a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16ZM219.31,80,80,219.31a16,16,0,0,1-22.62,0L36.68,198.63a16,16,0,0,1,0-22.63L176,36.69a16,16,0,0,1,22.63,0l20.68,20.68A16,16,0,0,1,219.31,80Zm-54.63,32L144,91.31l-96,96L68.68,208ZM208,68.69,187.31,48l-32,32L176,100.69Z"/></svg><span>Texto com brilho de cinema</span></li>
+        </ul>
+        <div class="cine-acoes" data-revelar>
+          <a class="cine-botao cine-botao-primario" href="/animacoes/">Experimentar grátis</a>
+          <a class="cine-botao cine-botao-vidro" href="/pro/">Conhecer o Pro <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cine-secao cine-sistemas" aria-labelledby="sistemas-titulo">
+      <div class="site-container cine-duas">
+        <div>
+          <p class="cine-sobretitulo" data-revelar>Sistemas completos</p>
+          <h2 class="cine-h2" id="sistemas-titulo" data-revelar>Descarregue. Instale.<br><span class="cine-suave">O negócio já está a funcionar.</span></h2>
+          <p class="cine-sub" data-revelar>Clínicas, barbearias, lojas, restaurantes, escolas. Cada sistema vem com painel, base de dados e página para os seus clientes num só zip: envia para qualquer alojamento com PHP, abre o endereço e está a funcionar.</p>
+          <ul class="cine-lista-ok" data-revelar>
+            <li>Instala em qualquer alojamento com PHP, sem base de dados para configurar</li>
+            <li>Personalize nomes, campos e textos sem programar</li>
+            <li>No seu domínio, com os dados guardados no seu alojamento</li>
+          </ul>
+        </div>
+        <div class="cine-janela" data-revelar aria-hidden="true">
+          <div class="cine-janela-barra"><span></span><span></span><span></span><b>Atalho Sistemas</b></div>
+          <div class="cine-janela-corpo">
+            <div class="cine-janela-icone">A</div>
+            <strong>A instalar a Clínica Sorriso</strong>
+            <div class="cine-progresso"><span></span></div>
+            <ul class="cine-ficheiros">
+              <li>index.php</li>
+              <li>sistema.php</li>
+              <li>nucleo/</li>
+              <li>dados/clinica.sqlite</li>
+              <li>LEIA-ME.md</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cine-secao cine-galeria-secao" aria-labelledby="paginas-titulo">
+      <div class="site-container">
+        <p class="cine-sobretitulo" data-revelar>Páginas completas</p>
+        <h2 class="cine-h2" id="paginas-titulo" data-revelar>Copie o ecrã inteiro,<br><span class="cine-suave">não só o botão.</span></h2>
+      </div>
+      <div class="cine-galeria" tabindex="0" aria-label="Páginas completas">
+        <a class="cine-galeria-item" href="/exemplos/landing-saas/">
+          <span class="cine-galeria-moldura"><img src="/exemplos/miniaturas/landing-saas.png" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Membros</span></span>
+          <strong>Landing page de produto</strong><span>Hero, integrações, recursos, planos com mensal/anual, perguntas frequentes e newsletter.</span>
+        </a><a class="cine-galeria-item" href="/exemplos/painel/">
+          <span class="cine-galeria-moldura"><img src="/exemplos/miniaturas/painel.png" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Membros</span></span>
+          <strong>Painel administrativo</strong><span>Menu lateral, indicadores, gráfico, atividade, tabela com pesquisa e exportação e pesquisa rápida Ctrl+K.</span>
+        </a><a class="cine-galeria-item" href="/exemplos/loja/">
+          <span class="cine-galeria-moldura"><img src="/exemplos/miniaturas/loja.png" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Membros</span></span>
+          <strong>Loja online</strong><span>Montra com pesquisa e filtro de preço, carrinho na gaveta guardado no navegador e notificações.</span>
+        </a><a class="cine-galeria-item" href="/exemplos/checkout/">
+          <span class="cine-galeria-moldura"><img src="/exemplos/miniaturas/checkout.png" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Membros</span></span>
+          <strong>Checkout com MB WAY</strong><span>Etapas, NIF e telemóvel com máscara, morada pelo código postal, formas de pagamento e confirmação por MB WAY.</span>
+        </a><a class="cine-galeria-item" href="/exemplos/login/">
+          <span class="cine-galeria-moldura"><img src="/exemplos/miniaturas/login.png" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Membros</span></span>
+          <strong>Ecrã de login</strong><span>Duas colunas com testemunho, login social, palavra-passe com mostrar/ocultar e validação.</span>
+        </a><a class="cine-galeria-item" href="/exemplos/blog/">
+          <span class="cine-galeria-moldura"><img src="/exemplos/miniaturas/blog.png" alt="" loading="lazy" width="600" height="375"><span class="site-galeria-cadeado"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Membros</span></span>
+          <strong>Blog</strong><span>Artigo em destaque, filtro por abas, lista de artigos, paginação e newsletter.</span>
+        </a>
+      </div>
+      <div class="site-container"><a class="cine-botao cine-botao-contorno" href="/exemplos/">Todas as páginas <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </section>
+
+    <section class="cine-secao cine-codigo" aria-labelledby="codigo-titulo">
+      <div class="site-container cine-duas">
+        <div>
+          <p class="cine-sobretitulo" data-revelar>Do HTML ao servidor</p>
+          <h2 class="cine-h2" id="codigo-titulo" data-revelar>Um só jeito de pensar,<br><span class="cine-suave">nas três camadas.</span></h2>
+          <p class="cine-sub" data-revelar>No navegador, atributos em português. No TypeScript, tipos que se completam sozinhos. No PHP, as mesmas regras validadas no servidor, onde a segurança acontece.</p>
+          <div class="cine-acoes" data-revelar>
+            <a class="cine-botao cine-botao-contorno" href="/typescript/">Guia de TypeScript</a>
+            <a class="cine-botao cine-botao-contorno" href="/php/">Guia de PHP</a>
+          </div>
+        </div>
+        <div class="site-exemplo-caixa cine-codigo-caixa" data-revelar>
+          <div class="site-codigo-abas">
+            <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código">
+              <button type="button" role="tab" aria-selected="true" aria-controls="vit-html" id="vit-aba-html">HTML</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="vit-ts" id="vit-aba-ts" tabindex="-1">TypeScript</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="vit-php" id="vit-aba-php" tabindex="-1">PHP</button>
+            </div>
+            <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+          </div>
+          <pre class="site-codigo" id="vit-html" role="tabpanel" aria-labelledby="vit-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">data-at-mascara</span><span class="tk-pon">=</span><span class="tk-str">&quot;nif&quot;</span><span class="tk-pon">&gt;</span>
+
+<span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">commandfor</span><span class="tk-pon">=</span><span class="tk-str">&quot;confirmar&quot;</span> <span class="tk-atr">command</span><span class="tk-pon">=</span><span class="tk-str">&quot;show-modal&quot;</span><span class="tk-pon">&gt;</span>
+  Eliminar
+<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span></code></pre>
+          <pre class="site-codigo" id="vit-ts" role="tabpanel" aria-labelledby="vit-aba-ts" tabindex="0" hidden><code><span class="tk-pal">interface</span> Carrinho {
+  itens: { nome: <span class="tk-tip">string</span>; preco: <span class="tk-tip">number</span> }[];
+  <span class="tk-pal">readonly</span> total: <span class="tk-tip">number</span>;
+}
+
+<span class="tk-pal">const</span> carrinho = Atalho.estado&lt;Carrinho&gt;(<span class="tk-str">&quot;carrinho&quot;</span>, {
+  itens: [],
+  <span class="tk-pal">get</span> total(): <span class="tk-tip">number</span> {
+    <span class="tk-pal">return</span> <span class="tk-pal">this</span>.itens.reduce((s, i) =&gt; s + i.preco, <span class="tk-num">0</span>);
+  },
+});</code></pre>
+          <pre class="site-codigo" id="vit-php" role="tabpanel" aria-labelledby="vit-aba-php" tabindex="0" hidden><code><span class="tk-pon">&lt;?php</span>
+require <span class="tk-str">&#39;atalho.php&#39;</span>;
+
+<span class="tk-var">$dados</span> = Atalho\lerJson();
+<span class="tk-pal">if</span> (!Atalho\validarNif(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;nif&#39;</span>] ?? <span class="tk-str">&#39;&#39;</span>)) {
+    Atalho\responderErro(<span class="tk-str">&#39;NIF inválido&#39;</span>, <span class="tk-num">422</span>);
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="cine-secao" aria-labelledby="categorias-titulo">
+      <div class="site-container">
+        <p class="cine-sobretitulo" data-revelar>O que tem dentro</p>
+        <h2 class="cine-h2" id="categorias-titulo" data-revelar>77 componentes e receitas.</h2>
+        <div class="site-categorias cine-categorias"><a class="site-categoria" href="/componentes/#fundamentos" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M184,120v61.65a8,8,0,0,1-2.34,5.65l-34.35,34.35a8,8,0,0,1-13.57-4.53L128,176ZM136,72H74.35a8,8,0,0,0-5.65,2.34L34.35,108.69a8,8,0,0,0,4.53,13.57L80,128ZM40,216c37.65,0,50.69-19.69,54.56-28.18L68.18,161.44C59.69,165.31,40,178.35,40,216Z" opacity="0.2"/><path d="M223.85,47.12a16,16,0,0,0-15-15c-12.58-.75-44.73.4-71.41,27.07L132.69,64H74.36A15.91,15.91,0,0,0,63,68.68L28.7,103a16,16,0,0,0,9.07,27.16l38.47,5.37,44.21,44.21,5.37,38.49a15.94,15.94,0,0,0,10.78,12.92,16.11,16.11,0,0,0,5.1.83A15.91,15.91,0,0,0,153,227.3L187.32,193A15.91,15.91,0,0,0,192,181.64V123.31l4.77-4.77C223.45,91.86,224.6,59.71,223.85,47.12ZM74.36,80h42.33L77.16,119.52,40,114.34Zm74.41-9.45a76.65,76.65,0,0,1,59.11-22.47,76.46,76.46,0,0,1-22.42,59.16L128,164.68,91.32,128ZM176,181.64,141.67,216l-5.19-37.17L176,139.31Zm-74.16,9.5C97.34,201,82.29,224,40,224a8,8,0,0,1-8-8c0-42.29,23-57.34,32.86-61.85a8,8,0,0,1,6.64,14.56c-6.43,2.93-20.62,12.36-23.12,38.91,26.55-2.5,36-16.69,38.91-23.12a8,8,0,1,1,14.56,6.64Z"/></svg></span><span class="site-contagem">06 itens</span><h3>Comece aqui</h3><p>Instalação, cores, layout e texto.</p><span class="site-categoria-itens">Instalação · Cores e tema escuro · Layout e grade · Texto e tipografia · Grelha de 12 colunas · Utilitários (espaçamento, flex, cores...)</span></a><a class="site-categoria" href="/componentes/#formularios" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M240,80v96a8,8,0,0,1-8,8H24a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H232A8,8,0,0,1,240,80Z" opacity="0.2"/><path d="M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z"/></svg></span><span class="site-contagem">13 itens</span><h3>Formulários</h3><p>Campos, máscaras, código postal, validação e envio.</p><span class="site-categoria-itens">Campos de formulário · Máscaras (NIF, IBAN, telemóvel...) · Morada pelo código postal · Validação de formulário · Palavra-passe (mostrar e força) · Código de verificação · Enviar ficheiros · Autocompletar …</span></a><a class="site-categoria" href="/componentes/#acoes" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,201,201,213.66a8,8,0,0,1-11.31,0l-51.31-51.31a8,8,0,0,0-13,2.46l-17.82,46.41a8,8,0,0,1-14.85-.71L40.41,50.44a8,8,0,0,1,10-10L210.51,92.68a8,8,0,0,1,.71,14.85l-46.41,17.82a8,8,0,0,0-2.46,13l51.31,51.31A8,8,0,0,1,213.66,201Z" opacity="0.2"/><path d="M88,24V16a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0ZM16,104h8a8,8,0,0,0,0-16H16a8,8,0,0,0,0,16ZM124.42,39.16a8,8,0,0,0,10.74-3.58l8-16a8,8,0,0,0-14.31-7.16l-8,16A8,8,0,0,0,124.42,39.16Zm-96,81.69-16,8a8,8,0,0,0,7.16,14.31l16-8a8,8,0,1,0-7.16-14.31ZM219.31,184a16,16,0,0,1,0,22.63l-12.68,12.68a16,16,0,0,1-22.63,0L132.7,168,115,214.09c0,.1-.08.21-.13.32a15.83,15.83,0,0,1-14.6,9.59l-.79,0a15.83,15.83,0,0,1-14.41-11L32.8,52.92A16,16,0,0,1,52.92,32.8L213,85.07a16,16,0,0,1,1.41,29.8l-.32.13L168,132.69ZM208,195.31,156.69,144h0a16,16,0,0,1,4.93-26l.32-.14,45.95-17.64L48,48l52.2,159.86,17.65-46c0-.11.08-.22.13-.33a16,16,0,0,1,11.69-9.34,16.72,16.72,0,0,1,3-.28,16,16,0,0,1,11.3,4.69L195.31,208Z"/></svg></span><span class="site-contagem">06 itens</span><h3>Ações</h3><p>Botões, menus e copiar.</p><span class="site-categoria-itens">Botão · Menu suspenso · Copiar (IBAN, referência, cupão, link) · Botão do WhatsApp · Recolher e expandir (collapse) · Grupo de botões e botão fechar</span></a><a class="site-categoria" href="/componentes/#navegacao" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,32a96,96,0,1,0,96,96A96,96,0,0,0,128,32Zm16,112L80,176l32-64,64-32Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM172.42,72.84l-64,32a8.05,8.05,0,0,0-3.58,3.58l-32,64A8,8,0,0,0,80,184a8.1,8.1,0,0,0,3.58-.84l64-32a8.05,8.05,0,0,0,3.58-3.58l32-64a8,8,0,0,0-10.74-10.74ZM138,138,97.89,158.11,118,118l40.15-20.07Z"/></svg></span><span class="site-contagem">10 itens</span><h3>Navegação</h3><p>Menus do site, abas, etapas e pesquisa rápida.</p><span class="site-categoria-itens">Barra de navegação · Menu lateral de sistema · Abas · Trilha (breadcrumb) · Paginação · Etapas · Pesquisa rápida (Ctrl+K) · Central de notificações …</span></a><a class="site-categoria" href="/componentes/#sobreposicoes" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,56V200a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"/><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM80,84A12,12,0,1,1,68,72,12,12,0,0,1,80,84Zm40,0a12,12,0,1,1-12-12A12,12,0,0,1,120,84Z"/></svg></span><span class="site-contagem">05 itens</span><h3>Janelas e avisos</h3><p>Modal, gaveta, dica e notificações.</p><span class="site-categoria-itens">Modal (janela de diálogo) · Gaveta (painel lateral) · Dica (tooltip) · Notificação (toast) · Balão informativo (popover)</span></a><a class="site-categoria" href="/componentes/#dados" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M88,104v96H32V104Z" opacity="0.2"/><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM40,112H80v32H40Zm56,0H216v32H96ZM216,64V96H40V64ZM40,160H80v32H40Zm176,32H96V160H216v32Z"/></svg></span><span class="site-contagem">17 itens</span><h3>Exibir dados</h3><p>Cartões, produtos, tabelas, listas e quadros.</p><span class="site-categoria-itens">Cartão · Cartão de produto · Tabela de dados · Indicadores (KPIs) · Selos e etiquetas · Avatar · Linha do tempo (seguimento) · Avaliação (estrelas) …</span></a><a class="site-categoria" href="/componentes/#feedback" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,147.81,56,112a72,72,0,0,1,144,0c0,35.82,8.3,56.6,14.9,68A8,8,0,0,1,208,192Z" opacity="0.2"/><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"/></svg></span><span class="site-contagem">04 itens</span><h3>Feedback</h3><p>Alertas, carregamento, estados vazios e cookies (RGPD).</p><span class="site-categoria-itens">Alertas e faixa · A carregar e progresso · Estado vazio · Aviso de cookies (RGPD)</span></a><a class="site-categoria" href="/componentes/#paginas" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M104,104V208H40a8,8,0,0,1-8-8V104Z" opacity="0.2"/><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V96H40V56ZM40,112H96v88H40Zm176,88H112V112H216v88Z"/></svg></span><span class="site-contagem">07 itens</span><h3>Blocos de página</h3><p>Secções prontas para landing pages.</p><span class="site-categoria-itens">Hero (topo da landing page) · Planos e preços · Rodapé · Contagem regressiva · Depoimentos · Grade de recursos · Newsletter</span></a><a class="site-categoria" href="/componentes/#javascript" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M240,128c-64,0,0,88-64,88H80c-64,0,0-88-64-88,64,0,0-88,64-88h96C240,40,176,128,240,128Z" opacity="0.2"/><path d="M43.18,128a29.78,29.78,0,0,1,8,10.26c4.8,9.9,4.8,22,4.8,33.74,0,24.31,1,36,24,36a8,8,0,0,1,0,16c-17.48,0-29.32-6.14-35.2-18.26-4.8-9.9-4.8-22-4.8-33.74,0-24.31-1-36-24-36a8,8,0,0,1,0-16c23,0,24-11.69,24-36,0-11.72,0-23.84,4.8-33.74C50.68,38.14,62.52,32,80,32a8,8,0,0,1,0,16C57,48,56,59.69,56,84c0,11.72,0,23.84-4.8,33.74A29.78,29.78,0,0,1,43.18,128ZM240,120c-23,0-24-11.69-24-36,0-11.72,0-23.84-4.8-33.74C205.32,38.14,193.48,32,176,32a8,8,0,0,0,0,16c23,0,24,11.69,24,36,0,11.72,0,23.84,4.8,33.74a29.78,29.78,0,0,0,8,10.26,29.78,29.78,0,0,0-8,10.26c-4.8,9.9-4.8,22-4.8,33.74,0,24.31-1,36-24,36a8,8,0,0,0,0,16c17.48,0,29.32-6.14,35.2-18.26,4.8-9.9,4.8-22,4.8-33.74,0-24.31,1-36,24-36a8,8,0,0,0,0-16Z"/></svg></span><span class="site-contagem">05 itens</span><h3>JavaScript</h3><p>Estado, formatação, pedidos e eventos.</p><span class="site-categoria-itens">Estado (reatividade) · Formatar (moeda, datas, números) · Obter dados de uma API · Eventos do Atalho · Carregar mais (scroll infinito)</span></a><a class="site-categoria" href="/componentes/#receitas" data-revelar><span class="site-recurso-icone"><svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,80V184a24,24,0,0,1-24,24H64a24,24,0,0,1-24-24V80Z" opacity="0.2"/><path d="M88,48V16a8,8,0,0,1,16,0V48a8,8,0,0,1-16,0Zm40,8a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,128,56Zm32,0a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,160,56Zm92.8,46.4L224,124v60a32,32,0,0,1-32,32H64a32,32,0,0,1-32-32V124L3.2,102.4a8,8,0,0,1,9.6-12.8L32,104V80a8,8,0,0,1,8-8H216a8,8,0,0,1,8,8v24l19.2-14.4a8,8,0,0,1,9.6,12.8ZM208,88H48v96a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16Z"/></svg></span><span class="site-contagem">04 itens</span><h3>Receitas completas</h3><p>Componentes conectados em ecrãs reais.</p><span class="site-categoria-itens">Loja com carrinho · Registo com morada automática · Painel administrativo · Login em duas etapas</span></a></div>
+      </div>
+    </section>
+
+    <section class="cine-secao cine-historia">
+      <div class="site-container site-historia">
+        <blockquote data-revelar>“Eu desisti de programar mais de uma vez. Não foi por falta de vontade.”</blockquote>
+        <div class="site-historia-texto" data-revelar>
+          <p>Via um tutorial e percebia uma coisa. Via outro e percebia outra. Na hora de juntar tudo num projeto a sério, nada encaixava. E a documentação oficial ajudava pouco: boa parte só existe em inglês e mostra cada peça isolada, nunca o ecrã pronto.</p>
+          <p>O Atalho é o material que eu queria ter tido no começo. <strong>Cada componente vem completo</strong>, resolvido como as grandes empresas resolvem, explicado em português e, principalmente, <strong>a mostrar como se liga aos outros</strong> para virar um ecrã a sério.</p>
+          <p class="at-mb-0">— Marcos Zorzetto, criador do Atalho</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cine-final" aria-labelledby="final-titulo">
+      <div class="cine-final-brilho" aria-hidden="true"></div>
+      <div class="site-container">
+        <h2 class="cine-h2 cine-final-titulo" id="final-titulo" data-revelar>Comece hoje.<br><span class="cine-ouro">É grátis.</span></h2>
+        <p class="cine-sub" data-revelar>Crie a conta em um minuto e liberte as páginas completas, 20 componentes avançados e 10 animações.</p>
+        <div class="cine-acoes cine-acoes-centro" data-revelar>
+          <a class="cine-botao cine-botao-primario" href="/conta/?criar">Criar conta grátis</a>
+          <a class="cine-botao cine-botao-vidro" href="/pro/">Ver o Pro <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

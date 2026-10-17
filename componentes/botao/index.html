@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Botão em HTML, CSS e JavaScript | Atalho</title>
+  <meta name="description" content="Botões para cada nível de importância, tamanhos, ícones, estado de a carregar, grupo e contador.">
+  <link rel="canonical" href="https://atalho.com.pt/componentes/botao/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Botão · Atalho">
+  <meta property="og:description" content="Botões para cada nível de importância, tamanhos, ícones, estado de a carregar, grupo e contador.">
+  <meta property="og:url" content="https://atalho.com.pt/componentes/botao/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Botão em HTML, CSS e JavaScript","description":"Botões para cada nível de importância, tamanhos, ícones, estado de a carregar, grupo e contador.","inLanguage":"pt-PT","url":"https://atalho.com.pt/componentes/botao/","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"publisher":{"@type":"Organization","name":"Atalho","url":"https://atalho.com.pt/"},"keywords":"button, btn, botão, cta, call to action, carregando, loading, ícone, grupo de botões","proficiencyLevel":"Beginner"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://atalho.com.pt/"},{"@type":"ListItem","position":2,"name":"Componentes","item":"https://atalho.com.pt/componentes/"},{"@type":"ListItem","position":3,"name":"Botão","item":"https://atalho.com.pt/componentes/botao/"}]}</script>
+  
+</head>
+<body data-pagina="componente" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/" aria-current="page">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+<div class="site-docs">
+    <nav class="site-menu-docs" id="menu-docs" aria-label="Todos os componentes"><h2>Comece aqui</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/cores-e-temas/">Cores e tema escuro</a></li><li><a href="/componentes/layout/">Layout e grade</a></li><li><a href="/componentes/tipografia/">Texto e tipografia</a></li><li><a href="/componentes/grade-12/">Grelha de 12 colunas <span class="site-novo">novo</span></a></li><li><a href="/componentes/utilitarios/">Utilitários (espaçamento, flex, cores...) <span class="site-novo">novo</span></a></li></ul><h2>Formulários</h2><ul><li><a href="/componentes/campo/">Campos de formulário</a></li><li><a href="/componentes/mascaras/">Máscaras (NIF, IBAN, telemóvel...)</a></li><li><a href="/componentes/cep/">Morada pelo código postal</a></li><li><a href="/componentes/validacao/">Validação de formulário</a></li><li><a href="/componentes/senha/">Palavra-passe (mostrar e força)</a></li><li><a href="/componentes/codigo/">Código de verificação</a></li><li><a href="/componentes/upload/">Enviar ficheiros</a></li><li><a href="/componentes/autocompletar/">Autocompletar <span class="site-novo">novo</span></a></li><li><a href="/componentes/quantidade/">Quantidade (+ e −) <span class="site-novo">novo</span></a></li><li><a href="/componentes/contador-caracteres/">Contador de caracteres <span class="site-novo">novo</span></a></li><li><a href="/componentes/faixa/">Faixa de valores (slider) <span class="site-novo">novo</span></a></li><li><a href="/componentes/etiquetas-entrada/">Entrada de etiquetas (tags) <span class="site-novo">novo</span></a></li><li><a href="/componentes/rotulo-flutuante/">Rótulo flutuante (floating label) <span class="site-novo">novo</span></a></li></ul><h2>Ações</h2><ul><li><a href="/componentes/botao/" aria-current="page">Botão</a></li><li><a href="/componentes/menu-suspenso/">Menu suspenso</a></li><li><a href="/componentes/copiar/">Copiar (IBAN, referência, cupão, link)</a></li><li><a href="/componentes/whatsapp/">Botão do WhatsApp <span class="site-novo">novo</span></a></li><li><a href="/componentes/recolher/">Recolher e expandir (collapse) <span class="site-novo">novo</span></a></li><li><a href="/componentes/grupo-botoes/">Grupo de botões e botão fechar <span class="site-novo">novo</span></a></li></ul><h2>Navegação</h2><ul><li><a href="/componentes/barra/">Barra de navegação</a></li><li><a href="/componentes/lateral/">Menu lateral de sistema</a></li><li><a href="/componentes/abas/">Abas</a></li><li><a href="/componentes/trilha/">Trilha (breadcrumb)</a></li><li><a href="/componentes/paginacao/">Paginação</a></li><li><a href="/componentes/etapas/">Etapas</a></li><li><a href="/componentes/comando/">Pesquisa rápida (Ctrl+K)</a></li><li><a href="/componentes/notificacoes-sino/">Central de notificações <span class="site-novo">novo</span></a></li><li><a href="/componentes/voltar-topo/">Voltar ao topo <span class="site-novo">novo</span></a></li><li><a href="/componentes/indice/">Índice que acompanha a leitura (scrollspy) <span class="site-novo">novo</span></a></li></ul><h2>Janelas e avisos</h2><ul><li><a href="/componentes/modal/">Modal (janela de diálogo)</a></li><li><a href="/componentes/gaveta/">Gaveta (painel lateral)</a></li><li><a href="/componentes/dica/">Dica (tooltip)</a></li><li><a href="/componentes/notificacao/">Notificação (toast)</a></li><li><a href="/componentes/balao/">Balão informativo (popover) <span class="site-novo">novo</span></a></li></ul><h2>Exibir dados</h2><ul><li><a href="/componentes/cartao/">Cartão</a></li><li><a href="/componentes/produto/">Cartão de produto</a></li><li><a href="/componentes/tabela/">Tabela de dados</a></li><li><a href="/componentes/indicador/">Indicadores (KPIs)</a></li><li><a href="/componentes/selo/">Selos e etiquetas</a></li><li><a href="/componentes/avatar/">Avatar</a></li><li><a href="/componentes/linha-do-tempo/">Linha do tempo (seguimento)</a></li><li><a href="/componentes/avaliacao/">Avaliação (estrelas)</a></li><li><a href="/componentes/carrossel/">Carrossel</a></li><li><a href="/componentes/sanfona/">Acordeão (perguntas frequentes)</a></li><li><a href="/componentes/chat/">Chat</a></li><li><a href="/componentes/kanban/">Quadro Kanban</a></li><li><a href="/componentes/galeria/">Galeria de fotos <span class="site-novo">novo</span></a></li><li><a href="/componentes/video/">Vídeo leve do YouTube <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-detalhes/">Lista de detalhes <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-grupo/">Lista agrupada (list group) <span class="site-novo">novo</span></a></li><li><a href="/componentes/imagens/">Imagens, figuras e proporção <span class="site-novo">novo</span></a></li></ul><h2>Feedback</h2><ul><li><a href="/componentes/alerta/">Alertas e faixa</a></li><li><a href="/componentes/carregando/">A carregar e progresso</a></li><li><a href="/componentes/vazio/">Estado vazio</a></li><li><a href="/componentes/cookies/">Aviso de cookies (RGPD)</a></li></ul><h2>Blocos de página</h2><ul><li><a href="/componentes/hero/">Hero (topo da landing page)</a></li><li><a href="/componentes/planos/">Planos e preços</a></li><li><a href="/componentes/rodape/">Rodapé</a></li><li><a href="/componentes/contagem-regressiva/">Contagem regressiva <span class="site-novo">novo</span></a></li><li><a href="/componentes/depoimentos/">Depoimentos <span class="site-novo">novo</span></a></li><li><a href="/componentes/recursos/">Grade de recursos <span class="site-novo">novo</span></a></li><li><a href="/componentes/newsletter/">Newsletter <span class="site-novo">novo</span></a></li></ul><h2>JavaScript</h2><ul><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/formatar/">Formatar (moeda, datas, números)</a></li><li><a href="/componentes/requisitar/">Obter dados de uma API</a></li><li><a href="/componentes/eventos/">Eventos do Atalho</a></li><li><a href="/componentes/carregar-mais/">Carregar mais (scroll infinito) <span class="site-novo">novo</span></a></li></ul><h2>Receitas completas</h2><ul><li><a href="/componentes/receita-loja/">Loja com carrinho</a></li><li><a href="/componentes/receita-cadastro/">Registo com morada automática</a></li><li><a href="/componentes/receita-painel/">Painel administrativo</a></li><li><a href="/componentes/receita-login/">Login em duas etapas</a></li></ul></nav>
+    <article class="site-artigo" data-componente="botao">
+      <div class="site-docs-barra-celular">
+        <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Todos os componentes</button>
+      </div>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
+        <li><a href="/">Início</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/componentes/botao/">Ações</a></li>
+        <li aria-current="page">Botão</li>
+      </ol></nav>
+      <div class="site-titulo-linha">
+        <h1 class="site-titulo site-h2" tabindex="-1">Botão</h1>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="botao" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/></svg><span>Adicionar aos favoritos</span></button>
+      </div>
+      <p class="at-chamada">Botões para cada nível de importância, tamanhos, ícones, estado de a carregar, grupo e contador.</p>
+      <div class="site-meta">
+        <span class="site-linguagem" data-linguagem="html">HTML</span><span class="site-linguagem" data-linguagem="js">JavaScript</span>
+      </div>
+      <div class="site-meta"><span class="site-meta-rotulo">Padrão usado em</span><span class="site-referencia">GitHub (Primer)</span><span class="site-referencia">Stripe Dashboard</span><span class="site-referencia">Shopify Polaris</span></div>
+      
+
+      <section aria-labelledby="quando-usar"><h2 class="site-secao-titulo" id="quando-usar"><a href="#quando-usar">Quando usar</a></h2>
+<div class="site-listas">
+          <div><ul class="site-lista "><li>at-primario: a ação principal do ecrã. Uma só por área.</li><li>Botão normal (sem modificador): ações secundárias.</li><li>at-fantasma ou at-link: ações discretas, como Cancelar.</li><li>at-perigo: eliminar, cancelar subscrição. Sempre com confirmação.</li></ul></div>
+          <div><h3 class="site-subtitulo">Evite</h3><ul class="site-lista site-evitar"><li>&lt;div&gt; ou &lt;a&gt; clicável no lugar de &lt;button&gt;: não funciona com teclado nem com leitor de ecrã.</li></ul></div>
+        </div>
+</section>
+
+<section aria-labelledby="como-funciona"><h2 class="site-secao-titulo" id="como-funciona"><a href="#como-funciona">Como funciona</a></h2>
+<div class="site-explicacao"><p>Use &lt;button&gt; para ações e &lt;a class=&quot;at-botao&quot;&gt; para navegação (ir para outra página). Para mostrar que algo está a carregar, coloque aria-busy=&quot;true&quot;: o texto dá lugar a um indicador a girar e o botão deixa de aceitar cliques, o que evita pedidos duplicados.</p></div>
+</section>
+
+<section aria-labelledby="exemplos"><h2 class="site-secao-titulo" id="exemplos"><a href="#exemplos">Exemplos</a></h2>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-variacoes"><a href="#exemplo-variacoes">Variações</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="0">
+<div class="at-linha">
+  <button class="at-botao at-primario">Guardar alterações</button>
+  <button class="at-botao">Exportar</button>
+  <button class="at-botao at-suave">Convidar</button>
+  <button class="at-botao at-fantasma">Cancelar</button>
+  <button class="at-botao at-perigo">Eliminar</button>
+  <button class="at-botao at-link">Ver detalhes</button>
+</div>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex0-html" id="ex0-aba-html" tabindex="0">HTML</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGRpdiBjbGFzcz1cImF0LWxpbmhhXCI-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1wcmltYXJpb1wiPkd1YXJkYXIgYWx0ZXJhw6fDtWVzPC9idXR0b24-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3Rhb1wiPkV4cG9ydGFyPC9idXR0b24-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1zdWF2ZVwiPkNvbnZpZGFyPC9idXR0b24-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1mYW50YXNtYVwiPkNhbmNlbGFyPC9idXR0b24-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1wZXJpZ29cIj5FbGltaW5hcjwvYnV0dG9uPlxuICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW8gYXQtbGlua1wiPlZlciBkZXRhbGhlczwvYnV0dG9uPlxuPC9kaXY-IiwiY3NzIjoiIiwianMiOiIifQ">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex0-html" role="tabpanel" aria-labelledby="ex0-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario&quot;</span><span class="tk-pon">&gt;</span>Guardar alterações<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao&quot;</span><span class="tk-pon">&gt;</span>Exportar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-suave&quot;</span><span class="tk-pon">&gt;</span>Convidar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-fantasma&quot;</span><span class="tk-pon">&gt;</span>Cancelar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-perigo&quot;</span><span class="tk-pon">&gt;</span>Eliminar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-link&quot;</span><span class="tk-pon">&gt;</span>Ver detalhes<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span></code></pre>
+        </div>
+      </div>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-tamanhos-e-icones"><a href="#exemplo-tamanhos-e-icones">Tamanhos e ícones</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="1">
+<div class="at-linha">
+  <button class="at-botao at-primario at-pequeno">Pequeno</button>
+  <button class="at-botao at-primario">Normal</button>
+  <button class="at-botao at-primario at-grande">Grande</button>
+  <button class="at-botao"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"/></svg> Descarregar PDF</button>
+  <button class="at-botao at-icone" aria-label="Editar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>
+  <button class="at-botao at-icone at-fantasma" aria-label="Eliminar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+</div>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex1-html" id="ex1-aba-html" tabindex="0">HTML</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGRpdiBjbGFzcz1cImF0LWxpbmhhXCI-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1wcmltYXJpbyBhdC1wZXF1ZW5vXCI-UGVxdWVubzwvYnV0dG9uPlxuICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW8gYXQtcHJpbWFyaW9cIj5Ob3JtYWw8L2J1dHRvbj5cbiAgPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LXByaW1hcmlvIGF0LWdyYW5kZVwiPkdyYW5kZTwvYnV0dG9uPlxuICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW9cIj48c3ZnIHZpZXdCb3g9XCIwIDAgMjQgMjRcIiB3aWR0aD1cIjE4XCIgaGVpZ2h0PVwiMThcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZS13aWR0aD1cIjJcIiBzdHJva2UtbGluZWNhcD1cInJvdW5kXCIgc3Ryb2tlLWxpbmVqb2luPVwicm91bmRcIiBhcmlhLWhpZGRlbj1cInRydWVcIj48cGF0aCBkPVwiTTEyIDR2MTJNNiAxMGw2IDYgNi02TTQgMjBoMTZcIi8-PC9zdmc-IERlc2NhcnJlZ2FyIFBERjwvYnV0dG9uPlxuICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW8gYXQtaWNvbmVcIiBhcmlhLWxhYmVsPVwiRWRpdGFyXCI-PHN2ZyB2aWV3Qm94PVwiMCAwIDI0IDI0XCIgd2lkdGg9XCIxOFwiIGhlaWdodD1cIjE4XCIgZmlsbD1cIm5vbmVcIiBzdHJva2U9XCJjdXJyZW50Q29sb3JcIiBzdHJva2Utd2lkdGg9XCIyXCIgc3Ryb2tlLWxpbmVjYXA9XCJyb3VuZFwiIHN0cm9rZS1saW5lam9pbj1cInJvdW5kXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI-PHBhdGggZD1cIk00IDIwaDRMMTkgOWwtNC00TDQgMTZ6XCIvPjwvc3ZnPjwvYnV0dG9uPlxuICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW8gYXQtaWNvbmUgYXQtZmFudGFzbWFcIiBhcmlhLWxhYmVsPVwiRWxpbWluYXJcIj48c3ZnIHZpZXdCb3g9XCIwIDAgMjQgMjRcIiB3aWR0aD1cIjE4XCIgaGVpZ2h0PVwiMThcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZS13aWR0aD1cIjJcIiBzdHJva2UtbGluZWNhcD1cInJvdW5kXCIgc3Ryb2tlLWxpbmVqb2luPVwicm91bmRcIiBhcmlhLWhpZGRlbj1cInRydWVcIj48cGF0aCBkPVwiTTMgNmgxOE04IDZWNGg4djJNNiA2bDEgMTRoMTBsMS0xNFwiLz48L3N2Zz48L2J1dHRvbj5cbjwvZGl2PiIsImNzcyI6IiIsImpzIjoiIn0">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex1-html" role="tabpanel" aria-labelledby="ex1-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario at-pequeno&quot;</span><span class="tk-pon">&gt;</span>Pequeno<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario&quot;</span><span class="tk-pon">&gt;</span>Normal<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario at-grande&quot;</span><span class="tk-pon">&gt;</span>Grande<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M12 4v12M6 10l6 6 6-6M4 20h16&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span> Descarregar PDF<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Editar&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M4 20h4L19 9l-4-4L4 16z&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone at-fantasma&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Eliminar&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span></code></pre>
+        </div>
+      </div>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-a-carregar-ao-guardar"><a href="#exemplo-a-carregar-ao-guardar">A carregar ao guardar</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="2">
+<button class="at-botao at-primario" id="botao-salvar">Guardar</button>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex2-html" id="ex2-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex2-js" id="ex2-aba-js" tabindex="-1">JavaScript</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LXByaW1hcmlvXCIgaWQ9XCJib3Rhby1zYWx2YXJcIj5HdWFyZGFyPC9idXR0b24-IiwiY3NzIjoiIiwianMiOiJjb25zdCBib3RhbyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIjYm90YW8tc2FsdmFyXCIpO1xuXG5ib3Rhby5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgKCkgPT4ge1xuICBib3Rhby5zZXRBdHRyaWJ1dGUoXCJhcmlhLWJ1c3lcIiwgXCJ0cnVlXCIpO1xuXG4gIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgIGJvdGFvLnJlbW92ZUF0dHJpYnV0ZShcImFyaWEtYnVzeVwiKTtcbiAgICBBdGFsaG8ubm90aWZpY2FyKFwiQWx0ZXJhw6fDtWVzIGd1YXJkYWRhcy5cIiwgeyB0aXBvOiBcInN1Y2Vzc29cIiB9KTtcbiAgfSwgMTUwMCk7XG59KTsifQ">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex2-html" role="tabpanel" aria-labelledby="ex2-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;botao-salvar&quot;</span><span class="tk-pon">&gt;</span>Guardar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex2-js" role="tabpanel" aria-labelledby="ex2-aba-js" tabindex="0" hidden><code><span class="tk-pal">const</span> botao = document.querySelector(<span class="tk-str">&quot;#botao-salvar&quot;</span>);
+
+botao.addEventListener(<span class="tk-str">&quot;click&quot;</span>, () =&gt; {
+  botao.setAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>, <span class="tk-str">&quot;true&quot;</span>);
+
+  setTimeout(() =&gt; {
+    botao.removeAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>);
+    Atalho.notificar(<span class="tk-str">&quot;Alterações guardadas.&quot;</span>, { tipo: <span class="tk-str">&quot;sucesso&quot;</span> });
+  }, <span class="tk-num">1500</span>);
+});</code></pre>
+        </div>
+      </div>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-grupo-e-contador"><a href="#exemplo-grupo-e-contador">Grupo e contador</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="3">
+<div class="at-linha">
+  <div class="at-grupo-botoes" role="group" aria-label="Período">
+    <button class="at-botao" aria-pressed="false">Dia</button>
+    <button class="at-botao" aria-pressed="true">Semana</button>
+    <button class="at-botao" aria-pressed="false">Mês</button>
+  </div>
+
+  <button class="at-botao at-icone at-contador-selo" aria-label="Notificações: 3 novas">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg>
+    <span data-contador aria-hidden="true">3</span>
+  </button>
+</div>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex3-html" id="ex3-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex3-js" id="ex3-aba-js" tabindex="-1">JavaScript</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGRpdiBjbGFzcz1cImF0LWxpbmhhXCI-XG4gIDxkaXYgY2xhc3M9XCJhdC1ncnVwby1ib3RvZXNcIiByb2xlPVwiZ3JvdXBcIiBhcmlhLWxhYmVsPVwiUGVyw61vZG9cIj5cbiAgICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW9cIiBhcmlhLXByZXNzZWQ9XCJmYWxzZVwiPkRpYTwvYnV0dG9uPlxuICAgIDxidXR0b24gY2xhc3M9XCJhdC1ib3Rhb1wiIGFyaWEtcHJlc3NlZD1cInRydWVcIj5TZW1hbmE8L2J1dHRvbj5cbiAgICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW9cIiBhcmlhLXByZXNzZWQ9XCJmYWxzZVwiPk3DqnM8L2J1dHRvbj5cbiAgPC9kaXY-XG5cbiAgPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LWljb25lIGF0LWNvbnRhZG9yLXNlbG9cIiBhcmlhLWxhYmVsPVwiTm90aWZpY2HDp8O1ZXM6IDMgbm92YXNcIj5cbiAgICA8c3ZnIHZpZXdCb3g9XCIwIDAgMjQgMjRcIiB3aWR0aD1cIjE4XCIgaGVpZ2h0PVwiMThcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZS13aWR0aD1cIjJcIiBzdHJva2UtbGluZWNhcD1cInJvdW5kXCIgc3Ryb2tlLWxpbmVqb2luPVwicm91bmRcIiBhcmlhLWhpZGRlbj1cInRydWVcIj48cGF0aCBkPVwiTTYgMTZ2LTVhNiA2IDAgMCAxIDEyIDB2NWwyIDJINHpcIi8-PHBhdGggZD1cIk0xMCAyMWg0XCIvPjwvc3ZnPlxuICAgIDxzcGFuIGRhdGEtY29udGFkb3IgYXJpYS1oaWRkZW49XCJ0cnVlXCI-Mzwvc3Bhbj5cbiAgPC9idXR0b24-XG48L2Rpdj4iLCJjc3MiOiIiLCJqcyI6ImRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCJbYXJpYS1sYWJlbD0nUGVyw61vZG8nXSAuYXQtYm90YW9cIikuZm9yRWFjaCgoYm90YW8sIF8sIHRvZG9zKSA9PiB7XG4gIGJvdGFvLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCAoKSA9PiB7XG4gICAgdG9kb3MuZm9yRWFjaCgoYikgPT4gYi5zZXRBdHRyaWJ1dGUoXCJhcmlhLXByZXNzZWRcIiwgU3RyaW5nKGIgPT09IGJvdGFvKSkpO1xuICB9KTtcbn0pOyJ9">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex3-html" role="tabpanel" aria-labelledby="ex3-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-grupo-botoes&quot;</span> <span class="tk-atr">role</span><span class="tk-pon">=</span><span class="tk-str">&quot;group&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Período&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao&quot;</span> <span class="tk-atr">aria-pressed</span><span class="tk-pon">=</span><span class="tk-str">&quot;false&quot;</span><span class="tk-pon">&gt;</span>Dia<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao&quot;</span> <span class="tk-atr">aria-pressed</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span>Semana<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao&quot;</span> <span class="tk-atr">aria-pressed</span><span class="tk-pon">=</span><span class="tk-str">&quot;false&quot;</span><span class="tk-pon">&gt;</span>Mês<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone at-contador-selo&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Notificações: 3 novas&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M10 21h4&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> data-contador <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span>3<span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex3-js" role="tabpanel" aria-labelledby="ex3-aba-js" tabindex="0" hidden><code>document.querySelectorAll(<span class="tk-str">&quot;[aria-label=&#39;Período&#39;] .at-botao&quot;</span>).forEach((botao, _, todos) =&gt; {
+  botao.addEventListener(<span class="tk-str">&quot;click&quot;</span>, () =&gt; {
+    todos.forEach((b) =&gt; b.setAttribute(<span class="tk-str">&quot;aria-pressed&quot;</span>, String(b === botao)));
+  });
+});</code></pre>
+        </div>
+      </div>
+</section>
+
+<section aria-labelledby="referencia"><h2 class="site-secao-titulo" id="referencia"><a href="#referencia">Referência</a></h2>
+<div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Referência de Botão"><table class="at-tabela site-tabela-api">
+          <thead><tr><th scope="col">Nome</th><th scope="col">Tipo</th><th scope="col">O que faz</th></tr></thead>
+          <tbody><tr><td><code>at-botao</code></td><td>classe</td><td>Base.</td></tr><tr><td><code>at-primario / at-suave / at-perigo / at-sucesso / at-fantasma / at-link</code></td><td>classe</td><td>Variações.</td></tr><tr><td><code>at-pequeno / at-grande / at-bloco / at-icone</code></td><td>classe</td><td>Tamanhos e formatos.</td></tr><tr><td><code>aria-busy=&quot;true&quot;</code></td><td>atributo</td><td>Estado a carregar.</td></tr><tr><td><code>at-grupo-botoes</code></td><td>classe</td><td>Botões colados. Marque o ativo com aria-pressed=&quot;true&quot;.</td></tr><tr><td><code>at-contador-selo + [data-contador]</code></td><td>classe</td><td>Número sobre o botão (carrinho, notificações).</td></tr><tr><td><code>data-at-notificar=&quot;texto&quot;</code></td><td>atributo</td><td>Mostra uma notificação ao clicar (atalho rápido).</td></tr></tbody>
+        </table></div>
+</section>
+
+<section aria-labelledby="acessibilidade"><h2 class="site-secao-titulo" id="acessibilidade"><a href="#acessibilidade">Acessibilidade</a></h2>
+<ul class="site-lista "><li>Botão só com ícone precisa de aria-label a descrever a ação.</li><li>Em grupos de alternância (Dia/Semana/Mês), use aria-pressed.</li></ul>
+</section>
+
+<section aria-labelledby="combina-com"><h2 class="site-secao-titulo" id="combina-com"><a href="#combina-com">Combina com</a></h2>
+<div class="site-relacionados"><a href="/componentes/menu-suspenso/"><strong>Menu suspenso</strong><span>Lista de ações que abre ao clicar num botão: o famoso menu dos três pontinhos e o menu do utilizador.</span></a><a href="/componentes/modal/"><strong>Modal (janela de diálogo)</strong><span>Janela por cima da página para confirmar algo importante ou preencher um formulário rápido. Abre sem escrever JavaScript.</span></a><a href="/componentes/notificacao/"><strong>Notificação (toast)</strong><span>Mensagem rápida no canto do ecrã a confirmar o que aconteceu, com botão de Desfazer opcional.</span></a><a href="/componentes/dica/"><strong>Dica (tooltip)</strong><span>Texto curto que aparece ao passar o rato ou ao focar com o teclado, a explicar um ícone.</span></a></div>
+</section>
+
+<section aria-labelledby="documentacao-oficial"><h2 class="site-secao-titulo" id="documentacao-oficial"><a href="#documentacao-oficial">Documentação oficial (MDN)</a></h2>
+<ul class="site-links-mdn"><li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Reference/Elements/button" target="_blank" rel="noopener"><span class="site-idioma" data-idioma="pt">PT</span>&lt;button&gt;</a></li></ul>
+</section>
+
+      <nav class="site-navegacao-docs" aria-label="Anterior e próximo">
+        <a href="/componentes/rotulo-flutuante/" rel="prev"><small>← Anterior</small><strong>Rótulo flutuante (floating label)</strong></a>
+        <a href="/componentes/menu-suspenso/" rel="next"><small>Próximo →</small><strong>Menu suspenso</strong></a>
+      </nav>
+      <p class="at-texto-suave at-texto-pequeno at-mt-6">Encontrou um erro? <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=%5BBot%C3%A3o%5D%20" target="_blank" rel="noopener">Abra uma issue</a> ou <a href="https://github.com/marcos-zorzetto/atalho/tree/main/site/dados" target="_blank" rel="noopener">edite no GitHub</a>.</p>
+    </article>
+    <aside class="site-indice" aria-label="Nesta página">
+      <div class="site-indice-fixo">
+        <h2>Nesta página</h2>
+        <ul><li><a href="#quando-usar">Quando usar</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#exemplos">Exemplos</a></li><li><a href="#referencia">Referência</a></li><li><a href="#acessibilidade">Acessibilidade</a></li><li><a href="#combina-com">Combina com</a></li><li><a href="#documentacao-oficial">Documentação oficial (MDN)</a></li></ul>
+        <aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
+    <a href="/patrocinar/" class="site-patrocinio-link">
+      <span class="site-patrocinio-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
+    </a>
+    <small>Espaço publicitário</small>
+  </aside>
+      </div>
+    </aside>
+  </div>
+  <script type="application/json" id="exemplos-js">[null,null,"const botao = document.querySelector(\"#botao-salvar\");\n\nbotao.addEventListener(\"click\", () => {\n  botao.setAttribute(\"aria-busy\", \"true\");\n\n  setTimeout(() => {\n    botao.removeAttribute(\"aria-busy\");\n    Atalho.notificar(\"Alterações guardadas.\", { tipo: \"sucesso\" });\n  }, 1500);\n});","document.querySelectorAll(\"[aria-label='Período'] .at-botao\").forEach((botao, _, todos) => {\n  botao.addEventListener(\"click\", () => {\n    todos.forEach((b) => b.setAttribute(\"aria-pressed\", String(b === botao)));\n  });\n});"]</script>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

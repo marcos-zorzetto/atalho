@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /conta/
+Disallow: /admin/
+
+Sitemap: https://atalho.com.pt/sitemap.xml

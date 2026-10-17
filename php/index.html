@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PHP com o Atalho · validação, código postal, upload e login</title>
+  <meta name="description" content="Biblioteca PHP do Atalho: validar NIF e IBAN, receber formulários em JSON, morada pelo código postal com cache, upload seguro e login com sessão, explicados em português.">
+  <link rel="canonical" href="https://atalho.com.pt/php/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="PHP com o Atalho · validação, código postal, upload e login">
+  <meta property="og:description" content="Biblioteca PHP do Atalho: validar NIF e IBAN, receber formulários em JSON, morada pelo código postal com cache, upload seguro e login com sessão, explicados em português.">
+  <meta property="og:url" content="https://atalho.com.pt/php/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  
+  
+</head>
+<body data-pagina="guia" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+
+    <section class="site-cabecalho-pagina">
+      <div class="site-container">
+        <span class="at-sobretitulo">Guia</span>
+        <h1 class="site-titulo site-h2">PHP no servidor</h1>
+        <p class="at-chamada">O navegador facilita a vida de quem preenche; o servidor protege os seus dados. Tudo o que o Atalho valida no navegador deve ser validado de novo no PHP.</p>
+        
+      </div>
+    </section>
+    <div class="site-container site-artigo-simples">
+      <div class="at-alerta at-aviso"><div class="at-alerta-conteudo"><strong>Regra de ouro</strong><p>Nunca confie no que vem do navegador. Qualquer pessoa pode desligar o JavaScript ou enviar dados diretamente para a sua API.</p></div></div>
+
+      <h2 class="site-secao-titulo" id="instalar">1. Descarregue a biblioteca PHP</h2>
+      <p>Um ficheiro só, sem dependências, para PHP 8.1 ou mais recente: <a href="https://github.com/marcos-zorzetto/atalho/blob/main/php/atalho.php"><code>atalho.php</code></a>.</p>
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">Terminal</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pal">curl</span> -o atalho.php https://cdn.jsdelivr.net/gh/marcos-zorzetto/atalho@1/php/atalho.php</code></pre>
+    </div>
+
+      <h2 class="site-secao-titulo" id="funcoes">2. O que vem nela</h2>
+      <div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Funções da biblioteca PHP"><table class="at-tabela site-tabela-api">
+        <thead><tr><th scope="col">Função</th><th scope="col">O que faz</th></tr></thead>
+        <tbody><tr><td><code>validarNif($nif)</code></td><td>Verifica o dígito de controlo do NIF/NIPC de Portugal (com ou sem espaços).</td></tr><tr><td><code>validarIban($iban)</code></td><td>IBAN de qualquer país da Europa (tamanho por país e módulo 97).</td></tr><tr><td><code>validarEmail / validarTelefone / validarTelemovel / validarCodigoPostal</code></td><td>Validações comuns, com as mesmas regras do navegador.</td></tr><tr><td><code>validarCpf / validarCnpj / validarCep</code></td><td>Documentos do Brasil, para quem também vende para lá (CNPJ alfanumérico incluído).</td></tr><tr><td><code>validar($dados, $regras)</code></td><td>Valida vários campos e devolve as mensagens de erro em português.</td></tr><tr><td><code>lerJson()</code></td><td>Lê o JSON enviado pelo navegador, com limite de tamanho.</td></tr><tr><td><code>responderJson($dados, $status)</code></td><td>Responde em JSON com o cabeçalho certo e encerra.</td></tr><tr><td><code>responderErro($mensagem, $status, $campos)</code></td><td>Erro no formato { erro, campos } que o Atalho entende.</td></tr><tr><td><code>exigirMetodo(&#39;POST&#39;)</code></td><td>Recusa outros métodos HTTP.</td></tr><tr><td><code>cors($origens)</code></td><td>Permite chamadas só dos domínios indicados.</td></tr><tr><td><code>iniciarSessao() / tokenCsrf() / validarCsrf()</code></td><td>Sessão com cookie seguro e proteção contra CSRF.</td></tr><tr><td><code>buscarCodigoPostal($cp)</code></td><td>Morada de um código postal português (GEO API PT), com cache em ficheiro.</td></tr><tr><td><code>buscarCep($cep)</code></td><td>Endereço de um CEP do Brasil (ViaCEP), com cache em ficheiro.</td></tr><tr><td><code>salvarUpload($arquivo, $pasta, $tipos, $mb)</code></td><td>Guarda o upload, verificando o tipo real do ficheiro e gerando um nome aleatório.</td></tr><tr><td><code>paginar($total, $pagina, $porPagina)</code></td><td>Calcula página, deslocamento e total de páginas.</td></tr><tr><td><code>formatarMoeda($valor, $moeda)</code></td><td>1234,50 € (euro por omissão; &#39;BRL&#39; para R$). Também formatarCpf e formatarCnpj.</td></tr><tr><td><code>e($texto)</code></td><td>Escapa texto para HTML. Use sempre ao imprimir dados do utilizador (evita XSS).</td></tr></tbody>
+      </table></div>
+
+      <h2 class="site-secao-titulo" id="receber-formulario">3. Receber um formulário</h2>
+      <p>O navegador valida para ajudar quem preenche; o PHP valida de novo para proteger o sistema. Erros voltam por campo, no mesmo formato das mensagens do Atalho.</p>
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">HTML (navegador)</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">form</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;cadastro&quot;</span> data-at-validar<span class="tk-pon">&gt;</span>…<span class="tk-pon">&lt;/</span><span class="tk-tag">form</span><span class="tk-pon">&gt;</span>
+
+<span class="tk-pon">&lt;</span><span class="tk-tag">script</span><span class="tk-pon">&gt;</span>
+  document.querySelector(<span class="tk-str">&quot;#cadastro&quot;</span>).addEventListener(<span class="tk-str">&quot;at:enviar&quot;</span>, <span class="tk-pal">async</span> (evento) =&gt; {
+    <span class="tk-pal">const</span> { dados, botao } = evento.detail;
+    botao.setAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>, <span class="tk-str">&quot;true&quot;</span>);
+    <span class="tk-pal">try</span> {
+      <span class="tk-pal">const</span> cliente = <span class="tk-pal">await</span> Atalho.requisitar(<span class="tk-str">&quot;api/cadastro.php&quot;</span>, { metodo: <span class="tk-str">&quot;POST&quot;</span>, corpo: dados });
+      Atalho.notificar(<span class="tk-str">&quot;Bem-vindo(a), &quot;</span> + cliente.nome + <span class="tk-str">&quot;!&quot;</span>, { tipo: <span class="tk-str">&quot;sucesso&quot;</span> });
+    } <span class="tk-pal">catch</span> (erro) {
+      Atalho.notificar(erro.dados?.erro || erro.message, { tipo: <span class="tk-str">&quot;perigo&quot;</span> });
+    } <span class="tk-pal">finally</span> {
+      botao.removeAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>);
+    }
+  });
+<span class="tk-pon">&lt;/</span><span class="tk-tag">script</span><span class="tk-pon">&gt;</span></code></pre>
+    </div>
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">api/cadastro.php</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/cadastro.php — recebe o formulário enviado pelo evento at:enviar</span>
+<span class="tk-pal">declare</span>(strict_types=<span class="tk-num">1</span>);
+
+require __DIR__ . <span class="tk-str">&#39;/../atalho.php&#39;</span>;
+
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, lerJson, validar, responderErro, responderJson, somenteDigitos, limparTexto};
+
+exigirMetodo(<span class="tk-str">&#39;POST&#39;</span>);
+<span class="tk-var">$dados</span> = lerJson();
+
+<span class="tk-com">// As mesmas regras do navegador, conferidas de novo no servidor</span>
+<span class="tk-var">$erros</span> = validar(<span class="tk-var">$dados</span>, [
+    <span class="tk-str">&#39;nome&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;min:3&#39;</span>, <span class="tk-str">&#39;max:120&#39;</span>],
+    <span class="tk-str">&#39;email&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;email&#39;</span>],
+    <span class="tk-str">&#39;nif&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;nif&#39;</span>],
+    <span class="tk-str">&#39;telemovel&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;telemovel&#39;</span>],
+]);
+
+<span class="tk-pal">if</span> (<span class="tk-var">$erros</span>) {
+    responderErro(<span class="tk-str">&#39;Verifique os dados do formulário.&#39;</span>, <span class="tk-num">422</span>, <span class="tk-var">$erros</span>);
+}
+
+<span class="tk-var">$cliente</span> = [
+    <span class="tk-str">&#39;nome&#39;</span> =&gt; limparTexto(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;nome&#39;</span>], <span class="tk-num">120</span>),
+    <span class="tk-str">&#39;email&#39;</span> =&gt; mb_strtolower(trim(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;email&#39;</span>])),
+    <span class="tk-str">&#39;nif&#39;</span> =&gt; somenteDigitos(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;nif&#39;</span>]),            <span class="tk-com">// guarde só os algarismos</span>
+    <span class="tk-str">&#39;telemovel&#39;</span> =&gt; somenteDigitos(<span class="tk-var">$dados</span>[<span class="tk-str">&#39;telemovel&#39;</span>]),
+];
+
+<span class="tk-com">// Aqui guardaria na base de dados (veja o exemplo de pedidos com PDO)</span>
+responderJson([<span class="tk-str">&#39;id&#39;</span> =&gt; <span class="tk-num">123</span>, <span class="tk-str">&#39;nome&#39;</span> =&gt; <span class="tk-var">$cliente</span>[<span class="tk-str">&#39;nome&#39;</span>]], <span class="tk-num">201</span>);</code></pre>
+    </div>
+<h2 class="site-secao-titulo" id="cep">4. Código postal pelo seu servidor</h2>
+      <p>Útil quando quer guardar em cache, registar consultas ou não depender do navegador para falar com a GEO API PT. Há também buscarCep() para o Brasil.</p>
+      
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">api/codigo-postal.php</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/codigo-postal.php?cp=1250-096 — morada pelo código postal (GEO API PT), com cache</span>
+<span class="tk-pal">declare</span>(strict_types=<span class="tk-num">1</span>);
+
+require __DIR__ . <span class="tk-str">&#39;/../atalho.php&#39;</span>;
+
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, buscarCodigoPostal, responderErro, responderJson, validarCodigoPostal};
+
+exigirMetodo(<span class="tk-str">&#39;GET&#39;</span>);
+<span class="tk-var">$codigo</span> = (<span class="tk-tip">string</span>) (<span class="tk-var">$_GET</span>[<span class="tk-str">&#39;cp&#39;</span>] ?? <span class="tk-str">&#39;&#39;</span>);
+
+<span class="tk-pal">if</span> (!validarCodigoPostal(<span class="tk-var">$codigo</span>)) {
+    responderErro(<span class="tk-str">&#39;Código postal inválido (formato 0000-000).&#39;</span>, <span class="tk-num">422</span>);
+}
+
+<span class="tk-pal">try</span> {
+    <span class="tk-var">$morada</span> = buscarCodigoPostal(<span class="tk-var">$codigo</span>, __DIR__ . <span class="tk-str">&#39;/cache-cp&#39;</span>);
+} <span class="tk-pal">catch</span> (RuntimeException <span class="tk-var">$erro</span>) {
+    responderErro(<span class="tk-var">$erro</span>-&gt;getMessage(), <span class="tk-num">503</span>);
+}
+
+<span class="tk-var">$morada</span> ?? responderErro(<span class="tk-str">&#39;Código postal não encontrado.&#39;</span>, <span class="tk-num">404</span>);
+
+header(<span class="tk-str">&#39;Cache-Control: public, max-age=86400&#39;</span>);
+responderJson(<span class="tk-var">$morada</span>);</code></pre>
+    </div>
+<h2 class="site-secao-titulo" id="upload">5. Upload seguro de imagens</h2>
+      <p>Nunca confie na extensão do nome do ficheiro: um .jpg pode ser um script. A biblioteca verifica o tipo real e gera um nome aleatório.</p>
+      
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">api/upload.php</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/upload.php — recebe as fotos do componente &quot;Enviar ficheiros&quot;</span>
+<span class="tk-pal">declare</span>(strict_types=<span class="tk-num">1</span>);
+
+require __DIR__ . <span class="tk-str">&#39;/../atalho.php&#39;</span>;
+
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, validarCsrf, salvarUpload, responderErro, responderJson};
+
+exigirMetodo(<span class="tk-str">&#39;POST&#39;</span>);
+validarCsrf();
+
+<span class="tk-var">$fotos</span> = <span class="tk-var">$_FILES</span>[<span class="tk-str">&#39;fotos&#39;</span>] ?? <span class="tk-pal">null</span>;
+<span class="tk-pal">if</span> (!<span class="tk-var">$fotos</span> || !is_array(<span class="tk-var">$fotos</span>[<span class="tk-str">&#39;name&#39;</span>])) {
+    responderErro(<span class="tk-str">&#39;Nenhuma foto enviada.&#39;</span>, <span class="tk-num">422</span>);
+}
+
+<span class="tk-var">$salvas</span> = [];
+<span class="tk-pal">foreach</span> (array_keys(<span class="tk-var">$fotos</span>[<span class="tk-str">&#39;name&#39;</span>]) <span class="tk-pal">as</span> <span class="tk-var">$i</span>) {
+    <span class="tk-var">$arquivo</span> = [
+        <span class="tk-str">&#39;name&#39;</span> =&gt; <span class="tk-var">$fotos</span>[<span class="tk-str">&#39;name&#39;</span>][<span class="tk-var">$i</span>],
+        <span class="tk-str">&#39;tmp_name&#39;</span> =&gt; <span class="tk-var">$fotos</span>[<span class="tk-str">&#39;tmp_name&#39;</span>][<span class="tk-var">$i</span>],
+        <span class="tk-str">&#39;size&#39;</span> =&gt; <span class="tk-var">$fotos</span>[<span class="tk-str">&#39;size&#39;</span>][<span class="tk-var">$i</span>],
+        <span class="tk-str">&#39;error&#39;</span> =&gt; <span class="tk-var">$fotos</span>[<span class="tk-str">&#39;error&#39;</span>][<span class="tk-var">$i</span>],
+    ];
+    <span class="tk-pal">try</span> {
+        <span class="tk-com">// Confere o tipo REAL do ficheiro, não a extensão do nome</span>
+        <span class="tk-var">$salvas</span>[] = salvarUpload(<span class="tk-var">$arquivo</span>, __DIR__ . <span class="tk-str">&#39;/uploads&#39;</span>, [<span class="tk-str">&#39;image/jpeg&#39;</span>, <span class="tk-str">&#39;image/png&#39;</span>, <span class="tk-str">&#39;image/webp&#39;</span>], <span class="tk-num">5</span>);
+    } <span class="tk-pal">catch</span> (RuntimeException <span class="tk-var">$erro</span>) {
+        responderErro(<span class="tk-str">&quot;{$arquivo[&#39;name&#39;]}: {$erro-&gt;getMessage()}&quot;</span>, <span class="tk-num">422</span>);
+    }
+}
+
+responderJson([<span class="tk-str">&#39;arquivos&#39;</span> =&gt; <span class="tk-var">$salvas</span>], <span class="tk-num">201</span>);</code></pre>
+    </div>
+<h2 class="site-secao-titulo" id="login">6. Login com sessão</h2>
+      <p>Palavra-passe sempre com password_hash, comparação com password_verify, nova sessão após o login e limite de tentativas.</p>
+      
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">api/login.php</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/login.php — login com sessão segura, palavra-passe com hash e limite de tentativas</span>
+<span class="tk-pal">declare</span>(strict_types=<span class="tk-num">1</span>);
+
+require __DIR__ . <span class="tk-str">&#39;/../atalho.php&#39;</span>;
+
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, lerJson, iniciarSessao, validarCsrf, responderErro, responderJson};
+
+exigirMetodo(<span class="tk-str">&#39;POST&#39;</span>);
+iniciarSessao();
+validarCsrf();
+
+<span class="tk-com">// Limite simples: 5 tentativas a cada 15 minutos por sessão</span>
+<span class="tk-var">$tentativas</span> = array_filter(<span class="tk-var">$_SESSION</span>[<span class="tk-str">&#39;tentativas&#39;</span>] ?? [], <span class="tk-pal">fn</span> (<span class="tk-tip">int</span> <span class="tk-var">$hora</span>) =&gt; <span class="tk-var">$hora</span> &gt; time() - <span class="tk-num">900</span>);
+<span class="tk-pal">if</span> (count(<span class="tk-var">$tentativas</span>) &gt;= <span class="tk-num">5</span>) {
+    responderErro(<span class="tk-str">&#39;Demasiadas tentativas. Aguarde 15 minutos.&#39;</span>, <span class="tk-num">429</span>);
+}
+
+<span class="tk-var">$dados</span> = lerJson();
+<span class="tk-var">$email</span> = mb_strtolower(trim((<span class="tk-tip">string</span>) (<span class="tk-var">$dados</span>[<span class="tk-str">&#39;email&#39;</span>] ?? <span class="tk-str">&#39;&#39;</span>)));
+<span class="tk-var">$senha</span> = (<span class="tk-tip">string</span>) (<span class="tk-var">$dados</span>[<span class="tk-str">&#39;senha&#39;</span>] ?? <span class="tk-str">&#39;&#39;</span>);
+
+<span class="tk-com">// Procure o utilizador na base de dados. Ao registar, guarde: password_hash($senha, PASSWORD_DEFAULT)</span>
+<span class="tk-var">$usuario</span> = buscarUsuarioPorEmail(<span class="tk-var">$email</span>);
+
+<span class="tk-com">// password_verify compara com o hash em tempo constante</span>
+<span class="tk-pal">if</span> (!<span class="tk-var">$usuario</span> || !password_verify(<span class="tk-var">$senha</span>, <span class="tk-var">$usuario</span>[<span class="tk-str">&#39;senha_hash&#39;</span>])) {
+    <span class="tk-var">$_SESSION</span>[<span class="tk-str">&#39;tentativas&#39;</span>] = [...<span class="tk-var">$tentativas</span>, time()];
+    responderErro(<span class="tk-str">&#39;E-mail ou palavra-passe incorretos.&#39;</span>, <span class="tk-num">401</span>); <span class="tk-com">// não diga qual dos dois errou</span>
+}
+
+session_regenerate_id(<span class="tk-pal">true</span>); <span class="tk-com">// evita sequestro de sessão</span>
+unset(<span class="tk-var">$_SESSION</span>[<span class="tk-str">&#39;tentativas&#39;</span>]);
+<span class="tk-var">$_SESSION</span>[<span class="tk-str">&#39;usuario_id&#39;</span>] = <span class="tk-var">$usuario</span>[<span class="tk-str">&#39;id&#39;</span>];
+
+responderJson([<span class="tk-str">&#39;nome&#39;</span> =&gt; <span class="tk-var">$usuario</span>[<span class="tk-str">&#39;nome&#39;</span>]]);
+
+<span class="tk-com">/** Exemplo: troque pela consulta à sua base de dados. */</span>
+<span class="tk-pal">function</span> buscarUsuarioPorEmail(<span class="tk-tip">string</span> <span class="tk-var">$email</span>): ?<span class="tk-pal">array</span>
+{
+    <span class="tk-var">$exemplo</span> = [<span class="tk-str">&#39;id&#39;</span> =&gt; <span class="tk-num">1</span>, <span class="tk-str">&#39;nome&#39;</span> =&gt; <span class="tk-str">&#39;Ana&#39;</span>, <span class="tk-str">&#39;email&#39;</span> =&gt; <span class="tk-str">&#39;ana@exemplo.com&#39;</span>, <span class="tk-str">&#39;senha_hash&#39;</span> =&gt; password_hash(<span class="tk-str">&#39;senha-de-teste&#39;</span>, PASSWORD_DEFAULT)];
+    <span class="tk-pal">return</span> <span class="tk-var">$email</span> === <span class="tk-var">$exemplo</span>[<span class="tk-str">&#39;email&#39;</span>] ? <span class="tk-var">$exemplo</span> : <span class="tk-pal">null</span>;
+}</code></pre>
+    </div>
+<h2 class="site-secao-titulo" id="pedidos">7. Lista paginada com base de dados</h2>
+      <p>JSON paginado para alimentar a Tabela de dados, com PDO e parâmetros para evitar SQL injection.</p>
+      
+      <div class="site-exemplo-caixa">
+      <div class="site-codigo-abas"><span class="site-codigo-rotulo">api/pedidos.php</span><button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button></div>
+      <pre class="site-codigo" tabindex="0"><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/pedidos.php?pagina=1&amp;busca=maria — lista paginada para a Tabela de dados</span>
+<span class="tk-pal">declare</span>(strict_types=<span class="tk-num">1</span>);
+
+require __DIR__ . <span class="tk-str">&#39;/../atalho.php&#39;</span>;
+
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, paginar, limparTexto, responderJson};
+
+exigirMetodo(<span class="tk-str">&#39;GET&#39;</span>);
+
+<span class="tk-var">$pdo</span> = <span class="tk-pal">new</span> PDO(<span class="tk-str">&#39;mysql:host=localhost;dbname=loja;charset=utf8mb4&#39;</span>, <span class="tk-str">&#39;utilizador&#39;</span>, <span class="tk-str">&#39;palavra-passe&#39;</span>, [
+    PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE =&gt; PDO::FETCH_ASSOC,
+]);
+
+<span class="tk-var">$busca</span> = limparTexto(<span class="tk-var">$_GET</span>[<span class="tk-str">&#39;busca&#39;</span>] ?? <span class="tk-str">&#39;&#39;</span>, <span class="tk-num">100</span>);
+<span class="tk-var">$filtro</span> = <span class="tk-str">&#39;%&#39;</span> . <span class="tk-var">$busca</span> . <span class="tk-str">&#39;%&#39;</span>;
+
+<span class="tk-com">// Use sempre parâmetros (?), nunca junte texto do utilizador no SQL: evita SQL injection</span>
+<span class="tk-var">$contar</span> = <span class="tk-var">$pdo</span>-&gt;prepare(<span class="tk-str">&#39;SELECT COUNT(*) FROM pedidos WHERE cliente LIKE ?&#39;</span>);
+<span class="tk-var">$contar</span>-&gt;execute([<span class="tk-var">$filtro</span>]);
+<span class="tk-var">$pagina</span> = paginar((<span class="tk-tip">int</span>) <span class="tk-var">$contar</span>-&gt;fetchColumn(), (<span class="tk-tip">int</span>) (<span class="tk-var">$_GET</span>[<span class="tk-str">&#39;pagina&#39;</span>] ?? <span class="tk-num">1</span>), <span class="tk-num">20</span>);
+
+<span class="tk-var">$consulta</span> = <span class="tk-var">$pdo</span>-&gt;prepare(
+    <span class="tk-str">&#39;SELECT id, cliente, status, total, criado_em
+       FROM pedidos
+      WHERE cliente LIKE ?
+      ORDER BY criado_em DESC
+      LIMIT ? OFFSET ?&#39;</span>
+);
+<span class="tk-var">$consulta</span>-&gt;bindValue(<span class="tk-num">1</span>, <span class="tk-var">$filtro</span>);
+<span class="tk-var">$consulta</span>-&gt;bindValue(<span class="tk-num">2</span>, <span class="tk-var">$pagina</span>[<span class="tk-str">&#39;porPagina&#39;</span>], PDO::PARAM_INT);
+<span class="tk-var">$consulta</span>-&gt;bindValue(<span class="tk-num">3</span>, <span class="tk-var">$pagina</span>[<span class="tk-str">&#39;deslocamento&#39;</span>], PDO::PARAM_INT);
+<span class="tk-var">$consulta</span>-&gt;execute();
+
+responderJson([<span class="tk-str">&#39;pedidos&#39;</span> =&gt; <span class="tk-var">$consulta</span>-&gt;fetchAll(), <span class="tk-str">&#39;paginacao&#39;</span> =&gt; <span class="tk-var">$pagina</span>]);</code></pre>
+    </div>
+    </div>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

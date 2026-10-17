@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etapas em HTML, CSS e JavaScript | Atalho</title>
+  <meta name="description" content="Mostra o progresso num processo em partes, como carrinho → entrega → pagamento → confirmação.">
+  <link rel="canonical" href="https://atalho.com.pt/componentes/etapas/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Etapas · Atalho">
+  <meta property="og:description" content="Mostra o progresso num processo em partes, como carrinho → entrega → pagamento → confirmação.">
+  <meta property="og:url" content="https://atalho.com.pt/componentes/etapas/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Etapas em HTML, CSS e JavaScript","description":"Mostra o progresso num processo em partes, como carrinho → entrega → pagamento → confirmação.","inLanguage":"pt-PT","url":"https://atalho.com.pt/componentes/etapas/","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"publisher":{"@type":"Organization","name":"Atalho","url":"https://atalho.com.pt/"},"keywords":"stepper, passos, wizard, checkout, progresso do registo, etapas do pedido, steps","proficiencyLevel":"Beginner"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://atalho.com.pt/"},{"@type":"ListItem","position":2,"name":"Componentes","item":"https://atalho.com.pt/componentes/"},{"@type":"ListItem","position":3,"name":"Etapas","item":"https://atalho.com.pt/componentes/etapas/"}]}</script>
+  
+</head>
+<body data-pagina="componente" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/" aria-current="page">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+<div class="site-docs">
+    <nav class="site-menu-docs" id="menu-docs" aria-label="Todos os componentes"><h2>Comece aqui</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/cores-e-temas/">Cores e tema escuro</a></li><li><a href="/componentes/layout/">Layout e grade</a></li><li><a href="/componentes/tipografia/">Texto e tipografia</a></li><li><a href="/componentes/grade-12/">Grelha de 12 colunas <span class="site-novo">novo</span></a></li><li><a href="/componentes/utilitarios/">Utilitários (espaçamento, flex, cores...) <span class="site-novo">novo</span></a></li></ul><h2>Formulários</h2><ul><li><a href="/componentes/campo/">Campos de formulário</a></li><li><a href="/componentes/mascaras/">Máscaras (NIF, IBAN, telemóvel...)</a></li><li><a href="/componentes/cep/">Morada pelo código postal</a></li><li><a href="/componentes/validacao/">Validação de formulário</a></li><li><a href="/componentes/senha/">Palavra-passe (mostrar e força)</a></li><li><a href="/componentes/codigo/">Código de verificação</a></li><li><a href="/componentes/upload/">Enviar ficheiros</a></li><li><a href="/componentes/autocompletar/">Autocompletar <span class="site-novo">novo</span></a></li><li><a href="/componentes/quantidade/">Quantidade (+ e −) <span class="site-novo">novo</span></a></li><li><a href="/componentes/contador-caracteres/">Contador de caracteres <span class="site-novo">novo</span></a></li><li><a href="/componentes/faixa/">Faixa de valores (slider) <span class="site-novo">novo</span></a></li><li><a href="/componentes/etiquetas-entrada/">Entrada de etiquetas (tags) <span class="site-novo">novo</span></a></li><li><a href="/componentes/rotulo-flutuante/">Rótulo flutuante (floating label) <span class="site-novo">novo</span></a></li></ul><h2>Ações</h2><ul><li><a href="/componentes/botao/">Botão</a></li><li><a href="/componentes/menu-suspenso/">Menu suspenso</a></li><li><a href="/componentes/copiar/">Copiar (IBAN, referência, cupão, link)</a></li><li><a href="/componentes/whatsapp/">Botão do WhatsApp <span class="site-novo">novo</span></a></li><li><a href="/componentes/recolher/">Recolher e expandir (collapse) <span class="site-novo">novo</span></a></li><li><a href="/componentes/grupo-botoes/">Grupo de botões e botão fechar <span class="site-novo">novo</span></a></li></ul><h2>Navegação</h2><ul><li><a href="/componentes/barra/">Barra de navegação</a></li><li><a href="/componentes/lateral/">Menu lateral de sistema</a></li><li><a href="/componentes/abas/">Abas</a></li><li><a href="/componentes/trilha/">Trilha (breadcrumb)</a></li><li><a href="/componentes/paginacao/">Paginação</a></li><li><a href="/componentes/etapas/" aria-current="page">Etapas</a></li><li><a href="/componentes/comando/">Pesquisa rápida (Ctrl+K)</a></li><li><a href="/componentes/notificacoes-sino/">Central de notificações <span class="site-novo">novo</span></a></li><li><a href="/componentes/voltar-topo/">Voltar ao topo <span class="site-novo">novo</span></a></li><li><a href="/componentes/indice/">Índice que acompanha a leitura (scrollspy) <span class="site-novo">novo</span></a></li></ul><h2>Janelas e avisos</h2><ul><li><a href="/componentes/modal/">Modal (janela de diálogo)</a></li><li><a href="/componentes/gaveta/">Gaveta (painel lateral)</a></li><li><a href="/componentes/dica/">Dica (tooltip)</a></li><li><a href="/componentes/notificacao/">Notificação (toast)</a></li><li><a href="/componentes/balao/">Balão informativo (popover) <span class="site-novo">novo</span></a></li></ul><h2>Exibir dados</h2><ul><li><a href="/componentes/cartao/">Cartão</a></li><li><a href="/componentes/produto/">Cartão de produto</a></li><li><a href="/componentes/tabela/">Tabela de dados</a></li><li><a href="/componentes/indicador/">Indicadores (KPIs)</a></li><li><a href="/componentes/selo/">Selos e etiquetas</a></li><li><a href="/componentes/avatar/">Avatar</a></li><li><a href="/componentes/linha-do-tempo/">Linha do tempo (seguimento)</a></li><li><a href="/componentes/avaliacao/">Avaliação (estrelas)</a></li><li><a href="/componentes/carrossel/">Carrossel</a></li><li><a href="/componentes/sanfona/">Acordeão (perguntas frequentes)</a></li><li><a href="/componentes/chat/">Chat</a></li><li><a href="/componentes/kanban/">Quadro Kanban</a></li><li><a href="/componentes/galeria/">Galeria de fotos <span class="site-novo">novo</span></a></li><li><a href="/componentes/video/">Vídeo leve do YouTube <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-detalhes/">Lista de detalhes <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-grupo/">Lista agrupada (list group) <span class="site-novo">novo</span></a></li><li><a href="/componentes/imagens/">Imagens, figuras e proporção <span class="site-novo">novo</span></a></li></ul><h2>Feedback</h2><ul><li><a href="/componentes/alerta/">Alertas e faixa</a></li><li><a href="/componentes/carregando/">A carregar e progresso</a></li><li><a href="/componentes/vazio/">Estado vazio</a></li><li><a href="/componentes/cookies/">Aviso de cookies (RGPD)</a></li></ul><h2>Blocos de página</h2><ul><li><a href="/componentes/hero/">Hero (topo da landing page)</a></li><li><a href="/componentes/planos/">Planos e preços</a></li><li><a href="/componentes/rodape/">Rodapé</a></li><li><a href="/componentes/contagem-regressiva/">Contagem regressiva <span class="site-novo">novo</span></a></li><li><a href="/componentes/depoimentos/">Depoimentos <span class="site-novo">novo</span></a></li><li><a href="/componentes/recursos/">Grade de recursos <span class="site-novo">novo</span></a></li><li><a href="/componentes/newsletter/">Newsletter <span class="site-novo">novo</span></a></li></ul><h2>JavaScript</h2><ul><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/formatar/">Formatar (moeda, datas, números)</a></li><li><a href="/componentes/requisitar/">Obter dados de uma API</a></li><li><a href="/componentes/eventos/">Eventos do Atalho</a></li><li><a href="/componentes/carregar-mais/">Carregar mais (scroll infinito) <span class="site-novo">novo</span></a></li></ul><h2>Receitas completas</h2><ul><li><a href="/componentes/receita-loja/">Loja com carrinho</a></li><li><a href="/componentes/receita-cadastro/">Registo com morada automática</a></li><li><a href="/componentes/receita-painel/">Painel administrativo</a></li><li><a href="/componentes/receita-login/">Login em duas etapas</a></li></ul></nav>
+    <article class="site-artigo" data-componente="etapas">
+      <div class="site-docs-barra-celular">
+        <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Todos os componentes</button>
+      </div>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
+        <li><a href="/">Início</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/componentes/barra/">Navegação</a></li>
+        <li aria-current="page">Etapas</li>
+      </ol></nav>
+      <div class="site-titulo-linha">
+        <h1 class="site-titulo site-h2" tabindex="-1">Etapas</h1>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="etapas" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/></svg><span>Adicionar aos favoritos</span></button>
+      </div>
+      <p class="at-chamada">Mostra o progresso num processo em partes, como carrinho → entrega → pagamento → confirmação.</p>
+      <div class="site-meta">
+        <span class="site-linguagem" data-linguagem="html">HTML</span><span class="site-linguagem" data-linguagem="js">JavaScript</span>
+      </div>
+      <div class="site-meta"><span class="site-meta-rotulo">Padrão usado em</span><span class="site-referencia">Worten e Amazon (checkout)</span><span class="site-referencia">Abertura de conta em bancos digitais</span></div>
+      
+
+      <section aria-labelledby="quando-usar"><h2 class="site-secao-titulo" id="quando-usar"><a href="#quando-usar">Quando usar</a></h2>
+<div class="site-listas">
+          <div><ul class="site-lista "><li>Processos com 3 a 5 etapas em ordem fixa.</li></ul></div>
+          
+        </div>
+</section>
+
+<section aria-labelledby="como-funciona"><h2 class="site-secao-titulo" id="como-funciona"><a href="#como-funciona">Como funciona</a></h2>
+<div class="site-explicacao"><p>Marque as etapas concluídas com data-estado=&quot;feito&quot; e a atual com aria-current=&quot;step&quot;. Os números e as linhas são desenhados pelo CSS.</p></div>
+</section>
+
+<section aria-labelledby="exemplos"><h2 class="site-secao-titulo" id="exemplos"><a href="#exemplos">Exemplo</a></h2>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-checkout"><a href="#exemplo-checkout">Checkout</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="0">
+<ol class="at-etapas" id="etapas-checkout">
+  <li data-estado="feito">Carrinho</li>
+  <li aria-current="step">Entrega</li>
+  <li>Pagamento</li>
+  <li>Confirmação</li>
+</ol>
+<div class="at-linha at-centro at-mt-6">
+  <button class="at-botao" id="etapa-voltar">Voltar</button>
+  <button class="at-botao at-primario" id="etapa-avancar">Continuar</button>
+</div>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex0-html" id="ex0-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-js" id="ex0-aba-js" tabindex="-1">JavaScript</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPG9sIGNsYXNzPVwiYXQtZXRhcGFzXCIgaWQ9XCJldGFwYXMtY2hlY2tvdXRcIj5cbiAgPGxpIGRhdGEtZXN0YWRvPVwiZmVpdG9cIj5DYXJyaW5obzwvbGk-XG4gIDxsaSBhcmlhLWN1cnJlbnQ9XCJzdGVwXCI-RW50cmVnYTwvbGk-XG4gIDxsaT5QYWdhbWVudG88L2xpPlxuICA8bGk-Q29uZmlybWHDp8OjbzwvbGk-XG48L29sPlxuPGRpdiBjbGFzcz1cImF0LWxpbmhhIGF0LWNlbnRybyBhdC1tdC02XCI-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3Rhb1wiIGlkPVwiZXRhcGEtdm9sdGFyXCI-Vm9sdGFyPC9idXR0b24-XG4gIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1wcmltYXJpb1wiIGlkPVwiZXRhcGEtYXZhbmNhclwiPkNvbnRpbnVhcjwvYnV0dG9uPlxuPC9kaXY-IiwiY3NzIjoiIiwianMiOiJjb25zdCBldGFwYXMgPSBbLi4uZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIiNldGFwYXMtY2hlY2tvdXQgbGlcIildO1xubGV0IGF0dWFsID0gMTtcblxuZnVuY3Rpb24gbW9zdHJhcigpIHtcbiAgZXRhcGFzLmZvckVhY2goKGV0YXBhLCBpbmRpY2UpID0-IHtcbiAgICBpZiAoaW5kaWNlID09PSBhdHVhbCkgZXRhcGEuc2V0QXR0cmlidXRlKFwiYXJpYS1jdXJyZW50XCIsIFwic3RlcFwiKTtcbiAgICBlbHNlIGV0YXBhLnJlbW92ZUF0dHJpYnV0ZShcImFyaWEtY3VycmVudFwiKTtcbiAgICBpZiAoaW5kaWNlIDwgYXR1YWwpIGV0YXBhLmRhdGFzZXQuZXN0YWRvID0gXCJmZWl0b1wiO1xuICAgIGVsc2UgZGVsZXRlIGV0YXBhLmRhdGFzZXQuZXN0YWRvO1xuICB9KTtcbn1cblxuZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNldGFwYS1hdmFuY2FyXCIpLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCAoKSA9PiB7XG4gIGF0dWFsID0gTWF0aC5taW4oYXR1YWwgKyAxLCBldGFwYXMubGVuZ3RoIC0gMSk7XG4gIG1vc3RyYXIoKTtcbn0pO1xuZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNldGFwYS12b2x0YXJcIikuYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsICgpID0-IHtcbiAgYXR1YWwgPSBNYXRoLm1heChhdHVhbCAtIDEsIDApO1xuICBtb3N0cmFyKCk7XG59KTsifQ">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex0-html" role="tabpanel" aria-labelledby="ex0-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">ol</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-etapas&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;etapas-checkout&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">li</span> <span class="tk-atr">data-estado</span><span class="tk-pon">=</span><span class="tk-str">&quot;feito&quot;</span><span class="tk-pon">&gt;</span>Carrinho<span class="tk-pon">&lt;/</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">li</span> <span class="tk-atr">aria-current</span><span class="tk-pon">=</span><span class="tk-str">&quot;step&quot;</span><span class="tk-pon">&gt;</span>Entrega<span class="tk-pon">&lt;/</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>Pagamento<span class="tk-pon">&lt;/</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>Confirmação<span class="tk-pon">&lt;/</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">ol</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha at-centro at-mt-6&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;etapa-voltar&quot;</span><span class="tk-pon">&gt;</span>Voltar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;etapa-avancar&quot;</span><span class="tk-pon">&gt;</span>Continuar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex0-js" role="tabpanel" aria-labelledby="ex0-aba-js" tabindex="0" hidden><code><span class="tk-pal">const</span> etapas = [...document.querySelectorAll(<span class="tk-str">&quot;#etapas-checkout li&quot;</span>)];
+<span class="tk-pal">let</span> atual = <span class="tk-num">1</span>;
+
+<span class="tk-pal">function</span> mostrar() {
+  etapas.forEach((etapa, indice) =&gt; {
+    <span class="tk-pal">if</span> (indice === atual) etapa.setAttribute(<span class="tk-str">&quot;aria-current&quot;</span>, <span class="tk-str">&quot;step&quot;</span>);
+    <span class="tk-pal">else</span> etapa.removeAttribute(<span class="tk-str">&quot;aria-current&quot;</span>);
+    <span class="tk-pal">if</span> (indice &lt; atual) etapa.dataset.estado = <span class="tk-str">&quot;feito&quot;</span>;
+    <span class="tk-pal">else</span> delete etapa.dataset.estado;
+  });
+}
+
+document.querySelector(<span class="tk-str">&quot;#etapa-avancar&quot;</span>).addEventListener(<span class="tk-str">&quot;click&quot;</span>, () =&gt; {
+  atual = Math.min(atual + <span class="tk-num">1</span>, etapas.length - <span class="tk-num">1</span>);
+  mostrar();
+});
+document.querySelector(<span class="tk-str">&quot;#etapa-voltar&quot;</span>).addEventListener(<span class="tk-str">&quot;click&quot;</span>, () =&gt; {
+  atual = Math.max(atual - <span class="tk-num">1</span>, <span class="tk-num">0</span>);
+  mostrar();
+});</code></pre>
+        </div>
+      </div>
+</section>
+
+<section aria-labelledby="referencia"><h2 class="site-secao-titulo" id="referencia"><a href="#referencia">Referência</a></h2>
+<div class="at-tabela-caixa" tabindex="0" role="region" aria-label="Referência de Etapas"><table class="at-tabela site-tabela-api">
+          <thead><tr><th scope="col">Nome</th><th scope="col">Tipo</th><th scope="col">O que faz</th></tr></thead>
+          <tbody><tr><td><code>at-etapas</code></td><td>classe</td><td>No &lt;ol&gt;.</td></tr><tr><td><code>data-estado=&quot;feito&quot;</code></td><td>atributo</td><td>Etapa concluída.</td></tr><tr><td><code>aria-current=&quot;step&quot;</code></td><td>atributo</td><td>Etapa atual.</td></tr></tbody>
+        </table></div>
+</section>
+
+<section aria-labelledby="acessibilidade"><h2 class="site-secao-titulo" id="acessibilidade"><a href="#acessibilidade">Acessibilidade</a></h2>
+<ul class="site-lista "><li>aria-current=&quot;step&quot; faz o leitor de ecrã anunciar &quot;etapa atual&quot;.</li></ul>
+</section>
+
+<section aria-labelledby="combina-com"><h2 class="site-secao-titulo" id="combina-com"><a href="#combina-com">Combina com</a></h2>
+<div class="site-relacionados"><a href="/componentes/validacao/"><strong>Validação de formulário</strong><span>Mensagens de erro claras, em português, no lugar certo e na hora certa. Sem biblioteca extra, com a validação nativa do navegador.</span></a><a href="/componentes/receita-login/"><strong>Login em duas etapas</strong><span>E-mail e palavra-passe, depois o código de verificação, depois a confirmação. Os ecrãs trocam pelo Estado, sem recarregar a página.</span></a><a href="/componentes/estado/"><strong>Estado (reatividade)</strong><span>A ideia central do React, sem React: muda os dados e o ecrã atualiza-se sozinho. É assim que os componentes se conectam.</span></a></div>
+</section>
+
+<section aria-labelledby="documentacao-oficial"><h2 class="site-secao-titulo" id="documentacao-oficial"><a href="#documentacao-oficial">Documentação oficial (MDN)</a></h2>
+<ul class="site-links-mdn"><li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-current" target="_blank" rel="noopener"><span class="site-idioma" data-idioma="en">EN</span>aria-current</a> <small class="at-texto-suave">ainda sem tradução para português</small></li></ul>
+</section>
+
+      <nav class="site-navegacao-docs" aria-label="Anterior e próximo">
+        <a href="/componentes/paginacao/" rel="prev"><small>← Anterior</small><strong>Paginação</strong></a>
+        <a href="/componentes/comando/" rel="next"><small>Próximo →</small><strong>Pesquisa rápida (Ctrl+K)</strong></a>
+      </nav>
+      <p class="at-texto-suave at-texto-pequeno at-mt-6">Encontrou um erro? <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=%5BEtapas%5D%20" target="_blank" rel="noopener">Abra uma issue</a> ou <a href="https://github.com/marcos-zorzetto/atalho/tree/main/site/dados" target="_blank" rel="noopener">edite no GitHub</a>.</p>
+    </article>
+    <aside class="site-indice" aria-label="Nesta página">
+      <div class="site-indice-fixo">
+        <h2>Nesta página</h2>
+        <ul><li><a href="#quando-usar">Quando usar</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#exemplos">Exemplo</a></li><li><a href="#referencia">Referência</a></li><li><a href="#acessibilidade">Acessibilidade</a></li><li><a href="#combina-com">Combina com</a></li><li><a href="#documentacao-oficial">Documentação oficial (MDN)</a></li></ul>
+        <aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
+    <a href="/patrocinar/" class="site-patrocinio-link">
+      <span class="site-patrocinio-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
+    </a>
+    <small>Espaço publicitário</small>
+  </aside>
+      </div>
+    </aside>
+  </div>
+  <script type="application/json" id="exemplos-js">["const etapas = [...document.querySelectorAll(\"#etapas-checkout li\")];\nlet atual = 1;\n\nfunction mostrar() {\n  etapas.forEach((etapa, indice) => {\n    if (indice === atual) etapa.setAttribute(\"aria-current\", \"step\");\n    else etapa.removeAttribute(\"aria-current\");\n    if (indice \u003c atual) etapa.dataset.estado = \"feito\";\n    else delete etapa.dataset.estado;\n  });\n}\n\ndocument.querySelector(\"#etapa-avancar\").addEventListener(\"click\", () => {\n  atual = Math.min(atual + 1, etapas.length - 1);\n  mostrar();\n});\ndocument.querySelector(\"#etapa-voltar\").addEventListener(\"click\", () => {\n  atual = Math.max(atual - 1, 0);\n  mostrar();\n});"]</script>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

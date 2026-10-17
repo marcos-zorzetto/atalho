@@ -1,0 +1,33 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+/atalho/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/exemplos/capturas/*
+  Cache-Control: public, max-age=604800
+
+/exemplos/miniaturas/*
+  Cache-Control: public, max-age=604800
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+/conta/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+/pro/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+/sistemas/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests

@@ -1,0 +1,77 @@
+# Gerado por scripts/site/alojamento.mjs — não edite à mão (as mudanças perdem-se na próxima publicação).
+# Guia: servicos/PTSERVIDOR.md
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+AddType application/manifest+json .webmanifest
+AddType image/svg+xml .svg
+AddType text/javascript .js .mjs
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Validação do certificado (AutoSSL) passa sem redirecionamento
+RewriteRule ^\.well-known/ - [L]
+# http e outros nomes (www, subdomínio do cPanel) levam ao endereço oficial
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://atalho.com.pt%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} !^atalho\.com\.pt$ [NC]
+RewriteRule ^ https://atalho.com.pt%{REQUEST_URI} [L,R=301]
+
+# Ficheiros escondidos (.git, .env…) nunca são servidos; .well-known continua acessível
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()"
+Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+# Páginas: sempre a versão nova (a cache do nginx e do navegador revalida)
+<FilesMatch "\.(html|xml|txt|json)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+# CSS e JS: as páginas pedem-nos com ?v=<impressão>; mesmo assim o navegador confirma
+# sempre (304 se não mudou), para nunca ficar preso a uma versão antiga
+<FilesMatch "\.(css|js|mjs)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+<FilesMatch "\.(svg|png|webp|woff2)$">
+  Header set Cache-Control "public, max-age=604800"
+</FilesMatch>
+<If "%{REQUEST_URI} =~ m#^/atalho/#">
+  Header always set Cache-Control "public, max-age=3600, must-revalidate"
+</If>
+<If "%{REQUEST_URI} =~ m#^/exemplos/capturas/#">
+  Header always set Cache-Control "public, max-age=604800"
+</If>
+<If "%{REQUEST_URI} =~ m#^/exemplos/miniaturas/#">
+  Header always set Cache-Control "public, max-age=604800"
+</If>
+<If "%{REQUEST_URI} =~ m#^/admin/#">
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set Cache-Control "no-store"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+</If>
+<If "%{REQUEST_URI} =~ m#^/conta/#">
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set Cache-Control "no-store"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+</If>
+<If "%{REQUEST_URI} =~ m#^/pro/#">
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+</If>
+<If "%{REQUEST_URI} =~ m#^/sistemas/#">
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-2R1457rl7WlYVAOVgaSlkvE/iT6jkG0uuw/phwjrsRI=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://*.supabase.co https://*.workers.dev https://json.geoapi.pt https://viacep.com.br https://dummyjson.com; frame-src 'self' blob: https://www.youtube-nocookie.com https://www.openstreetmap.org; worker-src 'self' blob:; form-action 'self' https://*.revolut.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+</If>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml application/xml text/plain
+</IfModule>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Newsletter em HTML, CSS e JavaScript | Atalho</title>
+  <meta name="description" content="Formulário de inscrição com validação, estado de carregamento, mensagem de sucesso e consentimento conforme o RGPD.">
+  <link rel="canonical" href="https://atalho.com.pt/componentes/newsletter/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Newsletter · Atalho">
+  <meta property="og:description" content="Formulário de inscrição com validação, estado de carregamento, mensagem de sucesso e consentimento conforme o RGPD.">
+  <meta property="og:url" content="https://atalho.com.pt/componentes/newsletter/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Newsletter em HTML, CSS e JavaScript","description":"Formulário de inscrição com validação, estado de carregamento, mensagem de sucesso e consentimento conforme o RGPD.","inLanguage":"pt-PT","url":"https://atalho.com.pt/componentes/newsletter/","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"publisher":{"@type":"Organization","name":"Atalho","url":"https://atalho.com.pt/"},"keywords":"newsletter, inscrição, assinar, lista de e-mails, captura de leads, e-mail marketing, receba novidades","proficiencyLevel":"Beginner"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://atalho.com.pt/"},{"@type":"ListItem","position":2,"name":"Componentes","item":"https://atalho.com.pt/componentes/"},{"@type":"ListItem","position":3,"name":"Newsletter","item":"https://atalho.com.pt/componentes/newsletter/"}]}</script>
+  
+</head>
+<body data-pagina="componente" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/" aria-current="page">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+<div class="site-docs">
+    <nav class="site-menu-docs" id="menu-docs" aria-label="Todos os componentes"><h2>Comece aqui</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/cores-e-temas/">Cores e tema escuro</a></li><li><a href="/componentes/layout/">Layout e grade</a></li><li><a href="/componentes/tipografia/">Texto e tipografia</a></li><li><a href="/componentes/grade-12/">Grelha de 12 colunas <span class="site-novo">novo</span></a></li><li><a href="/componentes/utilitarios/">Utilitários (espaçamento, flex, cores...) <span class="site-novo">novo</span></a></li></ul><h2>Formulários</h2><ul><li><a href="/componentes/campo/">Campos de formulário</a></li><li><a href="/componentes/mascaras/">Máscaras (NIF, IBAN, telemóvel...)</a></li><li><a href="/componentes/cep/">Morada pelo código postal</a></li><li><a href="/componentes/validacao/">Validação de formulário</a></li><li><a href="/componentes/senha/">Palavra-passe (mostrar e força)</a></li><li><a href="/componentes/codigo/">Código de verificação</a></li><li><a href="/componentes/upload/">Enviar ficheiros</a></li><li><a href="/componentes/autocompletar/">Autocompletar <span class="site-novo">novo</span></a></li><li><a href="/componentes/quantidade/">Quantidade (+ e −) <span class="site-novo">novo</span></a></li><li><a href="/componentes/contador-caracteres/">Contador de caracteres <span class="site-novo">novo</span></a></li><li><a href="/componentes/faixa/">Faixa de valores (slider) <span class="site-novo">novo</span></a></li><li><a href="/componentes/etiquetas-entrada/">Entrada de etiquetas (tags) <span class="site-novo">novo</span></a></li><li><a href="/componentes/rotulo-flutuante/">Rótulo flutuante (floating label) <span class="site-novo">novo</span></a></li></ul><h2>Ações</h2><ul><li><a href="/componentes/botao/">Botão</a></li><li><a href="/componentes/menu-suspenso/">Menu suspenso</a></li><li><a href="/componentes/copiar/">Copiar (IBAN, referência, cupão, link)</a></li><li><a href="/componentes/whatsapp/">Botão do WhatsApp <span class="site-novo">novo</span></a></li><li><a href="/componentes/recolher/">Recolher e expandir (collapse) <span class="site-novo">novo</span></a></li><li><a href="/componentes/grupo-botoes/">Grupo de botões e botão fechar <span class="site-novo">novo</span></a></li></ul><h2>Navegação</h2><ul><li><a href="/componentes/barra/">Barra de navegação</a></li><li><a href="/componentes/lateral/">Menu lateral de sistema</a></li><li><a href="/componentes/abas/">Abas</a></li><li><a href="/componentes/trilha/">Trilha (breadcrumb)</a></li><li><a href="/componentes/paginacao/">Paginação</a></li><li><a href="/componentes/etapas/">Etapas</a></li><li><a href="/componentes/comando/">Pesquisa rápida (Ctrl+K)</a></li><li><a href="/componentes/notificacoes-sino/">Central de notificações <span class="site-novo">novo</span></a></li><li><a href="/componentes/voltar-topo/">Voltar ao topo <span class="site-novo">novo</span></a></li><li><a href="/componentes/indice/">Índice que acompanha a leitura (scrollspy) <span class="site-novo">novo</span></a></li></ul><h2>Janelas e avisos</h2><ul><li><a href="/componentes/modal/">Modal (janela de diálogo)</a></li><li><a href="/componentes/gaveta/">Gaveta (painel lateral)</a></li><li><a href="/componentes/dica/">Dica (tooltip)</a></li><li><a href="/componentes/notificacao/">Notificação (toast)</a></li><li><a href="/componentes/balao/">Balão informativo (popover) <span class="site-novo">novo</span></a></li></ul><h2>Exibir dados</h2><ul><li><a href="/componentes/cartao/">Cartão</a></li><li><a href="/componentes/produto/">Cartão de produto</a></li><li><a href="/componentes/tabela/">Tabela de dados</a></li><li><a href="/componentes/indicador/">Indicadores (KPIs)</a></li><li><a href="/componentes/selo/">Selos e etiquetas</a></li><li><a href="/componentes/avatar/">Avatar</a></li><li><a href="/componentes/linha-do-tempo/">Linha do tempo (seguimento)</a></li><li><a href="/componentes/avaliacao/">Avaliação (estrelas)</a></li><li><a href="/componentes/carrossel/">Carrossel</a></li><li><a href="/componentes/sanfona/">Acordeão (perguntas frequentes)</a></li><li><a href="/componentes/chat/">Chat</a></li><li><a href="/componentes/kanban/">Quadro Kanban</a></li><li><a href="/componentes/galeria/">Galeria de fotos <span class="site-novo">novo</span></a></li><li><a href="/componentes/video/">Vídeo leve do YouTube <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-detalhes/">Lista de detalhes <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-grupo/">Lista agrupada (list group) <span class="site-novo">novo</span></a></li><li><a href="/componentes/imagens/">Imagens, figuras e proporção <span class="site-novo">novo</span></a></li></ul><h2>Feedback</h2><ul><li><a href="/componentes/alerta/">Alertas e faixa</a></li><li><a href="/componentes/carregando/">A carregar e progresso</a></li><li><a href="/componentes/vazio/">Estado vazio</a></li><li><a href="/componentes/cookies/">Aviso de cookies (RGPD)</a></li></ul><h2>Blocos de página</h2><ul><li><a href="/componentes/hero/">Hero (topo da landing page)</a></li><li><a href="/componentes/planos/">Planos e preços</a></li><li><a href="/componentes/rodape/">Rodapé</a></li><li><a href="/componentes/contagem-regressiva/">Contagem regressiva <span class="site-novo">novo</span></a></li><li><a href="/componentes/depoimentos/">Depoimentos <span class="site-novo">novo</span></a></li><li><a href="/componentes/recursos/">Grade de recursos <span class="site-novo">novo</span></a></li><li><a href="/componentes/newsletter/" aria-current="page">Newsletter <span class="site-novo">novo</span></a></li></ul><h2>JavaScript</h2><ul><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/formatar/">Formatar (moeda, datas, números)</a></li><li><a href="/componentes/requisitar/">Obter dados de uma API</a></li><li><a href="/componentes/eventos/">Eventos do Atalho</a></li><li><a href="/componentes/carregar-mais/">Carregar mais (scroll infinito) <span class="site-novo">novo</span></a></li></ul><h2>Receitas completas</h2><ul><li><a href="/componentes/receita-loja/">Loja com carrinho</a></li><li><a href="/componentes/receita-cadastro/">Registo com morada automática</a></li><li><a href="/componentes/receita-painel/">Painel administrativo</a></li><li><a href="/componentes/receita-login/">Login em duas etapas</a></li></ul></nav>
+    <article class="site-artigo" data-componente="newsletter">
+      <div class="site-docs-barra-celular">
+        <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Todos os componentes</button>
+      </div>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
+        <li><a href="/">Início</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/componentes/hero/">Blocos de página</a></li>
+        <li aria-current="page">Newsletter</li>
+      </ol></nav>
+      <div class="site-titulo-linha">
+        <h1 class="site-titulo site-h2" tabindex="-1">Newsletter</h1>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="newsletter" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/></svg><span>Adicionar aos favoritos</span></button>
+      </div>
+      <p class="at-chamada">Formulário de inscrição com validação, estado de carregamento, mensagem de sucesso e consentimento conforme o RGPD.</p>
+      <div class="site-meta">
+        <span class="site-linguagem" data-linguagem="html">HTML</span><span class="site-linguagem" data-linguagem="js">JavaScript</span><span class="site-linguagem" data-linguagem="php">PHP</span>
+      </div>
+      <div class="site-meta"><span class="site-meta-rotulo">Padrão usado em</span><span class="site-referencia">Substack</span><span class="site-referencia">Blogs e lojas que capturam e-mails</span></div>
+      <div class="site-meta"><span class="site-meta-rotulo">Suporte dos navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde dezembro de 2018." tabindex="0">Constraint validation API · Em todos os navegadores</span></div>
+
+      <section aria-labelledby="quando-usar"><h2 class="site-secao-titulo" id="quando-usar"><a href="#quando-usar">Quando usar</a></h2>
+<div class="site-listas">
+          <div><ul class="site-lista "><li>Rodapé de blog, fim de artigo, landing page.</li></ul></div>
+          
+        </div>
+</section>
+
+<section aria-labelledby="como-funciona"><h2 class="site-secao-titulo" id="como-funciona"><a href="#como-funciona">Como funciona</a></h2>
+<div class="site-explicacao"><p>Junta Campo, Validação e Requisitar. O texto do consentimento diz exatamente para que o e-mail será usado (RGPD, art. 7.º). No exemplo, o envio é simulado; no seu site, troque pelo endereço do seu serviço de e-mail.</p></div>
+</section>
+
+<section aria-labelledby="exemplos"><h2 class="site-secao-titulo" id="exemplos"><a href="#exemplos">Exemplo</a></h2>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-inscricao-com-consentimento"><a href="#exemplo-inscricao-com-consentimento">Inscrição com consentimento</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="0">
+<form class="at-superficie at-pilha" id="form-newsletter" data-at-validar style="max-width: 460px">
+  <h3 class="at-titulo-4 at-mb-0">Um artigo por semana no seu e-mail</h3>
+  <div class="at-grupo-entrada">
+    <input class="at-entrada" type="email" name="email" required placeholder="seu@email.com" aria-label="O seu e-mail" autocomplete="email">
+    <button class="at-botao at-primario">Subscrever</button>
+  </div>
+  <label class="at-check at-texto-pequeno"><input type="checkbox" name="consentimento" required data-msg-obrigatorio="Marque para confirmar a inscrição.">
+    <span>Aceito receber os artigos por e-mail. Posso cancelar a qualquer momento.</span></label>
+  <p class="at-texto-pequeno at-mb-0" aria-live="polite" data-resultado></p>
+</form>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex0-html" id="ex0-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-js" id="ex0-aba-js" tabindex="-1">JavaScript</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-php" id="ex0-aba-php" tabindex="-1">PHP</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGZvcm0gY2xhc3M9XCJhdC1zdXBlcmZpY2llIGF0LXBpbGhhXCIgaWQ9XCJmb3JtLW5ld3NsZXR0ZXJcIiBkYXRhLWF0LXZhbGlkYXIgc3R5bGU9XCJtYXgtd2lkdGg6IDQ2MHB4XCI-XG4gIDxoMyBjbGFzcz1cImF0LXRpdHVsby00IGF0LW1iLTBcIj5VbSBhcnRpZ28gcG9yIHNlbWFuYSBubyBzZXUgZS1tYWlsPC9oMz5cbiAgPGRpdiBjbGFzcz1cImF0LWdydXBvLWVudHJhZGFcIj5cbiAgICA8aW5wdXQgY2xhc3M9XCJhdC1lbnRyYWRhXCIgdHlwZT1cImVtYWlsXCIgbmFtZT1cImVtYWlsXCIgcmVxdWlyZWQgcGxhY2Vob2xkZXI9XCJzZXVAZW1haWwuY29tXCIgYXJpYS1sYWJlbD1cIk8gc2V1IGUtbWFpbFwiIGF1dG9jb21wbGV0ZT1cImVtYWlsXCI-XG4gICAgPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LXByaW1hcmlvXCI-U3Vic2NyZXZlcjwvYnV0dG9uPlxuICA8L2Rpdj5cbiAgPGxhYmVsIGNsYXNzPVwiYXQtY2hlY2sgYXQtdGV4dG8tcGVxdWVub1wiPjxpbnB1dCB0eXBlPVwiY2hlY2tib3hcIiBuYW1lPVwiY29uc2VudGltZW50b1wiIHJlcXVpcmVkIGRhdGEtbXNnLW9icmlnYXRvcmlvPVwiTWFycXVlIHBhcmEgY29uZmlybWFyIGEgaW5zY3Jpw6fDo28uXCI-XG4gICAgPHNwYW4-QWNlaXRvIHJlY2ViZXIgb3MgYXJ0aWdvcyBwb3IgZS1tYWlsLiBQb3NzbyBjYW5jZWxhciBhIHF1YWxxdWVyIG1vbWVudG8uPC9zcGFuPjwvbGFiZWw-XG4gIDxwIGNsYXNzPVwiYXQtdGV4dG8tcGVxdWVubyBhdC1tYi0wXCIgYXJpYS1saXZlPVwicG9saXRlXCIgZGF0YS1yZXN1bHRhZG8-PC9wPlxuPC9mb3JtPiIsImNzcyI6IiIsImpzIjoiZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNmb3JtLW5ld3NsZXR0ZXJcIikuYWRkRXZlbnRMaXN0ZW5lcihcImF0OmVudmlhclwiLCBhc3luYyAoZXZlbnRvKSA9PiB7XG4gIGNvbnN0IHsgZGFkb3MsIGJvdGFvLCBmb3JtdWxhcmlvIH0gPSBldmVudG8uZGV0YWlsO1xuICBib3Rhby5zZXRBdHRyaWJ1dGUoXCJhcmlhLWJ1c3lcIiwgXCJ0cnVlXCIpO1xuICAvLyBUcm9xdWUgcGVsYSBjaGFtYWRhIGFvIHNldSBzZXJ2acOnbyBkZSBlLW1haWw6XG4gIC8vIGF3YWl0IEF0YWxoby5yZXF1aXNpdGFyKFwiL2FwaS9uZXdzbGV0dGVyXCIsIHsgbWV0b2RvOiBcIlBPU1RcIiwgY29ycG86IGRhZG9zIH0pO1xuICBhd2FpdCBuZXcgUHJvbWlzZSgocHJvbnRvKSA9PiBzZXRUaW1lb3V0KHByb250bywgODAwKSk7XG4gIGJvdGFvLnJlbW92ZUF0dHJpYnV0ZShcImFyaWEtYnVzeVwiKTtcbiAgZm9ybXVsYXJpby5xdWVyeVNlbGVjdG9yKFwiW2RhdGEtcmVzdWx0YWRvXVwiKS50ZXh0Q29udGVudCA9IFwiUHJvbnRvISBDb25maXJtZSBhIGluc2NyacOnw6NvIG5vIGUtbWFpbCBxdWUgZW52acOhbW9zIHBhcmEgXCIgKyBkYWRvcy5lbWFpbCArIFwiLlwiO1xuICBmb3JtdWxhcmlvLnJlc2V0KCk7XG59KTsifQ">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex0-html" role="tabpanel" aria-labelledby="ex0-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">form</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-superficie at-pilha&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;form-newsletter&quot;</span> data-at-validar <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;max-width: 460px&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">h3</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-4 at-mb-0&quot;</span><span class="tk-pon">&gt;</span>Um artigo por semana no seu e-mail<span class="tk-pon">&lt;/</span><span class="tk-tag">h3</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-grupo-entrada&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-entrada&quot;</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;email&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;email&quot;</span> required <span class="tk-atr">placeholder</span><span class="tk-pon">=</span><span class="tk-str">&quot;seu@email.com&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;O seu e-mail&quot;</span> <span class="tk-atr">autocomplete</span><span class="tk-pon">=</span><span class="tk-str">&quot;email&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario&quot;</span><span class="tk-pon">&gt;</span>Subscrever<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">label</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-check at-texto-pequeno&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">input</span> <span class="tk-atr">type</span><span class="tk-pon">=</span><span class="tk-str">&quot;checkbox&quot;</span> <span class="tk-atr">name</span><span class="tk-pon">=</span><span class="tk-str">&quot;consentimento&quot;</span> required <span class="tk-atr">data-msg-obrigatorio</span><span class="tk-pon">=</span><span class="tk-str">&quot;Marque para confirmar a inscrição.&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>Aceito receber os artigos por e-mail. Posso cancelar a qualquer momento.<span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">label</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">p</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-texto-pequeno at-mb-0&quot;</span> <span class="tk-atr">aria-live</span><span class="tk-pon">=</span><span class="tk-str">&quot;polite&quot;</span> data-resultado<span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">p</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">form</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex0-js" role="tabpanel" aria-labelledby="ex0-aba-js" tabindex="0" hidden><code>document.querySelector(<span class="tk-str">&quot;#form-newsletter&quot;</span>).addEventListener(<span class="tk-str">&quot;at:enviar&quot;</span>, <span class="tk-pal">async</span> (evento) =&gt; {
+  <span class="tk-pal">const</span> { dados, botao, formulario } = evento.detail;
+  botao.setAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>, <span class="tk-str">&quot;true&quot;</span>);
+  <span class="tk-com">// Troque pela chamada ao seu serviço de e-mail:</span>
+  <span class="tk-com">// await Atalho.requisitar(&quot;/api/newsletter&quot;, { metodo: &quot;POST&quot;, corpo: dados });</span>
+  <span class="tk-pal">await</span> <span class="tk-pal">new</span> Promise((pronto) =&gt; setTimeout(pronto, <span class="tk-num">800</span>));
+  botao.removeAttribute(<span class="tk-str">&quot;aria-busy&quot;</span>);
+  formulario.querySelector(<span class="tk-str">&quot;[data-resultado]&quot;</span>).textContent = <span class="tk-str">&quot;Pronto! Confirme a inscrição no e-mail que enviámos para &quot;</span> + dados.email + <span class="tk-str">&quot;.&quot;</span>;
+  formulario.reset();
+});</code></pre>
+        <pre class="site-codigo" id="ex0-php" role="tabpanel" aria-labelledby="ex0-aba-php" tabindex="0" hidden><code><span class="tk-pon">&lt;?php</span>
+<span class="tk-com">// api/newsletter.php</span>
+require __DIR__ . <span class="tk-str">&#39;/atalho.php&#39;</span>;
+<span class="tk-pal">use</span> <span class="tk-pal">function</span> Atalho\{exigirMetodo, lerJson, validar, responderErro, responderJson};
+
+exigirMetodo(<span class="tk-str">&#39;POST&#39;</span>);
+<span class="tk-var">$dados</span> = lerJson();
+<span class="tk-var">$erros</span> = validar(<span class="tk-var">$dados</span>, [<span class="tk-str">&#39;email&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>, <span class="tk-str">&#39;email&#39;</span>], <span class="tk-str">&#39;consentimento&#39;</span> =&gt; [<span class="tk-str">&#39;obrigatorio&#39;</span>]]);
+<span class="tk-pal">if</span> (<span class="tk-var">$erros</span>) {
+    responderErro(<span class="tk-str">&#39;Verifique os dados.&#39;</span>, <span class="tk-num">422</span>, <span class="tk-var">$erros</span>);
+}
+<span class="tk-com">// Guarde o e-mail e a data do consentimento (o RGPD exige que consiga prová-lo)</span>
+responderJson([<span class="tk-str">&#39;ok&#39;</span> =&gt; <span class="tk-pal">true</span>], <span class="tk-num">201</span>);</code></pre>
+        </div>
+      </div>
+</section>
+
+<section aria-labelledby="acessibilidade"><h2 class="site-secao-titulo" id="acessibilidade"><a href="#acessibilidade">Acessibilidade</a></h2>
+<ul class="site-lista "><li>O resultado aparece numa região aria-live, anunciada pelo leitor de ecrã.</li></ul>
+</section>
+
+<section aria-labelledby="combina-com"><h2 class="site-secao-titulo" id="combina-com"><a href="#combina-com">Combina com</a></h2>
+<div class="site-relacionados"><a href="/componentes/validacao/"><strong>Validação de formulário</strong><span>Mensagens de erro claras, em português, no lugar certo e na hora certa. Sem biblioteca extra, com a validação nativa do navegador.</span></a><a href="/componentes/requisitar/"><strong>Obter dados de uma API</strong><span>fetch com tempo limite, JSON automático e erros em português. Com o Estado, ganha os estados de carregamento, erro e resultado no ecrã sem esforço.</span></a><a href="/componentes/rodape/"><strong>Rodapé</strong><span>Rodapé com colunas de links, redes e as informações que as lojas online em Portugal são obrigadas a mostrar (Livro de Reclamações, NIF, morada).</span></a><a href="/componentes/cookies/"><strong>Aviso de cookies (RGPD)</strong><span>Consentimento de cookies conforme o RGPD e a Diretiva ePrivacy: aceitar, recusar com o mesmo destaque e escolher por categoria. A escolha fica guardada.</span></a></div>
+</section>
+
+<section aria-labelledby="documentacao-oficial"><h2 class="site-secao-titulo" id="documentacao-oficial"><a href="#documentacao-oficial">Documentação oficial (MDN)</a></h2>
+<ul class="site-links-mdn"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form" target="_blank" rel="noopener"><span class="site-idioma" data-idioma="en">EN</span>&lt;form&gt;</a> <small class="at-texto-suave">ainda sem tradução para português</small></li></ul>
+</section>
+
+      <nav class="site-navegacao-docs" aria-label="Anterior e próximo">
+        <a href="/componentes/recursos/" rel="prev"><small>← Anterior</small><strong>Grade de recursos</strong></a>
+        <a href="/componentes/estado/" rel="next"><small>Próximo →</small><strong>Estado (reatividade)</strong></a>
+      </nav>
+      <p class="at-texto-suave at-texto-pequeno at-mt-6">Encontrou um erro? <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=%5BNewsletter%5D%20" target="_blank" rel="noopener">Abra uma issue</a> ou <a href="https://github.com/marcos-zorzetto/atalho/tree/main/site/dados" target="_blank" rel="noopener">edite no GitHub</a>.</p>
+    </article>
+    <aside class="site-indice" aria-label="Nesta página">
+      <div class="site-indice-fixo">
+        <h2>Nesta página</h2>
+        <ul><li><a href="#quando-usar">Quando usar</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#exemplos">Exemplo</a></li><li><a href="#acessibilidade">Acessibilidade</a></li><li><a href="#combina-com">Combina com</a></li><li><a href="#documentacao-oficial">Documentação oficial (MDN)</a></li></ul>
+        <aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
+    <a href="/patrocinar/" class="site-patrocinio-link">
+      <span class="site-patrocinio-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
+    </a>
+    <small>Espaço publicitário</small>
+  </aside>
+      </div>
+    </aside>
+  </div>
+  <script type="application/json" id="exemplos-js">["document.querySelector(\"#form-newsletter\").addEventListener(\"at:enviar\", async (evento) => {\n  const { dados, botao, formulario } = evento.detail;\n  botao.setAttribute(\"aria-busy\", \"true\");\n  // Troque pela chamada ao seu serviço de e-mail:\n  // await Atalho.requisitar(\"/api/newsletter\", { metodo: \"POST\", corpo: dados });\n  await new Promise((pronto) => setTimeout(pronto, 800));\n  botao.removeAttribute(\"aria-busy\");\n  formulario.querySelector(\"[data-resultado]\").textContent = \"Pronto! Confirme a inscrição no e-mail que enviámos para \" + dados.email + \".\";\n  formulario.reset();\n});"]</script>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

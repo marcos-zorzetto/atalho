@@ -1,0 +1,98 @@
+# Atalho
+
+> Biblioteca de componentes HTML, CSS e JavaScript em português, nos padrões das grandes empresas, com exemplos em TypeScript e PHP. Grátis e de código aberto.
+
+## Componentes
+
+- [Instalação](https://atalho.com.pt/componentes/instalacao/): Duas linhas no seu HTML e todos os componentes funcionam. Sem npm, sem build, sem configuração.
+- [Cores e tema escuro](https://atalho.com.pt/componentes/cores-e-temas/): Todas as cores, espaços e cantos vêm de variáveis CSS. Troque uma linha e o site inteiro muda de identidade.
+- [Layout e grade](https://atalho.com.pt/componentes/layout/): Container, grade que se ajusta sozinha, colunas, pilha e linha. Resolve 95% dos layouts sem escrever media query.
+- [Texto e tipografia](https://atalho.com.pt/componentes/tipografia/): Títulos, chamadas, texto secundário e teclas de atalho com hierarquia clara.
+- [Grelha de 12 colunas](https://atalho.com.pt/componentes/grade-12/): A grelha clássica do Bootstrap, em português: divida a linha em 12 partes e diga quantas cada bloco ocupa no telemóvel, tablet e computador.
+- [Utilitários (espaçamento, flex, cores...)](https://atalho.com.pt/componentes/utilitarios/): Classes de uma função só para ajustar espaçamento, alinhamento, texto, cores, bordas e sombras diretamente no HTML, como os utilities do Bootstrap.
+- [Campos de formulário](https://atalho.com.pt/componentes/campo/): Texto, seleção, área de texto, caixas de marcação, opções e chave liga/desliga com rótulo, ajuda e erro.
+- [Máscaras (NIF, IBAN, telemóvel...)](https://atalho.com.pt/componentes/mascaras/): Formata enquanto a pessoa escreve: NIF, IBAN, código postal, telemóvel, telefone internacional, moeda, cartão, validade, data e matrícula. Também CPF, CNPJ e CEP para clientes do Brasil.
+- [Morada pelo código postal](https://atalho.com.pt/componentes/cep/): A pessoa escreve o código postal e a rua, a localidade, o concelho e o distrito preenchem-se sozinhos. Usa a GEO API PT, gratuita e sem registo. Também funciona com o CEP do Brasil.
+- [Validação de formulário](https://atalho.com.pt/componentes/validacao/): Mensagens de erro claras, em português, no lugar certo e na hora certa. Sem biblioteca extra, com a validação nativa do navegador.
+- [Palavra-passe (mostrar e força)](https://atalho.com.pt/componentes/senha/): Campo de palavra-passe com botão Mostrar/Ocultar e medidor de força que avisa enquanto a pessoa escreve.
+- [Código de verificação](https://atalho.com.pt/componentes/codigo/): Seis caixinhas para o código recebido por SMS ou e-mail. Avança sozinho, aceita colar e preenche-se automaticamente a partir do SMS no telemóvel.
+- [Enviar ficheiros](https://atalho.com.pt/componentes/upload/): Área para arrastar e largar ficheiros, com pré-visualização das imagens, tamanho formatado, botão de remover e limite de tamanho.
+- [Autocompletar](https://atalho.com.pt/componentes/autocompletar/): Campo que sugere opções enquanto a pessoa escreve, ignorando acentos. Escolha com o rato ou com as setas e Enter.
+- [Quantidade (+ e −)](https://atalho.com.pt/componentes/quantidade/): Seletor de quantidade com botões de mais e menos, respeitando mínimo, máximo e stock.
+- [Contador de caracteres](https://atalho.com.pt/componentes/contador-caracteres/): Mostra quantos caracteres faltam e avisa com cor quando a pessoa está perto do limite.
+- [Faixa de valores (slider)](https://atalho.com.pt/componentes/faixa/): Controlo deslizante estilizado, com o valor mostrado ao lado e formatado no idioma e na moeda da página.
+- [Entrada de etiquetas (tags)](https://atalho.com.pt/componentes/etiquetas-entrada/): Campo em que cada palavra passa a ser uma etiqueta removível ao premir Enter ou vírgula. Ideal para habilidades, tags e e-mails.
+- [Rótulo flutuante (floating label)](https://atalho.com.pt/componentes/rotulo-flutuante/): O rótulo fica dentro do campo e sobe quando a pessoa começa a escrever. Visual compacto de ecrãs de login de bancos e apps.
+- [Botão](https://atalho.com.pt/componentes/botao/): Botões para cada nível de importância, tamanhos, ícones, estado de a carregar, grupo e contador.
+- [Menu suspenso](https://atalho.com.pt/componentes/menu-suspenso/): Lista de ações que abre ao clicar num botão: o famoso menu dos três pontinhos e o menu do utilizador.
+- [Copiar (IBAN, referência, cupão, link)](https://atalho.com.pt/componentes/copiar/): Botão que copia um texto para a área de transferência e confirma com "Copiado!". Perfeito para IBAN, referência Multibanco, cupão de desconto e link de convite.
+- [Botão do WhatsApp](https://atalho.com.pt/componentes/whatsapp/): Botão flutuante que abre uma conversa no WhatsApp com mensagem pronta. No telemóvel fica só o ícone.
+- [Recolher e expandir (collapse)](https://atalho.com.pt/componentes/recolher/): Um botão mostra e esconde um bloco com animação suave: filtros, detalhes da encomenda, "ler mais".
+- [Grupo de botões e botão fechar](https://atalho.com.pt/componentes/grupo-botoes/): Botões colados que funcionam como um conjunto (alinhar texto, escolher visualização) e o botão "×" padrão para fechar caixas.
+- [Barra de navegação](https://atalho.com.pt/componentes/barra/): Topo do site com marca, links, pesquisa e ações. Fica fixa ao fazer scroll, tem fundo translúcido e transforma-se em menu no telemóvel.
+- [Menu lateral de sistema](https://atalho.com.pt/componentes/lateral/): O esqueleto de qualquer painel administrativo: menu à esquerda com secções e contadores, conteúdo à direita.
+- [Abas](https://atalho.com.pt/componentes/abas/): Divide conteúdo relacionado em painéis, a mostrar um de cada vez. Funciona com rato, teclado e leitor de ecrã.
+- [Trilha (breadcrumb)](https://atalho.com.pt/componentes/trilha/): Mostra onde a pessoa está e o caminho de volta: Início / Eletrónicos / Telemóveis.
+- [Paginação](https://atalho.com.pt/componentes/paginacao/): Navegação entre páginas de resultados com a contagem "A mostrar 1–10 de 248".
+- [Etapas](https://atalho.com.pt/componentes/etapas/): Mostra o progresso num processo em partes, como carrinho → entrega → pagamento → confirmação.
+- [Pesquisa rápida (Ctrl+K)](https://atalho.com.pt/componentes/comando/): Uma caixa de pesquisa que abre com Ctrl+K e leva a qualquer página ou ação em segundos. É a pesquisa deste site.
+- [Central de notificações](https://atalho.com.pt/componentes/notificacoes-sino/): O sino do topo com contador e lista de avisos, destacando os não lidos e com "Marcar todas como lidas".
+- [Voltar ao topo](https://atalho.com.pt/componentes/voltar-topo/): Botão discreto que aparece depois de a pessoa descer na página e leva de volta ao início.
+- [Índice que acompanha a leitura (scrollspy)](https://atalho.com.pt/componentes/indice/): Lista de secções ao lado do texto que destaca sozinha a parte que a pessoa está a ler. Padrão de documentação e artigos longos.
+- [Modal (janela de diálogo)](https://atalho.com.pt/componentes/modal/): Janela por cima da página para confirmar algo importante ou preencher um formulário rápido. Abre sem escrever JavaScript.
+- [Gaveta (painel lateral)](https://atalho.com.pt/componentes/gaveta/): Painel que desliza da lateral: carrinho de compras, filtros, detalhes de um item ou menu no telemóvel.
+- [Dica (tooltip)](https://atalho.com.pt/componentes/dica/): Texto curto que aparece ao passar o rato ou ao focar com o teclado, a explicar um ícone.
+- [Notificação (toast)](https://atalho.com.pt/componentes/notificacao/): Mensagem rápida no canto do ecrã a confirmar o que aconteceu, com botão de Desfazer opcional.
+- [Balão informativo (popover)](https://atalho.com.pt/componentes/balao/): Caixa que abre ao clicar, ao lado do botão, com um título e um texto mais longo que uma dica. Fecha com Esc ou clicando fora.
+- [Cartão](https://atalho.com.pt/componentes/cartao/): Caixa que agrupa informações de um mesmo assunto: artigo, resumo, configuração, item clicável.
+- [Cartão de produto](https://atalho.com.pt/componentes/produto/): O cartão de produto de loja online completo: foto, nome em até duas linhas, preço antigo, desconto, pagamento em 3 vezes, portes grátis e botão de comprar.
+- [Tabela de dados](https://atalho.com.pt/componentes/tabela/): Tabela de sistema completa: ordenar por coluna, pesquisar, paginar, selecionar linhas e exportar para Excel. Tudo com atributos no HTML.
+- [Indicadores (KPIs)](https://atalho.com.pt/componentes/indicador/): Os números grandes do topo de qualquer painel: faturação, encomendas, clientes, com a variação em relação ao período anterior.
+- [Selos e etiquetas](https://atalho.com.pt/componentes/selo/): Selos mostram o estado (Pago, Pendente, Novo). Etiquetas são filtros ou tags que a pessoa pode remover.
+- [Avatar](https://atalho.com.pt/componentes/avatar/): Foto ou iniciais da pessoa, com estado (online, ocupado) e grupos sobrepostos.
+- [Linha do tempo (seguimento)](https://atalho.com.pt/componentes/linha-do-tempo/): Histórico de eventos em ordem: seguimento de encomendas, atividades de um projeto, etapas de um pedido de suporte.
+- [Avaliação (estrelas)](https://atalho.com.pt/componentes/avaliacao/): Mostra notas com estrelas (incluindo meias estrelas) e permite que a pessoa avalie com rato ou teclado.
+- [Carrossel](https://atalho.com.pt/componentes/carrossel/): Fileira de itens que desliza para o lado, com botões e encaixe suave. No telemóvel, é só arrastar com o dedo.
+- [Acordeão (perguntas frequentes)](https://atalho.com.pt/componentes/sanfona/): Perguntas que abrem e fecham ao clicar. Ideal para FAQ e detalhes opcionais.
+- [Chat](https://atalho.com.pt/componentes/chat/): Conversa no estilo WhatsApp: balões dos dois lados, horário e campo de envio. Ligado ao Estado, a lista atualiza-se sozinha.
+- [Quadro Kanban](https://atalho.com.pt/componentes/kanban/): Colunas com cartões que se arrastam entre etapas: A fazer, Em curso, Feito. Também move pelo teclado.
+- [Galeria de fotos](https://atalho.com.pt/componentes/galeria/): Grade de miniaturas que abre cada foto em ecrã inteiro, com setas, contador e legenda.
+- [Vídeo leve do YouTube](https://atalho.com.pt/componentes/video/): Mostra a capa do vídeo e só carrega o player do YouTube no clique: página até 1 MB mais leve e sem cookies antes da hora.
+- [Lista de detalhes](https://atalho.com.pt/componentes/lista-detalhes/): Pares de rótulo e valor alinhados: dados da encomenda, ficha técnica, resumo de registo.
+- [Lista agrupada (list group)](https://atalho.com.pt/componentes/lista-grupo/): Lista em caixa, com itens separados por linha: links de menu, configurações, contactos ou passos numerados.
+- [Imagens, figuras e proporção](https://atalho.com.pt/componentes/imagens/): Imagens que se ajustam ao ecrã, com cantos, miniatura e legenda, e caixas com proporção fixa (16:9, quadrada) para fotos e vídeos.
+- [Alertas e faixa](https://atalho.com.pt/componentes/alerta/): Mensagens fixas na página: informação, sucesso, atenção e erro. A faixa é o aviso no topo do site.
+- [A carregar e progresso](https://atalho.com.pt/componentes/carregando/): Indicador giratório, esqueleto do conteúdo (skeleton) e barra de progresso nativa.
+- [Estado vazio](https://atalho.com.pt/componentes/vazio/): O que mostrar quando não há nada: explica o porquê e oferece o próximo passo.
+- [Aviso de cookies (RGPD)](https://atalho.com.pt/componentes/cookies/): Consentimento de cookies conforme o RGPD e a Diretiva ePrivacy: aceitar, recusar com o mesmo destaque e escolher por categoria. A escolha fica guardada.
+- [Hero (topo da landing page)](https://atalho.com.pt/componentes/hero/): A primeira dobra de uma landing page: chamada, título forte, subtítulo, botões e prova social.
+- [Planos e preços](https://atalho.com.pt/componentes/planos/): Tabela de planos com destaque no recomendado e alternância mensal/anual que recalcula os preços.
+- [Rodapé](https://atalho.com.pt/componentes/rodape/): Rodapé com colunas de links, redes e as informações que as lojas online em Portugal são obrigadas a mostrar (Livro de Reclamações, NIF, morada).
+- [Contagem regressiva](https://atalho.com.pt/componentes/contagem-regressiva/): Dias, horas, minutos e segundos até uma data: promoção, lançamento, evento. Termina sozinha e avisa por evento.
+- [Depoimentos](https://atalho.com.pt/componentes/depoimentos/): Citações de clientes com foto, nome e cargo: a prova social que toda landing page precisa.
+- [Grade de recursos](https://atalho.com.pt/componentes/recursos/): Ícone, título e uma frase para cada benefício do produto. O bloco "porquê escolher-nos".
+- [Newsletter](https://atalho.com.pt/componentes/newsletter/): Formulário de inscrição com validação, estado de carregamento, mensagem de sucesso e consentimento conforme o RGPD.
+- [Estado (reatividade)](https://atalho.com.pt/componentes/estado/): A ideia central do React, sem React: muda os dados e o ecrã atualiza-se sozinho. É assim que os componentes se conectam.
+- [Formatar (moeda, datas, números)](https://atalho.com.pt/componentes/formatar/): Funções prontas no idioma da página: 1234,56 €, 08/10/2026, "há 5 minutos", 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.
+- [Obter dados de uma API](https://atalho.com.pt/componentes/requisitar/): fetch com tempo limite, JSON automático e erros em português. Com o Estado, ganha os estados de carregamento, erro e resultado no ecrã sem esforço.
+- [Eventos do Atalho](https://atalho.com.pt/componentes/eventos/): Todos os componentes avisam o que aconteceu com eventos do navegador. É a forma de ligar o Atalho ao seu código e ao seu servidor.
+- [Carregar mais (scroll infinito)](https://atalho.com.pt/componentes/carregar-mais/): Carrega a próxima página de resultados quando a pessoa chega ao fim da lista, com botão de reserva.
+- [Loja com carrinho](https://atalho.com.pt/componentes/receita-loja/): Montra, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo ligado pelo Estado e guardado no navegador.
+- [Registo com morada automática](https://atalho.com.pt/componentes/receita-cadastro/): Registo completo: dados pessoais com NIF e telemóvel, morada automática pelo código postal, palavra-passe com força, termos e confirmação.
+- [Painel administrativo](https://atalho.com.pt/componentes/receita-painel/): Menu lateral, indicadores, pesquisa, tabela com ordenação, ações por linha e exportação. O ecrã que todo sistema de empresa tem.
+- [Login em duas etapas](https://atalho.com.pt/componentes/receita-login/): E-mail e palavra-passe, depois o código de verificação, depois a confirmação. Os ecrãs trocam pelo Estado, sem recarregar a página.
+
+## Guias
+
+- [TypeScript](https://atalho.com.pt/typescript/)
+- [PHP](https://atalho.com.pt/php/)
+- [Exemplos completos](https://atalho.com.pt/exemplos/)
+
+## Páginas completas (código para membros)
+
+- [Landing page de produto](https://atalho.com.pt/exemplos/landing-saas/): Hero, integrações, recursos, planos com mensal/anual, perguntas frequentes e newsletter.
+- [Painel administrativo](https://atalho.com.pt/exemplos/painel/): Menu lateral, indicadores, gráfico, atividade, tabela com pesquisa e exportação e pesquisa rápida Ctrl+K.
+- [Loja online](https://atalho.com.pt/exemplos/loja/): Montra com pesquisa e filtro de preço, carrinho na gaveta guardado no navegador e notificações.
+- [Checkout com MB WAY](https://atalho.com.pt/exemplos/checkout/): Etapas, NIF e telemóvel com máscara, morada pelo código postal, formas de pagamento e confirmação por MB WAY.
+- [Ecrã de login](https://atalho.com.pt/exemplos/login/): Duas colunas com testemunho, login social, palavra-passe com mostrar/ocultar e validação.
+- [Blog](https://atalho.com.pt/exemplos/blog/): Artigo em destaque, filtro por abas, lista de artigos, paginação e newsletter.

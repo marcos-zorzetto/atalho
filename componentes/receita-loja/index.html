@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja com carrinho em HTML, CSS e JavaScript | Atalho</title>
+  <meta name="description" content="Montra, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo ligado pelo Estado e guardado no navegador.">
+  <link rel="canonical" href="https://atalho.com.pt/componentes/receita-loja/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marcos Zorzetto">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Atalho">
+  <meta property="og:title" content="Loja com carrinho · Atalho">
+  <meta property="og:description" content="Montra, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo ligado pelo Estado e guardado no navegador.">
+  <meta property="og:url" content="https://atalho.com.pt/componentes/receita-loja/">
+  <meta property="og:image" content="https://atalho.com.pt/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/atalho/atalho.css?v=c978e5f023">
+  <link rel="stylesheet" href="/site/site.css?v=3f92b12659">
+  <script src="/atalho/atalho.js?v=cc453ed46e" defer></script>
+  <script src="/site/config.js?v=f8fefe30a3" defer></script>
+  <script src="/site/indice-busca.js?v=c3dd9048b1" defer></script>
+  <script src="/site/assistente.js?v=0dba649f33" defer></script>
+  <script src="/site/site.js?v=20c58e54b8" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Loja com carrinho em HTML, CSS e JavaScript","description":"Montra, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo ligado pelo Estado e guardado no navegador.","inLanguage":"pt-PT","url":"https://atalho.com.pt/componentes/receita-loja/","author":{"@type":"Person","name":"Marcos Zorzetto","url":"https://github.com/marcos-zorzetto"},"publisher":{"@type":"Organization","name":"Atalho","url":"https://atalho.com.pt/"},"keywords":"loja, e-commerce, carrinho, carrinho de compras, shopping cart, comprar, checkout, loja online, vitrine","proficiencyLevel":"Beginner"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://atalho.com.pt/"},{"@type":"ListItem","position":2,"name":"Componentes","item":"https://atalho.com.pt/componentes/"},{"@type":"ListItem","position":3,"name":"Loja com carrinho","item":"https://atalho.com.pt/componentes/receita-loja/"}]}</script>
+  
+</head>
+<body data-pagina="componente" data-base="/">
+  <a class="at-pular-conteudo" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="at-barra at-barra-expandir-desktop site-barra">
+    <div class="at-barra-conteudo">
+      <a href="/" class="site-marca" aria-label="Atalho, página inicial"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+      <span class="site-versao">v1.3.0</span>
+      <button class="at-botao at-icone at-fantasma at-barra-menu" data-at-alternar="#links-topo" aria-expanded="false" aria-controls="links-topo" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <ul class="at-barra-links" id="links-topo">
+        <li><a href="/componentes/instalacao/">Começar</a></li>
+        <li><a href="/componentes/" aria-current="page">Componentes</a></li>
+        <li><a href="/exemplos/">Exemplos</a></li>
+        <li><a href="/icones/">Ícones</a></li>
+        <li><a href="/editor/">Editor</a></li>
+        <li><a href="/animacoes/">Animações</a></li>
+        <li><a href="/sistemas/">Sistemas</a></li>
+        <li><a href="/pro/" class="site-link-pro">Pro</a></li>
+      </ul>
+      <div class="at-barra-acoes">
+        <button class="at-botao site-busca-botao" data-abrir-busca aria-label="Pesquisar componentes (Ctrl + K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Pesquisar…</span><kbd class="at-tecla">Ctrl K</kbd>
+        </button>
+        <a class="at-botao at-icone at-fantasma at-so-desktop" href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener" aria-label="Código no GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <button class="at-botao at-icone at-fantasma" data-at-tema="alternar" aria-label="Alternar tema escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <a class="at-botao at-pequeno site-entrar" href="/conta/" data-conta-cabecalho><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Entrar</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="conteudo">
+<div class="site-docs">
+    <nav class="site-menu-docs" id="menu-docs" aria-label="Todos os componentes"><h2>Comece aqui</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/cores-e-temas/">Cores e tema escuro</a></li><li><a href="/componentes/layout/">Layout e grade</a></li><li><a href="/componentes/tipografia/">Texto e tipografia</a></li><li><a href="/componentes/grade-12/">Grelha de 12 colunas <span class="site-novo">novo</span></a></li><li><a href="/componentes/utilitarios/">Utilitários (espaçamento, flex, cores...) <span class="site-novo">novo</span></a></li></ul><h2>Formulários</h2><ul><li><a href="/componentes/campo/">Campos de formulário</a></li><li><a href="/componentes/mascaras/">Máscaras (NIF, IBAN, telemóvel...)</a></li><li><a href="/componentes/cep/">Morada pelo código postal</a></li><li><a href="/componentes/validacao/">Validação de formulário</a></li><li><a href="/componentes/senha/">Palavra-passe (mostrar e força)</a></li><li><a href="/componentes/codigo/">Código de verificação</a></li><li><a href="/componentes/upload/">Enviar ficheiros</a></li><li><a href="/componentes/autocompletar/">Autocompletar <span class="site-novo">novo</span></a></li><li><a href="/componentes/quantidade/">Quantidade (+ e −) <span class="site-novo">novo</span></a></li><li><a href="/componentes/contador-caracteres/">Contador de caracteres <span class="site-novo">novo</span></a></li><li><a href="/componentes/faixa/">Faixa de valores (slider) <span class="site-novo">novo</span></a></li><li><a href="/componentes/etiquetas-entrada/">Entrada de etiquetas (tags) <span class="site-novo">novo</span></a></li><li><a href="/componentes/rotulo-flutuante/">Rótulo flutuante (floating label) <span class="site-novo">novo</span></a></li></ul><h2>Ações</h2><ul><li><a href="/componentes/botao/">Botão</a></li><li><a href="/componentes/menu-suspenso/">Menu suspenso</a></li><li><a href="/componentes/copiar/">Copiar (IBAN, referência, cupão, link)</a></li><li><a href="/componentes/whatsapp/">Botão do WhatsApp <span class="site-novo">novo</span></a></li><li><a href="/componentes/recolher/">Recolher e expandir (collapse) <span class="site-novo">novo</span></a></li><li><a href="/componentes/grupo-botoes/">Grupo de botões e botão fechar <span class="site-novo">novo</span></a></li></ul><h2>Navegação</h2><ul><li><a href="/componentes/barra/">Barra de navegação</a></li><li><a href="/componentes/lateral/">Menu lateral de sistema</a></li><li><a href="/componentes/abas/">Abas</a></li><li><a href="/componentes/trilha/">Trilha (breadcrumb)</a></li><li><a href="/componentes/paginacao/">Paginação</a></li><li><a href="/componentes/etapas/">Etapas</a></li><li><a href="/componentes/comando/">Pesquisa rápida (Ctrl+K)</a></li><li><a href="/componentes/notificacoes-sino/">Central de notificações <span class="site-novo">novo</span></a></li><li><a href="/componentes/voltar-topo/">Voltar ao topo <span class="site-novo">novo</span></a></li><li><a href="/componentes/indice/">Índice que acompanha a leitura (scrollspy) <span class="site-novo">novo</span></a></li></ul><h2>Janelas e avisos</h2><ul><li><a href="/componentes/modal/">Modal (janela de diálogo)</a></li><li><a href="/componentes/gaveta/">Gaveta (painel lateral)</a></li><li><a href="/componentes/dica/">Dica (tooltip)</a></li><li><a href="/componentes/notificacao/">Notificação (toast)</a></li><li><a href="/componentes/balao/">Balão informativo (popover) <span class="site-novo">novo</span></a></li></ul><h2>Exibir dados</h2><ul><li><a href="/componentes/cartao/">Cartão</a></li><li><a href="/componentes/produto/">Cartão de produto</a></li><li><a href="/componentes/tabela/">Tabela de dados</a></li><li><a href="/componentes/indicador/">Indicadores (KPIs)</a></li><li><a href="/componentes/selo/">Selos e etiquetas</a></li><li><a href="/componentes/avatar/">Avatar</a></li><li><a href="/componentes/linha-do-tempo/">Linha do tempo (seguimento)</a></li><li><a href="/componentes/avaliacao/">Avaliação (estrelas)</a></li><li><a href="/componentes/carrossel/">Carrossel</a></li><li><a href="/componentes/sanfona/">Acordeão (perguntas frequentes)</a></li><li><a href="/componentes/chat/">Chat</a></li><li><a href="/componentes/kanban/">Quadro Kanban</a></li><li><a href="/componentes/galeria/">Galeria de fotos <span class="site-novo">novo</span></a></li><li><a href="/componentes/video/">Vídeo leve do YouTube <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-detalhes/">Lista de detalhes <span class="site-novo">novo</span></a></li><li><a href="/componentes/lista-grupo/">Lista agrupada (list group) <span class="site-novo">novo</span></a></li><li><a href="/componentes/imagens/">Imagens, figuras e proporção <span class="site-novo">novo</span></a></li></ul><h2>Feedback</h2><ul><li><a href="/componentes/alerta/">Alertas e faixa</a></li><li><a href="/componentes/carregando/">A carregar e progresso</a></li><li><a href="/componentes/vazio/">Estado vazio</a></li><li><a href="/componentes/cookies/">Aviso de cookies (RGPD)</a></li></ul><h2>Blocos de página</h2><ul><li><a href="/componentes/hero/">Hero (topo da landing page)</a></li><li><a href="/componentes/planos/">Planos e preços</a></li><li><a href="/componentes/rodape/">Rodapé</a></li><li><a href="/componentes/contagem-regressiva/">Contagem regressiva <span class="site-novo">novo</span></a></li><li><a href="/componentes/depoimentos/">Depoimentos <span class="site-novo">novo</span></a></li><li><a href="/componentes/recursos/">Grade de recursos <span class="site-novo">novo</span></a></li><li><a href="/componentes/newsletter/">Newsletter <span class="site-novo">novo</span></a></li></ul><h2>JavaScript</h2><ul><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/formatar/">Formatar (moeda, datas, números)</a></li><li><a href="/componentes/requisitar/">Obter dados de uma API</a></li><li><a href="/componentes/eventos/">Eventos do Atalho</a></li><li><a href="/componentes/carregar-mais/">Carregar mais (scroll infinito) <span class="site-novo">novo</span></a></li></ul><h2>Receitas completas</h2><ul><li><a href="/componentes/receita-loja/" aria-current="page">Loja com carrinho</a></li><li><a href="/componentes/receita-cadastro/">Registo com morada automática</a></li><li><a href="/componentes/receita-painel/">Painel administrativo</a></li><li><a href="/componentes/receita-login/">Login em duas etapas</a></li></ul></nav>
+    <article class="site-artigo" data-componente="receita-loja">
+      <div class="site-docs-barra-celular">
+        <button class="at-botao at-pequeno" data-at-alternar="#menu-docs" aria-expanded="false" aria-controls="menu-docs"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg> Todos os componentes</button>
+      </div>
+      <nav class="at-trilha" aria-label="Está aqui"><ol>
+        <li><a href="/">Início</a></li>
+        <li><a href="/componentes/">Componentes</a></li>
+        <li><a href="/componentes/receita-loja/">Receitas completas</a></li>
+        <li aria-current="page">Loja com carrinho</li>
+      </ol></nav>
+      <div class="site-titulo-linha">
+        <h1 class="site-titulo site-h2" tabindex="-1">Loja com carrinho</h1>
+        <button class="at-botao at-pequeno site-favoritar" data-favoritar="receita-loja" aria-pressed="false" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9.3-8.9A5 5 0 0 1 12 5.5a5 5 0 0 1 9.3 5.6C19 15.6 12 20 12 20z"/></svg><span>Adicionar aos favoritos</span></button>
+      </div>
+      <p class="at-chamada">Montra, carrinho na gaveta, contador na barra, total, quantidade e notificação, tudo ligado pelo Estado e guardado no navegador.</p>
+      <div class="site-meta">
+        <span class="site-linguagem" data-linguagem="html">HTML</span><span class="site-linguagem" data-linguagem="js">JavaScript</span>
+      </div>
+      <div class="site-meta"><span class="site-meta-rotulo">Padrão usado em</span><span class="site-referencia">Amazon</span><span class="site-referencia">Zalando</span><span class="site-referencia">Uber Eats (cesto lateral)</span></div>
+      <div class="site-meta"><span class="site-meta-rotulo">Suporte dos navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde março de 2022." tabindex="0">&lt;dialog&gt; · Em todos os navegadores</span><span class="at-selo at-info site-selo-baseline" data-at-dica="Chegou a todos os navegadores atuais em dezembro de 2025. Navegadores muito desatualizados podem não ter." tabindex="0">Invoker commands · Novo em todos os navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde novembro de 2015." tabindex="0">&lt;template&gt; · Em todos os navegadores</span><span class="at-selo at-sucesso site-selo-baseline" data-at-dica="Disponível em todos os navegadores principais desde julho de 2015." tabindex="0">localStorage and sessionStorage · Em todos os navegadores</span></div>
+
+      <section aria-labelledby="quando-usar"><h2 class="site-secao-titulo" id="quando-usar"><a href="#quando-usar">Quando usar</a></h2>
+<div class="site-listas">
+          <div><ul class="site-lista "><li>Ponto de partida para qualquer loja ou menu digital.</li></ul></div>
+          
+        </div>
+</section>
+
+<section aria-labelledby="como-funciona"><h2 class="site-secao-titulo" id="como-funciona"><a href="#como-funciona">Como funciona</a></h2>
+<div class="site-explicacao"><p>Dois estados: vitrine (os produtos) e carrinho (os itens, guardado no navegador). O botão Comprar está dentro da lista da vitrine, por isso a ação carrinho.adicionar recebe o produto automaticamente. Contador, gaveta, total e botão de finalizar só leem do carrinho: nenhum código atualiza o ecrã diretamente.</p></div>
+</section>
+
+<section aria-labelledby="exemplos"><h2 class="site-secao-titulo" id="exemplos"><a href="#exemplos">Exemplo</a></h2>
+<div class="site-exemplo">
+        <h3 class="site-exemplo-titulo" id="exemplo-loja-completa"><a href="#exemplo-loja-completa">Loja completa</a></h3>
+        
+        <div class="site-exemplo-caixa">
+          <div class="site-demo" data-demo="0">
+<header class="at-barra" style="position: static">
+  <div class="at-barra-conteudo" style="padding-inline: 16px">
+    <span class="at-barra-marca">◆ Loja Exemplo</span>
+    <div class="at-barra-acoes">
+      <button class="at-botao at-icone at-contador-selo" commandfor="gaveta-carrinho" command="show-modal" aria-label="Abrir carrinho">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6"/></svg>
+        <span data-contador data-at-texto="carrinho.quantidade" data-at-mostrar="carrinho.quantidade"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="at-grade at-mt-6" style="--min: 190px" data-at-lista="vitrine.produtos">
+  <template>
+    <article class="at-cartao at-produto">
+      <img class="at-cartao-midia" data-at-atributos="src: imagem, alt: nome" loading="lazy">
+      <div class="at-cartao-corpo">
+        <h3 class="at-produto-nome" data-at-campo="nome"></h3>
+        <span class="at-preco-antigo" data-at-campo="precoAntigo" data-at-formato="moeda"></span>
+        <span class="at-preco" data-at-campo="preco" data-at-formato="moeda"></span>
+        <button class="at-botao at-primario at-bloco" data-at-acao="carrinho.adicionar">Comprar</button>
+      </div>
+    </article>
+  </template>
+</div>
+
+<dialog class="at-gaveta" id="gaveta-carrinho" aria-labelledby="carrinho-titulo">
+  <div class="at-modal-cabecalho">
+    <h3 id="carrinho-titulo">O seu carrinho</h3>
+    <button class="at-botao at-icone at-fantasma at-pequeno" commandfor="gaveta-carrinho" command="close" aria-label="Fechar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+
+  <div class="at-modal-corpo">
+    <div class="at-vazio" data-at-mostrar="carrinho.vazio">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13h5l2 3h4l2-3h5"/><path d="M5 5h14l2 8v6H3v-6z"/></svg>
+      <h3>O seu carrinho está vazio</h3>
+      <p>Que tal espreitar as ofertas?</p>
+    </div>
+
+    <ul class="at-pilha" style="--at-gap: 12px; list-style: none; padding: 0; margin: 0" data-at-lista="carrinho.itens">
+      <template>
+        <li class="at-linha at-topo">
+          <img data-at-atributos="src: imagem, alt: nome" width="64" height="64" style="object-fit: contain; background: #fff; border-radius: 8px">
+          <div class="at-cresce">
+            <div class="at-texto-pequeno" data-at-campo="nome"></div>
+            <strong data-at-campo="subtotal" data-at-formato="moeda"></strong>
+            <div class="at-linha at-mt-2" style="--at-gap: 4px">
+              <button class="at-botao at-icone at-pequeno" data-at-acao="carrinho.diminuir" aria-label="Diminuir">−</button>
+              <span class="at-numero" style="min-width: 2ch; text-align: center" data-at-campo="quantidade"></span>
+              <button class="at-botao at-icone at-pequeno" data-at-acao="carrinho.aumentar" aria-label="Aumentar">+</button>
+              <button class="at-botao at-link at-pequeno" style="margin-left: auto" data-at-acao="carrinho.remover">Remover</button>
+            </div>
+          </div>
+        </li>
+      </template>
+    </ul>
+  </div>
+
+  <div class="at-modal-rodape" style="flex-direction: column; align-items: stretch">
+    <div class="at-linha at-entre">
+      <span>Total</span>
+      <strong class="at-titulo-4 at-mb-0" data-at-texto="carrinho.total" data-at-formato="moeda" aria-live="polite"></strong>
+    </div>
+    <button class="at-botao at-primario at-grande at-bloco" data-at-desabilitar="carrinho.vazio" data-at-acao="carrinho.finalizar">Finalizar compra</button>
+  </div>
+</dialog>
+          </div>
+          <div class="site-codigo-abas">
+          <div class="site-codigo-lista" role="tablist" aria-label="Linguagem do código"><button type="button" role="tab" aria-selected="true" aria-controls="ex0-html" id="ex0-aba-html" tabindex="0">HTML</button><button type="button" role="tab" aria-selected="false" aria-controls="ex0-js" id="ex0-aba-js" tabindex="-1">JavaScript</button></div>
+          <a class="at-botao at-pequeno site-editar" href="/editor/#eyJodG1sIjoiPGhlYWRlciBjbGFzcz1cImF0LWJhcnJhXCIgc3R5bGU9XCJwb3NpdGlvbjogc3RhdGljXCI-XG4gIDxkaXYgY2xhc3M9XCJhdC1iYXJyYS1jb250ZXVkb1wiIHN0eWxlPVwicGFkZGluZy1pbmxpbmU6IDE2cHhcIj5cbiAgICA8c3BhbiBjbGFzcz1cImF0LWJhcnJhLW1hcmNhXCI-4peGIExvamEgRXhlbXBsbzwvc3Bhbj5cbiAgICA8ZGl2IGNsYXNzPVwiYXQtYmFycmEtYWNvZXNcIj5cbiAgICAgIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1pY29uZSBhdC1jb250YWRvci1zZWxvXCIgY29tbWFuZGZvcj1cImdhdmV0YS1jYXJyaW5ob1wiIGNvbW1hbmQ9XCJzaG93LW1vZGFsXCIgYXJpYS1sYWJlbD1cIkFicmlyIGNhcnJpbmhvXCI-XG4gICAgICAgIDxzdmcgdmlld0JveD1cIjAgMCAyNCAyNFwiIHdpZHRoPVwiMThcIiBoZWlnaHQ9XCIxOFwiIGZpbGw9XCJub25lXCIgc3Ryb2tlPVwiY3VycmVudENvbG9yXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIHN0cm9rZS1saW5lY2FwPVwicm91bmRcIiBzdHJva2UtbGluZWpvaW49XCJyb3VuZFwiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiPjxjaXJjbGUgY3g9XCI5XCIgY3k9XCIyMFwiIHI9XCIxLjVcIi8-PGNpcmNsZSBjeD1cIjE4XCIgY3k9XCIyMFwiIHI9XCIxLjVcIi8-PHBhdGggZD1cIk0yIDNoM2wyLjYgMTIuMmEyIDIgMCAwIDAgMiAxLjZoNy44YTIgMiAwIDAgMCAyLTEuNUwyMSA4SDZcIi8-PC9zdmc-XG4gICAgICAgIDxzcGFuIGRhdGEtY29udGFkb3IgZGF0YS1hdC10ZXh0bz1cImNhcnJpbmhvLnF1YW50aWRhZGVcIiBkYXRhLWF0LW1vc3RyYXI9XCJjYXJyaW5oby5xdWFudGlkYWRlXCI-PC9zcGFuPlxuICAgICAgPC9idXR0b24-XG4gICAgPC9kaXY-XG4gIDwvZGl2PlxuPC9oZWFkZXI-XG5cbjxkaXYgY2xhc3M9XCJhdC1ncmFkZSBhdC1tdC02XCIgc3R5bGU9XCItLW1pbjogMTkwcHhcIiBkYXRhLWF0LWxpc3RhPVwidml0cmluZS5wcm9kdXRvc1wiPlxuICA8dGVtcGxhdGU-XG4gICAgPGFydGljbGUgY2xhc3M9XCJhdC1jYXJ0YW8gYXQtcHJvZHV0b1wiPlxuICAgICAgPGltZyBjbGFzcz1cImF0LWNhcnRhby1taWRpYVwiIGRhdGEtYXQtYXRyaWJ1dG9zPVwic3JjOiBpbWFnZW0sIGFsdDogbm9tZVwiIGxvYWRpbmc9XCJsYXp5XCI-XG4gICAgICA8ZGl2IGNsYXNzPVwiYXQtY2FydGFvLWNvcnBvXCI-XG4gICAgICAgIDxoMyBjbGFzcz1cImF0LXByb2R1dG8tbm9tZVwiIGRhdGEtYXQtY2FtcG89XCJub21lXCI-PC9oMz5cbiAgICAgICAgPHNwYW4gY2xhc3M9XCJhdC1wcmVjby1hbnRpZ29cIiBkYXRhLWF0LWNhbXBvPVwicHJlY29BbnRpZ29cIiBkYXRhLWF0LWZvcm1hdG89XCJtb2VkYVwiPjwvc3Bhbj5cbiAgICAgICAgPHNwYW4gY2xhc3M9XCJhdC1wcmVjb1wiIGRhdGEtYXQtY2FtcG89XCJwcmVjb1wiIGRhdGEtYXQtZm9ybWF0bz1cIm1vZWRhXCI-PC9zcGFuPlxuICAgICAgICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW8gYXQtcHJpbWFyaW8gYXQtYmxvY29cIiBkYXRhLWF0LWFjYW89XCJjYXJyaW5oby5hZGljaW9uYXJcIj5Db21wcmFyPC9idXR0b24-XG4gICAgICA8L2Rpdj5cbiAgICA8L2FydGljbGU-XG4gIDwvdGVtcGxhdGU-XG48L2Rpdj5cblxuPGRpYWxvZyBjbGFzcz1cImF0LWdhdmV0YVwiIGlkPVwiZ2F2ZXRhLWNhcnJpbmhvXCIgYXJpYS1sYWJlbGxlZGJ5PVwiY2FycmluaG8tdGl0dWxvXCI-XG4gIDxkaXYgY2xhc3M9XCJhdC1tb2RhbC1jYWJlY2FsaG9cIj5cbiAgICA8aDMgaWQ9XCJjYXJyaW5oby10aXR1bG9cIj5PIHNldSBjYXJyaW5obzwvaDM-XG4gICAgPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LWljb25lIGF0LWZhbnRhc21hIGF0LXBlcXVlbm9cIiBjb21tYW5kZm9yPVwiZ2F2ZXRhLWNhcnJpbmhvXCIgY29tbWFuZD1cImNsb3NlXCIgYXJpYS1sYWJlbD1cIkZlY2hhclwiPjxzdmcgdmlld0JveD1cIjAgMCAyNCAyNFwiIHdpZHRoPVwiMThcIiBoZWlnaHQ9XCIxOFwiIGZpbGw9XCJub25lXCIgc3Ryb2tlPVwiY3VycmVudENvbG9yXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIHN0cm9rZS1saW5lY2FwPVwicm91bmRcIiBzdHJva2UtbGluZWpvaW49XCJyb3VuZFwiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiPjxwYXRoIGQ9XCJNMTggNiA2IDE4TTYgNmwxMiAxMlwiLz48L3N2Zz48L2J1dHRvbj5cbiAgPC9kaXY-XG5cbiAgPGRpdiBjbGFzcz1cImF0LW1vZGFsLWNvcnBvXCI-XG4gICAgPGRpdiBjbGFzcz1cImF0LXZhemlvXCIgZGF0YS1hdC1tb3N0cmFyPVwiY2FycmluaG8udmF6aW9cIj5cbiAgICAgIDxzdmcgdmlld0JveD1cIjAgMCAyNCAyNFwiIHdpZHRoPVwiNDhcIiBoZWlnaHQ9XCI0OFwiIGZpbGw9XCJub25lXCIgc3Ryb2tlPVwiY3VycmVudENvbG9yXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIHN0cm9rZS1saW5lY2FwPVwicm91bmRcIiBzdHJva2UtbGluZWpvaW49XCJyb3VuZFwiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiPjxwYXRoIGQ9XCJNMyAxM2g1bDIgM2g0bDItM2g1XCIvPjxwYXRoIGQ9XCJNNSA1aDE0bDIgOHY2SDN2LTZ6XCIvPjwvc3ZnPlxuICAgICAgPGgzPk8gc2V1IGNhcnJpbmhvIGVzdMOhIHZhemlvPC9oMz5cbiAgICAgIDxwPlF1ZSB0YWwgZXNwcmVpdGFyIGFzIG9mZXJ0YXM_PC9wPlxuICAgIDwvZGl2PlxuXG4gICAgPHVsIGNsYXNzPVwiYXQtcGlsaGFcIiBzdHlsZT1cIi0tYXQtZ2FwOiAxMnB4OyBsaXN0LXN0eWxlOiBub25lOyBwYWRkaW5nOiAwOyBtYXJnaW46IDBcIiBkYXRhLWF0LWxpc3RhPVwiY2FycmluaG8uaXRlbnNcIj5cbiAgICAgIDx0ZW1wbGF0ZT5cbiAgICAgICAgPGxpIGNsYXNzPVwiYXQtbGluaGEgYXQtdG9wb1wiPlxuICAgICAgICAgIDxpbWcgZGF0YS1hdC1hdHJpYnV0b3M9XCJzcmM6IGltYWdlbSwgYWx0OiBub21lXCIgd2lkdGg9XCI2NFwiIGhlaWdodD1cIjY0XCIgc3R5bGU9XCJvYmplY3QtZml0OiBjb250YWluOyBiYWNrZ3JvdW5kOiAjZmZmOyBib3JkZXItcmFkaXVzOiA4cHhcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXQtY3Jlc2NlXCI-XG4gICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXQtdGV4dG8tcGVxdWVub1wiIGRhdGEtYXQtY2FtcG89XCJub21lXCI-PC9kaXY-XG4gICAgICAgICAgICA8c3Ryb25nIGRhdGEtYXQtY2FtcG89XCJzdWJ0b3RhbFwiIGRhdGEtYXQtZm9ybWF0bz1cIm1vZWRhXCI-PC9zdHJvbmc-XG4gICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXQtbGluaGEgYXQtbXQtMlwiIHN0eWxlPVwiLS1hdC1nYXA6IDRweFwiPlxuICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPVwiYXQtYm90YW8gYXQtaWNvbmUgYXQtcGVxdWVub1wiIGRhdGEtYXQtYWNhbz1cImNhcnJpbmhvLmRpbWludWlyXCIgYXJpYS1sYWJlbD1cIkRpbWludWlyXCI-4oiSPC9idXR0b24-XG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzPVwiYXQtbnVtZXJvXCIgc3R5bGU9XCJtaW4td2lkdGg6IDJjaDsgdGV4dC1hbGlnbjogY2VudGVyXCIgZGF0YS1hdC1jYW1wbz1cInF1YW50aWRhZGVcIj48L3NwYW4-XG4gICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1pY29uZSBhdC1wZXF1ZW5vXCIgZGF0YS1hdC1hY2FvPVwiY2FycmluaG8uYXVtZW50YXJcIiBhcmlhLWxhYmVsPVwiQXVtZW50YXJcIj4rPC9idXR0b24-XG4gICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9XCJhdC1ib3RhbyBhdC1saW5rIGF0LXBlcXVlbm9cIiBzdHlsZT1cIm1hcmdpbi1sZWZ0OiBhdXRvXCIgZGF0YS1hdC1hY2FvPVwiY2FycmluaG8ucmVtb3ZlclwiPlJlbW92ZXI8L2J1dHRvbj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2xpPlxuICAgICAgPC90ZW1wbGF0ZT5cbiAgICA8L3VsPlxuICA8L2Rpdj5cblxuICA8ZGl2IGNsYXNzPVwiYXQtbW9kYWwtcm9kYXBlXCIgc3R5bGU9XCJmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBhbGlnbi1pdGVtczogc3RyZXRjaFwiPlxuICAgIDxkaXYgY2xhc3M9XCJhdC1saW5oYSBhdC1lbnRyZVwiPlxuICAgICAgPHNwYW4-VG90YWw8L3NwYW4-XG4gICAgICA8c3Ryb25nIGNsYXNzPVwiYXQtdGl0dWxvLTQgYXQtbWItMFwiIGRhdGEtYXQtdGV4dG89XCJjYXJyaW5oby50b3RhbFwiIGRhdGEtYXQtZm9ybWF0bz1cIm1vZWRhXCIgYXJpYS1saXZlPVwicG9saXRlXCI-PC9zdHJvbmc-XG4gICAgPC9kaXY-XG4gICAgPGJ1dHRvbiBjbGFzcz1cImF0LWJvdGFvIGF0LXByaW1hcmlvIGF0LWdyYW5kZSBhdC1ibG9jb1wiIGRhdGEtYXQtZGVzYWJpbGl0YXI9XCJjYXJyaW5oby52YXppb1wiIGRhdGEtYXQtYWNhbz1cImNhcnJpbmhvLmZpbmFsaXphclwiPkZpbmFsaXphciBjb21wcmE8L2J1dHRvbj5cbiAgPC9kaXY-XG48L2RpYWxvZz4iLCJjc3MiOiIiLCJqcyI6IkF0YWxoby5lc3RhZG8oXCJ2aXRyaW5lXCIsIHtcbiAgcHJvZHV0b3M6IFtcbiAgICB7XG4gICAgICBcImlkXCI6IDEwMSxcbiAgICAgIFwibm9tZVwiOiBcIlTDqW5pcyBjYW5vIGFsdG8gdmVybWVsaG8gZSBwcmV0b1wiLFxuICAgICAgXCJwcmVjb1wiOiA1OTkuOSxcbiAgICAgIFwicHJlY29BbnRpZ29cIjogNzk5LjksXG4gICAgICBcImltYWdlbVwiOiBcImh0dHBzOi8vY2RuLmR1bW15anNvbi5jb20vcHJvZHVjdC1pbWFnZXMvbWVucy1zaG9lcy9uaWtlLWFpci1qb3JkYW4tMS1yZWQtYW5kLWJsYWNrL3RodW1ibmFpbC53ZWJwXCJcbiAgICB9LFxuICAgIHtcbiAgICAgIFwiaWRcIjogMTAyLFxuICAgICAgXCJub21lXCI6IFwiw5NjdWxvcyBkZSBzb2wgY2zDoXNzaWNvIGNvbSBwcm90ZcOnw6NvIFVWXCIsXG4gICAgICBcInByZWNvXCI6IDE4OS45LFxuICAgICAgXCJwcmVjb0FudGlnb1wiOiAyMjkuOSxcbiAgICAgIFwiaW1hZ2VtXCI6IFwiaHR0cHM6Ly9jZG4uZHVtbXlqc29uLmNvbS9wcm9kdWN0LWltYWdlcy9zdW5nbGFzc2VzL2NsYXNzaWMtc3VuLWdsYXNzZXMvdGh1bWJuYWlsLndlYnBcIlxuICAgIH0sXG4gICAge1xuICAgICAgXCJpZFwiOiAxMDMsXG4gICAgICBcIm5vbWVcIjogXCJSZWzDs2dpbyBjb20gcHVsc2VpcmEgZGUgcGVsZSBjYXN0YW5oYVwiLFxuICAgICAgXCJwcmVjb1wiOiAzNDksXG4gICAgICBcInByZWNvQW50aWdvXCI6IG51bGwsXG4gICAgICBcImltYWdlbVwiOiBcImh0dHBzOi8vY2RuLmR1bW15anNvbi5jb20vcHJvZHVjdC1pbWFnZXMvbWVucy13YXRjaGVzL2Jyb3duLWxlYXRoZXItYmVsdC13YXRjaC90aHVtYm5haWwud2VicFwiXG4gICAgfSxcbiAgICB7XG4gICAgICBcImlkXCI6IDEwNCxcbiAgICAgIFwibm9tZVwiOiBcIlBvcnTDoXRpbCBkZSAxNCBwb2xlZ2FkYXMgMTYgR0IgUkFNIDUxMiBHQiBTU0RcIixcbiAgICAgIFwicHJlY29cIjogODk5OSxcbiAgICAgIFwicHJlY29BbnRpZ29cIjogMTA0OTksXG4gICAgICBcImltYWdlbVwiOiBcImh0dHBzOi8vY2RuLmR1bW15anNvbi5jb20vcHJvZHVjdC1pbWFnZXMvbGFwdG9wcy9hcHBsZS1tYWNib29rLXByby0xNC1pbmNoLXNwYWNlLWdyZXkvdGh1bWJuYWlsLndlYnBcIlxuICAgIH1cbiAgXSxcbn0pO1xuXG5jb25zdCByZWNhbGN1bGFyID0gKGl0ZW5zKSA9PiBpdGVucy5tYXAoKGl0ZW0pID0-ICh7IC4uLml0ZW0sIHN1YnRvdGFsOiBpdGVtLnByZWNvICogaXRlbS5xdWFudGlkYWRlIH0pKTtcblxuQXRhbGhvLmVzdGFkbyhcImNhcnJpbmhvXCIsIHtcbiAgaXRlbnM6IFtdLFxuXG4gIGdldCBxdWFudGlkYWRlKCkgeyByZXR1cm4gdGhpcy5pdGVucy5yZWR1Y2UoKHNvbWEsIGl0ZW0pID0-IHNvbWEgKyBpdGVtLnF1YW50aWRhZGUsIDApOyB9LFxuICBnZXQgdG90YWwoKSB7IHJldHVybiB0aGlzLml0ZW5zLnJlZHVjZSgoc29tYSwgaXRlbSkgPT4gc29tYSArIGl0ZW0uc3VidG90YWwsIDApOyB9LFxuICBnZXQgdmF6aW8oKSB7IHJldHVybiB0aGlzLml0ZW5zLmxlbmd0aCA9PT0gMDsgfSxcblxuICBhZGljaW9uYXIocHJvZHV0bykge1xuICAgIGNvbnN0IGV4aXN0ZSA9IHRoaXMuaXRlbnMuZmluZCgoaXRlbSkgPT4gaXRlbS5pZCA9PT0gcHJvZHV0by5pZCk7XG4gICAgdGhpcy5pdGVucyA9IHJlY2FsY3VsYXIoZXhpc3RlXG4gICAgICA_IHRoaXMuaXRlbnMubWFwKChpdGVtKSA9PiAoaXRlbS5pZCA9PT0gcHJvZHV0by5pZCA_IHsgLi4uaXRlbSwgcXVhbnRpZGFkZTogaXRlbS5xdWFudGlkYWRlICsgMSB9IDogaXRlbSkpXG4gICAgICA6IFsuLi50aGlzLml0ZW5zLCB7IC4uLnByb2R1dG8sIHF1YW50aWRhZGU6IDEgfV0pO1xuXG4gICAgQXRhbGhvLm5vdGlmaWNhcihwcm9kdXRvLm5vbWUsIHtcbiAgICAgIHRpcG86IFwic3VjZXNzb1wiLFxuICAgICAgdGl0dWxvOiBcIkFkaWNpb25hZG8gYW8gY2FycmluaG9cIixcbiAgICAgIGFjYW86IHsgdGV4dG86IFwiVmVyIGNhcnJpbmhvXCIsIGFvQ2xpY2FyOiAoKSA9PiBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2dhdmV0YS1jYXJyaW5ob1wiKS5zaG93TW9kYWwoKSB9LFxuICAgIH0pO1xuICB9LFxuICBhdW1lbnRhcihpdGVtKSB7XG4gICAgdGhpcy5pdGVucyA9IHJlY2FsY3VsYXIodGhpcy5pdGVucy5tYXAoKGkpID0-IChpLmlkID09PSBpdGVtLmlkID8geyAuLi5pLCBxdWFudGlkYWRlOiBpLnF1YW50aWRhZGUgKyAxIH0gOiBpKSkpO1xuICB9LFxuICBkaW1pbnVpcihpdGVtKSB7XG4gICAgdGhpcy5pdGVucyA9IHJlY2FsY3VsYXIodGhpcy5pdGVuc1xuICAgICAgLm1hcCgoaSkgPT4gKGkuaWQgPT09IGl0ZW0uaWQgPyB7IC4uLmksIHF1YW50aWRhZGU6IGkucXVhbnRpZGFkZSAtIDEgfSA6IGkpKVxuICAgICAgLmZpbHRlcigoaSkgPT4gaS5xdWFudGlkYWRlID4gMCkpO1xuICB9LFxuICByZW1vdmVyKGl0ZW0pIHsgdGhpcy5pdGVucyA9IHRoaXMuaXRlbnMuZmlsdGVyKChpKSA9PiBpLmlkICE9PSBpdGVtLmlkKTsgfSxcbiAgZmluYWxpemFyKCkge1xuICAgIEF0YWxoby5ub3RpZmljYXIoXCJUb3RhbCBkZSBcIiArIEF0YWxoby5mb3JtYXRhci5tb2VkYSh0aGlzLnRvdGFsKSArIFwiLiBBZ29yYSDDqSBzw7MgbGlnYXIgYW8gc2V1IHBhZ2FtZW50byFcIiwgeyB0aXR1bG86IFwiRW5jb21lbmRhIGNyaWFkYVwiIH0pO1xuICAgIHRoaXMuaXRlbnMgPSBbXTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2dhdmV0YS1jYXJyaW5ob1wiKS5jbG9zZSgpO1xuICB9LFxufSwgeyBzYWx2YXI6IHRydWUgfSk7In0">Editar e testar</a>
+          <button type="button" class="at-botao at-pequeno site-copiar" data-copiar-codigo>Copiar</button>
+        </div>
+        <pre class="site-codigo" id="ex0-html" role="tabpanel" aria-labelledby="ex0-aba-html" tabindex="0"><code><span class="tk-pon">&lt;</span><span class="tk-tag">header</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-barra&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;position: static&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-barra-conteudo&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;padding-inline: 16px&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-barra-marca&quot;</span><span class="tk-pon">&gt;</span>◆ Loja Exemplo<span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-barra-acoes&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone at-contador-selo&quot;</span> <span class="tk-atr">commandfor</span><span class="tk-pon">=</span><span class="tk-str">&quot;gaveta-carrinho&quot;</span> <span class="tk-atr">command</span><span class="tk-pon">=</span><span class="tk-str">&quot;show-modal&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Abrir carrinho&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">circle</span> <span class="tk-atr">cx</span><span class="tk-pon">=</span><span class="tk-str">&quot;9&quot;</span> <span class="tk-atr">cy</span><span class="tk-pon">=</span><span class="tk-str">&quot;20&quot;</span> <span class="tk-atr">r</span><span class="tk-pon">=</span><span class="tk-str">&quot;1.5&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">circle</span> <span class="tk-atr">cx</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">cy</span><span class="tk-pon">=</span><span class="tk-str">&quot;20&quot;</span> <span class="tk-atr">r</span><span class="tk-pon">=</span><span class="tk-str">&quot;1.5&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> data-contador <span class="tk-atr">data-at-texto</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.quantidade&quot;</span> <span class="tk-atr">data-at-mostrar</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.quantidade&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">header</span><span class="tk-pon">&gt;</span>
+
+<span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-grade at-mt-6&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;--min: 190px&quot;</span> <span class="tk-atr">data-at-lista</span><span class="tk-pon">=</span><span class="tk-str">&quot;vitrine.produtos&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">template</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">article</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cartao at-produto&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">img</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cartao-midia&quot;</span> <span class="tk-atr">data-at-atributos</span><span class="tk-pon">=</span><span class="tk-str">&quot;src: imagem, alt: nome&quot;</span> <span class="tk-atr">loading</span><span class="tk-pon">=</span><span class="tk-str">&quot;lazy&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cartao-corpo&quot;</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">h3</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-produto-nome&quot;</span> <span class="tk-atr">data-at-campo</span><span class="tk-pon">=</span><span class="tk-str">&quot;nome&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">h3</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-preco-antigo&quot;</span> <span class="tk-atr">data-at-campo</span><span class="tk-pon">=</span><span class="tk-str">&quot;precoAntigo&quot;</span> <span class="tk-atr">data-at-formato</span><span class="tk-pon">=</span><span class="tk-str">&quot;moeda&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-preco&quot;</span> <span class="tk-atr">data-at-campo</span><span class="tk-pon">=</span><span class="tk-str">&quot;preco&quot;</span> <span class="tk-atr">data-at-formato</span><span class="tk-pon">=</span><span class="tk-str">&quot;moeda&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario at-bloco&quot;</span> <span class="tk-atr">data-at-acao</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.adicionar&quot;</span><span class="tk-pon">&gt;</span>Comprar<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">article</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">template</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+
+<span class="tk-pon">&lt;</span><span class="tk-tag">dialog</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-gaveta&quot;</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;gaveta-carrinho&quot;</span> <span class="tk-atr">aria-labelledby</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho-titulo&quot;</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-modal-cabecalho&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">h3</span> <span class="tk-atr">id</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho-titulo&quot;</span><span class="tk-pon">&gt;</span>O seu carrinho<span class="tk-pon">&lt;/</span><span class="tk-tag">h3</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone at-fantasma at-pequeno&quot;</span> <span class="tk-atr">commandfor</span><span class="tk-pon">=</span><span class="tk-str">&quot;gaveta-carrinho&quot;</span> <span class="tk-atr">command</span><span class="tk-pon">=</span><span class="tk-str">&quot;close&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Fechar&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;18&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M18 6 6 18M6 6l12 12&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-modal-corpo&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-vazio&quot;</span> <span class="tk-atr">data-at-mostrar</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.vazio&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">svg</span> <span class="tk-atr">viewBox</span><span class="tk-pon">=</span><span class="tk-str">&quot;0 0 24 24&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;48&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;48&quot;</span> <span class="tk-atr">fill</span><span class="tk-pon">=</span><span class="tk-str">&quot;none&quot;</span> <span class="tk-atr">stroke</span><span class="tk-pon">=</span><span class="tk-str">&quot;currentColor&quot;</span> <span class="tk-atr">stroke-width</span><span class="tk-pon">=</span><span class="tk-str">&quot;2&quot;</span> <span class="tk-atr">stroke-linecap</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">stroke-linejoin</span><span class="tk-pon">=</span><span class="tk-str">&quot;round&quot;</span> <span class="tk-atr">aria-hidden</span><span class="tk-pon">=</span><span class="tk-str">&quot;true&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M3 13h5l2 3h4l2-3h5&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;</span><span class="tk-tag">path</span> <span class="tk-atr">d</span><span class="tk-pon">=</span><span class="tk-str">&quot;M5 5h14l2 8v6H3v-6z&quot;</span><span class="tk-pon">/&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">svg</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">h3</span><span class="tk-pon">&gt;</span>O seu carrinho está vazio<span class="tk-pon">&lt;/</span><span class="tk-tag">h3</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">p</span><span class="tk-pon">&gt;</span>Que tal espreitar as ofertas?<span class="tk-pon">&lt;/</span><span class="tk-tag">p</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+
+    <span class="tk-pon">&lt;</span><span class="tk-tag">ul</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-pilha&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;--at-gap: 12px; list-style: none; padding: 0; margin: 0&quot;</span> <span class="tk-atr">data-at-lista</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.itens&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">template</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;</span><span class="tk-tag">li</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha at-topo&quot;</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;</span><span class="tk-tag">img</span> <span class="tk-atr">data-at-atributos</span><span class="tk-pon">=</span><span class="tk-str">&quot;src: imagem, alt: nome&quot;</span> <span class="tk-atr">width</span><span class="tk-pon">=</span><span class="tk-str">&quot;64&quot;</span> <span class="tk-atr">height</span><span class="tk-pon">=</span><span class="tk-str">&quot;64&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;object-fit: contain; background: #fff; border-radius: 8px&quot;</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-cresce&quot;</span><span class="tk-pon">&gt;</span>
+            <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-texto-pequeno&quot;</span> <span class="tk-atr">data-at-campo</span><span class="tk-pon">=</span><span class="tk-str">&quot;nome&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+            <span class="tk-pon">&lt;</span><span class="tk-tag">strong</span> <span class="tk-atr">data-at-campo</span><span class="tk-pon">=</span><span class="tk-str">&quot;subtotal&quot;</span> <span class="tk-atr">data-at-formato</span><span class="tk-pon">=</span><span class="tk-str">&quot;moeda&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">strong</span><span class="tk-pon">&gt;</span>
+            <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha at-mt-2&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;--at-gap: 4px&quot;</span><span class="tk-pon">&gt;</span>
+              <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone at-pequeno&quot;</span> <span class="tk-atr">data-at-acao</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.diminuir&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Diminuir&quot;</span><span class="tk-pon">&gt;</span>−<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+              <span class="tk-pon">&lt;</span><span class="tk-tag">span</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-numero&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;min-width: 2ch; text-align: center&quot;</span> <span class="tk-atr">data-at-campo</span><span class="tk-pon">=</span><span class="tk-str">&quot;quantidade&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+              <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-icone at-pequeno&quot;</span> <span class="tk-atr">data-at-acao</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.aumentar&quot;</span> <span class="tk-atr">aria-label</span><span class="tk-pon">=</span><span class="tk-str">&quot;Aumentar&quot;</span><span class="tk-pon">&gt;</span>+<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+              <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-link at-pequeno&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;margin-left: auto&quot;</span> <span class="tk-atr">data-at-acao</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.remover&quot;</span><span class="tk-pon">&gt;</span>Remover<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+            <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+          <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+        <span class="tk-pon">&lt;/</span><span class="tk-tag">li</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;/</span><span class="tk-tag">template</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">ul</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+
+  <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-modal-rodape&quot;</span> <span class="tk-atr">style</span><span class="tk-pon">=</span><span class="tk-str">&quot;flex-direction: column; align-items: stretch&quot;</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">div</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-linha at-entre&quot;</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>Total<span class="tk-pon">&lt;/</span><span class="tk-tag">span</span><span class="tk-pon">&gt;</span>
+      <span class="tk-pon">&lt;</span><span class="tk-tag">strong</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-titulo-4 at-mb-0&quot;</span> <span class="tk-atr">data-at-texto</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.total&quot;</span> <span class="tk-atr">data-at-formato</span><span class="tk-pon">=</span><span class="tk-str">&quot;moeda&quot;</span> <span class="tk-atr">aria-live</span><span class="tk-pon">=</span><span class="tk-str">&quot;polite&quot;</span><span class="tk-pon">&gt;</span><span class="tk-pon">&lt;/</span><span class="tk-tag">strong</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+    <span class="tk-pon">&lt;</span><span class="tk-tag">button</span> <span class="tk-atr">class</span><span class="tk-pon">=</span><span class="tk-str">&quot;at-botao at-primario at-grande at-bloco&quot;</span> <span class="tk-atr">data-at-desabilitar</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.vazio&quot;</span> <span class="tk-atr">data-at-acao</span><span class="tk-pon">=</span><span class="tk-str">&quot;carrinho.finalizar&quot;</span><span class="tk-pon">&gt;</span>Finalizar compra<span class="tk-pon">&lt;/</span><span class="tk-tag">button</span><span class="tk-pon">&gt;</span>
+  <span class="tk-pon">&lt;/</span><span class="tk-tag">div</span><span class="tk-pon">&gt;</span>
+<span class="tk-pon">&lt;/</span><span class="tk-tag">dialog</span><span class="tk-pon">&gt;</span></code></pre>
+        <pre class="site-codigo" id="ex0-js" role="tabpanel" aria-labelledby="ex0-aba-js" tabindex="0" hidden><code>Atalho.estado(<span class="tk-str">&quot;vitrine&quot;</span>, {
+  produtos: [
+    {
+      <span class="tk-str">&quot;id&quot;</span>: <span class="tk-num">101</span>,
+      <span class="tk-str">&quot;nome&quot;</span>: <span class="tk-str">&quot;Ténis cano alto vermelho e preto&quot;</span>,
+      <span class="tk-str">&quot;preco&quot;</span>: <span class="tk-num">599.9</span>,
+      <span class="tk-str">&quot;precoAntigo&quot;</span>: <span class="tk-num">799.9</span>,
+      <span class="tk-str">&quot;imagem&quot;</span>: <span class="tk-str">&quot;https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp&quot;</span>
+    },
+    {
+      <span class="tk-str">&quot;id&quot;</span>: <span class="tk-num">102</span>,
+      <span class="tk-str">&quot;nome&quot;</span>: <span class="tk-str">&quot;Óculos de sol clássico com proteção UV&quot;</span>,
+      <span class="tk-str">&quot;preco&quot;</span>: <span class="tk-num">189.9</span>,
+      <span class="tk-str">&quot;precoAntigo&quot;</span>: <span class="tk-num">229.9</span>,
+      <span class="tk-str">&quot;imagem&quot;</span>: <span class="tk-str">&quot;https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp&quot;</span>
+    },
+    {
+      <span class="tk-str">&quot;id&quot;</span>: <span class="tk-num">103</span>,
+      <span class="tk-str">&quot;nome&quot;</span>: <span class="tk-str">&quot;Relógio com pulseira de pele castanha&quot;</span>,
+      <span class="tk-str">&quot;preco&quot;</span>: <span class="tk-num">349</span>,
+      <span class="tk-str">&quot;precoAntigo&quot;</span>: <span class="tk-pal">null</span>,
+      <span class="tk-str">&quot;imagem&quot;</span>: <span class="tk-str">&quot;https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp&quot;</span>
+    },
+    {
+      <span class="tk-str">&quot;id&quot;</span>: <span class="tk-num">104</span>,
+      <span class="tk-str">&quot;nome&quot;</span>: <span class="tk-str">&quot;Portátil de 14 polegadas 16 GB RAM 512 GB SSD&quot;</span>,
+      <span class="tk-str">&quot;preco&quot;</span>: <span class="tk-num">8999</span>,
+      <span class="tk-str">&quot;precoAntigo&quot;</span>: <span class="tk-num">10499</span>,
+      <span class="tk-str">&quot;imagem&quot;</span>: <span class="tk-str">&quot;https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp&quot;</span>
+    }
+  ],
+});
+
+<span class="tk-pal">const</span> recalcular = (itens) =&gt; itens.map((item) =&gt; ({ ...item, subtotal: item.preco * item.quantidade }));
+
+Atalho.estado(<span class="tk-str">&quot;carrinho&quot;</span>, {
+  itens: [],
+
+  <span class="tk-pal">get</span> quantidade() { <span class="tk-pal">return</span> <span class="tk-pal">this</span>.itens.reduce((soma, item) =&gt; soma + item.quantidade, <span class="tk-num">0</span>); },
+  <span class="tk-pal">get</span> total() { <span class="tk-pal">return</span> <span class="tk-pal">this</span>.itens.reduce((soma, item) =&gt; soma + item.subtotal, <span class="tk-num">0</span>); },
+  <span class="tk-pal">get</span> vazio() { <span class="tk-pal">return</span> <span class="tk-pal">this</span>.itens.length === <span class="tk-num">0</span>; },
+
+  adicionar(produto) {
+    <span class="tk-pal">const</span> existe = <span class="tk-pal">this</span>.itens.find((item) =&gt; item.id === produto.id);
+    <span class="tk-pal">this</span>.itens = recalcular(existe
+      ? <span class="tk-pal">this</span>.itens.map((item) =&gt; (item.id === produto.id ? { ...item, quantidade: item.quantidade + <span class="tk-num">1</span> } : item))
+      : [...<span class="tk-pal">this</span>.itens, { ...produto, quantidade: <span class="tk-num">1</span> }]);
+
+    Atalho.notificar(produto.nome, {
+      tipo: <span class="tk-str">&quot;sucesso&quot;</span>,
+      titulo: <span class="tk-str">&quot;Adicionado ao carrinho&quot;</span>,
+      acao: { texto: <span class="tk-str">&quot;Ver carrinho&quot;</span>, aoClicar: () =&gt; document.querySelector(<span class="tk-str">&quot;#gaveta-carrinho&quot;</span>).showModal() },
+    });
+  },
+  aumentar(item) {
+    <span class="tk-pal">this</span>.itens = recalcular(<span class="tk-pal">this</span>.itens.map((i) =&gt; (i.id === item.id ? { ...i, quantidade: i.quantidade + <span class="tk-num">1</span> } : i)));
+  },
+  diminuir(item) {
+    <span class="tk-pal">this</span>.itens = recalcular(<span class="tk-pal">this</span>.itens
+      .map((i) =&gt; (i.id === item.id ? { ...i, quantidade: i.quantidade - <span class="tk-num">1</span> } : i))
+      .filter((i) =&gt; i.quantidade &gt; <span class="tk-num">0</span>));
+  },
+  remover(item) { <span class="tk-pal">this</span>.itens = <span class="tk-pal">this</span>.itens.filter((i) =&gt; i.id !== item.id); },
+  finalizar() {
+    Atalho.notificar(<span class="tk-str">&quot;Total de &quot;</span> + Atalho.formatar.moeda(<span class="tk-pal">this</span>.total) + <span class="tk-str">&quot;. Agora é só ligar ao seu pagamento!&quot;</span>, { titulo: <span class="tk-str">&quot;Encomenda criada&quot;</span> });
+    <span class="tk-pal">this</span>.itens = [];
+    document.querySelector(<span class="tk-str">&quot;#gaveta-carrinho&quot;</span>).close();
+  },
+}, { salvar: <span class="tk-pal">true</span> });</code></pre>
+        </div>
+      </div>
+</section>
+
+<section aria-labelledby="acessibilidade"><h2 class="site-secao-titulo" id="acessibilidade"><a href="#acessibilidade">Acessibilidade</a></h2>
+<ul class="site-lista "><li>O contador do botão do carrinho tem o número no aria-label, atualizado junto.</li></ul>
+</section>
+
+<section aria-labelledby="combina-com"><h2 class="site-secao-titulo" id="combina-com"><a href="#combina-com">Combina com</a></h2>
+<div class="site-relacionados"><a href="/componentes/produto/"><strong>Cartão de produto</strong><span>O cartão de produto de loja online completo: foto, nome em até duas linhas, preço antigo, desconto, pagamento em 3 vezes, portes grátis e botão de comprar.</span></a><a href="/componentes/gaveta/"><strong>Gaveta (painel lateral)</strong><span>Painel que desliza da lateral: carrinho de compras, filtros, detalhes de um item ou menu no telemóvel.</span></a><a href="/componentes/barra/"><strong>Barra de navegação</strong><span>Topo do site com marca, links, pesquisa e ações. Fica fixa ao fazer scroll, tem fundo translúcido e transforma-se em menu no telemóvel.</span></a><a href="/componentes/estado/"><strong>Estado (reatividade)</strong><span>A ideia central do React, sem React: muda os dados e o ecrã atualiza-se sozinho. É assim que os componentes se conectam.</span></a><a href="/componentes/notificacao/"><strong>Notificação (toast)</strong><span>Mensagem rápida no canto do ecrã a confirmar o que aconteceu, com botão de Desfazer opcional.</span></a><a href="/componentes/formatar/"><strong>Formatar (moeda, datas, números)</strong><span>Funções prontas no idioma da página: 1234,56 €, 08/10/2026, &quot;há 5 minutos&quot;, 1,2 mil, 3,4 MB. Em inglês ou no Brasil, mudam sozinhas.</span></a></div>
+</section>
+
+      <nav class="site-navegacao-docs" aria-label="Anterior e próximo">
+        <a href="/componentes/carregar-mais/" rel="prev"><small>← Anterior</small><strong>Carregar mais (scroll infinito)</strong></a>
+        <a href="/componentes/receita-cadastro/" rel="next"><small>Próximo →</small><strong>Registo com morada automática</strong></a>
+      </nav>
+      <p class="at-texto-suave at-texto-pequeno at-mt-6">Encontrou um erro? <a href="https://github.com/marcos-zorzetto/atalho/issues/new?title=%5BLoja%20com%20carrinho%5D%20" target="_blank" rel="noopener">Abra uma issue</a> ou <a href="https://github.com/marcos-zorzetto/atalho/tree/main/site/dados" target="_blank" rel="noopener">edite no GitHub</a>.</p>
+    </article>
+    <aside class="site-indice" aria-label="Nesta página">
+      <div class="site-indice-fixo">
+        <h2>Nesta página</h2>
+        <ul><li><a href="#quando-usar">Quando usar</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#exemplos">Exemplo</a></li><li><a href="#acessibilidade">Acessibilidade</a></li><li><a href="#combina-com">Combina com</a></li></ul>
+        <aside class="site-patrocinio site-patrocinio-vazio" aria-label="Espaço para patrocinador">
+    <a href="/patrocinar/" class="site-patrocinio-link">
+      <span class="site-patrocinio-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>
+      <span><strong>A sua marca aqui</strong><span>Chegue a programadores que estão a começar, em Portugal e no Brasil.</span></span>
+    </a>
+    <small>Espaço publicitário</small>
+  </aside>
+      </div>
+    </aside>
+  </div>
+  <script type="application/json" id="exemplos-js">["Atalho.estado(\"vitrine\", {\n  produtos: [\n    {\n      \"id\": 101,\n      \"nome\": \"Ténis cano alto vermelho e preto\",\n      \"preco\": 599.9,\n      \"precoAntigo\": 799.9,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp\"\n    },\n    {\n      \"id\": 102,\n      \"nome\": \"Óculos de sol clássico com proteção UV\",\n      \"preco\": 189.9,\n      \"precoAntigo\": 229.9,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp\"\n    },\n    {\n      \"id\": 103,\n      \"nome\": \"Relógio com pulseira de pele castanha\",\n      \"preco\": 349,\n      \"precoAntigo\": null,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/thumbnail.webp\"\n    },\n    {\n      \"id\": 104,\n      \"nome\": \"Portátil de 14 polegadas 16 GB RAM 512 GB SSD\",\n      \"preco\": 8999,\n      \"precoAntigo\": 10499,\n      \"imagem\": \"https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp\"\n    }\n  ],\n});\n\nconst recalcular = (itens) => itens.map((item) => ({ ...item, subtotal: item.preco * item.quantidade }));\n\nAtalho.estado(\"carrinho\", {\n  itens: [],\n\n  get quantidade() { return this.itens.reduce((soma, item) => soma + item.quantidade, 0); },\n  get total() { return this.itens.reduce((soma, item) => soma + item.subtotal, 0); },\n  get vazio() { return this.itens.length === 0; },\n\n  adicionar(produto) {\n    const existe = this.itens.find((item) => item.id === produto.id);\n    this.itens = recalcular(existe\n      ? this.itens.map((item) => (item.id === produto.id ? { ...item, quantidade: item.quantidade + 1 } : item))\n      : [...this.itens, { ...produto, quantidade: 1 }]);\n\n    Atalho.notificar(produto.nome, {\n      tipo: \"sucesso\",\n      titulo: \"Adicionado ao carrinho\",\n      acao: { texto: \"Ver carrinho\", aoClicar: () => document.querySelector(\"#gaveta-carrinho\").showModal() },\n    });\n  },\n  aumentar(item) {\n    this.itens = recalcular(this.itens.map((i) => (i.id === item.id ? { ...i, quantidade: i.quantidade + 1 } : i)));\n  },\n  diminuir(item) {\n    this.itens = recalcular(this.itens\n      .map((i) => (i.id === item.id ? { ...i, quantidade: i.quantidade - 1 } : i))\n      .filter((i) => i.quantidade > 0));\n  },\n  remover(item) { this.itens = this.itens.filter((i) => i.id !== item.id); },\n  finalizar() {\n    Atalho.notificar(\"Total de \" + Atalho.formatar.moeda(this.total) + \". Agora é só ligar ao seu pagamento!\", { titulo: \"Encomenda criada\" });\n    this.itens = [];\n    document.querySelector(\"#gaveta-carrinho\").close();\n  },\n}, { salvar: true });"]</script>
+  </main>
+  <footer class="site-rodape">
+    <div class="site-container">
+      <div class="site-rodape-grade">
+        <div class="site-rodape-sobre">
+          <a href="/" class="site-marca"><span class="site-marca-tecla" aria-hidden="true">A</span>Atalho</a>
+          <p>Componentes de interface em português, nos padrões das grandes empresas. Grátis e de código aberto.</p>
+          <p class="at-texto-pequeno">Versão 1.3.0 · Licença MIT</p>
+        </div>
+        <nav aria-label="Documentação"><h2>Documentação</h2><ul><li><a href="/componentes/instalacao/">Instalação</a></li><li><a href="/componentes/">Componentes</a></li><li><a href="/exemplos/">Exemplos completos</a></li><li><a href="/editor/">Editor ao vivo</a></li><li><a href="/animacoes/">Estúdio de animações</a></li><li><a href="/icones/">Ícones</a></li><li><a href="/personalizar/">Personalizar tema</a></li></ul></nav>
+        <nav aria-label="Linguagens"><h2>Linguagens</h2><ul><li><a href="/typescript/">TypeScript</a></li><li><a href="/php/">PHP no servidor</a></li><li><a href="/componentes/estado/">Estado (reatividade)</a></li><li><a href="/componentes/eventos/">Eventos</a></li></ul></nav>
+        <nav aria-label="Projeto"><h2>Projeto</h2><ul><li><a href="https://github.com/marcos-zorzetto/atalho" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/marcos-zorzetto/atalho/issues" target="_blank" rel="noopener">Reportar um problema</a></li><li><a href="/pro/">Atalho Pro</a></li><li><a href="/patrocinar/">Anuncie no Atalho</a></li></ul></nav>
+        <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="/privacidade/">Privacidade</a></li><li><a href="/termos/">Termos de uso</a></li><li><a href="/conta/">A minha conta</a></li></ul></nav>
+      </div>
+      <div class="site-rodape-base">
+        <span>Criado por <a href="https://github.com/marcos-zorzetto" target="_blank" rel="noopener">Marcos Zorzetto</a>. Empresas citadas são só referência de padrões de interface.</span>
+        <span>Dados de suporte dos navegadores: web-features (Baseline)</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
