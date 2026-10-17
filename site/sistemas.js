@@ -113,4 +113,36 @@
     const botao = evento.target.closest("[data-sistema-baixar]");
     if (botao) descarregar(botao);
   });
+
+  /* ---------- Procurar e filtrar por área ---------- */
+  const procura = document.querySelector("[data-sistemas-procura]");
+  const contagem = document.querySelector("[data-sistemas-contagem]");
+  const filtros = [...document.querySelectorAll("[data-sistemas-filtro]")];
+  const cartoes = [...document.querySelectorAll("[data-sistema]")];
+  const grupos = [...document.querySelectorAll("[data-sistemas-grupo]")];
+  const vazio = document.querySelector("[data-sistemas-vazio]");
+  const semAcentos = (t) => t.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  cartoes.forEach((c) => (c.dataset.busca = semAcentos(c.dataset.busca || "")));
+  let area = "todos";
+  function aplicar() {
+    const termos = semAcentos(procura?.value || "").split(/\s+/).filter(Boolean);
+    let n = 0;
+    for (const c of cartoes) {
+      const mostra = (area === "todos" || c.dataset.grupo === area) && termos.every((t) => c.dataset.busca.includes(t));
+      c.hidden = !mostra;
+      if (mostra) n++;
+    }
+    for (const g of grupos) g.hidden = !g.querySelector("[data-sistema]:not([hidden])");
+    if (vazio) vazio.hidden = n > 0;
+    if (contagem) contagem.textContent = n === 1 ? "1 sistema" : `${n} sistemas`;
+  }
+  procura?.addEventListener("input", aplicar);
+  for (const f of filtros) {
+    f.addEventListener("click", () => {
+      area = f.dataset.sistemasFiltro;
+      filtros.forEach((x) => x.setAttribute("aria-pressed", String(x === f)));
+      aplicar();
+      document.querySelector("[data-sistemas-barra]")?.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+  }
 })();
