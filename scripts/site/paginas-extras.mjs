@@ -581,7 +581,7 @@ export function paginaConta({ exemplos }) {
         <button class="at-botao at-perigo" commandfor="modal-excluir-conta" command="show-modal">Eliminar a minha conta</button>
         <dialog class="at-modal at-pequeno" id="modal-excluir-conta" aria-labelledby="excluir-conta-titulo">
           <form method="dialog">
-            <div class="at-modal-corpo"><h3 class="at-titulo-4" id="excluir-conta-titulo">Eliminar a sua conta?</h3><p class="at-texto-suave">Os seus dados e favoritos serão apagados de forma definitiva.</p><p class="at-texto-pequeno at-mb-0"><strong>Tem o Pro?</strong> Cancele antes em Gerir subscrição: eliminar a conta não interrompe a cobrança na Lemon Squeezy.</p></div>
+            <div class="at-modal-corpo"><h3 class="at-titulo-4" id="excluir-conta-titulo">Eliminar a sua conta?</h3><p class="at-texto-suave">Os seus dados e favoritos serão apagados de forma definitiva.</p><p class="at-texto-pequeno at-mb-0"><strong>Tem o Pro?</strong> Cancele primeiro a subscrição em "O seu plano" (Cancelar subscrição); só depois é possível eliminar a conta.</p></div>
             <div class="at-modal-rodape"><button class="at-botao at-fantasma" value="cancelar">Cancelar</button><button class="at-botao at-perigo" value="excluir" data-excluir-conta>Eliminar definitivamente</button></div>
           </form>
         </dialog>

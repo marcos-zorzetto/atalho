@@ -170,7 +170,8 @@
       if (evento.target.returnValue !== "excluir") return;
       evento.target.returnValue = "";
       const { error } = await cliente.rpc("excluir_minha_conta");
-      if (error) return notificar(traduzir(error), "perigo");
+      // Subscrição ainda a renovar: a mensagem do servidor já diz o que fazer
+      if (error) return notificar(error.hint === "subscricao_ativa" ? error.message : traduzir(error), "perigo", { duracao: 10000 });
       await cliente.auth.signOut();
       notificar("A sua conta e todos os seus dados foram apagados.", "sucesso");
       setTimeout(() => (location.href = base), 1500);

@@ -479,3 +479,58 @@ create table if not exists public.clientes_revolut (
 alter table public.clientes_revolut enable row level security;
 revoke all on public.clientes_revolut from anon, authenticated;
 grant select, insert, update, delete on public.clientes_revolut to service_role;
+
+-- ===========================================================================
+-- ENDURECIMENTO (versão 1.6, 17/10/2026)
+-- Os privilégios por omissão do Supabase davam TRUNCATE, TRIGGER e REFERENCES às
+-- contas nas tabelas pessoais (o TRUNCATE ignora as regras de RLS). Ficam só os
+-- privilégios que o site usa; no perfil, só o nome se pode mudar.
+-- Índices nas chaves estrangeiras (pedido pelo assistente de desempenho).
+-- ===========================================================================
+revoke all on public.perfis, public.favoritos, public.lista_espera_pro from authenticated;
+grant select on public.perfis to authenticated;
+grant update (nome) on public.perfis to authenticated;
+grant select, insert, delete on public.favoritos to authenticated;
+grant select, insert, delete on public.lista_espera_pro to authenticated;
+
+create index if not exists assinaturas_produto_idx on public.assinaturas (produto_id);
+create index if not exists compras_produto_idx on public.compras (produto_id);
+create index if not exists conteudos_produto_idx on public.conteudos (produto_id);
+create index if not exists pagamentos_produto_idx on public.pagamentos (produto_id);
+create index if not exists pagamentos_usuario_idx on public.pagamentos (usuario_id);
+
+-- Eliminar a conta com uma subscrição que ainda renova deixaria a Revolut a cobrar uma conta
+-- que já não existe: primeiro cancela-se (O seu plano → Cancelar subscrição), depois elimina-se.
+create or replace function public.excluir_minha_conta()
+returns void
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  if auth.uid() is null then
+    raise exception 'não autenticado';
+  end if;
+  if exists (
+    select 1 from public.assinaturas a
+    where a.usuario_id = auth.uid() and a.status in ('on_trial', 'active', 'past_due', 'paused', 'unpaid')
+  ) then
+    raise exception 'Cancele primeiro a subscrição do Pro (em "O seu plano") e depois elimine a conta.' using errcode = 'P0001', hint = 'subscricao_ativa';
+  end if;
+  delete from auth.users where id = auth.uid();
+end;
+$$;
+revoke all on function public.excluir_minha_conta() from public, anon;
+grant execute on function public.excluir_minha_conta() to authenticated;
+
+-- Ligar a loja pelo painel (/admin/ → "Ligar pagamentos"): a função revolut-loja cria os
+-- planos e o webhook na Revolut e guarda aqui o id do plano e o segredo do webhook.
+-- Só o servidor lê e escreve (nenhuma regra de RLS para anon/authenticated).
+create table if not exists public.config_revolut (
+  chave text primary key check (chave ~ '^[a-z_]{1,40}$'),
+  valor text not null check (char_length(valor) <= 500),
+  atualizado_em timestamptz not null default now()
+);
+alter table public.config_revolut enable row level security;
+revoke all on public.config_revolut from anon, authenticated;
+grant select, insert, update, delete on public.config_revolut to service_role;

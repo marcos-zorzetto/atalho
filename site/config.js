@@ -16,8 +16,9 @@ window.ATALHO_CONFIG = {
     url: "",
   },
   // Pagamentos pela Revolut Business (funções revolut-loja e revolut-webhook do Supabase).
-  // false = ainda não está à venda: o botão leva para a lista de espera.
+  // "auto" = pergunta à função revolut-loja se a loja já está ligada (chave da API, planos e
+  // webhook): nada a mudar aqui quando a Revolut ficar pronta. false = só lista de espera.
   pagamentos: {
-    ativo: false,
+    ativo: "auto",
   },
 };

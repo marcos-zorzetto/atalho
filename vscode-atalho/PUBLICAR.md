@@ -12,7 +12,7 @@ npm run extensao
 ```
 
 ```bash
-code --install-extension "C:\Users\marco\Documents\claude\loja-ajax-json\vscode-atalho\atalho-1.0.0.vsix"
+code --install-extension vscode-atalho/atalho-1.0.0.vsix
 ```
 
 Use o caminho completo: com o caminho curto, o comando só funciona de dentro da pasta do projeto.

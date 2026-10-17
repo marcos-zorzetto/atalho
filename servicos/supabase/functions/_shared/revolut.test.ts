@@ -2,7 +2,7 @@
 // a Revolut e o banco são imitações em memória.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { assinaturaValida, cancelar, criarCheckout, criarWebhook, estadoParaStatus, paginaRevolut, processarEvento, type Banco, type Produto, type Revolut } from "./revolut.ts";
+import { assinaturaValida, cancelar, configurarLoja, criarCheckout, criarWebhook, EVENTOS_WEBHOOK, estadoLoja, estadoParaStatus, paginaRevolut, processarEvento, type Banco, type Produto, type Revolut } from "./revolut.ts";
 
 const ANA = "11111111-1111-4111-8111-111111111111";
 const BRUNO = "22222222-2222-4222-8222-222222222222";
@@ -10,16 +10,17 @@ const SEGREDO = "wsk_teste_segredo";
 const SITE = "https://atalho.com.pt/";
 
 const PRODUTOS: Produto[] = [
-  { id: "pro-mensal", tipo: "assinatura", nome: "Atalho Pro (mensal)", preco_centavos: 900, variante_revolut: "var-mensal" },
-  { id: "pro-anual", tipo: "assinatura", nome: "Atalho Pro (anual)", preco_centavos: 7900, variante_revolut: null },
+  { id: "pro-mensal", tipo: "assinatura", nome: "Atalho Pro (mensal)", preco_centavos: 900, variante_revolut: "var-mensal", intervalo: "mes" },
+  { id: "pro-anual", tipo: "assinatura", nome: "Atalho Pro (anual)", preco_centavos: 7900, variante_revolut: null, intervalo: "ano" },
   { id: "pagina-agenda", tipo: "pagina", nome: "Página Agenda", preco_centavos: 900, variante_revolut: null },
 ];
 
-function bancoFalso() {
-  const estado = { clientes: new Map<string, string>(), assinaturas: new Map<string, any>(), compras: new Map<string, any>(), pagamentos: new Map<string, any>() };
+function bancoFalso(produtos: Produto[] = PRODUTOS) {
+  const lista = produtos.map((p) => ({ ...p }));
+  const estado = { clientes: new Map<string, string>(), assinaturas: new Map<string, any>(), compras: new Map<string, any>(), pagamentos: new Map<string, any>(), config: new Map<string, string>(), admins: new Set<string>([ANA]), produtos: lista };
   const banco: Banco = {
-    produto: async (id) => PRODUTOS.find((p) => p.id === id) ?? null,
-    produtoDaVariante: async (v) => PRODUTOS.find((p) => p.variante_revolut === v) ?? null,
+    produto: async (id) => lista.find((p) => p.id === id) ?? null,
+    produtoDaVariante: async (v) => lista.find((p) => p.variante_revolut === v) ?? null,
     clienteRevolut: async (u) => estado.clientes.get(u) ?? null,
     guardarClienteRevolut: async (u, c) => void estado.clientes.set(u, c),
     usuarioDoClienteRevolut: async (c) => [...estado.clientes].find(([, x]) => x === c)?.[0] ?? null,
@@ -29,6 +30,11 @@ function bancoFalso() {
     gravarPagamento: async (l) => void (estado.pagamentos.has(l.id) || estado.pagamentos.set(l.id, l)),
     reembolsarPedido: async (p) => estado.compras.forEach((c) => c.pedido_revolut === p && (c.reembolsada = true)),
     reembolsarPagamento: async (id) => void (estado.pagamentos.get(id) && (estado.pagamentos.get(id).reembolsado = true)),
+    produtosAssinatura: async () => lista.filter((p) => p.tipo === "assinatura"),
+    definirVariante: async (p, v) => void (lista.find((x) => x.id === p)!.variante_revolut = v),
+    lerConfig: async (c) => estado.config.get(c) ?? null,
+    gravarConfig: async (c, v) => void estado.config.set(c, v),
+    ehAdmin: async (u) => estado.admins.has(u),
   };
   return { banco, estado };
 }
@@ -46,6 +52,8 @@ function revolutFalsa(subscricoes: Record<string, any> = {}, pedidos: Record<str
     },
     criarPedido: async (d) => (chamadas.push(`pedido ${d.amount} ${d.merchant_order_data.reference}`), { id: "ord_avulso", checkout_url: "https://checkout.revolut.com/payment-link/abc" }),
     obterPedido: async (id) => pedidos[id] ?? { id, checkout_url: "https://checkout.revolut.com/payment-link/setup" },
+    criarPlano: async (d) => (chamadas.push(`plano ${d.name} ${d.variations.map((v) => `${v.phases[0].cycle_duration}=${v.phases[0].amount}${v.phases[0].currency}`).join(" ")}`), { id: "plan_1", variations: d.variations.map((_, i) => ({ id: `var_${i + 1}` })) }),
+    registarWebhook: async (d) => (chamadas.push(`webhook ${d.url} ${d.events.join(",")}`), { id: "wh_1", signing_secret: "wsk_novo" }),
   };
   return { revolut, chamadas };
 }
@@ -213,4 +221,50 @@ test("webhook HTTP: recusa sem assinatura (401) e processa com a assinatura cert
   assert.equal(com.status, 200);
   assert.equal(estado.assinaturas.get("sub_1")?.status, "active");
   assert.equal((await webhook(new Request("https://x/", { method: "GET" }))).status, 405);
+});
+
+/* ---------------- Ligar a loja pelo painel ---------------- */
+
+test("ligar a loja: cria só o plano que falta (com o preço da tabela) e o webhook, e guarda o segredo", async () => {
+  const { banco, estado } = bancoFalso();
+  const { revolut, chamadas } = revolutFalsa();
+  assert.deepEqual(await estadoLoja(banco, { chave: "sk_x", segredoAmbiente: "" }), { ativo: false });
+  const r = await configurarLoja({ banco, revolut, webhookUrl: "https://x.supabase.co/functions/v1/revolut-webhook", segredoAmbiente: "" });
+  assert.equal(r.status, 200);
+  // O mensal já tinha variação: o plano novo só leva o anual, a 79 €/ano
+  assert.deepEqual(chamadas, ["plano Atalho Pro P1Y=7900EUR", `webhook https://x.supabase.co/functions/v1/revolut-webhook ${EVENTOS_WEBHOOK.join(",")}`]);
+  assert.equal(estado.produtos.find((p) => p.id === "pro-anual")!.variante_revolut, "var_1");
+  assert.equal(estado.config.get("webhook_segredo"), "wsk_novo");
+  assert.deepEqual(await estadoLoja(banco, { chave: "sk_x", segredoAmbiente: "" }), { ativo: true });
+  // Sem a chave da API, nunca está a vender
+  assert.deepEqual(await estadoLoja(banco, { chave: "", segredoAmbiente: "" }), { ativo: false });
+});
+
+test("ligar a loja duas vezes não duplica planos nem webhooks", async () => {
+  const { banco } = bancoFalso();
+  const { revolut, chamadas } = revolutFalsa();
+  await configurarLoja({ banco, revolut, webhookUrl: "https://x/w", segredoAmbiente: "" });
+  const antes = chamadas.length;
+  const r = await configurarLoja({ banco, revolut, webhookUrl: "https://x/w", segredoAmbiente: "" });
+  assert.equal(r.status, 200);
+  assert.equal(chamadas.length, antes);
+});
+
+test("ligar a loja com REVOLUT_WEBHOOK_SECRET já definido: não cria outro webhook", async () => {
+  const { banco } = bancoFalso();
+  const { revolut, chamadas } = revolutFalsa();
+  await configurarLoja({ banco, revolut, webhookUrl: "https://x/w", segredoAmbiente: SEGREDO });
+  assert.ok(!chamadas.some((c) => c.startsWith("webhook")));
+  assert.deepEqual(await estadoLoja(banco, { chave: "sk_x", segredoAmbiente: SEGREDO }), { ativo: true });
+});
+
+test("webhook HTTP: aceita o segredo guardado na base de dados", async () => {
+  const { banco } = bancoFalso();
+  const { revolut } = revolutFalsa({}, { o9: { state: "pending" } });
+  const responder = criarWebhook({ segredo: async () => "wsk_da_base", banco, revolut });
+  const corpo = '{"event":"ORDER_COMPLETED","order_id":"o9"}';
+  const carimbo = String(Date.now());
+  const pedido = (assinatura: string) => new Request("https://x/", { method: "POST", body: corpo, headers: { "revolut-signature": assinatura, "revolut-request-timestamp": carimbo } });
+  assert.equal((await responder(pedido(await assinar(corpo, carimbo, "wsk_da_base")))).status, 200);
+  assert.equal((await responder(pedido(await assinar(corpo, carimbo, SEGREDO)))).status, 401);
 });

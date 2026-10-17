@@ -12,8 +12,11 @@ export const PROJETO = "https://teste-atalho.supabase.co";
  * Testes nunca falam com o Supabase de produção: por padrão o site recebe uma
  * configuração vazia (contas "em breve"). supabaseFalso() troca por uma simulada.
  */
+const CONFIG_JS = /\/site\/config\.js(\?.*)?$/;
+
 export async function semServicosReais(contexto) {
-  await contexto.route("**/site/config.js", (rota) =>
+  // As páginas pedem site/config.js?v=<impressão>: a regra aceita a versão
+  await contexto.route(CONFIG_JS, (rota) =>
     rota.fulfill({ contentType: "text/javascript", body: 'window.ATALHO_CONFIG = { supabase: { url: "", chavePublica: "" }, assistente: { url: "" } };' })
   );
 }
@@ -59,10 +62,10 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
   const quem = pessoa ? PESSOAS[pessoa] : null;
   const pedidos = [];
 
-  await contexto.route("**/site/config.js", (rota) =>
+  await contexto.route(CONFIG_JS, (rota) =>
     rota.fulfill({
       contentType: "text/javascript",
-      body: `window.ATALHO_CONFIG = { supabase: { url: "${PROJETO}", chavePublica: "${CHAVE}" }, assistente: { url: "" }, pagamentos: { ativo: ${Boolean(loja.ativo)} } };`,
+      body: `window.ATALHO_CONFIG = { supabase: { url: "${PROJETO}", chavePublica: "${CHAVE}" }, assistente: { url: "" }, pagamentos: { ativo: "auto" } };`,
     })
   );
 
@@ -90,6 +93,7 @@ export async function supabaseFalso(contexto, { pessoa = null, conteudos = {}, u
     if (caminho === "/functions/v1/revolut-loja") {
       const corpo = JSON.parse(pedido.postData() || "{}");
       pedidos.push({ metodo: "FUNCAO", caminho, logado, corpo });
+      if (corpo.acao === "estado") return json(rota, { ativo: Boolean(loja.ativo) });
       if (!logado) return json(rota, { erro: "Entre na sua conta para continuar." }, 401);
       if (corpo.acao === "checkout") return json(rota, { url: loja.checkoutUrl || "https://checkout.revolut.com/payment-link/teste" });
       if (corpo.acao === "cancelar") {

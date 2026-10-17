@@ -4,6 +4,7 @@
  */
 import { SITE, url, urlAbsoluta } from "./config.mjs";
 import { esc } from "./realce.mjs";
+import { SCRIPT_TEMA } from "./alojamento.mjs";
 
 const icone = (caminho, tamanho = 18) =>
   `<svg viewBox="0 0 24 24" width="${tamanho}" height="${tamanho}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${caminho}</svg>`;
@@ -95,7 +96,7 @@ export function pagina(p) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${url("favicon.svg")}" type="image/svg+xml">
   <link rel="sitemap" type="application/xml" href="${url("sitemap.xml")}">
-  <script>document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}</script>
+  <script>${SCRIPT_TEMA}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Inter+Tight:wght@600..800&family=JetBrains+Mono:wght@400;600;700&display=swap">

@@ -139,8 +139,59 @@
     $('[data-admin-detalhe="receita_total"]', raiz).textContent = "valor pago, antes de IVA e taxas";
   }
 
+  /** Funções da loja no Supabase (revolut-loja), com a sessão do administrador. */
+  async function funcaoLoja(corpo) {
+    const { data: dados, error } = await cliente.functions.invoke("revolut-loja", { body: corpo });
+    if (error) {
+      let mensagem = "Não foi possível falar com o serviço de pagamentos.";
+      try {
+        mensagem = (await error.context.json()).erro || mensagem;
+      } catch {}
+      throw new Error(mensagem);
+    }
+    return dados;
+  }
+
+  /** Cartão "Pagamentos": diz se a loja vende e, se não, o que falta (e liga-a com um clique). */
+  async function carregarPagamentos() {
+    const selo = $("[data-admin-pagamentos-selo]", raiz);
+    const texto = $("[data-admin-pagamentos-texto]", raiz);
+    const passos = $("[data-admin-pagamentos-passos]", raiz);
+    const botao = $("[data-admin-ligar-loja]", raiz);
+    let ligada = false;
+    try {
+      ligada = Boolean((await funcaoLoja({ acao: "estado" }))?.ativo);
+    } catch {
+      texto.textContent = "Não foi possível consultar o estado da loja. Tente atualizar o painel.";
+      selo.textContent = "Sem resposta";
+      return;
+    }
+    selo.textContent = ligada ? "A vender" : "Desligada";
+    selo.className = `at-selo ${ligada ? "at-sucesso" : "at-aviso"}`;
+    texto.textContent = ligada
+      ? "A loja está ligada: os botões de compra levam à página de pagamento da Revolut e o dinheiro entra na sua conta Revolut Business."
+      : "A loja ainda não vende: os visitantes veem a lista de espera. Siga os passos e carregue em Ligar a loja.";
+    passos.hidden = ligada;
+    botao.hidden = ligada;
+  }
+
+  async function ligarLoja(botao) {
+    botao.setAttribute("aria-busy", "true");
+    botao.disabled = true;
+    try {
+      const r = await funcaoLoja({ acao: "configurar" });
+      notificar(r?.mensagem || "Loja ligada à Revolut.", "sucesso", { duracao: 8000 });
+      await carregarPagamentos();
+    } catch (erro) {
+      notificar(erro.message, "perigo", { duracao: 10000 });
+    } finally {
+      botao.removeAttribute("aria-busy");
+      botao.disabled = false;
+    }
+  }
+
   async function carregarTudo() {
-    await Promise.all([carregarResumo(), carregarUsuarios(), carregarListaEConteudos(), carregarLoja()]);
+    await Promise.all([carregarResumo(), carregarUsuarios(), carregarListaEConteudos(), carregarLoja(), carregarPagamentos()]);
   }
 
   /** Folha de cálculo em CSV com ";" e BOM: abre certinho no Excel em português. */
@@ -196,6 +247,8 @@
         .catch(falhar);
     }
     if (evento.target.closest("[data-admin-exportar]")) exportarLista();
+    const ligar = evento.target.closest("[data-admin-ligar-loja]");
+    if (ligar && !ligar.disabled) ligarLoja(ligar);
   });
 
   function falhar(erro) {

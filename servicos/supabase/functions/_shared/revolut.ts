@@ -7,7 +7,9 @@
  *     ou o pedido avulso e devolve a página de pagamento da Revolut;
  *   - webhook: confere a assinatura do aviso, pergunta à Revolut o estado
  *     atual (o aviso é só um "algo mudou") e grava no banco;
- *   - cancelar: cancela a subscrição da própria pessoa.
+ *   - cancelar: cancela a subscrição da própria pessoa;
+ *   - configurar (só administrador): cria os planos e o webhook na Revolut e
+ *     guarda o que é preciso, para ligar a loja só com a chave da API.
  *
  * Sem dependências e sem nada específico do Deno, para ser testado no Node.
  * Documentação: https://developer.revolut.com/docs/merchant
@@ -21,6 +23,7 @@ export interface Produto {
   nome: string;
   preco_centavos: number;
   variante_revolut: string | null;
+  intervalo?: "mes" | "ano" | null;
 }
 
 /** O que as funções precisam do banco (API REST do Supabase com a chave de serviço). */
@@ -36,6 +39,11 @@ export interface Banco {
   gravarPagamento(linha: { id: string; usuario_id: string | null; produto_id: string | null; valor_centavos: number; moeda: string }): Promise<void>;
   reembolsarPedido(pedido: string): Promise<void>;
   reembolsarPagamento(id: string): Promise<void>;
+  produtosAssinatura(): Promise<Produto[]>;
+  definirVariante(produto: string, variante: string): Promise<void>;
+  lerConfig(chave: string): Promise<string | null>;
+  gravarConfig(chave: string, valor: string): Promise<void>;
+  ehAdmin(usuario: string): Promise<boolean>;
 }
 
 /** A parte da Merchant API que o Atalho usa. */
@@ -47,6 +55,8 @@ export interface Revolut {
   cancelarSubscricao(id: string): Promise<void>;
   criarPedido(dados: { amount: number; currency: string; customer: { id: string }; description: string; merchant_order_data: { reference: string }; redirect_url: string }): Promise<{ id: string; checkout_url?: string }>;
   obterPedido(id: string): Promise<any>;
+  criarPlano(dados: { name: string; variations: { phases: { ordinal: number; cycle_duration: string; amount: number; currency: string }[] }[] }): Promise<{ id: string; variations?: { id: string }[] }>;
+  registarWebhook(dados: { url: string; events: string[] }): Promise<{ id: string; signing_secret?: string }>;
 }
 
 export interface Resultado {
@@ -261,11 +271,13 @@ export async function processarEvento(evento: any, banco: Banco, revolut: Revolu
 }
 
 /** Recebe o aviso HTTP inteiro: confere a assinatura, processa e responde. */
-export function criarWebhook(config: { segredo: string; banco: Banco; revolut: Revolut }) {
+export function criarWebhook(config: { segredo: string | (() => Promise<string>); banco: Banco; revolut: Revolut }) {
   return async (requisicao: Request): Promise<Response> => {
     if (requisicao.method !== "POST") return new Response("Use POST", { status: 405 });
     const corpo = await requisicao.text();
-    const valida = await assinaturaValida(corpo, requisicao.headers.get("revolut-signature"), requisicao.headers.get("revolut-request-timestamp"), config.segredo);
+    // O segredo vem de REVOLUT_WEBHOOK_SECRET ou, se a loja foi ligada pelo painel, da tabela config_revolut
+    const segredo = typeof config.segredo === "function" ? await config.segredo().catch(() => "") : config.segredo;
+    const valida = await assinaturaValida(corpo, requisicao.headers.get("revolut-signature"), requisicao.headers.get("revolut-request-timestamp"), segredo);
     if (!valida) return new Response("Assinatura inválida", { status: 401 });
     let evento: unknown;
     try {
@@ -282,6 +294,66 @@ export function criarWebhook(config: { segredo: string; banco: Banco; revolut: R
       return new Response("Erro ao gravar", { status: 500 });
     }
   };
+}
+
+/* --------------------------------------------------------------------------
+   Ligar a loja (administrador): planos e webhook criados pela própria API
+   -------------------------------------------------------------------------- */
+
+/** Avisos que o Atalho trata (nomes confirmados na documentação da Merchant API). */
+export const EVENTOS_WEBHOOK = ["ORDER_COMPLETED", "SUBSCRIPTION_INITIATED", "SUBSCRIPTION_OVERDUE", "SUBSCRIPTION_CANCELLED", "SUBSCRIPTION_FINISHED"];
+
+const DURACAO: Record<string, string> = { mes: "P1M", ano: "P1Y" };
+
+/** A loja pode vender: chave da API, segredo do webhook e todos os planos ligados à Revolut. */
+export async function estadoLoja(banco: Banco, config: { chave: string; segredoAmbiente: string }): Promise<{ ativo: boolean }> {
+  if (!config.chave) return { ativo: false };
+  const segredo = config.segredoAmbiente || (await banco.lerConfig("webhook_segredo"));
+  const planos = await banco.produtosAssinatura();
+  return { ativo: Boolean(segredo) && planos.length > 0 && planos.every((p) => p.variante_revolut) };
+}
+
+/**
+ * Cria na Revolut o que falta (sem duplicar se for chamado outra vez):
+ *  - um plano "Atalho Pro" com uma variação por produto de assinatura (mensal, anual),
+ *    com o preço que está na tabela produtos; guarda o id de cada variação;
+ *  - o webhook para revolut-webhook; guarda o "signing secret" na tabela config_revolut
+ *    (só o servidor a lê), a não ser que já exista REVOLUT_WEBHOOK_SECRET.
+ */
+export async function configurarLoja(config: { banco: Banco; revolut: Revolut; webhookUrl: string; segredoAmbiente: string }): Promise<Resultado> {
+  const { banco, revolut, webhookUrl } = config;
+  const feito: string[] = [];
+  const planos = await banco.produtosAssinatura();
+  if (!planos.length) return { status: 409, mensagem: "Não há produtos de assinatura ativos na tabela produtos." };
+  const semVariante = planos.filter((p) => !p.variante_revolut);
+  if (semVariante.length) {
+    for (const p of semVariante) if (!p.intervalo || !DURACAO[p.intervalo]) return { status: 409, mensagem: `O produto ${p.id} não tem intervalo (mes ou ano).` };
+    const plano = await revolut.criarPlano({
+      name: "Atalho Pro",
+      variations: semVariante.map((p) => ({ phases: [{ ordinal: 1, cycle_duration: DURACAO[p.intervalo!], amount: p.preco_centavos, currency: "EUR" }] })),
+    });
+    const variacoes = plano?.variations ?? [];
+    if (variacoes.length !== semVariante.length) return { status: 502, mensagem: "A Revolut criou o plano mas não devolveu as variações." };
+    // As variações voltam pela ordem em que foram pedidas
+    for (const [i, p] of semVariante.entries()) await banco.definirVariante(p.id, String(variacoes[i].id));
+    await banco.gravarConfig("plano_id", String(plano.id));
+    feito.push(`plano criado (${semVariante.map((p) => p.nome).join(", ")})`);
+  } else {
+    feito.push("planos já ligados");
+  }
+
+  if (config.segredoAmbiente) {
+    feito.push("webhook com segredo definido no Supabase");
+  } else if (await banco.lerConfig("webhook_segredo")) {
+    feito.push("webhook já ligado");
+  } else {
+    const webhook = await revolut.registarWebhook({ url: webhookUrl, events: EVENTOS_WEBHOOK });
+    if (!webhook?.signing_secret) return { status: 502, mensagem: "A Revolut criou o webhook mas não devolveu o segredo." };
+    await banco.gravarConfig("webhook_segredo", webhook.signing_secret);
+    await banco.gravarConfig("webhook_id", String(webhook.id));
+    feito.push("webhook criado");
+  }
+  return { status: 200, mensagem: `Loja ligada à Revolut: ${feito.join("; ")}.`, corpo: { ok: true, mensagem: `Loja ligada à Revolut: ${feito.join("; ")}.` } };
 }
 
 /* --------------------------------------------------------------------------
@@ -314,6 +386,8 @@ export function revolutApi(chaveSecreta: string, opcoes: { sandbox?: boolean; ve
     cancelarSubscricao: (id) => pedir("POST", `/api/subscriptions/${seg(id)}/cancel`).then(() => {}),
     criarPedido: (d) => pedir("POST", "/api/orders", d),
     obterPedido: (id) => pedir("GET", `/api/orders/${seg(id)}`),
+    criarPlano: (d) => pedir("POST", "/api/subscription-plans", d),
+    registarWebhook: (d) => pedir("POST", "/api/webhooks", d),
   };
 }
 
@@ -329,7 +403,7 @@ export function bancoSupabase(url: string, chave: string, buscar: typeof fetch =
   const inserir = (tabela: string, linha: object, conflito: "merge" | "ignore", coluna = "id") =>
     rest(`${tabela}?on_conflict=${coluna}`, { method: "POST", body: JSON.stringify(linha), headers: { Prefer: `resolution=${conflito}-duplicates,return=minimal` } }).then(() => {});
   const e = encodeURIComponent;
-  const CAMPOS = "id,tipo,nome,preco_centavos,variante_revolut";
+  const CAMPOS = "id,tipo,nome,preco_centavos,variante_revolut,intervalo";
   return {
     produto: (id) => um(`produtos?select=${CAMPOS}&id=eq.${e(id)}&ativo=is.true`),
     produtoDaVariante: (v) => um(`produtos?select=${CAMPOS}&variante_revolut=eq.${e(v)}`),
@@ -342,6 +416,11 @@ export function bancoSupabase(url: string, chave: string, buscar: typeof fetch =
     gravarPagamento: (l) => inserir("pagamentos", l, "ignore"),
     reembolsarPedido: (p) => rest(`compras?pedido_revolut=eq.${e(p)}`, { method: "PATCH", body: JSON.stringify({ reembolsada: true }), headers: { Prefer: "return=minimal" } }).then(() => {}),
     reembolsarPagamento: (id) => rest(`pagamentos?id=eq.${e(id)}`, { method: "PATCH", body: JSON.stringify({ reembolsado: true }), headers: { Prefer: "return=minimal" } }).then(() => {}),
+    produtosAssinatura: async () => (await rest(`produtos?select=${CAMPOS}&tipo=eq.assinatura&ativo=is.true&order=preco_centavos`)) ?? [],
+    definirVariante: (p, v) => rest(`produtos?id=eq.${e(p)}`, { method: "PATCH", body: JSON.stringify({ variante_revolut: v }), headers: { Prefer: "return=minimal" } }).then(() => {}),
+    lerConfig: async (c) => (await um(`config_revolut?select=valor&chave=eq.${e(c)}`))?.valor ?? null,
+    gravarConfig: (c, v) => inserir("config_revolut", { chave: c, valor: v, atualizado_em: new Date().toISOString() }, "merge", "chave"),
+    ehAdmin: async (u) => Boolean(await um(`administradores?select=usuario_id&usuario_id=eq.${e(u)}`)),
   };
 }
 

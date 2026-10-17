@@ -7,3 +7,5 @@ dist/
 testes/resultado/
 dist-redirecionar/
 atalho-site.zip
+# Rascunhos de depuração (testes/_qualquer-coisa)
+testes/_*

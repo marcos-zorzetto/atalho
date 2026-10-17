@@ -247,6 +247,22 @@ test("excluir a conta apaga o usuário e tudo dele", async () => {
   await assert.rejects(como(null, `select public.excluir_minha_conta()`), negado);
 });
 
+test("com uma subscrição a renovar, a conta não se elimina (a Revolut continuaria a cobrar)", async () => {
+  // O administrador tem a subscrição anual ativa (teste do webhook acima)
+  await assert.rejects(como(ADMIN, `select public.excluir_minha_conta()`), /Cancele primeiro a subscrição/);
+  assert.equal((await db.query(`select count(*)::int as n from auth.users where id = '${ADMIN}'`)).rows[0].n, 1);
+});
+
+test("privilégios mínimos: sem TRUNCATE, perfil só muda o nome, configuração da Revolut fechada", async () => {
+  await assert.rejects(como(BRUNO, `truncate public.favoritos`), negado);
+  await assert.rejects(como(BRUNO, `truncate public.lista_espera_pro`), negado);
+  await como(BRUNO, `update public.perfis set nome = 'Bruno S.' where id = '${BRUNO}'`);
+  await assert.rejects(como(BRUNO, `update public.perfis set criado_em = now() - interval '9 years' where id = '${BRUNO}'`), negado);
+  await assert.rejects(como(null, `select * from public.config_revolut`), negado);
+  await assert.rejects(como(BRUNO, `select * from public.config_revolut`), negado);
+  await assert.rejects(como(BRUNO, `insert into public.config_revolut (chave, valor) values ('webhook_segredo', 'meu')`), negado);
+});
+
 test("animações: membro recebe as simples; as do Pro só com assinatura; tipo inválido é recusado", async () => {
   await db.exec(`
     insert into public.conteudos (id, tipo, titulo, html, acesso) values

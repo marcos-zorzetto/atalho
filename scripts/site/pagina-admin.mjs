@@ -40,12 +40,26 @@ export function paginaAdmin() {
           ${indicador("lista_espera", "Lista do Atalho Pro")}
         </div>
 
-        <div class="at-colunas-4" style="--min: 200px" aria-label="Loja">
+        <div class="at-colunas-4" style="--min: 200px" role="group" aria-label="Loja">
           ${indicador("assinantes_ativos", "Subscritores Pro")}
           ${indicador("compras_avulsas", "Compras avulsas")}
           ${indicador("receita_30_dias", "Receita em 30 dias")}
           ${indicador("receita_total", "Receita total")}
         </div>
+
+        <section class="at-cartao" aria-labelledby="admin-pagamentos">
+          <div class="at-cartao-cabecalho"><h2 id="admin-pagamentos">Pagamentos (Revolut Business)</h2><span class="at-selo" data-admin-pagamentos-selo>A verificar…</span></div>
+          <div class="at-cartao-corpo at-pilha">
+            <p class="at-mb-0" data-admin-pagamentos-texto>A perguntar ao servidor se a loja já está ligada…</p>
+            <ol class="at-texto-pequeno at-mb-0" data-admin-pagamentos-passos hidden>
+              <li>Na app ou em business.revolut.com: <strong>Merchant</strong> → ative a conta de comerciante (a Revolut aprova em 1 a 3 dias úteis).</li>
+              <li><strong>Merchant → API → Production API Secret key</strong> → gere a chave (começa por <code>sk_</code>).</li>
+              <li>No Supabase: <a href="https://supabase.com/dashboard/project/onjmugnpjvflomrevknh/functions/secrets" target="_blank" rel="noopener">Edge Functions → Secrets</a> → <strong>Add new secret</strong> com o nome <code>REVOLUT_SECRET_KEY</code> e a chave como valor. Nunca a envie por e-mail ou chat.</li>
+              <li>Volte aqui e carregue em <strong>Ligar a loja</strong>: os planos de 9 €/mês e 79 €/ano e o webhook são criados sozinhos.</li>
+            </ol>
+            <div class="at-linha"><button class="at-botao at-primario" type="button" data-admin-ligar-loja hidden>Ligar a loja</button></div>
+          </div>
+        </section>
 
         <section class="at-cartao">
           <div class="at-cartao-cabecalho"><h2>Registos nos últimos 30 dias</h2><span class="at-selo" data-admin-total-periodo></span></div>

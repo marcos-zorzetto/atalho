@@ -1,9 +1,11 @@
-// Função do Supabase (Deno) chamada pelo site com a sessão da pessoa:
+// Função do Supabase (Deno) chamada pelo site:
+//   POST { "acao": "estado" }                            → { ativo } se a loja já pode vender (sem sessão)
 //   POST { "acao": "checkout", "produto": "pro-mensal" }  → { url } da página de pagamento da Revolut
 //   POST { "acao": "cancelar", "assinatura": "<id>" }     → cancela a própria subscrição
-// Publicar: npx supabase functions deploy revolut-loja
+//   POST { "acao": "configurar" }                        → só administrador: cria os planos e o webhook na Revolut
+// Publicar: npx supabase functions deploy revolut-loja --no-verify-jwt (a sessão é conferida aqui dentro)
 // Segredos: REVOLUT_SECRET_KEY, ATALHO_URL (ex.: https://atalho.com.pt/) e, para testes, REVOLUT_SANDBOX=1.
-import { bancoSupabase, cancelar, criarCheckout, revolutApi, usuarioDoToken } from "../_shared/revolut.ts";
+import { bancoSupabase, cancelar, configurarLoja, criarCheckout, estadoLoja, revolutApi, usuarioDoToken } from "../_shared/revolut.ts";
 import { ambiente } from "../_shared/ambiente.ts";
 
 const a = ambiente();
@@ -16,14 +18,10 @@ const cors = (origem: string | null) => {
 };
 
 a.deno.serve(async (req: Request) => {
-  const cabecalhos = { ...cors(req.headers.get("origin")), "Content-Type": "application/json; charset=utf-8" };
+  const cabecalhos = { ...cors(req.headers.get("origin")), "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" };
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cabecalhos });
   if (req.method !== "POST") return new Response(JSON.stringify({ erro: "Use POST" }), { status: 405, headers: cabecalhos });
   const responder = (status: number, corpo: unknown) => new Response(JSON.stringify(corpo), { status, headers: cabecalhos });
-  if (!a.revolutChave) return responder(503, { erro: "Os pagamentos ainda não estão ligados." });
-  const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ?? null;
-  const usuario = await usuarioDoToken(a.url, a.chavePublica, token);
-  if (!usuario) return responder(401, { erro: "Entre na sua conta para continuar." });
   let pedido: any;
   try {
     pedido = await req.json();
@@ -31,6 +29,17 @@ a.deno.serve(async (req: Request) => {
     return responder(400, { erro: "Pedido inválido." });
   }
   try {
+    // Pergunta pública: o site mostra "Subscrever" ou a lista de espera
+    if (pedido?.acao === "estado") return responder(200, await estadoLoja(banco, { chave: a.revolutChave, segredoAmbiente: a.webhookSecreto }));
+    if (!a.revolutChave) return responder(503, { erro: "Os pagamentos ainda não estão ligados." });
+    const token = req.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ?? null;
+    const usuario = await usuarioDoToken(a.url, a.chavePublica, token);
+    if (!usuario) return responder(401, { erro: "Entre na sua conta para continuar." });
+    if (pedido?.acao === "configurar") {
+      if (!(await banco.ehAdmin(usuario.id))) return responder(403, { erro: "Só o administrador pode ligar a loja." });
+      const r = await configurarLoja({ banco, revolut, webhookUrl: `${a.url}/functions/v1/revolut-webhook`, segredoAmbiente: a.webhookSecreto });
+      return responder(r.status, r.status < 300 ? r.corpo : { erro: r.mensagem });
+    }
     const r =
       pedido?.acao === "checkout"
         ? await criarCheckout({ usuario, produtoId: String(pedido.produto ?? "") }, { banco, revolut, site: a.site })

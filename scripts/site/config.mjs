@@ -13,7 +13,7 @@ import { RAIZ } from "../docs.mjs";
 const pacote = JSON.parse(readFileSync(path.join(RAIZ, "package.json"), "utf8"));
 
 // Endereço oficial do site. Variável vazia no GitHub Actions também cai no padrão.
-const ENDERECO = (process.env.ATALHO_URL || "https://marcos-zorzetto.github.io/atalho/").replace(/\/?$/, "/");
+const ENDERECO = (process.env.ATALHO_URL || "https://atalho.com.pt/").replace(/\/?$/, "/");
 
 export const SITE = {
   nome: "Atalho",
@@ -23,8 +23,8 @@ export const SITE = {
   // Prefixo dos links internos: o caminho do endereço ("/atalho/" ou "/").
   // "--local" gera com links na raiz (para testar com um servidor local)
   base: process.argv.includes("--local") ? "/" : (process.env.ATALHO_BASE || new URL(ENDERECO).pathname).replace(/\/?$/, "/"),
-  // Onde o site está hospedado: "github" (GitHub Pages) ou "cloudflare"
-  hospedagem: process.env.ATALHO_HOSPEDAGEM || "github",
+  // Onde o site está hospedado: "ptservidor" (Apache, .htaccess), "github" (GitHub Pages) ou "cloudflare"
+  hospedagem: process.env.ATALHO_HOSPEDAGEM || "ptservidor",
   repositorio: "https://github.com/marcos-zorzetto/atalho",
   autor: "Marcos Zorzetto",
   autorUrl: "https://github.com/marcos-zorzetto",

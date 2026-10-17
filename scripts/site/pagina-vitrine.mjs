@@ -42,6 +42,7 @@ function paginaVitrine({ tipo, prefixo, caminho, secao, itens, categorias, texto
         <span class="at-sobretitulo">${esc(textos.sobretitulo)}</span>
         <h1 class="site-titulo site-h2">${textos.titulo}</h1>
         <p class="at-chamada">${esc(textos.chamada)}</p>
+        <p class="at-texto-suave at-texto-pequeno">Os textos, marcas e preços dentro das demonstrações são exemplos fictícios: troque-os pelos do seu negócio. Não são preços do Atalho.</p>
         <div class="site-anim-niveis">
           <div><strong>${conta("publico")}</strong><span>grátis, sem registo</span></div>
           <div><strong>${conta("publico") + conta("membro")}</strong><span>com conta grátis</span></div>

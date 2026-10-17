@@ -180,25 +180,25 @@ export function conteudoInicio({ total, exemplos, docs, vitrine, categorias, bas
         <div>
           <p class="cine-sobretitulo" data-revelar>Sistemas completos</p>
           <h2 class="cine-h2" id="sistemas-titulo" data-revelar>Descarregue. Instale.<br><span class="cine-suave">O negócio já está a funcionar.</span></h2>
-          <p class="cine-sub" data-revelar>Clínicas, barbearias, lojas, restaurantes, escolas. Cada sistema vem com painel, base de dados e site, num instalador para o Windows que cria tudo numa pasta. Quando quiser, publica na sua hospedagem e no seu domínio.</p>
+          <p class="cine-sub" data-revelar>Clínicas, barbearias, lojas, restaurantes, escolas. Cada sistema vem com painel, base de dados e página para os seus clientes num só zip: envia para qualquer alojamento com PHP, abre o endereço e está a funcionar.</p>
           <ul class="cine-lista-ok" data-revelar>
-            <li>Funciona sem internet, no seu computador</li>
-            <li>Base de dados local, com cópias de segurança</li>
-            <li>Pronto a publicar num domínio próprio</li>
+            <li>Instala em qualquer alojamento com PHP, sem base de dados para configurar</li>
+            <li>Personalize nomes, campos e textos sem programar</li>
+            <li>No seu domínio, com os dados guardados no seu alojamento</li>
           </ul>
         </div>
         <div class="cine-janela" data-revelar aria-hidden="true">
           <div class="cine-janela-barra"><span></span><span></span><span></span><b>Atalho Sistemas</b></div>
           <div class="cine-janela-corpo">
             <div class="cine-janela-icone">A</div>
-            <strong>A instalar Clínica Sorriso</strong>
+            <strong>A instalar a Clínica Sorriso</strong>
             <div class="cine-progresso"><span></span></div>
             <ul class="cine-ficheiros">
-              <li>node.exe</li>
-              <li>painel/</li>
-              <li>site/</li>
+              <li>index.php</li>
+              <li>sistema.php</li>
+              <li>nucleo/</li>
               <li>dados/clinica.sqlite</li>
-              <li>Abrir Clínica Sorriso.lnk</li>
+              <li>LEIA-ME.md</li>
             </ul>
           </div>
         </div>

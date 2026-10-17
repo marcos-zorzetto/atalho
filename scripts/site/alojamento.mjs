@@ -7,6 +7,15 @@
  * Guia: servicos/PTSERVIDOR.md
  */
 
+import { createHash } from "node:crypto";
+
+/**
+ * Único script em linha das páginas: aplica o tema antes de desenhar (sem piscar).
+ * Fica aqui para a CSP restrita o autorizar pelo hash, sem 'unsafe-inline'.
+ */
+export const SCRIPT_TEMA = `document.documentElement.classList.add("js");try{const t=JSON.parse(localStorage.getItem("atalho:tema"));if(t)document.documentElement.dataset.tema=t}catch{}`;
+const HASH_TEMA = `'sha256-${createHash("sha256").update(SCRIPT_TEMA).digest("base64")}'`;
+
 /** Origens externas que o site usa de facto (cada uma com o motivo). */
 const ORIGENS = {
   // atalho.css/js pela CDN nas demonstrações e no editor; Phosphor e three.js
@@ -55,6 +64,15 @@ export function politicaConteudo() {
   ].join("; ");
 }
 
+/**
+ * Política restrita das páginas com sessão ou pagamentos (conta, painel, preços, sistemas):
+ * nenhum código de demonstração corre aqui, por isso sem 'unsafe-eval' e sem scripts em
+ * linha além do tema (pelo hash). Um XSS nestas páginas não consegue executar código.
+ */
+export function politicaRestrita() {
+  return politicaConteudo().replace(/script-src [^;]+/, `script-src 'self' ${HASH_TEMA} ${ORIGENS.cdn}`);
+}
+
 /** Cabeçalhos de todas as respostas. */
 export function cabecalhosSeguranca() {
   return {
@@ -73,8 +91,10 @@ export const REGRAS = [
   { pasta: "atalho/", cabecalhos: { "Cache-Control": "public, max-age=3600, must-revalidate" } },
   { pasta: "exemplos/capturas/", cabecalhos: { "Cache-Control": "public, max-age=604800" } },
   { pasta: "exemplos/miniaturas/", cabecalhos: { "Cache-Control": "public, max-age=604800" } },
-  { pasta: "admin/", cabecalhos: { "X-Robots-Tag": "noindex, nofollow", "Cache-Control": "no-store" } },
-  { pasta: "conta/", cabecalhos: { "X-Robots-Tag": "noindex, nofollow", "Cache-Control": "no-store" } },
+  { pasta: "admin/", cabecalhos: { "X-Robots-Tag": "noindex, nofollow", "Cache-Control": "no-store", "Content-Security-Policy": politicaRestrita() } },
+  { pasta: "conta/", cabecalhos: { "X-Robots-Tag": "noindex, nofollow", "Cache-Control": "no-store", "Content-Security-Policy": politicaRestrita() } },
+  { pasta: "pro/", cabecalhos: { "Content-Security-Policy": politicaRestrita() } },
+  { pasta: "sistemas/", cabecalhos: { "Content-Security-Policy": politicaRestrita() } },
 ];
 
 /** Cabeçalhos para um pedido (usado pelos servidores dos testes). */
@@ -136,6 +156,11 @@ ${Object.entries(cabecalhosSeguranca()).map(([n, v]) => `Header always set ${n} 
 
 # Páginas: sempre a versão nova (a cache do nginx e do navegador revalida)
 <FilesMatch "\\.(html|xml|txt|json)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+# CSS e JS: as páginas pedem-nos com ?v=<impressão>; mesmo assim o navegador confirma
+# sempre (304 se não mudou), para nunca ficar preso a uma versão antiga
+<FilesMatch "\\.(css|js|mjs)$">
   Header set Cache-Control "no-cache"
 </FilesMatch>
 <FilesMatch "\\.(svg|png|webp|woff2)$">

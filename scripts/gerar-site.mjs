@@ -189,9 +189,47 @@ ${indexaveis
   await escrever(".htaccess", htaccess({ base: SITE.base, host }));
   await escrever("_headers", cabecalhosCloudflare({ base: SITE.base }));
 
+  const versionados = await versionarRecursos(SITE.base);
+
   const total = (await listar(DIST)).length;
-  console.log(`Site gerado em dist/ (${paginas.size} páginas, ${total} arquivos) em ${Date.now() - inicio} ms. Base: ${SITE.base}`);
+  console.log(`Site gerado em dist/ (${paginas.size} páginas, ${total} arquivos, ${versionados} links de CSS/JS com versão) em ${Date.now() - inicio} ms. Base: ${SITE.base}`);
   return { paginas: [...paginas.keys()] };
+}
+
+/**
+ * Cada CSS e JS do próprio site ganha "?v=<impressão do conteúdo>" em todas as páginas.
+ * Quando o ficheiro muda, o endereço muda: o navegador e a cache do nginx vão buscar o
+ * novo na hora (antes, quem já tinha visitado continuava dias com o CSS antigo).
+ */
+async function versionarRecursos(base) {
+  const { createHash } = await import("node:crypto");
+  const impressoes = new Map();
+  const impressao = async (relativo) => {
+    if (!impressoes.has(relativo)) {
+      const ficheiro = path.join(DIST, relativo);
+      impressoes.set(relativo, existsSync(ficheiro) ? createHash("sha256").update(await readFile(ficheiro)).digest("hex").slice(0, 10) : null);
+    }
+    return impressoes.get(relativo);
+  };
+  const prefixo = base.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const padrao = new RegExp(`((?:href|src)=")(${prefixo}([^"?#]+\\.(?:css|js)))(")`, "g");
+  let contagem = 0;
+  for (const item of await listar(DIST)) {
+    if (!item.name.endsWith(".html")) continue;
+    const ficheiro = path.join(item.parentPath ?? item.path, item.name);
+    const html = await readFile(ficheiro, "utf8");
+    const trocas = [];
+    for (const m of html.matchAll(padrao)) {
+      const v = await impressao(m[3]);
+      if (v) trocas.push([m[0], `${m[1]}${m[2]}?v=${v}${m[4]}`]);
+    }
+    if (!trocas.length) continue;
+    let novo = html;
+    for (const [de, para] of new Map(trocas)) novo = novo.split(de).join(para);
+    contagem += trocas.length;
+    await writeFile(ficheiro, novo);
+  }
+  return contagem;
 }
 
 async function listar(pasta) {

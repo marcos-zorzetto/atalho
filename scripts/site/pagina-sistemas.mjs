@@ -9,21 +9,21 @@ import { fileURLToPath } from "node:url";
 import { SITE, url, urlAbsoluta } from "./config.mjs";
 import { pagina, SCRIPTS_SUPABASE } from "./layout.mjs";
 import { esc } from "./realce.mjs";
+import { ilustracaoGrupo } from "./ilustracoes-grupos.mjs";
 
 export const SISTEMAS = JSON.parse(readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "sistemas-catalogo.json"), "utf8"));
 
-/** Grupos para a página (por ordem de aparição), com o ícone de cada um (traço 24×24). */
+/** Áreas da página (por ordem de aparição): cor, frase e sistemas de cada uma. */
 const GRUPOS = [
-  ["vendas", "Vendas e clientes", '<path d="M3 4h2l2.4 11h11L21 7H7"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>', ["crm", "orcamentos", "loja", "pedidos-orcamento", "encomendas-pastelaria", "compras", "contratos", "financas", "mediacao-seguros"]],
-  ["marcacoes", "Marcações e reservas", '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3"/>', ["agendamentos", "reservas", "alojamento-local", "clinica", "veterinario", "ginasio", "eventos", "escola-conducao"]],
-  ["restauracao", "Restauração e eventos", '<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 0-3 2.5-3 6h3v12"/>', ["restaurante", "catering"]],
-  ["atendimento", "Atendimento e serviços", '<path d="M4 13a8 8 0 0 1 16 0"/><rect x="2" y="13" width="4" height="6" rx="1.5"/><rect x="18" y="13" width="4" height="6" rx="1.5"/><path d="M20 19a3 3 0 0 1-3 3h-3"/>', ["helpdesk", "portal-cliente", "assistencia-tecnica", "oficina", "lavandaria", "aluguer-equipamentos", "reclamacoes"]],
-  ["operacoes", "Operações e equipa", '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/>', ["inventario", "projetos", "obras", "folha-horas", "frota", "equipamentos-ti", "recrutamento", "formacao"]],
-  ["imoveis", "Imóveis", '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>', ["imobiliaria", "condominio", "arrendamentos"]],
-  ["comunidades", "Comunidades e conteúdo", '<circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5M14.5 15.5c1-.7 1.9-1 2.5-1 2.5 0 4.5 1.7 5 5"/>', ["associacao", "clube-desportivo", "donativos", "explicacoes", "biblioteca", "blog", "newsletter"]],
+  { id: "vendas", titulo: "Vendas e clientes", cor: "#4f46e5", frase: "Do primeiro contacto à fatura pró-forma: clientes, propostas, encomendas, contratos e contas.", ids: ["crm", "orcamentos", "loja", "pedidos-orcamento", "encomendas-pastelaria", "compras", "contratos", "financas", "mediacao-seguros"] },
+  { id: "marcacoes", titulo: "Marcações e reservas", cor: "#0f766e", frase: "Agenda online em que o cliente marca sozinho, sem sobreposições e com tudo num calendário.", ids: ["agendamentos", "reservas", "alojamento-local", "clinica", "veterinario", "ginasio", "eventos", "escola-conducao"] },
+  { id: "restauracao", titulo: "Restauração e eventos", cor: "#c2410c", frase: "Menus com alergénios, encomendas e eventos por convidados, da cozinha à mesa.", ids: ["restaurante", "catering"] },
+  { id: "atendimento", titulo: "Atendimento e serviços", cor: "#0369a1", frase: "Pedidos, reparações, talões e alugueres com um estado que o cliente consulta sem telefonar.", ids: ["helpdesk", "portal-cliente", "assistencia-tecnica", "oficina", "lavandaria", "aluguer-equipamentos", "reclamacoes"] },
+  { id: "operacoes", titulo: "Operações e equipa", cor: "#a16207", frase: "Stock, projetos, obras, horas, frota e pessoas organizados em quadros e listas.", ids: ["inventario", "projetos", "obras", "folha-horas", "frota", "equipamentos-ti", "recrutamento", "formacao"] },
+  { id: "imoveis", titulo: "Imóveis", cor: "#15803d", frase: "Imóveis à venda e para arrendar, condomínios, rendas e quotas com avisos de prazo.", ids: ["imobiliaria", "condominio", "arrendamentos"] },
+  { id: "comunidades", titulo: "Comunidades e conteúdo", cor: "#be185d", frase: "Sócios, atletas, alunos, donativos, livros, artigos e listas de e-mail.", ids: ["associacao", "clube-desportivo", "donativos", "explicacoes", "biblioteca", "blog", "newsletter"] },
 ];
-const icone = (traco) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${traco}</svg>`;
-const OUTROS = ["outros", "Outros", '<circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/>'];
+const OUTROS = { id: "outros", titulo: "Outros", cor: "#475569", frase: "Mais sistemas prontos a instalar.", ids: [] };
 
 /** Recursos sempre pela mesma ordem, para os cartões se lerem de relance. */
 function recursos(s) {
@@ -39,12 +39,9 @@ function recursos(s) {
 
 function cartao(s, grupo) {
   const publicas = [...s.publico.formularios, ...s.publico.listas, ...s.publico.consultas];
-  const busca = [s.nome, s.descricao, grupo[1], ...s.tabelas, ...publicas].join(" ").toLowerCase();
-  return `<article class="site-sistema" style="--sistema-cor: ${esc(s.cor)}" id="${esc(s.id)}" data-sistema data-grupo="${grupo[0]}" data-busca="${esc(busca)}">
-        <header class="site-sistema-topo">
-          <span class="site-sistema-simbolo">${icone(grupo[2])}</span>
-          <div><h3>${esc(s.nome)}</h3><span class="site-sistema-grupo">${esc(grupo[1])}</span></div>
-        </header>
+  const busca = [s.nome, s.descricao, grupo.titulo, ...s.tabelas, ...publicas].join(" ").toLowerCase();
+  return `<article class="site-sistema" style="--sistema-cor: ${esc(s.cor)}" id="${esc(s.id)}" data-sistema data-grupo="${grupo.id}" data-busca="${esc(busca)}">
+        <h3 class="site-sistema-nome">${esc(s.nome)}</h3>
         <p class="site-sistema-descricao">${esc(s.descricao)}</p>
         <ul class="site-sistema-selos" aria-label="Inclui">${recursos(s).map(([t]) => `<li>${esc(t)}</li>`).join("")}</ul>
         <details class="site-sistema-detalhes">
@@ -66,10 +63,10 @@ export function paginaSistemas() {
   const total = SISTEMAS.length;
   const porId = new Map(SISTEMAS.map((s) => [s.id, s]));
   const usados = new Set();
-  const grupos = GRUPOS.map(([id, titulo, traco, ids]) => {
-    const lista = ids.map((i) => porId.get(i)).filter(Boolean);
+  const grupos = GRUPOS.map((g) => {
+    const lista = g.ids.map((i) => porId.get(i)).filter(Boolean);
     lista.forEach((s) => usados.add(s.id));
-    return [[id, titulo, traco], lista];
+    return [g, lista];
   });
   const outros = SISTEMAS.filter((s) => !usados.has(s.id));
   if (outros.length) grupos.push([OUTROS, outros]);
@@ -110,15 +107,23 @@ export function paginaSistemas() {
         </div>
         <div class="site-sistemas-filtros" role="group" aria-label="Filtrar por área">
           <button type="button" class="site-filtro" aria-pressed="true" data-sistemas-filtro="todos">Todos <span>${total}</span></button>
-          ${visiveis.map(([g, lista]) => `<button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="${g[0]}">${esc(g[1])} <span>${lista.length}</span></button>`).join("")}
+          ${visiveis.map(([g, lista]) => `<button type="button" class="site-filtro" aria-pressed="false" data-sistemas-filtro="${g.id}">${esc(g.titulo)} <span>${lista.length}</span></button>`).join("")}
         </div>
       </div>
     </div>
     ${visiveis
       .map(
-        ([g, lista]) => `<section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="${g[0]}" aria-labelledby="grupo-${g[0]}">
+        ([g, lista]) => `<section class="site-secao-curta site-sistemas-grupo" data-sistemas-grupo="${g.id}" aria-labelledby="grupo-${g.id}" style="--grupo-cor: ${g.cor}">
       <div class="site-container">
-        <h2 class="site-secao-titulo site-sistemas-titulo" id="grupo-${g[0]}"><span class="site-sistemas-titulo-icone">${icone(g[2])}</span>${esc(g[1])} <small>${lista.length}</small></h2>
+        <header class="site-grupo-faixa">
+          <div class="site-grupo-texto">
+            <span class="site-grupo-contagem">${lista.length === 1 ? "1 sistema" : `${lista.length} sistemas`}</span>
+            <h2 class="site-grupo-titulo" id="grupo-${g.id}">${esc(g.titulo)}</h2>
+            <p class="site-grupo-frase">${esc(g.frase)}</p>
+            <ul class="site-grupo-atalhos" aria-label="Sistemas de ${esc(g.titulo)}">${lista.map((s) => `<li><a href="#${esc(s.id)}">${esc(s.nome)}</a></li>`).join("")}</ul>
+          </div>
+          ${ilustracaoGrupo(g.id)}
+        </header>
         <div class="site-sistemas">
       ${lista.map((s) => cartao(s, g)).join("")}
         </div>

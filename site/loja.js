@@ -17,7 +17,9 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const { ativo, cliente, traduzir, notificar, usuario: usuarioAtual, linkConta } = window.AtalhoSupabase;
-  const pagamentosLigados = Boolean(((window.ATALHO_CONFIG || {}).pagamentos || {}).ativo);
+  // pagamentos.ativo: "auto" pergunta ao servidor se a loja já está ligada à Revolut; true/false forçam
+  const modoPagamentos = ((window.ATALHO_CONFIG || {}).pagamentos || {}).ativo;
+  let pagamentosLigados = modoPagamentos === true;
   const base = document.body.dataset.base || "/";
   const pagina = document.body.dataset.pagina;
 
@@ -52,6 +54,13 @@
   }
 
   const vendendo = () => ativo && pagamentosLigados;
+  // Uma pergunta por página, sem sessão; se falhar, fica a lista de espera (nunca um botão que dá erro)
+  const prontos =
+    ativo && modoPagamentos === "auto"
+      ? loja({ acao: "estado" })
+          .then((r) => (pagamentosLigados = Boolean(r && r.ativo)))
+          .catch(() => (pagamentosLigados = false))
+      : Promise.resolve(pagamentosLigados);
   const ATIVOS = ["on_trial", "active", "past_due"];
   const daAcesso = (a) => ATIVOS.includes(a.status) || (a.status === "cancelled" && a.termina_em && new Date(a.termina_em) > new Date());
 
@@ -105,6 +114,7 @@
   }
 
   async function comprar(id, botao) {
+    await prontos;
     if (!vendendo(id)) {
       const lista = $("[data-lista-espera]");
       if (lista) {
@@ -164,6 +174,7 @@
 
   async function iniciarPrecos() {
     window.Atalho?.estado?.("precos", { anual: false });
+    await prontos;
     const algumAVenda = vendendo("pro-mensal") || vendendo("pro-anual");
     if (!algumAVenda) {
       $("[data-lista-espera]").hidden = false;
@@ -259,6 +270,7 @@
 
   async function iniciarConta() {
     if (!ativo) return;
+    await prontos;
     // Pagamentos no ar: a lista de espera do Pro deixa de fazer sentido
     if (vendendo("pro-mensal") || vendendo("pro-anual")) $("[data-conta-lista-bloco]")?.setAttribute("hidden", "");
     let atual = await situacao();
@@ -279,7 +291,7 @@
     }
   }
 
-  window.AtalhoLoja = { situacao, comprar, vendendo };
+  window.AtalhoLoja = { situacao, comprar, vendendo, prontos, loja };
 
   const iniciar = pagina === "pro" ? iniciarPrecos : pagina === "conta" ? iniciarConta : null;
   iniciar?.().catch((erro) => {

@@ -13,36 +13,31 @@ O dinheiro entra **diretamente na conta Revolut Business**, normalmente no dia �
 
 > Confirme as taxas atuais em Revolut Business → Merchant → *Fees*: variam por plano e por país.
 
-## O que é preciso criar (no telemóvel ou em business.revolut.com)
+## Ligar a loja (4 passos, uns 10 minutos depois de a Revolut aprovar)
 
-1. **Conta Revolut Business** (plano *Free* de freelancer chega). A Revolut pede o NIF e a
-   atividade aberta nas Finanças.
-2. **Merchant account**: Revolut Business → *Merchant* → *Get started*. Indique o site
-   `https://atalho.com.pt` e a atividade "venda de software / conteúdo digital por subscrição".
-   A Revolut aprova em 1 a 3 dias úteis.
-3. **Planos de subscrição**: *Merchant* → *Subscriptions* → *Create plan*:
-   - **Atalho Pro**, com duas variações: **mensal 9,00 €** e **anual 79,00 €**.
-   - Depois de criar, abra cada variação e copie o **ID da variação** (`plan_variation_id`).
-4. **Chave da API**: *Merchant* → *API* → *Generate* → **Production API Secret key** (`sk_...`).
-5. **Webhook**: *Merchant* → *API* → *Webhooks* → *Add*:
-   - URL: `https://onjmugnpjvflomrevknh.supabase.co/functions/v1/revolut-webhook`
-   - Eventos: `ORDER_COMPLETED`, `ORDER_PAYMENT_REFUNDED` e todos os `SUBSCRIPTION_*`
-   - Guarde o **Signing secret** (`wsk_...`).
+1. **Conta Revolut Business** (o plano *Free* de freelancer chega) e, dentro dela,
+   **Merchant** → *Get started*. Indique o site `https://atalho.com.pt` e a atividade
+   "venda de software / conteúdo digital por subscrição". A Revolut aprova em 1 a 3 dias úteis.
+2. **Chave da API**: *Merchant* → *API* → **Production API Secret key** → *Generate*
+   (começa por `sk_`).
+3. **Colar a chave no Supabase** (e só aí; nunca por chat, e-mail ou WhatsApp):
+   [Edge Functions → Secrets](https://supabase.com/dashboard/project/onjmugnpjvflomrevknh/functions/secrets)
+   → *Add new secret* → nome `REVOLUT_SECRET_KEY`, valor = a chave.
+4. Em **https://atalho.com.pt/admin/** (com a conta de administrador) → cartão
+   **Pagamentos** → **Ligar a loja**. O painel cria na Revolut:
+   - o plano **Atalho Pro** com as variações **9 €/mês** e **79 €/ano** (os preços vêm da
+     tabela `produtos`) e guarda o id de cada variação;
+   - o **webhook** para `revolut-webhook` (eventos `ORDER_COMPLETED` e `SUBSCRIPTION_*`)
+     e guarda o segredo na tabela `config_revolut`, que só o servidor lê.
 
-**Nunca envie as chaves por chat, e-mail ou WhatsApp.** Cole-as só no Supabase (passo seguinte).
+Pronto: o site pergunta à função `revolut-loja` se a loja está ligada (`pagamentos.ativo: "auto"`
+em `site/config.js`) e os botões passam de "lista de espera" a "Subscrever" sozinhos, sem
+publicar nada. Carregar outra vez em *Ligar a loja* não duplica planos nem webhooks.
 
-## O que colar no Supabase
-
-1. *Project Settings* → *Edge Functions* → *Secrets* → **Add new secret**:
-   - `REVOLUT_SECRET_KEY` = a chave `sk_...`
-   - `REVOLUT_WEBHOOK_SECRET` = o `wsk_...`
-   - `ATALHO_URL` = `https://atalho.com.pt/`
-2. *SQL Editor* → ligar os planos aos produtos (troque pelos IDs copiados no passo 3):
-   ```sql
-   update public.produtos set variante_revolut = 'ID-DA-VARIACAO-MENSAL' where id = 'pro-mensal';
-   update public.produtos set variante_revolut = 'ID-DA-VARIACAO-ANUAL'  where id = 'pro-anual';
-   ```
-3. No site, `site/config.js` → `pagamentos: { ativo: true }` e publicar (push na `main`).
+> Preferir fazer à mão? Crie o plano e o webhook no painel da Revolut, ponha o *signing
+> secret* em `REVOLUT_WEBHOOK_SECRET` e os ids das variações em `produtos.variante_revolut`.
+> Reembolsos feitos no painel da Revolut: retire a compra no painel do Atalho (a lista de
+> eventos de webhook da Revolut não tem, por agora, um aviso de reembolso).
 
 ## Testar antes de vender (opcional, recomendado)
 
@@ -67,8 +62,8 @@ Revolut → aviso assinado → função revolut-webhook
   `revolut-loja/` e `revolut-webhook/`. Base de dados: fim de `servicos/supabase/schema.sql`.
 - Publicar as funções: `npx supabase functions deploy revolut-loja` e
   `npx supabase functions deploy revolut-webhook --no-verify-jwt`.
-- A função antiga `lemon-webhook` fica no repositório para o histórico; pode ser apagada
-  no Supabase quando não houver subscrições antigas.
+- A função antiga `lemon-webhook` fica no repositório para o histórico. No Supabase recusa tudo
+  (sem `LEMON_WEBHOOK_SECRET` nenhuma assinatura é válida) e pode ser apagada quando quiser.
 
 ## Faturas e IVA (confirme com o contabilista)
 
