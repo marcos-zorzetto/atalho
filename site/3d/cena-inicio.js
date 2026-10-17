@@ -107,11 +107,11 @@ const DESENHOS = [
     g.fillStyle = grad; g.beginPath(); g.roundRect(0, 0, l, a, 48); g.fill();
     pilula(g, 64, 70, 230, 64, "#ffc53d");
     texto(g, "Atalho Pro", 92, 116, 32, 800, "#1c1917");
-    texto(g, "4,90 €", 64, 300, 120, 800, "#fff");
-    texto(g, "/mês", 470, 300, 44, 500, "#a8a29e");
+    texto(g, "9 €", 64, 300, 120, 800, "#fff");
+    texto(g, "/mês", 270, 300, 44, 500, "#a8a29e");
     texto(g, "✓  119 componentes avançados", 64, 410, 36, 500, "#e7e5e4");
     texto(g, "✓  Animações de cinema em 3D", 64, 470, 36, 500, "#e7e5e4");
-    texto(g, "✓  Sistemas completos", 64, 530, 36, 500, "#e7e5e4");
+    texto(g, "✓  44 sistemas completos", 64, 530, 36, 500, "#e7e5e4");
   },
   // Agenda
   ({ g, largura: l }) => {

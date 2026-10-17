@@ -30,7 +30,7 @@ export function conteudoInicio({ total, exemplos, docs, vitrine, categorias, bas
           <span class="at-selo at-destaque">Novo</span> Descreva o que precisa e o assistente monta ${ICONES_SITE.seta}
         </button>
         <h1 id="cine-titulo" class="cine-titulo"><span class="cine-entrar">O atalho para sites</span> <span class="cine-entrar cine-ouro">que vendem.</span></h1>
-        <p class="cine-sub cine-entrar">${total} componentes grátis, animações de cinema em 3D e sistemas completos que se instalam com um clique. Em português, para Portugal e para a Europa.</p>
+        <p class="cine-sub cine-entrar">${total} componentes grátis, animações de cinema em 3D e sistemas completos prontos a instalar no seu alojamento. Em português, para Portugal e para a Europa.</p>
         <div class="cine-acoes cine-entrar">
           <a class="cine-botao cine-botao-primario" href="${url("componentes/instalacao/")}">Começar grátis</a>
           <a class="cine-botao cine-botao-vidro" href="${url("animacoes/")}">Ver as animações ${ICONES_SITE.seta}</a>
@@ -54,7 +54,7 @@ export function conteudoInicio({ total, exemplos, docs, vitrine, categorias, bas
     </section>
 
     <section class="cine-manifesto" id="manifesto" aria-label="O que é o Atalho">
-      <p class="site-container cine-manifesto-texto" data-palavras>Componentes prontos a copiar. Animações com qualidade de cinema. Sistemas inteiros que se instalam com um clique. Tudo explicado em português, sem rodeios, para quem quer vender mais e programar menos.</p>
+      <p class="site-container cine-manifesto-texto" data-palavras>Componentes prontos a copiar. Animações com qualidade de cinema. Sistemas inteiros prontos a instalar no seu alojamento. Tudo explicado em português, sem rodeios, para quem quer vender mais e programar menos.</p>
     </section>
 
     <section class="cine-numeros" aria-label="O Atalho em números">
