@@ -55,6 +55,31 @@
   "exemplos": 7
  },
  {
+  "id": "aluguer-equipamentos",
+  "nome": "Aluguer de equipamentos",
+  "descricao": "Catálogo online, alugueres com datas e caução, devoluções e manutenção de cada equipamento.",
+  "cor": "#ea580c",
+  "tabelas": [
+   "Equipamentos",
+   "Alugueres",
+   "Manutenções"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir aluguer"
+   ],
+   "listas": [
+    "Catálogo"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
   "id": "arrendamentos",
   "nome": "Arrendamentos",
   "descricao": "Imóveis, inquilinos, contratos registados nas Finanças, rendas em dia ou em atraso e pedidos de manutenção.",
@@ -186,6 +211,30 @@
   "exemplos": 8
  },
  {
+  "id": "catering",
+  "nome": "Catering",
+  "descricao": "Pedidos de orçamento por convidados, menus com preço por pessoa e eventos por fase, com sinal.",
+  "cor": "#9d174d",
+  "tabelas": [
+   "Eventos",
+   "Menus"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir proposta"
+   ],
+   "listas": [
+    "Menus"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 6
+ },
+ {
   "id": "clinica",
   "nome": "Clínica",
   "descricao": "Consultas, utentes, profissionais e notas clínicas, com marcação online e cuidados de RGPD para dados de saúde.",
@@ -210,6 +259,32 @@
   "quadro": true,
   "linhas": false,
   "exemplos": 11
+ },
+ {
+  "id": "clube-desportivo",
+  "nome": "Clube desportivo",
+  "descricao": "Atletas por escalão, treinos, jogos e mensalidades, com inscrição e calendário de jogos online.",
+  "cor": "#15803d",
+  "tabelas": [
+   "Atletas",
+   "Treinos",
+   "Jogos",
+   "Mensalidades"
+  ],
+  "publico": {
+   "formularios": [
+    "Inscrição de atleta"
+   ],
+   "listas": [
+    "Próximos jogos"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": false,
+  "linhas": false,
+  "exemplos": 9
  },
  {
   "id": "compras",
@@ -383,6 +458,32 @@
   "quadro": true,
   "linhas": false,
   "exemplos": 8
+ },
+ {
+  "id": "escola-conducao",
+  "nome": "Escola de condução",
+  "descricao": "Alunos, aulas práticas por instrutor e viatura, exames e pagamentos, com inscrição online.",
+  "cor": "#1d4ed8",
+  "tabelas": [
+   "Alunos",
+   "Instrutores",
+   "Viaturas",
+   "Aulas",
+   "Exames",
+   "Pagamentos"
+  ],
+  "publico": {
+   "formularios": [
+    "Inscrição"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 15
  },
  {
   "id": "eventos",
@@ -638,6 +739,30 @@
   "exemplos": 12
  },
  {
+  "id": "lavandaria",
+  "nome": "Lavandaria",
+  "descricao": "Talões de entrada, estado de cada lote no quadro e consulta online pelo número do talão.",
+  "cor": "#0891b2",
+  "tabelas": [
+   "Talões",
+   "Tabela de preços"
+  ],
+  "publico": {
+   "formularios": [],
+   "listas": [
+    "Preços"
+   ],
+   "consultas": [
+    "Consultar talão"
+   ]
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
   "id": "loja",
   "nome": "Loja",
   "descricao": "Catálogo online com encomendas, pagamento por MB WAY, Multibanco ou transferência, e gestão de stock.",
@@ -668,6 +793,30 @@
   "exemplos": 11
  },
  {
+  "id": "mediacao-seguros",
+  "nome": "Mediação de seguros",
+  "descricao": "Clientes, apólices por ramo, renovações a vencer, sinistros e pedidos de simulação online.",
+  "cor": "#0f766e",
+  "tabelas": [
+   "Clientes",
+   "Apólices",
+   "Sinistros",
+   "Pedidos de simulação"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir simulação"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
+ },
+ {
   "id": "newsletter",
   "nome": "Newsletter",
   "descricao": "Subscrições com dupla confirmação, campanhas por e-mail com link para anular e listas exportáveis.",
@@ -688,6 +837,29 @@
   "quadro": true,
   "linhas": false,
   "exemplos": 6
+ },
+ {
+  "id": "obras",
+  "nome": "Obras e remodelações",
+  "descricao": "Pedidos de orçamento, obras por fase, diário de obra, despesas e margem de cada obra.",
+  "cor": "#a16207",
+  "tabelas": [
+   "Obras",
+   "Diário de obra",
+   "Despesas"
+  ],
+  "publico": {
+   "formularios": [
+    "Pedir orçamento"
+   ],
+   "listas": [],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
  },
  {
   "id": "oficina",
@@ -885,6 +1057,30 @@
   "quadro": true,
   "linhas": false,
   "exemplos": 10
+ },
+ {
+  "id": "restaurante",
+  "nome": "Restaurante",
+  "descricao": "Menu digital com alergénios e encomendas para levantar ou entregar, com quadro da cozinha.",
+  "cor": "#c2410c",
+  "tabelas": [
+   "Encomendas",
+   "Pratos"
+  ],
+  "publico": {
+   "formularios": [
+    "Fazer encomenda"
+   ],
+   "listas": [
+    "Menu"
+   ],
+   "consultas": []
+  },
+  "documentos": [],
+  "calendario": true,
+  "quadro": true,
+  "linhas": false,
+  "exemplos": 7
  },
  {
   "id": "veterinario",

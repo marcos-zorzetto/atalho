@@ -14,12 +14,13 @@ export const SISTEMAS = JSON.parse(readFileSync(path.join(path.dirname(fileURLTo
 
 /** Grupos para a página (por ordem de aparição), com o ícone de cada um (traço 24×24). */
 const GRUPOS = [
-  ["vendas", "Vendas e clientes", '<path d="M3 4h2l2.4 11h11L21 7H7"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>', ["crm", "orcamentos", "loja", "pedidos-orcamento", "encomendas-pastelaria", "compras", "contratos", "financas"]],
-  ["marcacoes", "Marcações e reservas", '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3"/>', ["agendamentos", "reservas", "alojamento-local", "clinica", "veterinario", "ginasio", "eventos"]],
-  ["atendimento", "Atendimento e serviços", '<path d="M4 13a8 8 0 0 1 16 0"/><rect x="2" y="13" width="4" height="6" rx="1.5"/><rect x="18" y="13" width="4" height="6" rx="1.5"/><path d="M20 19a3 3 0 0 1-3 3h-3"/>', ["helpdesk", "portal-cliente", "assistencia-tecnica", "oficina", "reclamacoes"]],
-  ["operacoes", "Operações e equipa", '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/>', ["inventario", "projetos", "folha-horas", "frota", "equipamentos-ti", "recrutamento", "formacao"]],
+  ["vendas", "Vendas e clientes", '<path d="M3 4h2l2.4 11h11L21 7H7"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>', ["crm", "orcamentos", "loja", "pedidos-orcamento", "encomendas-pastelaria", "compras", "contratos", "financas", "mediacao-seguros"]],
+  ["marcacoes", "Marcações e reservas", '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3"/>', ["agendamentos", "reservas", "alojamento-local", "clinica", "veterinario", "ginasio", "eventos", "escola-conducao"]],
+  ["restauracao", "Restauração e eventos", '<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 0-3 2.5-3 6h3v12"/>', ["restaurante", "catering"]],
+  ["atendimento", "Atendimento e serviços", '<path d="M4 13a8 8 0 0 1 16 0"/><rect x="2" y="13" width="4" height="6" rx="1.5"/><rect x="18" y="13" width="4" height="6" rx="1.5"/><path d="M20 19a3 3 0 0 1-3 3h-3"/>', ["helpdesk", "portal-cliente", "assistencia-tecnica", "oficina", "lavandaria", "aluguer-equipamentos", "reclamacoes"]],
+  ["operacoes", "Operações e equipa", '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/>', ["inventario", "projetos", "obras", "folha-horas", "frota", "equipamentos-ti", "recrutamento", "formacao"]],
   ["imoveis", "Imóveis", '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>', ["imobiliaria", "condominio", "arrendamentos"]],
-  ["comunidades", "Comunidades e conteúdo", '<circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5M14.5 15.5c1-.7 1.9-1 2.5-1 2.5 0 4.5 1.7 5 5"/>', ["associacao", "donativos", "explicacoes", "biblioteca", "blog", "newsletter"]],
+  ["comunidades", "Comunidades e conteúdo", '<circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5M14.5 15.5c1-.7 1.9-1 2.5-1 2.5 0 4.5 1.7 5 5"/>', ["associacao", "clube-desportivo", "donativos", "explicacoes", "biblioteca", "blog", "newsletter"]],
 ];
 const icone = (traco) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${traco}</svg>`;
 const OUTROS = ["outros", "Outros", '<circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/>'];
@@ -88,6 +89,7 @@ export function paginaSistemas() {
           <li><strong>Descarregue o zip</strong> do sistema que quer (com o Pro).</li>
           <li><strong>Envie para o alojamento</strong> e extraia (no cPanel: File Manager → Upload → Extract).</li>
           <li><strong>Abra o endereço</strong>, escreva o nome do negócio e a sua palavra-passe. Pronto, com dados de exemplo.</li>
+          <li><strong>Ajuste ao seu negócio</strong> em Personalizar: nomes, campos, opções e textos da página pública, sem programar.</li>
         </ol>
         <div class="site-recursos at-mt-6">
           <div class="site-recurso"><h3>Feito para Portugal</h3><p>NIF, IBAN, código postal, +351, euro e IVA a 23, 13 e 6%. MB WAY, Multibanco e transferência nas instruções de pagamento.</p></div>

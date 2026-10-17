@@ -118,7 +118,7 @@ Guia completo: [TypeScript no Atalho](https://atalho.com.pt/typescript/).
 | JavaScript | estado reativo, formatação europeia (Intl), pedidos com erros em português, eventos |
 | Receitas | loja com carrinho, registo com código postal, painel de administração, login em dois passos |
 | Páginas completas (grátis com conta) | landing page de produto, painel de administração, loja online, checkout com MB WAY, login, blog |
-| Atalho Pro | **36 sistemas completos** em PHP + SQLite (CRM, marcações, orçamentos, loja, reservas, helpdesk, inventário, alojamento local…), 119 componentes avançados e 79 animações, incluindo 3D em WebGL |
+| Atalho Pro | **44 sistemas completos** em PHP + SQLite (CRM, marcações, orçamentos, loja, reservas, helpdesk, inventário, alojamento local…), 119 componentes avançados e 79 animações, incluindo 3D em WebGL |
 
 ## Qualidade verificada a cada mudança
 
@@ -146,7 +146,7 @@ Para ligar a etapa de IA, crie o segredo `ANTHROPIC_API_KEY` em *Settings → Se
 
 Os componentes e a documentação são abertos a todos. As **páginas completas** ficam disponíveis para quem cria uma conta grátis: a montra de cada uma (`/exemplos/<id>/`) é pública e aparece no Google, e o código só chega ao navegador de quem entrou na conta. Esse código não está neste repositório: vive no repositório privado `atalho-pro` e é entregue pelo Supabase, que confere a sessão em cada pedido.
 
-O **Atalho Pro** (9 €/mês ou 79 €/ano, IVA incluído) junta os [36 sistemas completos](https://atalho.com.pt/sistemas/), os componentes avançados e as animações. Cada sistema instala-se num passo em qualquer alojamento com PHP 8.1 (enviar o zip e abrir o endereço), com dados de exemplo, documentação em português e ferramentas do RGPD.
+O **Atalho Pro** (9 €/mês ou 79 €/ano, IVA incluído) junta os [44 sistemas completos](https://atalho.com.pt/sistemas/), os componentes avançados e as animações. Cada sistema instala-se num passo em qualquer alojamento com PHP 8.1 (enviar o zip e abrir o endereço), com dados de exemplo, documentação em português e ferramentas do RGPD.
 
 O administrador do site tem um painel em `/admin/` com utilizadores, registos por dia, lista de espera do Pro (exportável para folha de cálculo) e o conteúdo publicado. Os dados vêm de funções da base de dados que recusam quem não é administrador.
 
