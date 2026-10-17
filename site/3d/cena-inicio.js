@@ -315,7 +315,26 @@ export function iniciarCena(canvas, opcoes = {}) {
     deslocamento = 0;
     camera.userData.yBase = 0.2;
     camera.updateProjectionMatrix();
+    // Área visível no plano dos painéis (o mais próximo fica ~1 unidade à frente do centro):
+    // a órbita e o tamanho dos painéis encolhem para que nenhum saia do ecrã
+    const meiaAltura = Math.tan(MathUtils.degToRad(camera.fov / 2)) * (camera.position.z - 1.2);
+    const meiaLargura = meiaAltura * camera.aspect;
+    const margem = 0.35;
+    let escala = 1;
+    let raioX = Math.min(5.2, meiaLargura - margem - 1.35);
+    if (raioX < 2.4) {
+      escala = MathUtils.clamp((meiaLargura - margem - 2.4) / 1.35, 0.5, 1);
+      raioX = Math.max(1.6, meiaLargura - margem - 1.35 * escala);
+    }
+    const raioY = Math.max(1.2, Math.min(2.5, meiaAltura - margem - 0.9 * escala - 0.4));
+    limites = { x: meiaLargura - margem - 1.35 * escala, y: meiaAltura - margem - 0.9 * escala };
+    for (const p of paineis) {
+      p.userData.raioX = raioX;
+      p.userData.raioY = raioY;
+      p.scale.setScalar(escala);
+    }
   };
+  let limites = { x: 99, y: 99 };
   let deslocamento = 0;
   const observadorTamanho = new ResizeObserver(ajustar);
   observadorTamanho.observe(canvas);
@@ -351,7 +370,10 @@ export function iniciarCena(canvas, opcoes = {}) {
       const u = p.userData;
       const a = u.angulo + tempo * 0.06;
       const abertura = 1 + progresso * 0.55;
-      p.position.set(Math.cos(a) * u.raioX * abertura, Math.sin(a) * u.raioY * abertura + Math.sin(tempo * 0.8 + u.fase) * 0.1, Math.sin(a) * 1.6 - 0.6 - progresso * 1.5);
+      // A vista "explodida" do scroll abre a órbita, mas nunca para fora do ecrã
+      const x = MathUtils.clamp(Math.cos(a) * u.raioX * abertura, -limites.x, limites.x);
+      const y = MathUtils.clamp(Math.sin(a) * u.raioY * abertura + Math.sin(tempo * 0.8 + u.fase) * 0.1, -limites.y, limites.y);
+      p.position.set(x, y, Math.sin(a) * 1.6 - 0.6 - progresso * 1.5);
       p.rotation.set(Math.sin(tempo * 0.5 + u.fase) * 0.05 - p.position.y * 0.06, -p.position.x * 0.07, Math.sin(tempo * 0.3 + u.fase) * 0.03);
     }
 
